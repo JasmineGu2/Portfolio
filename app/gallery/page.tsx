@@ -8,7 +8,7 @@ interface GalleryImage {
   description: string
 }
 
-// Gallery images - all photos from the public/gallery folder
+// Gallery images - only photos that actually exist in the public/gallery folder
 const galleryImages: GalleryImage[] = [
   {
     src: '/gallery/20250323_124223_A19484 1.JPEG',
@@ -21,22 +21,7 @@ const galleryImages: GalleryImage[] = [
     description: '',
   },
   {
-    src: '/gallery/IMG_1179.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
     src: '/gallery/IMG_1426 1.JPEG',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_1607.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_1785 2.jpg',
     alt: 'Gallery Photo',
     description: '',
   },
@@ -51,17 +36,7 @@ const galleryImages: GalleryImage[] = [
     description: '',
   },
   {
-    src: '/gallery/IMG_3007.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
     src: '/gallery/IMG_3572.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_3655.jpg',
     alt: 'Gallery Photo',
     description: '',
   },
@@ -86,11 +61,6 @@ const galleryImages: GalleryImage[] = [
     description: '',
   },
   {
-    src: '/gallery/IMG_6561.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
     src: '/gallery/IMG_7394 1.jpg',
     alt: 'Gallery Photo',
     description: '',
@@ -102,36 +72,6 @@ const galleryImages: GalleryImage[] = [
   },
   {
     src: '/gallery/IMG_8054 1.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_8792 3..jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_9140.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_9220.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_9341.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_9485.jpg',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_9955.jpg',
     alt: 'Gallery Photo',
     description: '',
   },
