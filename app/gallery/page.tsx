@@ -149,7 +149,7 @@ function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
 
 export default function GalleryPage() {
   return (
-    <main className="w-full min-h-screen flex justify-center transition-colors pt-20 md:pt-24">
+    <main className="w-full min-h-screen flex justify-center transition-colors pt-16 md:pt-20">
       <div className="w-full max-w-[75%] space-y-6 py-6">
         <div className="rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] px-6 md:px-12 py-12 md:py-16 transition-colors">
           <h1 className="text-4xl font-bold text-[#2A2A2A] dark:text-white mb-4 transition-colors font-['Fraunces',serif]">
@@ -161,7 +161,7 @@ export default function GalleryPage() {
           
           {/* Impact Roles Section */}
           <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Inter',sans-serif]">
+            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Fraunces',serif]">
               Impact Roles
             </h2>
             <ul className="space-y-3 font-['Inter',sans-serif]">
@@ -185,7 +185,7 @@ export default function GalleryPage() {
 
           {/* Side-Questing Section */}
           <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Inter',sans-serif]">
+            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Fraunces',serif]">
               Side-Questing At…
             </h2>
             <ul className="space-y-3 font-['Inter',sans-serif]">

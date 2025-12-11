@@ -58,7 +58,7 @@ export default function Puzzle3D() {
 }
 
 function Puzzles({ data, range, isDark }: { data: any[]; range: number; isDark: boolean }) {
-  const { nodes } = useGLTF('/puzzle.glb')
+  const { nodes } = useGLTF('design/puzzle.glb')
 
   // Find geometry from puzzle.glb
   let geometry: THREE.BufferGeometry | null = null

@@ -1,35 +1,34 @@
 # Jasmine Gu - Personal Website
 
-A modern, holographic-themed personal portfolio website built with Next.js, TypeScript, and Framer Motion.
+A modern personal portfolio website built with Next.js, TypeScript, and Three.js.
 
 ## Features
 
-- ✨ **Holographic Design System** - Subtle gradients, glass morphism, and iridescent effects
-- 🎨 **Storytelling-First Layout** - Flipbook-style experience timeline
+- ✨ **3D Interactive Elements** - Three.js puzzle visualization
+- 🎨 **Clean Design** - Minimal, professional interface
 - 🚀 **Next.js App Router** - Modern React with server components
 - 📱 **Fully Responsive** - Mobile-first design
-- 🎭 **Smooth Animations** - Framer Motion for elegant transitions
 - 💎 **Type-Safe** - Full TypeScript support
 
 ## Structure
 
 ```
 app/
-  ├── page.tsx          # Main page with all sections
+  ├── page.tsx          # Home/Work page
+  ├── projects/         # Projects page (PM & Technical)
+  ├── gallery/          # Gallery page
   ├── layout.tsx        # Root layout
-  └── globals.css       # Global styles + holographic utilities
+  └── globals.css       # Global styles
 
 components/
-  ├── hero/             # Hero section with split-screen
-  ├── about/             # Storybook-style about section
-  ├── experience/       # Flipbook experience timeline
-  ├── career-highlights/# Career highlights grid
-  ├── case-studies/     # PM case studies
-  ├── technical-projects/# Technical projects grid
-  └── footer/           # Footer component
+  ├── Puzzle3D/        # 3D puzzle visualization
+  ├── layout/           # Header and layout components
+  ├── skills/           # Skill-related components
+  └── ui/               # UI components (buttons, theme toggle)
 
 lib/
-  ├── design-tokens.ts  # Design system tokens
+  ├── projects-data.ts  # Project data
+  ├── skills.ts         # Skills data
   └── types.ts          # TypeScript type definitions
 ```
 
@@ -37,78 +36,30 @@ lib/
 
 1. **Install dependencies:**
    ```bash
-   # Using pnpm (recommended - faster)
    pnpm install
-   
-   # Or using npm
-   npm install --legacy-peer-deps
    ```
 
 2. **Run development server:**
    ```bash
-   # Using pnpm
    pnpm dev
-   
-   # Or using npm
-   npm run dev
    ```
 
 3. **Open [http://localhost:3000](http://localhost:3000)**
 
-## Customization
+## Pages
 
-### Update Content
-
-Edit `app/page.tsx` to update:
-- Hero section content
-- Experience timeline
-- Career highlights
-- Case studies
-- Technical projects
-- Footer information
-
-### Design Tokens
-
-Modify `lib/design-tokens.ts` to adjust:
-- Colors
-- Typography
-- Spacing
-- Holographic gradients
-- Animation timings
-
-### Holographic Effects
-
-The design system includes:
-- `.glass` - Glass morphism effect
-- `.holo-gradient-1/2/3` - Animated gradients
-- `.metallic-text` - Shimmering text effect
-- `.iridescent-border` - Gradient borders
-- `.soft-glow` - Subtle shadow effects
-
-## Build
-
-```bash
-npm run build
-npm start
-```
+- **/** - Home page with hero section and work experience
+- **/projects** - Projects page with PM case studies and technical projects
+- **/gallery** - Gallery page with photos and community highlights
 
 ## Tech Stack
 
 - **Next.js 14** - React framework
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
-- **Framer Motion** - Animations
-- **Custom CSS** - Holographic effects
-
-## Design Philosophy
-
-- **Minimal** - Clean, uncluttered interface
-- **Professional** - Tasteful use of effects
-- **Storytelling** - Content-first approach
-- **Holographic** - Subtle futuristic aesthetic
+- **Three.js** - 3D graphics
+- **React Three Fiber** - React renderer for Three.js
 
 ---
 
 Built with curiosity and attention to detail. ✨
-
-

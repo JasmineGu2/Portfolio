@@ -12,7 +12,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Figma', 'Product Design', 'Team Leadership'],
     link: 'https://www.figma.com/proto/uQoQufP7QYdcJpW1jxI7nQ/UberEats-Slides?page-id=0%3A1&node-id=18-11323&starting-point-node-id=18%3A11323&scaling=min-zoom&show-proto-sidebar=1&mode=design&t=ltxlPmzZ6nlexlNy-1',
     image: {
-      src: '/ubereats.png',
+      src: '/projects/pm/ubereats.png',
       alt: 'UberEats Project',
     },
   },
@@ -27,7 +27,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Design Thinking', 'UX Research', 'Product Design'],
     link: 'https://www.figma.com/file/TItO4qnPpXbOTbgmQntyPH/Untitled?type=design&node-id=0%3A1&mode=design&t=b7TGhkGp8WEKgZFX-1',
     image: {
-      src: '/leap.png',
+      src: 'projects/pm/leap.png',
       alt: 'RBC LEAP Project',
     },
   },
@@ -42,7 +42,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Excel VBA', 'Automation', 'Process Improvement'],
     link: 'https://thecompass.ca/',
     image: {
-      src: '/compassfoodbanklogo.png',
+      src: '/projects/pm/compassfoodbanklogo.png',
       alt: 'Compass Food Bank Project',
     },
   },
@@ -57,7 +57,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Product Management', 'User Research', 'Strategy'],
     link: '#',
     image: {
-      src: '/fellowship.png',
+      src: '/projects/pm/Fellowship.png',
       alt: 'Fellowship Project',
     },
   },
@@ -71,7 +71,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['React', 'JavaScript', 'Web Development'],
     demo: '#',
     image: {
-      src: '/Hackwestern.png',
+      src: '/projects/technical/Hackwestern.png',
       alt: 'HackWestern Web Developer Project',
     },
   },
@@ -82,7 +82,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['Web Scraping', 'AI', 'NLP', 'React', 'Django'],
     demo: 'https://devpost.com/software/tldw-too-long-didn-t-watch',
     image: {
-      src: '/tldw.png',
+      src: '/projects/technical/tldw.png',
       alt: 'TLDW Project',
     },
   },
@@ -93,7 +93,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['React', 'Cohere API', 'QR Code Scanner', 'HTML', 'CSS', 'Firebase', 'Figma'],
     demo: 'https://devpost.com/software/brewmates',
     image: {
-      src: '/brewmates.png',
+      src: '/projects/technical/brewmates.png',
       alt: 'BrewMates Project',
     },
   },
@@ -105,7 +105,7 @@ export const technicalProjects: TechnicalProject[] = [
     github: 'https://github.com/JasmineGu2/scrapeEmail',
     demo: 'https://github.com/JasmineGu2/scrapeEmail',
     image: {
-      src: '/bot.png',
+      src: '/projects/technical/bot.png',
       alt: 'Email Scraping Bot',
     },
   },
@@ -116,7 +116,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['Excel VBA', 'Automation', 'Salesforce'],
     demo: 'https://thecompass.ca/',
     image: {
-      src: '/compass.png',
+      src: '/projects/technical/compass.png',
       alt: 'Compass Food Bank Project',
     },
   },
@@ -127,7 +127,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['Design Thinking', 'UX Research'],
     demo: 'https://www.figma.com/file/TItO4qnPpXbOTbgmQntyPH/Untitled?type=design&node-id=0%3A1&mode=design&t=b7TGhkGp8WEKgZFX-1',
     image: {
-      src: '/leap.png',
+      src: '/projects/pm/leap.png',
       alt: 'RBC LEAP Project',
     },
   },
@@ -138,7 +138,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['AI', 'NLP', 'Python', 'Machine Learning'],
     demo: '#',
     image: {
-      src: '/compassfoodbanklogo.png',
+      src: '/projects/pm/compassfoodbanklogo.png',
       alt: 'Video Transcriber Project',
     },
   },
@@ -149,7 +149,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     demo: '#',
     image: {
-      src: '/compassfoodbanklogo.png',
+      src: '/projects/pm/compassfoodbanklogo.png',
       alt: 'Personal Website Project',
     },
   },
@@ -160,7 +160,7 @@ export const technicalProjects: TechnicalProject[] = [
     technologies: ['Machine Learning', 'Python', 'Data Science', 'Research'],
     demo: '#',
     image: {
-      src: '/compassfoodbanklogo.png',
+      src: '/projects/pm/compassfoodbanklogo.png',
       alt: 'ML Engineer Ivey Business School Project',
     },
   },

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['framerusercontent.com', 'fonts.gstatic.com'],
+    domains: ['fonts.gstatic.com'],
   },
   webpack: (config, { isServer }) => {
     // Suppress warnings about dynamic requires
