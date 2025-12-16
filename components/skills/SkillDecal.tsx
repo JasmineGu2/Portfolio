@@ -93,10 +93,6 @@ export default function SkillDecal({
       rotation={decalRot}
       scale={scale}
       map={finalTexture as THREE.Texture}
-      polygonOffset
-      polygonOffsetFactor={-10}
-      depthTest={true}
-      depthWrite={true}
     />
   )
 }

@@ -143,8 +143,7 @@ export default function Home() {
                     I'm Jasmine
                   </h1>
                   <div className="text-3xl md:text-4xl mb-8 text-gray-600 dark:text-gray-400" style={{ fontFamily: "Inter" }}>
-                    <p>Engineer → Aspiring Product Manager.</p>
-                    <p className="mt-2">I build systems by connecting the right pieces.</p>
+                    <p>I build systems by connecting the right pieces.</p>
                   </div>
                 </div>
               </div>
