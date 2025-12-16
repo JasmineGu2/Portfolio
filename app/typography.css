@@ -1,0 +1,204 @@
+/* 
+ * Typography Token System
+ * 
+ * USAGE RULES:
+ * ============
+ * 
+ * 1. Headlines / Hero Text → Use h1 or h2 (Instrument Serif, italic)
+ *    Example: <h1>Main Title</h1>
+ * 
+ * 2. Section Titles / Card Titles / UI Emphasis → Use h3-h6 (Instrument Serif, italic)
+ *    Example: <h3>Section Title</h3>
+ * 
+ * 3. Body Text / Labels / Buttons → Use p, span, label, button (Inter)
+ *    Example: <p>Body text content</p>
+ * 
+ * 4. For custom styling, use utility classes:
+ *    - .text-display → Instrument Serif
+ *    - .text-heading → Instrument Serif
+ *    - .text-body → Inter
+ */
+
+/* Font Family Variables */
+:root {
+  --font-display: "Instrument Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+  --font-heading: "Instrument Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  
+  /* Typography Variables */
+  --typography--serif: "Instrument Serif", sans-serif;
+  --typography--sans: "Instrument Sans", sans-serif;
+  
+  /* Heading Sizes and Line Heights */
+  --h1--size: 64px;
+  --h1--height: 80px;
+  --h2--size: 56px;
+  --h2--height: 72px;
+  --h3--size: 40px;
+  --h3--height: 56px;
+  --h4--size: 32px;
+  --h4--height: 40px;
+  --h5--size: 28px;
+  --h5--height: 36px;
+  --h6--size: 24px;
+  --h6--height: 32px;
+  
+  /* Text Sizes and Line Heights */
+  --text-r--size: 16px;
+  --text-r--height: 24px;
+  --text-l--size: 20px;
+  --text-l--height: 32px;
+  --text-s--size: 14px;
+  --text-s--height: 20px;
+  --text-xs--size: 12px;
+  --text-xs--height: 16px;
+}
+
+/* Typography Role Classes */
+.text-display {
+  font-family: var(--font-display);
+}
+
+.text-heading {
+  font-family: var(--font-heading);
+}
+
+.text-body {
+  font-family: var(--font-body);
+}
+
+.font-serif {
+  font-family: var(--typography--serif);
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+/* Size Scale Variables */
+:root {
+  /* Display sizes (Instrument Serif) - for h1, h2 */
+  --text-display-7xl: 4.5rem; /* 72px */
+  --text-display-6xl: 3.75rem; /* 60px */
+  --text-display-5xl: 3rem; /* 48px */
+  --text-display-4xl: 2.25rem; /* 36px */
+  
+  /* Heading sizes (Instrument Serif) - for h3, h4, h5, h6 */
+  --text-heading-3xl: 1.875rem; /* 30px */
+  --text-heading-2xl: 1.5rem; /* 24px */
+  --text-heading-xl: 1.25rem; /* 20px */
+  --text-heading-lg: 1.125rem; /* 18px */
+  
+  /* Body sizes (Inter) - for p, span, labels, buttons */
+  --text-body-xl: 1.25rem; /* 20px */
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-base: 1rem; /* 16px */
+  --text-body-sm: 0.875rem; /* 14px */
+  --text-body-xs: 0.75rem; /* 12px */
+}
+
+/* 
+ * Semantic HTML Element Mapping
+ * These rules automatically apply the correct font based on HTML tag
+ */
+
+/* Font Smoothing and Feature Settings */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'clig' off, 'liga' off;
+}
+
+/* Display Font (Instrument Serif) - Headlines and Hero Text */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Regular weight by default */
+  font-style: italic; /* All headings are italic */
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: var(--h1--size);
+  line-height: var(--h1--height);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: var(--h2--size);
+  line-height: var(--h2--height);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+h1.bold, h2.bold,
+h1[class*="font-bold"], h2[class*="font-bold"] {
+  font-weight: 700; /* Bold for emphasis */
+  font-style: italic; /* Keep italic for bold headings */
+}
+
+/* Heading Font (Instrument Serif) - Section Titles, Card Titles, UI Emphasis */
+h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400; /* Regular weight */
+  font-style: italic; /* All headings are italic */
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: var(--h3--size);
+  line-height: var(--h3--height);
+}
+
+h4 {
+  font-size: var(--h4--size);
+  line-height: var(--h4--height);
+}
+
+h5 {
+  font-size: var(--h5--size);
+  line-height: var(--h5--height);
+}
+
+h6 {
+  font-size: var(--h6--size);
+  line-height: var(--h6--height);
+}
+
+h3[class*="font-semibold"], h4[class*="font-semibold"],
+h5[class*="font-semibold"], h6[class*="font-semibold"] {
+  font-weight: 600;
+  font-style: italic; /* Keep italic for semibold headings */
+}
+
+h3[class*="font-bold"], h4[class*="font-bold"],
+h5[class*="font-bold"], h6[class*="font-bold"] {
+  font-weight: 700;
+  font-style: italic; /* Keep italic for bold headings */
+}
+
+/* Body Font (Inter) - Body Text, Labels, Buttons, Links */
+p, li, span, small, label, input, textarea, select {
+  font-family: var(--font-body);
+  font-weight: 400; /* Regular for body */
+  font-size: var(--text-r--size);
+  line-height: var(--text-r--height);
+}
+
+button, a {
+  font-family: var(--font-body);
+  font-weight: 500; /* Medium for interactive elements */
+  font-size: var(--text-r--size);
+  line-height: var(--text-r--height);
+}
+
+/* Override for specific interactive states */
+button[class*="font-semibold"], a[class*="font-semibold"] {
+  font-weight: 600;
+}
+
+button[class*="font-bold"], a[class*="font-bold"] {
+  font-weight: 700;
+}
+

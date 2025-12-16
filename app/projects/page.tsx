@@ -5,9 +5,10 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { caseStudies, technicalProjects } from '@/lib/projects-data'
+import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
 
 export default function ProjectsPage() {
-  const [activeProjectType, setActiveProjectType] = useState<'pm' | 'technical'>('pm')
+  const [activeProjectType, setActiveProjectType] = useState<'pm' | 'technical'>('technical')
 
   const validCaseStudies = caseStudies.filter(
     (caseStudy) => caseStudy.title && caseStudy.image
@@ -23,22 +24,16 @@ export default function ProjectsPage() {
   )
 
   return (
-    <main className="w-full min-h-screen flex justify-center transition-colors pt-16 md:pt-20">
-      <div className="w-full max-w-[75%] space-y-6 py-6">
-        <div className="rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] px-6 md:px-12 py-12 md:py-16 transition-colors">
+    <main className="w-full min-h-screen transition-colors pt-24 md:pt-28 pb-2 md:pb-3">
+      <div className="w-full px-4 md:px-8 space-y-2 md:space-y-3">
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[65%] 2xl:max-w-[60%] rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] transition-colors relative overflow-hidden">
+          <div className="absolute inset-0 -z-0">
+            <GridPatternSpotlight />
+          </div>
+          <div className="relative z-10 px-6 md:px-12 py-12 md:py-16">
           <div className="mb-8 flex justify-center">
             <div className="flex items-center gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 w-fit">
-              <button
-                onClick={() => setActiveProjectType('pm')}
-                className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-md transition-all duration-200',
-                  activeProjectType === 'pm'
-                    ? 'bg-white dark:bg-gray-700 text-[#2A2A2A] dark:text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-[#2A2A2A] dark:hover:text-white'
-                )}
-              >
-                PM Projects
-              </button>
               <button
                 onClick={() => setActiveProjectType('technical')}
                 className={cn(
@@ -49,6 +44,17 @@ export default function ProjectsPage() {
                 )}
               >
                 Technical Projects
+              </button>
+              <button
+                onClick={() => setActiveProjectType('pm')}
+                className={cn(
+                  'px-4 py-2 text-sm font-medium rounded-md transition-all duration-200',
+                  activeProjectType === 'pm'
+                    ? 'bg-white dark:bg-gray-700 text-[#2A2A2A] dark:text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-[#2A2A2A] dark:hover:text-white'
+                )}
+              >
+                PM Projects
               </button>
             </div>
           </div>
@@ -65,12 +71,12 @@ export default function ProjectsPage() {
                     {validCaseStudies.map((caseStudy, idx) => {
                       const projectLink = caseStudy.link || '#'
                       const isLarge = idx % 3 === 0
+                      const isExternalLink = projectLink.startsWith('http')
                       return (
                         <Link
                           key={caseStudy.id}
                           href={projectLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          {...(isExternalLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                           className={`group animate-fade-in-up hover:-translate-y-1 transition-all duration-300 block ${
                             isLarge ? 'md:col-span-2' : ''
                           }`}
@@ -98,11 +104,11 @@ export default function ProjectsPage() {
                             </div>
                             
                             <div className="mt-4">
-                              <h3 className="text-xl font-semibold text-[#2A2A2A] dark:text-white mb-1 transition-colors">
+                              <h3 className="text-2xl font-light text-[#2A2A2A] dark:text-white mb-2 transition-colors" style={{ fontFamily: "Editorial Old" }}>
                                 {caseStudy.title}
                               </h3>
                               {caseStudy.description && (
-                                <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors font-['Inter',sans-serif]">
+                                <p className="text-base text-gray-600 dark:text-gray-400 transition-colors" style={{ fontFamily: "Inter" }}>
                                   {caseStudy.description}
                                 </p>
                               )}
@@ -153,11 +159,11 @@ export default function ProjectsPage() {
                           </div>
                           
                           <div className="mt-4">
-                            <h3 className="text-xl font-semibold text-[#2A2A2A] dark:text-white mb-1 transition-colors">
+                            <h3 className="text-2xl font-light text-[#2A2A2A] dark:text-white mb-2 transition-colors" style={{ fontFamily: "Editorial Old" }}>
                               {hackwesternProject.title}
                             </h3>
                             {hackwesternProject.description && (
-                              <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors font-['Inter',sans-serif]">
+                              <p className="text-base text-gray-600 dark:text-gray-400 transition-colors" style={{ fontFamily: "Inter" }}>
                                 {hackwesternProject.description}
                               </p>
                             )}
@@ -199,11 +205,11 @@ export default function ProjectsPage() {
                             </div>
                             
                             <div className="mt-2">
-                              <h3 className="text-sm font-semibold text-[#2A2A2A] dark:text-white mb-0.5 transition-colors line-clamp-1">
+                              <h3 className="text-base font-light text-[#2A2A2A] dark:text-white mb-1 transition-colors line-clamp-1" style={{ fontFamily: "Editorial Old" }}>
                                 {project.title}
                               </h3>
                               {project.description && (
-                                <p className="text-xs text-gray-600 dark:text-gray-400 transition-colors line-clamp-2 font-['Inter',sans-serif]">
+                                <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors line-clamp-2" style={{ fontFamily: "Inter" }}>
                                   {project.description}
                                 </p>
                               )}
@@ -217,7 +223,9 @@ export default function ProjectsPage() {
               </div>
             </section>
           </div>
+          </div>
         </div>
+      </div>
       </div>
     </main>
   )

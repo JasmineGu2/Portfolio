@@ -3,7 +3,6 @@
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { Bvh, OrbitControls, Environment, useGLTF } from '@react-three/drei'
-import { useControls } from 'leva'
 import { useMemo, useEffect, useState } from 'react'
 import { data } from './store'
 import { getSkillByIndex } from '@/lib/skills'
@@ -23,7 +22,7 @@ const createSilverMaterial = (isDark: boolean = false): THREE.Material => {
 }
 
 export default function Puzzle3D() {
-  const { range } = useControls({ range: { value: 20, min: 0, max: 100, step: 1 } })
+  const range = 12 // Always show 12 puzzle pieces
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export default function Puzzle3D() {
 }
 
 function Puzzles({ data, range, isDark }: { data: any[]; range: number; isDark: boolean }) {
-  const { nodes } = useGLTF('design/puzzle.glb')
+  const { nodes } = useGLTF('puzzle/puzzle.glb')
 
   // Find geometry from puzzle.glb
   let geometry: THREE.BufferGeometry | null = null

@@ -55,7 +55,7 @@ export const caseStudies: CaseStudy[] = [
     solution: 'Applied PM methodologies and user research',
     results: ['Improved product strategy', 'Better user insights', 'Enhanced product decisions'],
     tags: ['Product Management', 'User Research', 'Strategy'],
-    link: '#',
+    link: 'https://j-wang.notion.site/Ivey-Product-Society-Fellowship-Hub-2b5eb5d156a4801494facd629e976be8',
     image: {
       src: '/projects/pm/Fellowship.png',
       alt: 'Fellowship Project',
@@ -69,7 +69,7 @@ export const technicalProjects: TechnicalProject[] = [
     title: 'HackWestern Web Developer',
     description: 'Web development project built for HackWestern hackathon.',
     technologies: ['React', 'JavaScript', 'Web Development'],
-    demo: '#',
+    demo: 'https://www.hackwestern.com/',
     image: {
       src: '/projects/technical/Hackwestern.png',
       alt: 'HackWestern Web Developer Project',
@@ -110,58 +110,14 @@ export const technicalProjects: TechnicalProject[] = [
     },
   },
   {
-    id: 'compass-food-bank',
-    title: 'The Compass Food Bank VBA',
-    description: 'Automating task scheduling with VBA',
-    technologies: ['Excel VBA', 'Automation', 'Salesforce'],
-    demo: 'https://thecompass.ca/',
-    image: {
-      src: '/projects/technical/compass.png',
-      alt: 'Compass Food Bank Project',
-    },
-  },
-  {
-    id: 'rbc-leap',
-    title: 'Royal Bank of Canada Design Thinking Project',
-    description: 'User-centric design and research for LEAP',
-    technologies: ['Design Thinking', 'UX Research'],
-    demo: 'https://www.figma.com/file/TItO4qnPpXbOTbgmQntyPH/Untitled?type=design&node-id=0%3A1&mode=design&t=b7TGhkGp8WEKgZFX-1',
-    image: {
-      src: '/projects/pm/leap.png',
-      alt: 'RBC LEAP Project',
-    },
-  },
-  {
-    id: 'video-transcriber',
-    title: 'Video Transcriber',
-    description: 'AI-powered video transcription tool that converts video content to text with high accuracy.',
-    technologies: ['AI', 'NLP', 'Python', 'Machine Learning'],
-    demo: '#',
-    image: {
-      src: '/projects/pm/compassfoodbanklogo.png',
-      alt: 'Video Transcriber Project',
-    },
-  },
-  {
     id: 'personal-website',
     title: 'Personal Website',
     description: 'Personal portfolio website showcasing projects, experience, and skills.',
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     demo: '#',
     image: {
-      src: '/projects/pm/compassfoodbanklogo.png',
+      src: '/projects/technical/website.png',
       alt: 'Personal Website Project',
-    },
-  },
-  {
-    id: 'ivey-ml-engineer',
-    title: 'ML Engineer - Ivey Business School',
-    description: 'Machine learning engineering and research work for Ivey Business School.',
-    technologies: ['Machine Learning', 'Python', 'Data Science', 'Research'],
-    demo: '#',
-    image: {
-      src: '/projects/pm/compassfoodbanklogo.png',
-      alt: 'ML Engineer Ivey Business School Project',
     },
   },
 ]

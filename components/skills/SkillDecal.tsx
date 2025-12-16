@@ -43,8 +43,11 @@ export default function SkillDecal({
     const ctx = canvas.getContext('2d')
     
     if (ctx) {
-      // Draw image
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      // Mirror the image horizontally by scaling and translating
+      ctx.save()
+      ctx.scale(-1, 1)
+      ctx.drawImage(img, -canvas.width, 0, canvas.width, canvas.height)
+      ctx.restore()
       
       // Apply desaturation filter (60% saturation)
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
 
 interface GalleryImage {
   src: string
@@ -32,11 +33,6 @@ const galleryImages: GalleryImage[] = [
   },
   {
     src: '/gallery/IMG_2295 1.JPEG',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_3572.jpg',
     alt: 'Gallery Photo',
     description: '',
   },
@@ -84,7 +80,6 @@ const galleryImages: GalleryImage[] = [
 
 function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
   const [imageError, setImageError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   
   // Check if file is HEIC format (not supported by most browsers)
   const isHEIC = image.src.toLowerCase().endsWith('.heic')
@@ -108,7 +103,6 @@ function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 onError={() => setImageError(true)}
-                onLoad={() => setIsLoading(false)}
               />
             ) : (
               // For supported formats, use regular img tag to avoid Next.js Image issues with encoded URLs
@@ -117,13 +111,7 @@ function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 onError={() => setImageError(true)}
-                onLoad={() => setIsLoading(false)}
               />
-            )}
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-200 dark:bg-gray-800">
-                <div className="w-6 h-6 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
-              </div>
             )}
           </>
         ) : (
@@ -149,54 +137,59 @@ function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
 
 export default function GalleryPage() {
   return (
-    <main className="w-full min-h-screen flex justify-center transition-colors pt-16 md:pt-20">
-      <div className="w-full max-w-[75%] space-y-6 py-6">
-        <div className="rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] px-6 md:px-12 py-12 md:py-16 transition-colors">
-          <h1 className="text-4xl font-bold text-[#2A2A2A] dark:text-white mb-4 transition-colors font-['Fraunces',serif]">
+    <main className="w-full min-h-screen transition-colors pt-24 md:pt-28 pb-2 md:pb-3">
+      <div className="w-full px-4 md:px-8 space-y-2 md:space-y-3">
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[65%] 2xl:max-w-[60%] rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] transition-colors relative overflow-hidden">
+          <div className="absolute inset-0 -z-0">
+            <GridPatternSpotlight />
+          </div>
+          <div className="relative z-10 px-6 md:px-12 py-12 md:py-16">
+          <h1 className="text-5xl md:text-6xl font-light text-[#2A2A2A] dark:text-white mb-6 transition-colors animate-fade-in-up" style={{ fontFamily: "Editorial Old" }}>
             Powered by community (and a lot of love)
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-12 transition-colors font-['Inter',sans-serif]">
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 transition-colors animate-fade-in-up" style={{ fontFamily: "Inter", animationDelay: '100ms' }}>
             A small collection of the people, communities, and projects I've gotten to help shape along the way.
           </p>
           
           {/* Impact Roles Section */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Fraunces',serif]">
+          <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+            <h2 className="text-3xl font-light text-[#2A2A2A] dark:text-white mb-6 transition-colors" style={{ fontFamily: "Editorial Old" }}>
               Impact Roles
             </h2>
-            <ul className="space-y-3 font-['Inter',sans-serif]">
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">VP, Ivey Product Society Fellowship</span> — redesigned a 50-person product bootcamp
+            <ul className="space-y-3" style={{ fontFamily: "Inter" }}>
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>VP, Ivey Product Society Fellowship</span> — redesigned a 50-person product bootcamp
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Hub Leader, Rewriting the Code</span>
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hub Leader, Rewriting the Code</span>
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Orientation Residence Leader</span>
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Orientation Residence Leader</span>
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">President, Mississauga Youth Action Council</span> — grew membership 300%
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Mississauga Youth Action Council</span> — grew membership 300%
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">President, Social Justice Club</span>
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Social Justice Club</span>
               </li>
             </ul>
           </div>
 
           {/* Side-Questing Section */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-[#2A2A2A] dark:text-white mb-6 transition-colors font-['Fraunces',serif]">
+          <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+            <h2 className="text-3xl font-light text-[#2A2A2A] dark:text-white mb-6 transition-colors" style={{ fontFamily: "Editorial Old" }}>
               Side-Questing At…
             </h2>
-            <ul className="space-y-3 font-['Inter',sans-serif]">
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Poker Club</span> — Top 9 finalist
+            <ul className="space-y-3" style={{ fontFamily: "Inter" }}>
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Poker Club</span> — Top 9 finalist
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Hip Hop Western</span> — dancer
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hip Hop Western</span> — dancer
               </li>
-              <li className="text-gray-700 dark:text-gray-300">
-                <span className="font-semibold">Fashion Lifestyle Society</span> — stylist & creative director
+              <li className="text-lg text-gray-600 dark:text-gray-400">
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Fashion Lifestyle Society</span> — stylist & creative director
               </li>
             </ul>
           </div>
@@ -204,8 +197,12 @@ export default function GalleryPage() {
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((image, idx) => (
-              <GalleryItem key={idx} image={image} index={idx} />
+              <div key={idx} className="animate-fade-in-up" style={{ animationDelay: `${(idx + 1) * 50}ms` }}>
+                <GalleryItem image={image} index={idx} />
+              </div>
             ))}
+          </div>
+          </div>
           </div>
         </div>
       </div>

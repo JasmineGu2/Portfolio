@@ -1,12 +1,10 @@
 'use client'
 
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 import type { Skill } from '@/lib/skills'
 import SkillDecal from './SkillDecal'
-import SkillTooltip from './SkillTooltip'
 
 interface PuzzlePieceProps {
   random: number
@@ -28,9 +26,6 @@ export default function PuzzlePiece({
   material,
 }: PuzzlePieceProps) {
   const meshRef = useRef<THREE.Mesh>(null)
-  const groupRef = useRef<THREE.Group>(null)
-  const [hovered, setHover] = useState(false)
-  const [showTooltip, setShowTooltip] = useState(false)
 
   // Handle click to scroll
   const handleClick = () => {
@@ -61,15 +56,8 @@ export default function PuzzlePiece({
     return [0, Math.PI, 0] // Rotate 180 degrees on Y axis to face the back
   }, [])
 
-  // Tooltip position (above the puzzle piece)
-  const [tooltipPosition, setTooltipPosition] = useState<[number, number, number]>([
-    position[0],
-    position[1] + 1.5,
-    position[2],
-  ])
-
   useFrame((state) => {
-    if (!meshRef.current || !groupRef.current) return
+    if (!meshRef.current) return
     const t = state.clock.getElapsedTime() + random * 10000
 
     // Rotation animation
@@ -83,41 +71,16 @@ export default function PuzzlePiece({
     const floatOffset = Math.sin(t / 1.5) / 2
     meshRef.current.position.y = floatOffset
 
-    // Update tooltip position to follow the puzzle piece
-    const worldPosition = new THREE.Vector3()
-    groupRef.current.getWorldPosition(worldPosition)
-    setTooltipPosition([
-      worldPosition.x,
-      worldPosition.y + 1.5,
-      worldPosition.z,
-    ])
-
-    // Scale on hover
-    meshRef.current.scale.x = meshRef.current.scale.y = meshRef.current.scale.z =
-      THREE.MathUtils.lerp(
-        meshRef.current.scale.z,
-        hovered ? baseScale * 1.2 : baseScale,
-        0.1
-      )
+    // Keep scale constant
+    meshRef.current.scale.x = meshRef.current.scale.y = meshRef.current.scale.z = baseScale
   })
 
   return (
-    <group ref={groupRef} position={position} rotation={rotation}>
+    <group position={position} rotation={rotation}>
       <mesh
         ref={meshRef}
         geometry={geometry}
         material={material}
-        onPointerOver={(e) => {
-          e.stopPropagation()
-          setHover(true)
-          setShowTooltip(true)
-          document.body.style.cursor = 'pointer'
-        }}
-        onPointerOut={() => {
-          setHover(false)
-          setShowTooltip(false)
-          document.body.style.cursor = 'default'
-        }}
         onClick={(e) => {
           e.stopPropagation()
           handleClick()
@@ -143,16 +106,6 @@ export default function PuzzlePiece({
         )}
       </mesh>
 
-      {/* Skill Tooltip - Only on hover */}
-      {skill && (
-        <SkillTooltip
-          skill={skill.skill}
-          description={skill.description}
-          visible={showTooltip}
-          position={tooltipPosition}
-          above={true}
-        />
-      )}
     </group>
   )
 }
