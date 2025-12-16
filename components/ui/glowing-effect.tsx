@@ -2,7 +2,30 @@
 
 import { memo, useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { animate } from "motion/react";
+
+// Simple animate function replacement
+const animate = (from: number, to: number, options: { duration: number; ease?: number[]; onUpdate: (value: number) => void }) => {
+  const startTime = Date.now();
+  const duration = options.duration * 1000; // Convert to milliseconds
+  const ease = options.ease || [0.16, 1, 0.3, 1];
+  
+  const animateFrame = () => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Simple easing function (cubic bezier approximation)
+    const eased = progress < 1 ? progress * progress * (3 - 2 * progress) : 1;
+    const value = from + (to - from) * eased;
+    
+    options.onUpdate(value);
+    
+    if (progress < 1) {
+      requestAnimationFrame(animateFrame);
+    }
+  };
+  
+  requestAnimationFrame(animateFrame);
+};
 
 interface GlowingEffectProps {
   blur?: number;
