@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { Skill } from '@/lib/skills'
@@ -26,6 +26,8 @@ export default function PuzzlePiece({
   material,
 }: PuzzlePieceProps) {
   const meshRef = useRef<THREE.Mesh>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [hoverScale, setHoverScale] = useState(1)
 
   // Handle click to scroll
   const handleClick = () => {
@@ -38,18 +40,18 @@ export default function PuzzlePiece({
   }
 
   // Calculate decal positions and orientations for both sides
-  // Front side decal
+  // Front side decal - slightly inset to avoid z-fighting and ensure proper depth testing
   const decalPositionFront = useMemo<[number, number, number]>(() => {
-    return [0, 0, 0.4]
+    return [0, 0, 0.35] // Slightly inset from surface
   }, [])
 
   const decalRotationFront = useMemo<[number, number, number]>(() => {
     return [0, 0, 0]
   }, [])
 
-  // Back side decal (opposite side)
+  // Back side decal (opposite side) - slightly inset
   const decalPositionBack = useMemo<[number, number, number]>(() => {
-    return [0, 0, -0.4]
+    return [0, 0, -0.35] // Slightly inset from surface
   }, [])
 
   const decalRotationBack = useMemo<[number, number, number]>(() => {
@@ -59,6 +61,10 @@ export default function PuzzlePiece({
   useFrame((state) => {
     if (!meshRef.current) return
     const t = state.clock.getElapsedTime() + random * 10000
+
+    // Smooth hover scale transition
+    const targetScale = isHovered ? 1.15 : 1
+    setHoverScale((prev) => prev + (targetScale - prev) * 0.1)
 
     // Rotation animation
     meshRef.current.rotation.set(
@@ -71,8 +77,9 @@ export default function PuzzlePiece({
     const floatOffset = Math.sin(t / 1.5) / 2
     meshRef.current.position.y = floatOffset
 
-    // Keep scale constant
-    meshRef.current.scale.x = meshRef.current.scale.y = meshRef.current.scale.z = baseScale
+    // Apply base scale with hover scale
+    const finalScale = baseScale * hoverScale
+    meshRef.current.scale.x = meshRef.current.scale.y = meshRef.current.scale.z = finalScale
   })
 
   return (
@@ -84,6 +91,16 @@ export default function PuzzlePiece({
         onClick={(e) => {
           e.stopPropagation()
           handleClick()
+        }}
+        onPointerEnter={(e) => {
+          e.stopPropagation()
+          setIsHovered(true)
+          document.body.style.cursor = 'pointer'
+        }}
+        onPointerLeave={(e) => {
+          e.stopPropagation()
+          setIsHovered(false)
+          document.body.style.cursor = 'auto'
         }}
       >
         {/* Skill Decal - Front side */}
@@ -105,7 +122,6 @@ export default function PuzzlePiece({
           />
         )}
       </mesh>
-
     </group>
   )
 }

@@ -120,3 +120,5 @@ When refactoring existing components:
 - Replace `font-['Inter',sans-serif]` with semantic `p`, `span`, `label`, or `button` tags
 - Remove inline font-family declarations and rely on semantic HTML
 
+
+

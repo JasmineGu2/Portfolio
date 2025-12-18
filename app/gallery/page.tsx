@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useMemo, memo } from 'react'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
 
 interface GalleryImage {
@@ -23,11 +23,6 @@ const galleryImages: GalleryImage[] = [
   },
   {
     src: '/gallery/IMG_1426 1.JPEG',
-    alt: 'Gallery Photo',
-    description: '',
-  },
-  {
-    src: '/gallery/IMG_1862 1.PNG',
     alt: 'Gallery Photo',
     description: '',
   },
@@ -78,42 +73,106 @@ const galleryImages: GalleryImage[] = [
   },
 ]
 
-function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
+const GalleryItem = memo(function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
   const [imageError, setImageError] = useState(false)
+  const [imageLoading, setImageLoading] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   
   // Check if file is HEIC format (not supported by most browsers)
   const isHEIC = image.src.toLowerCase().endsWith('.heic')
   
-  // URL encode the image source to handle spaces and special characters
-  const encodedSrc = image.src.split('/').map((part, idx) => 
-    idx === image.src.split('/').length - 1 ? encodeURIComponent(part) : part
-  ).join('/')
+  // URL encode the image source to handle spaces and special characters - memoize
+  const encodedSrc = useMemo(() => 
+    image.src.split('/').map((part, idx) => 
+      idx === image.src.split('/').length - 1 ? encodeURIComponent(part) : part
+    ).join('/'),
+    [image.src]
+  )
+
+  // Lazy load images using Intersection Observer
+  useEffect(() => {
+    if (!containerRef.current) return
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+            observer.disconnect()
+          }
+        })
+      },
+      { 
+        rootMargin: '50px', // Start loading 50px before entering viewport
+        threshold: 0.01 
+      }
+    )
+    
+    observer.observe(containerRef.current)
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // Check if image is already loaded (for cached images)
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalHeight !== 0) {
+      setImageLoading(false)
+    }
+  }, [])
   
   return (
     <div
-      className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer"
+      ref={containerRef}
+      className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer will-change-transform"
     >
       <div className="relative w-full h-full bg-gray-100 dark:bg-gray-900">
-        {!imageError ? (
+        {imageLoading && !imageError && (
+          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-lg z-10" />
+        )}
+        {!imageError && isVisible ? (
           <>
             {isHEIC ? (
               // For HEIC files, use regular img tag with better error message
               <img
+                ref={imgRef}
                 src={encodedSrc}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                onError={() => setImageError(true)}
+                loading="lazy"
+                decoding="async"
+                className={`w-full h-full object-cover transition-opacity duration-300 will-change-transform ${imageLoading ? 'opacity-0' : 'opacity-100'} group-hover:scale-110`}
+                style={{ transform: 'translateZ(0)' }} // GPU acceleration
+                onError={() => {
+                  setImageError(true)
+                  setImageLoading(false)
+                }}
+                onLoad={() => {
+                  setImageLoading(false)
+                }}
               />
             ) : (
               // For supported formats, use regular img tag to avoid Next.js Image issues with encoded URLs
               <img
+                ref={imgRef}
                 src={encodedSrc}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                onError={() => setImageError(true)}
+                loading="lazy"
+                decoding="async"
+                className={`w-full h-full object-cover transition-opacity duration-300 will-change-transform ${imageLoading ? 'opacity-0' : 'opacity-100'} group-hover:scale-110`}
+                style={{ transform: 'translateZ(0)' }} // GPU acceleration
+                onError={() => {
+                  setImageError(true)
+                  setImageLoading(false)
+                }}
+                onLoad={() => {
+                  setImageLoading(false)
+                }}
               />
             )}
           </>
+        ) : !isVisible ? (
+          <div className="w-full h-full bg-gray-200 dark:bg-gray-800 animate-pulse rounded-lg" />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center bg-gray-200 dark:bg-gray-800 p-4">
             <span className="text-gray-400 dark:text-gray-500 text-xs text-center">
@@ -133,7 +192,7 @@ function GalleryItem({ image, index }: { image: GalleryImage; index: number }) {
       </div>
     </div>
   )
-}
+})
 
 export default function GalleryPage() {
   return (
@@ -162,16 +221,16 @@ export default function GalleryPage() {
                 <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>VP, Ivey Product Society Fellowship</span> — redesigned a 50-person product bootcamp
               </li>
               <li className="text-lg text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hub Leader, Rewriting the Code</span>
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hub Leader, Rewriting the Code</span> — building spaces for women in tech
               </li>
               <li className="text-lg text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Orientation Residence Leader</span>
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Orientation Residence Leader</span> — supporting First Years :)
               </li>
               <li className="text-lg text-gray-600 dark:text-gray-400">
                 <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Mississauga Youth Action Council</span> — grew membership 300%
               </li>
               <li className="text-lg text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Social Justice Club</span>
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Social Justice Club</span> — giving back {'<3'}
               </li>
             </ul>
           </div>
@@ -183,7 +242,7 @@ export default function GalleryPage() {
             </h2>
             <ul className="space-y-3" style={{ fontFamily: "Inter" }}>
               <li className="text-lg text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Poker Club</span> — Top 9 finalist
+                <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Poker Club</span> — top 9 finalist
               </li>
               <li className="text-lg text-gray-600 dark:text-gray-400">
                 <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hip Hop Western</span> — dancer
@@ -195,11 +254,9 @@ export default function GalleryPage() {
           </div>
           
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" style={{ contain: 'layout style paint' }}>
             {galleryImages.map((image, idx) => (
-              <div key={idx} className="animate-fade-in-up" style={{ animationDelay: `${(idx + 1) * 50}ms` }}>
-                <GalleryItem image={image} index={idx} />
-              </div>
+              <GalleryItem key={idx} image={image} index={idx} />
             ))}
           </div>
           </div>

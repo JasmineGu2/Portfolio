@@ -102,24 +102,44 @@ export function GridPatternSpotlight() {
   })
 
   useEffect(() => {
-    const updatePosition = () => {
-      const newPosition = { ...positionRef.current }
-      setPosition(newPosition)
-      
-      // Update colors based on position
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        const newColors = getColorFromPosition(
-          newPosition.x,
-          newPosition.y,
-          rect.width,
-          rect.height
-        )
-        setColors(newColors)
+    let rafId: number
+    let lastUpdateTime = 0
+    const throttleMs = 33 // ~30fps for better performance
+    let lastPosition = { x: 0, y: 0 }
+    
+    const updatePosition = (currentTime: number) => {
+      // Throttle updates
+      if (currentTime - lastUpdateTime < throttleMs) {
+        rafId = requestAnimationFrame(updatePosition)
+        return
       }
+      
+      lastUpdateTime = currentTime
+      const newPosition = { ...positionRef.current }
+      
+      // Only update if position actually changed
+      if (newPosition.x !== lastPosition.x || newPosition.y !== lastPosition.y) {
+        lastPosition = { ...newPosition }
+        setPosition(newPosition)
+        
+        // Update colors based on position
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect()
+          const newColors = getColorFromPosition(
+            newPosition.x,
+            newPosition.y,
+            rect.width,
+            rect.height
+          )
+          setColors(newColors)
+        }
+      }
+      
+      rafId = requestAnimationFrame(updatePosition)
     }
-    const interval = setInterval(updatePosition, 16) // ~60fps
-    return () => clearInterval(interval)
+    
+    rafId = requestAnimationFrame(updatePosition)
+    return () => cancelAnimationFrame(rafId)
   }, [])
 
   return (

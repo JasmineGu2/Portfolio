@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
+import { VideoWithSkeleton } from '@/components/ui/video-with-skeleton'
+import { ImageWithSkeleton } from '@/components/ui/image-with-skeleton'
 
 export default function IntuitCaseStudy() {
   const [openLearnings, setOpenLearnings] = useState<Record<number, boolean>>({
@@ -16,9 +18,9 @@ export default function IntuitCaseStudy() {
 
   const sections = [
     { id: 'overview', label: 'Overview' },
-    { id: 'what-was-built', label: 'What Was Built' },
-    { id: 'one-key-project', label: 'One Key Project' },
-    { id: 'shadowing-pm', label: 'Shadowing the PM Team' },
+    { id: 'what-was-built', label: 'What I Built' },
+    { id: 'one-key-project', label: 'Unifying Credit Karma Onboarding' },
+    { id: 'shadowing-pm', label: 'Working with Product' },
     { id: 'learnings', label: 'Learnings' },
   ]
 
@@ -68,8 +70,8 @@ export default function IntuitCaseStudy() {
     <main className="w-full min-h-screen transition-colors pt-24 md:pt-28 pb-2 md:pb-3">
       <div className="w-full px-4 md:px-8 space-y-2 md:space-y-3">
         <div className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[65%] 2xl:max-w-[60%] mx-auto flex gap-8">
-          {/* Right Sidebar Navigation */}
-          <aside className="hidden lg:block w-48 flex-shrink-0 fixed top-32 right-4 h-fit z-40">
+          {/* Left Sidebar Navigation */}
+          <aside className="hidden lg:block w-48 flex-shrink-0 h-fit z-40">
             <div className="rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] transition-colors relative overflow-hidden">
               <div className="absolute inset-0 -z-0">
                 <GridPatternSpotlight />
@@ -114,16 +116,10 @@ export default function IntuitCaseStudy() {
                 </div>
 
                 <h1 className="text-6xl md:text-7xl font-light mb-6 text-[#2A2A2A] dark:text-white leading-tight transition-colors" style={{ fontFamily: "Editorial Old" }}>
-                  Building TurboTax Onboarding Components for Rapid Experimentation
+                  TurboTax Onboarding Experimentation Platform
                 </h1>
               <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                TurboTax's onboarding funnel is one of the highest-leverage surfaces in the entire product. It's the moment where users decide whether they trust TurboTax enough to begin filing — and also where the company sees its steepest drop-off.
-              </p>
-              <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                TurboTax personalizes onboarding across persona, intent, promotion, and entry point, meaning each campaign requires unique UI treatments, variants, and experiments.
-              </p>
-              <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                <span className="font-medium">Role:</span> Build reusable UI components to support rapid A/B experimentation across TurboTax.com, making onboarding delightful, low-friction, and personalized.
+                TurboTax's onboarding funnel is a high-leverage surface where users decide whether they trust TurboTax enough to begin filing. Because onboarding is personalized across persona, intent, and entry point, each campaign requires distinct UI treatments and experiments.
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
@@ -137,164 +133,80 @@ export default function IntuitCaseStudy() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 transition-colors">TEAM</div>
-                  <div className="text-base font-medium text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Inter" }}>Onboarding Engineering, PM, Design</div>
+                  <div className="text-base font-medium text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Inter" }}>Onboarding Engineering</div>
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 transition-colors">SKILLS</div>
+                  <div className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 transition-colors">TECHNOLOGIES</div>
                   <div className="text-base font-medium text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Inter" }}>React, A/B Testing, Component Design</div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-16">
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                  <video
-                    src="/work/Intuit.mp4"
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                  <video
-                    src="/work/Intuit.mp4"
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
-                </div>
+              <div className="mb-16">
+                <VideoWithSkeleton
+                  src="/work/Intuit.mp4"
+                  className="rounded-lg shadow-lg"
+                  aspectRatio="aspect-video"
+                />
               </div>
               </section>
 
-              {/* What Was Built */}
+              {/* What I Built */}
               <section 
                 id="what-was-built" 
                 ref={(el) => { sectionsRef.current['what-was-built'] = el }}
                 className="mb-20 scroll-mt-8"
               >
                 <h2 className="text-4xl md:text-5xl font-light mb-6 text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Editorial Old" }}>
-                  What Was Built
+                  What I Built
                 </h2>
-                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  I implemented several production components that powered experimentation and seasonal onboarding flows across TurboTax.com.
-                </p>
-                
-                <h3 className="text-2xl font-light mb-4 text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Editorial Old" }}>
-                  1. Reusable Components for the Onboarding Funnel
-                </h3>
-                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-4 transition-colors" style={{ fontFamily: "Inter" }}>
-                  These included: personalization inputs (name, filing status, goals), progress / step indicators, experiment-friendly call-to-action components, dynamic forms with validation and feature-flag support, card and layout components, and subtle animations that smoothed friction points in the funnel.
+                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-6 transition-colors" style={{ fontFamily: "Inter" }}>
+                  I built reusable frontend components that powered experimentation and seasonal onboarding flows across TurboTax.com. These included personalization inputs, progress indicators, experiment-friendly CTAs, dynamic forms with validation and feature-flag support, shared layout components, and subtle animations to reduce friction.
                 </p>
                 <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  All components were designed to be reused across multiple campaigns, allowing PMs and designers to run tests faster and with fewer engineering dependencies.
+                  All components were designed to be reused across campaigns, enabling faster iteration with fewer engineering dependencies.
                 </p>
-
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                </div>
               </section>
 
-              {/* One Key Project */}
+              {/* Unifying Credit Karma Onboarding */}
               <section 
                 id="one-key-project" 
                 ref={(el) => { sectionsRef.current['one-key-project'] = el }}
                 className="mb-20 scroll-mt-8"
               >
                 <h2 className="text-4xl md:text-5xl font-light mb-6 text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Editorial Old" }}>
-                  One Key Project — Unifying Credit Karma Theming
+                  Unifying Credit Karma Onboarding
                 </h2>
                 <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  As more Credit Karma (CK) users were funneled into TurboTax, the onboarding experience needed to feel visually cohesive.
-                </p>
-                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-4 transition-colors" style={{ fontFamily: "Inter" }}>
-                  I worked cross-functionally across TurboTax, Credit Karma, and deployment teams in India to: unify color + theming systems across multiple pages, update components to support both CK and TurboTax design systems, ensure visual consistency across entry points, and coordinate with distributed engineering teams to land changes safely.
-                </p>
-                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  This created a single, coherent onboarding journey for CK users—smoothing drop-off and improving trust during critical signup moments.
+                  As more Credit Karma users entered TurboTax through different acquisition paths, I worked across TurboTax, Credit Karma, and deployment teams in India to unify theming and component support across both design systems. This created a single, cohesive onboarding experience for Credit Karma users during critical signup moments.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
+                  <ImageWithSkeleton
+                    src="/case-studies/intuit/creditkarma.png"
+                    alt="Credit Karma Onboarding"
+                    className="rounded-lg shadow-lg"
+                    aspectRatio="aspect-video"
+                  />
+                  <ImageWithSkeleton
+                    src="/case-studies/intuit/creditkarma2.png"
+                    alt="Credit Karma Onboarding"
+                    className="rounded-lg shadow-lg"
+                    aspectRatio="aspect-video"
+                  />
                 </div>
               </section>
 
-              {/* Shadowing the PM Team */}
+              {/* Working with Product */}
               <section 
                 id="shadowing-pm" 
                 ref={(el) => { sectionsRef.current['shadowing-pm'] = el }}
                 className="mb-20 scroll-mt-8"
               >
                 <h2 className="text-4xl md:text-5xl font-light mb-6 text-[#2A2A2A] dark:text-white transition-colors" style={{ fontFamily: "Editorial Old" }}>
-                  Shadowing the PM Team
+                  Working with Product
                 </h2>
                 <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  To better understand how onboarding decisions were made, I embedded myself with the PM team. This included: attending daily PM standups, reviewing experiment variants + activation results, learning how metrics were defined across surfaces and SKUs, and understanding how campaigns personalized content to different user types.
+                  I closely followed the PM team by attending standups and reviewing experiment variants and results, which informed how I built flexible, configurable components to support rapid experimentation.
                 </p>
-                <p className="text-neutral-800 dark:text-neutral-200 text-base md:text-lg font-normal mb-8 transition-colors" style={{ fontFamily: "Inter" }}>
-                  This influenced how I built components: flexible, configurable, and optimized for rapid iteration.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                </div>
               </section>
 
               {/* Learnings */}
@@ -384,28 +296,6 @@ export default function IntuitCaseStudy() {
                         </p>
                       </div>
                     )}
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  </div>
-                  <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <video
-                      src="/work/Intuit.mp4"
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
                   </div>
                 </div>
               </section>

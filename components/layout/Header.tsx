@@ -19,10 +19,10 @@ export default function Header() {
               {/* Name/Logo */}
               <Link 
                 href="/" 
-                className="text-xl md:text-2xl text-[#2A2A2A] dark:text-white hover:opacity-80 transition-opacity"
-                style={{ fontFamily: "Editorial Old" }}
+                className="text-[#2A2A2A] dark:text-white hover:opacity-80 transition-opacity"
               >
-                Jasmine Gu
+                <div className="text-xl md:text-2xl" style={{ fontFamily: "Editorial Old" }}>Jasmine Gu</div>
+                <div className="text-sm md:text-base text-gray-500 dark:text-gray-400" style={{ fontFamily: "Inter" }}>CS and Business Grad 2027</div>
               </Link>
 
               {/* Navigation and Actions */}

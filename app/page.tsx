@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRef, useState, useEffect } from 'react'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
+import { VideoWithSkeleton } from '@/components/ui/video-with-skeleton'
+import ExperienceList from '@/components/hero/ExperienceList'
 
 const Puzzle3DWrapper = dynamic(() => import('@/components/Puzzle3D/Puzzle3D'), {
   ssr: false,
@@ -25,14 +27,6 @@ interface WorkExperience {
   }
 }
 
-const experiences = [
-  { year: '2026 (Spring)', company: 'Autodesk', role: 'FullStack' },
-  { year: '2025', company: 'Tesla', role: 'Software Engineer' },
-  { year: '2025', company: 'Ivey Business School', role: 'ML Engineer (Research Assistant)' },
-  { year: '2024', company: 'Intuit', role: 'Software Engineer' },
-  { year: '2023', company: 'OMERS', role: 'Solutions Architect' },
-  { year: '2023', company: 'Metaverse Group', role: 'Data Analyst & Engineer' },
-]
 
 const workExperiences: WorkExperience[] = [
   {
@@ -134,30 +128,22 @@ export default function Home() {
             </div>
             <div className="relative z-10 px-6 md:px-12 py-12 md:py-16">
             <section className="relative flex flex-col w-full">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-full">
-                  <h1 
-                    className="text-[10rem] md:text-[12rem] lg:text-[14rem] font-light mb-6 text-[#2A2A2A] dark:text-white leading-tight"
-                    style={{ fontFamily: "Editorial Old" }}
-                  >
-                    I'm Jasmine
-                  </h1>
-                  <div className="text-3xl md:text-4xl mb-8 text-gray-600 dark:text-gray-400" style={{ fontFamily: "Inter" }}>
-                    <p>I build systems by connecting the right pieces.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experiences Centered Cards - Below Header */}
-              <div className="w-full mb-8">
-                <div className="flex flex-nowrap gap-2 md:gap-3 justify-center overflow-x-auto">
-                  {experiences.map((exp, idx) => (
-                    <div key={idx} className="flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 bg-white/50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 text-sm md:text-base" style={{ fontFamily: "Inter" }}>
-                      <div className="font-bold text-[#2A2A2A] dark:text-white transition-colors whitespace-nowrap">{exp.company}</div>
-                      <div className="text-gray-500 dark:text-gray-400 text-xs md:text-sm transition-colors whitespace-nowrap">{exp.year} • {exp.role}</div>
+                  {/* Centered Header and Subheader */}
+                  <div className="flex flex-col items-center text-center mb-8">
+                    <h1
+                      className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-light italic mb-4 text-[#2A2A2A] dark:text-white leading-tight"
+                      style={{ fontFamily: "Editorial Old" }}
+                    >
+                      I'm Jasmine
+                    </h1>
+                    <div className="text-3xl md:text-4xl lg:text-5xl text-gray-600 dark:text-gray-400 italic" style={{ fontFamily: "Inter" }}>
+                      <p>An engineer who loves connecting the pieces.</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+
+              {/* Work Experience Cards in Horizontal Line - Centered */}
+              <div className="flex justify-center mb-8">
+                <ExperienceList />
               </div>
 
               <div className="w-full mb-10">
@@ -209,7 +195,7 @@ export default function Home() {
 
         {/* Work Experience Section */}
         <div className="w-full flex justify-center">
-          <div id="work-experience" className="w-full max-w-[60%] rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] transition-colors relative overflow-hidden">
+          <div id="work-experience" className="w-full max-w-[95%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[65%] 2xl:max-w-[60%] rounded-2xl bg-[#F2F2F2] dark:bg-[rgb(23,22,23)] transition-colors relative overflow-hidden">
             <div className="absolute inset-0 -z-0">
               <GridPatternSpotlight />
             </div>
@@ -229,13 +215,10 @@ export default function Home() {
                             isLarge ? 'aspect-[21/9]' : 'aspect-[16/10]'
                           }`}>
                             {experience.video ? (
-                              <video
+                              <VideoWithSkeleton
                                 src={experience.video.src}
-                                className="relative w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
+                                className="transition-all duration-500 group-hover:scale-110"
+                                aspectRatio={isLarge ? 'aspect-[21/9]' : 'aspect-[16/10]'}
                               />
                             ) : (
                               <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center transition-colors">

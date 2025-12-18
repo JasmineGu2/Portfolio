@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { caseStudies, technicalProjects } from '@/lib/projects-data'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
+import { ImageWithSkeleton } from '@/components/ui/image-with-skeleton'
 
 export default function ProjectsPage() {
   const [activeProjectType, setActiveProjectType] = useState<'pm' | 'technical'>('technical')
@@ -87,10 +88,11 @@ export default function ProjectsPage() {
                               isLarge ? 'aspect-[21/9]' : 'aspect-[16/10]'
                             }`}>
                               {caseStudy.image ? (
-                                <img
+                                <ImageWithSkeleton
                                   src={caseStudy.image.src}
                                   alt={caseStudy.image.alt}
-                                  className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500"
+                                  className="transition-transform group-hover:scale-110 duration-500"
+                                  aspectRatio={isLarge ? 'aspect-[21/9]' : 'aspect-[16/10]'}
                                 />
                               ) : (
                                 <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center transition-colors">
@@ -141,13 +143,14 @@ export default function ProjectsPage() {
                       >
                         <div className="flex flex-col">
                           <div className="relative w-full bg-gray-100 dark:bg-gray-900 overflow-hidden rounded-lg transition-all duration-300 group-hover:scale-[1.02] aspect-[21/9]">
-                            {hackwesternProject.image ? (
-                              <img
-                                src={hackwesternProject.image.src}
-                                alt={hackwesternProject.image.alt}
-                                className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500"
-                              />
-                            ) : (
+                                  {hackwesternProject.image ? (
+                                    <ImageWithSkeleton
+                                      src={hackwesternProject.image.src}
+                                      alt={hackwesternProject.image.alt}
+                                      className="transition-transform group-hover:scale-110 duration-500"
+                                      aspectRatio="aspect-[21/9]"
+                                    />
+                                  ) : (
                               <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center transition-colors">
                                 <span className="text-gray-400 dark:text-gray-500 text-sm">Image Placeholder</span>
                               </div>
@@ -188,10 +191,11 @@ export default function ProjectsPage() {
                           <div className="flex flex-col">
                             <div className="relative w-full bg-gray-100 dark:bg-gray-900 overflow-hidden rounded-lg transition-all duration-300 group-hover:scale-[1.02] aspect-square">
                               {project.image ? (
-                                <img
+                                <ImageWithSkeleton
                                   src={project.image.src}
                                   alt={project.image.alt}
-                                  className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500"
+                                  className="transition-transform group-hover:scale-110 duration-500"
+                                  aspectRatio="aspect-square"
                                 />
                               ) : (
                                 <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center transition-colors">

@@ -27,13 +27,10 @@ export default function SkillDecal({
     }
   })
 
-  // Create a less saturated version using a custom shader material approach
-  // We'll use a simple color adjustment by creating a material with reduced saturation
-  const desaturatedTexture = useMemo(() => {
+  // Create a processed texture with white background removed and desaturation
+  const processedTexture = useMemo(() => {
     if (!texture || !(texture instanceof THREE.Texture)) return texture
     
-    // For SVG textures, we can't easily desaturate in Three.js without a shader
-    // Instead, we'll create a canvas and apply desaturation filter
     const img = texture.image
     if (!img || !(img instanceof HTMLImageElement)) return texture
     
@@ -49,26 +46,42 @@ export default function SkillDecal({
       ctx.drawImage(img, -canvas.width, 0, canvas.width, canvas.height)
       ctx.restore()
       
-      // Apply desaturation filter (60% saturation)
+      // Get image data and process pixels
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       const data = imageData.data
+      
+      // Threshold for white detection (adjustable - higher = more strict)
+      const whiteThreshold = 240 // Pixels with RGB values above this are considered white
       
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i]
         const g = data[i + 1]
         const b = data[i + 2]
-        const gray = r * 0.299 + g * 0.587 + b * 0.114
-        const saturation = 0.6 // 60% saturation
         
-        data[i] = Math.min(255, r * saturation + gray * (1 - saturation))
-        data[i + 1] = Math.min(255, g * saturation + gray * (1 - saturation))
-        data[i + 2] = Math.min(255, b * saturation + gray * (1 - saturation))
+        // Check if pixel is white or near-white
+        const isWhite = r >= whiteThreshold && g >= whiteThreshold && b >= whiteThreshold
+        
+        if (isWhite) {
+          // Make white pixels transparent
+          data[i + 3] = 0 // Set alpha to 0 (fully transparent)
+        } else {
+          // Apply desaturation filter (60% saturation) for non-white pixels
+          const gray = r * 0.299 + g * 0.587 + b * 0.114
+          const saturation = 0.6 // 60% saturation
+          
+          data[i] = Math.min(255, r * saturation + gray * (1 - saturation))
+          data[i + 1] = Math.min(255, g * saturation + gray * (1 - saturation))
+          data[i + 2] = Math.min(255, b * saturation + gray * (1 - saturation))
+          // Keep original alpha for non-white pixels
+        }
       }
       
       ctx.putImageData(imageData, 0, 0)
       const newTexture = new THREE.CanvasTexture(canvas)
       newTexture.flipY = false
       newTexture.colorSpace = THREE.SRGBColorSpace
+      newTexture.format = THREE.RGBAFormat // Ensure RGBA format for transparency
+      newTexture.premultiplyAlpha = false // Don't premultiply alpha for better transparency
       return newTexture
     }
     
@@ -84,8 +97,8 @@ export default function SkillDecal({
   const decalPos = new THREE.Vector3(...position)
   const decalRot = new THREE.Euler(...rotation)
 
-  // Use desaturated texture
-  const finalTexture = desaturatedTexture || texture
+  // Use processed texture (with white background removed and desaturation)
+  const finalTexture = processedTexture || texture
 
   return (
     <Decal
@@ -93,6 +106,7 @@ export default function SkillDecal({
       rotation={decalRot}
       scale={scale}
       map={finalTexture as THREE.Texture}
+      depthTest={true}
     />
   )
 }

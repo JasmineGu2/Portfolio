@@ -41,7 +41,16 @@ export default function Puzzle3D() {
   }, [])
 
   return (
-    <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
+    <Canvas 
+      camera={{ position: [0, 0, 10], fov: 75 }}
+      gl={{ 
+        alpha: false, 
+        antialias: true,
+        depth: true,
+        stencil: false,
+        preserveDrawingBuffer: false
+      }}
+    >
       <ambientLight intensity={isDark ? 0.8 : 0.6} />
       <directionalLight intensity={isDark ? 1.0 : 0.8} position={[5, 25, 20]} />
       <pointLight intensity={isDark ? 0.6 : 0.4} position={[0, 0, 10]} color={isDark ? "#ffffff" : "#ffffff"} />

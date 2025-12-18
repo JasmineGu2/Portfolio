@@ -2,190 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Typography System */
-@import './typography.css';
-
 /* Global styles */
 
-/* Instrument Serif - free font under SIL Open Font License
- * Available from: https://github.com/Instrument/instrument-serif
- * To use this font, you need to:
- * 1. Download Instrument Serif from GitHub or use npm: npm install @fontsource/instrument-serif
- * 2. Add the font files to /public/fonts/ or use the npm package
- * 3. The @font-face declarations below will automatically load them
- */
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('/fonts/InstrumentSerif-Regular.woff2') format('woff2'),
-       url('/fonts/InstrumentSerif-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('/fonts/InstrumentSerif-Italic.woff2') format('woff2'),
-       url('/fonts/InstrumentSerif-Italic.woff') format('woff');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('/fonts/InstrumentSerif-Bold.woff2') format('woff2'),
-       url('/fonts/InstrumentSerif-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('/fonts/InstrumentSerif-BoldItalic.woff2') format('woff2'),
-       url('/fonts/InstrumentSerif-BoldItalic.woff') format('woff');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Redaction - free font under SIL Open Font License (kept for backward compatibility)
- * To use this font, you need to:
- * 1. Download Redaction from https://www.cufonfonts.com/font/redaction
- * 2. Add the font files to /public/fonts/
- * 3. The @font-face declarations below will automatically load them
- */
-@font-face {
-  font-family: 'Redaction';
-  src: url('/fonts/Redaction-Regular.woff2') format('woff2'),
-       url('/fonts/Redaction-Regular.woff') format('woff'),
-       url('/fonts/Redaction-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Redaction';
-  src: url('/fonts/Redaction-Bold.woff2') format('woff2'),
-       url('/fonts/Redaction-Bold.woff') format('woff'),
-       url('/fonts/Redaction-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Redaction';
-  src: url('/fonts/Redaction-Italic.woff2') format('woff2'),
-       url('/fonts/Redaction-Italic.woff') format('woff'),
-       url('/fonts/Redaction-Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* National 2 - commercial font from Klim Type Foundry (kept for backward compatibility)
- * To use this font, you need to:
- * 1. Purchase National 2 from https://klim.co.nz/retail-fonts/national-2/
- * 2. Add the font files to /public/fonts/
- * 3. The @font-face declarations below will automatically load them
- */
-@font-face {
-  font-family: 'National 2';
-  src: url('/fonts/National2-Regular.woff2') format('woff2'),
-       url('/fonts/National2-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'National 2';
-  src: url('/fonts/National2-Medium.woff2') format('woff2'),
-       url('/fonts/National2-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'National 2';
-  src: url('/fonts/National2-Bold.woff2') format('woff2'),
-       url('/fonts/National2-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Feature - available from Creative Fabrica
- * To use this font, you need to:
- * 1. Download Feature from https://www.creativefabrica.com/product/feature/
- * 2. Add the font files to /public/fonts/
- * 3. The @font-face declarations below will automatically load them
- */
-@font-face {
-  font-family: 'Feature';
-  src: url('/fonts/Feature-Regular.woff2') format('woff2'),
-       url('/fonts/Feature-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Feature';
-  src: url('/fonts/Feature-Medium.woff2') format('woff2'),
-       url('/fonts/Feature-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Feature';
-  src: url('/fonts/Feature-Bold.woff2') format('woff2'),
-       url('/fonts/Feature-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
-
-/* Editorial Old - using Playfair Display as fallback if not available */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-@font-face {
-  font-family: 'Editorial Old';
-  src: local('Editorial Old'), local('Playfair Display');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Neue Montreal - using Space Grotesk as fallback if not available */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
-@font-face {
-  font-family: 'Neue Montreal';
-  src: local('Neue Montreal'), local('Space Grotesk');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Swear - using Cormorant Garamond as fallback if not available */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
-@font-face {
-  font-family: 'Swear';
-  src: local('Swear'), local('Cormorant Garamond');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   --color-background: rgb(226, 225, 217);
@@ -263,13 +85,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  cursor: url('/icons/puzzleicon.jpg') 16 16, auto;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  font-family: sans-serif;
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V8H20C21.1046 8 22 8.89543 22 10V14H26C27.1046 14 28 14.8954 28 16V22C28 23.1046 27.1046 24 26 24H22V28C22 29.1046 21.1046 30 20 30H10C8.89543 30 8 29.1046 8 28V24H4C2.89543 24 2 23.1046 2 22V16C2 14.8954 2.89543 14 4 14H8V10C8 8.89543 8.89543 8 10 8H14V4H10Z' fill='%232A2A2A'/%3E%3Cpath d='M8 4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V8H20C21.1046 8 22 8.89543 22 10V14H26C27.1046 14 28 14.8954 28 16V22C28 23.1046 27.1046 24 26 24H22V28C22 29.1046 21.1046 30 20 30H10C8.89543 30 8 29.1046 8 28V24H4C2.89543 24 2 23.1046 2 22V16C2 14.8954 2.89543 14 4 14H8V10C8 8.89543 8.89543 8 10 8H14V4H10Z' fill='white' opacity='0.3'/%3E%3C/svg%3E") 16 16, auto;
 }
 
 html,
@@ -277,12 +93,14 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background: #000000;
-  background-attachment: scroll !important;
+  background-attachment: fixed;
   color: #2A2A2A;
-  font-family: var(--font-body);
-  font-size: var(--text-r--size);
-  line-height: var(--text-r--height);
+  font-family: 'Inter', sans-serif;
   transition: background 0.3s ease, color 0.3s ease;
+}
+
+a, button, [role="button"], input, textarea, select {
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V8H20C21.1046 8 22 8.89543 22 10V14H26C27.1046 14 28 14.8954 28 16V22C28 23.1046 27.1046 24 26 24H22V28C22 29.1046 21.1046 30 20 30H10C8.89543 30 8 29.1046 8 28V24H4C2.89543 24 2 23.1046 2 22V16C2 14.8954 2.89543 14 4 14H8V10C8 8.89543 8.89543 8 10 8H14V4H10Z' fill='%232A2A2A'/%3E%3Cpath d='M8 4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V8H20C21.1046 8 22 8.89543 22 10V14H26C27.1046 14 28 14.8954 28 16V22C28 23.1046 27.1046 24 26 24H22V28C22 29.1046 21.1046 30 20 30H10C8.89543 30 8 29.1046 8 28V24H4C2.89543 24 2 23.1046 2 22V16C2 14.8954 2.89543 14 4 14H8V10C8 8.89543 8.89543 8 10 8H14V4H10Z' fill='white' opacity='0.3'/%3E%3C/svg%3E") 16 16, pointer;
 }
 
 .dark body {
@@ -294,15 +112,6 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  cursor: url('/icons/puzzleicon.jpg') 16 16, pointer;
-}
-
-button,
-[role="button"],
-input[type="button"],
-input[type="submit"],
-input[type="reset"] {
-  cursor: url('/icons/puzzleicon.jpg') 16 16, pointer;
 }
 
 /* Glass morphism effect */
@@ -407,18 +216,6 @@ input[type="reset"] {
   animation: fade-in-up 0.5s ease-out;
 }
 
-/* Scroll-triggered fade-in */
-.scroll-fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.scroll-fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Fade in */
 @keyframes fade-in {
   from {
@@ -453,5 +250,15 @@ input[type="reset"] {
 /* Dark mode adjustments for gradient blobs */
 .dark .animate-blob {
   opacity: 0.15;
+}
+
+/* Skeleton loader shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 

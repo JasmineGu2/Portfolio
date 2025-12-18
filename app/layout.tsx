@@ -6,7 +6,7 @@ import ThemeToggle from '@/components/ui/theme-toggle'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Jasmine Gu - Personal Website',
+  title: 'Jasmine Gu',
   description: 'Engineer → Product Thinker → Community Builder',
   icons: {
     icon: '/icons/puzzleicon.jpg',
