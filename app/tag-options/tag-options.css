@@ -1,0 +1,349 @@
+/* Tag styling options — /tag-options */
+
+.tag-opt-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tag-opt-hero-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+@media (min-width: 900px) {
+  .tag-opt-hero-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+}
+
+.tag-opt-hero-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.tag-opt-hero-title {
+  margin-top: 0.35rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  line-height: 1.3;
+  color: var(--pf-ink);
+}
+
+.tag-opt-hero-meta {
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  color: var(--pf-muted);
+}
+
+.tag-opt-hero-preview {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tag-opt-hero-mock,
+.tag-opt-tile-mock {
+  padding: 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.tag-opt-hero-kicker {
+  margin-bottom: 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.tag-opt-tile-body {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.tag-opt-tile-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.55rem;
+  background: #f3f4f6;
+  font-weight: 700;
+  color: var(--pf-ink);
+}
+
+.tag-opt-tile-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pf-ink);
+}
+
+.tag-opt-tile-sub {
+  font-size: 0.68rem;
+  color: var(--pf-muted);
+}
+
+.tag-opt-row {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.tag-opt-row--wrap {
+  flex-wrap: wrap;
+}
+
+.tag-opt-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .tag-opt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .tag-opt-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tag-opt-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.9rem;
+  text-align: left;
+  border-radius: 0.9rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.tag-opt-card:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+  transform: translateY(-1px);
+}
+
+.tag-opt-card--active {
+  border-color: var(--pf-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tag-opt-card-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tag-opt-card-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--pf-ink);
+}
+
+.tag-opt-card-best {
+  font-size: 0.62rem;
+  color: var(--pf-muted);
+}
+
+.tag-opt-card-desc {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--pf-muted);
+}
+
+.tag-opt-footer-note {
+  font-size: 0.78rem;
+  color: var(--pf-muted);
+}
+
+.tag-opt-code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.tag-opt-link {
+  color: var(--pf-violet);
+  font-weight: 600;
+}
+
+.tag-opt-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Shared chip base ── */
+.tag-opt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.tag-opt-chip--sm {
+  font-size: 0.58rem;
+}
+
+.tag-opt-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 01 · Current filled */
+.tag-opt-chip--filled-current {
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: var(--tag-color);
+  color: var(--tag-fg);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 72%, #000);
+}
+
+.tag-opt-chip--filled-current.tag-opt-chip--sm {
+  padding: 0.14rem 0.42rem;
+}
+
+/* 02 · Outline */
+.tag-opt-chip--outline {
+  padding: 0.18rem 0.52rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--tag-color);
+  border: 1.5px solid color-mix(in srgb, var(--tag-color) 55%, #000);
+}
+
+/* 03 · Soft tint */
+.tag-opt-chip--soft-tint {
+  padding: 0.18rem 0.52rem;
+  border-radius: 9999px;
+  background: var(--tag-soft);
+  color: var(--tag-color);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 22%, transparent);
+}
+
+/* 04 · Serif keycap */
+.tag-opt-chip--serif-keycap {
+  padding: 0.22rem 0.62rem;
+  border-radius: 9999px;
+  background: var(--tag-tint);
+  color: var(--pf-ink);
+  border: 1.5px solid var(--pf-ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  box-shadow: 2px 2px 0 rgba(17, 17, 17, 0.12);
+}
+
+/* 05 · Mono label */
+.tag-opt-chip--mono-label {
+  padding: 0.16rem 0.42rem;
+  border-radius: 0.25rem;
+  background: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag-opt-chip--mono-label .tag-opt-label {
+  color: var(--tag-color);
+}
+
+/* 06 · Dot lead */
+.tag-opt-chip--dot-lead {
+  padding: 0.14rem 0.45rem 0.14rem 0.35rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--pf-ink);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tag-opt-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--tag-color);
+  flex-shrink: 0;
+}
+
+/* 07 · Left stripe */
+.tag-opt-chip--stripe {
+  padding: 0.16rem 0.48rem 0.16rem 0.55rem;
+  border-radius: 0.45rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--pf-ink);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.tag-opt-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.22rem;
+  background: var(--tag-color);
+}
+
+.tag-opt-chip--stripe .tag-opt-label {
+  padding-left: 0.15rem;
+}
+
+/* 08 · Glass */
+.tag-opt-chip--glass {
+  padding: 0.18rem 0.52rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--tag-color) 12%, rgba(255, 255, 255, 0.55));
+  color: color-mix(in srgb, var(--tag-color) 78%, #111);
+  border: 1px solid color-mix(in srgb, var(--tag-color) 35%, rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+/* 09 · Underline accent */
+.tag-opt-chip--underline {
+  padding: 0.08rem 0.1rem 0.18rem;
+  border-radius: 0;
+  background: transparent;
+  color: var(--pf-ink);
+  border: none;
+  border-bottom: 2px solid var(--tag-color);
+  font-weight: 600;
+}
+
+/* 10 · Square badge */
+.tag-opt-chip--square-badge {
+  padding: 0.16rem 0.38rem;
+  border-radius: 0.3rem;
+  background: var(--tag-color);
+  color: var(--tag-fg);
+  border: none;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

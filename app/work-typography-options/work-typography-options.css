@@ -1,0 +1,188 @@
+.work-type-opt-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.work-type-opt-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--pf-border);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+@media (min-width: 900px) {
+  .work-type-opt-hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
+.work-type-opt-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+  margin-bottom: 0.5rem;
+}
+
+.work-type-opt-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.work-type-opt-meta {
+  margin-top: 0.65rem;
+  font-size: 0.875rem;
+  color: var(--pf-muted);
+}
+
+.work-type-opt-legend {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.work-type-opt-legend li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.work-type-opt-legend-label {
+  min-width: 4.5rem;
+  color: var(--pf-muted);
+}
+
+.work-type-opt-legend-value {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+}
+
+.work-type-opt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .work-type-opt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.work-type-opt-option {
+  text-align: left;
+  padding: 1.15rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--pf-border);
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.work-type-opt-option:hover {
+  border-color: color-mix(in srgb, #1a0089 25%, transparent);
+}
+
+.work-type-opt-option--active {
+  border-color: #1a0089;
+  box-shadow: 0 8px 28px rgba(26, 0, 137, 0.1);
+}
+
+.work-type-opt-option-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.work-type-opt-option-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.work-type-opt-option-best {
+  font-size: 0.75rem;
+  color: var(--pf-muted);
+}
+
+.work-type-opt-option-desc {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--pf-muted);
+  margin-bottom: 0.85rem;
+}
+
+.work-type-opt-card {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, #ff5e32 10%, white);
+  border: 1px solid rgba(40, 20, 80, 0.12);
+}
+
+.work-type-opt-card--compact {
+  padding: 1rem;
+}
+
+.work-type-opt-company {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.work-type-opt-company--caps {
+  font-size: 0.75rem;
+}
+
+.work-type-opt-company--mono {
+  font-size: 0.8125rem;
+}
+
+.work-type-opt-role {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.work-type-opt-subtitle {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  margin-top: 10px;
+}
+
+.work-type-opt-subtitle--muted {
+  opacity: 0.82;
+}
+
+.work-type-opt-period {
+  font-size: 0.6875rem;
+  opacity: 0.55;
+  margin-top: 10px;
+}
+
+.work-type-opt-footer {
+  font-size: 0.875rem;
+  color: var(--pf-muted);
+}
+
+.work-type-opt-link {
+  color: #1a0089;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.work-type-opt-link:hover {
+  opacity: 0.8;
+}

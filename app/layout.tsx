@@ -1,25 +1,13 @@
 import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
-import ThemeToggle from '@/components/ui/theme-toggle'
+import { BentoWorkspaceRoot } from '@/components/portfolio/bento-workflows/BentoWorkspaceRoot'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Jasmine Gu',
-  description: 'Engineer → Product Thinker → Community Builder',
-  icons: {
-    icon: '/icons/puzzleicon.jpg',
-    shortcut: '/icons/puzzleicon.jpg',
-    apple: '/icons/puzzleicon.jpg',
-  },
+  title: 'Jasmine Gu — Product / Software',
+  description:
+    'Product Manager and Engineer building thoughtful, AI-powered products. CS + Business @ Western / Ivey.',
+  icons: { icon: '/icons/puzzleicon.jpg' },
 }
-
-const navItems = [
-  { label: 'Work', href: '/' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Gallery', href: '/gallery' },
-]
 
 export default function RootLayout({
   children,
@@ -28,17 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="transition-colors">
-        <div className="fixed inset-0 -z-10">
-          <GridPatternSpotlight />
-        </div>
-        <ThemeToggle />
-        <Header />
-        {children}
-        <Footer />
+      <body className="min-h-screen antialiased">
+        <BentoWorkspaceRoot>{children}</BentoWorkspaceRoot>
       </body>
     </html>
   )
 }
-
-

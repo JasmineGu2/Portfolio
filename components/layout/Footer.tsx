@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Linkedin, Github, FileText } from 'lucide-react'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
+import { ResumeLink } from '@/components/portfolio/ResumeLink'
 
 export default function Footer() {
   return (
@@ -48,15 +49,12 @@ export default function Footer() {
                 >
                   <Github className="w-5 h-5" />
                 </Link>
-                <Link
-                  href="/Jasmine_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <ResumeLink
                   className="group p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 text-[#2A2A2A] dark:text-white hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300"
                   aria-label="Resume"
                 >
                   <FileText className="w-5 h-5" />
-                </Link>
+                </ResumeLink>
               </div>
 
               {/* Copyright */}

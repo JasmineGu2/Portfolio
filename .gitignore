@@ -30,6 +30,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# accidental local artifacts
+200/
+layout.css?v=*/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

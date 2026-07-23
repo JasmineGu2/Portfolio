@@ -1,0 +1,480 @@
+/* Unified scheme tags — work chips, hero pills, sidebar legend */
+
+.bw-scheme-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  border-radius: 9999px;
+  background: var(--exp-chip-soft, color-mix(in srgb, var(--exp-accent-base) 18%, #ffffff));
+  color: var(--exp-chip-fg, var(--exp-accent-base));
+  border: 1px solid var(--exp-chip-border, color-mix(in srgb, var(--exp-accent-base) 22%, transparent));
+  white-space: nowrap;
+}
+
+.bw-scheme-tag--sm {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+}
+
+.bw-scheme-tag--md {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.95rem;
+}
+
+.bw-scheme-tag--supporting {
+  font-weight: 500;
+  opacity: 1;
+}
+
+.bw-scheme-tag--category {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--exp-chip-fg, #1a0089);
+}
+
+.bw-scheme-tag--filled {
+  color: var(--exp-chip-fg, #ffffff);
+}
+
+.bw-scheme-tag--legend {
+  font-size: 0.52rem;
+  padding: 0.12rem 0.38rem;
+}
+
+.bw-scheme-tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+}
+
+.bw-scheme-tag-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bw-scheme-tag-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0 0.35rem;
+}
+
+.bw-scheme-tag-legend-label {
+  margin-top: 0.35rem;
+  padding: 0 0.35rem;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  color: var(--pf-muted);
+}
+
+/* Work experience tiles — scheme-matched filled tags on neutral cards */
+
+.bento-tile--work-exp--themed .bw-scheme-tag,
+.bento-tile--work-exp--themed .bw-exp-chip {
+  font-size: 0.52rem;
+  padding: 0.15rem 0.45rem;
+}
+
+.bento-tile--work-exp--themed .bw-exp-logo {
+  background: color-mix(in srgb, var(--exp-soft) 55%, #ffffff);
+  border-color: color-mix(in srgb, var(--exp-accent-base) 18%, transparent);
+}
+
+.bento-tile--work-exp--themed.bento-tile--clickable:hover {
+  filter: brightness(1.02);
+}
+
+/* ── Soft / Accent — neutral tile, scheme strip + filled chip ── */
+.bw-shell:is([data-work-mode='soft'], [data-work-mode='accent']) .bento-tile--work-exp--themed {
+  background: var(--sch-soft-bg, #fafafa);
+  color: var(--sch-soft-fg, var(--pf-ink));
+  border: 1px solid var(--sch-soft-border, rgba(0, 0, 0, 0.04));
+  border-top: 4px solid var(--exp-accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.bw-shell:is([data-work-mode='soft'], [data-work-mode='accent'])
+  .bento-tile--work-exp--themed
+  .bento-caption,
+.bw-shell:is([data-work-mode='soft'], [data-work-mode='accent'])
+  .bento-tile--work-exp--themed
+  .bento-period {
+  color: var(--sch-soft-fg, var(--pf-muted));
+  opacity: 0.72;
+}
+
+.bw-shell:is([data-work-mode='soft'], [data-work-mode='accent'])
+  .bento-tile--work-exp--themed
+  .bento-arrow {
+  color: var(--exp-accent-base);
+}
+
+.bw-shell:is([data-work-mode='soft'], [data-work-mode='accent'])
+  .bento-tile--work-exp--themed.bento-tile--clickable:hover {
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--exp-accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--exp-accent-base) 22%, transparent);
+}
+
+.bw-shell[data-work-mode='accent'] .bento-tile--work-exp--themed .bw-exp-logo {
+  background: color-mix(in srgb, var(--exp-soft) 40%, #ffffff);
+  border-color: color-mix(in srgb, var(--exp-accent-base) 24%, transparent);
+}
+
+/* ── Filled — brand colors as tile fills ── */
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed {
+  background: linear-gradient(
+    145deg,
+    var(--exp-work-bg) 0%,
+    color-mix(in srgb, var(--exp-work-bg) 72%, #000) 100%
+  );
+  color: var(--exp-work-fg);
+  border: 1.5px solid var(--exp-work-border);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--exp-work-bg) 20%, transparent);
+}
+
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed .bento-caption,
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed .bento-period {
+  color: color-mix(in srgb, var(--exp-work-fg) 78%, transparent);
+  opacity: 1;
+}
+
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed .bento-arrow {
+  color: color-mix(in srgb, var(--exp-work-fg) 92%, transparent);
+}
+
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed .bw-exp-logo {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed.bento-tile--clickable:hover {
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--exp-work-bg) 30%, transparent);
+}
+
+/* ── Dark — neutral dark tile, scheme accent strip ── */
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed {
+  background: var(--sch-soft-bg, #171717);
+  color: var(--sch-soft-fg, #fafafa);
+  border: 1.5px solid var(--sch-hero-border);
+  border-left: 4px solid var(--exp-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--sch-hero-border) 18%, transparent),
+    0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed .bento-caption,
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed .bento-period {
+  color: color-mix(in srgb, var(--sch-soft-fg, #fff) 68%, transparent);
+  opacity: 1;
+}
+
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed .bento-arrow {
+  color: var(--exp-accent);
+}
+
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed .bw-exp-logo {
+  background: color-mix(in srgb, var(--sch-soft-bg, #171717) 88%, #ffffff);
+  border-color: color-mix(in srgb, var(--exp-accent-base) 28%, transparent);
+}
+
+.bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed.bento-tile--clickable:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--exp-accent) 35%, transparent),
+    0 8px 24px color-mix(in srgb, var(--exp-accent) 18%, transparent);
+}
+
+/* ── Tint — work tiles sit on tinted scheme surfaces ── */
+.bw-shell[data-scheme-tone='tint'] .bento-career-zone .bw-card-label {
+  color: var(--sch-card-label, var(--pf-muted));
+}
+
+.bw-shell[data-scheme-tone='tint']:is([data-work-mode='soft'], [data-work-mode='accent'])
+  .bento-tile--work-exp--themed {
+  background: var(--sch-soft-bg, #fafafa);
+  border-color: var(--sch-soft-border, rgba(0, 0, 0, 0.06));
+}
+
+/* ── Bold — filled palette tiles on colored canvas ── */
+.bw-shell[data-scheme-tone='bold'] .bento-career-zone .bw-card-label {
+  color: var(--sch-card-label, rgba(255, 255, 255, 0.74));
+}
+
+.bw-shell[data-scheme-tone='bold'][data-work-mode='filled'] .bento-tile--work-exp--themed .bento-label {
+  color: var(--exp-work-fg);
+}
+
+.bw-shell[data-scheme-tone='bold'][data-work-mode='filled']
+  .bento-tile--work-exp--themed
+  .bw-exp-media-stage--video {
+  background: color-mix(in srgb, var(--exp-work-bg) 18%, #ffffff);
+}
+
+/* ── Duo — palette-colored work tiles with contrasting type ── */
+.bw-shell[data-scheme-tone='duo'] .bento-career-zone .bw-card-label {
+  color: var(--sch-card-label, var(--pf-muted));
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed {
+  background: var(--exp-work-duo-bg, var(--sch-soft-bg));
+  color: var(--exp-work-duo-fg, var(--sch-soft-fg));
+  border: 1px solid color-mix(in srgb, var(--exp-work-duo-bg) 70%, #000000);
+  border-top: none;
+  box-shadow:
+    0 6px 22px color-mix(in srgb, var(--exp-work-duo-bg) 22%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--exp-work-duo-bg) 55%, transparent);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bento-label {
+  color: var(--exp-work-duo-fg, var(--sch-soft-fg));
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bento-caption,
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bento-period {
+  color: color-mix(in srgb, var(--exp-work-duo-fg, var(--sch-soft-fg)) 72%, transparent);
+  opacity: 1;
+}
+
+/* Custom palette duos — full-opacity secondary text for WCAG contrast */
+.bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bento-caption,
+.bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bento-period {
+  color: color-mix(in srgb, var(--exp-work-duo-fg, var(--sch-soft-fg)) 92%, transparent);
+}
+
+.bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bw-scheme-tag,
+.bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bw-exp-chip {
+  background: color-mix(in srgb, var(--exp-work-duo-fg) 22%, var(--exp-work-duo-bg));
+  border-color: color-mix(in srgb, var(--exp-work-duo-fg) 38%, transparent);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bento-arrow {
+  color: var(--exp-work-duo-fg, var(--sch-soft-fg));
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bw-scheme-tag,
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bw-exp-chip {
+  background: color-mix(in srgb, var(--exp-work-duo-fg) 16%, var(--exp-work-duo-bg));
+  color: var(--exp-work-duo-fg);
+  border-color: color-mix(in srgb, var(--exp-work-duo-fg) 28%, transparent);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bw-exp-logo,
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed .bw-exp-media-stage--video {
+  background: color-mix(in srgb, var(--exp-work-duo-fg) 12%, var(--exp-work-duo-bg));
+  border-color: color-mix(in srgb, var(--exp-work-duo-fg) 22%, transparent);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bento-tile--work-exp--themed.bento-tile--clickable:hover {
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--exp-work-duo-bg) 32%, transparent);
+  filter: none;
+}
+
+/* Work experience media — video or logo on home canvas */
+
+.bento-tile--work-exp--media {
+  position: relative;
+  min-width: 0;
+}
+
+.bento-tile--work-exp--has-video {
+  height: auto;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.bw-grid--home-wireframe .bento-tile--work-exp--has-video {
+  height: 100%;
+}
+
+.bw-grid--projects-wireframe .bento-tile--work-exp--has-video {
+  height: 100%;
+}
+
+.bw-grid--projects-wireframe .bw-project-thumb {
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  padding: 0.35rem;
+}
+
+.bw-grid--projects-wireframe .bento-tile--clickable:hover .bw-project-thumb {
+  transform: none;
+}
+
+.bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-exp-media-stage--video {
+  min-height: 4.75rem;
+}
+
+@media (min-width: 768px) {
+  .bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-exp-media-stage--video {
+    min-height: 5.5rem;
+  }
+}
+
+.bw-exp-copy--media {
+  flex: 0 0 auto;
+}
+
+.bw-exp-media-stage {
+  position: relative;
+  display: grid;
+  width: 100%;
+  margin-top: 0.35rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.bw-exp-media-stage > * {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.bw-exp-media-stage--video > * {
+  height: 100%;
+}
+
+/* Videos — media stage grows; player fills available height */
+.bw-exp-media-stage--video {
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  background: color-mix(in srgb, var(--exp-soft, #f4f4f5) 55%, #ffffff);
+}
+
+.bento-tile--work-exp--has-video .bw-exp-media-stage--video {
+  flex: 1 1 auto;
+  margin-top: 0.25rem;
+}
+
+.bw-exp-media-stage--video.bw-exp-media-stage--featured {
+  min-height: 0;
+}
+
+.bw-exp-media-stage--logo {
+  flex: 1 1 auto;
+  min-height: 4.25rem;
+  aspect-ratio: var(--exp-media-aspect, 16 / 9);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.bw-grid--home-wireframe .bw-exp-media-stage--logo {
+  aspect-ratio: unset;
+}
+
+.bw-exp-media-stage--logo.bw-exp-media-stage--featured {
+  min-height: 5.25rem;
+}
+
+.bw-exp-video-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  aspect-ratio: unset;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.06);
+  transition: transform 0.35s ease;
+}
+
+.bw-grid--home-wireframe .bento-tile--work-exp--has-video .bw-exp-video-player,
+.bw-workflow-canvas--compact .bento-tile--work-exp--has-video .bw-exp-video-player,
+.bw-grid--projects-wireframe .bento-tile--work-exp--has-video .bw-exp-video-player {
+  flex: 1 1 auto;
+  min-height: 100%;
+}
+
+.bento-tile--work-exp--has-video.bento-tile--clickable:hover .bw-exp-video-player {
+  transform: scale(1.1);
+}
+
+.bw-exp-media-stage .bw-exp-logo-img,
+.bw-exp-media-stage .bw-exp-logo-letter {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.bw-exp-logo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.12);
+  transition: transform 0.35s ease;
+}
+
+.bw-exp-logo-img--mark {
+  object-position: center;
+}
+
+.bw-exp-logo-img--wide {
+  object-position: center;
+}
+
+.bw-exp-logo-img--hero {
+  object-position: center;
+  transform: scale(1.15);
+}
+
+.bento-tile--work-exp--media.bento-tile--clickable:hover .bw-exp-logo-img {
+  transform: scale(1.18);
+}
+
+.bento-tile--work-exp--media.bento-tile--clickable:hover .bw-exp-logo-img--hero {
+  transform: scale(1.2);
+}
+
+.bw-exp-logo-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--exp-accent-base, #111111);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.bw-exp-logo-letter--mark {
+  font-size: 2.2rem;
+}
+
+.bw-exp-logo-letter--hero {
+  font-size: 2.6rem;
+}
+
+.bw-exp-copy--media {
+  flex: 0 0 auto;
+  padding-top: 0.45rem;
+}
+
+.bw-exp-logo-plain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bento-tile--work-exp--media.bento-tile--featured .bw-exp-media-stage--logo {
+  min-height: 0;
+}
+
+.bento-tile--work-exp--media.bento-tile--featured .bw-exp-logo-img--hero {
+  object-position: center;
+}

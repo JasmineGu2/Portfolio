@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { ChevronDown, ChevronRight } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence } from '@/lib/motion'
 
 interface AccordionItem {
   title: string
