@@ -1,31 +1,48 @@
-# Portfolio Specs — Index
+# Portfolio Specs
 
-This folder contains the product specifications for Jasmine's portfolio system.
-
-The portfolio is **one connected product** with three ways to understand the same underlying data:
-
-| View | Route | Job |
-|------|-------|-----|
-| **Work** | `/` | Show the evidence — jobs, case studies, bento tiles |
-| **Architecture** | `/architecture` | Explain the background — how experience became capability |
-| **Ask** | Side panel (global) | Query the portfolio — explore, compare, trace |
-
-Projects live at `/projects` as a separate bento page (not nested under Work).
+Product specifications for Jasmine's portfolio — one connected system, three views, one data layer.
 
 ---
 
-## Spec documents
+## How to read these specs
 
-| # | Document | Contents |
-|---|----------|----------|
-| 01 | [Product Overview](./01-product-overview.md) | Core concept, thesis, visitor goals |
-| 02 | [Site Architecture](./02-site-architecture.md) | Routes, nav, page relationships, what's built vs planned |
-| 03 | [Data Model](./03-data-model.md) | Shared schema, graph, capabilities, content integrity |
-| 04 | [Visual System](./04-visual-system.md) | Typography, color, gradients, card families, light/dark rhythm |
-| 05 | [Work & Projects](./05-work-and-projects.md) | Bento pages, tiles, filters, media, detail pages |
-| 06 | [Agent Architecture Page](./06-agent-architecture-page.md) | The `/architecture` narrative — abstraction engine, runtime sections |
-| 07 | [Ask Side Agent](./07-ask-side-agent.md) | Floating panel UX, query modes, grounding, cross-page behavior |
-| 08 | [Build Plan](./08-build-plan.md) | Phased implementation, checkpoints, decisions log |
+```text
+01 Product Overview          ← start here (the "why")
+        ↓
+02 Site Architecture         ← routes, nav, components, state
+03 Data Model                ← shared schema (source of truth)
+        ↓
+04 Visual System             ← typography, color, motion rules
+05 Work & Projects           ← bento pages (backbone)
+06 Agent Architecture Page   ← /architecture narrative (background)
+07 Ask Side Agent            ← floating query panel
+        ↓
+08 Build Plan                ← phases, status, decisions
+09 Dot Fabric Visual         ← optional animated surface (reference impl)
+```
+
+---
+
+## The product in one diagram
+
+```text
+                         ┌──────────────────────┐
+                         │    Shared Data       │
+                         │  portfolio-data.ts   │
+                         │  graph · capabilities│
+                         └──────────┬───────────┘
+                                    │
+         ┌──────────────────────────┼──────────────────────────┐
+         │                          │                          │
+    WORK (/)                   ARCHITECTURE              ASK (side panel)
+    Backbone                   Background                 Query layer
+    Bento evidence             Agent runtime narrative    Explore Work
+         │                          │                          │
+         └──────────────────────────┴──────────────────────────┘
+                                    │
+                              PROJECTS (/projects)
+                              Separate bento — case studies & builds
+```
 
 ---
 
@@ -33,35 +50,70 @@ Projects live at `/projects` as a separate bento page (not nested under Work).
 
 > **Work is the backbone. Architecture is the background. Ask is the query layer.**
 
-The visitor should understand Jasmine's career progression even if they never open Ask. Ask lowers the effort to explore once they care about specifics.
+| View | Route | Nav | Job |
+|------|-------|-----|-----|
+| **Work** | `/` | Yes | Jobs, internships, case study links — default landing |
+| **Architecture** | `/architecture` | Yes | How experience became capability — agent runtime narrative |
+| **Projects** | `/projects` | Yes | PM case studies + technical builds (separate from Work) |
+| **Ask** | Side panel | No | Query Work, trace paths, highlight tiles |
+| **Gallery** | `/gallery` | No | Linked from Architecture Community section (planned) |
 
 ---
 
-## Implementation status (Aug 2026)
+## Spec documents
+
+| # | Document | Contents |
+|---|----------|----------|
+| 01 | [Product Overview](./01-product-overview.md) | Thesis, three views, aesthetic goal, content rules |
+| 02 | [Site Architecture](./02-site-architecture.md) | Routes, nav, components, global state, responsive |
+| 03 | [Data Model](./03-data-model.md) | `PortfolioItem`, graph, capabilities, memory, schemas |
+| 04 | [Visual System](./04-visual-system.md) | Fonts, palette, gradients, cards, light/dark rhythm, motion |
+| 05 | [Work & Projects](./05-work-and-projects.md) | Bento layouts, tiles, media, detail pages, interactions |
+| 06 | [Agent Architecture Page](./06-agent-architecture-page.md) | All `/architecture` sections — abstraction engine → runtime loop |
+| 07 | [Ask Side Agent](./07-ask-side-agent.md) | Panel UX, query modes, grounding, cross-page behavior |
+| 08 | [Build Plan](./08-build-plan.md) | Phases, checkpoints, decisions log, timeline |
+| 09 | [Dot Fabric Visual](./09-dot-fabric-visual.md) | Animated dot surface — implementation reference |
+
+---
+
+## Implementation status
 
 | Area | Status |
 |------|--------|
 | Work bento at `/` | ✅ Built |
-| Projects bento at `/projects` | ✅ Built (existing) |
-| Architecture page placeholder at `/architecture` | ✅ Built (content TBD) |
-| Ask side panel UI | ✅ Built (AI responses TBD) |
-| Unified data layer (`portfolio-data.ts`) | ✅ Built |
+| Projects bento at `/projects` | ✅ Built |
+| Architecture placeholder at `/architecture` | ✅ Built — content TBD |
+| Ask side panel UI | ✅ Built — AI responses TBD |
+| Unified data layer | ✅ Built |
 | Graph + capabilities scaffolding | ✅ Built |
 | PortfolioState context | ✅ Built |
-| Custom fonts (Bootzy, Awesome Shorten, Analogue OS) | ✅ Added to repo |
-| Full Architecture page content | 🔲 Next |
-| Ask AI backend + grounding | 🔲 Next |
-| Gallery → Architecture community section | 🔲 Planned |
+| Custom fonts | ✅ In repo |
+| Full Architecture page | 🔲 Phase 2–3 |
+| Ask AI backend | 🔲 Phase 4 |
+| Dot fabric visual on Architecture | 🔲 Optional — see `09-dot-fabric-visual.md` |
+| Gallery → Architecture link | 🔲 Planned |
 
 ---
 
-## Related files in codebase
+## Codebase map
 
 ```
-lib/portfolio/portfolio-data.ts   — unified experience + project data
-lib/portfolio/graph.ts            — node connections
-lib/portfolio/capabilities.ts     — 6 capability modules
-components/portfolio/PortfolioStateContext.tsx
-components/portfolio/agent/AgentSidePanel.tsx
-public/fonts/                     — Bootzy, Awesome Shorten, Analogue OS
+lib/portfolio/
+  portfolio-data.ts      ← unified experiences + projects
+  graph.ts               ← node connections
+  capabilities.ts        ← 6 capability modules
+
+components/portfolio/
+  agent/AgentSidePanel.tsx
+  PortfolioStateContext.tsx
+  bento-workflows/       ← Work + Projects bento system
+
+app/
+  page.tsx               ← Work (/)
+  architecture/page.tsx  ← Architecture
+  projects/page.tsx      ← Projects
+
+public/fonts/            ← Bootzy, Awesome Shorten, Analogue OS
 ```
+
+When implementing a feature, update the relevant spec and this status table.

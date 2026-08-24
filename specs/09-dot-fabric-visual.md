@@ -1,3 +1,8 @@
+# 09 — Dot Fabric Visual System
+
+> Animated dot surface for Architecture hero backgrounds and ambient system sections.
+> Implementation reference — build after core Architecture page content (Phase 2–3).
+
 ### 1. Purpose
 
 Create a reusable animated visual system made from **small circular pixels arranged as a continuous deforming surface**.

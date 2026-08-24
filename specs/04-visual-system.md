@@ -188,6 +188,14 @@ Motion should feel **slow, deliberate, and system-like**.
 
 ---
 
+## Dot fabric visual (optional)
+
+For Architecture hero backgrounds and ambient system surfaces, see **[09 — Dot Fabric Visual](./09-dot-fabric-visual.md)**.
+
+A reusable animated surface made from small circular pixels as a continuous deforming fabric — computational, spatial, not random particles. Used sparingly behind Architecture and runtime sections.
+
+---
+
 ## Ask panel visual treatment
 
 Uses portfolio design system:

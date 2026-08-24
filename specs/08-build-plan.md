@@ -106,6 +106,13 @@
 | Performance pass (videos, gradients) | 1 day |
 | Archive/delete exploration pages | 0.5 day |
 | Migrate legacy data files to `portfolio-data.ts` only | 1 day |
+| Dot fabric visual on Architecture hero (optional) | See `09-dot-fabric-visual.md` |
+
+---
+
+## Optional: Dot fabric visual
+
+Animated dot surface for Architecture page backgrounds. Full implementation spec in **[09-dot-fabric-visual.md](./09-dot-fabric-visual.md)**. Build after core Architecture content is in place.
 
 ---
 
