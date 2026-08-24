@@ -4,7 +4,10 @@ const nextConfig = {
   images: {
     domains: ['fonts.gstatic.com'],
   },
-  webpack: (config, { isServer }) => {
+  async redirects() {
+    return [{ source: '/work', destination: '/', permanent: true }]
+  },
+  webpack(config, { isServer }) {
     // Suppress warnings about dynamic requires
     if (!isServer) {
       config.resolve.fallback = {
@@ -12,11 +15,9 @@ const nextConfig = {
         fs: false,
       }
     }
-    
+
     return config
   },
 }
 
 module.exports = nextConfig
-
-

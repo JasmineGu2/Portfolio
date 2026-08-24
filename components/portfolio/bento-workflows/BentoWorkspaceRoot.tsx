@@ -17,6 +17,7 @@ import {
   useBentoWorkspace,
 } from './BentoWorkspaceContext'
 import { HeroWorkspaceNav } from './HeroWorkspaceNav'
+import { AgentSidePanel } from '@/components/portfolio/agent/AgentSidePanel'
 
 function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
   const { colorScheme } = useBentoWorkspace()
@@ -71,6 +72,7 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
           <HeroWorkspaceNav compact showWorkspaceControls={false} />
         </header>
         {children}
+        <AgentSidePanel />
       </div>
     </div>
   )

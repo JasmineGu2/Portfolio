@@ -2,7 +2,12 @@ import { WorkflowBentoCanvas } from '@/components/portfolio/bento-workflows/Work
 import { PORTFOLIO_PAGE_SCHEME } from '@/lib/portfolio/bento-workflows/color-schemes'
 import { getWorkflowLayout } from '@/lib/portfolio/bento-workflows/layouts'
 
-export default function HomePage() {
+export const metadata = {
+  title: 'Work — Jasmine Gu',
+  description: 'Jobs and internships across product, engineering, and AI.',
+}
+
+export default function WorkPage() {
   const layout = getWorkflowLayout('home-wireframe')
 
   if (!layout) {

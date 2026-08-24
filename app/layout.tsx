@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { BentoWorkspaceRoot } from '@/components/portfolio/bento-workflows/BentoWorkspaceRoot'
+import { PortfolioStateProvider } from '@/components/portfolio/PortfolioStateContext'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <BentoWorkspaceRoot>{children}</BentoWorkspaceRoot>
+        <PortfolioStateProvider>
+          <BentoWorkspaceRoot>{children}</BentoWorkspaceRoot>
+        </PortfolioStateProvider>
       </body>
     </html>
   )

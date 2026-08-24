@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Bootzy';
+  src: url('/fonts/BootzyTM.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Awesome Shorten';
+  src: url('/fonts/Awesome-Shorten-BF6781e4db99e2b.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Analogue OS';
+  src: url('/fonts/AnalogueOS-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-bootzy {
+  font-family: 'Bootzy', Georgia, serif;
+}
+
+.font-awesome-shorten {
+  font-family: 'Awesome Shorten', 'Fredoka', cursive;
+}
+
+.font-analogue {
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+}
