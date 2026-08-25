@@ -21,7 +21,7 @@ export function HeroIntroCopy({
           <em className="hero-em hero-em--accent">code and empathy</em>.
           <span
             className="hero-worked-with"
-            aria-label="Worked at Tesla, Autodesk, Intuit, and a stealth startup"
+            aria-label="Worked at Tesla, Autodesk, and Intuit"
           >
             <img src="/work/tesla.png" alt="Tesla" className="hero-worked-with__logo" />
             <img
@@ -30,11 +30,6 @@ export function HeroIntroCopy({
               className="hero-worked-with__logo hero-worked-with__logo--autodesk"
             />
             <img src="/puzzle/intuit.png" alt="Intuit" className="hero-worked-with__logo" />
-            <img
-              src="/work/stealth-startup.png"
-              alt="Stealth Startup"
-              className="hero-worked-with__logo"
-            />
             <span className="hero-worked-with__divider" aria-hidden="true" />
             <span className="hero-worked-with__text">Grad 2027</span>
           </span>

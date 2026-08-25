@@ -1154,7 +1154,6 @@
   box-shadow: none;
 }
 
-.bw-shell[data-ai-background='architecture'] .arch-id-card,
 .bw-shell[data-ai-background='architecture'] .architecture-flow__stage-pill,
 .bw-shell[data-ai-background='architecture'] .arch-flow-node--experience,
 .bw-shell[data-ai-background='architecture'] .arch-flow-node--concept,
@@ -1163,6 +1162,12 @@
 .bw-shell[data-ai-background='architecture'] .arch-flow-node--tool {
   background: var(--arch-dark-surface, var(--pf-dark-surface));
   border-color: var(--pf-card-border-dark);
+}
+
+/* Kept in light mode for now — see app/architecture/architecture.css */
+.bw-shell[data-ai-background='architecture'] .arch-id-card {
+  background: var(--arch-surface);
+  border-color: var(--arch-line);
 }
 
 .bw-shell[data-ai-background='architecture'] .arch-flow-node--agent {
@@ -1183,8 +1188,8 @@ body:has(.bw-shell[data-ai-background='work']) {
 
 html:has(.bw-shell[data-page='architecture']),
 body:has(.bw-shell[data-page='architecture']) {
-  background-color: #1a1410;
-  color: #f5f0ea;
+  background-color: var(--pf-canvas);
+  color: var(--pf-ink);
 }
 
 .bw-shell[data-ai-background] {
@@ -1196,7 +1201,7 @@ body:has(.bw-shell[data-page='architecture']) {
 .bw-shell[data-page='architecture'][data-ai-background] {
   background-color: transparent;
   background-image: none;
-  color: #f5f0ea;
+  color: var(--pf-ink);
 }
 
 .bw-shell[data-ai-background][data-scheme-tone='duo'],
@@ -3970,8 +3975,8 @@ body:has(.bw-shell[data-page='architecture']) {
 }
 
 .hero-worked-with__logo--autodesk {
-  height: 2rem;
-  max-width: 7rem;
+  height: 2.75rem;
+  max-width: 9rem;
 }
 
 .hero-worked-with__text {
@@ -4298,6 +4303,7 @@ body:has(.bw-shell[data-page='architecture']) {
 }
 
 .capability-layer-stack {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(6.75rem, 7rem) minmax(0, 1fr);
   gap: 0.35rem 0.5rem;
@@ -4398,58 +4404,28 @@ body:has(.bw-shell[data-page='architecture']) {
 
 .capability-layer-stack__label {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.capability-layer-stack__capabilities {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 5;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 0.28rem;
-  margin: 0;
-  padding: 0.3rem 0.5rem 0.3rem 1.2rem;
-  border-radius: 0.5rem;
-  background: var(--pf-surface);
-  box-shadow: var(--pf-shadow-outline-hover);
-  list-style: none;
-  min-width: 0;
-  max-width: 16rem;
-  width: max-content;
-}
-
-.capability-layer-stack__capabilities > li {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.capability-layer-stack__capabilities[hidden] {
-  display: none;
-}
-
-.capability-layer-stack__cap-chip {
-  display: inline-block;
-  padding: 0.12rem 0.34rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--pf-accent) 22%, transparent);
-  background: color-mix(in srgb, var(--pf-peach) 14%, var(--pf-surface));
-  color: var(--pf-muted);
-  font-size: 0.52rem;
-  letter-spacing: 0.08em;
-  line-height: 1.25;
-  text-transform: uppercase;
-  max-width: 100%;
-  overflow-wrap: anywhere;
   white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.capability-layer-stack__subtitle {
+  margin: 0.15rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--pf-muted);
+  font-size: 0.48rem;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.capability-layer-stack__subtitle[hidden] {
+  display: none;
 }
 
 /* Large variant (~1.75×) — chat hero Core Strengths */
 .capability-layer-stack--large {
-  grid-template-columns: minmax(11.9rem, 12.2rem) minmax(0, 1fr);
+  grid-template-columns: minmax(11.9rem, 12.2rem) minmax(4rem, 1fr);
   gap: 0.5rem 0.75rem;
   max-width: 25rem;
 }
@@ -4481,15 +4457,9 @@ body:has(.bw-shell[data-page='architecture']) {
   width: 1.75rem;
 }
 
-.capability-layer-stack--large .capability-layer-stack__capabilities {
-  gap: 0.3rem 0.45rem;
-  padding: 0 0 0 2rem;
-}
-
-.capability-layer-stack--large .capability-layer-stack__cap-chip {
-  padding: 0.2rem 0.55rem;
-  font-size: 0.875rem;
-  letter-spacing: 0.06em;
+.capability-layer-stack--large .capability-layer-stack__subtitle {
+  padding-left: 2rem;
+  font-size: 0.62rem;
 }
 
 @media (min-width: 768px) {
@@ -4505,8 +4475,8 @@ body:has(.bw-shell[data-page='architecture']) {
     font-size: 0.62rem;
   }
 
-  .capability-layer-stack__cap-chip {
-    font-size: 0.54rem;
+  .capability-layer-stack__subtitle {
+    font-size: 0.5rem;
   }
 
   .capability-layer-stack--large {
@@ -4517,8 +4487,8 @@ body:has(.bw-shell[data-page='architecture']) {
     font-size: 1rem;
   }
 
-  .capability-layer-stack--large .capability-layer-stack__cap-chip {
-    font-size: 0.9rem;
+  .capability-layer-stack--large .capability-layer-stack__subtitle {
+    font-size: 0.68rem;
   }
 }
 
@@ -6928,12 +6898,12 @@ body:has(.bw-shell[data-page='architecture']) {
   border-radius: calc(var(--pf-card-radius-lg) - 0.35rem);
   box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 55%, transparent);
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {
   .chat-hero__editorial {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     gap: 1.35rem;
     padding: clamp(1.15rem, 2.2vw, 1.5rem) clamp(1.2rem, 2.4vw, 1.65rem);
   }
@@ -6947,7 +6917,7 @@ body:has(.bw-shell[data-page='architecture']) {
   background: none;
   border: none;
   box-shadow: none;
-  font-size: clamp(1.85rem, 3.6vw, 2.75rem);
+  font-size: clamp(1.6rem, 2.9vw, 2.3rem);
   line-height: 1.2;
   margin: 0;
 }
@@ -6963,7 +6933,7 @@ body:has(.bw-shell[data-page='architecture']) {
   gap: 0.55rem;
   min-height: 0;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .chat-hero__strengths-label {
@@ -6997,10 +6967,14 @@ body:has(.bw-shell[data-page='architecture']) {
   gap: 0.75rem;
 }
 
+.chat-hero__strengths .capability-layer-stack__graphic {
+  margin-left: 0.75rem;
+}
+
 .chat-hero__strengths .capability-layer-stack__svg {
   width: 100%;
   height: auto;
-  max-width: 11.875rem;
+  max-width: 10.5rem;
 }
 
 .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__layer-btn {
@@ -7019,33 +6993,35 @@ body:has(.bw-shell[data-page='architecture']) {
   width: 1.25rem;
 }
 
-.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__capabilities {
-  gap: 0.25rem 0.35rem;
+.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__subtitle {
   padding-left: 1.35rem;
-}
-
-.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__cap-chip {
   font-size: clamp(0.58rem, 1.6vw, 0.72rem);
-  padding: 0.14rem 0.4rem;
-  letter-spacing: 0.05em;
 }
 
-@media (min-width: 768px) {
+/* Below this, the side-by-side graphic+legend columns don't have room to breathe —
+   stays in the single-column (stacked, full-width legend) base layout instead. */
+@media (min-width: 1280px) {
   .chat-hero__strengths .capability-layer-stack--large {
-    grid-template-columns: minmax(11.9rem, 12.2rem) minmax(0, max-content);
+    grid-template-columns: minmax(11.9rem, 12.2rem) minmax(4rem, 1fr);
+  }
+
+  .chat-hero__strengths .capability-layer-stack__graphic {
+    margin-left: 1.1rem;
   }
 
   .chat-hero__strengths .capability-layer-stack__svg {
     width: auto;
     height: auto;
     max-width: none;
+    transform: scale(0.9);
+    transform-origin: top left;
   }
 
   .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__layer-btn {
     font-size: clamp(0.78rem, 1.4vw, 0.92rem);
   }
 
-  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__cap-chip {
+  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__subtitle {
     font-size: clamp(0.65rem, 1.1vw, 0.78rem);
   }
 }

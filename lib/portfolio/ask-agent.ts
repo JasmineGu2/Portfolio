@@ -108,7 +108,7 @@ const TOPIC_PICKER_ITEMS: ExperiencePickerItem[] = [
 ]
 
 const ABOUT_PICKER_ITEMS: ExperiencePickerItem[] = [
-  { id: 'architecture', label: 'Architecture', group: 'about' },
+  { id: 'architecture', label: 'Journey', group: 'about' },
   { id: 'tools', label: 'Tools I Use', group: 'about' },
 ]
 
@@ -164,7 +164,7 @@ export const CONTEXT_PICKER_OPTIONS: AskContextOption[] = [
   { id: 'product', label: 'Product', group: 'topic' },
   { id: 'ai', label: 'AI', group: 'topic' },
   { id: 'projects', label: 'Projects', group: 'topic' },
-  { id: 'architecture', label: 'Architecture', group: 'about' },
+  { id: 'architecture', label: 'Journey', group: 'about' },
   { id: 'tools', label: 'Tools I Use', group: 'about' },
 ]
 
@@ -504,8 +504,8 @@ export function resolveAskResponse(
   if (q.includes('connect') || q.includes('architecture') || q.includes('abstraction')) {
     return {
       answer:
-        'Each experience trained a different capability — automation taught leverage, interfaces taught user empathy, systems work taught dependencies, platform work taught scale, and product work taught direction. The Architecture page maps how they connect.',
-      references: [{ id: 'architecture', label: 'Architecture', href: '/architecture' }],
+        'Each experience trained a different capability — automation taught leverage, interfaces taught user empathy, systems work taught dependencies, platform work taught scale, and product work taught direction. The Journey page maps how they connect.',
+      references: [{ id: 'architecture', label: 'Journey', href: '/architecture' }],
       followUps: [
         'Trace how you moved from frontend to product.',
         'What capabilities did Tesla train?',

@@ -22,7 +22,7 @@
 .bw-shell[data-page='architecture'][data-ai-background] {
   background: transparent;
   background-image: none;
-  color: #f5f0ea;
+  color: var(--pf-ink);
 }
 
 .bw-shell[data-ai-background] .bw-main-canvas {

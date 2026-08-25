@@ -187,7 +187,7 @@
 }
 
 .arch-page .arch-id-card {
-  background: color-mix(in srgb, var(--arch-surface) 88%, transparent);
+  background: var(--arch-surface);
   border-color: var(--arch-line);
 }
 
@@ -847,8 +847,7 @@
   border: 1px solid var(--arch-line);
   border-radius: 1rem;
   padding: 1.25rem 1.35rem;
-  background: color-mix(in srgb, var(--arch-surface) 85%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--arch-surface);
   outline: 1.5px solid color-mix(in srgb, var(--arch-accent) 45%, transparent);
   outline-offset: 3px;
 }

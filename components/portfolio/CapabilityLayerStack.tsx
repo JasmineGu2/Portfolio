@@ -205,17 +205,13 @@ export function CapabilityLayerStack({ size = 'default' }: { size?: 'default' | 
                 <span className="capability-layer-stack__label">{layer.label}</span>
               </button>
 
-              <ul
+              <p
                 id={`${groupId}-${layer.id}-caps`}
-                className="capability-layer-stack__capabilities"
+                className="capability-layer-stack__subtitle font-analogue"
                 hidden={!isActive}
               >
-                {layer.capabilities.map((cap) => (
-                  <li key={cap}>
-                    <span className="capability-layer-stack__cap-chip font-analogue">{cap}</span>
-                  </li>
-                ))}
-              </ul>
+                {layer.capabilities.join(' · ')}
+              </p>
             </div>
           )
         })}

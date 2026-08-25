@@ -25,7 +25,7 @@ export const STARTER_CHIPS: StarterChip[] = [
   { id: 'projects', label: 'Projects', icon: Layers, query: 'What have you built zero to one?' },
   {
     id: 'architecture',
-    label: 'Architecture',
+    label: 'Journey',
     icon: Layers,
     query: 'How do your experiences connect?',
   },
