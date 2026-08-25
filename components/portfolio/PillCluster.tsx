@@ -53,7 +53,7 @@ export function Pill({
 
 export function PillCluster({ pills }: { pills: PillItem[] }) {
   return (
-    <div className="pf-pill-cluster" aria-hidden>
+    <div className="pf-pill-cluster">
       {pills.map((pill) => (
         <span
           key={pill.label}

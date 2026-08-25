@@ -1,26 +1,14 @@
 'use client'
 
 import { useCallback, type ReactNode } from 'react'
-import Link from 'next/link'
-import { Monitor, Rocket, Sparkles } from 'lucide-react'
-import { FlowerIcon } from './FlowerIcon'
-import { ResumeLink } from './ResumeLink'
-import { SchemeTag } from './bento-workflows/SchemeTag'
-import { HERO_STRENGTHS } from '@/lib/portfolio/pill-data'
-import { SITE_CONTACT } from '@/lib/portfolio/mindmap-data'
+import { CapabilityLayerStack } from './CapabilityLayerStack'
+import { HeroIntroCopy } from './HeroIntroCopy'
+import { CAPABILITY_LAYERS } from '@/lib/portfolio/capability-layers-data'
 import {
-  DEFAULT_COLOR_SCHEME,
+  PORTFOLIO_DEFAULT_SCHEME,
   type ColorSchemeId,
 } from '@/lib/portfolio/bento-workflows/color-schemes'
-import { CORE_BRAND, experienceTagColor } from '@/lib/portfolio/experience-cards-data'
 import { HeroWorkspaceNav } from './bento-workflows/HeroWorkspaceNav'
-
-function HeroPillIcon({ type }: { type: NonNullable<(typeof HERO_STRENGTHS)[number]['icon']> }) {
-  const cls = 'w-3 h-3 shrink-0'
-  if (type === 'monitor') return <Monitor className={cls} strokeWidth={2} aria-hidden />
-  if (type === 'rocket') return <Rocket className={cls} strokeWidth={2} aria-hidden />
-  return <Sparkles className={cls} strokeWidth={2} aria-hidden />
-}
 
 function HeroBentoCell({
   id,
@@ -50,7 +38,7 @@ function HeroBentoCell({
 
 export function HeroBentoPanel({
   cellRefs,
-  colorScheme = DEFAULT_COLOR_SCHEME,
+  colorScheme = PORTFOLIO_DEFAULT_SCHEME,
   showWorkspaceNav = false,
   showWorkspaceControls = true,
   introHeadline,
@@ -84,26 +72,7 @@ export function HeroBentoPanel({
       >
         <div className="bento-tile bento-tile--editorial hero-bento-block">
           <span className="hero-bento-port hero-bento-port--right" aria-hidden />
-          {introHeadline ? (
-            <p className="hero-editorial-headline font-serif-display">{introHeadline}</p>
-          ) : (
-            <p className="hero-editorial-headline font-serif-display">
-              Jasm
-              <span className="relative inline-block">
-                i
-                <FlowerIcon className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 h-5 sm:w-6 sm:h-6 pointer-events-none" />
-              </span>
-              ne Gu is a{' '}
-              <em className="hero-em hero-em--accent">product-minded builder</em> with the{' '}
-              <em className="hero-em hero-em--accent">experience and versatility</em> to translate
-              between users, engineering, and operations.
-            </p>
-          )}
-
-          <p className="hero-editorial-sub mt-6 md:mt-7">
-            {introSub ??
-              'Product manager and engineer building thoughtful, AI-powered products—from consumer experiences at TurboTax to enterprise data platforms at Autodesk.'}
-          </p>
+          <HeroIntroCopy headline={introHeadline} sub={introSub} />
         </div>
       </HeroBentoCell>
 
@@ -115,71 +84,20 @@ export function HeroBentoPanel({
         <div className="bento-tile bento-tile--editorial-soft hero-bento-block">
           <span className="hero-bento-port hero-bento-port--left" aria-hidden />
           <span className="hero-bento-port hero-bento-port--bottom" aria-hidden />
-          <p className="bw-card-label bw-card-label--section">Core Strengths</p>
-          <ul className="bw-tag-grid">
-            {HERO_STRENGTHS.map((pill) => (
-              <li key={pill.label}>
-                <SchemeTag
-                  label={pill.label}
-                  color={experienceTagColor(
-                    pill.variant === 'supporting'
-                      ? 'supporting'
-                      : pill.accent === 'coral'
-                        ? 'coral'
-                        : 'lavender'
-                  )}
-                  size="sm"
-                  variant={pill.variant === 'supporting' ? 'supporting' : 'primary'}
-                  icon={pill.icon ? <HeroPillIcon type={pill.icon} /> : undefined}
-                />
+          <p className="bw-card-label bw-card-label--section font-analogue">Core Strengths</p>
+          <ul className="sr-only">
+            {CAPABILITY_LAYERS.map((layer) => (
+              <li key={layer.id}>
+                {layer.label}: {layer.capabilities.join(', ')}
               </li>
             ))}
           </ul>
-        </div>
-      </HeroBentoCell>
-
-      <HeroBentoCell
-        id="hero-actions"
-        cellRefs={cellRefs}
-        className="hero-bento-cell hero-bento-cell--actions"
-      >
-        <div className="bento-tile bento-tile--editorial-soft hero-bento-block hero-bento-block--actions">
-          <span className="hero-bento-port hero-bento-port--top" aria-hidden />
-          <span className="hero-bento-port hero-bento-port--bottom" aria-hidden />
-          <div className="hero-bento-actions-row">
-            <div className="hero-bento-actions-left">
-              <span className="hero-bento-monogram" aria-hidden>
-                JG
-              </span>
-              <div>
-                <p className="hero-bento-actions-name">Jasmine Gu</p>
-                <p className="hero-bento-actions-role">Product Manager + Engineer</p>
-              </div>
-            </div>
-
-            <div className="hero-bento-contact-meta">
-              <span>Western / Ivey · CS + Business</span>
-              <span aria-hidden>·</span>
-              <span>Grad 2027</span>
-              <span aria-hidden>·</span>
-              <span>{SITE_CONTACT.email}</span>
-              <span aria-hidden>·</span>
-              <Link
-                href={SITE_CONTACT.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 transition-colors"
-              >
-                LinkedIn
-              </Link>
-              <span aria-hidden>·</span>
-              <ResumeLink className="underline underline-offset-2 transition-colors">
-                Résumé
-              </ResumeLink>
-            </div>
+          <div className="hero-bento-capability-stack">
+            <CapabilityLayerStack />
           </div>
         </div>
       </HeroBentoCell>
+
     </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { BentoCanvasViewport } from './BentoCanvasViewport'
 import { useBentoWorkspace } from './BentoWorkspaceContext'
 import type { WorkflowLayoutConfig } from '@/lib/portfolio/bento-workflows/layouts'
 
@@ -55,7 +56,9 @@ export function BentoWorkspaceShell({
 
       {!hidePageHeader && description && <p className="bw-main-desc">{description}</p>}
 
-      <div className="bw-main-canvas">{children}</div>
+      <div className="bw-main-canvas">
+        <BentoCanvasViewport>{children}</BentoCanvasViewport>
+      </div>
     </>
   )
 }

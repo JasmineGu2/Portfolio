@@ -4,7 +4,7 @@ import type { ColorSchemeId } from './color-schemes'
 import { getPaletteVariant } from './color-schemes'
 import { contrastChipText } from './duo-contrast'
 import { getSchemeTokens, type ColorSchemeTokens } from './scheme-tokens'
-import { CORE_BRAND, EXPERIENCE_CARDS } from '@/lib/portfolio/experience-cards-data'
+import { EXPERIENCE_CARDS } from '@/lib/portfolio/experience-cards-data'
 
 export type TagVariant = 'primary' | 'supporting' | 'category' | 'filled'
 
@@ -33,17 +33,17 @@ export function schemeTagStyleVars(
 ): Record<string, string> {
   if (variant === 'supporting') {
     return {
-      '--exp-accent-base': CORE_BRAND.ink,
-      '--exp-chip-fg': CORE_BRAND.ink,
-      '--exp-chip-soft': CORE_BRAND.cream,
-      '--exp-chip-border': 'color-mix(in srgb, #1A0089 16%, transparent)',
+      '--exp-accent-base': 'var(--pf-accent)',
+      '--exp-chip-fg': 'var(--pf-muted)',
+      '--exp-chip-soft': 'color-mix(in srgb, var(--pf-peach) 10%, var(--pf-surface))',
+      '--exp-chip-border': 'color-mix(in srgb, var(--pf-accent) 14%, transparent)',
     }
   }
 
   if (variant === 'category') {
     return {
-      '--exp-accent-base': CORE_BRAND.ink,
-      '--exp-chip-fg': CORE_BRAND.ink,
+      '--exp-accent-base': 'var(--pf-accent)',
+      '--exp-chip-fg': 'var(--pf-muted)',
       '--exp-chip-soft': 'transparent',
       '--exp-chip-border': 'transparent',
     }
@@ -59,16 +59,11 @@ export function schemeTagStyleVars(
     }
   }
 
-  const isCoral = color.toLowerCase() === CORE_BRAND.coral.toLowerCase()
   return {
-    '--exp-accent-base': isCoral ? CORE_BRAND.coral : CORE_BRAND.purple,
-    '--exp-chip-fg': CORE_BRAND.purple,
-    '--exp-chip-soft': isCoral
-      ? 'color-mix(in srgb, #FF5E32 22%, #ffffff)'
-      : 'color-mix(in srgb, #1A0089 14%, #ffffff)',
-    '--exp-chip-border': isCoral
-      ? 'color-mix(in srgb, #FF5E32 35%, transparent)'
-      : 'color-mix(in srgb, #1A0089 22%, transparent)',
+    '--exp-accent-base': 'var(--pf-accent)',
+    '--exp-chip-fg': 'var(--pf-accent-chip-fg)',
+    '--exp-chip-soft': 'color-mix(in srgb, var(--pf-peach) 28%, var(--pf-surface))',
+    '--exp-chip-border': 'var(--pf-accent-chip-border)',
   }
 }
 

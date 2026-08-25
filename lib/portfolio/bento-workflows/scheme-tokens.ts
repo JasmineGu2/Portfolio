@@ -134,6 +134,16 @@ const RETRO_WARM: NeutralShell = {
   border: 'rgba(28, 25, 23, 0.06)',
 }
 
+/** Warm editorial shell — aligned with Architecture --arch-* / --pf-* tokens */
+const PORTFOLIO_WARM: NeutralShell = {
+  shell: '#faf6f0',
+  canvas: '#f3ede4',
+  dot: '#d4cfc6',
+  soft: '#fffdf9',
+  fg: '#1a1410',
+  border: 'color-mix(in srgb, #1a1410 10%, transparent)',
+}
+
 /** Palette schemes share neutral shells; reference colors appear only as accents. */
 const PALETTE_NEUTRALS = {
   pop: PURE_WHITE,
@@ -469,7 +479,29 @@ const SOFT_TOKENS: ColorSchemeTokens = {
   ctaBg: '#1a1a1a',
 }
 
+const PORTFOLIO_WARM_TOKENS: ColorSchemeTokens = {
+  ...makeAccentNeutralTokens(
+    PORTFOLIO_WARM,
+    ['#e8c547', '#f5e6a8', '#c9a020'],
+    ['#f5e6a8', '#e8c547', '#faf3c8', '#f0d878', '#c9a020']
+  ),
+  heroSub: '#6b635c',
+  cardLabel: '#6b635c',
+  badgeFg: '#6b635c',
+  ctaBg: '#1a1410',
+  connector: 'color-mix(in srgb, #1a1410 22%, transparent)',
+  connectorPrimary: 'color-mix(in srgb, #1a1410 38%, transparent)',
+  workPalette: ['#e8c547', '#f5e6a8', '#f0d878', '#c9a020', '#faf3c8'],
+  pillPeach: pill('#f5e6a8', '#7a5f10', 'color-mix(in srgb, #e8c547 45%, #1a1410)'),
+  pillCream: pill('#faf6f0', '#6b635c', 'color-mix(in srgb, #1a1410 12%, transparent)'),
+  pillLavender: pill('#f0d878', '#7a5f10', 'color-mix(in srgb, #e8c547 50%, #1a1410)'),
+  pillSky: pill('#faf3c8', '#7a5f10', 'color-mix(in srgb, #e8c547 40%, #1a1410)'),
+  pillMint: pill('#f5e6a8', '#6b5a12', 'color-mix(in srgb, #e8c547 42%, #1a1410)'),
+}
+
 export const SCHEME_TOKENS: Record<ColorSchemeId, ColorSchemeTokens> = {
+  'warm-portfolio': PORTFOLIO_WARM_TOKENS,
+  'portfolio-warm': PORTFOLIO_WARM_TOKENS,
   soft: SOFT_TOKENS,
   'soft-mist': makeAccentNeutralTokens(COOL_PEARL, ['#f472b6', '#60a5fa', '#34d399'], [
     '#f472b6',
@@ -573,7 +605,7 @@ export function getBaseSchemeTokens(id: ColorSchemeId): ColorSchemeTokens {
   return SCHEME_TOKENS[normalized] ?? SCHEME_TOKENS[DEFAULT_SCHEME_FALLBACK]
 }
 
-const DEFAULT_SCHEME_FALLBACK = 'rainbow-prism' satisfies ColorSchemeId
+const DEFAULT_SCHEME_FALLBACK = 'warm-portfolio' satisfies ColorSchemeId
 
 export function getSchemeTokens(id: ColorSchemeId): ColorSchemeTokens {
   const normalized = id.endsWith('-bold') ? (id.replace(/-bold$/, '-duo') as ColorSchemeId) : id
@@ -631,6 +663,7 @@ export function schemeTokensToCssVars(tokens: ColorSchemeTokens): CSSProperties 
     '--sch-card-label': tokens.cardLabel,
     '--sch-connector': tokens.connector,
     '--sch-connector-primary': tokens.connectorPrimary,
+    '--sch-em-orange': tokens.workA,
     '--sch-work-a': tokens.workA,
     '--sch-work-b': tokens.workB,
     '--sch-work-c': tokens.workC,

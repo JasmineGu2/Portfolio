@@ -1,10 +1,10 @@
 import { WorkflowBentoCanvas } from '@/components/portfolio/bento-workflows/WorkflowBentoCanvas'
-import { PORTFOLIO_PAGE_SCHEME } from '@/lib/portfolio/bento-workflows/color-schemes'
 import { getWorkflowLayout } from '@/lib/portfolio/bento-workflows/layouts'
+import { HERO_TAGLINE } from '@/lib/portfolio/site-copy'
 
 export const metadata = {
   title: 'Work — Jasmine Gu',
-  description: 'Jobs and internships across product, engineering, and AI.',
+  description: HERO_TAGLINE.secondary,
 }
 
 export default function WorkPage() {
@@ -18,7 +18,6 @@ export default function WorkPage() {
     <WorkflowBentoCanvas
       layout={layout}
       showWorkspaceControls={false}
-      fixedColorScheme={PORTFOLIO_PAGE_SCHEME}
     />
   )
 }

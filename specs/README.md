@@ -18,7 +18,11 @@ Product specifications for Jasmine's portfolio — one connected system, three v
 07 Ask Side Agent            ← floating query panel
         ↓
 08 Build Plan                ← phases, status, decisions
-09 Dot Fabric Visual         ← optional animated surface (reference impl)
+09 Dot Fabric Visual         ← redirect → specs/visuals/dot-fabric.md
+10 Agent Card Components     ← reusable agent/API architecture card system
+11 Performance Budget        ← motion limits, canvas/video/lazy-load budgets
+
+Visuals (implementation)     ← specs/visuals/ — dot fabric, ambient effects
 ```
 
 ---
@@ -72,7 +76,18 @@ Product specifications for Jasmine's portfolio — one connected system, three v
 | 06 | [Agent Architecture Page](./06-agent-architecture-page.md) | All `/architecture` sections — abstraction engine → runtime loop |
 | 07 | [Ask Side Agent](./07-ask-side-agent.md) | Panel UX, query modes, grounding, cross-page behavior |
 | 08 | [Build Plan](./08-build-plan.md) | Phases, checkpoints, decisions log, timeline |
-| 09 | [Dot Fabric Visual](./09-dot-fabric-visual.md) | Animated dot surface — implementation reference |
+| 09 | [Dot Fabric Visual](./09-dot-fabric-visual.md) | Redirect → [visuals/dot-fabric.md](./visuals/dot-fabric.md) |
+| 10 | [Agent Card Components](./10-agent-card-components.md) | Reusable agent/API card variants — chips, nodes, config panels, flow connectors |
+| 11 | [Performance Budget](./11-performance-budget.md) | One motion system per viewport, canvas/video caps, lazy load, mobile tiers, checklist |
+
+### Visuals (implementation specs)
+
+| Document | Contents |
+|----------|----------|
+| [Visuals index](./visuals/README.md) | Animated surfaces — dot fabric, future ambient effects |
+| [Overview](./visuals/overview.md) | Visuals layer philosophy and placement rules |
+| [Dot fabric](./visuals/dot-fabric.md) | Canvas dot surface — presets, API, performance |
+| [Hover / context stack](./visuals/hover.md) | Agent context stack concept (Ask panel) |
 
 ---
 
@@ -82,16 +97,23 @@ Product specifications for Jasmine's portfolio — one connected system, three v
 |------|--------|
 | Work bento at `/` | ✅ Built |
 | Projects bento at `/projects` | ✅ Built |
-| Architecture placeholder at `/architecture` | ✅ Built — content TBD |
-| Ask side panel UI | ✅ Built — AI responses TBD |
+| Architecture page at `/architecture` | ✅ Built — Phase 2–3 content |
+| Ask side panel UI | ✅ Built — pattern-matched responses |
+| Ask trace → Architecture highlighting | ✅ Built |
 | Unified data layer | ✅ Built |
 | Graph + capabilities scaffolding | ✅ Built |
 | PortfolioState context | ✅ Built |
 | Custom fonts | ✅ In repo |
-| Full Architecture page | 🔲 Phase 2–3 |
-| Ask AI backend | 🔲 Phase 4 |
-| Dot fabric visual on Architecture | 🔲 Optional — see `09-dot-fabric-visual.md` |
-| Gallery → Architecture link | 🔲 Planned |
+| Dot fabric visual on Architecture hero | ✅ Built |
+| Ask mobile bottom sheet | ✅ Built |
+| Architecture mobile stacked layout | ✅ Built |
+| Exploration pages → `/dev/` | ✅ Moved + redirects |
+| Visual system skill + rule | ✅ `.cursor/skills/portfolio-visual` |
+| Performance budget spec + skill + rule | ✅ `11-performance-budget.md`, `.cursor/skills/portfolio-performance` |
+| Ask AI backend (LLM) | 🔲 Phase 4 |
+| Gallery → Architecture link | ✅ Linked from Memory section |
+| Memory/community placeholders | 🔲 Content-dependent |
+| Agent card component system | 🔲 Spec written — see `10-agent-card-components.md` |
 
 ---
 
@@ -107,6 +129,9 @@ components/portfolio/
   agent/AgentSidePanel.tsx
   PortfolioStateContext.tsx
   bento-workflows/       ← Work + Projects bento system
+
+components/visuals/
+  DotField/              ← dot fabric (Architecture hero)
 
 app/
   page.tsx               ← Work (/)

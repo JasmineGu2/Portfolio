@@ -1,4 +1,4 @@
-# 06 — Agent Architecture Page
+/Users/guj/personal-life/personal website redesign/Branding of portfolio.canvas# 06 — Agent Architecture Page
 
 Route: `/architecture`
 

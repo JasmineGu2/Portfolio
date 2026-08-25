@@ -50,7 +50,7 @@ export function WorkExperiencePageClient({ slug }: { slug: WorkId }) {
               <p className="bw-content-role">{tile.role}</p>
               {tile.roleNote && <p className="bw-content-role-note">{tile.roleNote}</p>}
               <p className="bw-content-sub">{tile.subtitle}</p>
-              {tile.period && <p className="bw-content-meta">{tile.period}</p>}
+              {tile.period && <p className="bw-content-meta font-analogue">{tile.period}</p>}
             </div>
           </div>
         </header>
@@ -60,7 +60,7 @@ export function WorkExperiencePageClient({ slug }: { slug: WorkId }) {
         </section>
 
         <section className="bw-content-section">
-          <h2 className="bw-content-heading">Highlights</h2>
+          <h2 className="bw-content-heading font-analogue">Highlights</h2>
           <ul className="bw-content-list">
             {content.highlights.map((item) => (
               <li key={item}>{item}</li>
@@ -69,7 +69,7 @@ export function WorkExperiencePageClient({ slug }: { slug: WorkId }) {
         </section>
 
         <section className="bw-content-section">
-          <h2 className="bw-content-heading">Skills & themes</h2>
+          <h2 className="bw-content-heading font-analogue">Skills & themes</h2>
           <div className="flex flex-wrap gap-2">
             {content.skills.map((skill, index) => (
               <SchemeTag

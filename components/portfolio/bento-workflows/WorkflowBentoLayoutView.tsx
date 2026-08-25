@@ -17,7 +17,7 @@ export function WorkflowBentoLayoutView({ slug: initialSlug }: { slug: string })
   const handleLayoutChange = useCallback(
     (nextSlug: string) => {
       setSlug(nextSlug)
-      router.replace(`/bento-workflows/${nextSlug}`, { scroll: false })
+      router.replace(`/dev/bento-workflows/${nextSlug}`, { scroll: false })
     },
     [router]
   )
@@ -25,6 +25,11 @@ export function WorkflowBentoLayoutView({ slug: initialSlug }: { slug: string })
   if (!layout) return null
 
   return (
-    <WorkflowBentoCanvas layout={layout} showSwitcher onLayoutChange={handleLayoutChange} />
+    <WorkflowBentoCanvas
+      layout={layout}
+      showSwitcher
+      onLayoutChange={handleLayoutChange}
+      fixedColorScheme={undefined}
+    />
   )
 }

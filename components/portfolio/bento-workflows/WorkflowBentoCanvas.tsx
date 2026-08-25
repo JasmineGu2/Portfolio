@@ -2,31 +2,28 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowUpRight } from 'lucide-react'
 import { HeroBentoPanel } from '../HeroBentoPanel'
-import { WorkflowConnectors } from '../WorkflowConnectors'
+import { ChatHeroSection } from '../ChatHeroSection'
 import { BentoWorkspaceShell } from './BentoWorkspaceShell'
 import { useBentoWorkspace } from './BentoWorkspaceContext'
 import {
-  getWorkflowLayoutEdges,
   WORKFLOW_BENTO_LAYOUTS,
   type WorkflowLayoutConfig,
   type WorkflowWorkTile,
 } from '@/lib/portfolio/bento-workflows/layouts'
 import type { ColorSchemeId } from '@/lib/portfolio/bento-workflows/color-schemes'
-import { PORTFOLIO_PAGE_SCHEME } from '@/lib/portfolio/bento-workflows/color-schemes'
 import {
   resolveWorkAccent,
   workTileThemeStyleVars,
 } from '@/lib/portfolio/bento-workflows/work-accents'
-import {
-  EXPERIENCE_CARDS,
-  experienceTagColor,
-} from '@/lib/portfolio/experience-cards-data'
+import { EXPERIENCE_CARDS } from '@/lib/portfolio/experience-cards-data'
 import { SchemeTag } from './SchemeTag'
 import type { WorkId } from '@/lib/portfolio/bento-workflows/experience-layouts'
 import { getExperienceVideoMeta, getExperienceMediaAspect } from '@/lib/portfolio/experience-videos-data'
 import { cn } from '@/lib/utils'
+import { usePortfolioState } from '@/components/portfolio/PortfolioStateContext'
 
 const LOGO_LETTERS: Partial<Record<string, string>> = {
   western: 'W',
@@ -58,10 +55,6 @@ function WorkflowCell({
       data-bw-tile={tile.id}
       style={{ gridColumn: tile.col, gridRow: tile.row }}
     >
-      <span className="bw-port bw-port--top" aria-hidden />
-      <span className="bw-port bw-port--bottom" aria-hidden />
-      <span className="bw-port bw-port--left" aria-hidden />
-      <span className="bw-port bw-port--right" aria-hidden />
       {children}
     </div>
   )
@@ -139,6 +132,8 @@ function WorkTileMedia({
 }
 
 function WorkTile({ tile, colorScheme }: { tile: WorkflowWorkTile; colorScheme: ColorSchemeId }) {
+  const { highlightedNodeIds } = usePortfolioState()
+  const highlighted = highlightedNodeIds.includes(tile.id)
   const isWide = tile.col.includes('span 2') || tile.col.includes('span 3') || tile.col.includes('span 4') || tile.col.includes('span 5')
   const isTall = tile.row.includes('span 2')
   const workId = tile.id as WorkId
@@ -159,32 +154,33 @@ function WorkTile({ tile, colorScheme }: { tile: WorkflowWorkTile; colorScheme: 
           variant="category"
           className="bw-exp-chip bw-exp-category"
         />
-        {tile.href && (
-          <span className="bento-arrow shrink-0" aria-hidden>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </span>
-        )}
+        <div className="flex items-center gap-2 shrink-0">
+          {tile.period && <span className="bento-period bento-period--top">{tile.period}</span>}
+          {tile.href && (
+            <span className="bento-arrow bento-arrow--plain shrink-0" aria-hidden>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </span>
+          )}
+        </div>
       </div>
 
       <WorkTileMedia workId={workId} featured={isFeatured} />
 
       <div className="bw-exp-copy bw-exp-copy--media">
-        <p className={`bento-label ${isFeatured ? 'text-base md:text-lg' : isWide ? 'text-sm md:text-base' : 'text-sm'}`}>
-          {tile.title}
+        <div className="bento-eyebrow-row">
+          <p className="bento-eyebrow-company">{tile.title}</p>
+        </div>
+        <p
+          className={`bento-role mt-0.5 ${isFeatured ? 'bento-role--featured' : isWide ? 'bento-role--wide' : ''}`}
+        >
+          {tile.role}
         </p>
-        <p className="bento-role mt-0.5">{tile.role}</p>
         {tile.roleNote && <p className="bento-role-note">{tile.roleNote}</p>}
         <p className="bento-subtitle mt-1">{tile.subtitle}</p>
-        {tile.period && <p className="bento-period mt-1">{tile.period}</p>}
-        <ul className="bw-exp-skill-tags" aria-label="Key skills">
+        <ul className="bw-exp-skill-tags bw-exp-skill-tags--chip" aria-label="Key skills">
           {card.tags.map((tag) => (
             <li key={tag.label}>
-              <SchemeTag
-                label={tag.label}
-                color={experienceTagColor(tag.accent)}
-                size="sm"
-                variant={tag.accent === 'supporting' ? 'supporting' : 'primary'}
-              />
+              <span className="bw-exp-skill-tag bw-exp-skill-tag--chip">{tag.label}</span>
             </li>
           ))}
         </ul>
@@ -198,7 +194,8 @@ function WorkTile({ tile, colorScheme }: { tile: WorkflowWorkTile; colorScheme: 
     accent.textOn === 'dark' && 'bento-tile--work-exp--dark-text',
     tile.href && 'bento-tile--clickable',
     isFeatured && 'bento-tile--featured',
-    !hasVideo && (isTall || isWide) && 'bento-tile--wide'
+    !hasVideo && (isTall || isWide) && 'bento-tile--wide',
+    highlighted && 'bento-tile--highlighted'
   )
 
   if (tile.href) {
@@ -226,11 +223,12 @@ export function WorkflowBentoCanvas({
   showSwitcher?: boolean
   onLayoutChange?: (slug: string) => void
   showWorkspaceControls?: boolean
+  /** Locks canvas to a scheme. Omit on production Work/Projects pages — context default is portfolio-warm. */
   fixedColorScheme?: ColorSchemeId
 }) {
-  const wrapRef = useRef<HTMLDivElement>(null)
   const cellRefs = useRef<Map<string, HTMLDivElement>>(new Map())
-  const edges = getWorkflowLayoutEdges(layout)
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
   const { colorScheme, setColorScheme } = useBentoWorkspace()
   const activeColorScheme = fixedColorScheme ?? colorScheme
 
@@ -247,21 +245,21 @@ export function WorkflowBentoCanvas({
       onLayoutChange={onLayoutChange}
       hidePageHeader
     >
-      <div
-        ref={wrapRef}
-        className="bento-workflow-wrap bw-workflow-canvas bw-workflow-canvas--unified bw-workflow-canvas--n8n bw-workflow-canvas--compact"
-      >
-        <WorkflowConnectors wrapRef={wrapRef} cellRefs={cellRefs} edges={edges} />
-
-        <HeroBentoPanel
-          cellRefs={cellRefs}
-          colorScheme={activeColorScheme}
-          showWorkspaceControls={showWorkspaceControls}
-        />
+      <div className={`bento-workflow-wrap bw-workflow-canvas bw-workflow-canvas--unified bw-workflow-canvas--n8n bw-workflow-canvas--compact portfolio-content${isHomePage ? ' bw-workflow-canvas--chat-hero' : ''}`}>
+        {isHomePage ? (
+          <div className="chat-hero-wrap">
+            <ChatHeroSection />
+            <div className="chat-hero-sentinel" aria-hidden />
+          </div>
+        ) : (
+          <HeroBentoPanel
+            cellRefs={cellRefs}
+            colorScheme={activeColorScheme}
+            showWorkspaceControls={showWorkspaceControls}
+          />
+        )}
 
         <div className="bento-career-zone">
-          <p className="bw-card-label mb-3 md:mb-4">{layout.zoneLabel}</p>
-
           <div className={`bento-grid bento-grid--canvas bw-grid ${layout.gridClass}`}>
             {layout.tiles.map((tile) => (
               <WorkflowCell key={tile.id} tile={tile} cellRefs={cellRefs}>
@@ -282,7 +280,7 @@ export function WorkflowBentoPlayground() {
   const [slug, setSlug] = useState(defaultSlug)
   const layout = WORKFLOW_BENTO_LAYOUTS.find((l) => l.slug === slug) ?? WORKFLOW_BENTO_LAYOUTS[0]
 
-  return <WorkflowBentoCanvas layout={layout} showSwitcher onLayoutChange={setSlug} />
+  return <WorkflowBentoCanvas layout={layout} showSwitcher onLayoutChange={setSlug} fixedColorScheme={undefined} />
 }
 
 export function WorkflowBentoHub() {
@@ -293,7 +291,7 @@ export function WorkflowBentoHub() {
     >
       <div className="bf-hub-grid">
         {WORKFLOW_BENTO_LAYOUTS.map((layout, i) => (
-          <Link key={layout.slug} href={`/bento-workflows/${layout.slug}`} className="bf-hub-card">
+          <Link key={layout.slug} href={`/dev/bento-workflows/${layout.slug}`} className="bf-hub-card">
             <span className="bf-hub-num">{String(i + 1).padStart(2, '0')}</span>
             <span className="bf-format-tag">{layout.tag}</span>
             <h2 className="bf-hub-title">{layout.title}</h2>

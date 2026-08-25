@@ -5,20 +5,28 @@
 ### ✅ Done
 - Work bento at `/` (default landing)
 - Projects bento at `/projects` (separate page)
-- Architecture placeholder at `/architecture`
-- Ask side panel UI (no AI backend yet)
+- Full Architecture page (abstraction levels + runtime sections)
+- Ask side panel with pattern-matched grounded responses
+- Ask trace → Architecture highlighting
+- Cross-page highlighting (Ask → Work tiles)
+- Dot fabric visual on Architecture hero
+- Ask mobile bottom sheet
+- Architecture mobile stacked layout
+- Exploration pages moved to `/dev/` with redirects
+- Gallery linked from Architecture Memory section
 - Unified data layer: `portfolio-data.ts`, `graph.ts`, `capabilities.ts`
 - `PortfolioStateContext` for shared UI state
 - Custom fonts in `public/fonts/`
 - Nav: Work · Architecture · Projects · Resume
-- Redirects: `/work` → `/`, `/ask` → `/`
-- Exploration pages removed from nav
+- Redirects: `/work` → `/`, `/ask` → `/`, old paths → `/dev/*`
+- Visual system skill: `.cursor/skills/portfolio-visual`
 
 ### 🔲 Next priorities
-1. Full Architecture page (abstraction levels + runtime sections)
-2. Ask AI backend with portfolio grounding
-3. Cross-page highlighting (Ask → Work tiles, Architecture paths)
-4. Gallery linked from Architecture Community section
+1. Ask AI backend with Vercel AI SDK (real LLM grounding)
+2. Memory/community placeholder → real content (as supplied)
+3. Experience detail page template expansion
+4. Migrate legacy data files fully to `portfolio-data.ts`
+5. Performance pass (videos, gradients)
 
 ---
 
@@ -106,13 +114,13 @@
 | Performance pass (videos, gradients) | 1 day |
 | Archive/delete exploration pages | 0.5 day |
 | Migrate legacy data files to `portfolio-data.ts` only | 1 day |
-| Dot fabric visual on Architecture hero (optional) | See `09-dot-fabric-visual.md` |
+| Dot fabric visual on Architecture hero (optional) | See [visuals/dot-fabric.md](./visuals/dot-fabric.md) |
 
 ---
 
 ## Optional: Dot fabric visual
 
-Animated dot surface for Architecture page backgrounds. Full implementation spec in **[09-dot-fabric-visual.md](./09-dot-fabric-visual.md)**. Build after core Architecture content is in place.
+Animated dot surface for Architecture page backgrounds. Full implementation spec in **[visuals/dot-fabric.md](./visuals/dot-fabric.md)**. Component: `components/visuals/DotField/`. Build after core Architecture content is in place.
 
 ---
 

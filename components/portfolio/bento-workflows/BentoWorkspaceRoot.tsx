@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { FlowersBackgroundLayer } from '@/components/visuals/FlowersBackground/FlowersBackgroundLayer'
 import {
   getSchemeTokens,
   schemeTokensToCssVars,
@@ -18,8 +20,13 @@ import {
 } from './BentoWorkspaceContext'
 import { HeroWorkspaceNav } from './HeroWorkspaceNav'
 import { AgentSidePanel } from '@/components/portfolio/agent/AgentSidePanel'
+import { AskAgentProvider } from '@/components/portfolio/agent/AskAgentProvider'
+import { ChatFloatingWidget } from '@/components/portfolio/ChatFloatingWidget'
 
 function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const isArchitecturePage = pathname === '/architecture' || pathname.startsWith('/architecture/')
+  const isHomePage = pathname === '/'
   const { colorScheme } = useBentoWorkspace()
   const [duoRevision, setDuoRevision] = useState(0)
   const schemeTokens = getSchemeTokens(colorScheme)
@@ -65,14 +72,32 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
       data-scheme-tone={schemeTone}
       data-work-mode={schemeTokens.workMode}
       data-custom-duo={isCustomDuo ? 'true' : undefined}
+      data-page={isArchitecturePage ? 'architecture' : isHomePage ? 'work-home' : undefined}
+      data-ai-background={isArchitecturePage ? 'architecture' : 'work'}
       style={schemeVars}
     >
-      <div className="bw-main">
-        <header className="bw-site-nav">
-          <HeroWorkspaceNav compact showWorkspaceControls={false} />
-        </header>
-        {children}
-        <AgentSidePanel />
+      <FlowersBackgroundLayer dark={isArchitecturePage} />
+      <div className="bw-workspace-row">
+        {!isArchitecturePage && !isHomePage && (
+          <Suspense fallback={null}>
+            <AgentSidePanel />
+          </Suspense>
+        )}
+        <div className="bw-main">
+          <header className="bw-site-nav">
+            <HeroWorkspaceNav compact showWorkspaceControls={false} />
+          </header>
+          {isHomePage ? (
+            <Suspense fallback={null}>
+              <AskAgentProvider>
+                {children}
+                <ChatFloatingWidget />
+              </AskAgentProvider>
+            </Suspense>
+          ) : (
+            children
+          )}
+        </div>
       </div>
     </div>
   )

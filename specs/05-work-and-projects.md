@@ -50,6 +50,8 @@ Each tile shows:
 ### Hero panel
 `HeroBentoPanel` with identity strip (Jasmine Gu, location, mode). No layout/color switcher in production.
 
+**Core Strengths** uses a compact isometric layer stack (`CapabilityLayerStack` + `CAPABILITY_LAYERS` from `lib/portfolio/capability-layers-data.ts`) — four floating slabs (Product, Software Engineering, Business, Community) with Analogue OS labels and connector lines on the right. Hover or keyboard focus pulls the active layer outward ~12px, dims other slabs, and reveals 2–4 capability micro-chips per layer. Warm botanical palette with orange accent on the active layer; `prefers-reduced-motion` disables the pull animation. An sr-only list exposes full layer + capability text to screen readers.
+
 ### Connectors
 Workflow connector lines between experience tiles (duo-bucket chains). Optional — preserve from current bento.
 

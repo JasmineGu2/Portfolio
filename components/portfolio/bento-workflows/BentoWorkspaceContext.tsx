@@ -2,24 +2,30 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import {
-  getColorSchemeIndex,
+  PORTFOLIO_DEFAULT_SCHEME,
   normalizeColorSchemeId,
-  PORTFOLIO_PAGE_SCHEME,
+  getColorSchemeIndex,
   type ColorSchemeId,
 } from '@/lib/portfolio/bento-workflows/color-schemes'
 import type { WorkflowLayoutConfig } from '@/lib/portfolio/bento-workflows/layouts'
 
 const COLOR_SCHEME_STORAGE_KEY = 'bw-color-scheme'
 
+const LEGACY_SCHEME_MIGRATIONS: Record<string, ColorSchemeId> = {
+  'palette-sand-chartreuse-duo': PORTFOLIO_DEFAULT_SCHEME,
+  soft: PORTFOLIO_DEFAULT_SCHEME,
+}
+
 function readStoredColorScheme(): ColorSchemeId {
-  if (typeof window === 'undefined') return PORTFOLIO_PAGE_SCHEME
+  if (typeof window === 'undefined') return PORTFOLIO_DEFAULT_SCHEME
   try {
     const stored = window.localStorage.getItem(COLOR_SCHEME_STORAGE_KEY)
-    if (!stored) return PORTFOLIO_PAGE_SCHEME
-    const normalized = normalizeColorSchemeId(stored as ColorSchemeId)
-    return getColorSchemeIndex(normalized) >= 0 ? normalized : PORTFOLIO_PAGE_SCHEME
+    if (!stored) return PORTFOLIO_DEFAULT_SCHEME
+    const migrated = LEGACY_SCHEME_MIGRATIONS[stored] ?? stored
+    const normalized = normalizeColorSchemeId(migrated as ColorSchemeId)
+    return getColorSchemeIndex(normalized) >= 0 ? normalized : PORTFOLIO_DEFAULT_SCHEME
   } catch {
-    return PORTFOLIO_PAGE_SCHEME
+    return PORTFOLIO_DEFAULT_SCHEME
   }
 }
 
@@ -39,7 +45,7 @@ interface BentoWorkspaceContextValue {
 const BentoWorkspaceContext = createContext<BentoWorkspaceContextValue | null>(null)
 
 export function BentoWorkspaceProvider({ children }: { children: ReactNode }) {
-  const [colorScheme, setColorSchemeState] = useState<ColorSchemeId>(PORTFOLIO_PAGE_SCHEME)
+  const [colorScheme, setColorSchemeState] = useState<ColorSchemeId>(PORTFOLIO_DEFAULT_SCHEME)
   const [layoutControls, setLayoutControls] = useState<BentoLayoutControls | null>(null)
 
   useEffect(() => {

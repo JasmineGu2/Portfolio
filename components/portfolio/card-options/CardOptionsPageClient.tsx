@@ -63,7 +63,7 @@ export function CardOptionsPageClient() {
 
         <p className="card-opt-footer-note">
           Pick a favorite and I can apply it to the live work experience tiles.{' '}
-          <Link href="/tag-options" className="card-opt-link">
+          <Link href="/dev/tag-options" className="card-opt-link">
             Tag options →
           </Link>
           {' · '}

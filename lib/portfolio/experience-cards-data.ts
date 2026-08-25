@@ -223,15 +223,14 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
 }
 
 export const CORE_BRAND = {
-  purple: '#1A0089',
-  coral: '#FF5E32',
-  yellow: '#FCF893',
+  gold: '#E8C547',
+  goldDeep: '#C9A020',
+  goldSoft: '#F5E6A8',
   cream: '#FAF8F4',
-  ink: '#1A0089',
+  ink: '#1A1410',
 } as const
 
 export function experienceTagColor(accent: ExperienceTagAccent): string {
-  if (accent === 'coral') return CORE_BRAND.coral
-  if (accent === 'lavender') return CORE_BRAND.purple
-  return CORE_BRAND.purple
+  if (accent === 'supporting') return CORE_BRAND.ink
+  return CORE_BRAND.gold
 }

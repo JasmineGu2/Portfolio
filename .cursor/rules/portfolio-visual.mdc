@@ -1,0 +1,35 @@
+---
+description: Portfolio visual system guardrails — fonts, palette, card types, no cyber/neon styling
+globs: "{app,components/portfolio,lib/portfolio}/**/*.{css,tsx,ts}"
+alwaysApply: false
+---
+
+# Portfolio visual guardrails
+
+When editing portfolio UI, follow `.cursor/skills/portfolio-visual/SKILL.md` and `specs/04-visual-system.md`.
+
+## Typography (one job per font)
+
+- **Bootzy** — editorial titles, hero statements only
+- **Awesome Shorten** — conversational / personality copy
+- **Analogue OS** — system metadata, status, tool names
+- **Inter** — body, nav, buttons, long descriptions
+
+Classes: `.font-bootzy`, `.font-awesome-shorten`, `.font-analogue` in `app/portfolio-fonts.css`.
+
+## Do not
+
+- Use neon purple or saturated cyber-AI aesthetics
+- Apply Architecture warm palette to Work bento without explicit request
+- Put custom fonts on every element — Inter is the default utility face
+- Use obvious linear gradients or glassmorphism on every card
+
+## Page tokens
+
+- **Architecture** → `--arch-*` in `app/architecture/architecture.css`
+- **Work / Projects bento** → `--sch-*` via `PORTFOLIO_PAGE_SCHEME`
+- **Ask panel** → warm cream + charcoal FAB in `app/portfolio-theme.css` (`.agent-*`)
+
+## Card type
+
+Pick one: editorial (warm/cream), system (charcoal/Analogue OS), hybrid (story + metadata block), or existing bento tile.

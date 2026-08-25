@@ -76,7 +76,7 @@ export function ExperienceVideosPageClient() {
           Tesla, Intuit, OMERS, and Metaverse use your existing loop clips from{' '}
           <code className="exp-vid-code">public/work/</code>. Other roles show logo fallbacks until
           you add more MP4s.{' '}
-          <Link href="/tag-options" className="exp-vid-link">
+          <Link href="/dev/tag-options" className="exp-vid-link">
             Tag options →
           </Link>
           {' · '}

@@ -2,11 +2,10 @@
 
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { useCallback, useEffect, useRef, type CSSProperties } from 'react'
+import { useCallback, useRef, type CSSProperties } from 'react'
 import { HeroBentoPanel } from './HeroBentoPanel'
 import { SchemeTag } from './bento-workflows/SchemeTag'
 import { useBentoWorkspace } from './bento-workflows/BentoWorkspaceContext'
-import { PORTFOLIO_PAGE_SCHEME } from '@/lib/portfolio/bento-workflows/color-schemes'
 import {
   ALL_PROJECT_TILES,
   PROJECTS_INTRO,
@@ -144,11 +143,7 @@ function ProjectTile({ tile }: { tile: ProjectTileSpec }) {
 
 export function ProjectsBentoGrid() {
   const cellRefs = useRef<Map<string, HTMLDivElement>>(new Map())
-  const { colorScheme, setColorScheme } = useBentoWorkspace()
-
-  useEffect(() => {
-    setColorScheme(PORTFOLIO_PAGE_SCHEME)
-  }, [setColorScheme])
+  const { colorScheme } = useBentoWorkspace()
 
   return (
     <div className="bento-workflow-wrap bw-workflow-canvas bw-workflow-canvas--unified bw-workflow-canvas--n8n bw-workflow-canvas--compact">

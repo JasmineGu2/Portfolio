@@ -1,0 +1,32 @@
+.flowers-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #fbf3e6;
+}
+
+.flowers-background--dark {
+  background-color: #2a2018;
+}
+
+.flowers-background--inline {
+  position: absolute;
+  z-index: auto;
+}
+
+.flowers-background__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flowers-background__bubbles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

@@ -138,7 +138,7 @@ export function getWorkflowLayoutEdges(layout: WorkflowLayoutConfig): WorkflowEd
   return [
     ...HERO_BENTO_EDGES,
     { from: 'hero-intro', to: entry, primary: true },
-    { from: 'hero-actions', to: entry, primary: true },
+    { from: 'hero-pills', to: entry, primary: true },
     ...layout.edges,
   ]
 }

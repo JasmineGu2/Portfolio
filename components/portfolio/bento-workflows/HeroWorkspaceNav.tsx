@@ -3,9 +3,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { FlowerIcon } from '@/components/portfolio/FlowerIcon'
-import { RESUME_LINK_PROPS } from '@/lib/portfolio/resume'
-import { MAIN_NAV, PINNED_NAV, navIsActive } from '@/lib/portfolio/workspace-nav'
+import { PINNED_NAV, navIsActive } from '@/lib/portfolio/workspace-nav'
+import { SiteNavLinks } from '@/components/portfolio/SiteNavLinks'
+import { SiteNavContact, SiteNavIdentity } from '@/components/portfolio/SiteNavIdentity'
 import {
   BENTO_COLOR_SCHEMES,
   PALETTE_DUO_SCHEME_IDS,
@@ -70,41 +70,26 @@ export function HeroWorkspaceNav({
     )
   }
 
+  const isSiteNav = compact
+
   return (
     <div className={cn('hero-workspace-nav', compact && 'hero-workspace-nav--compact hero-workspace-nav--site')}>
-      <div className="hero-workspace-nav__row">
-        <Link href="/" className="hero-workspace-nav__brand-link" aria-label="Jasmine Gu — home">
-          <span className="hero-workspace-nav__brand-tag">
-            <FlowerIcon className="hero-workspace-nav__brand-flower" />
-            Jasmine Gu
-          </span>
-        </Link>
+      <div className={cn('hero-workspace-nav__row', isSiteNav && 'hero-workspace-nav__row--site-primary')}>
+        {isSiteNav ? (
+          <SiteNavIdentity />
+        ) : (
+          <Link href="/" className="hero-workspace-nav__brand-link" aria-label="Jasmine Gu — home">
+            <span className="hero-workspace-nav__brand-tag">Jasmine Gu</span>
+          </Link>
+        )}
 
         <nav className="hero-workspace-nav__links" aria-label="Main">
-          {MAIN_NAV.map((item) => {
-            const isActive = navIsActive(pathname, item.href)
-            if (item.external) {
-              return (
-                <a
-                  key={item.label}
-                  {...RESUME_LINK_PROPS}
-                  className={cn('hero-nav-btn', isActive && 'hero-nav-btn--active')}
-                >
-                  {item.label}
-                </a>
-              )
-            }
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={cn('hero-nav-btn', isActive && 'hero-nav-btn--active')}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
+          <SiteNavLinks pathname={pathname} variant="hero" isArchitecturePage={false} />
         </nav>
+
+        {isSiteNav && (
+          <SiteNavContact variant="hero" className="hero-workspace-nav__contact" />
+        )}
       </div>
 
       {!compact && showWorkspaceControls && (

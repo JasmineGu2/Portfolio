@@ -31,5 +31,17 @@
 }
 
 .font-analogue {
-  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--pf-font-system);
+}
+
+.font-body {
+  font-family: var(--pf-font-body);
+}
+
+.font-editorial {
+  font-family: var(--pf-font-editorial);
+}
+
+.font-personality {
+  font-family: var(--pf-font-personality);
 }

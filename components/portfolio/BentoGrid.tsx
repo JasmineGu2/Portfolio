@@ -4,8 +4,7 @@ import { useCallback, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { HeroBentoPanel } from './HeroBentoPanel'
-import { WorkflowConnectors } from './WorkflowConnectors'
-import { BENTO_EDGES, BENTO_TILES, type BentoTile, type BentoTileVariant } from '@/lib/portfolio/bento-data'
+import { BENTO_TILES, type BentoTile, type BentoTileVariant } from '@/lib/portfolio/bento-data'
 
 const VARIANT: Record<BentoTileVariant, string> = {
   dark: 'bento-tile--dark',
@@ -114,7 +113,6 @@ function BentoTileView({ tile }: { tile: BentoTile }) {
 }
 
 export function BentoGrid() {
-  const wrapRef = useRef<HTMLDivElement>(null)
   const cellRefs = useRef<Map<string, HTMLDivElement>>(new Map())
 
   return (
@@ -127,9 +125,7 @@ export function BentoGrid() {
           </Link>
         </div>
 
-        <div ref={wrapRef} className="bento-workflow-wrap">
-          <WorkflowConnectors wrapRef={wrapRef} cellRefs={cellRefs} edges={BENTO_EDGES} />
-
+        <div className="bento-workflow-wrap">
           <HeroBentoPanel cellRefs={cellRefs} />
 
           <div className="bento-career-zone">

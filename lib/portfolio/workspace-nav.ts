@@ -1,18 +1,31 @@
-import { RESUME_LINK_PROPS } from '@/lib/portfolio/resume'
+const LEGACY_WORK_PATHS = ['/tesla', '/intuit', '/omers', '/metaverse'] as const
 
-export const MAIN_NAV = [
-  { label: 'Work', href: '/' },
-  { label: 'Architecture', href: '/architecture' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Resume', href: RESUME_LINK_PROPS.href, external: true as const },
-]
+export const MAIN_NAV = {
+  explore: {
+    label: 'Work',
+    href: '/',
+  },
+  explorations: {
+    label: 'Explorations',
+    href: '/projects',
+  },
+  gallery: {
+    label: 'Gallery',
+    href: '/gallery',
+  },
+  architecture: {
+    label: 'The Journey',
+    href: '/architecture',
+  },
+} as const
 
 /** Internal design tooling — hidden from production nav */
 export const DEV_NAV = [
-  { label: 'Layouts', href: '/bento-workflows' },
-  { label: 'Formats', href: '/bento-formats' },
-  { label: 'Palettes', href: '/palette-duo-editor' },
-  { label: 'Tags', href: '/tag-options' },
+  { label: 'Dev index', href: '/dev' },
+  { label: 'Layouts', href: '/dev/bento-workflows' },
+  { label: 'Formats', href: '/dev/bento-formats' },
+  { label: 'Palettes', href: '/dev/palette-duo-editor' },
+  { label: 'Tags', href: '/dev/tag-options' },
   { label: 'Videos', href: '/experience-videos' },
 ]
 
@@ -21,5 +34,30 @@ export const PINNED_NAV = DEV_NAV
 
 export function navIsActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/'
+  if (href.startsWith('mailto:') || href.endsWith('.pdf')) return false
   return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+export function exploreNavIsActive(pathname: string) {
+  if (pathname === '/') return true
+  if (pathname.startsWith('/work/')) return true
+  return LEGACY_WORK_PATHS.some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`)
+  )
+}
+
+export function architectureNavIsActive(pathname: string) {
+  return pathname === '/architecture' || pathname.startsWith('/architecture/')
+}
+
+export function isAgentPanelRoute(pathname: string) {
+  if (pathname === '/ask') return false
+  if (pathname.startsWith('/dev/') || pathname.startsWith('/bento-') || pathname.includes('-options')) {
+    return false
+  }
+  return (
+    pathname === '/' ||
+    pathname === '/tesla' ||
+    pathname.startsWith('/work/')
+  )
 }

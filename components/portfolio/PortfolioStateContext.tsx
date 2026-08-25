@@ -18,6 +18,7 @@ export interface PortfolioState {
   selectedContexts: string[]
   activeFilters: WorkFilter[]
   highlightedNodeIds: string[]
+  traceIds: string[]
   agentOpen: boolean
 }
 
@@ -32,6 +33,8 @@ export interface PortfolioStateContextValue extends PortfolioState {
   setHighlightedNodeIds: (ids: string[]) => void
   highlightNodes: (ids: string[]) => void
   clearHighlights: () => void
+  setTraceIds: (ids: string[]) => void
+  clearTrace: () => void
   setAgentOpen: (open: boolean) => void
   toggleAgent: () => void
 }
@@ -44,7 +47,11 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
   const [selectedContexts, setSelectedContexts] = useState<string[]>([])
   const [activeFilters, setActiveFilters] = useState<WorkFilter[]>(['ALL'])
   const [highlightedNodeIds, setHighlightedNodeIds] = useState<string[]>([])
-  const [agentOpen, setAgentOpen] = useState(false)
+  const [traceIds, setTraceIdsState] = useState<string[]>([])
+  const [agentOpen, setAgentOpen] = useState(() => {
+    if (typeof window === 'undefined') return true
+    return !window.matchMedia('(max-width: 640px)').matches
+  })
 
   const addContext = useCallback((id: string) => {
     setSelectedContexts((current) => (current.includes(id) ? current : [...current, id]))
@@ -70,6 +77,14 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
     setHighlightedNodeIds([])
   }, [])
 
+  const setTraceIds = useCallback((ids: string[]) => {
+    setTraceIdsState(ids)
+  }, [])
+
+  const clearTrace = useCallback(() => {
+    setTraceIdsState([])
+  }, [])
+
   const toggleAgent = useCallback(() => {
     setAgentOpen((open) => !open)
   }, [])
@@ -81,6 +96,7 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
       selectedContexts,
       activeFilters,
       highlightedNodeIds,
+      traceIds,
       agentOpen,
       setActiveView,
       setSelectedExperienceIds,
@@ -92,6 +108,8 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
       setHighlightedNodeIds,
       highlightNodes,
       clearHighlights,
+      setTraceIds,
+      clearTrace,
       setAgentOpen,
       toggleAgent,
     }),
@@ -101,6 +119,7 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
       selectedContexts,
       activeFilters,
       highlightedNodeIds,
+      traceIds,
       agentOpen,
       addContext,
       removeContext,
@@ -108,6 +127,8 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
       setWorkFilter,
       highlightNodes,
       clearHighlights,
+      setTraceIds,
+      clearTrace,
       toggleAgent,
     ]
   )

@@ -7,6 +7,78 @@
 .bw-shell {
   background: var(--sch-shell-bg, #f4f3f0);
   color: var(--sch-soft-fg, var(--pf-ink));
+  position: relative;
+  isolation: isolate;
+}
+
+/* AIBackground — no section washes; contour animation is the only atmosphere */
+.bw-shell[data-ai-background] .bento-workspace-root,
+.bw-shell[data-ai-background] {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+.bw-shell[data-ai-background='architecture'],
+.bw-shell[data-page='architecture'][data-ai-background] {
+  background: transparent;
+  background-image: none;
+  color: #f5f0ea;
+}
+
+.bw-shell[data-ai-background] .bw-main-canvas {
+  background-color: transparent;
+  background-image: none;
+  border-color: color-mix(in srgb, var(--sch-hero-border, rgba(0, 0, 0, 0.07)) 20%, transparent);
+}
+
+.bw-shell[data-ai-background][data-scheme-tone='duo'],
+.bw-shell[data-ai-background][data-custom-duo='true'] {
+  background-color: transparent;
+  background-image: none;
+}
+
+.bw-shell[data-ai-background] .bw-site-nav {
+  background: var(--sch-soft-bg, var(--pf-surface));
+  border-color: var(--sch-soft-border, var(--pf-card-border));
+}
+
+.bw-shell[data-ai-background] .bento-tile--editorial {
+  background: var(--sch-hero, var(--pf-surface));
+  border-color: var(--pf-card-border);
+}
+
+.bw-shell[data-ai-background] .bento-tile--editorial-soft {
+  background: var(--sch-soft-bg, var(--pf-cream));
+  border-color: var(--pf-card-border);
+}
+
+.bw-shell[data-ai-background='work']:not([data-scheme-tone='duo']):not([data-custom-duo='true'])::before {
+  display: none;
+}
+
+.bw-shell[data-ai-background='work'][data-scheme-tone='duo'],
+.bw-shell[data-ai-background='work'][data-custom-duo='true'] {
+  background-color: transparent;
+  background-image: none;
+}
+
+.bw-shell[data-ai-background]::after,
+.bw-shell[data-ai-background][data-scheme-tone='duo']::after,
+.bw-shell[data-ai-background][data-custom-duo='true']::after {
+  display: none;
+}
+
+.bw-shell[data-ai-background]:not([data-page='architecture']) .bw-site-nav::after {
+  display: none;
+}
+
+.bw-shell:not([data-page='architecture']) .bw-main {
+  position: relative;
+  z-index: 1;
+}
+
+.bw-shell:not([data-page='architecture']) .agent-slot {
+  z-index: 40;
 }
 
 .bw-scheme-btn--active {
@@ -22,21 +94,40 @@
 .bw-site-nav {
   background: color-mix(in srgb, var(--sch-soft-bg, var(--sch-shell-bg, #ffffff)) 94%, transparent);
   border-color: var(--sch-soft-border, rgba(0, 0, 0, 0.04));
+  position: relative;
+  isolation: isolate;
+}
+
+.bw-shell:not([data-page='architecture']) .bw-site-nav::after {
+  content: '';
+  position: absolute;
+  inset: -1rem -2rem;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 80% at 8% 50%, color-mix(in srgb, var(--pf-peach) 16%, transparent), transparent 58%),
+    radial-gradient(ellipse 45% 70% at 92% 40%, color-mix(in srgb, var(--pf-blue) 12%, transparent), transparent 55%);
+  opacity: 0.55;
+  filter: blur(24px);
 }
 
 .bw-shell[data-scheme-tone='duo'] .bw-site-nav .hero-workspace-nav__brand-tag {
-  background: var(--sch-hero-nav-fg, #1a0089);
-  color: var(--sch-em-orange, #ff5e32);
+  background: var(--sch-hero-nav-fg, var(--pf-ink));
+  color: var(--sch-em-orange, var(--pf-accent));
 }
 
 .bw-shell[data-scheme-tone='duo'] .bw-site-nav .hero-nav-btn {
-  color: var(--sch-hero-nav-fg, #1a0089);
+  color: var(--sch-hero-nav-fg, var(--pf-ink));
 }
 
-.bw-shell[data-scheme-tone='duo'] .bw-site-nav .hero-nav-btn:hover,
-.bw-shell[data-scheme-tone='duo'] .bw-site-nav .hero-nav-btn--active {
-  background: color-mix(in srgb, var(--sch-hero-nav-fg, #1a0089) 8%, transparent);
-  color: var(--sch-hero-nav-fg, #1a0089);
+.bw-shell[data-scheme-tone='duo'] .bw-site-nav .site-nav-link {
+  color: color-mix(in srgb, var(--sch-hero-nav-fg, var(--pf-ink)) 62%, transparent);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bw-site-nav .site-nav-link:hover,
+.bw-shell[data-scheme-tone='duo'] .bw-site-nav .site-nav-link--active {
+  color: var(--sch-hero-nav-fg, var(--pf-ink));
+  background: transparent;
 }
 
 .hero-nav-btn:hover,
@@ -89,18 +180,49 @@
 }
 
 .bw-shell .bw-main-canvas {
-  background-color: var(--sch-canvas-bg, #f0eeea);
-  background-image: radial-gradient(circle, var(--sch-canvas-dot, #c8c4bc) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: var(--sch-canvas-bg, var(--pf-canvas-alt));
+  background-image:
+    radial-gradient(circle, var(--sch-canvas-dot, var(--pf-dot)) 0.75px, transparent 0.75px),
+    radial-gradient(circle, color-mix(in srgb, var(--pf-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px, 24px 24px;
   border-color: color-mix(in srgb, var(--sch-hero-border, rgba(0, 0, 0, 0.07)) 20%, transparent);
 }
 
 /* Duo homepage — dotted canvas fills the full shell, not just the career panel */
 .bw-shell[data-scheme-tone='duo'],
 .bw-shell[data-custom-duo='true'] {
-  background-color: var(--sch-canvas-bg, #f0eeea);
-  background-image: radial-gradient(circle, var(--sch-canvas-dot, #c8c4bc) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: var(--sch-canvas-bg, var(--pf-canvas-alt));
+  background-image:
+    radial-gradient(circle, var(--sch-canvas-dot, var(--pf-dot)) 0.75px, transparent 0.75px),
+    radial-gradient(circle, color-mix(in srgb, var(--pf-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px, 24px 24px;
+}
+
+.bw-shell[data-scheme-tone='duo']::after,
+.bw-shell[data-custom-duo='true']::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--pf-peach) 20%, transparent), transparent 48%),
+    radial-gradient(circle at 82% 22%, color-mix(in srgb, var(--pf-gold) 16%, transparent), transparent 44%),
+    radial-gradient(circle at 72% 78%, color-mix(in srgb, var(--pf-blue) 14%, transparent), transparent 50%),
+    radial-gradient(circle at 28% 82%, color-mix(in srgb, var(--pf-mint) 12%, transparent), transparent 46%);
+  opacity: 0.32;
+  filter: blur(52px);
+}
+
+.bw-shell[data-scheme-tone='duo'] .bw-main,
+.bw-shell[data-custom-duo='true'] .bw-main {
+  position: relative;
+  z-index: 1;
+}
+
+.bw-shell[data-scheme-tone='duo'] .agent-slot,
+.bw-shell[data-custom-duo='true'] .agent-slot {
+  z-index: 40;
 }
 
 .bw-shell[data-scheme-tone='duo'] .bw-main-canvas,
@@ -136,13 +258,13 @@
 .bw-shell .bento-tile--editorial {
   background: var(--sch-hero, #ffffff);
   color: var(--sch-hero-fg, var(--pf-ink));
-  border-color: var(--sch-hero-border, rgba(0, 0, 0, 0.05));
+  border-color: var(--pf-card-border);
 }
 
 .bw-shell .bento-tile--editorial-soft {
   background: var(--sch-soft-bg, #fafafa);
   color: var(--sch-soft-fg, var(--pf-ink));
-  border-color: var(--sch-soft-border, rgba(0, 0, 0, 0.04));
+  border-color: var(--pf-card-border);
 }
 
 .bw-shell .hero-editorial-headline {
@@ -307,7 +429,10 @@
 }
 
 .bw-shell[data-scheme-tone='duo'] .hero-bento-cell--intro .hero-em--accent {
-  color: var(--sch-hero-intro-em-blue, #ff5e32);
+  background: var(--pf-accent-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-style: italic;
 }
 
@@ -426,17 +551,16 @@
 
 .bw-shell[data-custom-duo='true'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft,
 .bw-shell[data-custom-duo='true'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bw-card-label {
-  color: var(--sch-hero-nav-fg, #1a0089);
+  color: var(--sch-hero-nav-fg, var(--pf-ink));
 }
 
 /* Inner pages — projects, gallery, work detail */
 .bw-content-panel {
-  background-color: var(--sch-canvas-bg, #f0eeea);
-  background-image: radial-gradient(circle, var(--sch-canvas-dot, #c8c4bc) 1px, transparent 1px);
-  background-size: 24px 24px;
-  border: 1px solid color-mix(in srgb, var(--sch-hero-border, rgba(0, 0, 0, 0.07)) 20%, transparent);
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
   border-radius: 1.15rem;
   padding: 1.25rem 1.35rem 1.5rem;
+  box-shadow: var(--pf-shadow-outline-subtle);
 }
 
 @media (min-width: 768px) {
@@ -449,40 +573,42 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 500;
-  color: var(--sch-hero-sub, var(--pf-muted));
+  color: var(--pf-muted);
   margin-bottom: 1.25rem;
 }
 
 .bw-content-back:hover {
-  color: var(--sch-hero-fg, var(--pf-ink));
+  color: var(--pf-ink);
 }
 
 .bw-content-title {
   font-size: clamp(1.65rem, 3vw, 2.25rem);
   line-height: 1.15;
-  color: var(--sch-hero-fg, var(--pf-ink));
+  color: var(--pf-ink);
 }
 
 .bw-content-sub {
   margin-top: 0.35rem;
   font-size: 0.95rem;
-  color: var(--sch-hero-sub, var(--pf-muted));
+  color: var(--pf-muted);
 }
 
 .bw-content-meta {
   margin-top: 0.25rem;
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--sch-card-label, var(--pf-muted));
+  color: var(--pf-muted);
 }
 
 .bw-content-lead {
   font-size: 1rem;
   line-height: 1.65;
-  color: var(--sch-soft-fg, var(--pf-ink));
+  color: var(--pf-ink);
   max-width: 42rem;
 }
 
@@ -491,11 +617,12 @@
 }
 
 .bw-content-heading {
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--sch-card-label, var(--pf-muted));
+  color: var(--pf-muted);
   margin-bottom: 0.75rem;
 }
 
@@ -504,7 +631,7 @@
   padding-left: 1.15rem;
   display: grid;
   gap: 0.45rem;
-  color: var(--sch-soft-fg, var(--pf-ink));
+  color: var(--pf-ink);
   font-size: 0.92rem;
   line-height: 1.55;
   max-width: 42rem;
@@ -819,4 +946,38 @@
 .bw-shell[data-custom-duo='true'] .bento-career-zone .bw-card-label {
   color: var(--pf-ink);
   opacity: 0.72;
+}
+
+/* Duo hero cells — opaque scheme fills over contour animation */
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--intro .bento-tile--editorial,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--intro .bento-tile--editorial {
+  background: var(--sch-hero-intro-bg, var(--sch-hero, var(--pf-surface)));
+}
+
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--nav .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--pills .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--actions .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--nav .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--pills .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--actions .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft {
+  border-color: var(--pf-card-border);
+}
+
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--nav .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--nav .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft {
+  background: var(--sch-hero-nav-bg, var(--sch-soft-bg, var(--pf-surface)));
+}
+
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--pills .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--pills .bento-tile--editorial-soft {
+  background: var(--sch-hero-pills-bg, var(--sch-soft-bg, var(--pf-surface)));
+}
+
+.bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--actions .bento-tile--editorial-soft,
+.bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--actions .bento-tile--editorial-soft {
+  background: var(--sch-hero-actions-bg, var(--sch-soft-bg, var(--pf-surface)));
 }

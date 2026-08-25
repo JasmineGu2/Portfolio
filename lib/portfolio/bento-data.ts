@@ -33,7 +33,7 @@ export type BentoTile = BentoWorkTile | BentoValueTile
 /** Workflow connectors — hero panel + career tiles on one canvas */
 export const BENTO_EDGES: WorkflowEdge[] = [
   ...HERO_BENTO_EDGES,
-  { from: 'hero-actions', to: 'western', primary: true },
+  { from: 'hero-pills', to: 'western', primary: true },
   { from: 'hero-intro', to: 'ux', primary: true },
   { from: 'western', to: 'metaverse', primary: true },
   { from: 'metaverse', to: 'omers', primary: true },

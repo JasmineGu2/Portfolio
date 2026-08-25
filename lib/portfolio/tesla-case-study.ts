@@ -46,7 +46,7 @@ export const TESLA_INTUIT_QUESTIONS = [
 export const TESLA_STAKEHOLDERS = [
   {
     title: 'Operators',
-    detail: 'Needed to identify relevant results quickly and continue investigations without losing context.',
+    detail: 'Needed to find relevant results quickly and continue an investigation without losing context.',
   },
   {
     title: 'ML engineers',
@@ -58,7 +58,7 @@ export const TESLA_STAKEHOLDERS = [
   },
   {
     title: 'Technicians',
-    detail: 'Needed interfaces that reflected how investigations actually happened on the factory floor.',
+    detail: 'Needed interfaces that matched how investigations actually happened on the factory floor.',
   },
 ] as const
 

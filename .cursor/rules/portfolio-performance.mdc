@@ -1,0 +1,30 @@
+---
+description: Portfolio performance budget — one motion system, canvas caps, lazy media, no offscreen rAF
+globs: "{app,components,lib}/**/*.{tsx,ts,css}"
+alwaysApply: false
+---
+
+# Portfolio performance guardrails
+
+When adding or editing motion, video, canvas, or heavy media, follow `.cursor/skills/portfolio-performance/SKILL.md` and `specs/11-performance-budget.md`.
+
+## Must
+
+- One primary motion system per viewport; pause/hide offscreen work (IntersectionObserver)
+- One global canvas; particle caps (desktop ≤3k, mobile ≤1k or off); ambient 24–30fps
+- Max 1–2 videos decoding; poster + `preload="none"`; play visible/hover only
+- Scroll animation: `transform` + `opacity` only
+- Lazy load below-fold media; dynamic import for interaction-only heavy components
+- Respect `prefers-reduced-motion` — remove ambient animation
+
+## Do not
+
+- Stack multiple full-viewport animated canvases or ambient loops
+- Run rAF loops when element is offscreen
+- Animate `filter: blur()`, width/height/top/left, or box-shadow on scroll
+- Autoplay video without poster or offscreen pause
+- Load all font weights or uncompressed video larger than display size
+
+## Visual alignment
+
+Performance constraints pair with `.cursor/skills/portfolio-visual/SKILL.md` — reduce scope, do not break the warm editorial feel with extra motion layers.

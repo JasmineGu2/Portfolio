@@ -61,5 +61,4 @@ export function workflowPath(
 
 export const HERO_BENTO_EDGES: WorkflowEdge[] = [
   { from: 'hero-intro', to: 'hero-pills', primary: true },
-  { from: 'hero-pills', to: 'hero-actions' },
 ]

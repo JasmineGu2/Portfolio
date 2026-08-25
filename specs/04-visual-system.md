@@ -33,31 +33,44 @@ Wired in `app/portfolio-fonts.css` with utility classes: `.font-bootzy`, `.font-
 
 Move away from black + neon-purple AI aesthetic.
 
-**Feel:** optimistic, tactile, creative, slightly nostalgic, warm, sophisticated — technological without looking "cyber."
+**Feel:** optimistic, tactile, creative, slightly nostalgic, warm, sophisticated — technological without looking "cyber." Editorial postcard vibe: warm off-white/cream canvas, soft charcoal ink, muted botanical glow.
 
-Avoid highly saturated neon. Avoid purple as dominant accent.
+Avoid highly saturated neon. Avoid purple as dominant accent. No flat beige résumé blocks.
 
-### Base palette tokens
+### Canonical botanical palette (`app/portfolio-tokens.css`)
 
-```text
-canvas        warm ivory / off-white
-surface       soft cream
-surfaceAlt    very pale gray-lilac
-ink           near-black
-mutedInk      warm gray
-line          translucent gray
-peach         soft peach-pink
-orange        warm amber-orange
-lavender      muted lavender
-sky           powder blue
-yellow        pale warm yellow
-```
+Reference direction: warm golden yellow → pale peach/cream → light icy blue airbrushed gradients; tiny scattered red speckle dots as ambient texture.
+
+| Token | Hex | Role |
+|-------|-----|------|
+| `--pf-canvas` | `#f5f0e8` | Warm cream/beige page canvas |
+| `--pf-surface` | `#faf7f2` | Soft cream cards |
+| `--pf-ink` | `#2a2520` | Soft charcoal text |
+| `--pf-muted` | `#7a726a` | Warm gray metadata |
+| `--pf-gold` | `#e8c547` | Golden yellow accent |
+| `--pf-peach` | `#f4b896` | Orange-peach |
+| `--pf-orange` | `#e89850` | Warm orange |
+| `--pf-cream` | `#faf3e8` | Pale cream |
+| `--pf-blue` | `#a8d4e8` | Pale icy blue |
+| `--pf-mint` | `#b8e8d4` | Mint green |
+| `--pf-green` | `#98d4a8` | Soft green |
+| `--pf-accent` | `#e8784a` | Warm amber-orange CTA |
+| `--pf-dot` | `rgba(200, 80, 60, 0.35)` | Red speckle dot texture |
 
 Use colors softly rather than as hard blocks.
 
+### Gradient presets
+
+Layered radial gradients — airbrushed blobs, not linear bands:
+
+- `--pf-gradient-warm` — gold → peach → cream
+- `--pf-gradient-cool` — blue → mint → green
+- `--pf-gradient-botanical` — gold + peach + blue + mint (default atmosphere)
+- `--pf-gradient-postcard` — vertical rainbow strip feel for hero/editorial
+
 ### Work bento pages
 
-Currently use existing bento color scheme system (`PORTFOLIO_PAGE_SCHEME`, `--sch-*` tokens). Visual system upgrade applies to Architecture page first; Work bento keeps current scheme until intentionally migrated.
+Production Work / Projects use `portfolio-warm` scheme (`PORTFOLIO_DEFAULT_SCHEME`) mapped to `--pf-*` tokens via `--sch-*` aliases in `portfolio-tokens.css`.
 
 ---
 
@@ -76,21 +89,23 @@ Should look like ambient light or blurred translucent forms — not conventional
 
 | Name | Colors |
 |------|--------|
-| Warm | orange → peach → pale cream |
-| Cool | powder blue → lavender → soft gray |
-| Mixed | warm orange → dusty pink → lavender → pale blue |
-| Sunset | yellow-orange → salmon → soft pink → cream |
+| Warm | gold → peach → pale cream |
+| Cool | icy blue → mint → soft green |
+| Mixed | gold → peach → cream → pale blue |
+| Postcard | peach → gold → mint → icy blue (vertical strip feel) |
 
 ### Implementation
 
 Layered radial gradients, not single `linear-gradient()`:
 
 ```css
+background: var(--pf-gradient-botanical);
+/* or manually: */
 background:
-  radial-gradient(circle at 70% 20%, warm orange, transparent 40%),
-  radial-gradient(circle at 20% 45%, dusty pink, transparent 45%),
-  radial-gradient(circle at 60% 80%, pale blue, transparent 50%),
-  radial-gradient(circle at 35% 70%, lavender, transparent 40%);
+  radial-gradient(circle at 70% 20%, color-mix(in srgb, var(--pf-gold) 42%, transparent), transparent 40%),
+  radial-gradient(circle at 20% 45%, color-mix(in srgb, var(--pf-peach) 36%, transparent), transparent 45%),
+  radial-gradient(circle at 60% 80%, color-mix(in srgb, var(--pf-blue) 30%, transparent), transparent 50%),
+  radial-gradient(circle at 35% 70%, color-mix(in srgb, var(--pf-mint) 24%, transparent), transparent 40%);
 ```
 
 Then: large blur, low opacity, subtle grain, slow movement.
@@ -190,9 +205,9 @@ Motion should feel **slow, deliberate, and system-like**.
 
 ## Dot fabric visual (optional)
 
-For Architecture hero backgrounds and ambient system surfaces, see **[09 — Dot Fabric Visual](./09-dot-fabric-visual.md)**.
+For Architecture hero backgrounds, abstraction stages, Work bento canvas, and optional Ask panel texture — see the **[visuals specs](./visuals/README.md)** — especially [dot-fabric.md](./visuals/dot-fabric.md).
 
-A reusable animated surface made from small circular pixels as a continuous deforming fabric — computational, spatial, not random particles. Used sparingly behind Architecture and runtime sections.
+Red speckle dots (`--pf-dot`) appear as CSS radial-gradient texture on canvases; animated DotField uses botanical gold/peach/blue/mint with deterministic red speckles via noise threshold.
 
 ---
 

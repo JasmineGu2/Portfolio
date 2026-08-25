@@ -1,0 +1,170 @@
+/* ── Portfolio design tokens (canonical warm palette — aligned with --arch-*) ── */
+
+:root {
+  /* Canvas & surfaces */
+  --pf-canvas: #faf6f0;
+  --pf-canvas-alt: #f3ede4;
+  --pf-canvas-dot: #d4cfc6;
+  --pf-surface: #fffdf9;
+  --pf-surface-alt: #f5f0e8;
+  --pf-cream: #faf6f0;
+
+  /* Ink & type */
+  --pf-ink: #1a1410;
+  --pf-muted: #6b635c;
+  --pf-line: color-mix(in srgb, var(--pf-ink) 10%, transparent);
+
+  /* Accent palette — Claude orange */
+  --pf-accent: #d97757;
+  --pf-gold: #e8c547;
+  --pf-gold-deep: #c9a020;
+  --pf-gold-soft: #f5e6a8;
+  --pf-peach: #f4b896;
+  --pf-lavender: #c8b8e8;
+  --pf-sky: #b8d4f0;
+  --pf-yellow: #f5e6a8;
+  --pf-dot: rgba(200, 80, 60, 0.35);
+
+  /* Dark runtime sections */
+  --pf-dark: #141210;
+  --pf-dark-surface: #1c1916;
+  --pf-dark-line: color-mix(in srgb, #fff 10%, transparent);
+
+  /* Connectors & chrome */
+  --pf-connector: color-mix(in srgb, var(--pf-ink) 38%, transparent);
+  --pf-connector-strong: color-mix(in srgb, var(--pf-ink) 58%, transparent);
+  --pf-shadow: #1a1410;
+  --pf-shadow-outline:
+    0 1px 2px color-mix(in srgb, var(--pf-ink) 5%, transparent),
+    0 4px 12px color-mix(in srgb, var(--pf-ink) 5%, transparent);
+  --pf-shadow-outline-subtle:
+    0 1px 2px color-mix(in srgb, var(--pf-ink) 4%, transparent),
+    0 3px 10px color-mix(in srgb, var(--pf-ink) 3%, transparent);
+  --pf-shadow-outline-nav:
+    0 2px 6px color-mix(in srgb, var(--pf-ink) 4%, transparent),
+    0 6px 18px color-mix(in srgb, var(--pf-ink) 4%, transparent);
+  --pf-shadow-outline-dark:
+    0 1px 2px color-mix(in srgb, #000 18%, transparent),
+    0 4px 14px color-mix(in srgb, #000 22%, transparent);
+  --pf-shadow-outline-hover:
+    0 2px 4px color-mix(in srgb, var(--pf-ink) 6%, transparent),
+    0 8px 20px color-mix(in srgb, var(--pf-ink) 8%, transparent);
+  --pf-shadow-outline-hover-dark:
+    0 2px 4px color-mix(in srgb, #000 20%, transparent),
+    0 8px 22px color-mix(in srgb, #000 28%, transparent);
+
+  /* Card system — unified borders, radius, transitions */
+  --pf-card-border: color-mix(in srgb, var(--pf-ink) 12%, transparent);
+  --pf-card-border-hover: color-mix(in srgb, var(--pf-ink) 22%, transparent);
+  --pf-card-border-glass: var(--pf-card-border);
+  --pf-card-border-dark: color-mix(in srgb, #fff 12%, transparent);
+  --pf-card-border-dark-hover: color-mix(in srgb, #fff 22%, transparent);
+  --pf-card-border-glass-dark: var(--pf-card-border-dark);
+  --pf-card-radius: 1.35rem;
+  --pf-card-radius-lg: 1.5rem;
+  --pf-card-radius-sm: 0.875rem;
+  --pf-card-transition: border-color 180ms ease, box-shadow 180ms ease;
+
+  /* Orange accent gradients — hero emphasis + bento chips */
+  --pf-accent-chip-border: color-mix(in srgb, var(--pf-accent) 34%, transparent);
+  --pf-accent-gradient-text: linear-gradient(
+    120deg,
+    var(--pf-peach) 0%,
+    var(--pf-accent) 48%,
+    color-mix(in srgb, var(--pf-accent) 78%, var(--pf-ink)) 100%
+  );
+  --pf-accent-gradient-chip: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--pf-accent) 26%, var(--pf-surface)) 0%,
+    color-mix(in srgb, var(--pf-peach) 18%, var(--pf-cream)) 100%
+  );
+  --pf-accent-chip-fg: color-mix(in srgb, var(--pf-accent) 58%, var(--pf-ink));
+
+  /* Legacy aliases — no purple/cyber accents */
+  --pf-border: var(--pf-card-border);
+  --pf-bio-bg: var(--pf-surface-alt);
+  --pf-orange: var(--pf-accent);
+  --pf-pink: var(--pf-peach);
+  --pf-green: #7aab7a;
+  --pf-blue: #a8d4e8;
+  --pf-mint: #b8e8d4;
+  --pf-magenta: var(--pf-peach);
+  --pf-violet: var(--pf-lavender);
+
+  /* Typography stacks */
+  --pf-font-body: 'Inter', system-ui, sans-serif;
+  --pf-font-editorial: 'Bootzy', Georgia, serif;
+  --pf-font-personality: 'Awesome Shorten', 'Fredoka', cursive;
+  --pf-font-system: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Bento scheme defaults — warm editorial; JS may override per scheme */
+  --sch-shell-bg: var(--pf-canvas);
+  --sch-sidebar-bg: var(--pf-surface);
+  --sch-sidebar-active-bg: var(--pf-surface-alt);
+  --sch-canvas-bg: var(--pf-canvas-alt);
+  --sch-canvas-dot: var(--pf-canvas-dot);
+  --sch-hero: var(--pf-surface);
+  --sch-hero-fg: var(--pf-ink);
+  --sch-hero-sub: var(--pf-muted);
+  --sch-hero-border: var(--pf-card-border);
+  --sch-soft-bg: var(--pf-surface);
+  --sch-soft-fg: var(--pf-ink);
+  --sch-soft-fg-muted: var(--pf-muted);
+  --sch-soft-border: var(--pf-card-border);
+  --sch-hero-nav-fg: var(--pf-ink);
+  --sch-hero-nav-bg: var(--pf-surface);
+  --sch-hero-nav-border: var(--pf-card-border);
+  --sch-em-orange: var(--pf-accent);
+  --sch-em-green: var(--pf-green);
+  --sch-em-blue: var(--pf-blue);
+  --sch-em-magenta: var(--pf-peach);
+  --sch-cta-bg: var(--pf-ink);
+  --sch-cta-fg: var(--pf-surface);
+  --sch-badge-bg: var(--pf-surface);
+  --sch-badge-fg: var(--pf-muted);
+  --sch-card-label: var(--pf-muted);
+  --sch-connector: var(--pf-connector);
+  --sch-connector-primary: var(--pf-connector-strong);
+
+  /* Architecture page aliases */
+  --arch-ink: var(--pf-ink);
+  --arch-muted: var(--pf-muted);
+  --arch-cream: var(--pf-canvas);
+  --arch-surface: var(--pf-surface);
+  --arch-dark: var(--pf-dark);
+  --arch-dark-surface: var(--pf-dark-surface);
+  --arch-dark-line: var(--pf-dark-line);
+  --arch-accent: var(--pf-accent);
+  --arch-peach: var(--pf-peach);
+  --arch-lavender: var(--pf-lavender);
+  --arch-line: var(--pf-card-border-dark);
+
+  /* Ambient gradient presets — layered radial blobs, not linear bands */
+  --pf-gradient-warm:
+    radial-gradient(ellipse 90% 70% at 50% 0%, color-mix(in srgb, var(--pf-gold) 42%, transparent), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 30% 100%, color-mix(in srgb, var(--pf-peach) 36%, transparent), transparent 50%);
+  --pf-gradient-cool:
+    radial-gradient(ellipse 85% 65% at 60% 20%, color-mix(in srgb, var(--pf-blue) 40%, transparent), transparent 55%),
+    radial-gradient(ellipse 75% 55% at 25% 80%, color-mix(in srgb, var(--pf-mint) 34%, transparent), transparent 50%);
+  --pf-gradient-botanical:
+    radial-gradient(circle at 70% 18%, color-mix(in srgb, var(--pf-gold) 38%, transparent), transparent 42%),
+    radial-gradient(circle at 18% 42%, color-mix(in srgb, var(--pf-peach) 34%, transparent), transparent 46%),
+    radial-gradient(circle at 62% 78%, color-mix(in srgb, var(--pf-blue) 28%, transparent), transparent 48%),
+    radial-gradient(circle at 32% 68%, color-mix(in srgb, var(--pf-mint) 24%, transparent), transparent 42%);
+  --pf-gradient-postcard:
+    radial-gradient(ellipse 55% 80% at 12% 50%, color-mix(in srgb, var(--pf-peach) 30%, transparent), transparent 60%),
+    radial-gradient(ellipse 50% 75% at 38% 50%, color-mix(in srgb, var(--pf-gold) 26%, transparent), transparent 58%),
+    radial-gradient(ellipse 50% 70% at 62% 50%, color-mix(in srgb, var(--pf-mint) 24%, transparent), transparent 56%),
+    radial-gradient(ellipse 55% 80% at 88% 50%, color-mix(in srgb, var(--pf-blue) 28%, transparent), transparent 60%);
+  --pf-gradient-botanical-subtle:
+    radial-gradient(circle at 72% 14%, color-mix(in srgb, var(--pf-gold) 22%, transparent), transparent 44%),
+    radial-gradient(circle at 14% 38%, color-mix(in srgb, var(--pf-peach) 18%, transparent), transparent 48%),
+    radial-gradient(circle at 64% 82%, color-mix(in srgb, var(--pf-blue) 14%, transparent), transparent 50%),
+    radial-gradient(circle at 28% 72%, color-mix(in srgb, var(--pf-mint) 12%, transparent), transparent 46%);
+  --pf-gradient-botanical-dark:
+    radial-gradient(circle at 68% 12%, color-mix(in srgb, var(--pf-gold) 28%, transparent), transparent 46%),
+    radial-gradient(circle at 16% 40%, color-mix(in srgb, var(--pf-peach) 24%, transparent), transparent 50%),
+    radial-gradient(circle at 58% 78%, color-mix(in srgb, var(--pf-blue) 20%, transparent), transparent 52%),
+    radial-gradient(circle at 34% 68%, color-mix(in srgb, var(--pf-mint) 16%, transparent), transparent 48%),
+    radial-gradient(ellipse 38% 90% at 82% 55%, color-mix(in srgb, var(--pf-accent) 18%, transparent), transparent 62%);
+}

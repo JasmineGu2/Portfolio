@@ -10,6 +10,8 @@ import {
 } from './palette-scheme-data'
 
 export type ClassicColorSchemeId =
+  | 'warm-portfolio'
+  | 'portfolio-warm'
   | 'soft'
   | 'soft-mist'
   | 'soft-blush'
@@ -40,6 +42,18 @@ export interface ColorSchemeSpec {
 }
 
 export const BENTO_COLOR_SCHEMES: ColorSchemeSpec[] = [
+  {
+    id: 'warm-portfolio',
+    label: 'Warm Portfolio',
+    description: 'Warm ivory canvas — amber, peach, lavender accents',
+    swatches: ['#faf6f0', '#e8784a', '#c8b8e8'],
+  },
+  {
+    id: 'portfolio-warm',
+    label: 'Portfolio Warm',
+    description: 'Alias — warm ivory canvas aligned with Architecture palette',
+    swatches: ['#faf6f0', '#e8784a', '#c8b8e8'],
+  },
   {
     id: 'soft',
     label: 'Soft',
@@ -187,10 +201,13 @@ export function isPaletteScheme(id: ColorSchemeId): boolean {
   return id.startsWith('palette-')
 }
 
-export const DEFAULT_COLOR_SCHEME: ColorSchemeId = 'rainbow-prism'
+export const DEFAULT_COLOR_SCHEME: ColorSchemeId = 'warm-portfolio'
 
-/** Locked homepage scheme — Sand Chartreuse Duo */
-export const PORTFOLIO_PAGE_SCHEME: ColorSchemeId = 'palette-sand-chartreuse-duo'
+/** Production Work / Projects bento — warm portfolio palette aligned with --arch-* tokens */
+export const PORTFOLIO_DEFAULT_SCHEME: ColorSchemeId = 'warm-portfolio'
+
+/** @deprecated Use PORTFOLIO_DEFAULT_SCHEME */
+export const PORTFOLIO_PAGE_SCHEME: ColorSchemeId = PORTFOLIO_DEFAULT_SCHEME
 
 export function getColorSchemeIndex(id: ColorSchemeId): number {
   return BENTO_COLOR_SCHEMES.findIndex((scheme) => scheme.id === normalizeColorSchemeId(id))

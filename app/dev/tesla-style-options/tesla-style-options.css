@@ -1,0 +1,933 @@
+/* ── Options page chrome ── */
+
+.tesla-style-opt-page {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.tesla-style-opt-hero {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.tesla-style-opt-eyebrow {
+  margin-bottom: 0.5rem;
+  color: #707687;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tesla-style-opt-title {
+  max-width: 42rem;
+  color: #210795;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.tesla-style-opt-meta,
+.tesla-style-opt-note {
+  margin-top: 0.75rem;
+  color: #6d7383;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.tesla-style-opt-link {
+  color: #ff5a36;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.tesla-style-opt-hero-preview {
+  border: 1px solid #dedbea;
+  border-radius: 1.25rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.tesla-style-opt-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.tesla-style-opt-option {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #dedbea;
+  border-radius: 1.15rem;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.tesla-style-opt-option:hover {
+  border-color: color-mix(in srgb, #210795 18%, #dedbea);
+}
+
+.tesla-style-opt-option--active {
+  border-color: #210795;
+  box-shadow: 0 0 0 1px color-mix(in srgb, #210795 12%, transparent);
+}
+
+.tesla-style-opt-option-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+}
+
+.tesla-style-opt-option-name {
+  color: #210795;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tesla-style-opt-option-best {
+  color: #707687;
+  font-size: 0.75rem;
+}
+
+.tesla-style-opt-option-desc {
+  color: #4b5163;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.tesla-style-opt-option-preview {
+  border: 1px solid #eceaf3;
+  border-radius: 0.85rem;
+  overflow: hidden;
+}
+
+.tesla-style-opt-footer {
+  color: #6d7383;
+  font-size: 0.875rem;
+}
+
+.tesla-style-opt-group {
+  display: grid;
+  gap: 1rem;
+}
+
+.tesla-style-opt-group-head {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.tesla-style-opt-group-title {
+  color: #210795;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.tesla-style-opt-group-desc {
+  color: #6d7383;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 960px) {
+  .tesla-style-opt-hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
+    align-items: start;
+  }
+
+  .tesla-style-opt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Shared preview base ── */
+
+.tesla-var {
+  --var-navy: #210795;
+  --var-text: #4b5163;
+  --var-muted: #6d7383;
+  --var-label: #707687;
+  --var-border: #dedbea;
+  --var-prose: 47.5rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+}
+
+.tesla-var--compact {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.tesla-var--compact .tesla-var__headline {
+  font-size: 1.35rem;
+}
+
+.tesla-var--compact .tesla-var__body,
+.tesla-var--compact .tesla-var__card-detail,
+.tesla-var--compact .tesla-var__quote {
+  font-size: 0.875rem;
+}
+
+.tesla-var__label {
+  margin-bottom: 0.65rem;
+  color: var(--var-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tesla-var__headline {
+  max-width: var(--var-prose);
+  margin-bottom: 1rem;
+  color: var(--var-navy);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.15;
+}
+
+.tesla-var__body {
+  max-width: var(--var-prose);
+  margin-top: 1rem;
+  color: var(--var-text);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.tesla-var__body:first-of-type {
+  margin-top: 0;
+}
+
+.tesla-var__em {
+  font-weight: 600;
+}
+
+.tesla-var__questions {
+  margin-top: 1.25rem;
+  max-width: var(--var-prose);
+}
+
+.tesla-var__questions-title {
+  margin-bottom: 0.75rem;
+  color: var(--var-navy);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tesla-var__question-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tesla-var__question-item {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.65rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--var-border);
+  color: var(--var-text);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.tesla-var__question-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.tesla-var__question-num {
+  color: var(--var-navy);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tesla-var__cards {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  max-width: calc(var(--var-prose) + 8rem);
+}
+
+.tesla-var__card {
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--var-border);
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+.tesla-var__card-title {
+  margin-bottom: 0.35rem;
+  color: var(--var-navy);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tesla-var__card-detail {
+  color: #555b6c;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.tesla-var__quote {
+  margin: 1.25rem 0 0;
+  max-width: var(--var-prose);
+  padding-left: 1rem;
+  border-left: 2px solid var(--var-border);
+  color: var(--var-navy);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.0625rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.tesla-var__outcomes {
+  margin-top: 1.25rem;
+  max-width: var(--var-prose);
+}
+
+.tesla-var__outcomes-label {
+  margin-bottom: 0.65rem;
+  color: var(--var-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tesla-var__outcomes-list {
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1.1rem;
+  color: var(--var-text);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+/* ── Spacious editorial layout (meta + sections) ── */
+
+.tesla-var__meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1.25rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #ececf1;
+}
+
+.tesla-var__meta-item {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.tesla-var__meta-label {
+  color: #a1a7b3;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tesla-var__meta-value {
+  color: #2d3142;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.tesla-var__meta-dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.35rem;
+  border-radius: 999px;
+  background: var(--sp-accent, #ff5a36);
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+
+.tesla-var__section + .tesla-var__section {
+  margin-top: 2.75rem;
+}
+
+.tesla-var__section-label {
+  margin-bottom: 1rem;
+  color: var(--sp-label, #a1a7b3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tesla-var__section-headline {
+  max-width: 34rem;
+  margin-bottom: 1.15rem;
+  color: var(--sp-headline, #2d3142);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+
+.tesla-var__section-body {
+  max-width: 34rem;
+  color: #8b9099;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.tesla-var__section-bullets {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 34rem;
+  margin-top: 0.25rem;
+  padding-left: 1rem;
+  color: #6d7383;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .tesla-var__meta-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+.tesla-var--compact .tesla-var__meta-grid {
+  gap: 1rem 0.85rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.tesla-var--compact .tesla-var__section + .tesla-var__section {
+  margin-top: 1.75rem;
+}
+
+.tesla-var--compact .tesla-var__section-label {
+  margin-bottom: 0.65rem;
+}
+
+.tesla-var--compact .tesla-var__section-headline {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.tesla-var--compact .tesla-var__section-body,
+.tesla-var--compact .tesla-var__section-bullets {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* ── Spacious editorial family (shared base) ── */
+
+.tesla-var--spacious-editorial,
+.tesla-var--spacious-coral-hint,
+.tesla-var--spacious-navy-headlines,
+.tesla-var--spacious-lavender-impact,
+.tesla-var--spacious-warm-paper,
+.tesla-var--spacious-line-mark {
+  --var-prose: 34rem;
+  --sp-accent: #ff5a36;
+  --sp-headline: #252833;
+  --sp-bg: #ffffff;
+  --sp-label: #a1a7b3;
+  --sp-meta-border: #f0f1f4;
+  --sp-bullet: #c8ccd6;
+  --sp-meta-rule: 1px;
+  background: var(--sp-bg);
+  padding: 2.25rem 2.5rem 2.75rem;
+}
+
+.tesla-var--spacious-editorial.tesla-var--compact,
+.tesla-var--spacious-coral-hint.tesla-var--compact,
+.tesla-var--spacious-navy-headlines.tesla-var--compact,
+.tesla-var--spacious-lavender-impact.tesla-var--compact,
+.tesla-var--spacious-warm-paper.tesla-var--compact,
+.tesla-var--spacious-line-mark.tesla-var--compact {
+  padding: 1.15rem 1.25rem 1.35rem;
+}
+
+.tesla-var--spacious-editorial .tesla-var__meta-grid,
+.tesla-var--spacious-coral-hint .tesla-var__meta-grid,
+.tesla-var--spacious-navy-headlines .tesla-var__meta-grid,
+.tesla-var--spacious-lavender-impact .tesla-var__meta-grid,
+.tesla-var--spacious-warm-paper .tesla-var__meta-grid,
+.tesla-var--spacious-line-mark .tesla-var__meta-grid {
+  border-bottom: var(--sp-meta-rule) solid var(--sp-meta-border);
+}
+
+.tesla-var--spacious-editorial .tesla-var__section-bullets,
+.tesla-var--spacious-coral-hint .tesla-var__section-bullets,
+.tesla-var--spacious-navy-headlines .tesla-var__section-bullets,
+.tesla-var--spacious-lavender-impact .tesla-var__section-bullets,
+.tesla-var--spacious-warm-paper .tesla-var__section-bullets,
+.tesla-var--spacious-line-mark .tesla-var__section-bullets {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tesla-var--spacious-editorial .tesla-var__section-bullets li,
+.tesla-var--spacious-coral-hint .tesla-var__section-bullets li,
+.tesla-var--spacious-navy-headlines .tesla-var__section-bullets li,
+.tesla-var--spacious-lavender-impact .tesla-var__section-bullets li,
+.tesla-var--spacious-warm-paper .tesla-var__section-bullets li,
+.tesla-var--spacious-line-mark .tesla-var__section-bullets li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.tesla-var--spacious-editorial .tesla-var__section-bullets li::before,
+.tesla-var--spacious-coral-hint .tesla-var__section-bullets li::before,
+.tesla-var--spacious-navy-headlines .tesla-var__section-bullets li::before,
+.tesla-var--spacious-lavender-impact .tesla-var__section-bullets li::before,
+.tesla-var--spacious-warm-paper .tesla-var__section-bullets li::before,
+.tesla-var--spacious-line-mark .tesla-var__section-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--sp-bullet);
+}
+
+/* Pure — grey dot only on skills */
+.tesla-var--spacious-editorial {
+  --sp-accent: #c8ccd6;
+}
+
+/* Coral hint — labels + bullets + soft rule */
+.tesla-var--spacious-coral-hint {
+  --sp-label: color-mix(in srgb, #ff5a36 72%, #a1a7b3);
+  --sp-bullet: #ff5a36;
+  --sp-meta-border: color-mix(in srgb, #ff5a36 22%, #ececf1);
+  --sp-meta-rule: 2px;
+}
+
+/* Navy headlines — brand serif color, minimal dot accent */
+.tesla-var--spacious-navy-headlines {
+  --sp-headline: #210795;
+  --sp-accent: #ff5a36;
+}
+
+/* Lavender impact — one tinted panel at the bottom */
+.tesla-var--spacious-lavender-impact .tesla-var__section--impact {
+  margin-top: 3rem;
+  padding: 1.35rem 1.4rem 1.45rem;
+  border-radius: 1rem;
+  background: #f1efff;
+  border: 1px solid color-mix(in srgb, #210795 8%, #dedbea);
+}
+
+.tesla-var--spacious-lavender-impact .tesla-var__section--impact .tesla-var__section-label {
+  color: #210795;
+}
+
+.tesla-var--spacious-lavender-impact.tesla-var--compact .tesla-var__section--impact {
+  margin-top: 1.75rem;
+  padding: 1rem 1.05rem;
+}
+
+/* Warm paper — cream canvas, coral labels */
+.tesla-var--spacious-warm-paper {
+  --sp-bg: #fbfaf6;
+  --sp-meta-border: #e8e4da;
+  --sp-label: color-mix(in srgb, #ff5a36 65%, #8b9099);
+  --sp-headline: #2d3142;
+}
+
+/* Line mark — accent rules, no fill panels */
+.tesla-var--spacious-line-mark {
+  --sp-meta-border: color-mix(in srgb, #ff5a36 35%, #ececf1);
+  --sp-meta-rule: 2px;
+}
+
+.tesla-var--spacious-line-mark .tesla-var__section {
+  padding-left: 1rem;
+  border-left: 2px solid color-mix(in srgb, #ff5a36 28%, transparent);
+}
+
+.tesla-var--spacious-line-mark .tesla-var__section-label {
+  color: #8b9099;
+}
+
+.tesla-var--spacious-line-mark .tesla-var__section-label::after {
+  content: '';
+  display: block;
+  width: 1.75rem;
+  height: 2px;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, #ff5a36 55%, transparent);
+}
+
+/* ── Story layout (shared narrative rhythm) ── */
+
+.tesla-var--story-restrained,
+.tesla-var--story-soft-flow,
+.tesla-var--story-editorial-mix {
+  --var-prose: 38rem;
+  background: #ffffff;
+  padding: 2rem 2.15rem 2.35rem;
+}
+
+.tesla-var--story-restrained.tesla-var--compact,
+.tesla-var--story-soft-flow.tesla-var--compact,
+.tesla-var--story-editorial-mix.tesla-var--compact {
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.tesla-var--story-restrained .tesla-var__story-beat + .tesla-var__story-beat,
+.tesla-var--story-soft-flow .tesla-var__story-beat + .tesla-var__story-beat,
+.tesla-var--story-editorial-mix .tesla-var__story-beat + .tesla-var__story-beat {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #ececf1;
+}
+
+.tesla-var--story-restrained.tesla-var--compact .tesla-var__story-beat + .tesla-var__story-beat,
+.tesla-var--story-soft-flow.tesla-var--compact .tesla-var__story-beat + .tesla-var__story-beat,
+.tesla-var--story-editorial-mix.tesla-var--compact .tesla-var__story-beat + .tesla-var__story-beat {
+  margin-top: 1.65rem;
+  padding-top: 1.65rem;
+}
+
+.tesla-var__story-chapter {
+  margin-bottom: 0.9rem;
+  color: #707687;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tesla-var--story-restrained .tesla-var__headline,
+.tesla-var--story-soft-flow .tesla-var__headline,
+.tesla-var--story-editorial-mix .tesla-var__headline {
+  max-width: var(--var-prose);
+  margin-bottom: 1rem;
+  color: #210795;
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  line-height: 1.2;
+}
+
+.tesla-var--story-editorial-mix .tesla-var__headline {
+  font-size: clamp(1.65rem, 2.8vw, 2.2rem);
+  color: #252833;
+  font-weight: 400;
+}
+
+.tesla-var__body--story {
+  max-width: var(--var-prose);
+  margin-top: 0.85rem;
+  color: #4b5163;
+  font-size: 1.03125rem;
+  line-height: 1.72;
+}
+
+.tesla-var__body--story:first-of-type {
+  margin-top: 0;
+}
+
+.tesla-var--story-restrained .tesla-var__questions,
+.tesla-var--story-editorial-mix .tesla-var__questions {
+  margin-top: 1.35rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1rem;
+  background: #f1efff;
+  border: 1px solid color-mix(in srgb, #210795 10%, #dedbea);
+}
+
+.tesla-var--story-soft-flow .tesla-var__questions {
+  margin-top: 1.35rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid #dedbea;
+}
+
+.tesla-var--story-restrained .tesla-var__cards,
+.tesla-var--story-soft-flow .tesla-var__cards,
+.tesla-var--story-editorial-mix .tesla-var__cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.15rem;
+}
+
+.tesla-var--story-restrained .tesla-var__card,
+.tesla-var--story-editorial-mix .tesla-var__card {
+  border-top: 2px solid #ff5a36;
+}
+
+.tesla-var--story-soft-flow .tesla-var__card {
+  border-top: 1px solid color-mix(in srgb, #ff5a36 45%, #dedbea);
+}
+
+.tesla-var--story-restrained .tesla-var__quote,
+.tesla-var--story-editorial-mix .tesla-var__quote {
+  margin-top: 0;
+  padding: 1.1rem 1.15rem;
+  border-left: 3px solid #210795;
+  border-radius: 0 1rem 1rem 0;
+  background: #f1efff;
+}
+
+.tesla-var--story-soft-flow .tesla-var__quote {
+  margin-top: 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid #210795;
+  border-radius: 0;
+  background: transparent;
+  font-style: normal;
+  font-family: inherit;
+  font-size: 1.03125rem;
+}
+
+.tesla-var--story-restrained .tesla-var__outcomes,
+.tesla-var--story-editorial-mix .tesla-var__outcomes {
+  margin-top: 0.85rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #ff5a36, color-mix(in srgb, #ff5a36 88%, #210795));
+  color: #ffffff;
+}
+
+.tesla-var--story-restrained .tesla-var__outcomes-list,
+.tesla-var--story-editorial-mix .tesla-var__outcomes-list {
+  list-style: none;
+  padding-left: 0;
+  color: #ffffff;
+}
+
+.tesla-var--story-soft-flow .tesla-var__outcomes {
+  margin-top: 0.85rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, #ff5a36 28%, #dedbea);
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+.tesla-var--story-soft-flow .tesla-var__outcomes-list {
+  list-style: none;
+  padding-left: 0;
+  color: #4b5163;
+}
+
+.tesla-var--story-editorial-mix {
+  background: #fbfaf6;
+}
+
+.tesla-var--story-editorial-mix .tesla-var__story-chapter {
+  color: color-mix(in srgb, #ff5a36 55%, #707687);
+}
+
+@media (max-width: 640px) {
+  .tesla-var--story-restrained .tesla-var__cards,
+  .tesla-var--story-soft-flow .tesla-var__cards,
+  .tesla-var--story-editorial-mix .tesla-var__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Variant 1: Minimal Editorial ── */
+
+.tesla-var--minimal-editorial {
+  background: #fbfaf6;
+}
+
+.tesla-var--minimal-editorial .tesla-var__em {
+  color: inherit;
+  font-weight: 650;
+}
+
+.tesla-var--minimal-editorial .tesla-var__questions,
+.tesla-var--minimal-editorial .tesla-var__card {
+  background: #ffffff;
+}
+
+.tesla-var--minimal-editorial .tesla-var__outcomes-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tesla-var--minimal-editorial .tesla-var__outcomes-list li {
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--var-border);
+}
+
+/* ── Variant 2: Monochrome Document ── */
+
+.tesla-var--monochrome-document {
+  --var-prose: 42rem;
+  background: #ffffff;
+}
+
+.tesla-var--monochrome-document .tesla-var__headline {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 500;
+}
+
+.tesla-var--monochrome-document .tesla-var__body,
+.tesla-var--monochrome-document .tesla-var__question-item,
+.tesla-var--monochrome-document .tesla-var__card-detail {
+  color: #3d4352;
+  font-size: 1rem;
+}
+
+.tesla-var--monochrome-document .tesla-var__em {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #c8ccd6;
+  text-underline-offset: 0.15em;
+}
+
+.tesla-var--monochrome-document .tesla-var__questions {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--var-border);
+}
+
+.tesla-var--monochrome-document .tesla-var__cards {
+  grid-template-columns: 1fr;
+  max-width: var(--var-prose);
+}
+
+.tesla-var--monochrome-document .tesla-var__card {
+  padding: 0.85rem 0;
+  border: none;
+  border-bottom: 1px solid var(--var-border);
+  border-radius: 0;
+  background: transparent;
+}
+
+.tesla-var--monochrome-document .tesla-var__card-title {
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.tesla-var--monochrome-document .tesla-var__quote {
+  border-left-color: #3d4352;
+  font-style: normal;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.tesla-var--monochrome-document .tesla-var__outcomes-list {
+  list-style: disc;
+}
+
+/* ── Variant 3: Soft Neutral ── */
+
+.tesla-var--soft-neutral {
+  background: #f7f7f9;
+}
+
+.tesla-var--soft-neutral .tesla-var__em {
+  color: #ff5a36;
+}
+
+.tesla-var--soft-neutral .tesla-var__questions {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--var-border);
+}
+
+.tesla-var--soft-neutral .tesla-var__question-item {
+  border-top-color: #ececf1;
+}
+
+.tesla-var--soft-neutral .tesla-var__cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tesla-var--soft-neutral .tesla-var__card {
+  background: #ffffff;
+  border-color: #ececf1;
+}
+
+.tesla-var--soft-neutral .tesla-var__quote {
+  padding: 1rem 1.1rem;
+  border-left: none;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--var-border);
+}
+
+.tesla-var--soft-neutral .tesla-var__outcomes {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--var-border);
+}
+
+.tesla-var--soft-neutral .tesla-var__outcomes-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+@media (max-width: 640px) {
+  .tesla-var--soft-neutral .tesla-var__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Variant 4: Restrained Accent ── */
+
+.tesla-var--restrained-accent {
+  background: #ffffff;
+}
+
+.tesla-var--restrained-accent .tesla-var__em {
+  color: #ff5a36;
+}
+
+.tesla-var--restrained-accent .tesla-var__questions {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: #f1efff;
+  border: 1px solid color-mix(in srgb, #210795 10%, var(--var-border));
+}
+
+.tesla-var--restrained-accent .tesla-var__card {
+  border-top: 2px solid #ff5a36;
+}
+
+.tesla-var--restrained-accent .tesla-var__quote {
+  border-left-color: #210795;
+  background: #f1efff;
+  padding: 1rem 1.1rem;
+  border-radius: 0 1rem 1rem 0;
+}
+
+.tesla-var--restrained-accent .tesla-var__outcomes {
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #ff5a36, color-mix(in srgb, #ff5a36 88%, #210795));
+  color: #ffffff;
+}
+
+.tesla-var--restrained-accent .tesla-var__outcomes-label {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.tesla-var--restrained-accent .tesla-var__outcomes-list {
+  list-style: none;
+  padding-left: 0;
+  color: #ffffff;
+}
+
+.tesla-var--restrained-accent .tesla-var__cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .tesla-var--restrained-accent .tesla-var__cards {
+    grid-template-columns: 1fr;
+  }
+}
