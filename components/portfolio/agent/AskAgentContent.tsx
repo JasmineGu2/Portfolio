@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { ArrowUp, Briefcase, Cpu, Layers, Sparkles, Wrench, type LucideIcon } from 'lucide-react'
 import { HERO_EXAMPLE_QUESTIONS, type AgentResponse } from '@/lib/portfolio/ask-agent'
 import { cn } from '@/lib/utils'
@@ -55,8 +54,6 @@ export function AskAgentContent({
     suggestions,
     autocomplete,
     submitQuery,
-    handleTrace,
-    highlightNodes,
     resizeTextarea,
   } = agent
 
@@ -85,14 +82,7 @@ export function AskAgentContent({
                 {message.role === 'user' ? (
                   <p className="agent-message__text">{message.text}</p>
                 ) : (
-                  <AssistantMessage
-                    response={message.response}
-                    onTrace={() => {
-                      if (!message.response.traceIds?.length) return
-                      handleTrace(message.response.traceIds)
-                    }}
-                    onHighlight={(id) => highlightNodes([id])}
-                  />
+                  <AssistantMessage response={message.response} />
                 )}
               </li>
             ))}
@@ -127,7 +117,7 @@ export function AskAgentContent({
                   key={chip.id}
                   type="button"
                   className="agent-topic-chip"
-                  onClick={() => submitQuery(chip.query)}
+                  onClick={() => submitQuery(chip.query, true)}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0 opacity-55" aria-hidden />
                   {chip.label}
@@ -144,7 +134,7 @@ export function AskAgentContent({
                 key={chip.id}
                 type="button"
                 className="agent-topic-chip agent-topic-chip--compact"
-                onClick={() => submitQuery(chip.query)}
+                onClick={() => submitQuery(chip.query, true)}
               >
                 {chip.label}
               </button>
@@ -159,7 +149,7 @@ export function AskAgentContent({
                 key={suggestion}
                 type="button"
                 className="agent-topic-chip agent-topic-chip--compact"
-                onClick={() => submitQuery(suggestion)}
+                onClick={() => submitQuery(suggestion, true)}
               >
                 {suggestion.length > 36 ? `${suggestion.slice(0, 36)}…` : suggestion}
               </button>
@@ -196,7 +186,7 @@ function ComposerCard({
   animatedPlaceholder?: boolean
   onQueryChange: (value: string) => void
   onInputResize: (el: HTMLTextAreaElement) => void
-  onSubmit: (text: string) => void
+  onSubmit: (text: string, viaChip?: boolean) => void
 }) {
   const [inputFocused, setInputFocused] = useState(false)
   const showTypewriter = animatedPlaceholder && !compact && !query.trim() && !inputFocused
@@ -235,7 +225,7 @@ function ComposerCard({
             if (event.key === 'Enter' && !event.shiftKey) {
               event.preventDefault()
               if (activeAutocomplete >= 0 && autocomplete[activeAutocomplete]) {
-                onSubmit(autocomplete[activeAutocomplete])
+                onSubmit(autocomplete[activeAutocomplete], true)
               } else {
                 onSubmit(query)
               }
@@ -268,7 +258,7 @@ function ComposerCard({
                   'agent-autocomplete__item',
                   index === activeAutocomplete && 'agent-autocomplete__item--active'
                 )}
-                onClick={() => onSubmit(item)}
+                onClick={() => onSubmit(item, true)}
               >
                 {item}
               </button>
@@ -280,41 +270,12 @@ function ComposerCard({
   )
 }
 
-function AssistantMessage({
-  response,
-  onTrace,
-  onHighlight,
-}: {
-  response: AgentResponse
-  onTrace: () => void
-  onHighlight: (id: string) => void
-}) {
+function AssistantMessage({ response }: { response: AgentResponse }) {
   return (
     <div className="agent-message__assistant">
       <p className="agent-message__text">{response.answer}</p>
 
-      {response.references.length > 0 && (
-        <div className="agent-message__refs">
-          {response.references.map((ref) => (
-            <Link
-              key={ref.id}
-              href={ref.href}
-              className="agent-ref-chip"
-              onClick={() => onHighlight(ref.id)}
-            >
-              {ref.label}
-            </Link>
-          ))}
-        </div>
-      )}
-
       {response.relatedPath && <p className="agent-message__path">{response.relatedPath}</p>}
-
-      {response.traceIds && response.traceIds.length > 0 && (
-        <button type="button" className="agent-trace-link" onClick={onTrace}>
-          View in Architecture →
-        </button>
-      )}
     </div>
   )
 }

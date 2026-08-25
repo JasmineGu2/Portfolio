@@ -31,7 +31,7 @@ export function HeroIntroCopy({
             />
             <img src="/puzzle/intuit.png" alt="Intuit" className="hero-worked-with__logo" />
             <img
-              src="/work/stealth-startup.svg"
+              src="/work/stealth-startup.png"
               alt="Stealth Startup"
               className="hero-worked-with__logo"
             />

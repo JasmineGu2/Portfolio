@@ -292,7 +292,7 @@
 
 .site-nav-contact--hero {
   flex: 1 1 12rem;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-left: 0;
 }
 
@@ -1497,7 +1497,8 @@ body:has(.bw-shell[data-page='architecture']) {
 }
 
 .bento-label {
-  font-family: 'Bootzy', Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.2;
@@ -3784,6 +3785,7 @@ body:has(.bw-shell[data-page='architecture']) {
 .bw-main-title {
   margin-top: 0.15rem;
   font-family: var(--pf-font-editorial);
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
   font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   font-weight: 500;
   line-height: 1.2;

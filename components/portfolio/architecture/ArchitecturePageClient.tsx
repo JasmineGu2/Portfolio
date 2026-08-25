@@ -51,7 +51,9 @@ function ExplorationsCompact() {
   return (
     <section className="arch-section arch-section--light arch-section--engine">
       <div className="arch-container arch-container--engine">
-        <p className="arch-eyebrow font-analogue">Explorations</p>
+        <div className="arch-text-bubble">
+          <p className="arch-eyebrow font-analogue">Explorations</p>
+        </div>
         <div className="arch-project-grid">
           {ALL_PROJECT_TILES.map((tile) => (
             <a
@@ -90,9 +92,11 @@ function GalleryCompact() {
   return (
     <section className="arch-section arch-section--light arch-section--engine">
       <div className="arch-container arch-container--engine">
-        <p className="arch-eyebrow font-analogue">Gallery</p>
-        <p className="arch-gallery-title font-serif-display">{GALLERY_INTRO.title}</p>
-        <p className="arch-gallery-lead font-awesome-shorten">{GALLERY_INTRO.lead}</p>
+        <div className="arch-text-bubble">
+          <p className="arch-eyebrow font-analogue">Gallery</p>
+          <p className="arch-gallery-title font-serif-display">{GALLERY_INTRO.title}</p>
+          <p className="arch-gallery-lead">{GALLERY_INTRO.lead}</p>
+        </div>
 
         <div className="arch-gallery-photos">
           {GALLERY_PHOTOS.map((photo) => (
@@ -125,10 +129,12 @@ export function ArchitecturePageClient() {
       <ArchitectureIdCard />
       <section className="arch-section arch-section--light arch-section--engine">
         <div className="arch-container arch-container--engine">
-          <p className="arch-matrix-lead font-awesome-shorten">
-            Each role trained a different layer — from automating tasks to shaping product
-            direction.
-          </p>
+          <div className="arch-text-bubble">
+            <p className="arch-matrix-lead">
+              Each role trained a different layer — from automating tasks to shaping product
+              direction.
+            </p>
+          </div>
           <ExperienceLevelMatrix />
         </div>
       </section>

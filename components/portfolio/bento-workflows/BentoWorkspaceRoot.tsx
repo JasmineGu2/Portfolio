@@ -76,7 +76,8 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
       data-ai-background={isArchitecturePage ? 'architecture' : 'work'}
       style={schemeVars}
     >
-      <FlowersBackgroundLayer dark={isArchitecturePage} />
+      {/* Architecture page kept in light mode for now — was `dark={isArchitecturePage}` */}
+      <FlowersBackgroundLayer dark={false} />
       <div className="bw-workspace-row">
         {!isArchitecturePage && !isHomePage && (
           <Suspense fallback={null}>

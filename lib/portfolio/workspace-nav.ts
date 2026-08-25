@@ -51,13 +51,10 @@ export function architectureNavIsActive(pathname: string) {
 }
 
 export function isAgentPanelRoute(pathname: string) {
+  // Chat experience turned off on work-experience pages for now (Tesla + /work/*).
   if (pathname === '/ask') return false
   if (pathname.startsWith('/dev/') || pathname.startsWith('/bento-') || pathname.includes('-options')) {
     return false
   }
-  return (
-    pathname === '/' ||
-    pathname === '/tesla' ||
-    pathname.startsWith('/work/')
-  )
+  return pathname === '/'
 }

@@ -3,7 +3,7 @@ import { getWorkflowLayout } from '@/lib/portfolio/bento-workflows/layouts'
 import { HERO_TAGLINE } from '@/lib/portfolio/site-copy'
 
 export const metadata = {
-  title: 'Work — Jasmine Gu',
+  title: "Jasmine's Portfolio",
   description: HERO_TAGLINE.secondary,
 }
 

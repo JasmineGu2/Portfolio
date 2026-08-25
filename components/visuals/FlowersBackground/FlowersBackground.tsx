@@ -36,6 +36,10 @@ export type FlowersBackgroundConfig = {
   rippleFrequency: number
   /** 'ripple' only: how fast the rings travel outward. */
   rippleSpeed: number
+  /** Max px of ambient per-cell drift, independent of the cursor. Keep tiny for a barely-there breathing effect. */
+  idleDriftAmount: number
+  /** Angular speed (radians/sec) of the ambient drift. Small = slow. */
+  idleDriftSpeed: number
 }
 
 export const DEFAULT_FLOWERS_BACKGROUND_CONFIG: FlowersBackgroundConfig = {
@@ -53,6 +57,8 @@ export const DEFAULT_FLOWERS_BACKGROUND_CONFIG: FlowersBackgroundConfig = {
   interactEase: 0.18,
   rippleFrequency: 0.05,
   rippleSpeed: 4,
+  idleDriftAmount: 0.45,
+  idleDriftSpeed: 0.35,
 }
 
 const MAX_DPR = 1.5
@@ -101,6 +107,8 @@ export function FlowersBackground({
     interactEase: INTERACT_EASE,
     rippleFrequency: RIPPLE_FREQUENCY,
     rippleSpeed: RIPPLE_SPEED,
+    idleDriftAmount: IDLE_DRIFT_AMOUNT,
+    idleDriftSpeed: IDLE_DRIFT_SPEED,
   } = { ...DEFAULT_FLOWERS_BACKGROUND_CONFIG, ...config }
 
   useEffect(() => {
@@ -130,6 +138,8 @@ export function FlowersBackground({
     let curDX: Float32Array = new Float32Array(0)
     let curDY: Float32Array = new Float32Array(0)
     let curScale: Float32Array = new Float32Array(0)
+    let phaseX: Float32Array = new Float32Array(0)
+    let phaseY: Float32Array = new Float32Array(0)
     let cellColor: string[] = []
     let cellChar: string[] = []
 
@@ -169,6 +179,8 @@ export function FlowersBackground({
       curDX = new Float32Array(cellCount)
       curDY = new Float32Array(cellCount)
       curScale = new Float32Array(cellCount).fill(1)
+      phaseX = new Float32Array(cellCount)
+      phaseY = new Float32Array(cellCount)
       cellColor = new Array(cellCount)
       cellChar = new Array(cellCount)
 
@@ -184,6 +196,8 @@ export function FlowersBackground({
           const jitterY = (Math.random() - 0.5) * 2 * JITTER
           baseX[idx] = col * cellW + cellW / 2 + jitterX
           baseY[idx] = row * cellH + cellH / 2 + jitterY
+          phaseX[idx] = Math.random() * Math.PI * 2
+          phaseY[idx] = Math.random() * Math.PI * 2
 
           cellColor[idx] = `rgb(${r | 0}, ${g | 0}, ${b | 0})`
           isAscii[idx] = Math.random() < ASCII_CHANCE ? 1 : 0
@@ -209,8 +223,8 @@ export function FlowersBackground({
       ctx.fillRect(0, 0, width, height)
 
       for (let idx = 0; idx < cellCount; idx++) {
-        let targetDX = 0
-        let targetDY = 0
+        let targetDX = Math.sin(time * IDLE_DRIFT_SPEED + phaseX[idx]) * IDLE_DRIFT_AMOUNT
+        let targetDY = Math.cos(time * IDLE_DRIFT_SPEED + phaseY[idx]) * IDLE_DRIFT_AMOUNT
         let targetScale = 1
 
         if (pointer.active) {
@@ -224,21 +238,21 @@ export function FlowersBackground({
             switch (INTERACTION_MODE) {
               case 'repel': {
                 const force = falloff * INTERACT_STRENGTH
-                targetDX = (dx / dist) * force
-                targetDY = (dy / dist) * force
+                targetDX += (dx / dist) * force
+                targetDY += (dy / dist) * force
                 break
               }
               case 'attract': {
                 const force = falloff * INTERACT_STRENGTH
-                targetDX = -(dx / dist) * force
-                targetDY = -(dy / dist) * force
+                targetDX += -(dx / dist) * force
+                targetDY += -(dy / dist) * force
                 break
               }
               case 'ripple': {
                 const wave = Math.sin(dist * RIPPLE_FREQUENCY - time * RIPPLE_SPEED)
                 const force = wave * falloff * INTERACT_STRENGTH
-                targetDX = (dx / dist) * force
-                targetDY = (dy / dist) * force
+                targetDX += (dx / dist) * force
+                targetDY += (dy / dist) * force
                 break
               }
               case 'grow': {
@@ -356,6 +370,8 @@ export function FlowersBackground({
     INTERACT_EASE,
     RIPPLE_FREQUENCY,
     RIPPLE_SPEED,
+    IDLE_DRIFT_AMOUNT,
+    IDLE_DRIFT_SPEED,
   ])
 
   return (

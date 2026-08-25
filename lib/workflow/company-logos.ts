@@ -12,7 +12,7 @@ export const COMPANY_LOGOS = {
   hackWestern: '/work/hack-western.png',
   iveyProduct: '/work/ivey-product.png',
   stealthStartup: '/work/stealth-startup.png',
-  jasmine: '/icons/puzzleicon.jpg',
+  jasmine: '/icons/jasmine-logo.png',
   linkedin: '/icons/linkedin.png',
 } as const
 

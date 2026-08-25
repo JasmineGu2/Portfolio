@@ -10,6 +10,7 @@ import {
   getContextualSuggestions,
   resolveAskResponse,
   contextLabel,
+  WORK_IN_PROGRESS_RESPONSE,
   type AgentResponse,
 } from '@/lib/portfolio/ask-agent'
 
@@ -134,7 +135,7 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
   }, [setAgentOpen])
 
   const submitQuery = useCallback(
-    (text: string) => {
+    (text: string, viaChip = false) => {
       const trimmed = text.trim()
       if (!trimmed) return
 
@@ -145,32 +146,39 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
         inputRef.current.style.height = 'auto'
       }
 
+      if (!viaChip) {
+        setMessages((current) => [
+          ...current,
+          { id: newId(), role: 'assistant', response: WORK_IN_PROGRESS_RESPONSE },
+        ])
+        return
+      }
+
       const result = resolveAskResponse(trimmed, 'explain', selectedContexts)
       setMessages((current) => [...current, { id: newId(), role: 'assistant', response: result }])
 
+      // Never auto-navigate away from wherever the visitor already is — surface the
+      // highlight/trace state and let them follow the "View in Architecture" link or a
+      // reference chip themselves if they want to jump.
       if (result.traceIds?.length) {
         setTraceIds(result.traceIds)
         if (result.highlightIds.length > 0) {
           highlightNodes(result.highlightIds)
         }
-        if (pathname !== '/architecture') {
-          router.push('/architecture')
+        if (pathname === '/architecture') {
+          setTimeout(scrollToTraceSection, 150)
         }
-        setTimeout(scrollToTraceSection, pathname !== '/architecture' ? 450 : 150)
         return
       }
 
       if (result.highlightIds.length > 0) {
         highlightNodes(result.highlightIds)
-        if (pathname !== '/') {
-          router.push('/')
-          setTimeout(() => scrollToHighlighted(result.highlightIds), 400)
-        } else {
+        if (pathname === '/') {
           scrollToHighlighted(result.highlightIds)
         }
       }
     },
-    [selectedContexts, highlightNodes, setTraceIds, pathname, router]
+    [selectedContexts, highlightNodes, setTraceIds, pathname]
   )
 
   const startNewChat = useCallback(() => {

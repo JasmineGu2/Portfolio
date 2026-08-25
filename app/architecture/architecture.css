@@ -1,4 +1,5 @@
-/* ── Architecture page — warm dark canvas (scoped; site stays light) ── */
+/* ── Architecture page — kept in light mode for now (was a warm dark canvas;
+   flip the tokens below back to the commented values to restore it) ── */
 
 .portfolio-content {
   position: relative;
@@ -6,14 +7,14 @@
 }
 
 .arch-page {
-  --arch-canvas: #1a1410;
-  --arch-canvas-alt: #211a15;
+  --arch-canvas: var(--pf-canvas);
+  --arch-canvas-alt: var(--pf-canvas-alt);
   --arch-cream: var(--arch-canvas);
-  --arch-ink: #f5f0ea;
-  --arch-muted: #a89f96;
-  --arch-surface: #2a2520;
-  --arch-surface-alt: #241f1a;
-  --arch-line: var(--pf-card-border-dark);
+  --arch-ink: var(--pf-ink);
+  --arch-muted: var(--pf-muted);
+  --arch-surface: var(--pf-surface);
+  --arch-surface-alt: var(--pf-surface-alt);
+  --arch-line: var(--pf-card-border);
   --arch-dark: #141210;
   --arch-dark-surface: #1c1916;
   --arch-dark-line: color-mix(in srgb, #fff 10%, transparent);
@@ -23,7 +24,6 @@
   --arch-blue: var(--pf-blue);
   --arch-mint: var(--pf-mint);
   --arch-lavender: var(--pf-blue);
-  --pf-dot: rgba(232, 120, 74, 0.42);
 
   background: var(--arch-canvas);
   color: var(--arch-ink);
@@ -36,9 +36,9 @@
 
 /* Architecture shell + nav — page-scoped dark chrome */
 .bw-shell[data-page='architecture'] {
-  --sch-shell-bg: var(--arch-canvas, #1a1410);
-  background: var(--arch-canvas, #1a1410);
-  color: var(--arch-ink, #f5f0ea);
+  --sch-shell-bg: var(--pf-canvas);
+  background: var(--pf-canvas);
+  color: var(--pf-ink);
 }
 
 .bw-shell[data-page='architecture'][data-ai-background] {
@@ -55,119 +55,10 @@
   z-index: 1;
 }
 
-.bw-shell[data-page='architecture'][data-ai-background] .bw-site-nav {
-  background: var(--arch-dark-surface, var(--pf-dark-surface));
-  border-color: var(--pf-card-border-dark);
-}
-
+/* Nav stays identical across every page — light chrome, no page-scoped dark variant.
+   The ambient dark-page ink color above must not bleed into it. */
 .bw-shell[data-page='architecture'] .bw-site-nav {
-  background: color-mix(in srgb, var(--arch-canvas, #1a1410) 94%, transparent);
-  border-color: var(--pf-card-border-dark);
-  box-shadow: var(--pf-shadow-outline-dark);
-}
-
-.bw-shell[data-page='architecture'] .hero-workspace-nav__brand-tag {
-  background: color-mix(in srgb, #fff 8%, transparent);
-  color: var(--arch-ink);
-  border-color: var(--pf-card-border-dark);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-identity__name {
-  color: var(--arch-ink, #f5f0ea);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-identity__role {
-  color: color-mix(in srgb, #fff 58%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-identity__monogram {
-  background: color-mix(in srgb, #fff 8%, transparent);
-  color: var(--arch-ink, #f5f0ea);
-  border-color: var(--pf-card-border-dark);
-}
-
-.bw-shell[data-page='architecture'] .hero-workspace-nav__brand-link:hover .hero-workspace-nav__brand-tag {
-  background: color-mix(in srgb, #fff 12%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-link {
-  color: color-mix(in srgb, #fff 58%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-link:hover,
-.bw-shell[data-page='architecture'] .site-nav-link--active {
-  color: var(--arch-ink, #f5f0ea);
-  background: transparent;
-}
-
-.bw-shell[data-page='architecture'] .site-nav-link--active {
-  text-decoration-color: color-mix(in srgb, #fff 38%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .hero-nav-btn {
-  color: color-mix(in srgb, #fff 62%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .hero-nav-btn:hover,
-.bw-shell[data-page='architecture'] .hero-nav-btn--active {
-  background: color-mix(in srgb, #fff 10%, transparent);
-  color: var(--arch-ink, #f5f0ea);
-}
-
-.bw-shell[data-page='architecture'] .hero-nav-btn--primary {
-  background: var(--arch-ink, #f5f0ea);
-  color: var(--arch-dark, #141210);
-}
-
-.bw-shell[data-page='architecture'] .hero-nav-btn--primary:hover {
-  color: var(--arch-dark, #141210);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-links__divider {
-  background: color-mix(in srgb, #fff 16%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-icon-btn {
-  color: color-mix(in srgb, #fff 58%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .site-nav-icon-btn:hover {
-  background: color-mix(in srgb, #fff 10%, transparent);
-  color: var(--arch-ink, #f5f0ea);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__panel {
-  background: color-mix(in srgb, var(--arch-surface, #2a2520) 96%, transparent);
-  border-color: var(--pf-card-border-dark);
-  box-shadow: var(--pf-shadow-outline-dark);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__group + .explore-nav-dropdown__group {
-  border-top-color: color-mix(in srgb, #fff 10%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__group-label {
-  color: color-mix(in srgb, #fff 52%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__item {
-  color: var(--arch-ink, #f5f0ea);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__item:hover {
-  background: color-mix(in srgb, #fff 8%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__item--active {
-  background: color-mix(in srgb, var(--pf-accent) 18%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__item-desc {
-  color: color-mix(in srgb, #fff 52%, transparent);
-}
-
-.bw-shell[data-page='architecture'] .explore-nav-dropdown__backdrop {
-  background: color-mix(in srgb, #000 55%, transparent);
+  color: var(--pf-ink);
 }
 
 /* Light sections → warm dark canvas with light ink */
@@ -212,8 +103,8 @@
 .bw-shell[data-ai-background='architecture'] .arch-level-matrix__col-head,
 .bw-shell[data-ai-background='architecture'] .arch-level-matrix__row-head,
 .bw-shell[data-ai-background='architecture'] .arch-level-matrix__cell {
-  background: var(--arch-dark-surface, var(--pf-dark-surface));
-  border-color: var(--pf-card-border-dark);
+  background: var(--arch-surface);
+  border-color: var(--arch-line);
 }
 
 .bw-shell[data-ai-background='architecture'] .arch-page .architecture-flow__payoff,
@@ -471,7 +362,23 @@
   text-transform: uppercase;
   color: var(--arch-accent);
   margin-bottom: 0.75rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+/* Solid white backing for text sitting directly on the animated background —
+   keeps it readable regardless of what's moving underneath. */
+.arch-text-bubble {
+  display: inline-block;
+  max-width: 100%;
+  background: var(--pf-surface);
+  border-radius: 1rem;
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1rem;
+  outline: 1.5px solid color-mix(in srgb, var(--pf-accent) 45%, transparent);
+  outline-offset: 3px;
+}
+
+.arch-text-bubble > *:last-child {
+  margin-bottom: 0;
 }
 
 .arch-eyebrow--dark {
@@ -544,25 +451,22 @@
   line-height: 1.15;
   color: var(--arch-ink);
   margin: 0.5rem 0 0.5rem;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 3px 14px rgba(0, 0, 0, 0.5);
 }
 
 .arch-gallery-lead {
   font-size: 0.9rem;
   line-height: 1.55;
-  color: color-mix(in srgb, #fff 78%, transparent);
+  color: var(--arch-muted);
   max-width: 42ch;
   margin-bottom: 1.25rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .arch-matrix-lead {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: color-mix(in srgb, #fff 78%, transparent);
+  color: var(--arch-muted);
   max-width: 40ch;
   margin-bottom: 1rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .arch-gallery-photos {

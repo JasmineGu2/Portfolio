@@ -324,6 +324,17 @@ export function getAutocompleteMatches(query: string, contextIds: string[], path
   return pool.filter((question) => normalize(question).includes(q)).slice(0, 5)
 }
 
+/** Shown for freely-typed questions — there's no real language model behind this yet, only
+ *  keyword-matched answers wired to the topic chips, so guessing at arbitrary text would
+ *  either misfire or silently redirect the page. Typed questions get this instead. */
+export const WORK_IN_PROGRESS_RESPONSE: AgentResponse = {
+  answer:
+    "(work in progress) Free-form questions aren't wired up yet — I can only answer the topics above right now. Tap one of the chips, or try one of the example questions.",
+  references: [],
+  followUps: [],
+  highlightIds: [],
+}
+
 export function resolveAskResponse(
   query: string,
   mode: QueryMode,

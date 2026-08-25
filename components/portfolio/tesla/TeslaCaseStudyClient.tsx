@@ -84,6 +84,16 @@ export function TeslaCaseStudyClient() {
   const [activeSection, setActiveSection] = useState(TESLA_CASE_STUDY_SECTIONS[0].id)
   const [readProgress, setReadProgress] = useState(0)
 
+  // The app shell scrolls internally on .bw-main, not the window/document — a plain
+  // <a href="#id"> fragment jump is ambiguous about which of those it scrolls, and in
+  // practice it was scrolling the wrong one, taking the sticky sidebar off-screen with it.
+  // Scrolling the target explicitly finds the real scrollable ancestor correctly.
+  function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    event.preventDefault()
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    window.history.replaceState(null, '', `#${id}`)
+  }
+
   useEffect(() => {
     const sectionElements = TESLA_CASE_STUDY_SECTIONS.map(({ id }) =>
       document.getElementById(id)
@@ -112,12 +122,17 @@ export function TeslaCaseStudyClient() {
   }, [])
 
   useEffect(() => {
+    // The app shell scrolls internally on .bw-main rather than the window,
+    // so this has to listen there too or the progress bar just freezes.
+    const scrollContainer = document.querySelector('.bw-main')
+
     function updateProgress() {
       const article = document.querySelector('.tesla-cs__main')
       if (!article) return
 
       const rect = article.getBoundingClientRect()
-      const total = article.scrollHeight - window.innerHeight
+      const viewportHeight = scrollContainer?.clientHeight ?? window.innerHeight
+      const total = article.scrollHeight - viewportHeight
       if (total <= 0) return
 
       const scrolled = Math.min(Math.max(-rect.top, 0), total)
@@ -127,9 +142,11 @@ export function TeslaCaseStudyClient() {
     updateProgress()
     window.addEventListener('scroll', updateProgress, { passive: true })
     window.addEventListener('resize', updateProgress)
+    scrollContainer?.addEventListener('scroll', updateProgress, { passive: true })
     return () => {
       window.removeEventListener('scroll', updateProgress)
       window.removeEventListener('resize', updateProgress)
+      scrollContainer?.removeEventListener('scroll', updateProgress)
     }
   }, [])
 
@@ -157,6 +174,7 @@ export function TeslaCaseStudyClient() {
                 <a
                   key={id}
                   href={`#${id}`}
+                  onClick={(event) => scrollToSection(event, id)}
                   className={cn('tesla-cs__nav-link', activeSection === id && 'tesla-cs__nav-link--active')}
                   aria-current={activeSection === id ? 'true' : undefined}
                 >
@@ -178,6 +196,7 @@ export function TeslaCaseStudyClient() {
               <a
                 key={id}
                 href={`#${id}`}
+                onClick={(event) => scrollToSection(event, id)}
                 className={cn('tesla-cs__mobile-link', activeSection === id && 'tesla-cs__mobile-link--active')}
                 aria-current={activeSection === id ? 'true' : undefined}
               >
@@ -191,8 +210,7 @@ export function TeslaCaseStudyClient() {
             <h1 className="tesla-cs__hero-title font-serif-display">{TESLA_HERO_META.title}</h1>
 
             <div className="tesla-cs__meta-grid tesla-cs__wide">
-              <div className="tesla-cs__meta-block tesla-cs__card--hybrid">
-                <p className="tesla-cs__card-meta font-analogue">Role · Tesla</p>
+              <div className="tesla-cs__meta-block">
                 <p className="tesla-cs__meta-label font-analogue">Role</p>
                 <p className="tesla-cs__meta-value">{TESLA_HERO_META.role}</p>
               </div>

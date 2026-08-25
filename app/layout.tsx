@@ -7,7 +7,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
-  icons: { icon: '/icons/puzzleicon.jpg' },
+  icons: { icon: '/icons/jasmine-logo.png' },
 }
 
 export default function RootLayout({

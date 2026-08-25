@@ -8,7 +8,7 @@ export const HERO_TAGLINE = {
 } as const
 
 export const SITE_METADATA = {
-  title: 'Jasmine Gu — Product / Software',
+  title: "Jasmine's Portfolio",
   description: HERO_TAGLINE.secondary,
 } as const
 
