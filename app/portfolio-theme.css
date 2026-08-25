@@ -6948,6 +6948,7 @@ body:has(.bw-shell[data-page='architecture']) {
 @media (min-width: 768px) {
   .chat-hero__strengths {
     gap: 0.65rem;
+    margin-left: 1.75rem;
   }
 
   .chat-hero__strengths-label {
