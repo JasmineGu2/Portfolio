@@ -10,7 +10,7 @@ export function MagazineBentoFormat() {
     <BentoFormatShell
       formatId="magazine"
       title="Magazine editorial"
-      description="Serif-forward hero, oversized feature tiles, and asymmetric spans — like a spread, not a dashboard."
+      description="Serif-forward hero, oversized feature tiles, and asymmetric spans. Like a spread, not a dashboard."
     >
       <article className="bf-magazine">
         <section className="bf-magazine-hero">

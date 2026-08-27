@@ -1,7 +1,7 @@
 ---
 name: portfolio-visual
 description: >-
-  Applies the Jasmine Gu portfolio visual system — typography roles, warm
+  Applies the Jasmine Gu portfolio visual system, typography roles, warm
   palette, light/dark section rhythm, card families, gradients, and motion.
   Use when styling portfolio pages, bento tiles, Architecture sections, Ask
   panel, case studies, CSS, or when the user asks about visual look, design,
@@ -25,7 +25,7 @@ Utility classes in `app/portfolio-fonts.css`: `.font-bootzy`, `.font-awesome-sho
 
 ## Feel
 
-Optimistic, tactile, creative, slightly nostalgic, warm, sophisticated — technological without looking "cyber."
+Optimistic, tactile, creative, slightly nostalgic, warm, sophisticated, technological without looking "cyber."
 
 **Never:** neon-purple AI aesthetic, saturated neon, purple as dominant accent, glassmorphism everywhere, generic portfolio animations.
 
@@ -33,8 +33,8 @@ Optimistic, tactile, creative, slightly nostalgic, warm, sophisticated — techn
 
 | Area | Visual treatment |
 |------|------------------|
-| **Architecture** (`app/architecture/`, `architecture.css`) | Full visual system — warm palette, light/dark rhythm, editorial + system cards |
-| **Work / Projects bento** | `portfolio-warm` scheme — botanical `--pf-*` tokens via `--sch-*` |
+| **Architecture** (`app/architecture/`, `architecture.css`) | Full visual system, warm palette, light/dark rhythm, editorial + system cards |
+| **Work / Projects bento** | `portfolio-warm` scheme, botanical `--pf-*` tokens via `--sch-*` |
 | **Ask panel** | Warm ivory/cream base, Analogue OS metadata, Awesome Shorten description, Inter input, charcoal FAB |
 | **Case studies** | Editorial cards + hybrid cards where story meets system |
 
@@ -62,7 +62,7 @@ Canonical tokens in `app/portfolio-tokens.css`:
 
 Architecture page also uses `--arch-*` aliases in `app/architecture/architecture.css` (mapped to `--pf-*`).
 
-Use colors softly — translucent lines via `color-mix(in srgb, ...)`, not hard saturated blocks. **No purple/cyber accents.**
+Use colors softly, translucent lines via `color-mix(in srgb, ...)`, not hard saturated blocks. **No purple/cyber accents.**
 
 ## Light vs dark rhythm (Architecture)
 
@@ -76,14 +76,14 @@ Apply via `.arch-section--light` / `.arch-section--dark`.
 
 ## Card families
 
-1. **Editorial** — warm white/cream, subtle border, generous spacing, Bootzy titles, Inter body. For stories, photos, narrative.
-2. **System** — charcoal/near-black, thin gray borders, Analogue OS, status metadata (`ONLINE`, `RUNNING`), restrained accent glow. For agents, tools, runtime.
-3. **Hybrid** — warm off-white card with a system metadata block inside. Motif: human experience → system capability.
-4. **Work bento tiles** — existing themed work-exp tiles; do not replace with Architecture cards.
+1. **Editorial**, warm white/cream, subtle border, generous spacing, Bootzy titles, Inter body. For stories, photos, narrative.
+2. **System**, charcoal/near-black, thin gray borders, Analogue OS, status metadata (`ONLINE`, `RUNNING`), restrained accent glow. For agents, tools, runtime.
+3. **Hybrid**, warm off-white card with a system metadata block inside. Motif: human experience → system capability.
+4. **Work bento tiles**, existing themed work-exp tiles; do not replace with Architecture cards.
 
 ## Gradients
 
-Layered radial gradients — ambient light blobs, not obvious `linear-gradient()`:
+Layered radial gradients, ambient light blobs, not obvious `linear-gradient()`:
 
 ```css
 background: var(--pf-gradient-botanical);
@@ -103,14 +103,14 @@ Motion should feel slow, deliberate, and system-like.
 
 When adding or editing visual UI:
 
-1. Pick the correct font role — do not use Bootzy for body copy or Inter for system status labels.
-2. Match page scope — Architecture tokens vs bento `--sch-*` tokens.
-3. Pick card family — editorial, system, hybrid, or bento tile.
+1. Pick the correct font role, do not use Bootzy for body copy or Inter for system status labels.
+2. Match page scope, Architecture tokens vs bento `--sch-*` tokens.
+3. Pick card family, editorial, system, hybrid, or bento tile.
 4. Respect light/dark rhythm on Architecture sections.
 5. Use existing CSS files before inventing new token names:
-   - `app/portfolio-fonts.css` — font faces + utilities
-   - `app/architecture/architecture.css` — Architecture page
-   - `app/portfolio-theme.css` — shared theme, agent panel, bento shell
+   - `app/portfolio-fonts.css`, font faces + utilities
+   - `app/architecture/architecture.css`, Architecture page
+   - `app/portfolio-theme.css`, shared theme, agent panel, bento shell
 6. Reuse component patterns from `components/portfolio/architecture/ArchitecturePageClient.tsx` and `components/portfolio/agent/AgentSidePanel.tsx`.
 
 ## Ask panel styling
@@ -121,14 +121,14 @@ Classes in `app/portfolio-theme.css` under `.agent-*`:
 - `.font-analogue` for eyebrow, status, metadata
 - `.font-awesome-shorten` for conversational description
 - Inter for input and response body
-- Charcoal FAB — not neon purple
+- Charcoal FAB, not neon purple
 
 ## Photography & media (Work / Projects)
 
-Mix interfaces, photos, sketches, artifacts — not every tile should be a UI screenshot.
+Mix interfaces, photos, sketches, artifacts, not every tile should be a UI screenshot.
 
 Videos: autoplay muted when visible, pause off-screen (Intersection Observer), poster + lazy load, limit simultaneous autoplay.
 
 ## Dot fabric (optional)
 
-Architecture hero, abstraction stages, Work bento canvas (CSS speckle), Ask panel (subtle CSS). Animated surface: `components/visuals/DotField/` — botanical colors + red speckles. See `specs/visuals/dot-fabric.md`. Use sparingly.
+Architecture hero, abstraction stages, Work bento canvas (CSS speckle), Ask panel (subtle CSS). Animated surface: `components/visuals/DotField/`, botanical colors + red speckles. See `specs/visuals/dot-fabric.md`. Use sparingly.

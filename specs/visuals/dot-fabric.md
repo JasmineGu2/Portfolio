@@ -1,7 +1,7 @@
 # Dot Fabric Visual System
 
 > Animated dot surface for Architecture hero backgrounds and ambient system sections.
-> Part of the [visuals layer](./README.md) — see [overview.md](./overview.md) for placement philosophy.
+> Part of the [visuals layer](./README.md), see [overview.md](./overview.md) for placement philosophy.
 
 **Component:** `components/visuals/DotField/` · **Import:** `@/components/visuals/DotField/DotField`
 
@@ -540,7 +540,7 @@ mostly empty negative space
 
 # 15b. Preset: `animated-blobs` / `river` (blob mode)
 
-Halftone grid with **fixed dot positions** — density/opacity modulated by 2–4 soft metaball blobs that drift on 30–90s cycles. Dots do not scatter independently; clusters morph together with slow breathing.
+Halftone grid with **fixed dot positions**, density/opacity modulated by 2–4 soft metaball blobs that drift on 30–90s cycles. Dots do not scatter independently; clusters morph together with slow breathing.
 
 ```ts
 renderMode: 'blobs'

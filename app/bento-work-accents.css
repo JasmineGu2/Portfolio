@@ -1,4 +1,4 @@
-/* Unified scheme tags — work chips, hero pills, sidebar legend */
+/* Unified scheme tags, work chips, hero pills, sidebar legend */
 
 .bw-scheme-tag {
   display: inline-flex;
@@ -82,7 +82,7 @@
   color: var(--pf-muted);
 }
 
-/* Work experience tiles — scheme-matched filled tags on neutral cards */
+/* Work experience tiles, scheme-matched filled tags on neutral cards */
 
 .bento-tile--work-exp--themed .bw-scheme-tag,
 .bento-tile--work-exp--themed .bw-exp-chip {
@@ -112,7 +112,7 @@
   box-shadow: var(--pf-shadow-outline-hover);
 }
 
-/* ── Soft / Accent — neutral tile, scheme strip + filled chip ── */
+/* ── Soft / Accent, neutral tile, scheme strip + filled chip ── */
 .bw-shell:is([data-work-mode='soft'], [data-work-mode='accent']) .bento-tile--work-exp--themed {
   background: var(--sch-soft-bg, #fafafa);
   color: var(--sch-soft-fg, var(--pf-ink));
@@ -148,7 +148,7 @@
   border-color: color-mix(in srgb, var(--exp-accent-base) 24%, transparent);
 }
 
-/* ── Filled — brand colors as tile fills ── */
+/* ── Filled, brand colors as tile fills ── */
 .bw-shell[data-work-mode='filled'] .bento-tile--work-exp--themed {
   background: linear-gradient(
     145deg,
@@ -179,7 +179,7 @@
   box-shadow: var(--pf-shadow-outline-hover);
 }
 
-/* ── Dark — neutral dark tile, scheme accent strip ── */
+/* ── Dark, neutral dark tile, scheme accent strip ── */
 .bw-shell[data-work-mode='dark'] .bento-tile--work-exp--themed {
   background: var(--sch-soft-bg, #171717);
   color: var(--sch-soft-fg, #fafafa);
@@ -208,7 +208,7 @@
   box-shadow: var(--pf-shadow-outline-hover-dark);
 }
 
-/* ── Tint — work tiles sit on tinted scheme surfaces ── */
+/* ── Tint, work tiles sit on tinted scheme surfaces ── */
 .bw-shell[data-scheme-tone='tint'] .bento-career-zone .bw-card-label {
   color: var(--sch-card-label, var(--pf-muted));
 }
@@ -219,7 +219,7 @@
   border-color: var(--sch-soft-border, rgba(0, 0, 0, 0.06));
 }
 
-/* ── Bold — filled palette tiles on colored canvas ── */
+/* ── Bold, filled palette tiles on colored canvas ── */
 .bw-shell[data-scheme-tone='bold'] .bento-career-zone .bw-card-label {
   color: var(--sch-card-label, rgba(255, 255, 255, 0.74));
 }
@@ -234,7 +234,7 @@
   background: color-mix(in srgb, var(--exp-work-bg) 18%, #ffffff);
 }
 
-/* ── Duo — palette-colored work tiles with contrasting type ── */
+/* ── Duo, palette-colored work tiles with contrasting type ── */
 .bw-shell[data-scheme-tone='duo'] .bento-career-zone .bw-card-label {
   color: var(--sch-card-label, var(--pf-muted));
 }
@@ -259,7 +259,7 @@
   opacity: 1;
 }
 
-/* Custom palette duos — full-opacity secondary text for WCAG contrast */
+/* Custom palette duos, full-opacity secondary text for WCAG contrast */
 .bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bento-caption,
 .bw-shell[data-custom-duo='true'] .bento-tile--work-exp--themed .bento-period {
   color: color-mix(in srgb, var(--exp-work-duo-fg, var(--sch-soft-fg)) 92%, transparent);
@@ -294,7 +294,7 @@
   filter: none;
 }
 
-/* Work experience media — video or logo on home canvas */
+/* Work experience media, video or logo on home canvas */
 
 .bento-tile--work-exp--media {
   position: relative;
@@ -366,7 +366,7 @@
   height: 100%;
 }
 
-/* Videos — media stage grows; player fills available height */
+/* Videos, media stage grows; player fills available height */
 .bw-exp-media-stage--video {
   flex: 1 1 auto;
   align-self: stretch;
@@ -495,7 +495,7 @@
   object-position: center;
 }
 
-/* AIBackground — opaque work tiles over contour animation */
+/* AIBackground, opaque work tiles over contour animation */
 .bw-shell[data-ai-background]:is([data-work-mode='soft'], [data-work-mode='accent'])
   .bento-tile--work-exp--themed {
   background: var(--sch-soft-bg, var(--pf-surface));

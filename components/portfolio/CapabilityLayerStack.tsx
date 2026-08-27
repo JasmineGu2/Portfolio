@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useId, useState, type KeyboardEvent } from 'react'
+import { useCallback, useId, useState, type CSSProperties, type KeyboardEvent } from 'react'
 import {
   CAPABILITY_LAYERS,
   CAPABILITY_LAYER_A11Y_SUMMARY,
@@ -11,7 +11,6 @@ type SlabGeometry = {
   width: number
   depthX: number
   depthY: number
-  thickness: number
   rowStep: number
   pull: number
 }
@@ -21,201 +20,151 @@ const SLAB_GEOMETRY = {
     width: 72,
     depthX: 16,
     depthY: 9,
-    thickness: 9,
-    rowStep: 16,
-    pull: 12,
+    rowStep: 18,
+    pull: 10,
   },
   large: {
     width: 140,
     depthX: 30,
     depthY: 17,
-    thickness: 18,
-    rowStep: 40,
-    pull: 24,
+    rowStep: 34,
+    pull: 20,
   },
 } as const satisfies Record<'default' | 'large', SlabGeometry>
 
-const LAYER_PALETTE: Record<
-  CapabilityLayerId,
-  { top: string; left: string; right: string }
-> = {
-  product: {
-    top: 'var(--cap-layer-product-top)',
-    left: 'var(--cap-layer-product-left)',
-    right: 'var(--cap-layer-product-right)',
-  },
-  'software-engineering': {
-    top: 'var(--cap-layer-engineering-top)',
-    left: 'var(--cap-layer-engineering-left)',
-    right: 'var(--cap-layer-engineering-right)',
-  },
-  business: {
-    top: 'var(--cap-layer-business-top)',
-    left: 'var(--cap-layer-business-left)',
-    right: 'var(--cap-layer-business-right)',
-  },
-  community: {
-    top: 'var(--cap-layer-community-top)',
-    left: 'var(--cap-layer-community-left)',
-    right: 'var(--cap-layer-community-right)',
-  },
+const toDeg = (radians: number) => `${((radians * 180) / Math.PI).toFixed(2)}deg`
+
+/**
+ * Slab faces are skewed boxes rather than svg paths so the side faces can stretch to
+ * whatever height their row ends up at. An open layer's block simply gets thicker,
+ * which keeps the ladder contiguous — no gap opens up where a layer should be.
+ */
+function slabVars(geometry: SlabGeometry): CSSProperties {
+  const { width, depthX, depthY, rowStep, pull } = geometry
+
+  return {
+    '--cap-slab-w': `${width}px`,
+    '--cap-slab-dx': `${depthX}px`,
+    '--cap-slab-dy': `${depthY}px`,
+    '--cap-slab-step': `${rowStep}px`,
+    '--cap-slab-pull': `${pull}px`,
+    '--cap-slab-skew-x': toDeg(Math.atan(depthX / depthY)),
+    '--cap-slab-skew-y': toDeg(Math.atan(depthY / depthX)),
+  } as CSSProperties
 }
 
-function IsometricSlab({
-  colors,
-  active,
-  dimmed,
-  geometry,
-}: {
-  colors: (typeof LAYER_PALETTE)[CapabilityLayerId]
-  active: boolean
-  dimmed: boolean
-  geometry: SlabGeometry
-}) {
-  const { width: w, depthX: dx, depthY: dy, thickness: h } = geometry
-
-  return (
-    <g className={dimmed ? 'capability-layer-stack__slab--dimmed' : undefined}>
-      <path
-        d={`M 0 0 L ${w} 0 L ${w + dx} ${dy} L ${dx} ${dy} Z`}
-        fill={colors.top}
-        className="capability-layer-stack__slab-top"
-      />
-      <path
-        d={`M ${w} 0 L ${w + dx} ${dy} L ${w + dx} ${dy + h} L ${w} ${h} Z`}
-        fill={colors.right}
-        className="capability-layer-stack__slab-right"
-      />
-      <path
-        d={`M 0 0 L ${dx} ${dy} L ${dx} ${dy + h} L 0 ${h} Z`}
-        fill={colors.left}
-        className="capability-layer-stack__slab-left"
-      />
-      {active && (
-        <path
-          d={`M 0 0 L ${w} 0 L ${w + dx} ${dy} L ${dx} ${dy} Z`}
-          fill="none"
-          stroke="var(--cap-layer-active-stroke)"
-          strokeWidth="1.5"
-          className="capability-layer-stack__slab-active-ring"
-        />
-      )}
-    </g>
-  )
-}
+const DEFAULT_LAYER_ID = CAPABILITY_LAYERS[0].id
 
 export function CapabilityLayerStack({ size = 'default' }: { size?: 'default' | 'large' }) {
   const geometry = SLAB_GEOMETRY[size]
   const groupId = useId()
-  const [activeId, setActiveId] = useState<CapabilityLayerId | null>(null)
-  const [focusedId, setFocusedId] = useState<CapabilityLayerId | null>(null)
-
-  const highlightedId = activeId ?? focusedId
+  /**
+   * One layer is always open, and it only changes on a real pointer move, a focus, or a
+   * tap — never on a bare mouseenter. Opening a row resizes it, and a mouseenter fired
+   * by that reflow (cursor stationary, content sliding under it) would hand the open
+   * state to whichever row slid into place and oscillate.
+   */
+  const [openId, setOpenId] = useState<CapabilityLayerId>(DEFAULT_LAYER_ID)
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
       if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
         event.preventDefault()
         const next = CAPABILITY_LAYERS[(index + 1) % CAPABILITY_LAYERS.length]
-        setFocusedId(next.id)
+        setOpenId(next.id)
         document.getElementById(`${groupId}-${next.id}`)?.focus()
       } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
         event.preventDefault()
         const prev =
           CAPABILITY_LAYERS[(index - 1 + CAPABILITY_LAYERS.length) % CAPABILITY_LAYERS.length]
-        setFocusedId(prev.id)
+        setOpenId(prev.id)
         document.getElementById(`${groupId}-${prev.id}`)?.focus()
       } else if (event.key === 'Escape') {
-        setActiveId(null)
-        setFocusedId(null)
         ;(event.target as HTMLButtonElement).blur()
       }
     },
     [groupId]
   )
 
-  const stackHeight =
-    geometry.rowStep * (CAPABILITY_LAYERS.length - 1) +
-    geometry.depthY +
-    geometry.thickness +
-    4
-
   return (
     <div
-      className={size === 'large' ? 'capability-layer-stack capability-layer-stack--large' : 'capability-layer-stack'}
+      className={
+        size === 'large'
+          ? 'capability-layer-stack capability-layer-stack--large'
+          : 'capability-layer-stack'
+      }
       role="group"
       aria-label="Core strengths by layer"
-      onMouseLeave={() => setActiveId(null)}
+      style={slabVars(geometry)}
     >
-      <div className="capability-layer-stack__graphic" aria-hidden="true">
-        <svg
-          viewBox={`0 0 ${geometry.width + geometry.depthX + 20} ${stackHeight}`}
-          width={geometry.width + geometry.depthX + 20}
-          height={stackHeight}
-          className="capability-layer-stack__svg"
-        >
-          {CAPABILITY_LAYERS.map((layer, index) => {
-            const isActive = highlightedId === layer.id
-            const isDimmed = highlightedId !== null && !isActive
-            const pull = isActive ? geometry.pull : 0
+      {CAPABILITY_LAYERS.map((layer, index) => {
+        const isOpen = openId === layer.id
+        const detailId = `${groupId}-${layer.id}-detail`
 
-            return (
-              <g
-                key={layer.id}
-                className="capability-layer-stack__slab-group"
-                transform={`translate(${pull}, ${index * geometry.rowStep})`}
-                data-active={isActive ? 'true' : undefined}
-                onMouseEnter={() => setActiveId(layer.id)}
-              >
-                <IsometricSlab
-                  colors={LAYER_PALETTE[layer.id]}
-                  active={isActive}
-                  dimmed={isDimmed}
-                  geometry={geometry}
-                />
-              </g>
-            )
-          })}
-        </svg>
-      </div>
-
-      <div className="capability-layer-stack__legend">
-        {CAPABILITY_LAYERS.map((layer, index) => {
-          const isActive = highlightedId === layer.id
-
-          return (
+        return (
+          <div
+            key={layer.id}
+            className="capability-layer-stack__row"
+            data-open={isOpen ? 'true' : undefined}
+          >
             <div
-              key={layer.id}
-              className="capability-layer-stack__legend-row"
-              data-active={isActive ? 'true' : undefined}
-              style={{ minHeight: `${geometry.rowStep}px` }}
+              className="capability-layer-stack__slab"
+              data-layer={layer.id}
+              aria-hidden="true"
+              onPointerMove={() => setOpenId(layer.id)}
+              onClick={() => setOpenId(layer.id)}
             >
+              <span className="capability-layer-stack__face capability-layer-stack__face--top" />
+              <span className="capability-layer-stack__face capability-layer-stack__face--front" />
+              <span className="capability-layer-stack__face capability-layer-stack__face--left" />
+              <span className="capability-layer-stack__face capability-layer-stack__face--right" />
+            </div>
+
+            <div className="capability-layer-stack__body">
               <button
                 type="button"
                 id={`${groupId}-${layer.id}`}
                 className="capability-layer-stack__layer-btn font-analogue"
-                aria-expanded={isActive}
-                aria-controls={`${groupId}-${layer.id}-caps`}
-                onMouseEnter={() => setActiveId(layer.id)}
-                onFocus={() => setFocusedId(layer.id)}
-                onBlur={() => setFocusedId((current) => (current === layer.id ? null : current))}
+                aria-expanded={isOpen}
+                aria-controls={detailId}
+                onPointerMove={() => setOpenId(layer.id)}
+                onClick={() => setOpenId(layer.id)}
+                onFocus={() => setOpenId(layer.id)}
                 onKeyDown={(event) => handleKeyDown(event, index)}
               >
                 <span className="capability-layer-stack__connector" aria-hidden="true" />
-                <span className="capability-layer-stack__label">{layer.label}</span>
+                <span className="capability-layer-stack__label" title={layer.label}>
+                  {layer.label}
+                </span>
               </button>
 
-              <p
-                id={`${groupId}-${layer.id}-caps`}
-                className="capability-layer-stack__subtitle font-analogue"
-                hidden={!isActive}
+              {/* Opens in place, directly under its own title. One line per role. */}
+              <div
+                id={detailId}
+                className="capability-layer-stack__detail"
+                aria-hidden={!isOpen}
               >
-                {layer.capabilities.join(' · ')}
-              </p>
+                <ul className="capability-layer-stack__roles font-analogue">
+                  {layer.experiences.map((experience) => (
+                    <li
+                      key={`${experience.org}-${experience.role}`}
+                      className="capability-layer-stack__role"
+                    >
+                      <span className="capability-layer-stack__role-title">
+                        {experience.role}
+                      </span>
+                      <span className="capability-layer-stack__role-sep" aria-hidden="true">
+                        ·
+                      </span>
+                      <span className="capability-layer-stack__role-org">{experience.org}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          )
-        })}
-      </div>
+          </div>
+        )
+      })}
 
       <ul className="sr-only">
         {CAPABILITY_LAYER_A11Y_SUMMARY.map((item) => (

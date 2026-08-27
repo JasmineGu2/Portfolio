@@ -10,7 +10,7 @@ export type TagVariant = 'primary' | 'supporting' | 'category' | 'filled'
 
 /** Brand colors matched to each org's logo */
 export interface WorkAccent {
-  /** Primary accent — strip + filled chip background */
+  /** Primary accent, strip + filled chip background */
   color: string
   /** Gradient end (defaults via CSS color-mix) */
   colorEnd?: string
@@ -22,7 +22,7 @@ export interface WorkAccent {
   chipFg?: string
   /** Text color on filled tile */
   textOn?: 'light' | 'dark'
-  /** @deprecated Legacy brand highlight — no longer used for tags */
+  /** @deprecated Legacy brand highlight, no longer used for tags */
   highlight?: string
 }
 
@@ -218,7 +218,7 @@ function accentFromSchemeColor(color: string, chip: string): WorkAccent {
 
 type DuoRoleBucket = 'warm' | 'cool' | 'neutral'
 
-/** Duo tiles — warm product, cool engineering, neutral enterprise/community */
+/** Duo tiles, warm product, cool engineering, neutral enterprise/community */
 const DUO_WARM_ROLES = ['autodesk', 'stealth-startup'] as const satisfies readonly WorkId[]
 const DUO_COOL_ROLES = ['tesla', 'autodesk-eng', 'intuit'] as const satisfies readonly WorkId[]
 const DUO_NEUTRAL_ROLES = [
@@ -435,7 +435,7 @@ export function schemeAccentFromColor(color: string, chip: string): WorkAccent {
   return accentFromSchemeColor(color, chip)
 }
 
-/** Scheme palette slot per experience — uniform filled tag styling */
+/** Scheme palette slot per experience, uniform filled tag styling */
 export function resolveWorkAccent(workId: WorkId, schemeId: ColorSchemeId): WorkAccent {
   const base = WORK_ACCENTS[workId]
   const tokens = getSchemeTokens(schemeId)
@@ -450,7 +450,7 @@ export function resolveWorkAccent(workId: WorkId, schemeId: ColorSchemeId): Work
   return accentFromSchemeColor(color, base.chip)
 }
 
-/** Sidebar legend dots — one swatch per work tag color in the active scheme */
+/** Sidebar legend dots, one swatch per work tag color in the active scheme */
 export function getWorkAccentLegend(
   schemeId: ColorSchemeId
 ): { id: WorkId; color: string; label: string }[] {

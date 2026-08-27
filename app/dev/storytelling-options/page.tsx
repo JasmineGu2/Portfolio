@@ -5,23 +5,23 @@ import { ArrowLeft, ChevronDown, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { GridPatternSpotlight } from '@/components/background/GridPatternSpotlight'
 
-const storytellingText = "I'm the kind of engineer who chases the missing puzzle piece—whether it's buried in code, revealed in user behavior, or shaped by business constraints. Curiosity has pulled every role I've taken into something bigger."
+const storytellingText = "I'm the kind of engineer who chases the missing puzzle piece, whether it's buried in code, revealed in user behavior, or shaped by business constraints. Curiosity has pulled every role I've taken into something bigger."
 
 const experiences = [
   {
-    title: "Tesla — Engineer → Sales & Brand Activation",
+    title: "Tesla, Engineer → Sales & Brand Activation",
     description: "Weekdays: ML observability engineering. Weekends: sales and brand activations. (~2K+ leads across SF events and storefronts)"
   },
   {
-    title: "Intuit — Frontend SWE → Shadowed PMs",
+    title: "Intuit, Frontend SWE → Shadowed PMs",
     description: "Built TurboTax onboarding and studied how A/B tests and experimentation make signing up for taxes delightful."
   },
   {
-    title: "OMERS — Solutions Engineer → Business Analyst",
-    description: "Shipped end-to-end enterprise IT solutions—from requirements → dev → QA → business ops."
+    title: "OMERS, Solutions Engineer → Business Analyst",
+    description: "Shipped end-to-end enterprise IT solutions, from requirements → dev → QA → business ops."
   },
   {
-    title: "Metaverse Group — BA → Python Engineer & B2B Growth Lead",
+    title: "Metaverse Group, BA → Python Engineer & B2B Growth Lead",
     description: "Automated B2B outreach with Python, generating 1,000+ leads from KPMG, Puma, and Hugo Boss."
   }
 ]
@@ -71,7 +71,7 @@ function TabbedExperiences() {
             }`}
             style={{ fontFamily: "Inter" }}
           >
-            {exp.title.split(' — ')[0]}
+            {exp.title.split(', ')[0]}
           </button>
         ))}
       </div>

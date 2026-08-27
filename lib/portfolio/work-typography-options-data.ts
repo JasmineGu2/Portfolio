@@ -36,14 +36,14 @@ export const WORK_TYPOGRAPHY_SAMPLE = {
   role: 'Technical Platform Product Manager Intern',
   subtitle:
     'Building governed, AI-assisted query experiences for Autodesk’s data platform',
-  period: 'May 2026 — Present',
+  period: 'May 2026, Present',
 } as const
 
 export const WORK_TYPOGRAPHY_OPTIONS: WorkTypographyOption[] = [
   {
     id: 'playful-current',
     name: '01 · Playful current',
-    description: 'Fredoka company label, Inter role, italic Inter subtitle — matches today’s cards.',
+    description: 'Fredoka company label, Inter role, italic Inter subtitle, matches today’s cards.',
     bestFor: 'Keeping the existing bento personality',
     company: { fontFamily: "'Fredoka', system-ui, sans-serif", fontWeight: 600 },
     role: { fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 500 },

@@ -18,7 +18,7 @@ const ImpactRolesSection = ({ className = "" }: { className?: string }) => (
     </h2>
     <ul className="space-y-3" style={{ fontFamily: "Inter" }}>
       <li className="text-lg text-gray-600 dark:text-gray-400">
-        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>VP, Ivey Product Society Fellowship</span> — redesigned a 50-person product bootcamp
+        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>VP, Ivey Product Society Fellowship</span>, redesigned a 50-person product bootcamp
       </li>
       <li className="text-lg text-gray-600 dark:text-gray-400">
         <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hub Leader, Rewriting the Code</span>
@@ -27,7 +27,7 @@ const ImpactRolesSection = ({ className = "" }: { className?: string }) => (
         <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Orientation Residence Leader</span>
       </li>
       <li className="text-lg text-gray-600 dark:text-gray-400">
-        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Mississauga Youth Action Council</span> — grew membership 300%
+        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Mississauga Youth Action Council</span>, grew membership 300%
       </li>
       <li className="text-lg text-gray-600 dark:text-gray-400">
         <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>President, Social Justice Club</span>
@@ -43,13 +43,13 @@ const SideQuestingSection = ({ className = "" }: { className?: string }) => (
     </h2>
     <ul className="space-y-3" style={{ fontFamily: "Inter" }}>
       <li className="text-lg text-gray-600 dark:text-gray-400">
-        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Poker Club</span> — Top 9 finalist
+        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Poker Club</span>, Top 9 finalist
       </li>
       <li className="text-lg text-gray-600 dark:text-gray-400">
-        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hip Hop Western</span> — dancer
+        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Hip Hop Western</span>, dancer
       </li>
       <li className="text-lg text-gray-600 dark:text-gray-400">
-        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Fashion Lifestyle Society</span> — stylist & creative director
+        <span className="font-semibold text-[#2A2A2A] dark:text-white" style={{ fontFamily: "Editorial Old" }}>Fashion Lifestyle Society</span>, stylist & creative director
       </li>
     </ul>
   </div>

@@ -28,7 +28,7 @@ interface LargeCardsOptionProps {
   steps: StoryStep[]
 }
 
-/** Option A — big horizontal cards, one screen, readable at a glance */
+/** Option A, big horizontal cards, one screen, readable at a glance */
 export function LargeCardsOption({ steps }: LargeCardsOptionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)

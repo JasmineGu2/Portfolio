@@ -1,4 +1,4 @@
-/** Miro-style zigzag flow — boxes + oval tags, left → right */
+/** Miro-style zigzag flow, boxes + oval tags, left → right */
 
 import { getBoxSize, getNodeTier, getTagSize } from './flow-visual'
 
@@ -13,7 +13,7 @@ export function tagNodeId(stepId: string) {
   return `${stepId}-tag`
 }
 
-/** Chronological sequence (matches Miro board — no branches) */
+/** Chronological sequence (matches Miro board, no branches) */
 export const FLOW_SEQUENCE = [
   'education',
   'metaverse',

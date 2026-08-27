@@ -3,10 +3,10 @@
 import { CapabilityLayerStack } from '@/components/portfolio/CapabilityLayerStack'
 
 const OPTIONS = [
-  { id: 'a', label: 'A — Current', className: 'stack-palette-a' },
-  { id: 'b', label: 'B — Claude orange ramp', className: 'stack-palette-b' },
-  { id: 'c', label: 'C — Earthy editorial', className: 'stack-palette-c' },
-  { id: 'd', label: 'D — Cool contrast, orange pop', className: 'stack-palette-d' },
+  { id: 'a', label: 'A, Current', className: 'stack-palette-a' },
+  { id: 'b', label: 'B, Claude orange ramp', className: 'stack-palette-b' },
+  { id: 'c', label: 'C, Earthy editorial', className: 'stack-palette-c' },
+  { id: 'd', label: 'D, Cool contrast, orange pop', className: 'stack-palette-d' },
 ] as const
 
 export default function StackColorsPage() {

@@ -105,7 +105,7 @@ function roleToTile(role: GalleryRoleBento, col: string, row: string): GalleryTi
 
 export const GALLERY_GRID_COLUMNS = 6
 
-/** Compact 6-column mosaic — singles, wides, and 2×2 highlights */
+/** Compact 6-column mosaic, singles, wides, and 2×2 highlights */
 const GALLERY_MOMENT_LAYOUT: Pick<GalleryTileSpec, 'col' | 'row'>[] = [
   { col: '1', row: '1' },
   { col: '2', row: '1' },

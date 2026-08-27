@@ -82,7 +82,7 @@ export function TeslaStyleOptionsPageClient() {
   return (
     <BentoWorkspaceShell
       title="Tesla case study styling"
-      description="Story-driven layouts with restrained accents—or compare spacious and earlier directions."
+      description="Story-driven layouts with restrained accents, or compare spacious and earlier directions."
     >
       <section className="tesla-style-opt-page">
         <div className="tesla-style-opt-hero">
@@ -104,7 +104,7 @@ export function TeslaStyleOptionsPageClient() {
 
         <VariantGroup
           title="Story layout"
-          description="Restrained-accent text blocks arranged as narrative chapters—questions, cards, quote, outcomes."
+          description="Restrained-accent text blocks arranged as narrative chapters, questions, cards, quote, outcomes."
           variants={STORY_STYLE_VARIANTS}
           selectedId={selectedId}
           onSelect={setSelectedId}
@@ -112,7 +112,7 @@ export function TeslaStyleOptionsPageClient() {
 
         <VariantGroup
           title="Spacious editorial family"
-          description="Meta grid and serif section hooks—pick how much color comes back."
+          description="Meta grid and serif section hooks, pick how much color comes back."
           variants={SPACIOUS_STYLE_VARIANTS}
           selectedId={selectedId}
           onSelect={setSelectedId}

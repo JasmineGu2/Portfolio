@@ -34,7 +34,7 @@ export function OrchestratorNode({
       className="relative w-full max-w-xl mx-auto"
       aria-labelledby="orchestrator-title"
     >
-      {/* Hub layout — Jasmine at intersection of Users, Products, Technical Systems */}
+      {/* Hub layout, Jasmine at intersection of Users, Products, Technical Systems */}
       <div className="relative mb-6 hidden md:block" aria-hidden>
         <div className="flex justify-center mb-3">
           <HubLabel label={primaryLabels[0] ?? 'Users'} position="top" active={isActive} />

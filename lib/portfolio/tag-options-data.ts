@@ -35,7 +35,7 @@ export const TAG_STYLE_OPTIONS: TagStyleOption[] = [
   {
     id: 'filled-current',
     name: '01 · Current filled',
-    description: 'Solid color pills with white/dark text — what you have now.',
+    description: 'Solid color pills with white/dark text, what you have now.',
     bestFor: 'Work experience chips, high contrast on cards',
   },
   {
@@ -65,7 +65,7 @@ export const TAG_STYLE_OPTIONS: TagStyleOption[] = [
   {
     id: 'dot-lead',
     name: '06 · Dot lead',
-    description: 'Neutral chip with a colored dot prefix — no fill block.',
+    description: 'Neutral chip with a colored dot prefix, no fill block.',
     bestFor: 'Sidebar legend, subtle categorization',
   },
   {
@@ -83,7 +83,7 @@ export const TAG_STYLE_OPTIONS: TagStyleOption[] = [
   {
     id: 'underline',
     name: '09 · Underline accent',
-    description: 'Text-only tags with colored underline — no pill shape.',
+    description: 'Text-only tags with colored underline, no pill shape.',
     bestFor: 'Minimal hero, magazine layout',
   },
   {

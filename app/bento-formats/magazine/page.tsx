@@ -1,7 +1,7 @@
 import { MagazineBentoFormat } from '@/components/portfolio/bento-formats/MagazineBentoFormat'
 
 export const metadata = {
-  title: 'Bento format — Magazine editorial',
+  title: 'Bento format · Magazine editorial',
 }
 
 export default function MagazineBentoPage() {

@@ -1,8 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import { ArrowUp, Briefcase, Cpu, Layers, Sparkles, Wrench, type LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import {
+  ArrowUp,
+  Briefcase,
+  Cpu,
+  Layers,
+  Route,
+  Sparkles,
+  User,
+  Wrench,
+  type LucideIcon,
+} from 'lucide-react'
 import { HERO_EXAMPLE_QUESTIONS, type AgentResponse } from '@/lib/portfolio/ask-agent'
+import {
+  findRecruiterAnswer,
+  RECRUITER_TOPICS,
+  type RecruiterTopic,
+} from '@/lib/portfolio/recruiter-qa'
 import { cn } from '@/lib/utils'
 import { AnimatedQuestionPlaceholder } from './AnimatedQuestionPlaceholder'
 import { type useAskAgent } from './useAskAgent'
@@ -10,28 +25,38 @@ import { useTypewriterCycle } from './useTypewriterCycle'
 
 type AskAgentState = ReturnType<typeof useAskAgent>
 
-export type StarterChip = {
-  id: string
-  label: string
-  icon: LucideIcon
-  query: string
+const TOPIC_ICONS: Record<RecruiterTopic['icon'], LucideIcon> = {
+  briefcase: Briefcase,
+  wrench: Wrench,
+  sparkles: Sparkles,
+  layers: Layers,
+  cpu: Cpu,
+  user: User,
+  route: Route,
 }
 
-export const STARTER_CHIPS: StarterChip[] = [
-  { id: 'tesla', label: 'Tesla', icon: Cpu, query: 'What did you actually build at Tesla?' },
-  { id: 'product', label: 'Product', icon: Briefcase, query: 'Why did you move from engineering to product?' },
-  { id: 'engineering', label: 'Engineering', icon: Wrench, query: "What's your most technical experience?" },
-  { id: 'ai', label: 'AI', icon: Sparkles, query: 'What is your approach to AI products?' },
-  { id: 'projects', label: 'Projects', icon: Layers, query: 'What have you built zero to one?' },
-  {
-    id: 'architecture',
-    label: 'Journey',
-    icon: Layers,
-    query: 'How do your experiences connect?',
-  },
-  { id: 'autodesk', label: 'Autodesk', icon: Briefcase, query: 'What are you building at Autodesk?' },
-  { id: 'intuit', label: 'Intuit', icon: Briefcase, query: 'What did you learn at Intuit?' },
-]
+/** The chip row: short label per topic, same set the site opened with. */
+function TopicChips({ onOpen, limit }: { onOpen: (id: string) => void; limit?: number }) {
+  const topics = limit ? RECRUITER_TOPICS.slice(0, limit) : RECRUITER_TOPICS
+  return (
+    <div className="agent-panel__chip-grid">
+      {topics.map((topic) => {
+        const Icon = TOPIC_ICONS[topic.icon]
+        return (
+          <button
+            key={topic.id}
+            type="button"
+            className="agent-topic-chip"
+            onClick={() => onOpen(topic.id)}
+          >
+            <Icon className="h-3.5 w-3.5 shrink-0 opacity-55" aria-hidden />
+            {topic.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
 
 export function AskAgentContent({
   agent,
@@ -51,14 +76,28 @@ export function AskAgentContent({
     setActiveAutocomplete,
     inputRef,
     threadRef,
-    suggestions,
     autocomplete,
     submitQuery,
+    openTopic,
     resizeTextarea,
   } = agent
 
   const isHero = variant === 'hero'
   const isFloating = variant === 'floating'
+
+  /** Chips and popup picks land in the composer so you can edit before sending. */
+  function fillComposer(question: string) {
+    setQuery(question)
+    setActiveAutocomplete(-1)
+    const input = inputRef.current
+    if (!input) return
+    input.focus({ preventScroll: true })
+    // Caret to the end, and grow the box to fit what we just dropped in.
+    window.requestAnimationFrame(() => {
+      input.setSelectionRange(question.length, question.length)
+      resizeTextarea(input)
+    })
+  }
 
   return (
     <div
@@ -82,7 +121,7 @@ export function AskAgentContent({
                 {message.role === 'user' ? (
                   <p className="agent-message__text">{message.text}</p>
                 ) : (
-                  <AssistantMessage response={message.response} />
+                  <AssistantMessage response={message.response} onAsk={submitQuery} />
                 )}
               </li>
             ))}
@@ -106,55 +145,11 @@ export function AskAgentContent({
           }}
           onInputResize={resizeTextarea}
           onSubmit={submitQuery}
+          onPickSuggestion={fillComposer}
         />
 
-        {!hasMessages && !isFloating && (
-          <div className="agent-panel__chip-grid">
-            {STARTER_CHIPS.map((chip) => {
-              const Icon = chip.icon
-              return (
-                <button
-                  key={chip.id}
-                  type="button"
-                  className="agent-topic-chip"
-                  onClick={() => submitQuery(chip.query, true)}
-                >
-                  <Icon className="h-3.5 w-3.5 shrink-0 opacity-55" aria-hidden />
-                  {chip.label}
-                </button>
-              )
-            })}
-          </div>
-        )}
-
-        {!hasMessages && isFloating && (
-          <div className="agent-panel__chip-grid agent-panel__chip-grid--compact">
-            {STARTER_CHIPS.slice(0, 4).map((chip) => (
-              <button
-                key={chip.id}
-                type="button"
-                className="agent-topic-chip agent-topic-chip--compact"
-                onClick={() => submitQuery(chip.query, true)}
-              >
-                {chip.label}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {hasMessages && suggestions.length > 0 && (
-          <div className="agent-panel__chip-grid agent-panel__chip-grid--compact">
-            {suggestions.slice(0, 4).map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                className="agent-topic-chip agent-topic-chip--compact"
-                onClick={() => submitQuery(suggestion, true)}
-              >
-                {suggestion.length > 36 ? `${suggestion.slice(0, 36)}…` : suggestion}
-              </button>
-            ))}
-          </div>
+        {!hasMessages && (
+          <TopicChips onOpen={openTopic} limit={isFloating ? 4 : undefined} />
         )}
 
         {hasMessages && !isFloating && (
@@ -177,6 +172,7 @@ function ComposerCard({
   onQueryChange,
   onInputResize,
   onSubmit,
+  onPickSuggestion,
 }: {
   query: string
   autocomplete: string[]
@@ -187,9 +183,34 @@ function ComposerCard({
   onQueryChange: (value: string) => void
   onInputResize: (el: HTMLTextAreaElement) => void
   onSubmit: (text: string, viaChip?: boolean) => void
+  onPickSuggestion: (question: string) => void
 }) {
   const [inputFocused, setInputFocused] = useState(false)
+  const [popupDismissed, setPopupDismissed] = useState(false)
+  const [sendNotice, setSendNotice] = useState(false)
+  const noticeTimer = useRef<number | null>(null)
   const showTypewriter = animatedPlaceholder && !compact && !query.trim() && !inputFocused
+
+  // A question is sendable once it matches something written. Typing a near-miss
+  // leaves the button off rather than sending it into the fallback notice.
+  const canSend = Boolean(findRecruiterAnswer(query))
+  const showPopup =
+    inputFocused && !popupDismissed && !canSend && query.trim().length > 0 && autocomplete.length > 0
+
+  // Free-form send is switched off until there's a model behind it. Rather than a
+  // dead button, show a short-lived explanation of why nothing happened.
+  function refuseSend() {
+    setSendNotice(true)
+    if (noticeTimer.current) window.clearTimeout(noticeTimer.current)
+    noticeTimer.current = window.setTimeout(() => setSendNotice(false), 4000)
+  }
+
+  useEffect(
+    () => () => {
+      if (noticeTimer.current) window.clearTimeout(noticeTimer.current)
+    },
+    []
+  )
   const { displayText, reducedMotion } = useTypewriterCycle(
     HERO_EXAMPLE_QUESTIONS,
     showTypewriter
@@ -218,16 +239,28 @@ function ComposerCard({
           onChange={(event) => {
             onQueryChange(event.target.value)
             onInputResize(event.target)
+            setPopupDismissed(false)
           }}
           onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
+          // Delayed so a click on a popup row lands before the popup unmounts.
+          onBlur={() => window.setTimeout(() => setInputFocused(false), 120)}
           onKeyDown={(event) => {
+            if (event.key === 'Escape' && showPopup) {
+              event.preventDefault()
+              setPopupDismissed(true)
+              return
+            }
             if (event.key === 'Enter' && !event.shiftKey) {
               event.preventDefault()
-              if (activeAutocomplete >= 0 && autocomplete[activeAutocomplete]) {
-                onSubmit(autocomplete[activeAutocomplete], true)
-              } else {
+              // Highlighted row wins: load it into the composer, same as clicking it.
+              if (showPopup && activeAutocomplete >= 0 && autocomplete[activeAutocomplete]) {
+                onPickSuggestion(autocomplete[activeAutocomplete])
+                return
+              }
+              if (canSend) {
                 onSubmit(query)
+              } else {
+                refuseSend()
               }
             }
           }}
@@ -235,19 +268,31 @@ function ComposerCard({
       </div>
 
       <div className="agent-composer-card__footer">
+        {sendNotice && (
+          <div className="agent-send-notice" id="agent-send-notice" role="status">
+            <strong>No answer written for that one yet.</strong> Start typing and pick a suggested
+            question, or tap one below.
+          </div>
+        )}
         <button
           type="button"
-          className="agent-composer-card__send"
-          onClick={() => onSubmit(query)}
-          disabled={!query.trim()}
-          aria-label="Send message"
+          className={cn(
+            'agent-composer-card__send',
+            !canSend && 'agent-composer-card__send--disabled'
+          )}
+          onClick={() => (canSend ? onSubmit(query) : refuseSend())}
+          aria-label={canSend ? 'Send message' : 'Send message (no written answer yet)'}
+          aria-describedby={sendNotice ? 'agent-send-notice' : undefined}
         >
           <ArrowUp className="h-4 w-4" />
         </button>
       </div>
 
-      {query && autocomplete.length > 0 && (
-        <ul className="agent-autocomplete" role="listbox">
+      {showPopup && (
+        <ul className="agent-autocomplete" role="listbox" aria-label="Suggested questions">
+          <li className="agent-autocomplete__hint" aria-hidden>
+            Questions I have answers for
+          </li>
           {autocomplete.map((item, index) => (
             <li key={item}>
               <button
@@ -258,7 +303,9 @@ function ComposerCard({
                   'agent-autocomplete__item',
                   index === activeAutocomplete && 'agent-autocomplete__item--active'
                 )}
-                onClick={() => onSubmit(item, true)}
+                // Mouse-down beats the textarea blur, so the pick isn't lost.
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => onPickSuggestion(item)}
               >
                 {item}
               </button>
@@ -270,12 +317,57 @@ function ComposerCard({
   )
 }
 
-function AssistantMessage({ response }: { response: AgentResponse }) {
+function AssistantMessage({
+  response,
+  onAsk,
+}: {
+  response: AgentResponse
+  onAsk: (question: string, viaChip?: boolean) => void
+}) {
+  // Options come from a chip branch, follow-ups from an answer. Same affordance either way.
+  const choices = response.options ?? response.followUps
+
   return (
     <div className="agent-message__assistant">
-      <p className="agent-message__text">{response.answer}</p>
+      <div className="agent-message__avatar" aria-hidden>
+        JG
+      </div>
 
-      {response.relatedPath && <p className="agent-message__path">{response.relatedPath}</p>}
+      <div className="agent-message__body">
+        <p className="agent-message__author font-analogue">Jasmine</p>
+
+        <div className="agent-message__bubble">
+          <p className="agent-message__text">{response.answer}</p>
+          {response.relatedPath && <p className="agent-message__path">{response.relatedPath}</p>}
+        </div>
+
+        {response.references.length > 0 && (
+          <ul className="agent-message__refs">
+            {response.references.map((ref) => (
+              <li key={ref.id}>
+                <a className="agent-message__ref" href={ref.href}>
+                  {ref.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {choices.length > 0 && (
+          <div className="agent-message__choices">
+            {choices.map((choice) => (
+              <button
+                key={choice}
+                type="button"
+                className="agent-message__choice"
+                onClick={() => onAsk(choice, true)}
+              >
+                {choice}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -334,7 +334,7 @@ export const MEMORY_MODULES: MemoryModule[] = [
     id: 'long-term',
     title: 'Long-term Memory',
     description: 'Experiences and communities that changed how I think.',
-    items: ['CONTENT_REQUIRED — communities, mentors, leadership, hackathons'],
+    items: ['CONTENT_REQUIRED: communities, mentors, leadership, hackathons'],
     placeholder: true,
   },
   {
@@ -342,9 +342,9 @@ export const MEMORY_MODULES: MemoryModule[] = [
     title: 'Working Memory',
     description: 'Things currently occupying my brain.',
     items: [
-      'CONTENT_REQUIRED — current side project',
-      'CONTENT_REQUIRED — current AI experiment',
-      'CONTENT_REQUIRED — current rabbit hole',
+      'CONTENT_REQUIRED: current side project',
+      'CONTENT_REQUIRED: current AI experiment',
+      'CONTENT_REQUIRED: current rabbit hole',
     ],
     placeholder: true,
   },
@@ -398,7 +398,7 @@ export const OUTPUT_TYPES: OutputType[] = [
     id: 'communities',
     title: 'Communities',
     description: 'Things created or improved with other people.',
-    examples: ['CONTENT_REQUIRED — from community data'],
+    examples: ['CONTENT_REQUIRED: from community data'],
   },
 ]
 
@@ -537,7 +537,7 @@ export const NARRATIVE_FLOW_STAGES: FlowStageMeta[] = [
     id: 'zoom-narrative',
     level: 'ZOOM',
     label: 'Keep Zooming Out',
-    question: 'Every experience became an input — I kept zooming out.',
+    question: 'Every experience became an input. I kept zooming out.',
   },
   {
     id: 'runtime',
@@ -640,7 +640,7 @@ export const ARCHITECTURE_FLOW_PAYOFF = {
   lead: 'I learned to operate across more of the system.',
 }
 
-/** Core abstraction-level nodes (stages 0–5) — spine only, no concept fan-out. */
+/** Core abstraction-level nodes (stages 0–5), spine only, no concept fan-out. */
 const ARCHITECTURE_CORE_NODES: ArchitectureNode[] = [
   // ── Stage 0: Automation ──
   {
@@ -945,7 +945,7 @@ const RUNTIME_CAPABILITY_IDS = ['understand', 'build', 'decide'] as const
 
 const OUTPUT_ARTIFACT_IDS = ['products', 'systems', 'decisions'] as const
 
-/** Narrative continuation — floating satellites after the abstraction spine. */
+/** Narrative continuation, floating satellites after the abstraction spine. */
 function buildExtendedArchitectureNodes(): ArchitectureNode[] {
   const nodes: ArchitectureNode[] = []
 
@@ -1090,7 +1090,7 @@ function buildExtendedArchitectureNodes(): ArchitectureNode[] {
   return nodes
 }
 
-/** Nodes accumulate across stages — nothing resets between bands. */
+/** Nodes accumulate across stages, nothing resets between bands. */
 export const ARCHITECTURE_NODES: ArchitectureNode[] = [
   ...ARCHITECTURE_CORE_NODES,
   ...buildExtendedArchitectureNodes(),

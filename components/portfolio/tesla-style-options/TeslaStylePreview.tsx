@@ -147,7 +147,7 @@ function StandardPreview({ compact = false }: { compact?: boolean }) {
               <span className="tesla-var__em">model runs</span>,{' '}
               <span className="tesla-var__em">camera footage</span>,{' '}
               <span className="tesla-var__em">operational charts</span>, and{' '}
-              <span className="tesla-var__em">related metadata</span>—often while diagnosing
+              <span className="tesla-var__em">related metadata</span>-often while diagnosing
               time-sensitive issues.
             </>
           ) : (

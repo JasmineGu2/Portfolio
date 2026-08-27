@@ -1,4 +1,4 @@
-/* ── Architecture page — kept in light mode for now (was a warm dark canvas;
+/* ── Architecture page, kept in light mode for now (was a warm dark canvas;
    flip the tokens below back to the commented values to restore it) ── */
 
 .portfolio-content {
@@ -34,7 +34,7 @@
   background: transparent;
 }
 
-/* Architecture shell + nav — page-scoped dark chrome */
+/* Architecture shell + nav, page-scoped dark chrome */
 .bw-shell[data-page='architecture'] {
   --sch-shell-bg: var(--pf-canvas);
   background: var(--pf-canvas);
@@ -55,7 +55,7 @@
   z-index: 1;
 }
 
-/* Nav stays identical across every page — light chrome, no page-scoped dark variant.
+/* Nav stays identical across every page, light chrome, no page-scoped dark variant.
    The ambient dark-page ink color above must not bleed into it. */
 .bw-shell[data-page='architecture'] .bw-site-nav {
   color: var(--pf-ink);
@@ -146,7 +146,7 @@
   color: color-mix(in srgb, #fff 45%, transparent);
 }
 
-/* Hero — dark canvas; atmosphere from global AIBackground */
+/* Hero, dark canvas; atmosphere from global AIBackground */
 .arch-page .arch-hero {
   background: transparent;
 }
@@ -199,7 +199,7 @@
   color: var(--arch-ink);
 }
 
-/* Flow — connectors & nodes on dark */
+/* Flow, connectors & nodes on dark */
 .arch-page .arch-connector__line {
   stroke: color-mix(in srgb, #fff 22%, transparent);
 }
@@ -274,7 +274,7 @@
   color: var(--arch-ink);
 }
 
-/* Timeline, memory, final stack — editorial cards on dark */
+/* Timeline, memory, final stack, editorial cards on dark */
 .arch-page .arch-timeline {
   border-left-color: var(--arch-line);
 }
@@ -364,8 +364,7 @@
   margin-bottom: 0.75rem;
 }
 
-/* Solid white backing for text sitting directly on the animated background —
-   keeps it readable regardless of what's moving underneath. */
+/* Solid white backing for text sitting directly on the animated background, keeps it readable regardless of what's moving underneath. */
 .arch-text-bubble {
   display: inline-block;
   max-width: 100%;
@@ -567,18 +566,19 @@
 
 .arch-project-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
 }
 
 @media (max-width: 800px) {
   .arch-project-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .arch-project-card {
-    grid-column: span 4 !important;
-    grid-row: auto !important;
+@media (max-width: 520px) {
+  .arch-project-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -635,7 +635,10 @@
 .arch-project-card__img {
   display: block;
   width: 100%;
-  height: 7.5rem;
+  /* 16:9 matches the screenshots' average, so `contain` barely letterboxes. A fixed
+     short height on a wide card was what left them floating in empty space. */
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: contain;
   background: color-mix(in srgb, var(--arch-ink) 4%, transparent);
   border-radius: 0.55rem;
@@ -1973,7 +1976,7 @@
   align-items: center;
 }
 
-/* Level 00 — fan-in merge */
+/* Level 00, fan-in merge */
 .arch-stage__graph--00 {
   grid-template-columns: 1fr;
 }
@@ -1993,7 +1996,7 @@
   align-items: flex-start;
 }
 
-/* Level 01 — branch from ambiguity */
+/* Level 01, branch from ambiguity */
 .arch-stage__graph--01 {
   grid-template-columns: 1fr;
 }
@@ -2020,7 +2023,7 @@
   border-radius: 0.25rem;
 }
 
-/* Level 02 — interface flow */
+/* Level 02, interface flow */
 .arch-stage__graph--02 {
   grid-template-columns: 1fr;
 }
@@ -2045,7 +2048,7 @@
   white-space: nowrap;
 }
 
-/* Level 03 — dependency hub */
+/* Level 03, dependency hub */
 .arch-stage__graph--03 {
   min-height: 10rem;
 }
@@ -2084,7 +2087,7 @@
   background: color-mix(in srgb, var(--arch-surface) 80%, transparent);
 }
 
-/* Level 04 — platform network */
+/* Level 04, platform network */
 .arch-stage__graph--04 {
   min-height: 11rem;
 }
@@ -2135,7 +2138,7 @@
   color: var(--arch-muted);
 }
 
-/* Level 05 — decision surface */
+/* Level 05, decision surface */
 .arch-stage__graph--05 {
   min-height: 12rem;
   padding-top: 1.25rem;

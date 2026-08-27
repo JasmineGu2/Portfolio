@@ -27,7 +27,7 @@ export const EXPERIENCE_VIDEO_STYLE_OPTIONS: ExperienceVideoStyleOption[] = [
   {
     id: 'square-grid',
     name: '01 · Even squares',
-    description: 'Uniform animated squares — like your previous portfolio work section.',
+    description: 'Uniform animated squares, like your previous portfolio work section.',
     bestFor: 'Clean scan of every role at a glance',
   },
   {
@@ -44,7 +44,7 @@ export const EXPERIENCE_VIDEO_STYLE_OPTIONS: ExperienceVideoStyleOption[] = [
   },
 ]
 
-/** Looping preview clips — order matches home canvas WORK_ORDER */
+/** Looping preview clips, order matches home canvas WORK_ORDER */
 export const EXPERIENCE_VIDEO_ENTRIES: ExperienceVideoEntry[] = [
   { id: 'autodesk', video: '/work/autodesk-pm.mp4', logo: COMPANY_LOGOS.autodesk, logoFit: 'wide', mediaAspect: '16 / 9' },
   { id: 'tesla', video: '/work/teslagif.mp4', logo: COMPANY_LOGOS.tesla, logoFit: 'mark', mediaAspect: '16 / 9' },

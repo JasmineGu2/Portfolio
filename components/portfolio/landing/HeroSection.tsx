@@ -16,7 +16,7 @@ export function HeroSection() {
           versatility to translate between users, engineering, and operations.
         </p>
         <p className="landing-hero__sub">
-          Product manager and engineer building thoughtful, AI-powered products—from consumer
+          Product manager and engineer building thoughtful, AI-powered products, from consumer
           experiences at TurboTax to enterprise data platforms at Autodesk.
         </p>
       </div>

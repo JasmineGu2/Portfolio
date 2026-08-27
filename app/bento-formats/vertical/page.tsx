@@ -1,7 +1,7 @@
 import { VerticalFlowBentoFormat } from '@/components/portfolio/bento-formats/VerticalFlowBentoFormat'
 
 export const metadata = {
-  title: 'Bento format — Vertical flow strips',
+  title: 'Bento format · Vertical flow strips',
 }
 
 export default function VerticalBentoPage() {

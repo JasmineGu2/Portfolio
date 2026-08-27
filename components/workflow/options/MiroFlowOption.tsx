@@ -133,7 +133,7 @@ interface MiroFlowOptionProps {
   steps: StoryStep[]
 }
 
-/** Option B — recreates Miro zigzag with square nodes + oval tags */
+/** Option B, recreates Miro zigzag with square nodes + oval tags */
 export function MiroFlowOption({ steps }: MiroFlowOptionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)

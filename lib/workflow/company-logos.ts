@@ -1,5 +1,5 @@
 /**
- * Company logos from /public — transparent PNGs/SVGs under public/work/.
+ * Company logos from /public, transparent PNGs/SVGs under public/work/.
  */
 export const COMPANY_LOGOS = {
   metaverse: '/work/metaverse.png',

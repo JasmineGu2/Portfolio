@@ -27,7 +27,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     role: 'Technical Platform Product Manager Intern',
     subtitle:
       'Building governed, AI-assisted query experiences for Autodesk’s data platform',
-    period: 'May 2026 — Present',
+    period: 'May 2026 – Present',
     category: 'Data Products',
     track: 'product',
     tags: [
@@ -49,7 +49,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     company: 'Autodesk',
     role: 'Full-Stack Engineering Intern',
     subtitle: 'Building distributed asset-library services for Autodesk Fusion',
-    period: 'Jan — May 2026',
+    period: 'Jan – May 2026',
     category: 'Platform Engineering',
     track: 'engineering',
     tags: [
@@ -126,7 +126,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     company: 'Metaverse Group',
     role: 'Developer and Data Analyst Intern',
     subtitle: 'Automating B2B prospecting and improving outreach performance',
-    period: '2022 — 2023',
+    period: '2022 – 2023',
     category: 'Growth Automation',
     track: 'engineering',
     tags: [
@@ -164,7 +164,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     company: 'Hack Western',
     role: 'Product and Engineering Lead',
     subtitle: 'Leading a six-person engineering team building the platform experience for 400+ hackers',
-    period: '2023 — Present',
+    period: '2023 – Present',
     category: 'Product Leadership',
     track: 'education',
     tags: [
@@ -186,7 +186,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     company: 'IPS Fellowship',
     role: 'Product Bootcamp Lead',
     subtitle: 'Designing and leading a 10-week hands-on product management bootcamp',
-    period: '2023 — 2024',
+    period: '2023 – 2024',
     category: 'Product Education',
     track: 'education',
     tags: [
@@ -208,7 +208,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     company: 'Western / Ivey',
     role: 'CS + Business Dual Degree',
     subtitle: 'Building technical and product foundations across computer science and business',
-    period: '2022 — 2027',
+    period: '2022 – 2027',
     category: 'Education',
     track: 'education',
     tags: [
@@ -218,7 +218,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
     ],
     expandedTags: ['Ivey HBA', 'Software Engineering', 'Operations'],
     description:
-      'Dual degree in Computer Science and Business at Western University and Ivey Business School — building the technical and product foundation for everything that followed.',
+      'Dual degree in Computer Science and Business at Western University and Ivey Business School, building the technical and product foundation for everything that followed.',
   },
 }
 

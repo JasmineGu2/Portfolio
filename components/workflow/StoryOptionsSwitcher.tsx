@@ -10,7 +10,7 @@ import { N8nCanvas } from './N8nCanvas'
 type OptionId = 'current' | 'large' | 'miro' | 'zones'
 
 const OPTIONS: { id: OptionId; label: string; desc: string }[] = [
-  { id: 'large', label: 'A · Big cards', desc: 'Large timeline cards — easiest to scan' },
+  { id: 'large', label: 'A · Big cards', desc: 'Large timeline cards, easiest to scan' },
   { id: 'miro', label: 'B · Miro flow', desc: 'Boxes + oval tags, zigzag layout' },
   { id: 'zones', label: 'C · Story zones', desc: 'Themed chapters like n8n steps' },
   { id: 'current', label: 'Compact', desc: 'Small n8n-style node canvas' },
@@ -21,7 +21,7 @@ export function StoryOptionsSwitcher() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      {/* Site header + layout tabs — always visible */}
+      {/* Site header + layout tabs, always visible */}
       <header className="shrink-0 border-b border-n8n-border bg-n8n-toolbar z-50">
         <div className="flex items-center justify-between px-4 py-2 gap-3">
           <a href="/" className="text-sm font-bold text-n8n-text shrink-0">

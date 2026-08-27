@@ -10,7 +10,7 @@ const CONTACT_SEP = '·'
 
 export function SiteNavIdentity({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn('site-nav-identity', className)} aria-label="Jasmine Gu — home">
+    <Link href="/" className={cn('site-nav-identity', className)} aria-label="Jasmine Gu, home">
       <span className="site-nav-identity__text">
         <span className="site-nav-identity__name">Jasmine Gu</span>
         <span className="site-nav-identity__role">Engineer + PM</span>

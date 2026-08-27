@@ -1,17 +1,17 @@
-# 02 — Site Architecture
+# 02, Site Architecture
 
 ## Route map
 
 | Route | Page | Role | Status |
 |-------|------|------|--------|
-| `/` | Work | Default landing — experience bento | ✅ Built |
-| `/architecture` | Agent Architecture | Background narrative — abstraction engine | 🔲 Placeholder |
+| `/` | Work | Default landing, experience bento | ✅ Built |
+| `/architecture` | Agent Architecture | Background narrative, abstraction engine | 🔲 Placeholder |
 | `/projects` | Projects | PM + technical project bento | ✅ Built |
 | `/tesla` | Tesla case study | Full case study detail | ✅ Built |
 | `/work/[slug]` | Experience detail | Generic experience pages | ✅ Built |
-| `/ask` | — | Redirects to `/` (use side panel) | ✅ Redirect |
-| `/work` | — | Redirects to `/` | ✅ Redirect |
-| `/gallery` | Gallery | Community/photos — linked from Architecture later | ✅ Exists, not in main nav |
+| `/ask` |, | Redirects to `/` (use side panel) | ✅ Redirect |
+| `/work` |, | Redirects to `/` | ✅ Redirect |
+| `/gallery` | Gallery | Community/photos, linked from Architecture later | ✅ Exists, not in main nav |
 
 ---
 
@@ -21,8 +21,8 @@
 Work  ·  Architecture  ·  Projects  ·  Resume
 ```
 
-- **Ask is NOT in nav** — floating side panel only
-- **Gallery is NOT in main nav** — accessible from Architecture Community/Memory section when built
+- **Ask is NOT in nav**, floating side panel only
+- **Gallery is NOT in main nav**, accessible from Architecture Community/Memory section when built
 - Resume opens PDF in new tab
 
 ---
@@ -57,13 +57,13 @@ ASK (overlay)
 ```text
 1. Land on Work (/)
       ↓
-2. Scan bento — click Tesla, Autodesk, etc.
+2. Scan bento, click Tesla, Autodesk, etc.
       ↓
-3. Optional: open Ask side panel — "What did you build at Tesla?"
+3. Optional: open Ask side panel, "What did you build at Tesla?"
       ↓
-4. Optional: read Architecture — full zoom-out narrative
+4. Optional: read Architecture, full zoom-out narrative
       ↓
-5. Optional: Projects — case studies and hackathon builds
+5. Optional: Projects, case studies and hackathon builds
 ```
 
 Visitors may enter any view at any time. The system always allows movement between them.
@@ -136,7 +136,7 @@ These are **not part of the portfolio product**.
 | Projects | Bento mosaic | 1–2 column cards |
 | Ask | Right side panel | Full-width bottom sheet (planned) |
 
-Do not shrink a dense desktop graph onto a narrow screen — convert to vertical connected cards.
+Do not shrink a dense desktop graph onto a narrow screen, convert to vertical connected cards.
 
 ---
 

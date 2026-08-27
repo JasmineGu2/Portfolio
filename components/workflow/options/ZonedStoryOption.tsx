@@ -64,7 +64,7 @@ interface ZonedStoryOptionProps {
   steps: StoryStep[]
 }
 
-/** Option C — n8n-style themed zones that frame the narrative in chapters */
+/** Option C, n8n-style themed zones that frame the narrative in chapters */
 export function ZonedStoryOption({ steps }: ZonedStoryOptionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)

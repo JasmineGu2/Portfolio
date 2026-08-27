@@ -5,7 +5,7 @@ export interface Point {
   y: number
 }
 
-/** Max y in node data — used to normalize vertical placement. */
+/** Max y in node data, used to normalize vertical placement. */
 export const FLOW_Y_MAX = 100
 
 const PORT_OFFSET = 4
@@ -71,7 +71,7 @@ export function buildOrthogonalPath(from: Point, to: Point): string {
   ].join(' ')
 }
 
-/** Connector opacity — always readable; brighter on active stage or hover. */
+/** Connector opacity, always readable; brighter on active stage or hover. */
 export function getConnectorOpacity(
   edgeStage: number,
   activeStageIndex: number,

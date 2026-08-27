@@ -1,7 +1,7 @@
 ---
 name: portfolio-performance
 description: >-
-  Enforces the Jasmine Gu portfolio performance budget — one motion system per
+  Enforces the Jasmine Gu portfolio performance budget, one motion system per
   viewport, canvas particle caps, video decode limits, lazy loading, fps targets,
   and mobile tiers. Use when working on performance, animation, canvas, video,
   lazy load, IntersectionObserver, mobile optimization, Lighthouse, frame rate,
@@ -32,10 +32,10 @@ Ask agent       → exploration (load on interaction)
 | Ambient fps | 24–30 (not 60) |
 | Interaction fps | 60 for pointer-driven only |
 | Videos decoding | Max 1–2 at once |
-| Scroll animation | `transform` + `opacity` only — no width/height/blur/shadow |
-| Blur | Never animate `filter: blur()` — prerender or translate3d layers |
+| Scroll animation | `transform` + `opacity` only, no width/height/blur/shadow |
+| Blur | Never animate `filter: blur()`, prerender or translate3d layers |
 | Fonts | Minimal WOFF2 weights, subset |
-| Offscreen | No rAF loops — IntersectionObserver pause |
+| Offscreen | No rAF loops, IntersectionObserver pause |
 
 ## Mobile tiers
 
@@ -45,10 +45,10 @@ Ask agent       → exploration (load on interaction)
 
 ## Progressive load order
 
-1. **Initial** — hero + visible projects
-2. **Idle** — background canvas / gradients
-3. **Scroll** — below-fold media
-4. **Interaction** — Ask panel, heavy 3D, architecture detail
+1. **Initial**, hero + visible projects
+2. **Idle**, background canvas / gradients
+3. **Scroll**, below-fold media
+4. **Interaction**, Ask panel, heavy 3D, architecture detail
 
 ```tsx
 import dynamic from 'next/dynamic'
@@ -98,10 +98,10 @@ if (now - lastFrame >= FRAME_MS) { lastFrame = now; render() }
 
 - Visual skill defines **what** motion should feel like (slow, deliberate, system-like).
 - This skill defines **how much** motion the device can afford.
-- When polish conflicts with budget, **reduce motion scope** — never add a second ambient system.
+- When polish conflicts with budget, **reduce motion scope**, never add a second ambient system.
 
 ## Reference implementations
 
-- `components/visuals/DotField/DotField.tsx` — visibility + reduced motion
-- `components/visuals/AIBackground/AIBackground.tsx` — intersection pause
-- `specs/visuals/dot-fabric.md` — canvas density (note: budget in `11-performance-budget.md` is authoritative for caps)
+- `components/visuals/DotField/DotField.tsx`, visibility + reduced motion
+- `components/visuals/AIBackground/AIBackground.tsx`, intersection pause
+- `specs/visuals/dot-fabric.md`, canvas density (note: budget in `11-performance-budget.md` is authoritative for caps)

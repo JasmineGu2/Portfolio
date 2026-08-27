@@ -19,7 +19,7 @@ export interface HeroStrengthPill {
   icon?: 'monitor' | 'rocket' | 'sparkle'
 }
 
-/** Homepage core strengths — max 6–7 tags */
+/** Homepage core strengths, max 6–7 tags */
 export const HERO_STRENGTHS: HeroStrengthPill[] = [
   { label: 'Product Strategy', variant: 'primary', accent: 'coral' },
   { label: 'AI-Powered Products', variant: 'primary', accent: 'lavender', icon: 'rocket' },

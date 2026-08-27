@@ -42,7 +42,7 @@ export const ACCENT_HEX: Record<NodeAccent, string> = {
   coral: '#fb923c',
 }
 
-/** Top trigger — school */
+/** Top trigger, school */
 export const SCHOOL_NODE: WorkflowNode = {
   id: 'education',
   title: 'CS + Business Dual Degree',
@@ -69,7 +69,7 @@ export const WORKFLOW_LAYERS: WorkflowLayer[] = [
         pill: 'Zero to one',
         accent: 'yellow',
         story:
-          'Pre-seed stealth startup — auth, PostgreSQL, Django, payments. Full product ownership from zero to one.',
+          'Pre-seed stealth startup: auth, PostgreSQL, Django, payments. Full product ownership from zero to one.',
       },
       {
         id: 'intuit',
@@ -92,7 +92,7 @@ export const WORKFLOW_LAYERS: WorkflowLayer[] = [
         pill: '40% faster insight',
         accent: 'pink',
         story:
-          'Operator-facing ML software — React UI, video infra, bounding boxes. ~40% faster time-to-insight for ops teams.',
+          'Operator-facing ML software: React UI, video infra, bounding boxes. ~40% faster time-to-insight for ops teams.',
         links: [{ label: 'Case study', href: '/tesla' }],
       },
       {
@@ -144,7 +144,7 @@ export const WORKFLOW_LAYERS: WorkflowLayer[] = [
         pill: '60% adoption ↑',
         accent: 'coral',
         story:
-          'Owned ADP Studio query platform — 60% adoption lift, 3× workspace. AI schema assist & MCP roadmap.',
+          'Owned ADP Studio query platform. 60% adoption lift, 3× workspace. AI schema assist & MCP roadmap.',
       },
     ],
   },
@@ -159,7 +159,7 @@ export const WORKFLOW_LAYERS: WorkflowLayer[] = [
         pill: 'Leadership',
         logoLetter: 'P',
         accent: 'lavender',
-        story: 'Redesigned Ivey Product Society Fellowship — a 50-person product bootcamp.',
+        story: 'Redesigned Ivey Product Society Fellowship, a 50-person product bootcamp.',
       },
       {
         id: 'rtc',

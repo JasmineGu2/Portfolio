@@ -1,4 +1,4 @@
-# 03 — Data Model
+# 03, Data Model
 
 ## Principle
 
@@ -257,4 +257,4 @@ Reusable across Architecture and Ask answers:
 1. Ask may only make claims supported by structured portfolio data.
 2. Do not fabricate experiences, technologies, metrics, or opinions.
 3. Use `CONTENT_REQUIRED` / `PROJECT_DATA_REQUIRED` placeholders.
-4. Same ID everywhere — `tesla` in Work = `tesla` in graph = `tesla` in Ask context.
+4. Same ID everywhere, `tesla` in Work = `tesla` in graph = `tesla` in Ask context.

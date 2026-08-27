@@ -31,7 +31,7 @@ export interface LandingStrength {
   variant: 'primary-coral' | 'primary-lavender' | 'supporting'
 }
 
-/** Homepage core strengths — capabilities, not values */
+/** Homepage core strengths, capabilities, not values */
 export const LANDING_STRENGTHS: LandingStrength[] = [
   { label: 'Product Strategy', variant: 'primary-coral' },
   { label: 'AI-Powered Products', variant: 'primary-lavender' },
@@ -170,7 +170,7 @@ function cardToLanding(id: WorkId): LandingExperience {
     category: card.category,
     subtitle: card.subtitle,
     tags: card.tags.map((tag) => tag.label),
-    imageAlt: `${card.company} — ${card.role}`,
+    imageAlt: `${card.company}, ${card.role}`,
   }
 }
 

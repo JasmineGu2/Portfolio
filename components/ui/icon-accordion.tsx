@@ -17,19 +17,19 @@ interface AccordionComponentProps {
 
 const defaultItems: AccordionItem[] = [
   {
-    title: "Tesla — Engineer → Sales & Brand Activation",
+    title: "Tesla: Engineer → Sales & Brand Activation",
     description: "Weekdays: ML observability engineering. Weekends: sales and brand activations. (~2K+ leads across SF events and storefronts)"
   },
   {
-    title: "Intuit — Frontend SWE → Shadowed PMs",
+    title: "Intuit: Frontend SWE → Shadowed PMs",
     description: "Built TurboTax onboarding and studied how A/B tests and experimentation make signing up for taxes delightful."
   },
   {
-    title: "OMERS — Solutions Engineer → Business Analyst",
-    description: "Shipped end-to-end enterprise IT solutions—from requirements → dev → QA → business ops."
+    title: "OMERS: Solutions Engineer → Business Analyst",
+    description: "Shipped end-to-end enterprise IT solutions, from requirements → dev → QA → business ops."
   },
   {
-    title: "Metaverse Group — BA → Python Engineer & B2B Growth Lead",
+    title: "Metaverse Group: BA → Python Engineer & B2B Growth Lead",
     description: "Automated B2B outreach with Python, generating 1,000+ leads from KPMG, Puma, and Hugo Boss."
   }
 ]

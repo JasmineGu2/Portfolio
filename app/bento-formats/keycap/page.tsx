@@ -1,7 +1,7 @@
 import { KeycapBentoFormat } from '@/components/portfolio/bento-formats/KeycapBentoFormat'
 
 export const metadata = {
-  title: 'Bento format — Keycap playground',
+  title: 'Bento format · Keycap playground',
 }
 
 export default function KeycapBentoPage() {

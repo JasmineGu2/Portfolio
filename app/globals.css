@@ -37,7 +37,7 @@ body {
 }
 
 .flow-node-current {
-  /* deprecated — use .n8n-node--running */
+  /* deprecated, use .n8n-node--running */
 }
 
 :focus-visible {

@@ -40,7 +40,7 @@ export function createClusters(count: number, seed = 42): ClusterBlob[] {
   return blobs
 }
 
-/** Metaball positions — faster gather / disperse cycles for visible motion. */
+/** Metaball positions, faster gather / disperse cycles for visible motion. */
 export function clusterPosition(
   blob: ClusterBlob,
   time: number
@@ -64,7 +64,7 @@ export function ambientNoise(x: number, y: number, time: number): number {
   )
 }
 
-/** Fractional Brownian motion — contour bands from layered sine octaves. */
+/** Fractional Brownian motion, contour bands from layered sine octaves. */
 export function fbmContour(x: number, y: number, time: number): number {
   const t = time * 0.00022
   let value = 0
@@ -140,7 +140,7 @@ export function sampleFieldDensity(
 }
 
 /**
- * Contour + flow density — perimeter clusters, central channel void, swirling bands.
+ * Contour + flow density, perimeter clusters, central channel void, swirling bands.
  * Returns 0–1; all visual intensity comes from glyph population, not fills.
  */
 export function sampleContourDensity(
@@ -179,7 +179,7 @@ export function sampleContourDensity(
   return Math.max(0, Math.min(1, combined))
 }
 
-/** Soft attenuation inside DOM card rects — creates negative space behind content. */
+/** Soft attenuation inside DOM card rects, creates negative space behind content. */
 export function domDensityMask(
   x: number,
   y: number,

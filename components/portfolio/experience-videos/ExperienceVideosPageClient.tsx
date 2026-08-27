@@ -24,7 +24,7 @@ export function ExperienceVideosPageClient() {
   return (
     <BentoWorkspaceShell
       title="Experience video tiles"
-      description="Animated square previews for each role — the loop clips from your previous site, with logo fallbacks where video isn’t available yet."
+      description="Animated square previews for each role. The loop clips from your previous site, with logo fallbacks where video isn’t available yet."
     >
       <section className="exp-vid-page">
         <div className="exp-vid-hero-panel">

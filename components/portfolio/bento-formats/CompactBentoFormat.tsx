@@ -10,7 +10,7 @@ export function CompactBentoFormat() {
     <BentoFormatShell
       formatId="compact"
       title="Compact mosaic"
-      description="A dense 4-column bento box — small gaps, flat background, every tile visible at once."
+      description="A dense 4-column bento box: small gaps, flat background, every tile visible at once."
     >
       <div className="bf-compact-grid">
         <div className="bf-compact-cell bf-compact-cell--intro">

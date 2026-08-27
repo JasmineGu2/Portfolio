@@ -79,7 +79,7 @@ export const WORK_CARD_STYLE_OPTIONS: WorkCardStyleOption[] = [
   {
     id: 'current-compact',
     name: '01 · Current compact',
-    description: 'Small logo beside text — what the site uses today.',
+    description: 'Small logo beside text, what the site uses today.',
     bestFor: 'Dense bento grids with many tiles',
   },
   {
@@ -103,7 +103,7 @@ export const WORK_CARD_STYLE_OPTIONS: WorkCardStyleOption[] = [
   {
     id: 'photo-banner',
     name: '05 · Photo banner',
-    description: 'Full-width logo band across the top — gallery-style.',
+    description: 'Full-width logo band across the top, gallery-style.',
     bestFor: 'Matching gallery moment tiles',
   },
   {
@@ -139,7 +139,7 @@ export const WORK_CARD_STYLE_OPTIONS: WorkCardStyleOption[] = [
   {
     id: 'logo-zoom-center',
     name: '11 · Logo zoom center',
-    description: 'Oversized logo centered on the card — no tinted box or watermark.',
+    description: 'Oversized logo centered on the card, no tinted box or watermark.',
     bestFor: 'Clean, logo-first tiles on the home canvas',
   },
   {
@@ -163,7 +163,7 @@ export const WORK_CARD_STYLE_OPTIONS: WorkCardStyleOption[] = [
   {
     id: 'logo-badge-center',
     name: '15 · Logo badge center',
-    description: 'Circular logo badge as the focal point — no surrounding frame.',
+    description: 'Circular logo badge as the focal point, no surrounding frame.',
     bestFor: 'App-icon style experience nodes',
   },
   {

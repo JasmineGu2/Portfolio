@@ -1,7 +1,7 @@
 import { CompactBentoFormat } from '@/components/portfolio/bento-formats/CompactBentoFormat'
 
 export const metadata = {
-  title: 'Bento format — Compact mosaic',
+  title: 'Bento format · Compact mosaic',
 }
 
 export default function CompactBentoPage() {

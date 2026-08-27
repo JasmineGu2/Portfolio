@@ -498,12 +498,12 @@
   background: var(--sp-bullet);
 }
 
-/* Pure — grey dot only on skills */
+/* Pure, grey dot only on skills */
 .tesla-var--spacious-editorial {
   --sp-accent: #c8ccd6;
 }
 
-/* Coral hint — labels + bullets + soft rule */
+/* Coral hint, labels + bullets + soft rule */
 .tesla-var--spacious-coral-hint {
   --sp-label: color-mix(in srgb, #ff5a36 72%, #a1a7b3);
   --sp-bullet: #ff5a36;
@@ -511,13 +511,13 @@
   --sp-meta-rule: 2px;
 }
 
-/* Navy headlines — brand serif color, minimal dot accent */
+/* Navy headlines, brand serif color, minimal dot accent */
 .tesla-var--spacious-navy-headlines {
   --sp-headline: #210795;
   --sp-accent: #ff5a36;
 }
 
-/* Lavender impact — one tinted panel at the bottom */
+/* Lavender impact, one tinted panel at the bottom */
 .tesla-var--spacious-lavender-impact .tesla-var__section--impact {
   margin-top: 3rem;
   padding: 1.35rem 1.4rem 1.45rem;
@@ -535,7 +535,7 @@
   padding: 1rem 1.05rem;
 }
 
-/* Warm paper — cream canvas, coral labels */
+/* Warm paper, cream canvas, coral labels */
 .tesla-var--spacious-warm-paper {
   --sp-bg: #fbfaf6;
   --sp-meta-border: #e8e4da;
@@ -543,7 +543,7 @@
   --sp-headline: #2d3142;
 }
 
-/* Line mark — accent rules, no fill panels */
+/* Line mark, accent rules, no fill panels */
 .tesla-var--spacious-line-mark {
   --sp-meta-border: color-mix(in srgb, #ff5a36 35%, #ececf1);
   --sp-meta-rule: 2px;

@@ -20,7 +20,7 @@ export function KeycapBentoFormat() {
     <BentoFormatShell
       formatId="keycap"
       title="Keycap playground"
-      description="OVERFLOW-inspired keycap blocks — thick borders, offset shadows, and saturated color fills."
+      description="OVERFLOW-inspired keycap blocks: thick borders, offset shadows, and saturated color fills."
     >
       <div className="bf-keycap-grid">
         {allTiles.map((tile, i) => (

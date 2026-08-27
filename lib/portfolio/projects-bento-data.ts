@@ -27,7 +27,7 @@ export interface ProjectTileSpec {
 
 export const PROJECTS_INTRO = {
   title: 'Case studies and builds',
-  lead: 'Product case studies from Ivey and technical projects from hackathons, internships, and side builds — all in one workflow.',
+  lead: 'Product case studies from Ivey and technical projects from hackathons, internships, and side builds, all in one workflow.',
 }
 
 function normalizeSrc(src: string): string {
@@ -94,26 +94,17 @@ function buildTechnicalTiles(): ProjectTileSpec[] {
   })
 }
 
-const PLACEMENTS: Record<string, { col: string; row: string }> = {
-  ubereats: { col: '1 / span 8', row: '1' },
-  'hackwestern-web-developer': { col: '9 / span 4', row: '1' },
-  'rbc-leap': { col: '1 / span 5', row: '2' },
-  tldw: { col: '6 / span 7', row: '2' },
-  'compass-food-bank': { col: '1 / span 4', row: '3' },
-  brewmates: { col: '5 / span 4', row: '3' },
-  'email-scraping-bot': { col: '9 / span 4', row: '3' },
-  'personal-website': { col: '1 / span 7', row: '4' },
-  fellowship: { col: '8 / span 5', row: '4' },
-}
-
+/**
+ * Tiles flow in document order at a uniform size; each grid that renders them (the
+ * projects page and the Architecture explorations strip) picks its own column count
+ * per breakpoint.
+ *
+ * This replaced a hand-placed 12-column mosaic where some cards spanned 8 columns.
+ * The screenshots are `object-fit: contain` and cluster around 16:9, so a card that
+ * wide left them stranded in broad empty bands on either side.
+ */
 function withPlacements(tiles: ProjectTileSpec[]): ProjectTileSpec[] {
-  return tiles.map((tile, index) => ({
-    ...tile,
-    ...(PLACEMENTS[tile.id] ?? {
-      col: String((index % 4) + 1),
-      row: String(Math.floor(index / 4) + 1),
-    }),
-  }))
+  return tiles.map((tile) => ({ ...tile, col: 'auto', row: 'auto' }))
 }
 
 export const PM_PROJECT_TILES = buildPmTiles()

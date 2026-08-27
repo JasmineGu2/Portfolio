@@ -15,7 +15,7 @@ export function VerticalFlowBentoFormat() {
     <BentoFormatShell
       formatId="vertical"
       title="Vertical flow strips"
-      description="Full-width horizontal bento bars stacked on a dot canvas — timeline rail on the left."
+      description="Full-width horizontal bento bars stacked on a dot canvas, with a timeline rail on the left."
     >
       <div className="bf-vertical-wrap">
         <div className="bf-vertical-rail" aria-hidden>

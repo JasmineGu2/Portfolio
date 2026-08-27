@@ -1,8 +1,8 @@
-# 04 — Visual System
+# 04, Visual System
 
 ## Typography hierarchy
 
-Four typefaces. Each has a clear job — do not force custom typography everywhere.
+Four typefaces. Each has a clear job, do not force custom typography everywhere.
 
 | Font | Role | Use for |
 |------|------|---------|
@@ -33,7 +33,7 @@ Wired in `app/portfolio-fonts.css` with utility classes: `.font-bootzy`, `.font-
 
 Move away from black + neon-purple AI aesthetic.
 
-**Feel:** optimistic, tactile, creative, slightly nostalgic, warm, sophisticated — technological without looking "cyber." Editorial postcard vibe: warm off-white/cream canvas, soft charcoal ink, muted botanical glow.
+**Feel:** optimistic, tactile, creative, slightly nostalgic, warm, sophisticated, technological without looking "cyber." Editorial postcard vibe: warm off-white/cream canvas, soft charcoal ink, muted botanical glow.
 
 Avoid highly saturated neon. Avoid purple as dominant accent. No flat beige résumé blocks.
 
@@ -61,12 +61,12 @@ Use colors softly rather than as hard blocks.
 
 ### Gradient presets
 
-Layered radial gradients — airbrushed blobs, not linear bands:
+Layered radial gradients, airbrushed blobs, not linear bands:
 
-- `--pf-gradient-warm` — gold → peach → cream
-- `--pf-gradient-cool` — blue → mint → green
-- `--pf-gradient-botanical` — gold + peach + blue + mint (default atmosphere)
-- `--pf-gradient-postcard` — vertical rainbow strip feel for hero/editorial
+- `--pf-gradient-warm`, gold → peach → cream
+- `--pf-gradient-cool`, blue → mint → green
+- `--pf-gradient-botanical`, gold + peach + blue + mint (default atmosphere)
+- `--pf-gradient-postcard`, vertical rainbow strip feel for hero/editorial
 
 ### Work bento pages
 
@@ -76,7 +76,7 @@ Production Work / Projects use `portfolio-warm` scheme (`PORTFOLIO_DEFAULT_SCHEM
 
 ## Gradients
 
-Should look like ambient light or blurred translucent forms — not conventional linear CSS gradients.
+Should look like ambient light or blurred translucent forms, not conventional linear CSS gradients.
 
 ### Qualities
 - Very soft edges
@@ -159,7 +159,7 @@ Example: warm off-white card containing `TESLA` with a technical agent-style met
 
 Represents: **human experience → system capability**
 
-Work bento tiles are a fourth variant — existing themed work-exp tiles. Keep for Work and Projects pages.
+Work bento tiles are a fourth variant, existing themed work-exp tiles. Keep for Work and Projects pages.
 
 ---
 
@@ -205,7 +205,7 @@ Motion should feel **slow, deliberate, and system-like**.
 
 ## Dot fabric visual (optional)
 
-For Architecture hero backgrounds, abstraction stages, Work bento canvas, and optional Ask panel texture — see the **[visuals specs](./visuals/README.md)** — especially [dot-fabric.md](./visuals/dot-fabric.md).
+For Architecture hero backgrounds, abstraction stages, Work bento canvas, and optional Ask panel texture, see the **[visuals specs](./visuals/README.md)**, especially [dot-fabric.md](./visuals/dot-fabric.md).
 
 Red speckle dots (`--pf-dot`) appear as CSS radial-gradient texture on canvases; animated DotField uses botanical gold/peach/blue/mint with deterministic red speckles via noise threshold.
 

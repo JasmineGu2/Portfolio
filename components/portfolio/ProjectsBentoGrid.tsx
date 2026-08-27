@@ -53,23 +53,12 @@ function ProjectTile({ tile }: { tile: ProjectTileSpec }) {
   const accent = resolveProjectAccent(tile.track, colorScheme, tile.tag)
   const accentStyle = workTileThemeStyleVars(accent) as CSSProperties
 
-  const isWide =
-    tile.col.includes('span 2') ||
-    tile.col.includes('span 3') ||
-    tile.col.includes('span 4') ||
-    tile.col.includes('span 5') ||
-    tile.col.includes('span 6') ||
-    tile.col.includes('span 7') ||
-    tile.col.includes('span 8')
-  const isTall = tile.row.includes('span 2')
-  const isFeatured = isWide && isTall
-
+  // Every tile is the same size now that the grid auto-flows, so there's no
+  // featured/wide variant to branch on.
   const className = cn(
     'bento-tile bento-tile--work-exp bento-tile--work-exp--themed bento-tile--work-exp--media bento-tile--work-exp--has-video flex flex-col w-full h-auto',
     accent.textOn === 'dark' && 'bento-tile--work-exp--dark-text',
-    tile.href !== '#' && 'bento-tile--clickable',
-    isFeatured && 'bento-tile--featured',
-    !isFeatured && (isTall || isWide) && 'bento-tile--wide'
+    tile.href !== '#' && 'bento-tile--clickable'
   )
 
   const inner = (
@@ -83,12 +72,7 @@ function ProjectTile({ tile }: { tile: ProjectTileSpec }) {
         )}
       </div>
 
-      <div
-        className={cn(
-          'bw-exp-media-stage bw-exp-media-stage--video',
-          isFeatured && 'bw-exp-media-stage--featured'
-        )}
-      >
+      <div className="bw-exp-media-stage bw-exp-media-stage--video">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={tile.imageSrc}
@@ -99,14 +83,7 @@ function ProjectTile({ tile }: { tile: ProjectTileSpec }) {
       </div>
 
       <div className="bw-exp-copy bw-exp-copy--media">
-        <p
-          className={cn(
-            'bento-label',
-            isFeatured ? 'text-base md:text-lg' : isWide ? 'text-sm md:text-base' : 'text-sm'
-          )}
-        >
-          {tile.title}
-        </p>
+        <p className="bento-label text-sm">{tile.title}</p>
         <p className="bento-caption mt-0.5">{tile.subtitle}</p>
       </div>
     </>

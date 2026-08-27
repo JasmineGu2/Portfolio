@@ -84,7 +84,7 @@ export function TeslaCaseStudyClient() {
   const [activeSection, setActiveSection] = useState(TESLA_CASE_STUDY_SECTIONS[0].id)
   const [readProgress, setReadProgress] = useState(0)
 
-  // The app shell scrolls internally on .bw-main, not the window/document — a plain
+  // The app shell scrolls internally on .bw-main, not the window/document, a plain
   // <a href="#id"> fragment jump is ambiguous about which of those it scrolls, and in
   // practice it was scrolling the wrong one, taking the sticky sidebar off-screen with it.
   // Scrolling the target explicitly finds the real scrollable ancestor correctly.
@@ -259,7 +259,7 @@ export function TeslaCaseStudyClient() {
               <span className="tesla-cs__em">model runs</span>,{' '}
               <span className="tesla-cs__em">camera footage</span>,{' '}
               <span className="tesla-cs__em">operational charts</span>, and{' '}
-              <span className="tesla-cs__em">related metadata</span>—often while diagnosing
+              <span className="tesla-cs__em">related metadata</span>, often while diagnosing
               time-sensitive issues.
             </Body>
             <Body>
@@ -455,7 +455,7 @@ export function TeslaCaseStudyClient() {
               <span className="tesla-cs__em">12+ Tesla sales</span>.
             </Body>
             <Body>
-              I loved getting to know customers and the San Francisco Bay Area ecosystem—and driving a red
+              I loved getting to know customers and the San Francisco Bay Area ecosystem, and driving a red
               Cybertruck was a definite highlight.
             </Body>
           </section>

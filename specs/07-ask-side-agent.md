@@ -1,8 +1,8 @@
-# 07 — Ask Side Agent
+# 07, Ask Side Agent
 
 Ask is a **floating side panel**, not a primary page. It queries Work (and references Architecture paths). It must NOT feel like a generic ChatGPT clone.
 
-Route `/ask` redirects to `/` — use the side panel.
+Route `/ask` redirects to `/`, use the side panel.
 
 ---
 
@@ -83,7 +83,7 @@ After selecting an experience in Ask, suggestions become experience-specific.
 
 ## Context chips (planned)
 
-Below composer — selectable filters, NOT prompts:
+Below composer, selectable filters, NOT prompts:
 
 ```text
 [ Tesla × ] [ Autodesk × ] [ Projects ] [ + ]
@@ -100,9 +100,9 @@ Below composer — selectable filters, NOT prompts:
 | Mode | Behavior |
 |------|----------|
 | **Explain** | Normal conversational answer |
-| **Compare** | Requires multiple contexts — compare scope, depth, lessons |
-| **Trace** | Narrative across experiences — highlight path on Architecture |
-| **Show Me** | Portfolio navigation — filter/highlight Work tiles, scroll to section |
+| **Compare** | Requires multiple contexts, compare scope, depth, lessons |
+| **Trace** | Narrative across experiences, highlight path on Architecture |
+| **Show Me** | Portfolio navigation, filter/highlight Work tiles, scroll to section |
 
 ---
 
@@ -163,7 +163,7 @@ After selecting Engineering: `Tesla` · `Autodesk SWE` · `Intuit` · `Projects`
 
 After selecting Tesla: `What I Built` · `Hardest Problem` · `What I Learned` · `What Came Next`
 
-Optional: `✦ Surprise me` — surfaces less obvious story from available data only.
+Optional: `✦ Surprise me`, surfaces less obvious story from available data only.
 
 ---
 
@@ -196,7 +196,7 @@ At every point provide one or more of:
 - Suggested follow-ups
 - Actions (Trace, Show Me)
 
-**Feel like:** the fastest way to understand Jasmine — not a chatbot embedded in a portfolio.
+**Feel like:** the fastest way to understand Jasmine, not a chatbot embedded in a portfolio.
 
 ---
 

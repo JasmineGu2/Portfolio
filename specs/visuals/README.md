@@ -4,7 +4,7 @@ Implementation specs for reusable animated surfaces and ambient effects in the p
 
 **Code home:** `components/visuals/`
 
-**Design context:** [04 — Visual System](../04-visual-system.md) · [Overview](./overview.md)
+**Design context:** [04, Visual System](../04-visual-system.md) · [Overview](./overview.md)
 
 ---
 
@@ -12,9 +12,9 @@ Implementation specs for reusable animated surfaces and ambient effects in the p
 
 | Document | System | Component | Status |
 |----------|--------|-----------|--------|
-| [overview.md](./overview.md) | Visuals layer philosophy & placement rules | — | Reference |
+| [overview.md](./overview.md) | Visuals layer philosophy & placement rules |, | Reference |
 | [dot-fabric.md](./dot-fabric.md) | Animated dot surface (continuous deforming fabric) | `components/visuals/DotField/` | ✅ Built |
-| [hover.md](./hover.md) | Agent context stack (isometric slabs) | — | 🔲 Concept |
+| [hover.md](./hover.md) | Agent context stack (isometric slabs) |, | 🔲 Concept |
 
 ---
 

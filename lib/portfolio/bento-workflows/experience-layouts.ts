@@ -65,7 +65,7 @@ const HOME_DUO_BUCKET_EDGES = duoBucketChains({
 
 const FULL_CHAIN = chain(...WORK_ORDER)
 
-/** Spaced hero + 9 experience blocks — engineering vs product tracks */
+/** Spaced hero + 9 experience blocks, engineering vs product tracks */
 export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'home-wireframe',
@@ -110,7 +110,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'hub-spoke',
     title: 'Hub & spoke',
-    description: 'Autodesk TPM anchors the center — internships and roles connect inward.',
+    description: 'Autodesk TPM anchors the center, with internships and roles connecting inward.',
     tag: 'Radial',
     gridClass: 'bw-grid--hub',
     careerEntry: 'autodesk',
@@ -184,7 +184,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'diamond-core',
     title: 'Diamond core',
-    description: 'Autodesk anchors the middle — internships form a diamond around it.',
+    description: 'Autodesk anchors the middle, with internships forming a diamond around it.',
     tag: 'Diamond',
     gridClass: 'bw-grid--diamond',
     careerEntry: 'autodesk',
@@ -343,7 +343,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'hero-corner',
     title: 'Corner flow',
-    description: 'Hero in the corner — experience fills toward bottom-right.',
+    description: 'Hero in the corner, experience filling toward bottom-right.',
     tag: 'Corner',
     gridClass: 'bw-grid--corner',
         work: {
@@ -381,7 +381,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'cross-axis',
     title: 'Cross axis',
-    description: 'Hero and Western anchor a spine — paths branch left and right.',
+    description: 'Hero and Western anchor a spine, with paths branching left and right.',
     tag: 'Cross',
     gridClass: 'bw-grid--cross',
         work: {
@@ -404,7 +404,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'timeline-left',
     title: 'Timeline rows',
-    description: 'Hero cube plus two timeline rows — school top, internships below.',
+    description: 'Hero cube plus two timeline rows: school top, internships below.',
     tag: 'Timeline',
     gridClass: 'bw-grid--timeline',
         work: {
@@ -442,7 +442,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'inverted-flow',
     title: 'Featured anchor',
-    description: 'Hero cube up top — Autodesk anchors the bottom row.',
+    description: 'Hero cube up top, Autodesk anchoring the bottom row.',
     tag: 'Anchor',
     gridClass: 'bw-grid--inverted',
     careerEntry: 'autodesk',
@@ -481,7 +481,7 @@ export const EXPERIENCE_LAYOUT_SPECS: ExperienceLayoutSpec[] = [
   {
     slug: 'focal-center',
     title: 'Focal center',
-    description: 'Autodesk as the large center block — all roles connect inward.',
+    description: 'Autodesk as the large center block, all roles connecting inward.',
     tag: 'Center',
     gridClass: 'bw-grid--focal',
     careerEntry: 'autodesk',

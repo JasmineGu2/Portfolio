@@ -14,7 +14,7 @@ Everything else → static | paused | cheap
 Only animate what's visible
 ```
 
-If a new effect competes with an existing motion layer, **remove or defer** the weaker one — do not stack ambient animations.
+If a new effect competes with an existing motion layer, **remove or defer** the weaker one, do not stack ambient animations.
 
 ---
 
@@ -24,7 +24,7 @@ Each layer has one job. Do not duplicate work.
 
 | Layer | Responsibility | Not responsible for |
 |-------|----------------|---------------------|
-| **Videos** | Show work — interfaces, process, artifacts | Atmosphere, scroll narrative |
+| **Videos** | Show work, interfaces, process, artifacts | Atmosphere, scroll narrative |
 | **Connectors** | Relationships between nodes / tiles | Decorative motion |
 | **Generative layer** (dot fabric, AI background) | Atmosphere, AI presence | Storytelling, video playback |
 | **Scroll** | Narrative pacing, section reveals | Ambient particle fields |
@@ -46,14 +46,14 @@ Before adding motion, ask: *which row owns this job?* If two layers answer the s
 
 ## Videos
 
-- **Poster by default** — never autoplay a blank frame.
-- **Play on visible or hover only** — use IntersectionObserver; pause when offscreen.
+- **Poster by default**, never autoplay a blank frame.
+- **Play on visible or hover only**, use IntersectionObserver; pause when offscreen.
 - **Max 1–2 videos decoding** at once site-wide.
-- **Short, compressed** WebM (preferred) or MP4 — sized to display dimensions, not source resolution.
-- **Responsive encodes** — smaller files for card thumbnails vs hero.
+- **Short, compressed** WebM (preferred) or MP4, sized to display dimensions, not source resolution.
+- **Responsive encodes**, smaller files for card thumbnails vs hero.
 
 ```tsx
-// Pause offscreen — pattern used in DotField, Tesla case study, etc.
+// Pause offscreen, pattern used in DotField, Tesla case study, etc.
 const observer = new IntersectionObserver(
   ([entry]) => {
     const visible = entry?.isIntersecting ?? false
@@ -82,14 +82,14 @@ observer.observe(videoContainer)
 
 ## Canvas (generative / dot fabric)
 
-- **One global canvas** per viewport — no stacked full-screen canvases.
+- **One global canvas** per viewport, no stacked full-screen canvases.
 - **Particle caps by device:**
   - Desktop: 1,500–3,000 (hard ceiling ~3,000)
   - Mobile: 500–1,000, or **disable** ambient canvas entirely
-- **24–30fps ambient** — not 60fps for background fields.
+- **24–30fps ambient**, not 60fps for background fields.
 - **60fps only** for direct interaction (drag, hover response tied to pointer).
-- **Single animation scheduler** — one rAF loop coordinates all canvas work; no independent loops per component.
-- **IntersectionObserver pause** — cancel rAF when offscreen.
+- **Single animation scheduler**, one rAF loop coordinates all canvas work; no independent loops per component.
+- **IntersectionObserver pause**, cancel rAF when offscreen.
 
 ```ts
 const TARGET_FPS = 30
@@ -141,7 +141,7 @@ Scroll narrative should use GPU-friendly properties only. Prefer CSS transitions
 
 ## Blur
 
-- **Do not animate `filter: blur()`** — it is expensive and triggers repaints every frame.
+- **Do not animate `filter: blur()`**, it is expensive and triggers repaints every frame.
 - Use **prerendered textures** (static PNG/WebP blur plates) or **translate3d on gradient layers** for depth.
 - If blur is decorative, bake it into an asset; if it must move, move the layer with `transform`, not the filter.
 
@@ -149,7 +149,7 @@ Scroll narrative should use GPU-friendly properties only. Prefer CSS transitions
 
 ## Lazy load & progressive unlock
 
-Load in priority order — do not fetch everything on first paint.
+Load in priority order, do not fetch everything on first paint.
 
 | Phase | What loads |
 |-------|------------|
@@ -162,10 +162,10 @@ Load in priority order — do not fetch everything on first paint.
 // Images
 <img src="..." loading="lazy" decoding="async" />
 
-// Video — no preload until needed
+// Video, no preload until needed
 <video preload="none" poster="..." />
 
-// Heavy components — Next.js dynamic import
+// Heavy components, Next.js dynamic import
 import dynamic from 'next/dynamic'
 
 const AgentSidePanel = dynamic(
@@ -183,7 +183,7 @@ const DotField = dynamic(
 
 ## Fonts
 
-- **Minimal weights** — only load faces actually used (typically 400 + one display weight).
+- **Minimal weights**, only load faces actually used (typically 400 + one display weight).
 - **WOFF2** format only in production.
 - **Subset** to Latin + required glyphs; avoid loading full character sets for display faces.
 
@@ -195,7 +195,7 @@ Files live in `public/fonts/`; faces declared in `app/portfolio-fonts.css`.
 
 - **Images:** `srcset` + `sizes` for card grids and hero; serve WebP/AVIF where supported.
 - **Videos:** separate encodes for card (low bitrate, short loop) vs detail page (higher quality, longer).
-- Asset dimensions should match **display size × DPR cap** — not 4K for a 400px card.
+- Asset dimensions should match **display size × DPR cap**, not 4K for a 400px card.
 
 ---
 
@@ -229,16 +229,16 @@ const reducedMotion =
 
 Use before shipping any new motion, video, or visual effect:
 
-- [ ] **One canvas** — no second full-viewport generative layer
-- [ ] **Particle caps** — desktop ≤3,000; mobile ≤1,000 or disabled
+- [ ] **One canvas**, no second full-viewport generative layer
+- [ ] **Particle caps**, desktop ≤3,000; mobile ≤1,000 or disabled
 - [ ] **Max 1–2 videos decoding** simultaneously
-- [ ] **No offscreen rAF loops** — IntersectionObserver pauses all ambient animation
+- [ ] **No offscreen rAF loops**, IntersectionObserver pauses all ambient animation
 - [ ] **24–30fps ambient**, 60fps only for direct pointer interaction
-- [ ] **Lazy media** — `loading="lazy"`, `preload="none"`, dynamic imports for heavy UI
-- [ ] **No animated blur** — prerendered or transform-only depth
+- [ ] **Lazy media**, `loading="lazy"`, `preload="none"`, dynamic imports for heavy UI
+- [ ] **No animated blur**, prerendered or transform-only depth
 - [ ] **Scroll uses transform + opacity only**
-- [ ] **Minimal font weights** — WOFF2, subset
-- [ ] **Effect matrix** — new motion does not duplicate an existing layer's job
+- [ ] **Minimal font weights**, WOFF2, subset
+- [ ] **Effect matrix**, new motion does not duplicate an existing layer's job
 - [ ] **DevTools / Lighthouse** verified on **CPU throttle** (4× slowdown) and mobile viewport
 
 ---
@@ -246,7 +246,7 @@ Use before shipping any new motion, video, or visual effect:
 ## Verification
 
 1. Chrome DevTools → Performance → CPU 4× throttle → record scroll + hover + open Ask.
-2. Lighthouse → Performance (mobile) — watch TBT, LCP, CLS; investigate any new long tasks.
+2. Lighthouse → Performance (mobile), watch TBT, LCP, CLS; investigate any new long tasks.
 3. Rendering tab → check **Frames** during ambient animation; target ≤33ms/frame for ambient.
 4. Network → confirm videos and heavy chunks load only after scroll or interaction.
 

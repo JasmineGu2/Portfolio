@@ -16,7 +16,14 @@ export function ChatFloatingWidget() {
 
   useEffect(() => {
     const sentinel = document.querySelector(CHAT_HERO_SENTINEL_SELECTOR)
-    if (!sentinel) return
+
+    // The home page hides the launcher until you've scrolled past the hero chat,
+    // so the two don't compete. Every other page has no hero chat, so the
+    // launcher is the only entry point and should be there immediately.
+    if (!sentinel) {
+      setVisible(true)
+      return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {

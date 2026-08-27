@@ -1,5 +1,5 @@
 // ============================================================================
-// WORKFLOW TYPES — Edit content in workflow-data.ts, not here
+// WORKFLOW TYPES, Edit content in workflow-data.ts, not here
 // ============================================================================
 
 export type NodeType =

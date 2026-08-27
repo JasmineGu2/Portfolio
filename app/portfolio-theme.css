@@ -1,4 +1,4 @@
-/* Portfolio theme — component styles. Canonical tokens live in portfolio-tokens.css */
+/* Portfolio theme, component styles. Canonical tokens live in portfolio-tokens.css */
 
 /* ── Unified card / glass surface system ── */
 .pf-glass-card {
@@ -37,7 +37,7 @@
   box-shadow: var(--pf-shadow-outline-hover-dark);
 }
 
-/* Mini glass card wrapping readable text — chat, hero copy, bento labels */
+/* Mini glass card wrapping readable text, chat, hero copy, bento labels */
 .pf-text-card {
   display: block;
   width: fit-content;
@@ -117,7 +117,7 @@
   letter-spacing: -0.005em;
 }
 
-/* Site header — Inter utility nav, warm ink */
+/* Site header, Inter utility nav, warm ink */
 .site-header {
   font-family: 'Inter', system-ui, sans-serif;
   box-shadow: var(--pf-shadow-outline-subtle);
@@ -145,7 +145,7 @@
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Editorial nav links — no pill/button chrome */
+/* Editorial nav links, no pill/button chrome */
 .site-nav-link {
   display: inline-flex;
   align-items: center;
@@ -207,7 +207,7 @@
   text-decoration-color: color-mix(in srgb, var(--pf-accent) 55%, transparent);
 }
 
-/* Site nav identity + contact — editorial, not pill buttons */
+/* Site nav identity + contact, editorial, not pill buttons */
 .site-nav-identity {
   display: inline-flex;
   align-items: center;
@@ -1031,7 +1031,7 @@
   height: 100%;
 }
 
-/* Page-level AIBackground — portaled to body at z-index 0; shell content stacks above */
+/* Page-level AIBackground, portaled to body at z-index 0; shell content stacks above */
 .bw-shell[data-ai-background] {
   position: relative;
   z-index: 1;
@@ -1164,7 +1164,7 @@
   border-color: var(--pf-card-border-dark);
 }
 
-/* Kept in light mode for now — see app/architecture/architecture.css */
+/* Kept in light mode for now, see app/architecture/architecture.css */
 .bw-shell[data-ai-background='architecture'] .arch-id-card {
   background: var(--arch-surface);
   border-color: var(--arch-line);
@@ -1179,7 +1179,7 @@
   background: transparent;
 }
 
-/* ── AIBackground atmosphere — transparent sections, glass cards only ── */
+/* ── AIBackground atmosphere, transparent sections, glass cards only ── */
 
 html:has(.bw-shell[data-ai-background='work']),
 body:has(.bw-shell[data-ai-background='work']) {
@@ -1725,7 +1725,7 @@ body:has(.bw-shell[data-page='architecture']) {
   }
 }
 
-/* ── Bento format explorations (/bento-formats/*) — separate from /bento ── */
+/* ── Bento format explorations (/bento-formats/*), separate from /bento ── */
 .bf-page {
   min-height: 100vh;
 }
@@ -2289,7 +2289,7 @@ body:has(.bw-shell[data-page='architecture']) {
   }
 }
 
-/* ── Workflow bento styles (/bento-workflows/*) — spaced n8n canvas layouts ── */
+/* ── Workflow bento styles (/bento-workflows/*), spaced n8n canvas layouts ── */
 .bw-workflow-canvas--spaced.bw-workflow-canvas--unified .bento-career-zone {
   margin-top: 4rem;
 }
@@ -2379,7 +2379,7 @@ body:has(.bw-shell[data-page='architecture']) {
   }
 }
 
-/* Role track tiles — engineering vs product vs education */
+/* Role track tiles, engineering vs product vs education */
 .bento-tile--track-eng {
   background: linear-gradient(145deg, #eef7ff 0%, #f8fbff 55%, #f3f9ff 100%);
   color: #0f172a;
@@ -2493,7 +2493,7 @@ body:has(.bw-shell[data-page='architecture']) {
   border-color: rgba(234, 179, 8, 0.35);
 }
 
-/* Compact hero blocks — same footprint as work/value nodes */
+/* Compact hero blocks, same footprint as work/value nodes */
 .bw-hero-tile {
   min-height: 0;
 }
@@ -2703,24 +2703,29 @@ body:has(.bw-shell[data-page='architecture']) {
   font-size: 0.68rem;
 }
 
-/* Projects page — same mosaic rhythm as home wireframe */
+/* Projects page, same mosaic rhythm as home wireframe */
 .bw-grid--projects-wireframe {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(4, minmax(13.5rem, auto));
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: auto;
   align-items: stretch;
   gap: 0.85rem;
 }
 
+@media (min-width: 640px) {
+  .bw-grid--projects-wireframe {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 768px) {
   .bw-grid--projects-wireframe {
-    grid-template-rows: repeat(4, minmax(16rem, auto));
     gap: 1.15rem 1.35rem;
   }
 }
 
 @media (min-width: 1024px) {
   .bw-grid--projects-wireframe {
-    grid-template-rows: repeat(4, minmax(18rem, auto));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem 1.5rem;
   }
 }
@@ -2746,22 +2751,16 @@ body:has(.bw-shell[data-page='architecture']) {
   align-self: stretch;
 }
 
+/*
+ * Fixed 16:9 stage rather than "stretch to fill the card". The screenshots average
+ * ~16:9, so `contain` has almost nothing left to letterbox, the old flex-grow stage
+ * took whatever width the mosaic gave it and padded the difference with empty card.
+ */
 .bw-grid--projects-wireframe .bento-tile--work-exp--has-video .bw-exp-media-stage--video {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-height: 0;
-  height: 100%;
-}
-
-@media (min-width: 768px) {
-  .bw-grid--projects-wireframe .bento-tile--work-exp--has-video .bw-exp-media-stage--video {
-    min-height: 8.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .bw-grid--projects-wireframe .bento-tile--work-exp--has-video .bw-exp-media-stage--video {
-    min-height: 10rem;
-  }
+  height: auto;
+  aspect-ratio: 16 / 9;
 }
 
 .bw-grid--projects-wireframe .bw-project-thumb {
@@ -2779,20 +2778,9 @@ body:has(.bw-shell[data-page='architecture']) {
   background: color-mix(in srgb, var(--exp-soft, #f4f4f5) 55%, #ffffff);
 }
 
-.bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-exp-media-stage--video {
-  min-height: 4.75rem;
-}
-
-@media (min-width: 768px) {
-  .bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-exp-media-stage--video {
-    min-height: 5.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-exp-media-stage--video {
-    min-height: 6.25rem;
-  }
+/* Compass is a ~3:1 wordmark, not a screenshot, inset it so it doesn't span edge to edge. */
+.bw-grid--projects-wireframe .bw-cell[data-bw-tile='compass-food-bank'] .bw-project-thumb {
+  padding: 1.25rem 2rem;
 }
 
 .bw-workflow-canvas--compact.bw-workflow-canvas--n8n .bento-grid--canvas.bw-grid--projects-wireframe {
@@ -2900,7 +2888,7 @@ body:has(.bw-shell[data-page='architecture']) {
   min-height: 72px;
 }
 
-/* Gallery — compact mosaic (varied spans, smaller tiles) */
+/* Gallery, compact mosaic (varied spans, smaller tiles) */
 .bw-grid--gallery-mosaic {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.35rem;
@@ -3126,7 +3114,7 @@ body:has(.bw-shell[data-page='architecture']) {
   text-transform: uppercase;
 }
 
-/* Gallery masonry — thin bento frames + hover captions */
+/* Gallery masonry, thin bento frames + hover captions */
 .bw-gallery-photos {
   column-count: 2;
   column-gap: 0.55rem;
@@ -3491,7 +3479,7 @@ body:has(.bw-shell[data-page='architecture']) {
   }
 }
 
-/* Top header — replaces sidebar */
+/* Top header, replaces sidebar */
 
 .bw-top-header {
   position: sticky;
@@ -3893,7 +3881,7 @@ body:has(.bw-shell[data-page='architecture']) {
   color: var(--pf-muted);
 }
 
-/* Editorial hero — photo 4 typography on light canvas */
+/* Editorial hero, photo 4 typography on light canvas */
 .hero-bento-grid--editorial {
   gap: 1.25rem;
   position: relative;
@@ -4023,7 +4011,7 @@ body:has(.bw-shell[data-page='architecture']) {
   color: var(--pf-magenta);
 }
 
-/* Soft colorful tags — photo 3 vibe, no black borders */
+/* Soft colorful tags, photo 3 vibe, no black borders */
 .bw-shell .pf-pill--soft,
 .bw-shell .pf-keycap-tag.pf-pill--soft {
   border: 1px solid transparent;
@@ -4293,159 +4281,262 @@ body:has(.bw-shell[data-page='architecture']) {
   --cap-layer-community-left: color-mix(in srgb, var(--pf-lavender) 55%, var(--pf-ink) 22%);
   --cap-layer-community-right: color-mix(in srgb, var(--pf-lavender) 40%, var(--pf-ink) 32%);
 
-  --cap-layer-active-stroke: var(--pf-accent);
-  --cap-layer-connector: color-mix(in srgb, var(--pf-muted) 55%, var(--pf-blue) 20%);
+  --cap-layer-connector: color-mix(in srgb, var(--pf-muted) 55%, var(--pf-ink) 10%);
 }
 
 .hero-bento-capability-stack {
   margin-top: 0.45rem;
-  min-height: 7.5rem;
 }
 
 .capability-layer-stack {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(6.75rem, 7rem) minmax(0, 1fr);
-  gap: 0.35rem 0.5rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 13.125rem;
+  max-width: 21rem;
+  min-width: 0;
+  /* Scale hook — the slab column shrinks as a unit on tight layouts. */
+  --cap-slab-scale: 1;
+  --cap-w: calc(var(--cap-slab-w) * var(--cap-slab-scale));
+  --cap-dx: calc(var(--cap-slab-dx) * var(--cap-slab-scale));
+  --cap-dy: calc(var(--cap-slab-dy) * var(--cap-slab-scale));
+  --cap-pull: calc(var(--cap-slab-pull) * var(--cap-slab-scale));
+  --cap-slab-column: calc(var(--cap-w) + var(--cap-dx));
+  --cap-slab-row-step: calc(var(--cap-slab-step) * var(--cap-slab-scale));
+}
+
+/* One row per layer: slab on the left, title and its details on the right. Rows sit
+   flush against each other so the slabs always form an unbroken ladder. */
+.capability-layer-stack__row {
+  display: grid;
+  grid-template-columns: var(--cap-slab-column) minmax(0, 1fr);
+  column-gap: 0.5rem;
+  align-items: stretch;
+  min-height: var(--cap-slab-row-step);
   min-width: 0;
 }
 
-.capability-layer-stack__graphic {
-  padding-top: 0;
-}
-
-.capability-layer-stack__svg {
-  display: block;
-  overflow: visible;
-}
-
-.capability-layer-stack__slab-group {
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  cursor: pointer;
-}
-
-.capability-layer-stack__slab-group[data-active='true'] {
-  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--pf-accent) 18%, transparent));
-}
-
-.capability-layer-stack__slab--dimmed {
-  opacity: 0.48;
-  transition: opacity 180ms ease;
-}
-
-.capability-layer-stack__legend {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 0;
-  overflow: visible;
-}
-
-.capability-layer-stack__legend-row {
+/*
+ * The slab is three skewed boxes, not an svg, so its side faces stretch to the row's
+ * height. When a layer opens, its block simply gets thicker instead of pushing a gap
+ * into the ladder.
+ */
+.capability-layer-stack__slab {
   position: relative;
+  width: var(--cap-slab-column);
+  min-height: var(--cap-slab-row-step);
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.capability-layer-stack__row[data-open='true'] .capability-layer-stack__slab {
+  transform: translateX(var(--cap-pull));
+  filter: drop-shadow(0 2px 7px color-mix(in srgb, var(--pf-ink) 14%, transparent));
+}
+
+.capability-layer-stack__face {
+  position: absolute;
+  display: block;
+  transform-origin: top left;
+  background: var(--cap-face-color);
+}
+
+.capability-layer-stack__face--top {
+  top: 0;
+  left: 0;
+  width: var(--cap-w);
+  height: var(--cap-dy);
+  transform: skewX(var(--cap-slab-skew-x));
+  --cap-face-color: var(--cap-slab-top);
+}
+
+.capability-layer-stack__face--front {
+  top: var(--cap-dy);
+  left: var(--cap-dx);
+  width: var(--cap-w);
+  height: calc(100% - var(--cap-dy));
+  --cap-face-color: var(--cap-slab-left);
+}
+
+.capability-layer-stack__face--left {
+  top: 0;
+  left: 0;
+  width: var(--cap-dx);
+  height: calc(100% - var(--cap-dy));
+  transform: skewY(var(--cap-slab-skew-y));
+  --cap-face-color: color-mix(in srgb, var(--cap-slab-left) 82%, var(--pf-ink));
+}
+
+.capability-layer-stack__face--right {
+  top: 0;
+  left: var(--cap-w);
+  width: var(--cap-dx);
+  height: calc(100% - var(--cap-dy));
+  transform: skewY(var(--cap-slab-skew-y));
+  --cap-face-color: var(--cap-slab-right);
+}
+
+.capability-layer-stack__slab[data-layer='software-engineering'] {
+  --cap-slab-top: var(--cap-layer-engineering-top);
+  --cap-slab-left: var(--cap-layer-engineering-left);
+  --cap-slab-right: var(--cap-layer-engineering-right);
+}
+
+.capability-layer-stack__slab[data-layer='product'] {
+  --cap-slab-top: var(--cap-layer-product-top);
+  --cap-slab-left: var(--cap-layer-product-left);
+  --cap-slab-right: var(--cap-layer-product-right);
+}
+
+.capability-layer-stack__slab[data-layer='business'] {
+  --cap-slab-top: var(--cap-layer-business-top);
+  --cap-slab-left: var(--cap-layer-business-left);
+  --cap-slab-right: var(--cap-layer-business-right);
+}
+
+.capability-layer-stack__slab[data-layer='community'] {
+  --cap-slab-top: var(--cap-layer-community-top);
+  --cap-slab-left: var(--cap-layer-community-left);
+  --cap-slab-right: var(--cap-layer-community-right);
+}
+
+.capability-layer-stack__body {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding-block: 0.05rem;
-  min-width: 0;
-  overflow: visible;
 }
 
 .capability-layer-stack__layer-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.35rem;
+  width: 100%;
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
   color: var(--pf-ink);
-  font-size: 0.58rem;
+  font-size: 0.55rem;
   letter-spacing: 0.14em;
-  line-height: 1.2;
+  line-height: 1.15;
   text-transform: uppercase;
   text-align: left;
   cursor: pointer;
-  transition: color 160ms ease;
   min-width: 0;
-  max-width: 100%;
 }
 
-.capability-layer-stack__layer-btn:hover,
 .capability-layer-stack__layer-btn:focus-visible {
-  color: var(--pf-accent);
   outline: none;
-}
-
-.capability-layer-stack__layer-btn:focus-visible {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--pf-accent) 35%, transparent);
   border-radius: 2px;
-}
-
-.capability-layer-stack__legend-row[data-active='true'] .capability-layer-stack__layer-btn {
-  color: var(--pf-accent);
 }
 
 .capability-layer-stack__connector {
   flex-shrink: 0;
   width: 0.85rem;
   height: 1.5px;
-  background: color-mix(in srgb, var(--pf-accent) 55%, var(--cap-layer-connector));
+  background: var(--cap-layer-connector);
   transition: background-color 160ms ease, width 160ms ease;
 }
 
-.capability-layer-stack__legend-row[data-active='true'] .capability-layer-stack__connector {
-  width: 1.1rem;
+.capability-layer-stack__row[data-open='true'] .capability-layer-stack__connector {
   background: var(--pf-accent);
 }
 
+/* Labels never wrap — they truncate so the text always sits beside the stack. */
 .capability-layer-stack__label {
   min-width: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Same peach → accent → darker fade as the hero's emphasised words. */
+  background: var(--pf-accent-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.7;
+  transition: opacity 160ms ease;
 }
 
-.capability-layer-stack__subtitle {
-  margin: 0.15rem 0 0;
-  padding-left: 1.2rem;
-  color: var(--pf-muted);
-  font-size: 0.48rem;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
+.capability-layer-stack__row[data-open='true'] .capability-layer-stack__label,
+.capability-layer-stack__layer-btn:hover .capability-layer-stack__label,
+.capability-layer-stack__layer-btn:focus-visible .capability-layer-stack__label {
+  opacity: 1;
+}
+
+/* Details open under their own title, indented to line up with the title text. */
+.capability-layer-stack__detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms cubic-bezier(0.22, 1, 0.36, 1);
   min-width: 0;
-  overflow-wrap: break-word;
+  padding-left: calc(0.85rem + 0.35rem);
 }
 
-.capability-layer-stack__subtitle[hidden] {
-  display: none;
+.capability-layer-stack__row[data-open='true'] .capability-layer-stack__detail {
+  grid-template-rows: 1fr;
+}
+
+.capability-layer-stack__roles {
+  overflow: hidden;
+  display: grid;
+  align-content: start;
+  gap: 0.05rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+  opacity: 0;
+  transition: opacity 160ms ease, padding 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.capability-layer-stack__row[data-open='true'] .capability-layer-stack__roles {
+  padding: 0.15rem 0 0.25rem;
+  opacity: 1;
+}
+
+/* One line per entry: ROLE · Company. */
+.capability-layer-stack__role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.capability-layer-stack__role-title {
+  color: var(--pf-ink);
+  font-size: 0.42rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.capability-layer-stack__role-sep {
+  color: color-mix(in srgb, var(--pf-ink) 34%, var(--pf-muted));
+  font-size: 0.42rem;
+  line-height: 1.25;
+  margin: 0 0.2rem;
+}
+
+.capability-layer-stack__role-org {
+  color: color-mix(in srgb, var(--pf-ink) 58%, var(--pf-muted));
+  font-size: 0.42rem;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
 }
 
 /* Large variant (~1.75×) — chat hero Core Strengths */
 .capability-layer-stack--large {
-  grid-template-columns: minmax(11.9rem, 12.2rem) minmax(4rem, 1fr);
-  gap: 0.5rem 0.75rem;
-  max-width: 25rem;
+  max-width: 32rem;
 }
 
-.capability-layer-stack--large .capability-layer-stack__graphic {
-  padding-top: 0;
-}
-
-.capability-layer-stack--large .capability-layer-stack__legend {
-  gap: 0;
-}
-
-.capability-layer-stack--large .capability-layer-stack__legend-row {
-  gap: 0.35rem;
-  padding-block: 0.1rem;
+.capability-layer-stack--large .capability-layer-stack__row {
+  column-gap: 0.75rem;
 }
 
 .capability-layer-stack--large .capability-layer-stack__layer-btn {
   gap: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.12em;
 }
 
@@ -4453,51 +4544,51 @@ body:has(.bw-shell[data-page='architecture']) {
   width: 1.35rem;
 }
 
-.capability-layer-stack--large .capability-layer-stack__legend-row[data-active='true'] .capability-layer-stack__connector {
-  width: 1.75rem;
+.capability-layer-stack--large .capability-layer-stack__detail {
+  padding-left: calc(1.35rem + 0.5rem);
 }
 
-.capability-layer-stack--large .capability-layer-stack__subtitle {
-  padding-left: 2rem;
-  font-size: 0.62rem;
+.capability-layer-stack--large .capability-layer-stack__roles {
+  gap: 0.1rem;
+}
+
+.capability-layer-stack--large .capability-layer-stack__row[data-open='true'] .capability-layer-stack__roles {
+  padding: 0.25rem 0 0.4rem;
+}
+
+.capability-layer-stack--large .capability-layer-stack__role-title,
+.capability-layer-stack--large .capability-layer-stack__role-sep,
+.capability-layer-stack--large .capability-layer-stack__role-org {
+  font-size: 0.6rem;
 }
 
 @media (min-width: 768px) {
-  .hero-bento-capability-stack {
-    min-height: 8rem;
-  }
-
-  .capability-layer-stack {
-    max-width: 14.5rem;
-  }
-
   .capability-layer-stack__layer-btn {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
   }
 
-  .capability-layer-stack__subtitle {
-    font-size: 0.5rem;
-  }
-
-  .capability-layer-stack--large {
-    max-width: 25rem;
+  .capability-layer-stack__role-title,
+  .capability-layer-stack__role-sep,
+  .capability-layer-stack__role-org {
+    font-size: 0.45rem;
   }
 
   .capability-layer-stack--large .capability-layer-stack__layer-btn {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
-  .capability-layer-stack--large .capability-layer-stack__subtitle {
-    font-size: 0.68rem;
+  .capability-layer-stack--large .capability-layer-stack__role-title,
+  .capability-layer-stack--large .capability-layer-stack__role-sep,
+  .capability-layer-stack--large .capability-layer-stack__role-org {
+    font-size: 0.64rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .capability-layer-stack__slab-group {
-    transition: none;
-  }
-
-  .capability-layer-stack__slab--dimmed {
+  .capability-layer-stack__slab,
+  .capability-layer-stack__detail,
+  .capability-layer-stack__roles,
+  .capability-layer-stack__label {
     transition: none;
   }
 }
@@ -4556,7 +4647,7 @@ body:has(.bw-shell[data-page='architecture']) {
   min-height: auto;
 }
 
-/* Compact n8n canvas — visible connectors behind tiles */
+/* Compact n8n canvas, visible connectors behind tiles */
 .bw-workflow-canvas--compact.bw-workflow-canvas--n8n .bento-career-zone {
   margin-top: 0.5rem;
   padding-top: 0;
@@ -4721,7 +4812,7 @@ body:has(.bw-shell[data-page='architecture']) {
   gap: 0.35rem;
 }
 
-/* Hero workspace nav — replaces top header on home */
+/* Hero workspace nav, replaces top header on home */
 
 .hero-bento-block--nav {
   padding: 0.65rem 0.85rem;
@@ -6167,11 +6258,11 @@ body:has(.bw-shell[data-page='architecture']) {
 .agent-composer-card__typewriter-cursor {
   display: inline-block;
   flex-shrink: 0;
-  width: 1px;
+  width: 1.5px;
   height: 1.1em;
-  margin-left: 1px;
-  background: var(--pf-muted);
-  opacity: 0.55;
+  margin-left: 2px;
+  background: var(--pf-accent);
+  opacity: 0.9;
   vertical-align: text-bottom;
   animation: agent-typewriter-blink 1s step-end infinite;
 }
@@ -6179,7 +6270,7 @@ body:has(.bw-shell[data-page='architecture']) {
 @keyframes agent-typewriter-blink {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.9;
   }
 
   50% {
@@ -6206,6 +6297,8 @@ body:has(.bw-shell[data-page='architecture']) {
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--pf-ink);
+  /* Match the typewriter caret so the placeholder and the real caret agree. */
+  caret-color: var(--pf-accent);
 }
 
 .agent-composer-card--compact .agent-composer-card__input {
@@ -6390,12 +6483,108 @@ body:has(.bw-shell[data-page='architecture']) {
   margin-left: 0;
 }
 
-.agent-message--assistant .agent-message__text {
+/* ── Ask Jasmine: chat-bot message layout ── */
+
+.agent-message--user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.agent-message--user .agent-message__text {
+  max-width: 85%;
+  border-bottom-right-radius: 0.35rem;
+  background: color-mix(in srgb, var(--pf-accent) 12%, var(--pf-surface));
+  border-color: color-mix(in srgb, var(--pf-accent) 28%, transparent);
+}
+
+.agent-message__assistant {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.agent-message__avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: 1.35rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pf-accent) 16%, var(--pf-surface));
+  border: 1px solid color-mix(in srgb, var(--pf-accent) 34%, transparent);
+  font-family: var(--pf-font-mono, ui-monospace, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  color: var(--pf-accent);
+}
+
+.agent-message__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.agent-message__author {
+  margin-bottom: 0.3rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.agent-message__bubble {
+  max-width: 88%;
   background: var(--pf-surface);
   border: 1px solid var(--pf-card-border);
   box-shadow: var(--pf-shadow-outline-subtle);
   border-radius: var(--pf-card-radius-sm);
-  padding: 0.65rem 0.85rem;
+  border-top-left-radius: 0.35rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.agent-message__choices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin-top: 0.6rem;
+}
+
+.agent-message__choice {
+  max-width: 100%;
+  padding: 0.42rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--pf-accent) 30%, transparent);
+  border-radius: 999px;
+  background: var(--pf-surface);
+  font-family: var(--pf-font-body);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-align: left;
+  color: var(--pf-ink);
+  cursor: pointer;
+  box-shadow: var(--pf-shadow-outline-subtle);
+  transition: var(--pf-card-transition), background 180ms ease;
+}
+
+.agent-message__choice:hover {
+  background: color-mix(in srgb, var(--pf-accent) 10%, var(--pf-surface));
+  border-color: color-mix(in srgb, var(--pf-accent) 52%, transparent);
+}
+
+.agent-message__ref {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--pf-muted);
+  background: var(--pf-surface);
+}
+
+.agent-message__ref:hover {
+  color: var(--pf-ink);
+  border-color: var(--pf-card-border-hover);
 }
 
 .agent-message__refs {
@@ -6505,13 +6694,26 @@ body:has(.bw-shell[data-page='architecture']) {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(100% + 0.35rem);
+  /* Below the composer: the tall 3-row box would otherwise push this over the hero copy. */
+  top: calc(100% + 0.35rem);
+  max-height: 15rem;
+  overflow-y: auto;
   border: 1px solid var(--pf-card-border);
   border-radius: var(--pf-card-radius-sm);
-  overflow: hidden;
   background: var(--pf-surface);
   box-shadow: var(--pf-shadow-outline-hover);
-  z-index: 2;
+  z-index: 5;
+}
+
+.agent-autocomplete__hint {
+  padding: 0.4rem 0.75rem 0.3rem;
+  font-family: var(--pf-font-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+  background: var(--pf-cream);
+  border-bottom: 1px solid var(--pf-card-border);
 }
 
 .agent-autocomplete__item {
@@ -6847,7 +7049,7 @@ body:has(.bw-shell[data-page='architecture']) {
   }
 }
 
-/* ── Chat hero (Work home — Ask as centerpiece) ── */
+/* ── Chat hero (Work home, Ask as centerpiece) ── */
 .chat-hero-wrap {
   width: 100%;
 }
@@ -6961,21 +7163,11 @@ body:has(.bw-shell[data-page='architecture']) {
   margin-top: 0;
 }
 
+/* Tight hero column, shrink the slabs but keep the labels beside them. */
 .chat-hero__strengths .capability-layer-stack--large {
   width: auto;
   max-width: 100%;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-}
-
-.chat-hero__strengths .capability-layer-stack__graphic {
-  margin-left: 0.75rem;
-}
-
-.chat-hero__strengths .capability-layer-stack__svg {
-  width: 100%;
-  height: auto;
-  max-width: 10.5rem;
+  --cap-slab-scale: 0.62;
 }
 
 .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__layer-btn {
@@ -6987,43 +7179,29 @@ body:has(.bw-shell[data-page='architecture']) {
   width: 1rem;
 }
 
-.chat-hero__strengths
-  .capability-layer-stack--large
-  .capability-layer-stack__legend-row[data-active='true']
-  .capability-layer-stack__connector {
-  width: 1.25rem;
+.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-title,
+.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-org,
+.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-sep {
+  font-size: clamp(0.55rem, 1.5vw, 0.66rem);
 }
 
-.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__subtitle {
-  padding-left: 1.35rem;
-  font-size: clamp(0.58rem, 1.6vw, 0.72rem);
+.chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__detail {
+  padding-left: calc(1rem + 0.5rem);
 }
 
-/* Below this, the side-by-side graphic+legend columns don't have room to breathe —
-   stays in the single-column (stacked, full-width legend) base layout instead. */
 @media (min-width: 1280px) {
   .chat-hero__strengths .capability-layer-stack--large {
-    grid-template-columns: minmax(11.9rem, 12.2rem) minmax(4rem, 1fr);
-  }
-
-  .chat-hero__strengths .capability-layer-stack__graphic {
-    margin-left: 1.1rem;
-  }
-
-  .chat-hero__strengths .capability-layer-stack__svg {
-    width: auto;
-    height: auto;
-    max-width: none;
-    transform: scale(0.9);
-    transform-origin: top left;
+    --cap-slab-scale: 0.9;
   }
 
   .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__layer-btn {
     font-size: clamp(0.78rem, 1.4vw, 0.92rem);
   }
 
-  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__subtitle {
-    font-size: clamp(0.65rem, 1.1vw, 0.78rem);
+  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-title,
+  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-org,
+  .chat-hero__strengths .capability-layer-stack--large .capability-layer-stack__role-sep {
+    font-size: clamp(0.6rem, 1.05vw, 0.72rem);
   }
 }
 
@@ -7095,7 +7273,7 @@ body:has(.bw-shell[data-page='architecture']) {
   margin-left: 0;
 }
 
-/* ── Floating chat widget (Work home — scroll past hero) ── */
+/* ── Floating chat widget (Work home, scroll past hero) ── */
 .chat-float-widget {
   position: fixed;
   right: calc(1rem + env(safe-area-inset-right, 0px));
@@ -7298,5 +7476,135 @@ body:has(.bw-shell[data-page='architecture']) {
 
   .chat-float-widget--expanded {
     align-items: stretch;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Ask Jasmine, ML notice, grouped recruiter questions, disabled send.
+   The chat has no model behind it yet, so the UI has to say so plainly and
+   steer visitors to the curated questions that do have written answers.
+   --------------------------------------------------------------------------- */
+
+.agent-ml-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--pf-accent) 28%, var(--pf-card-border));
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--pf-peach) 22%, var(--pf-surface));
+  color: var(--pf-ink);
+  font-family: var(--pf-font-body);
+  font-size: 0.78125rem;
+  line-height: 1.5;
+}
+
+.agent-ml-notice strong {
+  font-weight: 650;
+}
+
+.agent-topic-groups {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.9rem;
+}
+
+.agent-topic-group__label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+  color: var(--pf-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.agent-topic-group__questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* Full question text rather than a one-word topic, a recruiter shouldn't have to
+   guess what tapping a chip will ask. */
+.agent-question-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: 999px;
+  background: var(--pf-surface);
+  color: var(--pf-ink);
+  font-family: var(--pf-font-body);
+  font-size: 0.78125rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--pf-shadow-outline-subtle);
+  transition: var(--pf-card-transition), background 180ms ease;
+}
+
+.agent-question-chip:hover {
+  border-color: var(--pf-card-border-hover);
+  background: color-mix(in srgb, var(--pf-peach) 20%, var(--pf-surface));
+}
+
+.agent-question-chip:focus-visible,
+.agent-composer-card__send--disabled:focus-visible {
+  outline: 2px solid var(--pf-accent);
+  outline-offset: 2px;
+}
+
+/* Deliberately still looks pressable, it needs to receive the click in order to
+   explain itself, so `disabled` would defeat the point. */
+.agent-composer-card__send--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.agent-composer-card__footer {
+  position: relative;
+}
+
+.agent-send-notice {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.5rem);
+  z-index: 20;
+  width: min(20rem, calc(100vw - 3rem));
+  padding: 0.6rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--pf-accent) 35%, var(--pf-card-border));
+  border-radius: 0.7rem;
+  background: var(--pf-surface);
+  box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.28);
+  color: var(--pf-ink);
+  font-family: var(--pf-font-body);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  animation: agent-send-notice-in 160ms ease-out;
+}
+
+.agent-send-notice strong {
+  font-weight: 650;
+}
+
+@keyframes agent-send-notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-send-notice {
+    animation: none;
   }
 }

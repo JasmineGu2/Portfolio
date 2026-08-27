@@ -1,4 +1,4 @@
-# 08 — Build Plan
+# 08, Build Plan
 
 ## Current state (Aug 2026)
 
@@ -30,7 +30,7 @@
 
 ---
 
-## Phase 1 — Foundation ✅ COMPLETE
+## Phase 1, Foundation ✅ COMPLETE
 
 | Task | Status |
 |------|--------|
@@ -47,7 +47,7 @@
 
 ---
 
-## Phase 2 — Architecture page
+## Phase 2, Architecture page
 
 **Goal:** The zoom-out narrative is readable without Ask.
 
@@ -64,7 +64,7 @@
 
 ---
 
-## Phase 3 — Runtime sections (Architecture)
+## Phase 3, Runtime sections (Architecture)
 
 **Goal:** Agent metaphor as infrastructure diagram.
 
@@ -84,7 +84,7 @@
 
 ---
 
-## Phase 4 — Ask intelligence
+## Phase 4, Ask intelligence
 
 **Goal:** Useful query layer grounded in portfolio data.
 
@@ -103,7 +103,7 @@
 
 ---
 
-## Phase 5 — Polish & content
+## Phase 5, Polish & content
 
 | Task | Estimate |
 |------|----------|
@@ -133,7 +133,7 @@ Animated dot surface for Architecture page backgrounds. Full implementation spec
 | Ask placement | Side panel, not nav | Secondary query layer over Work |
 | Projects placement | Separate `/projects` | Different content type; user requested no nesting under Work |
 | Work filters | None on Work page | User requested no filter chips |
-| Gallery in nav | No — link from Architecture | Personal/community content belongs in Architecture memory layer |
+| Gallery in nav | No, link from Architecture | Personal/community content belongs in Architecture memory layer |
 | Exploration pages | Hidden from nav, delete later | Internal design tooling, not product |
 | Tesla route | `/tesla` dedicated case study | Full writing exists; Work tile links here |
 | Visual system on Work | Keep current bento scheme | Upgrade Architecture first; migrate Work intentionally later |

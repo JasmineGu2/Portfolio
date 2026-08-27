@@ -204,7 +204,7 @@ export function ProductStoryCanvas() {
 
           {selectedZone && (
             <p className="ps-inspector-zone">
-              Phase {selectedZone.step}: {selectedZone.title} — {selectedZone.subtitle}
+              Phase {selectedZone.step}: {selectedZone.title}: {selectedZone.subtitle}
             </p>
           )}
 

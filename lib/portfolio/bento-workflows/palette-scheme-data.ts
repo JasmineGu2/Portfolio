@@ -30,7 +30,7 @@ export interface HeroCardTheme {
   actions: HeroCardColors
 }
 
-/** Three work-tile background fills only — hero/shell use the full palette elsewhere */
+/** Three work-tile background fills only, hero/shell use the full palette elsewhere */
 export interface DuoBucketPalette {
   warm: string
   cool: string

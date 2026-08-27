@@ -1,4 +1,4 @@
-const LEGACY_WORK_PATHS = ['/tesla', '/intuit', '/omers', '/metaverse'] as const
+const LEGACY_WORK_PATHS = ['/tesla', '/autodesk', '/intuit', '/omers', '/metaverse'] as const
 
 export const MAIN_NAV = {
   explore: {
@@ -19,7 +19,7 @@ export const MAIN_NAV = {
   },
 } as const
 
-/** Internal design tooling — hidden from production nav */
+/** Internal design tooling, hidden from production nav */
 export const DEV_NAV = [
   { label: 'Dev index', href: '/dev' },
   { label: 'Layouts', href: '/dev/bento-workflows' },
@@ -29,7 +29,7 @@ export const DEV_NAV = [
   { label: 'Videos', href: '/experience-videos' },
 ]
 
-/** @deprecated Use DEV_NAV — kept for any lingering imports */
+/** @deprecated Use DEV_NAV, kept for any lingering imports */
 export const PINNED_NAV = DEV_NAV
 
 export function navIsActive(pathname: string, href: string) {

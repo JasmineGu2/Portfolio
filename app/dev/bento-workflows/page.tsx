@@ -1,7 +1,7 @@
 import { WorkflowBentoHub } from '@/components/portfolio/bento-workflows/WorkflowBentoCanvas'
 
 export const metadata = {
-  title: 'Jasmine Gu — Workflow bento styles',
+  title: 'Jasmine Gu, Workflow bento styles',
   description: 'Ten spaced workflow bento layout explorations with n8n cube styling',
 }
 

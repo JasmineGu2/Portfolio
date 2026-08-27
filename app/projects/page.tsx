@@ -1,7 +1,7 @@
 import { ProjectsPageClient } from '@/components/portfolio/ProjectsPageClient'
 
 export const metadata = {
-  title: 'Projects — Jasmine Gu',
+  title: 'Projects · Jasmine Gu',
   description: 'PM case studies and technical projects.',
 }
 

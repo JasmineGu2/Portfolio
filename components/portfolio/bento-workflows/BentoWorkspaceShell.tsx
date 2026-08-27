@@ -46,7 +46,7 @@ export function BentoWorkspaceShell({
             <p className="bw-main-eyebrow">{title}</p>
             {layout && (
               <h1 className="bw-main-title font-serif-display">
-                Welcome back — <span className="text-[var(--pf-muted)]">{layout.title}</span>
+                Welcome back, <span className="text-[var(--pf-muted)]">{layout.title}</span>
               </h1>
             )}
           </div>

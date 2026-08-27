@@ -14,7 +14,7 @@ export function ExecutionHistory({ experiences }: ExecutionHistoryProps) {
     <WorkflowGroup
       id="execution-history"
       title="Execution history"
-      subtitle="Prior workflow executions — each company represents a problem translated into a reliable system."
+      subtitle="Prior workflow executions. Each company represents a problem translated into a reliable system."
     >
       <div className="space-y-4">
         {experiences.map((exp, i) => (

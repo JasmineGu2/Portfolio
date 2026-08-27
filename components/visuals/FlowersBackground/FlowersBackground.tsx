@@ -8,7 +8,7 @@ import './flowers-background.css'
 export type InteractionMode = 'repel' | 'attract' | 'ripple' | 'grow'
 
 export type FlowersBackgroundConfig = {
-  /** Grid cell size in px — smaller = more granular. */
+  /** Grid cell size in px, smaller = more granular. */
   cellSize: number
   /** Bubble diameter as a fraction of the cell. */
   bubbleScale: number
@@ -18,9 +18,9 @@ export type FlowersBackgroundConfig = {
   brighten: number
   /** Fraction of cells (0–1) rendered as an ASCII glyph instead of a plain dot. */
   asciiChance: number
-  /** Opacity (0–1) of the whole dot/ASCII overlay — lower lets the raw frame read through more. */
+  /** Opacity (0–1) of the whole dot/ASCII overlay, lower lets the raw frame read through more. */
   overlayOpacity: number
-  /** Gaussian blur (px) applied to the overlay — softens the grid so it doesn't read as blocky. */
+  /** Gaussian blur (px) applied to the overlay, softens the grid so it doesn't read as blocky. */
   blurPx: number
   /** Seconds into the source video to freeze as the static frame. */
   captureTime: number

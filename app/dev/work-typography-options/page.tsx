@@ -3,7 +3,7 @@ import { WorkTypographyOptionsPageClient } from '@/components/portfolio/work-typ
 import './work-typography-options.css'
 
 export const metadata: Metadata = {
-  title: 'Work card typography — Jasmine Gu',
+  title: 'Work card typography, Jasmine Gu',
   description: 'Compare four font pairings for company, role, and subtitle on experience cards.',
 }
 

@@ -1,13 +1,13 @@
 import { COMPANY_LOGOS } from './company-logos'
 import { RESUME_HREF } from '@/lib/portfolio/resume'
 
-/** Shared career narrative — sourced from resume + Miro board */
+/** Shared career narrative, sourced from resume + Miro board */
 export interface StoryStep {
   id: string
   company: string
   role: string
   period: string
-  /** Oval / tag line — what you actually did */
+  /** Oval / tag line, what you actually did */
   tag: string
   logo?: string
   accent: string
@@ -23,7 +23,7 @@ export interface StoryStep {
 
 export const STORY_HEADLINE = 'My work is translation.'
 export const STORY_SUBLINE =
-  'I move between users, product, engineering, and operations — turning ambiguous problems into shipped workflows.'
+  'I move between users, product, engineering, and operations, turning ambiguous problems into shipped workflows.'
 
 export const STORY_STEPS: StoryStep[] = [
   {
@@ -63,7 +63,7 @@ export const STORY_STEPS: StoryStep[] = [
     logo: COMPANY_LOGOS.omers,
     accent: '#ff6d5a',
     story:
-      'Designed UX and built 8+ automation solutions — intake forms, notifications, process flows. 60–70% faster processes.',
+      'Designed UX and built 8+ automation solutions: intake forms, notifications, process flows. 60–70% faster processes.',
     outcome: 'Stakeholders → system requirements',
     links: [{ label: 'Case study', href: '/omers' }],
   },
@@ -77,7 +77,7 @@ export const STORY_STEPS: StoryStep[] = [
     flowSubtitle: 'Stealth Startup · Fall 2023',
     accent: '#ff6d5a',
     story:
-      'Pre-seed stealth startup — CRM for childcare providers. Auth, PostgreSQL, Django, payments. Full product ownership.',
+      'Pre-seed stealth startup building a CRM for childcare providers. Auth, PostgreSQL, Django, payments. Full product ownership.',
     outcome: 'Full-stack shipping',
   },
   {
@@ -119,7 +119,7 @@ export const STORY_STEPS: StoryStep[] = [
     logo: COMPANY_LOGOS.tesla,
     accent: '#ff6d5a',
     story:
-      'Operator-facing ML software — React UI, video infra, bounding boxes. ~40% faster time-to-insight for ops teams.',
+      'Operator-facing ML software: React UI, video infra, bounding boxes. ~40% faster time-to-insight for ops teams.',
     outcome: 'Users + ML + operations',
     links: [{ label: 'Case study', href: '/tesla' }],
   },
@@ -147,7 +147,7 @@ export const STORY_STEPS: StoryStep[] = [
     flowSubtitle: 'Autodesk · May 2026 – Present',
     accent: '#ff6d5a',
     story:
-      'Owned ADP Studio query platform — 40% adoption lift, 3× workspace. Roadmap for AI schema assist, MCP integration.',
+      'Owned ADP Studio query platform. 40% adoption lift, 3× workspace. Roadmap for AI schema assist, MCP integration.',
     outcome: 'Shape platform direction',
     logo: COMPANY_LOGOS.autodesk,
   },

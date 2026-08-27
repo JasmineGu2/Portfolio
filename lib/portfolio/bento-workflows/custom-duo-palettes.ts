@@ -145,7 +145,7 @@ export function isCustomDuoScheme(id: ColorSchemeId): id is CustomDuoSchemeId {
   return (CUSTOM_DUO_SCHEME_IDS as readonly string[]).includes(id)
 }
 
-/** Loaded after client mount — null during SSR/first paint to avoid hydration mismatch */
+/** Loaded after client mount, null during SSR/first paint to avoid hydration mismatch */
 let clientDuoPaletteEdits: Partial<Record<CustomDuoSchemeId, CustomDuoPaletteEdit>> | null = null
 
 export function setClientDuoPaletteEdits(

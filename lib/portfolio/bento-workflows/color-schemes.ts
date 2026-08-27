@@ -45,31 +45,31 @@ export const BENTO_COLOR_SCHEMES: ColorSchemeSpec[] = [
   {
     id: 'warm-portfolio',
     label: 'Warm Portfolio',
-    description: 'Warm ivory canvas — amber, peach, lavender accents',
+    description: 'Warm ivory canvas: amber, peach, lavender accents',
     swatches: ['#faf6f0', '#e8784a', '#c8b8e8'],
   },
   {
     id: 'portfolio-warm',
     label: 'Portfolio Warm',
-    description: 'Alias — warm ivory canvas aligned with Architecture palette',
+    description: 'Alias for the warm ivory canvas aligned with Architecture palette',
     swatches: ['#faf6f0', '#e8784a', '#c8b8e8'],
   },
   {
     id: 'soft',
     label: 'Soft',
-    description: 'Warm white — rose, blue, green tags',
+    description: 'Warm white: rose, blue, green tags',
     swatches: ['#ffffff', '#db2777', '#2563eb'],
   },
   {
     id: 'soft-mist',
     label: 'Soft Mist',
-    description: 'Cool pearl — blush, sky, sage tags',
+    description: 'Cool pearl: blush, sky, sage tags',
     swatches: ['#ffffff', '#f472b6', '#60a5fa'],
   },
   {
     id: 'soft-blush',
     label: 'Soft Blush',
-    description: 'Cream white — peony, lilac, mint tags',
+    description: 'Cream white: peony, lilac, mint tags',
     swatches: ['#ffffff', '#ec4899', '#a78bfa'],
   },
   {
@@ -203,7 +203,7 @@ export function isPaletteScheme(id: ColorSchemeId): boolean {
 
 export const DEFAULT_COLOR_SCHEME: ColorSchemeId = 'warm-portfolio'
 
-/** Production Work / Projects bento — warm portfolio palette aligned with --arch-* tokens */
+/** Production Work / Projects bento, warm portfolio palette aligned with --arch-* tokens */
 export const PORTFOLIO_DEFAULT_SCHEME: ColorSchemeId = 'warm-portfolio'
 
 /** @deprecated Use PORTFOLIO_DEFAULT_SCHEME */

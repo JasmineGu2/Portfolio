@@ -284,7 +284,7 @@ function InspectorPanel({
         </div>
         <div className="p-4 text-sm text-n8n-text leading-relaxed">
           Started in full-stack engineering on Fusion libraries, then moved into
-          platform PM for data products — building and shaping the same
+          platform PM for data products, building and shaping the same
           platform from two sides.
         </div>
       </aside>

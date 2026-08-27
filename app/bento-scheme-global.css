@@ -1,4 +1,4 @@
-/* Global color scheme application — shell, canvas, hero, tags, actions */
+/* Global color scheme application, shell, canvas, hero, tags, actions */
 
 .bento-workspace-root {
   background: var(--sch-shell-bg, #f4f3f0);
@@ -11,7 +11,7 @@
   isolation: isolate;
 }
 
-/* AIBackground — no section washes; contour animation is the only atmosphere */
+/* AIBackground, no section washes; contour animation is the only atmosphere */
 .bw-shell[data-ai-background] .bento-workspace-root,
 .bw-shell[data-ai-background] {
   background: transparent !important;
@@ -188,7 +188,7 @@
   border-color: color-mix(in srgb, var(--sch-hero-border, rgba(0, 0, 0, 0.07)) 20%, transparent);
 }
 
-/* Duo homepage — dotted canvas fills the full shell, not just the career panel */
+/* Duo homepage, dotted canvas fills the full shell, not just the career panel */
 .bw-shell[data-scheme-tone='duo'],
 .bw-shell[data-custom-duo='true'] {
   background-color: var(--sch-canvas-bg, var(--pf-canvas-alt));
@@ -411,7 +411,7 @@
   text-decoration-color: color-mix(in srgb, var(--sch-soft-fg, var(--pf-border)) 40%, transparent);
 }
 
-/* Duo palette — each hero bento card gets its own bg + type color */
+/* Duo palette, each hero bento card gets its own bg + type color */
 .bw-shell[data-scheme-tone='duo'] .hero-bento-cell--intro .bento-tile--editorial {
   background: var(--sch-hero-intro-bg, var(--sch-hero));
   color: var(--sch-hero-intro-fg, var(--sch-hero-fg));
@@ -537,7 +537,7 @@
   color: var(--sch-hero-actions-bg, var(--sch-cta-fg));
 }
 
-/* Gallery hero — side panel uses nav card colors, not orange contact strip */
+/* Gallery hero, side panel uses nav card colors, not orange contact strip */
 .bw-shell[data-scheme-tone='duo'] .hero-bento-grid--gallery-hero .hero-bento-cell--side .bento-tile--editorial-soft {
   background: var(--sch-hero-nav-bg, var(--sch-soft-bg));
   color: var(--sch-hero-nav-fg, var(--sch-soft-fg));
@@ -554,7 +554,7 @@
   color: var(--sch-hero-nav-fg, var(--pf-ink));
 }
 
-/* Inner pages — projects, gallery, work detail */
+/* Inner pages, projects, gallery, work detail */
 .bw-content-panel {
   background: var(--pf-surface);
   border: 1px solid var(--pf-border);
@@ -809,7 +809,7 @@
   }
 }
 
-/* Gallery photo bento tiles — accent strip, chip, full photo frame */
+/* Gallery photo bento tiles, accent strip, chip, full photo frame */
 .bento-tile--gallery-photo {
   min-height: 156px;
 }
@@ -912,7 +912,7 @@
   }
 }
 
-/* Custom palette duos — stronger hero + label contrast */
+/* Custom palette duos, stronger hero + label contrast */
 .bw-shell[data-custom-duo='true'] .hero-bento-cell--intro .hero-editorial-sub,
 .bw-shell[data-custom-duo='true'] .hero-bento-intro-sub {
   color: var(--sch-hero-intro-fg, var(--sch-hero-fg));
@@ -948,7 +948,7 @@
   opacity: 0.72;
 }
 
-/* Duo hero cells — opaque scheme fills over contour animation */
+/* Duo hero cells, opaque scheme fills over contour animation */
 .bw-shell[data-ai-background][data-scheme-tone='duo'] .hero-bento-cell--intro .bento-tile--editorial,
 .bw-shell[data-ai-background][data-custom-duo='true'] .hero-bento-cell--intro .bento-tile--editorial {
   background: var(--sch-hero-intro-bg, var(--sch-hero, var(--pf-surface)));

@@ -223,7 +223,7 @@ export function WorkflowBentoCanvas({
   showSwitcher?: boolean
   onLayoutChange?: (slug: string) => void
   showWorkspaceControls?: boolean
-  /** Locks canvas to a scheme. Omit on production Work/Projects pages — context default is portfolio-warm. */
+  /** Locks canvas to a scheme. Omit on production Work/Projects pages, context default is portfolio-warm. */
   fixedColorScheme?: ColorSchemeId
 }) {
   const cellRefs = useRef<Map<string, HTMLDivElement>>(new Map())

@@ -3,7 +3,7 @@ import { TagOptionsPageClient } from '@/components/portfolio/tag-options/TagOpti
 import './tag-options.css'
 
 export const metadata: Metadata = {
-  title: 'Tag styling options — Jasmine Gu',
+  title: 'Tag styling options, Jasmine Gu',
   description: 'Compare ten alternative tag styles for the portfolio bento workspace.',
 }
 

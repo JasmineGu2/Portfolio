@@ -134,7 +134,7 @@ const RETRO_WARM: NeutralShell = {
   border: 'rgba(28, 25, 23, 0.06)',
 }
 
-/** Warm editorial shell — aligned with Architecture --arch-* / --pf-* tokens */
+/** Warm editorial shell, aligned with Architecture --arch-* / --pf-* tokens */
 const PORTFOLIO_WARM: NeutralShell = {
   shell: '#faf6f0',
   canvas: '#f3ede4',

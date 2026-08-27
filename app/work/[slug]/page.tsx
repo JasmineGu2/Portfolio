@@ -10,10 +10,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  if (!isWorkExperienceSlug(slug)) return { title: 'Experience — Jasmine Gu' }
+  if (!isWorkExperienceSlug(slug)) return { title: 'Experience · Jasmine Gu' }
   const tile = getWorkTileById(slug)
   return {
-    title: `${tile.title} — Jasmine Gu`,
+    title: `${tile.title} · Jasmine Gu`,
     description: tile.subtitle,
   }
 }
@@ -26,5 +26,6 @@ export default async function WorkExperiencePage({
   const { slug } = await params
   if (!isWorkExperienceSlug(slug)) notFound()
   if (slug === 'tesla') redirect('/tesla')
+  if (slug === 'autodesk') redirect('/autodesk')
   return <WorkExperiencePageClient slug={slug as WorkId} />
 }

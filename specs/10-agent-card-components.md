@@ -1,14 +1,14 @@
-# 10 — Agent Card Components
+# 10, Agent Card Components
 
 > Reusable component system for showcasing API and agent architecture on `/architecture`.
 > Reference inspiration: agent-builder UIs (config panels, flow nodes, provider chips, featured templates).
-> **Portfolio adaptation:** warm sophisticated system cards — not neon-purple cyber aesthetic. See [04 — Visual System](./04-visual-system.md).
+> **Portfolio adaptation:** warm sophisticated system cards, not neon-purple cyber aesthetic. See [04, Visual System](./04-visual-system.md).
 
 ---
 
 ## Purpose
 
-These components visualize **Jasmine as a generalist agent runtime** — inputs, capabilities, tools, memory, and outputs — using the same visual language as modern agent/API builders, but grounded in portfolio data.
+These components visualize **Jasmine as a generalist agent runtime**, inputs, capabilities, tools, memory, and outputs, using the same visual language as modern agent/API builders, but grounded in portfolio data.
 
 The visitor should feel like they are looking at a **real system diagram**, not a generic AI landing page.
 
@@ -22,11 +22,11 @@ One component family → many layout variants → all driven by shared data
 
 | Principle | Rule |
 |-----------|------|
-| **One family** | All variants extend `AgentCard` base — same tokens, borders, typography roles |
-| **Warm system aesthetic** | Charcoal surfaces, `--arch-accent` (#e8784a) glow, muted lavender/peach accents — no dominant neon purple |
+| **One family** | All variants extend `AgentCard` base, same tokens, borders, typography roles |
+| **Warm system aesthetic** | Charcoal surfaces, `--arch-accent` (#e8784a) glow, muted lavender/peach accents, no dominant neon purple |
 | **Typography roles** | Analogue OS for labels/metadata · Bootzy for titles · Inter for body · Awesome Shorten for conversational copy |
 | **Show structure, not decoration** | Fields, ports, and status badges communicate real architecture |
-| **Portfolio-grounded** | Content comes from `capabilities.ts`, `abstraction-engine-data.ts`, `portfolio-data.ts` — not lorem ipsum |
+| **Portfolio-grounded** | Content comes from `capabilities.ts`, `abstraction-engine-data.ts`, `portfolio-data.ts`, not lorem ipsum |
 | **Inspectable** | Hover reveals connections; Ask trace mode highlights related cards |
 
 ---
@@ -34,12 +34,12 @@ One component family → many layout variants → all driven by shared data
 ## Size tiers
 
 ```text
-XS   Chip        — provider, tool, tag, status pill
-SM   Compact     — single-field input node (User, Model)
-MD   Standard    — title + description feature card
-LG   Config      — multi-field agent/tool editor panel
-XL   Featured    — category-labeled showcase card with accent gradient
-2XL  Hub         — central runtime node (Jasmine agent)
+XS   Chip, provider, tool, tag, status pill
+SM   Compact, single-field input node (User, Model)
+MD   Standard, title + description feature card
+LG   Config, multi-field agent/tool editor panel
+XL   Featured, category-labeled showcase card with accent gradient
+2XL  Hub, central runtime node (Jasmine agent)
 ```
 
 ---
@@ -78,7 +78,7 @@ XL   Featured    — category-labeled showcase card with accent gradient
 
 **Reference:** User card + Model card in flow diagram (left side).
 
-**Use for:** Single-input flow nodes — user message, model selector, trigger, context source.
+**Use for:** Single-input flow nodes, user message, model selector, trigger, context source.
 
 | Field | Required | Example |
 |-------|----------|---------|
@@ -97,7 +97,7 @@ XL   Featured    — category-labeled showcase card with accent gradient
 - Right edge: glowing port dot for flow connectors
 
 **Architecture usage**
-- Experience Inputs section — each experience as an input node feeding Jasmine
+- Experience Inputs section, each experience as an input node feeding Jasmine
 - Optional "User question" node in runtime loop demo
 - Ask panel could reuse SM variant for query preview
 
@@ -117,7 +117,7 @@ XL   Featured    — category-labeled showcase card with accent gradient
 | `icon` | no | lucide icon |
 | `href` | no | link to Work evidence |
 | `status` | no | `ACTIVE` |
-| `traced` | no | boolean — warm outline when Ask trace active |
+| `traced` | no | boolean, warm outline when Ask trace active |
 
 **Layout**
 - Width: 240–320px (flexible in grid)
@@ -138,7 +138,7 @@ XL   Featured    — category-labeled showcase card with accent gradient
 
 **Reference:** Agent panel with Role, Language Model, Tools, Input Message fields.
 
-**Use for:** The "inspect the agent" view — shows how Jasmine is configured as a system.
+**Use for:** The "inspect the agent" view, shows how Jasmine is configured as a system.
 
 | Field | Required | Example |
 |-------|----------|---------|
@@ -200,9 +200,9 @@ Status        ● ONLINE
 | `category` | yes | `AGENTS` · `PROMPTING` · `RUNTIME` · `MEMORY` |
 | `title` | yes | `Jasmine Runtime` |
 | `description` | yes | max 3 lines |
-| `accent` | no | `warm` · `cool` · `mixed` — gradient corner variant |
+| `accent` | no | `warm` · `cool` · `mixed`, gradient corner variant |
 | `href` | no | CTA link |
-| `featured` | no | boolean — larger scale |
+| `featured` | no | boolean, larger scale |
 
 **Layout**
 - Width: 360–480px
@@ -223,7 +223,7 @@ Status        ● ONLINE
 
 **Reference:** Central Agent card in flow diagram with Prompt, Model, Role, Tools, Response rows.
 
-**Use for:** The central Jasmine node in runtime graph — the orchestrator everything connects to.
+**Use for:** The central Jasmine node in runtime graph, the orchestrator everything connects to.
 
 | Field | Required | Example |
 |-------|----------|---------|
@@ -242,7 +242,7 @@ Status        ● ONLINE
 - Active/hovered port: `--arch-accent` glow pulse (slow, once)
 
 **Architecture usage**
-- Section 03 — Jasmine Runtime (primary)
+- Section 03, Jasmine Runtime (primary)
 - Flow diagram center in "Run, Share and Collaborate" style section
 
 ---
@@ -251,7 +251,7 @@ Status        ● ONLINE
 
 **Reference:** "Responding…" Researcher response card on right side of flow.
 
-**Use for:** Agent outputs — products, decisions, experiments, responses.
+**Use for:** Agent outputs, products, decisions, experiments, responses.
 
 | Field | Required | Example |
 |-------|----------|---------|
@@ -280,7 +280,7 @@ Status        ● ONLINE
 
 **Reference:** Curved purple lines with glowing nodes between cards.
 
-**Use for:** Visual connections in graph/flow layouts — not a card, but part of the system.
+**Use for:** Visual connections in graph/flow layouts, not a card, but part of the system.
 
 | Prop | Type | Notes |
 |------|------|-------|
@@ -321,11 +321,11 @@ Status        ● ONLINE
 - Width: 100% of parent (sidebar column)
 - Dark inset panel within light editorial section (hybrid card pattern)
 - Analogue OS label + value pairs
-- Compact — fits beside experience cards in abstraction scroll
+- Compact, fits beside experience cards in abstraction scroll
 
 **Architecture usage**
-- Section 02 — each abstraction level's "Agent state" block
-- Already partially built as `arch-agent-state` — migrate to component
+- Section 02, each abstraction level's "Agent state" block
+- Already partially built as `arch-agent-state`, migrate to component
 
 ---
 
@@ -333,7 +333,7 @@ Status        ● ONLINE
 
 These are **arrangements** of the components above, not new primitives.
 
-### Composition A — Provider grid
+### Composition A, Provider grid
 
 ```text
 [Chip] [Chip] [Chip] [Chip]
@@ -346,7 +346,7 @@ These are **arrangements** of the components above, not new primitives.
 
 ---
 
-### Composition B — Horizontal flow
+### Composition B, Horizontal flow
 
 ```text
 [InputNode SM] ──→ [HubNode 2XL] ──→ [OutputNode LG]
@@ -358,7 +358,7 @@ These are **arrangements** of the components above, not new primitives.
 
 ---
 
-### Composition C — Radial runtime
+### Composition C, Radial runtime
 
 ```text
          [Cap MD]
@@ -372,7 +372,7 @@ These are **arrangements** of the components above, not new primitives.
 
 ---
 
-### Composition D — Vertical abstraction stack
+### Composition D, Vertical abstraction stack
 
 ```text
 [Editorial exp cards] + [AgentStateBlock SM]
@@ -453,13 +453,13 @@ components/portfolio/agent-cards/
 | Page section | Components | Composition |
 |--------------|------------|-------------|
 | Hero | `AgentConfigPanel` (mini), `AgentChip` | Optional inline agent window |
-| Abstraction levels | `AgentStateBlock`, editorial exp cards | D — vertical stack |
-| Jasmine Runtime | `AgentHubNode`, `AgentFeatureCard`, `AgentFlowConnector` | C — radial |
-| Tool Registry | `AgentChip`, `AgentFeatureCard` | A — grid |
-| Experience Inputs | `AgentInputNode`, `AgentFlowConnector` | B — inputs → hub |
-| Memory | `AgentFeatureCard` (light/hybrid) | A — 3-column |
-| Outputs | `AgentOutputNode`, `AgentFeatureCard` | B — hub → outputs |
-| Runtime loop | `AgentChip` (steps), `AgentFlowConnector` | B — linear flow |
+| Abstraction levels | `AgentStateBlock`, editorial exp cards | D, vertical stack |
+| Jasmine Runtime | `AgentHubNode`, `AgentFeatureCard`, `AgentFlowConnector` | C, radial |
+| Tool Registry | `AgentChip`, `AgentFeatureCard` | A, grid |
+| Experience Inputs | `AgentInputNode`, `AgentFlowConnector` | B, inputs → hub |
+| Memory | `AgentFeatureCard` (light/hybrid) | A, 3-column |
+| Outputs | `AgentOutputNode`, `AgentFeatureCard` | B, hub → outputs |
+| Runtime loop | `AgentChip` (steps), `AgentFlowConnector` | B, linear flow |
 | Final stack | `AgentFeaturedCard` (XL) × 6 levels | Vertical list |
 
 ---
@@ -523,14 +523,14 @@ Keep existing CSS working until each section is migrated. New sections use compo
 - Use neon purple as dominant accent
 - Add glassmorphism to every card
 - Show fake LLM provider logos without context
-- Make cards pure decoration — every field should map to real capability/input/output
-- Create separate unrelated components per section — extend the family
+- Make cards pure decoration, every field should map to real capability/input/output
+- Create separate unrelated components per section, extend the family
 
 ---
 
 ## Related specs
 
-- [04 — Visual System](./04-visual-system.md) — typography, card families, light/dark rhythm
-- [06 — Agent Architecture Page](./06-agent-architecture-page.md) — section content and narrative
-- [07 — Ask Side Agent](./07-ask-side-agent.md) — trace highlighting, shared field patterns
-- [Dot Fabric Visual](./visuals/dot-fabric.md) — ambient backgrounds behind featured/hub cards
+- [04, Visual System](./04-visual-system.md), typography, card families, light/dark rhythm
+- [06, Agent Architecture Page](./06-agent-architecture-page.md), section content and narrative
+- [07, Ask Side Agent](./07-ask-side-agent.md), trace highlighting, shared field patterns
+- [Dot Fabric Visual](./visuals/dot-fabric.md), ambient backgrounds behind featured/hub cards

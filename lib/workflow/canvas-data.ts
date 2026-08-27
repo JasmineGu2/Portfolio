@@ -1,5 +1,5 @@
 // ============================================================================
-// CAREER STORY — compact single-screen layout · edit here
+// CAREER STORY, compact single-screen layout · edit here
 // ============================================================================
 
 import type { ExecutionState } from './types'
@@ -40,7 +40,7 @@ export const NODE_BOX = 52
 export const NODE_TYPE_H = 10
 export const NODE_LABEL_H = 28
 
-/** Logical canvas — scaled to fit viewport */
+/** Logical canvas, scaled to fit viewport */
 export const CANVAS_META = {
   title: 'My work is translation.',
   subtitle: 'Users → product → engineering → operations',
@@ -64,7 +64,7 @@ export const CANVAS_NODES: CanvasNode[] = [
     y: 128,
     accent: '#22c55e',
     story:
-      'I connect users, products, and technical systems—most useful where product, engineering, and operations collide.',
+      'I connect users, products, and technical systems, most useful where product, engineering, and operations collide.',
   },
   {
     id: 'metaverse',
@@ -110,7 +110,7 @@ export const CANVAS_NODES: CanvasNode[] = [
     y: 208,
     accent: '#4D90D8',
     year: '2023',
-    story: 'Pre-seed stealth startup — Django, PostgreSQL, payments, CRM. End-to-end product in production.',
+    story: 'Pre-seed stealth startup: Django, PostgreSQL, payments, CRM. End-to-end product in production.',
     outcome: 'Operational product shipped',
     unlocked: 'Full-stack ownership',
   },

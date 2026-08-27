@@ -76,7 +76,7 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
       data-ai-background={isArchitecturePage ? 'architecture' : 'work'}
       style={schemeVars}
     >
-      {/* Architecture page kept in light mode for now — was `dark={isArchitecturePage}` */}
+      {/* Architecture page kept in light mode for now, was `dark={isArchitecturePage}` */}
       <FlowersBackgroundLayer dark={false} />
       <div className="bw-workspace-row">
         {!isArchitecturePage && !isHomePage && (
@@ -88,16 +88,14 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
           <header className="bw-site-nav">
             <HeroWorkspaceNav compact showWorkspaceControls={false} />
           </header>
-          {isHomePage ? (
-            <Suspense fallback={null}>
-              <AskAgentProvider>
-                {children}
-                <ChatFloatingWidget />
-              </AskAgentProvider>
-            </Suspense>
-          ) : (
-            children
-          )}
+          {/* The launcher is available on every page. On a case study it's the
+              only way to ask a question, and it behaves like a support chat. */}
+          <Suspense fallback={null}>
+            <AskAgentProvider>
+              {children}
+              <ChatFloatingWidget />
+            </AskAgentProvider>
+          </Suspense>
         </div>
       </div>
     </div>

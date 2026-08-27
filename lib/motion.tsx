@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Lightweight motion shim — Framer Motion-compatible API.
+ * Lightweight motion shim, Framer Motion-compatible API.
  * Swap imports to `framer-motion` when the package is available.
  */
 

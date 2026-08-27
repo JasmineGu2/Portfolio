@@ -1,4 +1,4 @@
-/* ── Portfolio design tokens (canonical warm palette — aligned with --arch-*) ── */
+/* ── Portfolio design tokens (canonical warm palette, aligned with --arch-*) ── */
 
 :root {
   /* Canvas & surfaces */
@@ -14,7 +14,7 @@
   --pf-muted: #6b635c;
   --pf-line: color-mix(in srgb, var(--pf-ink) 10%, transparent);
 
-  /* Accent palette — Claude orange */
+  /* Accent palette, Claude orange */
   --pf-accent: #d97757;
   --pf-gold: #e8c547;
   --pf-gold-deep: #c9a020;
@@ -53,7 +53,7 @@
     0 2px 4px color-mix(in srgb, #000 20%, transparent),
     0 8px 22px color-mix(in srgb, #000 28%, transparent);
 
-  /* Card system — unified borders, radius, transitions */
+  /* Card system, unified borders, radius, transitions */
   --pf-card-border: color-mix(in srgb, var(--pf-ink) 12%, transparent);
   --pf-card-border-hover: color-mix(in srgb, var(--pf-ink) 22%, transparent);
   --pf-card-border-glass: var(--pf-card-border);
@@ -65,7 +65,7 @@
   --pf-card-radius-sm: 0.875rem;
   --pf-card-transition: border-color 180ms ease, box-shadow 180ms ease;
 
-  /* Orange accent gradients — hero emphasis + bento chips */
+  /* Orange accent gradients, hero emphasis + bento chips */
   --pf-accent-chip-border: color-mix(in srgb, var(--pf-accent) 34%, transparent);
   --pf-accent-gradient-text: linear-gradient(
     120deg,
@@ -80,7 +80,7 @@
   );
   --pf-accent-chip-fg: color-mix(in srgb, var(--pf-accent) 58%, var(--pf-ink));
 
-  /* Legacy aliases — no purple/cyber accents */
+  /* Legacy aliases, no purple/cyber accents */
   --pf-border: var(--pf-card-border);
   --pf-bio-bg: var(--pf-surface-alt);
   --pf-orange: var(--pf-accent);
@@ -97,7 +97,7 @@
   --pf-font-personality: 'Awesome Shorten', 'Fredoka', cursive;
   --pf-font-system: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Bento scheme defaults — warm editorial; JS may override per scheme */
+  /* Bento scheme defaults, warm editorial; JS may override per scheme */
   --sch-shell-bg: var(--pf-canvas);
   --sch-sidebar-bg: var(--pf-surface);
   --sch-sidebar-active-bg: var(--pf-surface-alt);
@@ -139,7 +139,7 @@
   --arch-lavender: var(--pf-lavender);
   --arch-line: var(--pf-card-border-dark);
 
-  /* Ambient gradient presets — layered radial blobs, not linear bands */
+  /* Ambient gradient presets, layered radial blobs, not linear bands */
   --pf-gradient-warm:
     radial-gradient(ellipse 90% 70% at 50% 0%, color-mix(in srgb, var(--pf-gold) 42%, transparent), transparent 55%),
     radial-gradient(ellipse 80% 60% at 30% 100%, color-mix(in srgb, var(--pf-peach) 36%, transparent), transparent 50%);

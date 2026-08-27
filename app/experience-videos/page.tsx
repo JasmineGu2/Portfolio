@@ -3,7 +3,7 @@ import { ExperienceVideosPageClient } from '@/components/portfolio/experience-vi
 import './experience-videos.css'
 
 export const metadata: Metadata = {
-  title: 'Experience video tiles — Jasmine Gu',
+  title: 'Experience video tiles · Jasmine Gu',
   description: 'Animated square previews for each work experience, with logo fallbacks.',
 }
 

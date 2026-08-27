@@ -109,7 +109,7 @@ export function AutodeskWorkflow({
             {mergeMessage}
           </p>
           <p className="text-sm text-workflow-secondary mt-2">
-            Translation between product and engineering — on both sides of the
+            Translation between product and engineering, on both sides of the
             platform.
           </p>
         </motion.div>

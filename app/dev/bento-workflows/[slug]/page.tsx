@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const layout = getWorkflowLayout(params.slug)
   if (!layout) return { title: 'Workflow bento' }
-  return { title: `Workflow bento — ${layout.title}` }
+  return { title: `Workflow bento, ${layout.title}` }
 }
 
 export default function WorkflowBentoPage({ params }: { params: { slug: string } }) {

@@ -30,7 +30,7 @@ export interface BentoValueTile {
 
 export type BentoTile = BentoWorkTile | BentoValueTile
 
-/** Workflow connectors — hero panel + career tiles on one canvas */
+/** Workflow connectors, hero panel + career tiles on one canvas */
 export const BENTO_EDGES: WorkflowEdge[] = [
   ...HERO_BENTO_EDGES,
   { from: 'hero-pills', to: 'western', primary: true },
@@ -48,7 +48,7 @@ export const BENTO_EDGES: WorkflowEdge[] = [
   { from: 'ship', to: 'tesla' },
 ]
 
-/** Career tiles — spaced 4-column workflow grid below hero */
+/** Career tiles, spaced 4-column workflow grid below hero */
 export const BENTO_TILES: BentoTile[] = [
   {
     kind: 'value',

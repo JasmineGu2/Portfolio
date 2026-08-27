@@ -32,7 +32,7 @@ export default function DevIndexPage() {
     >
       <h1 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Dev tools</h1>
       <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '2rem' }}>
-        Internal design exploration — not linked from production nav.
+        Internal design exploration, not linked from production nav.
       </p>
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         {DEV_PAGES.map((page) => (

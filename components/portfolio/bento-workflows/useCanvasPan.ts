@@ -1,6 +1,6 @@
 'use client'
 
-/** Canvas pan is disabled — viewport is static; page scrolls normally. */
+/** Canvas pan is disabled, viewport is static; page scrolls normally. */
 export function useCanvasPan() {
   return {
     pan: { x: 0, y: 0 },

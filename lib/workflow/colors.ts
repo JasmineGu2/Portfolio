@@ -1,5 +1,5 @@
 // ============================================================================
-// WORKFLOW COLOR TOKENS — Semantic color mapping for agents and nodes
+// WORKFLOW COLOR TOKENS, Semantic color mapping for agents and nodes
 // ============================================================================
 
 import type { AgentColor, AgentType } from './types'

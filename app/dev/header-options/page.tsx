@@ -141,7 +141,7 @@ const headerOptions: HeaderOption[] = [
     component: (
       <div className="text-[#2A2A2A] dark:text-white flex items-center">
         <span className="text-xl md:text-2xl" style={{ fontFamily: "Editorial Old" }}>Jasmine Gu</span>
-        <span className="text-gray-300 dark:text-gray-600 mx-2">—</span>
+        <span className="text-gray-300 dark:text-gray-600 mx-2">-</span>
         <span className="text-sm md:text-base text-gray-400 dark:text-gray-500" style={{ fontFamily: "Inter" }}>CS and Business Grad 2027</span>
       </div>
     ),

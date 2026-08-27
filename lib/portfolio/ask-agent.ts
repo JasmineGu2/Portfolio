@@ -7,6 +7,11 @@ import {
 import { EXPERIENCE_CARDS } from '@/lib/portfolio/experience-cards-data'
 import { CAPABILITY_MODULES } from '@/lib/portfolio/capabilities'
 import { AGENT_IDENTITY } from '@/lib/portfolio/abstraction-engine-data'
+import { buildAutodeskFactSheet } from '@/lib/portfolio/autodesk-facts'
+import {
+  findRecruiterAnswer,
+  RECRUITER_QUESTIONS,
+} from '@/lib/portfolio/recruiter-qa'
 
 export type QueryMode = 'explain' | 'compare' | 'trace' | 'show'
 
@@ -23,6 +28,8 @@ export interface AgentResponse {
   followUps: string[]
   highlightIds: string[]
   traceIds?: string[]
+  /** Questions offered as buttons inside the bubble, used by the chip branches. */
+  options?: string[]
 }
 
 export interface AskContextOption {
@@ -45,14 +52,14 @@ export interface ExperiencePickerItem {
  * ---------------------------------------------------------------------
  * Persona and grounding instructions for "Ask Jasmine."
  *
- * There is currently no LLM call anywhere in this codebase — `resolveAskResponse`
+ * There is currently no LLM call anywhere in this codebase, `resolveAskResponse`
  * below answers visitors with hand-written copy that is meant to follow these
  * same voice rules, and the UI (references, highlightIds, traceIds, routing to
  * /architecture) depends on that function's structured output, not free text.
  *
  * If a real model call is ever wired up (e.g. a new `app/api/ask` route calling
  * an LLM), send this string as the `system` prompt, and keep `resolveAskResponse`'s
- * structured fields — or an equivalent tool-call schema — so the navigation
+ * structured fields, or an equivalent tool-call schema, so the navigation
  * features keep working. It's assembled from the same data files that drive the
  * rest of the site (EXPERIENCE_CARDS, CAPABILITY_MODULES, AGENT_IDENTITY) so it
  * can't drift out of sync with what's actually on the page.
@@ -62,7 +69,7 @@ export function buildAskJasmineSystemPrompt(): string {
     .filter((id) => id !== 'western')
     .map((id) => {
       const card = EXPERIENCE_CARDS[id]
-      return `- ${card.company} — ${card.role} (${card.period}): ${card.description}`
+      return `- ${card.company}, ${card.role} (${card.period}): ${card.description}`
     })
     .join('\n')
 
@@ -70,13 +77,13 @@ export function buildAskJasmineSystemPrompt(): string {
     (cap) => `- ${cap.title}: ${cap.description} (evidence: ${cap.evidence.join(', ')})`
   ).join('\n')
 
-  return `You are Jasmine Gu, answering questions on your own portfolio site. Speak directly to the visitor — a recruiter, hiring manager, or fellow engineer — in first person ("I", never "Jasmine" or "the portfolio").
+  return `You are Jasmine Gu, answering questions on your own portfolio site. Speak directly to the visitor, whether a recruiter, hiring manager, or fellow engineer, in first person ("I", never "Jasmine" or "the portfolio").
 
 VOICE
 - Confident and specific. Never generic chatbot filler ("Great question!", "I'd be happy to help!").
 - Talk like an engineer who became a PM: name the actual system, tool, or tradeoff, not just a job title.
 - Short, direct sentences. Skip buzzwords unless they're literally what you used (MCP, DynamoDB, Spring Boot).
-- You're allowed opinions about your own path — why you moved from engineering to product, what surprised you, what you'd do differently.
+- You're allowed opinions about your own path: why you moved from engineering to product, what surprised you, what you'd do differently.
 - Never invent facts, dates, companies, or achievements beyond what's listed below. If you don't know, say so plainly and redirect to something you can actually answer.
 
 WHO YOU ARE
@@ -88,8 +95,12 @@ ${roles}
 CAPABILITIES YOU DRAW ON
 ${capabilities}
 
+AUTODESK / ADP STUDIO IN DETAIL
+This is the deepest-documented role. Answer from these facts and don't extrapolate past them.
+${buildAutodeskFactSheet()}
+
 WHEN YOU DON'T KNOW
-If a question falls outside this grounding, say so plainly in first person and point the visitor at something you can answer — Tesla, Autodesk, the move into product, or how the experiences connect. Don't fabricate specifics to fill the gap.`
+If a question falls outside this grounding, say so plainly in first person and point the visitor at something you can answer, like Tesla, Autodesk, the move into product, or how the experiences connect. Don't fabricate specifics to fill the gap.`
 }
 
 export const ASK_JASMINE_SYSTEM_PROMPT = buildAskJasmineSystemPrompt()
@@ -152,8 +163,8 @@ export const INITIAL_CONTEXT_CHIPS: AskContextOption[] = [
 ]
 
 export const CONTEXT_PICKER_OPTIONS: AskContextOption[] = [
-  { id: 'autodesk', label: 'Autodesk — Product', group: 'work' },
-  { id: 'autodesk-eng', label: 'Autodesk — SWE', group: 'work' },
+  { id: 'autodesk', label: 'Autodesk, Product', group: 'work' },
+  { id: 'autodesk-eng', label: 'Autodesk, SWE', group: 'work' },
   { id: 'tesla', label: 'Tesla', group: 'work' },
   { id: 'intuit', label: 'Intuit', group: 'work' },
   { id: 'stealth-startup', label: 'Stealth Startup', group: 'work' },
@@ -211,10 +222,20 @@ function refFromItem(item: PortfolioItem): AgentReference {
 }
 
 function refsFromIds(ids: string[]): AgentReference[] {
-  return ids
+  const refs = ids
     .map((id) => getPortfolioItem(id))
     .filter((item): item is PortfolioItem => item !== undefined)
     .map(refFromItem)
+
+  // Both Autodesk roles carry the same company name, so an answer citing both would
+  // render two chips reading "Autodesk". Fall back to the picker label, which
+  // already distinguishes them, but only for the labels that actually collide.
+  const seen = new Map<string, number>()
+  refs.forEach((ref) => seen.set(ref.label, (seen.get(ref.label) ?? 0) + 1))
+
+  return refs.map((ref) =>
+    (seen.get(ref.label) ?? 0) > 1 ? { ...ref, label: contextLabel(ref.id) } : ref
+  )
 }
 
 function itemSummary(id: WorkId): string {
@@ -320,16 +341,22 @@ export function getAutocompleteMatches(query: string, contextIds: string[], path
   const q = normalize(query)
   if (!q) return getContextualSuggestions(contextIds, pathname).slice(0, 5)
 
-  const pool = [...new Set([...getContextualSuggestions(contextIds, pathname), ...AUTOCOMPLETE_QUESTIONS])]
+  const pool = [
+    ...new Set([
+      ...getContextualSuggestions(contextIds, pathname),
+      ...RECRUITER_QUESTIONS,
+      ...AUTOCOMPLETE_QUESTIONS,
+    ]),
+  ]
   return pool.filter((question) => normalize(question).includes(q)).slice(0, 5)
 }
 
-/** Shown for freely-typed questions — there's no real language model behind this yet, only
+/** Shown for freely-typed questions, there's no real language model behind this yet, only
  *  keyword-matched answers wired to the topic chips, so guessing at arbitrary text would
  *  either misfire or silently redirect the page. Typed questions get this instead. */
 export const WORK_IN_PROGRESS_RESPONSE: AgentResponse = {
   answer:
-    "(work in progress) Free-form questions aren't wired up yet — I can only answer the topics above right now. Tap one of the chips, or try one of the example questions.",
+    "I don't have that one written up yet. Pick a topic below and I'll show you what I can answer.",
   references: [],
   followUps: [],
   highlightIds: [],
@@ -343,10 +370,24 @@ export function resolveAskResponse(
   const q = normalize(query)
   const hasContext = (id: string) => contextIds.includes(id)
 
+  // Curated recruiter Q&A first. These are exact matches on the chip questions,
+  // so they always beat the keyword heuristics below, which are deliberately
+  // broad and would otherwise swallow a specific question with a vague answer.
+  const curated = findRecruiterAnswer(query)
+  if (curated) {
+    const refIds = curated.refIds ?? []
+    return {
+      answer: curated.answer,
+      references: refsFromIds(refIds),
+      followUps: curated.followUps ?? [],
+      highlightIds: refIds,
+    }
+  }
+
   if (mode === 'trace' || q.includes('trace') || q.includes('progression') || q.includes('path')) {
     return {
       answer:
-        'The through-line runs from interfaces toward product decisions — each step added a wider lens, not a departure from building.',
+        'The through-line runs from interfaces toward product decisions. Each step added a wider lens, not a departure from building.',
       references: refsFromIds(TRACE_FRONTEND_TO_PRODUCT),
       relatedPath: 'INTERFACE → SYSTEM → PLATFORM → PRODUCT',
       followUps: [
@@ -401,7 +442,7 @@ export function resolveAskResponse(
   if (q.includes('why') && (q.includes('product') || q.includes('pm') || q.includes('engineering'))) {
     return {
       answer:
-        'I moved toward product after repeatedly hitting questions the interface alone could not answer — what the system should enable, what to prioritize, and what tradeoffs mattered. Tesla and Autodesk SWE made the underlying systems legible; product became the layer where those systems meet direction.',
+        'I moved toward product after repeatedly hitting questions the interface alone could not answer: what the system should enable, what to prioritize, and what tradeoffs mattered. Tesla and Autodesk SWE made the underlying systems legible; product became the layer where those systems meet direction.',
       references: refsFromIds(['intuit', 'tesla', 'autodesk-eng', 'autodesk']),
       relatedPath: 'INTERFACE → SYSTEM → PLATFORM → PRODUCT',
       followUps: [
@@ -469,7 +510,7 @@ export function resolveAskResponse(
   if (q.includes('intuit') || hasContext('intuit')) {
     return {
       answer:
-        'Intuit was my first time doing frontend work inside a system I did not build — TurboTax.com already had a large component library, theming rules, and animation conventions, and my job was to build onboarding UI that fit inside them cleanly. I learned how much of real engineering is integration: matching an existing design system and wiring REST APIs other teams owned, not just shipping a new component in isolation.',
+        'Intuit was my first time doing frontend work inside a system I did not build. TurboTax.com already had a large component library, theming rules, and animation conventions, and my job was to build onboarding UI that fit inside them cleanly. I learned how much of real engineering is integration: matching an existing design system and wiring REST APIs other teams owned, not just shipping a new component in isolation.',
       references: refsFromIds(['intuit']),
       relatedPath: 'INTERFACE',
       followUps: ['What did you learn about design systems?', 'Trace how you moved toward systems work.'],
@@ -494,7 +535,7 @@ export function resolveAskResponse(
   if (q.includes('technical') || q.includes('how technical')) {
     return {
       answer:
-        'Still very technical as a PM — I came from frontend and systems work, spent time on ML factory tooling and distributed platform services, and now work on AI-assisted data products where understanding the system underneath the feature is the job.',
+        'Still very technical as a PM. I came from frontend and systems work, spent time on ML factory tooling and distributed platform services, and now work on AI-assisted data products where understanding the system underneath the feature is the job.',
       references: refsFromIds(['tesla', 'autodesk-eng', 'autodesk']),
       followUps: ['Show me your most technical work.', 'What languages have you used?', 'Trace my engineering path.'],
       highlightIds: ['tesla', 'autodesk-eng'],
@@ -504,7 +545,7 @@ export function resolveAskResponse(
   if (q.includes('connect') || q.includes('architecture') || q.includes('abstraction')) {
     return {
       answer:
-        'Each experience trained a different capability — automation taught leverage, interfaces taught user empathy, systems work taught dependencies, platform work taught scale, and product work taught direction. The Journey page maps how they connect.',
+        'Each experience trained a different capability. Automation taught leverage, interfaces taught user empathy, systems work taught dependencies, platform work taught scale, and product work taught direction. The Journey page maps how they connect.',
       references: [{ id: 'architecture', label: 'Journey', href: '/architecture' }],
       followUps: [
         'Trace how you moved from frontend to product.',
@@ -524,7 +565,7 @@ export function resolveAskResponse(
   ) {
     return {
       answer:
-        'Most of my zero-to-one work is LaurelSpace, a childcare CRM where I owned product and engineering end to end — payments, email automation, the database, and the go-to-market plan. Outside of full-time roles I keep building smaller things fast: TLDW summarized and classified YouTube videos, BrewMates helped students start networking conversations, and I led the six-person team that built the Hack Western hacker portal for 400+ participants. Different sizes, same instinct — build the real thing to answer the question instead of debating it.',
+        'Most of my zero-to-one work is LaurelSpace, a childcare CRM where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan. Outside of full-time roles I keep building smaller things fast: TLDW summarized and classified YouTube videos, BrewMates helped students start networking conversations, and I led the six-person team that built the Hack Western hacker portal for 400+ participants. Different sizes, same instinct: build the real thing to answer the question instead of debating it.',
       references: refsFromIds(['stealth-startup', 'tldw', 'brewmates', 'hackwestern-web-developer']),
       relatedPath: 'ZERO → ONE',
       followUps: [
@@ -538,7 +579,7 @@ export function resolveAskResponse(
 
   return {
     answer:
-      "I don't have a specific answer for that yet — try asking about Tesla, Autodesk, the move into product, or tracing how the experiences connect.",
+      "I don't have a specific answer for that yet. Try asking about Tesla, Autodesk, the move into product, or tracing how the experiences connect.",
     references: refsFromIds(['tesla', 'autodesk']),
     followUps: [
       'Why did you move from engineering to product?',

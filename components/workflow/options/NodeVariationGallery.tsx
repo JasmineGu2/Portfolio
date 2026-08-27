@@ -502,12 +502,12 @@ export function NodeVariationGallery() {
             Milestone nodes
           </h2>
           <p className="text-sm text-n8n-muted mb-6">
-            Major roles on the main career path — compact, icon-led, operational.
+            Major roles on the main career path, compact, icon-led, operational.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <PreviewFrame
               title="Live · Official n8n canvas node"
-              description="96×96 icon box, label below, 16px handles — matches the editor."
+              description="96×96 icon box, label below, 16px handles, matches the editor."
             >
               <N8nDefaultNode step={DEMO_MILESTONE} active />
             </PreviewFrame>
@@ -543,7 +543,7 @@ export function NodeVariationGallery() {
             </PreviewFrame>
             <PreviewFrame
               title="F · Ghost outline"
-              description="Muted, dashed — for older entries."
+              description="Muted, dashed, for older entries."
             >
               <MilestoneF step={DEMO_MILESTONE} />
             </PreviewFrame>
@@ -592,13 +592,13 @@ export function NodeVariationGallery() {
             Project / branch nodes
           </h2>
           <p className="text-sm text-n8n-muted mb-6">
-            Smaller nodes attached above or below milestones — side projects,
+            Smaller nodes attached above or below milestones, side projects,
             skills, context.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <PreviewFrame
               title="Live · Official n8n sticky note"
-              description="Yellow sticky branch node — matches the editor."
+              description="Yellow sticky branch node, matches the editor."
             >
               <N8nStickyNode label={DEMO_PROJECT.label} active />
             </PreviewFrame>
@@ -616,7 +616,7 @@ export function NodeVariationGallery() {
             </PreviewFrame>
             <PreviewFrame
               title="C · Tag only"
-              description="Minimal — no category, lowest weight."
+              description="Minimal, no category, lowest weight."
             >
               <ProjectC />
             </PreviewFrame>
@@ -658,12 +658,12 @@ export function NodeVariationGallery() {
             Router / split nodes
           </h2>
           <p className="text-sm text-n8n-muted mb-6">
-            Where the story branches — e.g. Engineering vs Product at Autodesk.
+            Where the story branches, e.g. Engineering vs Product at Autodesk.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <PreviewFrame
               title="Live · Official n8n configuration node"
-              description="80px circle with route icon — matches the editor."
+              description="80px circle with route icon, matches the editor."
             >
               <N8nConfigurationNode label="Autodesk split" active />
             </PreviewFrame>
@@ -675,7 +675,7 @@ export function NodeVariationGallery() {
             </PreviewFrame>
             <PreviewFrame
               title="B · Diamond"
-              description="Rotated square — classic flowchart fork."
+              description="Rotated square, classic flowchart fork."
             >
               <RouterB />
             </PreviewFrame>

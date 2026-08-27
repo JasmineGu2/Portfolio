@@ -1,7 +1,7 @@
 import { BentoFormatHub } from '@/components/portfolio/bento-formats/BentoFormatShell'
 
 export const metadata = {
-  title: 'Jasmine Gu — Bento format explorations',
+  title: 'Jasmine Gu · Bento format explorations',
   description: 'Four alternate bento layout formats for portfolio preview',
 }
 

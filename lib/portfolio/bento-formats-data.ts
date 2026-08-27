@@ -13,13 +13,13 @@ export const BENTO_FORMATS: FormatMeta[] = [
   {
     id: 'compact',
     title: 'Compact mosaic',
-    description: 'Tight classic bento grid — dense tiles, flat cream background, no connectors.',
+    description: 'Tight classic bento grid: dense tiles, flat cream background, no connectors.',
     tag: 'Dense grid',
   },
   {
     id: 'magazine',
     title: 'Magazine editorial',
-    description: 'Large serif hero, asymmetric spans, and generous whitespace — editorial, not workflow.',
+    description: 'Large serif hero, asymmetric spans, and generous whitespace. Editorial, not workflow.',
     tag: 'Editorial',
   },
   {
@@ -57,7 +57,7 @@ export const FORMAT_INTRO = {
   serif:
     'Jasmine Gu is a product-minded builder with the experience and versatility to translate between users, engineering, and operations in dynamic environments.',
   subline:
-    'Product Manager and Engineer building thoughtful, AI-powered products — from TurboTax UX to data platforms at Autodesk.',
+    'Product Manager and Engineer building thoughtful, AI-powered products, from TurboTax UX to data platforms at Autodesk.',
 }
 
 export const FORMAT_WORK: FormatWorkItem[] = [

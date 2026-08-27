@@ -1,10 +1,10 @@
-/** Canonical site messaging — used across Work hero, Architecture, metadata, and Ask. */
+/** Canonical site messaging, used across Work hero, Architecture, metadata, and Ask. */
 
 export const HERO_TAGLINE = {
   primary:
     'Jasmine Gu is a product-minded builder with the experience and versatility to translate between users, engineering, and operations.',
   secondary:
-    'Product manager and engineer building thoughtful, AI-powered products—from consumer experiences at TurboTax to enterprise data platforms at Autodesk.',
+    'Product manager and engineer building thoughtful, AI-powered products, from consumer experiences at TurboTax to enterprise data platforms at Autodesk.',
 } as const
 
 export const SITE_METADATA = {

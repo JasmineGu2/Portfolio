@@ -1,8 +1,8 @@
-/Users/guj/personal-life/personal website redesign/Branding of portfolio.canvas# 06 — Agent Architecture Page
+/Users/guj/personal-life/personal website redesign/Branding of portfolio.canvas# 06, Agent Architecture Page
 
 Route: `/architecture`
 
-This is **not called Story**. It is the **architecture of the agent** — the background layer that explains why Work makes sense.
+This is **not called Story**. It is the **architecture of the agent**, the background layer that explains why Work makes sense.
 
 Work is the backbone (evidence). Architecture is the background (narrative + system diagram).
 
@@ -36,7 +36,7 @@ Final conclusion:
 
 ## Page sections (build order)
 
-### SECTION 01 — Initialize (hero)
+### SECTION 01, Initialize (hero)
 
 Identity card:
 
@@ -62,7 +62,7 @@ Small agent window optional in hero (status ONLINE, capabilities: Product, Engin
 
 ---
 
-### SECTION 02 — Abstraction levels
+### SECTION 02, Abstraction levels
 
 Six scroll sections, one per level. Each follows this pattern:
 
@@ -73,39 +73,39 @@ Six scroll sections, one per level. Each follows this pattern:
 5. Agent state card
 6. Link to Work tile(s)
 
-#### Level 00 — AUTOMATION
+#### Level 00, AUTOMATION
 - **Question:** Can I make this easier?
 - **Experiences:** Metaverse Group, ServiceNow / OMERS
-- **Unlocked:** `LEVERAGE` — Software can turn repetitive work into a system.
+- **Unlocked:** `LEVERAGE`, Software can turn repetitive work into a system.
 
-#### Level 01 — ZERO TO ONE
+#### Level 01, ZERO TO ONE
 - **Question:** What do you build when nothing is defined yet?
 - **Experience:** Stealth Pre-Seed Startup (LaurelSpace)
-- **Unlocked:** `AMBIGUITY` — When there is no blueprint, product and engineering decisions happen together.
+- **Unlocked:** `AMBIGUITY`, When there is no blueprint, product and engineering decisions happen together.
 
-#### Level 02 — INTERFACE
+#### Level 02, INTERFACE
 - **Question:** How does a system become understandable to a person?
-- **Experience:** Intuit — TurboTax
-- **Unlocked:** `USER` — The system eventually becomes something a person has to understand.
+- **Experience:** Intuit, TurboTax
+- **Unlocked:** `USER`, The system eventually becomes something a person has to understand.
 
-#### Level 03 — SYSTEM
+#### Level 03, SYSTEM
 - **Question:** What has to happen underneath the interface?
 - **Experience:** Tesla
-- **Unlocked:** `DEPENDENCIES` — Great interfaces are often systems problems underneath.
+- **Unlocked:** `DEPENDENCIES`, Great interfaces are often systems problems underneath.
 
-#### Level 04 — PLATFORM
+#### Level 04, PLATFORM
 - **Question:** What happens when many systems depend on the same foundation?
 - **Experience:** Autodesk Fusion (SWE)
-- **Unlocked:** `SCALE` — A product is not a page. It is a network of dependencies.
+- **Unlocked:** `SCALE`, A product is not a page. It is a network of dependencies.
 
-#### Level 05 — PRODUCT
+#### Level 05, PRODUCT
 - **Question:** What should the system actually enable?
-- **Experience:** Autodesk — Platform Product (ADP Studio)
-- **Unlocked:** `DIRECTION` — Once she understood how systems were built, she became interested in shaping what they should make possible.
+- **Experience:** Autodesk, Platform Product (ADP Studio)
+- **Unlocked:** `DIRECTION`, Once she understood how systems were built, she became interested in shaping what they should make possible.
 
 ---
 
-### SECTION 03 — Jasmine Runtime
+### SECTION 03, Jasmine Runtime
 
 **Dark system section.**
 
@@ -136,7 +136,7 @@ Visual: connected agent-architecture interface with curved connector lines, glow
 
 ---
 
-### SECTION 04 — Tool Registry
+### SECTION 04, Tool Registry
 
 Compact tool picker with expandable categories:
 
@@ -152,7 +152,7 @@ Also: personal tools Jasmine uses daily (Claude, Notion, Wispr Flow, Obsidian, F
 
 ---
 
-### SECTION 05 — Experience Inputs
+### SECTION 05, Experience Inputs
 
 **Editorial statement:** Every experience became an input.
 
@@ -169,7 +169,7 @@ Six input streams connecting into Jasmine agent:
 
 ---
 
-### SECTION 06 — Zoom-out visual
+### SECTION 06, Zoom-out visual
 
 Vertical/diagonal visualization showing career as increasing abstraction.
 
@@ -177,23 +177,23 @@ Headline: **I kept zooming out.**
 
 As user scrolls, camera visually zooms outward through layers. Experience nodes appear at each level.
 
-Do not imply engineering stopped when moving to product — each role added a broader abstraction layer.
+Do not imply engineering stopped when moving to product, each role added a broader abstraction layer.
 
 ---
 
-### SECTION 07 — Memory
+### SECTION 07, Memory
 
 Three modules styled like AI memory system:
 
-**Long-term memory** — communities, mentors, leadership, hackathons, formative projects. Placeholders where content not supplied. Links to Gallery.
+**Long-term memory**, communities, mentors, leadership, hackathons, formative projects. Placeholders where content not supplied. Links to Gallery.
 
-**Working memory** — current side project, AI experiment, rabbit hole, technical/product questions. Placeholders.
+**Working memory**, current side project, AI experiment, rabbit hole, technical/product questions. Placeholders.
 
-**Context window** — static operating traits as system context (learns by building, likes ambiguous problems, prototypes early, etc.).
+**Context window**, static operating traits as system context (learns by building, likes ambiguous problems, prototypes early, etc.).
 
 ---
 
-### SECTION 08 — Experimental Infrastructure (projects)
+### SECTION 08, Experimental Infrastructure (projects)
 
 Personal projects with schema:
 
@@ -213,15 +213,15 @@ Links to `/projects` for full bento view.
 
 ---
 
-### SECTION 09 — Community Layer
+### SECTION 09, Community Layer
 
 Schema for community entries. Placeholders until data supplied. Primary content source: Gallery (`/gallery`).
 
-Not in main nav — linked from here as "See full gallery →"
+Not in main nav, linked from here as "See full gallery →"
 
 ---
 
-### SECTION 10 — Outputs
+### SECTION 10, Outputs
 
 Five output types connected to Jasmine agent:
 
@@ -235,7 +235,7 @@ Five output types connected to Jasmine agent:
 
 ---
 
-### SECTION 11 — Runtime loop
+### SECTION 11, Runtime loop
 
 Animated circular process:
 
@@ -249,17 +249,17 @@ Label: `RUNTIME LOOP`
 
 ---
 
-### SECTION 12 — Final stack reveal
+### SECTION 12, Final stack reveal
 
 All abstraction levels displayed together:
 
 ```text
-PRODUCT     — What should exist?
-PLATFORM    — What should others be able to build on?
-SYSTEM      — What makes it work reliably?
-INTERFACE   — How does someone experience it?
-ZERO → ONE  — How do you make something real from ambiguity?
-AUTOMATION  — Can software remove friction?
+PRODUCT, What should exist?
+PLATFORM, What should others be able to build on?
+SYSTEM, What makes it work reliably?
+INTERFACE, How does someone experience it?
+ZERO → ONE, How do you make something real from ambiguity?
+AUTOMATION, Can software remove friction?
 ```
 
 Closing: **I didn't leave the earlier layers behind.**

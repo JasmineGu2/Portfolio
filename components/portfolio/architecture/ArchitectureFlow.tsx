@@ -17,7 +17,7 @@ import {
 } from '@/lib/portfolio/abstraction-engine-data'
 import { cn } from '@/lib/utils'
 
-/** First node y per stage — anchors compact level pills. */
+/** First node y per stage, anchors compact level pills. */
 const STAGE_ANCHOR_Y: Record<string, number> = {
   automation: 2,
   'zero-to-one': 13,
@@ -103,7 +103,7 @@ export function ArchitectureFlow() {
           Different experiences trained different parts of how I work.
         </h2>
         <p className="arch-section__sub font-awesome-shorten">
-          Each role trained a different layer — from automating tasks to shaping product direction.
+          Each role trained a different layer, from automating tasks to shaping product direction.
         </p>
 
         <div className="arch-level-matrix-section">

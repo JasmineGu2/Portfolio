@@ -1,4 +1,4 @@
-# 01 — Product Overview
+# 01, Product Overview
 
 ## One-line concept
 
@@ -34,7 +34,7 @@ PLATFORM
 PRODUCT
 ```
 
-Each experience expanded the level at which Jasmine understands and builds products — not a random collection of roles.
+Each experience expanded the level at which Jasmine understands and builds products, not a random collection of roles.
 
 ---
 
@@ -68,16 +68,16 @@ Each experience expanded the level at which Jasmine understands and builds produ
      Bento tiles       Agent runtime       Explore Work
 ```
 
-### Work — the backbone
+### Work, the backbone
 Jobs, internships, case study links. What recruiters scan first. Default landing at `/`.
 
-### Architecture — the background
-The agent architecture narrative. Why the diverse background makes sense. Lives at `/architecture`. Not called "Story" — it is the **architecture of the agent**.
+### Architecture, the background
+The agent architecture narrative. Why the diverse background makes sense. Lives at `/architecture`. Not called "Story", it is the **architecture of the agent**.
 
-### Ask — the query layer
+### Ask, the query layer
 Floating side panel to explore Work (and reference Architecture paths). Not a primary nav destination.
 
-### Projects — separate evidence
+### Projects, separate evidence
 PM case studies and technical builds at `/projects`. Same bento vibe as Work but its own page.
 
 ---
@@ -92,7 +92,7 @@ The site should feel like two worlds overlapping:
 | Playful, curious, imperfect | Connected, agent-like |
 | Bootzy + Awesome Shorten | Analogue OS metadata |
 
-**Goal aesthetic:** a creative studio designed an AI operating system for one person — not a developer recreated an AI SaaS dashboard.
+**Goal aesthetic:** a creative studio designed an AI operating system for one person, not a developer recreated an AI SaaS dashboard.
 
 ---
 

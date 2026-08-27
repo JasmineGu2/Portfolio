@@ -26,7 +26,7 @@ interface CareerWorkflowFeedProps {
   steps: StoryStep[]
 }
 
-/** Newest first — Jenny Wen–style feed with n8n node cards */
+/** Newest first, Jenny Wen–style feed with n8n node cards */
 export function CareerWorkflowFeed({ steps }: CareerWorkflowFeedProps) {
   const ordered = [...steps].reverse()
 
@@ -43,7 +43,7 @@ export function CareerWorkflowFeed({ steps }: CareerWorkflowFeedProps) {
             id={`step-${step.id}`}
             className="scroll-mt-24 group"
           >
-            {/* Date + headline — simple like Jenny Wen */}
+            {/* Date + headline, simple like Jenny Wen */}
             <p className="text-base text-n8n-muted mb-2">{step.period}</p>
             <h3 className="text-[15px] md:text-base leading-snug mb-1">
               <a
@@ -55,7 +55,7 @@ export function CareerWorkflowFeed({ steps }: CareerWorkflowFeedProps) {
               </a>
               <span className="text-n8n-muted font-normal">
                 {' '}
-                — {step.role}. {step.tag}
+                · {step.role}. {step.tag}
               </span>
             </h3>
 

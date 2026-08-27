@@ -21,7 +21,7 @@ export function CardOptionsPageClient() {
   return (
     <BentoWorkspaceShell
       title="Work card styling"
-      description="Sixteen experience tile layouts — including logo-forward options with no tinted backgrounds. Click a card to preview it large above."
+      description="Sixteen experience tile layouts, including logo-forward options with no tinted backgrounds. Click a card to preview it large above."
     >
       <section className="card-opt-page">
         <div className="card-opt-hero-panel">

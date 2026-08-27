@@ -1,0 +1,825 @@
+/* Autodesk case study, mirrors the Tesla case study styling rules
+   (app/tesla/tesla-case-study.css) in its own namespace so the two
+   case studies can diverge without breaking each other. */
+
+.adsk-cs {
+  --adsk-ink: var(--pf-ink, #1a1410);
+  --adsk-muted: var(--pf-muted, #6b635c);
+  --adsk-accent: var(--pf-accent, #e8784a);
+  --adsk-peach: var(--pf-peach, #f4c4a8);
+  --adsk-lavender: #e8dff5;
+  --adsk-cream: var(--pf-cream, #faf6f0);
+  --adsk-surface: var(--pf-surface, #fffdf9);
+  --adsk-border: var(--pf-border, color-mix(in srgb, var(--pf-ink) 10%, transparent));
+  --adsk-prose: 41rem;
+  --adsk-wide: 56rem;
+  --adsk-sidebar: 14rem;
+  --adsk-beat: 1.75rem;
+  padding: 0.75rem 0.85rem 4rem;
+  color: var(--adsk-muted);
+  background: var(--adsk-cream);
+}
+
+.bw-main:has(.adsk-cs) {
+  --bw-main-pad-x: 0.65rem;
+}
+
+/*
+ * The shell intends .bw-main to be the scroll container — it sets `overflow-y: auto` —
+ * but the height chain from html down is only ever `min-height`, so .bw-main's
+ * `height: 100%` resolves to auto, it never overflows, and the window scrolls the whole
+ * page instead. A `position: sticky` element inside a scroll container that never
+ * scrolls never sticks, which is why the sidebar scrolled away with the article.
+ * Pinning this page's shell to the viewport hands scrolling back to .bw-main.
+ */
+html:has(.adsk-cs),
+body:has(.adsk-cs) {
+  height: 100%;
+  overflow: hidden;
+}
+
+.bw-shell:has(.adsk-cs) {
+  height: 100dvh;
+}
+
+.bw-main:has(.adsk-cs) {
+  scroll-behavior: smooth;
+}
+
+.adsk-cs__layout {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.adsk-cs__sidebar {
+  display: none;
+}
+
+.adsk-cs__sidebar-tile {
+  padding: 1.15rem 1rem 1.25rem;
+  background: var(--adsk-surface);
+  border: 1px solid var(--adsk-border);
+  border-radius: 1rem;
+}
+
+.adsk-cs__sidebar-tile .adsk-cs__back {
+  margin-bottom: 1rem;
+  color: var(--adsk-muted);
+  font-size: 0.875rem;
+}
+
+.adsk-cs__progress {
+  height: 3px;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--adsk-border) 70%, #ffffff);
+  overflow: hidden;
+}
+
+.adsk-cs__progress-bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--adsk-ink), var(--adsk-accent));
+  transition: width 0.2s ease;
+}
+
+.adsk-cs__mobile-nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.adsk-cs__mobile-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.adsk-cs__mobile-link {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--adsk-border);
+  border-radius: 999px;
+  background: var(--adsk-surface);
+  color: var(--adsk-muted);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.adsk-cs__mobile-link--active {
+  border-color: color-mix(in srgb, var(--adsk-accent) 35%, var(--adsk-border));
+  color: var(--adsk-ink);
+  background: color-mix(in srgb, var(--adsk-peach) 25%, var(--adsk-surface));
+}
+
+.adsk-cs__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.adsk-cs__nav-link {
+  display: block;
+  padding: 0.55rem 0.75rem 0.55rem 0.85rem;
+  border-left: 3px solid transparent;
+  border-radius: 0 10px 10px 0;
+  color: var(--adsk-muted);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.adsk-cs__nav-link:hover {
+  color: var(--adsk-ink);
+}
+
+.adsk-cs__nav-link--active {
+  background: color-mix(in srgb, var(--adsk-peach) 20%, var(--adsk-surface));
+  border-left-color: var(--adsk-accent);
+  color: var(--adsk-ink);
+  font-weight: 700;
+}
+
+.adsk-cs__main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* One centred reading column. Without this the content hugged the left edge of
+     its grid track and left a dead gutter on the right at desktop widths. */
+  width: 100%;
+  max-width: var(--adsk-wide);
+  margin-inline: auto;
+}
+
+/* Prose-width blocks centre inside the column; the wider blocks (meta grid, card
+   grids, role table) fill it, so they break out symmetrically around the text
+   instead of the text sitting off to one side. */
+.adsk-cs__kicker,
+.adsk-cs__label,
+.adsk-cs__hero-title,
+.adsk-cs__headline,
+.adsk-cs__body,
+.adsk-cs__bullets,
+.adsk-cs__impact-list,
+.adsk-cs__subsections,
+.adsk-cs__key-insight,
+.adsk-cs__outcomes-panel {
+  margin-inline: auto;
+}
+
+/* Section labels have no measure of their own, so they need one to line up with
+   the body copy they introduce. */
+.adsk-cs__kicker,
+.adsk-cs__label {
+  max-width: var(--adsk-prose);
+}
+
+.adsk-cs__prose {
+  max-width: var(--adsk-prose);
+}
+
+.adsk-cs__wide {
+  max-width: var(--adsk-wide);
+}
+
+.adsk-cs__hero {
+  scroll-margin-top: 6rem;
+  padding: 0 0 2.75rem;
+  background: var(--adsk-cream);
+  border-bottom: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__kicker,
+.adsk-cs__label {
+  margin-bottom: 1rem;
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__hero-title {
+  margin-bottom: 2.25rem;
+  max-width: var(--adsk-prose);
+  color: var(--adsk-ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  font-size: clamp(2.25rem, 4.5vw, 3.35rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.adsk-cs__meta-grid {
+  display: grid;
+  gap: 1rem 1.25rem;
+  grid-template-columns: 1fr;
+  max-width: var(--adsk-wide);
+}
+
+.adsk-cs__meta-block {
+  min-height: 0;
+  padding: 1rem 1.1rem;
+  background: var(--adsk-surface);
+  border: 1px solid var(--adsk-border);
+  border-radius: 0.85rem;
+}
+
+.adsk-cs__meta-label {
+  margin-bottom: 0.45rem;
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__meta-value {
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.adsk-cs__section {
+  scroll-margin-top: 6rem;
+  min-height: 0;
+  padding: 2.75rem 0;
+  border-top: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__headline {
+  margin-bottom: 1.35rem;
+  max-width: var(--adsk-prose);
+  color: var(--adsk-ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.adsk-cs__subhead {
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  color: var(--adsk-ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.adsk-cs__section > .adsk-cs__subhead {
+  max-width: var(--adsk-prose);
+  margin-inline: auto;
+}
+
+.adsk-cs__body {
+  max-width: var(--adsk-prose);
+  color: var(--adsk-muted);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.03125rem;
+  line-height: 1.75;
+}
+
+.adsk-cs__em {
+  color: var(--adsk-ink);
+  font-weight: 650;
+  font-style: normal;
+}
+
+.adsk-cs__inline-link {
+  color: var(--adsk-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--adsk-ink) 25%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.adsk-cs__inline-link:hover {
+  opacity: 0.85;
+}
+
+.adsk-cs__bullets {
+  display: grid;
+  gap: 0.5rem;
+  /* Autodesk's bullets carry full sentences rather than Tesla's short phrases,
+     so they hold the same prose measure as body copy instead of the container. */
+  max-width: var(--adsk-prose);
+  margin-top: 0.85rem;
+  padding-left: 1rem;
+  color: var(--adsk-muted);
+  font-size: 1.03125rem;
+  line-height: 1.7;
+}
+
+.adsk-cs__impact-list {
+  display: grid;
+  gap: 0.55rem;
+  max-width: var(--adsk-prose);
+  margin-top: 1.25rem;
+  padding-left: 1rem;
+  color: var(--adsk-ink);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Role table, the "My Role" definition rows */
+.adsk-cs__deflist {
+  margin: 2rem 0 0;
+  max-width: var(--adsk-wide);
+  padding: 0;
+  border-top: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__defrow {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__defterm {
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__defdetail {
+  margin: 0;
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Numbered block, the four types of ambiguity */
+.adsk-cs__numbered-block {
+  margin-top: 2rem;
+  max-width: var(--adsk-wide);
+  padding: 1.75rem 0 0;
+  border-top: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__numbered-block-title {
+  margin-bottom: 1.25rem;
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__numbered-rows {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* One type per row, with the actions beside it rather than under it, so it reads
+   as "this kind of ambiguity" then "what I did about it". */
+.adsk-cs__numbered-row {
+  display: grid;
+  gap: 0.85rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__numbered-row:first-child {
+  padding-top: 0;
+}
+
+.adsk-cs__numbered-head {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.adsk-cs__numbered-num {
+  color: var(--adsk-accent);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.adsk-cs__numbered-title {
+  margin-bottom: 0.35rem;
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.adsk-cs__numbered-detail {
+  color: var(--adsk-muted);
+  font-size: 0.96875rem;
+  line-height: 1.65;
+}
+
+/* Compact label/detail rows, denser than a card grid, for enumerating the
+   surrounding platform components without giving each one a whole card. */
+.adsk-cs__speclist {
+  display: grid;
+  gap: 0;
+  margin: 1.25rem 0 0;
+  max-width: var(--adsk-wide);
+  border-top: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__specrow {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__specterm {
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.adsk-cs__specdetail {
+  margin: 0;
+  color: var(--adsk-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.adsk-cs__grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: var(--adsk-wide);
+}
+
+.adsk-cs__card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--adsk-border);
+  border-radius: 0.85rem;
+  background: var(--adsk-surface);
+}
+
+.adsk-cs__card-title {
+  margin-bottom: 0.35rem;
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.adsk-cs__card-detail {
+  color: var(--adsk-muted);
+  font-size: 0.96875rem;
+  line-height: 1.65;
+}
+
+.adsk-cs__subsections {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 1.75rem;
+  max-width: var(--adsk-prose);
+}
+
+.adsk-cs__subsection {
+  padding: 1rem 1.1rem 1rem 1.2rem;
+  border: 1px solid var(--adsk-border);
+  border-left: 3px solid var(--adsk-accent);
+  border-radius: 0.75rem;
+  background: var(--adsk-surface);
+}
+
+.adsk-cs__subsection .adsk-cs__subhead {
+  margin-top: 0;
+  color: var(--adsk-ink);
+  font-size: 1.0625rem;
+}
+
+.adsk-cs__subsection-body {
+  color: var(--adsk-muted);
+  font-size: 1.03125rem;
+  line-height: 1.75;
+}
+
+.adsk-cs__key-insight {
+  margin-top: 2rem;
+  max-width: var(--adsk-prose);
+}
+
+.adsk-cs__key-insight-label {
+  margin-bottom: 0.85rem;
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__quote {
+  margin: 0 auto;
+  max-width: var(--adsk-prose);
+  padding: 0 0 0 1rem;
+  border-left: 2px solid color-mix(in srgb, var(--adsk-accent) 40%, var(--adsk-border));
+  border-radius: 0;
+  background: transparent;
+  color: var(--adsk-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.adsk-cs__quote--inline {
+  margin-top: 1.25rem;
+}
+
+.adsk-cs__outcomes-panel {
+  margin-top: 1.25rem;
+  max-width: var(--adsk-prose);
+  padding: 1.25rem 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--adsk-accent) 22%, var(--adsk-border));
+  border-radius: 1rem;
+  background: var(--adsk-surface);
+  color: var(--adsk-ink);
+}
+
+.adsk-cs__outcomes {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.adsk-cs__outcome::marker {
+  color: var(--adsk-accent);
+}
+
+.adsk-cs__body + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__grid,
+.adsk-cs__grid + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__bullets,
+.adsk-cs__bullets + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__headline,
+.adsk-cs__headline + .adsk-cs__body,
+.adsk-cs__grid + .adsk-cs__headline,
+.adsk-cs__bullets + .adsk-cs__headline,
+.adsk-cs__body + .adsk-cs__numbered-block,
+.adsk-cs__numbered-block + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__speclist,
+.adsk-cs__speclist + .adsk-cs__body,
+.adsk-cs__speclist + .adsk-cs__subhead,
+.adsk-cs__grid + .adsk-cs__subhead,
+.adsk-cs__bullets + .adsk-cs__subhead,
+.adsk-cs__body + .adsk-cs__deflist,
+.adsk-cs__deflist + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__subsections,
+.adsk-cs__subsections + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__outcomes-panel,
+.adsk-cs__outcomes-panel + .adsk-cs__body,
+.adsk-cs__body + .adsk-cs__quote,
+.adsk-cs__quote + .adsk-cs__body,
+.adsk-cs__quote + .adsk-cs__subsections,
+.adsk-cs__body + .adsk-cs__key-insight,
+.adsk-cs__key-insight + .adsk-cs__body,
+.adsk-cs__deflist + .adsk-cs__key-insight,
+.adsk-cs__grid + .adsk-cs__key-insight,
+.adsk-cs__bullets + .adsk-cs__key-insight,
+.adsk-cs__subsections + .adsk-cs__key-insight,
+.adsk-cs__numbered-block + .adsk-cs__key-insight,
+.adsk-cs__body + .adsk-cs__impact-list {
+  margin-top: var(--adsk-beat);
+}
+
+.adsk-cs__grid--two,
+.adsk-cs__grid--three {
+  grid-template-columns: 1fr;
+}
+
+.adsk-cs__nav-link:focus-visible,
+.adsk-cs__mobile-link:focus-visible,
+.adsk-cs__back:focus-visible,
+.adsk-cs__inline-link:focus-visible {
+  outline: 2px solid var(--adsk-accent);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .bw-main:has(.adsk-cs) {
+    --bw-main-pad-x: 0.85rem;
+  }
+
+  .adsk-cs {
+    padding: 1rem 1.15rem 4rem;
+  }
+
+  .adsk-cs__meta-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .adsk-cs__grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adsk-cs__grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .adsk-cs__defrow {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 0 2rem;
+    align-items: start;
+  }
+
+  .adsk-cs__specrow {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 0 1.5rem;
+    align-items: baseline;
+  }
+
+  .adsk-cs__numbered-row {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 0 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bw-main:has(.adsk-cs) {
+    --bw-main-pad-x: 1rem;
+  }
+
+  .adsk-cs {
+    padding: 1rem 1.35rem 4.5rem;
+  }
+
+  .adsk-cs__layout {
+    grid-template-columns: var(--adsk-sidebar) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    /* Centre the sidebar and column as one unit rather than letting the grid
+       stretch edge to edge with all the slack on the right. */
+    max-width: calc(var(--adsk-sidebar) + 1.5rem + var(--adsk-wide));
+    margin-inline: auto;
+  }
+
+  .adsk-cs__sidebar {
+    display: block;
+    position: sticky;
+    top: 7rem;
+    /* dvh, not vh — the scrollport is now the shell's own height. */
+    max-height: calc(100dvh - 8.5rem);
+    overflow-y: auto;
+  }
+
+  .adsk-cs__mobile-nav {
+    display: none;
+  }
+
+  .adsk-cs__section,
+  .adsk-cs__hero {
+    scroll-margin-top: 7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .adsk-cs {
+    --adsk-prose: 43rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .adsk-cs {
+    /* Prose stays at its readable measure; only the breakout blocks widen. */
+    --adsk-wide: 60rem;
+  }
+}
+
+/* What-I-did bullets nested under each ambiguity type. */
+.adsk-cs__numbered-actions {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0;
+  padding-left: 0.95rem;
+  color: var(--adsk-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.adsk-cs__numbered-actions li::marker {
+  color: var(--adsk-accent);
+}
+
+/* Two-column pros and cons for the export decision. */
+.adsk-cs__tradeoff {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.adsk-cs__tradeoff-col {
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--adsk-border);
+  border-radius: 0.85rem;
+  background: var(--adsk-surface);
+}
+
+.adsk-cs__tradeoff-label {
+  margin-bottom: 0.75rem;
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.adsk-cs__tradeoff-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--adsk-muted);
+  font-size: 0.96875rem;
+  line-height: 1.6;
+}
+
+.adsk-cs__tradeoff-list li::marker {
+  color: var(--adsk-accent);
+}
+
+.adsk-cs__body + .adsk-cs__tradeoff,
+.adsk-cs__tradeoff + .adsk-cs__subsections {
+  margin-top: var(--adsk-beat);
+}
+
+@media (min-width: 768px) {
+  .adsk-cs__tradeoff {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Editorial beats: an inline lead-in instead of another bordered card, so the
+   Avengers narrative reads differently from the sections around it. */
+.adsk-cs__inline-beats {
+  display: grid;
+  gap: 1.1rem;
+  max-width: var(--adsk-prose);
+  margin: 1.5rem auto 0;
+}
+
+.adsk-cs__inline-beat {
+  margin: 0;
+  color: var(--adsk-muted);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.03125rem;
+  line-height: 1.75;
+}
+
+.adsk-cs__inline-beat-title {
+  color: var(--adsk-ink);
+  font-weight: 650;
+}
+
+.adsk-cs__body + .adsk-cs__inline-beats,
+.adsk-cs__inline-beats + .adsk-cs__key-insight {
+  margin-top: var(--adsk-beat);
+}

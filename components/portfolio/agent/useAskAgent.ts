@@ -4,6 +4,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { usePortfolioState } from '@/components/portfolio/PortfolioStateContext'
 import { AskAgentContext } from './AskAgentProvider'
+import { findRecruiterAnswer, RECRUITER_TOPICS } from '@/lib/portfolio/recruiter-qa'
 import {
   filterExperiencePickerGroups,
   getAutocompleteMatches,
@@ -17,12 +18,6 @@ import {
 export type ChatMessage =
   | { id: string; role: 'user'; text: string }
   | { id: string; role: 'assistant'; response: AgentResponse }
-
-function scrollToHighlighted(ids: string[]) {
-  if (ids.length === 0) return
-  const el = document.querySelector(`[data-bw-tile="${ids[0]}"]`)
-  el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-}
 
 function scrollToTraceSection() {
   const el =
@@ -126,7 +121,7 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
 
   const contextHint =
     selectedContexts.length === 0
-      ? 'Focus area (optional) — e.g. Tesla, product, AI'
+      ? 'Focus area (optional), e.g. Tesla, product, AI'
       : selectedContexts.map((id) => contextLabel(id)).join(' · ')
 
   const close = useCallback(() => {
@@ -146,7 +141,10 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
         inputRef.current.style.height = 'auto'
       }
 
-      if (!viaChip) {
+      // Chips and the suggestion popup fill the composer rather than sending, so what
+      // arrives here is typed text either way. Answer it whenever there's a written
+      // answer for it, and fall back to the notice only for genuinely free-form asks.
+      if (!viaChip && !findRecruiterAnswer(trimmed)) {
         setMessages((current) => [
           ...current,
           { id: newId(), role: 'assistant', response: WORK_IN_PROGRESS_RESPONSE },
@@ -157,7 +155,7 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
       const result = resolveAskResponse(trimmed, 'explain', selectedContexts)
       setMessages((current) => [...current, { id: newId(), role: 'assistant', response: result }])
 
-      // Never auto-navigate away from wherever the visitor already is — surface the
+      // Never auto-navigate away from wherever the visitor already is, surface the
       // highlight/trace state and let them follow the "View in Architecture" link or a
       // reference chip themselves if they want to jump.
       if (result.traceIds?.length) {
@@ -171,15 +169,35 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
         return
       }
 
+      // Highlight the matching tiles, but don't yank the page down to them. The
+      // answer is what was asked for, and scrolling away from the thread hides it.
       if (result.highlightIds.length > 0) {
         highlightNodes(result.highlightIds)
-        if (pathname === '/') {
-          scrollToHighlighted(result.highlightIds)
-        }
       }
     },
     [selectedContexts, highlightNodes, setTraceIds, pathname]
   )
+
+  /** Tapping a topic chip opens a branch: my intro line plus that topic's questions,
+   *  posted into the thread so the conversation has somewhere to go next. */
+  const openTopic = useCallback((topicId: string) => {
+    const topic = RECRUITER_TOPICS.find((entry) => entry.id === topicId)
+    if (!topic) return
+    setMessages((current) => [
+      ...current,
+      {
+        id: newId(),
+        role: 'assistant',
+        response: {
+          answer: topic.intro,
+          references: [],
+          followUps: [],
+          highlightIds: [],
+          options: topic.questions,
+        },
+      },
+    ])
+  }, [])
 
   const startNewChat = useCallback(() => {
     setMessages([])
@@ -342,6 +360,7 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
     toggleContext,
     clearContexts,
     submitQuery,
+    openTopic,
     startNewChat,
     close,
     handleTrace,

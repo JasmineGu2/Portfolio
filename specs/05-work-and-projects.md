@@ -1,4 +1,4 @@
-# 05 — Work & Projects
+# 05, Work & Projects
 
 ## Overview
 
@@ -18,11 +18,11 @@ Projects are NOT nested under Work. No filter chips combining them.
 ## Work page (`/`)
 
 ### Layout
-Uses `home-wireframe` bento grid — same as previous homepage.
+Uses `home-wireframe` bento grid, same as previous homepage.
 
 ```text
 ┌──────────────────┐  ┌──────────┐
-│  Autodesk PM     │  │  Tesla   │   row 1 — featured
+│  Autodesk PM     │  │  Tesla   │   row 1, featured
 └──────────────────┘  └──────────┘
 ┌──────┐ ┌──────────────────────────┐
 │ SWE  │ │  OMERS                    │   row 2
@@ -50,17 +50,17 @@ Each tile shows:
 ### Hero panel
 `HeroBentoPanel` with identity strip (Jasmine Gu, location, mode). No layout/color switcher in production.
 
-**Core Strengths** uses a compact isometric layer stack (`CapabilityLayerStack` + `CAPABILITY_LAYERS` from `lib/portfolio/capability-layers-data.ts`) — four floating slabs (Product, Software Engineering, Business, Community) with Analogue OS labels and connector lines on the right. Hover or keyboard focus pulls the active layer outward ~12px, dims other slabs, and reveals 2–4 capability micro-chips per layer. Warm botanical palette with orange accent on the active layer; `prefers-reduced-motion` disables the pull animation. An sr-only list exposes full layer + capability text to screen readers.
+**Core Strengths** uses a compact isometric layer stack (`CapabilityLayerStack` + `CAPABILITY_LAYERS` from `lib/portfolio/capability-layers-data.ts`), four floating slabs (Product, Software Engineering, Business, Community) with Analogue OS labels and connector lines on the right. Hover or keyboard focus pulls the active layer outward ~12px, dims other slabs, and reveals 2–4 capability micro-chips per layer. Warm botanical palette with orange accent on the active layer; `prefers-reduced-motion` disables the pull animation. An sr-only list exposes full layer + capability text to screen readers.
 
 ### Connectors
-Workflow connector lines between experience tiles (duo-bucket chains). Optional — preserve from current bento.
+Workflow connector lines between experience tiles (duo-bucket chains). Optional, preserve from current bento.
 
 ---
 
 ## Projects page (`/projects`)
 
 ### Layout
-`bw-grid--projects-wireframe` — separate 4-row mosaic.
+`bw-grid--projects-wireframe`, separate 4-row mosaic.
 
 ### Component
 `ProjectsBentoGrid` → `ProjectsPageClient`
@@ -117,14 +117,14 @@ Tesla
 Frontend + ML Systems
 "When an interface became an infrastructure problem."
 Tags: SYSTEMS · ML · ENGINEERING
-Abstraction: LEVEL 03 — SYSTEM
+Abstraction: LEVEL 03, SYSTEM
 ```
 
 Each card should show its place in the Architecture abstraction engine with **View in Architecture →** link (planned).
 
 ---
 
-## Filters (future — not on Work page currently)
+## Filters (future, not on Work page currently)
 
 If an Experience Explorer is added later (Architecture or separate section):
 
@@ -134,7 +134,7 @@ ALL · PRODUCT · ENGINEERING · AI · SYSTEMS · DESIGN · COMMUNITY · PROJECT
 
 Also: **ABSTRACTION LEVEL** filter (automation → product).
 
-Work page itself stays unfiltered — full bento always visible.
+Work page itself stays unfiltered, full bento always visible.
 
 ---
 
@@ -164,7 +164,7 @@ Consistent everywhere: Work tiles, Architecture nodes, Ask reference chips.
 
 ## Responsive
 
-Desktop: primary experience — full bento grid.
+Desktop: primary experience, full bento grid.
 
 Mobile:
 - Convert grid to stacked connected cards
@@ -178,5 +178,5 @@ Mobile:
 
 - Do not merge Projects into Work page
 - Do not add filter chips to Work page (user decision)
-- Do not redesign bento tiles — keep current vibe
+- Do not redesign bento tiles, keep current vibe
 - Do not load all videos immediately

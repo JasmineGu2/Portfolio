@@ -131,7 +131,7 @@ export function ArchitecturePageClient() {
         <div className="arch-container arch-container--engine">
           <div className="arch-text-bubble">
             <p className="arch-matrix-lead">
-              Each role trained a different layer — from automating tasks to shaping product
+              Each role trained a different layer, from automating tasks to shaping product
               direction.
             </p>
           </div>

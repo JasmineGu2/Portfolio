@@ -78,7 +78,7 @@ export function HeroWorkspaceNav({
         {isSiteNav ? (
           <SiteNavIdentity />
         ) : (
-          <Link href="/" className="hero-workspace-nav__brand-link" aria-label="Jasmine Gu — home">
+          <Link href="/" className="hero-workspace-nav__brand-link" aria-label="Jasmine Gu, home">
             <span className="hero-workspace-nav__brand-tag">Jasmine Gu</span>
           </Link>
         )}

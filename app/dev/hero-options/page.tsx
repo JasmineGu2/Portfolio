@@ -1735,7 +1735,7 @@ export default function HeroOptionsPage() {
                               <div className="text-gray-400 dark:text-gray-500 transition-colors">{exp.year}</div>
                               <div className="text-gray-600 dark:text-gray-400 transition-colors">•</div>
                               <div className="font-bold text-[#2A2A2A] dark:text-white transition-colors">{exp.company}</div>
-                              <div className="text-gray-500 dark:text-gray-400 transition-colors">—</div>
+                              <div className="text-gray-500 dark:text-gray-400 transition-colors">-</div>
                               <div className="text-gray-500 dark:text-gray-400 transition-colors">{exp.role}</div>
                             </div>
                           ))}

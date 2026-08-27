@@ -7,7 +7,7 @@ export type FlowCategory = 'Engineering' | 'Product' | 'Data' | 'Founder' | 'Bus
 export interface GraphNode {
   id: string
   kind: NodeKind
-  /** Story step id — project nodes may reuse parent or own step */
+  /** Story step id, project nodes may reuse parent or own step */
   stepId: string
   x: number
   y: number
