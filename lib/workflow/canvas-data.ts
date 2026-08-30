@@ -221,7 +221,7 @@ export const CANVAS_NODES: CanvasNode[] = [
     links: [
       { label: 'Email', href: 'mailto:jasmine@example.com' },
       { label: 'Résumé', href: RESUME_HREF, external: true },
-      { label: 'LinkedIn', href: 'https://linkedin.com/in/jasminegu', external: true },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201', external: true },
     ],
   },
 ]

@@ -32,7 +32,7 @@ export default function Footer() {
               {/* Social Media Icons */}
               <div className="flex items-center gap-4">
                 <Link
-                  href="https://www.linkedin.com/in/jasminegu"
+                  href="https://www.linkedin.com/in/jasmine-gu-b2aa65201"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-3 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 text-[#2A2A2A] dark:text-white hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300"

@@ -200,7 +200,7 @@ export const ALL_WORKFLOW_NODES: WorkflowNode[] = [
 export const SITE_CONTACT = {
   email: 'jgu.hba2027@ivey.ca',
   phone: '647-763-3712',
-  linkedin: 'https://linkedin.com/in/jasminegu',
+  linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
   resume: RESUME_HREF,
 }
 

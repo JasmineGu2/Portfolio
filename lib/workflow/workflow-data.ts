@@ -316,7 +316,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
       { label: 'Contact me', href: '#contact' },
       {
         label: 'LinkedIn',
-        href: 'https://linkedin.com/in/jasminegu',
+        href: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
         external: true,
       },
     ],
@@ -739,7 +739,7 @@ export const CONTACT_COPY = {
     { label: 'Email Jasmine', href: 'mailto:jasmine@example.com' },
     {
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/jasminegu',
+      href: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
       external: true,
     },
     { label: 'View résumé', href: '#execution-history' },
@@ -751,5 +751,5 @@ export const SITE_CONFIG = {
   name: 'Jasmine Gu',
   tagline: 'Product-minded engineer and technical translator',
   email: 'jasmine@example.com', // UPDATE: your email
-  linkedin: 'https://linkedin.com/in/jasminegu', // UPDATE: your LinkedIn
+  linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
 }

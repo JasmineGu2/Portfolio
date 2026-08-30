@@ -6,7 +6,7 @@ export const BIO_NAV = {
   primary: [{ label: 'Workflow', href: '#workflow' }],
   secondary: [
     { label: 'Email', href: 'mailto:jgu.hba2027@ivey.ca' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/jasminegu', external: true },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201', external: true },
     { label: 'Résumé', href: RESUME_HREF, external: true },
   ],
 }

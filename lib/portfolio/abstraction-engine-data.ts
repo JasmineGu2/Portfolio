@@ -430,12 +430,32 @@ export interface ExperienceLevelRow {
   href: string
 }
 
-export const MATRIX_LEVELS: { id: MatrixLevel; label: string }[] = [
-  { id: 'automate', label: 'Automate' },
-  { id: 'user', label: 'User' },
-  { id: 'system', label: 'System' },
-  { id: 'scale', label: 'Scale' },
-  { id: 'direction', label: 'Direction' },
+export const MATRIX_LEVELS: { id: MatrixLevel; label: string; blurb: string }[] = [
+  {
+    id: 'automate',
+    label: 'Automate',
+    blurb: 'Taking repetitive work and turning it into a script or a tool.',
+  },
+  {
+    id: 'user',
+    label: 'User',
+    blurb: 'Deciding how one person actually moves through the product.',
+  },
+  {
+    id: 'system',
+    label: 'System',
+    blurb: 'Making the thing hold up once real usage hits it.',
+  },
+  {
+    id: 'scale',
+    label: 'Scale',
+    blurb: 'Keeping it working as the userbase and the team grow.',
+  },
+  {
+    id: 'direction',
+    label: 'Direction',
+    blurb: 'Choosing what should exist next, and being able to say why.',
+  },
 ]
 
 export const EXPERIENCE_LEVEL_MATRIX: ExperienceLevelRow[] = [

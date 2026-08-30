@@ -191,5 +191,5 @@ export const STORY_ZONES = [
 export const CONTACT_LINKS = [
   { label: 'Email', href: 'mailto:jgu.hba2027@ivey.ca' },
   { label: 'Résumé', href: RESUME_HREF, external: true },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/jasminegu', external: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201', external: true },
 ]
