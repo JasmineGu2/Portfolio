@@ -78,26 +78,23 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
     >
       {/* Architecture page kept in light mode for now, was `dark={isArchitecturePage}` */}
       <FlowersBackgroundLayer dark={false} />
-      <div className="bw-workspace-row">
-        {!isArchitecturePage && !isHomePage && (
-          <Suspense fallback={null}>
+      {/* One shared Ask Jasmine conversation across the hero panel, the side
+          panel, and the floating launcher (spec §2, §11). */}
+      <Suspense fallback={null}>
+        <AskAgentProvider>
+          <div className="bw-workspace-row">
+            {/* Renders itself only on routes where `isAgentPanelRoute` is true. */}
             <AgentSidePanel />
-          </Suspense>
-        )}
-        <div className="bw-main">
-          <header className="bw-site-nav">
-            <HeroWorkspaceNav compact showWorkspaceControls={false} />
-          </header>
-          {/* The launcher is available on every page. On a case study it's the
-              only way to ask a question, and it behaves like a support chat. */}
-          <Suspense fallback={null}>
-            <AskAgentProvider>
+            <div className="bw-main">
+              <header className="bw-site-nav">
+                <HeroWorkspaceNav compact showWorkspaceControls={false} />
+              </header>
               {children}
               <ChatFloatingWidget />
-            </AskAgentProvider>
-          </Suspense>
-        </div>
-      </div>
+            </div>
+          </div>
+        </AskAgentProvider>
+      </Suspense>
     </div>
   )
 }

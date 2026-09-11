@@ -55,9 +55,9 @@ export interface FormatValueItem {
 export const FORMAT_INTRO = {
   headline: 'My work is translation.',
   serif:
-    'Jasmine Gu is a product-minded builder with the experience and versatility to translate between users, engineering, and operations in dynamic environments.',
+    'Jasmine Gu is a product manager and engineer who translates between users, engineering, and operations.',
   subline:
-    'Product Manager and Engineer building thoughtful, AI-powered products, from TurboTax UX to data platforms at Autodesk.',
+    'Product Manager and Engineer building AI-powered products, from TurboTax UX to data platforms at Autodesk.',
 }
 
 export const FORMAT_WORK: FormatWorkItem[] = [

@@ -50,11 +50,23 @@ export function architectureNavIsActive(pathname: string) {
   return pathname === '/architecture' || pathname.startsWith('/architecture/')
 }
 
+const AGENT_PANEL_ROUTES = ['/projects', '/architecture', '/tesla', '/autodesk', '/gallery']
+
+/**
+ * Where the Ask Jasmine side panel appears (spec §2). The home page is excluded
+ * because it has the full hero panel instead; dev and exploration pages never
+ * get it. `/intuit`, `/omers`, `/metaverse` redirect to `/work/*`, so `/work/`
+ * covers them.
+ */
 export function isAgentPanelRoute(pathname: string) {
-  // Chat experience turned off on work-experience pages for now (Tesla + /work/*).
-  if (pathname === '/ask') return false
-  if (pathname.startsWith('/dev/') || pathname.startsWith('/bento-') || pathname.includes('-options')) {
+  if (pathname === '/' || pathname === '/ask') return false
+  if (
+    pathname.startsWith('/dev/') ||
+    pathname.startsWith('/bento-') ||
+    pathname.includes('-options')
+  ) {
     return false
   }
-  return pathname === '/'
+  if (pathname.startsWith('/work/')) return true
+  return AGENT_PANEL_ROUTES.includes(pathname)
 }

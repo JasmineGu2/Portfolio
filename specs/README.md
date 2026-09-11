@@ -74,7 +74,7 @@ Visuals (implementation)     ← specs/visuals/, dot fabric, ambient effects
 | 04 | [Visual System](./04-visual-system.md) | Fonts, palette, gradients, cards, light/dark rhythm, motion |
 | 05 | [Work & Projects](./05-work-and-projects.md) | Bento layouts, tiles, media, detail pages, interactions |
 | 06 | [Agent Architecture Page](./06-agent-architecture-page.md) | All `/architecture` sections, abstraction engine → runtime loop |
-| 07 | [Ask Side Agent](./07-ask-side-agent.md) | Panel UX, query modes, grounding, cross-page behavior |
+| 07 | [Ask Side Agent](07-ask-Jasmine-Guided%20Portfolio.md) | Panel UX, query modes, grounding, cross-page behavior |
 | 08 | [Build Plan](./08-build-plan.md) | Phases, checkpoints, decisions log, timeline |
 | 09 | [Dot Fabric Visual](./09-dot-fabric-visual.md) | Redirect → [visuals/dot-fabric.md](./visuals/dot-fabric.md) |
 | 10 | [Agent Card Components](./10-agent-card-components.md) | Reusable agent/API card variants, chips, nodes, config panels, flow connectors |

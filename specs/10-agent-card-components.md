@@ -532,5 +532,5 @@ Keep existing CSS working until each section is migrated. New sections use compo
 
 - [04, Visual System](./04-visual-system.md), typography, card families, light/dark rhythm
 - [06, Agent Architecture Page](./06-agent-architecture-page.md), section content and narrative
-- [07, Ask Side Agent](./07-ask-side-agent.md), trace highlighting, shared field patterns
+- [07, Ask Side Agent](07-ask-Jasmine-Guided%20Portfolio.md), trace highlighting, shared field patterns
 - [Dot Fabric Visual](./visuals/dot-fabric.md), ambient backgrounds behind featured/hub cards

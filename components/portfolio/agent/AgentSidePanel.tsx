@@ -22,9 +22,7 @@ function AgentSidePanelInner() {
         <button
           type="button"
           className="agent-tab"
-          onClick={() => {
-            setAgentOpen(true)
-          }}
+          onClick={() => setAgentOpen(true)}
           aria-label="Open Ask Jasmine"
         >
           <PanelLeftOpen className="h-4 w-4" aria-hidden />
@@ -48,14 +46,16 @@ function AgentSidePanelInner() {
       >
         <header className="agent-panel__header">
           <div className="agent-panel__header-actions">
-            <button
-              type="button"
-              className="agent-panel__icon-btn"
-              onClick={agent.startNewChat}
-              aria-label="New conversation"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
+            {agent.hasMessages && (
+              <button
+                type="button"
+                className="agent-panel__icon-btn"
+                onClick={agent.startNewChat}
+                aria-label="New conversation"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
+            )}
             <button
               type="button"
               className="agent-panel__icon-btn"
@@ -67,22 +67,8 @@ function AgentSidePanelInner() {
           </div>
         </header>
 
-        <div
-          className={cn('agent-panel__body', !agent.hasMessages && 'agent-panel__body--empty')}
-        >
-          <AskAgentContent
-            agent={agent}
-            variant="sidebar"
-            heroSlot={
-              !agent.hasMessages ? (
-                <div className="agent-panel__hero">
-                  <p className="agent-panel__hero-sub">
-                    Ask about my work, experience, or how things connect.
-                  </p>
-                </div>
-              ) : null
-            }
-          />
+        <div className={cn('agent-panel__body', !agent.hasMessages && 'agent-panel__body--empty')}>
+          <AskAgentContent agent={agent} variant="sidebar" />
         </div>
       </aside>
     </div>

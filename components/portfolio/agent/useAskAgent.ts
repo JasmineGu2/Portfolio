@@ -3,55 +3,48 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { usePortfolioState } from '@/components/portfolio/PortfolioStateContext'
+import { deriveContext, CONTEXT_INTENT_PRIORITY } from '@/lib/portfolio/agent/context'
+import { INTENT_QUESTIONS } from '@/lib/portfolio/agent/intents'
+import { resolveIntent } from '@/lib/portfolio/agent/retrieval'
+import type { AgentIntent, AgentMessage } from '@/lib/portfolio/agent/types'
 import { AskAgentContext } from './AskAgentProvider'
-import { findRecruiterAnswer, RECRUITER_TOPICS } from '@/lib/portfolio/recruiter-qa'
-import {
-  filterExperiencePickerGroups,
-  getAutocompleteMatches,
-  getContextualSuggestions,
-  resolveAskResponse,
-  contextLabel,
-  WORK_IN_PROGRESS_RESPONSE,
-  type AgentResponse,
-} from '@/lib/portfolio/ask-agent'
 
-export type ChatMessage =
-  | { id: string; role: 'user'; text: string }
-  | { id: string; role: 'assistant'; response: AgentResponse }
-
-function scrollToTraceSection() {
-  const el =
-    document.getElementById('arch-experience-inputs') ??
-    document.getElementById('arch-timeline')
-  el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
+const MOBILE_AGENT_MQ = '(max-width: 640px)'
 
 function newId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 }
 
-export function resizeTextarea(el: HTMLTextAreaElement) {
-  el.style.height = 'auto'
-  el.style.height = `${Math.min(el.scrollHeight, 140)}px`
-}
-
-function focusComposer(input: HTMLTextAreaElement | null, delayMs = 0) {
-  if (!input) return
-  window.setTimeout(() => {
-    input.focus({ preventScroll: true })
-  }, delayMs)
-}
-
-function composerFocusDelayMs(): number {
-  if (typeof window === 'undefined') return 0
-  return window.matchMedia(MOBILE_AGENT_MQ).matches ? 280 : 0
-}
-
-const MOBILE_AGENT_MQ = '(max-width: 640px)'
-
 function isMobileAgentViewport(): boolean {
   if (typeof window === 'undefined') return false
   return window.matchMedia(MOBILE_AGENT_MQ).matches
+}
+
+function scrollToTraceSection() {
+  document.getElementById('arch-experience-matrix')?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}
+
+function uniq(values: string[]): string[] {
+  return [...new Set(values)]
+}
+
+function readAsked(messages: AgentMessage[]): AgentIntent[] {
+  return messages
+    .filter((m): m is Extract<AgentMessage, { role: 'user' }> => m.role === 'user')
+    .map((m) => m.intent)
+}
+
+function readExplored(messages: AgentMessage[]): string[] {
+  return uniq(
+    messages.flatMap((m) =>
+      m.role === 'assistant'
+        ? [m.answer.intent, ...m.answer.references.map((r) => r.id)]
+        : [m.intent]
+    )
+  )
 }
 
 export function useAskAgent({ variant = 'sidebar' }: { variant?: 'sidebar' | 'hero' } = {}) {
@@ -60,7 +53,9 @@ export function useAskAgent({ variant = 'sidebar' }: { variant?: 'sidebar' | 'he
   return shared ?? local
 }
 
-export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' | 'hero' } = {}) {
+export function useAskAgentState({
+  variant = 'sidebar',
+}: { variant?: 'sidebar' | 'hero' } = {}) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -68,243 +63,124 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
     agentOpen,
     setAgentOpen,
     toggleAgent,
-    selectedContexts,
-    addContext,
-    removeContext,
-    clearContexts,
     highlightNodes,
     clearHighlights,
     setTraceIds,
     clearTrace,
   } = usePortfolioState()
 
-  const [query, setQuery] = useState('')
-  const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [pickerOpen, setPickerOpen] = useState(false)
-  const [pickerQuery, setPickerQuery] = useState('')
-  const [activeAutocomplete, setActiveAutocomplete] = useState(-1)
-  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const [messages, setMessages] = useState<AgentMessage[]>([])
+  const [categoriesOpen, setCategoriesOpen] = useState(false)
   const threadRef = useRef<HTMLDivElement>(null)
   const prevPathRef = useRef(pathname)
-  const prevAgentOpenRef = useRef(agentOpen)
-  const mountedRef = useRef(false)
 
-  const isHero = variant === 'hero'
-  const panelActive = isHero || agentOpen
   const hasMessages = messages.length > 0
+  const currentContext = useMemo(() => deriveContext(pathname), [pathname])
+  const askedIntents = useMemo(() => readAsked(messages), [messages])
+  const exploredIds = useMemo(() => readExplored(messages), [messages])
+  const currentIntent = askedIntents.at(-1) ?? null
 
-  const suggestions = useMemo(
-    () => getContextualSuggestions(selectedContexts, pathname),
-    [selectedContexts, pathname]
-  )
+  const suggestedIntents = useMemo<AgentIntent[]>(() => {
+    const last = [...messages].reverse().find((m) => m.role === 'assistant')
+    if (last && last.role === 'assistant') return last.answer.followUps
+    return CONTEXT_INTENT_PRIORITY[currentContext.page].slice(0, 3)
+  }, [messages, currentContext])
 
-  const autocomplete = useMemo(
-    () => getAutocompleteMatches(query, selectedContexts, pathname),
-    [query, selectedContexts, pathname]
-  )
-
-  const groupedPicker = useMemo(
-    () => filterExperiencePickerGroups(pickerQuery),
-    [pickerQuery]
-  )
-
-  const toggleContext = useCallback(
-    (id: string) => {
-      if (selectedContexts.includes(id)) {
-        removeContext(id)
-      } else {
-        addContext(id)
-      }
-    },
-    [selectedContexts, addContext, removeContext]
-  )
-
-  const contextHint =
-    selectedContexts.length === 0
-      ? 'Focus area (optional), e.g. Tesla, product, AI'
-      : selectedContexts.map((id) => contextLabel(id)).join(' · ')
+  const priorityIntents = CONTEXT_INTENT_PRIORITY[currentContext.page]
 
   const close = useCallback(() => {
     setAgentOpen(false)
-    setPickerOpen(false)
+    setCategoriesOpen(false)
   }, [setAgentOpen])
 
-  const submitQuery = useCallback(
-    (text: string, viaChip = false) => {
-      const trimmed = text.trim()
-      if (!trimmed) return
-
-      setMessages((current) => [...current, { id: newId(), role: 'user', text: trimmed }])
-      setQuery('')
-      setActiveAutocomplete(-1)
-      if (inputRef.current) {
-        inputRef.current.style.height = 'auto'
-      }
-
-      // Chips and the suggestion popup fill the composer rather than sending, so what
-      // arrives here is typed text either way. Answer it whenever there's a written
-      // answer for it, and fall back to the notice only for genuinely free-form asks.
-      if (!viaChip && !findRecruiterAnswer(trimmed)) {
-        setMessages((current) => [
+  const askIntent = useCallback(
+    (intent: AgentIntent) => {
+      setCategoriesOpen(false)
+      setMessages((current) => {
+        const answer = resolveIntent(intent, currentContext, {
+          exploredIds: readExplored(current),
+          askedIntents: readAsked(current),
+        })
+        return [
           ...current,
-          { id: newId(), role: 'assistant', response: WORK_IN_PROGRESS_RESPONSE },
-        ])
-        return
-      }
-
-      const result = resolveAskResponse(trimmed, 'explain', selectedContexts)
-      setMessages((current) => [...current, { id: newId(), role: 'assistant', response: result }])
-
-      // Never auto-navigate away from wherever the visitor already is, surface the
-      // highlight/trace state and let them follow the "View in Architecture" link or a
-      // reference chip themselves if they want to jump.
-      if (result.traceIds?.length) {
-        setTraceIds(result.traceIds)
-        if (result.highlightIds.length > 0) {
-          highlightNodes(result.highlightIds)
-        }
-        if (pathname === '/architecture') {
-          setTimeout(scrollToTraceSection, 150)
-        }
-        return
-      }
-
-      // Highlight the matching tiles, but don't yank the page down to them. The
-      // answer is what was asked for, and scrolling away from the thread hides it.
-      if (result.highlightIds.length > 0) {
-        highlightNodes(result.highlightIds)
-      }
+          { id: newId(), role: 'user', intent, label: INTENT_QUESTIONS[intent] },
+          { id: newId(), role: 'assistant', answer },
+        ]
+      })
     },
-    [selectedContexts, highlightNodes, setTraceIds, pathname]
+    [currentContext]
   )
 
-  /** Tapping a topic chip opens a branch: my intro line plus that topic's questions,
-   *  posted into the thread so the conversation has somewhere to go next. */
-  const openTopic = useCallback((topicId: string) => {
-    const topic = RECRUITER_TOPICS.find((entry) => entry.id === topicId)
-    if (!topic) return
-    setMessages((current) => [
-      ...current,
-      {
-        id: newId(),
-        role: 'assistant',
-        response: {
-          answer: topic.intro,
-          references: [],
-          followUps: [],
-          highlightIds: [],
-          options: topic.questions,
-        },
-      },
-    ])
-  }, [])
+  // Light the matching tiles / trace path for the newest answer, without
+  // navigating away (spec §10). Runs after render so it never updates another
+  // component mid-render.
+  const lastAnswerId = messages.at(-1)?.id
+  useEffect(() => {
+    const last = messages.at(-1)
+    if (!last || last.role !== 'assistant') return
+    const experienceIds = last.answer.references
+      .filter((r) => r.type === 'experience')
+      .map((r) => r.id)
+    if (experienceIds.length > 0) highlightNodes(experienceIds)
+    const trace = last.answer.actions.find((a) => a.type === 'trace')
+    if (trace && trace.type === 'trace') {
+      setTraceIds(trace.nodeIds)
+      if (pathname === '/architecture') setTimeout(scrollToTraceSection, 150)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastAnswerId])
+
+  const openCategories = useCallback(() => setCategoriesOpen(true), [])
+  const closeCategories = useCallback(() => setCategoriesOpen(false), [])
 
   const startNewChat = useCallback(() => {
     setMessages([])
-    setQuery('')
-    clearContexts()
+    setCategoriesOpen(false)
     clearHighlights()
     clearTrace()
-    setPickerOpen(false)
-    inputRef.current?.focus()
-  }, [clearContexts, clearHighlights, clearTrace])
+  }, [clearHighlights, clearTrace])
 
-  const handleTrace = useCallback(
-    (traceIds: string[]) => {
-      if (!traceIds.length) return
-      setTraceIds(traceIds)
-      if (pathname !== '/architecture') {
-        router.push('/architecture')
-      }
-      setTimeout(scrollToTraceSection, pathname !== '/architecture' ? 450 : 150)
-    },
-    [pathname, router, setTraceIds]
-  )
+  // ── Effects ──────────────────────────────────────────────────────────────
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        if (pickerOpen) setPickerOpen(false)
-        else if (!isHero && agentOpen) close()
+        if (categoriesOpen) setCategoriesOpen(false)
+        else if (agentOpen) close()
       }
       if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
         event.preventDefault()
-        if (isHero) {
-          focusComposer(inputRef.current, 0)
-        } else {
-          toggleAgent()
-        }
-      }
-      if (!panelActive || !query) return
-      if (event.key === 'ArrowDown') {
-        event.preventDefault()
-        setActiveAutocomplete((i) => Math.min(i + 1, autocomplete.length - 1))
-      }
-      if (event.key === 'ArrowUp') {
-        event.preventDefault()
-        setActiveAutocomplete((i) => Math.max(i - 1, 0))
-      }
-      if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault()
-        if (activeAutocomplete >= 0 && autocomplete[activeAutocomplete]) {
-          submitQuery(autocomplete[activeAutocomplete])
-        } else {
-          submitQuery(query)
-        }
+        toggleAgent()
       }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [
-    panelActive,
-    isHero,
-    close,
-    toggleAgent,
-    query,
-    autocomplete,
-    activeAutocomplete,
-    submitQuery,
-    pickerOpen,
-    agentOpen,
-  ])
+  }, [categoriesOpen, agentOpen, close, toggleAgent])
 
   useEffect(() => {
-    if (!isHero && !agentOpen) {
-      clearHighlights()
-    }
-  }, [agentOpen, clearHighlights, isHero])
+    if (!agentOpen) clearHighlights()
+  }, [agentOpen, clearHighlights])
 
   useEffect(() => {
     const prevPath = prevPathRef.current
-    if (prevPath === '/architecture' && pathname !== '/architecture') {
-      clearTrace()
-    }
-    if (
-      !isHero &&
-      prevPath !== pathname &&
-      agentOpen &&
-      isMobileAgentViewport()
-    ) {
-      close()
-    }
+    if (prevPath === '/architecture' && pathname !== '/architecture') clearTrace()
+    if (prevPath !== pathname && agentOpen && isMobileAgentViewport()) close()
     prevPathRef.current = pathname
-  }, [pathname, clearTrace, isHero, agentOpen, close])
+  }, [pathname, clearTrace, agentOpen, close])
 
   useEffect(() => {
-    if (isHero || !agentOpen) return
+    if (!agentOpen) return
     const mq = window.matchMedia(MOBILE_AGENT_MQ)
-
-    function syncBodyScrollLock() {
+    const sync = () => {
       document.body.style.overflow = mq.matches ? 'hidden' : ''
     }
-
-    syncBodyScrollLock()
-    mq.addEventListener('change', syncBodyScrollLock)
+    sync()
+    mq.addEventListener('change', sync)
     return () => {
-      mq.removeEventListener('change', syncBodyScrollLock)
+      mq.removeEventListener('change', sync)
       document.body.style.overflow = ''
     }
-  }, [agentOpen, isHero])
+  }, [agentOpen])
 
   useEffect(() => {
     if (searchParams.get('ask') !== 'open') return
@@ -313,58 +189,37 @@ export function useAskAgentState({ variant = 'sidebar' }: { variant?: 'sidebar' 
   }, [pathname, router, searchParams, setAgentOpen])
 
   useEffect(() => {
-    threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: 'smooth' })
+    const thread = threadRef.current
+    if (!thread) return
+    // Put the newest question at the top so its answer reads top-down, rather
+    // than scrolling to the bottom and hiding the summary.
+    const items = thread.querySelectorAll('.agent-messages > li')
+    const lastQuestion = [...items].reverse().find((li) => li.querySelector('.agent-user-question'))
+    const target = lastQuestion ?? items[items.length - 1]
+    if (target instanceof HTMLElement) {
+      thread.scrollTo({ top: target.offsetTop - 8, behavior: 'smooth' })
+    }
   }, [messages])
 
-  useEffect(() => {
-    if (!panelActive) {
-      prevAgentOpenRef.current = false
-      return
-    }
-
-    const openedNow = !prevAgentOpenRef.current
-    const initialMount = !mountedRef.current
-    prevAgentOpenRef.current = true
-    mountedRef.current = true
-
-    if (!pickerOpen) {
-      if (isHero) {
-        // Hero keeps the composer unfocused on load so the typewriter placeholder stays visible.
-      } else if (openedNow || initialMount) {
-        focusComposer(inputRef.current, composerFocusDelayMs())
-      }
-    }
-  }, [panelActive, pickerOpen, isHero])
-
   return {
+    variant,
     pathname,
-    query,
-    setQuery,
     messages,
     hasMessages,
-    pickerOpen,
-    setPickerOpen,
-    pickerQuery,
-    setPickerQuery,
-    activeAutocomplete,
-    setActiveAutocomplete,
-    inputRef,
     threadRef,
-    suggestions,
-    autocomplete,
-    groupedPicker,
-    selectedContexts,
-    contextHint,
+    currentContext,
+    currentIntent,
+    exploredIds,
+    suggestedIntents,
+    priorityIntents,
+    categoriesOpen,
     agentOpen,
     setAgentOpen,
-    toggleContext,
-    clearContexts,
-    submitQuery,
-    openTopic,
+    toggleAgent,
+    askIntent,
+    openCategories,
+    closeCategories,
     startNewChat,
     close,
-    handleTrace,
-    highlightNodes,
-    resizeTextarea,
   }
 }

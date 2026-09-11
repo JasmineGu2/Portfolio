@@ -127,7 +127,10 @@ export function ArchitecturePageClient() {
   return (
     <main className="arch-page portfolio-content">
       <ArchitectureIdCard />
-      <section className="arch-section arch-section--light arch-section--engine">
+      <section
+        id="arch-experience-matrix"
+        className="arch-section arch-section--light arch-section--engine"
+      >
         <div className="arch-container arch-container--engine">
           <div className="arch-text-bubble">
             <p className="arch-matrix-lead">

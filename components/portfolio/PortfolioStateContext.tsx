@@ -15,6 +15,7 @@ export type PortfolioView = 'architecture' | 'work' | 'ask'
 export interface PortfolioState {
   activeView: PortfolioView
   selectedExperienceIds: string[]
+  /** @deprecated Ask Jasmine is chip-only now; the context picker was removed (spec §4). */
   selectedContexts: string[]
   activeFilters: WorkFilter[]
   highlightedNodeIds: string[]
@@ -48,10 +49,9 @@ export function PortfolioStateProvider({ children }: { children: ReactNode }) {
   const [activeFilters, setActiveFilters] = useState<WorkFilter[]>(['ALL'])
   const [highlightedNodeIds, setHighlightedNodeIds] = useState<string[]>([])
   const [traceIds, setTraceIdsState] = useState<string[]>([])
-  const [agentOpen, setAgentOpen] = useState(() => {
-    if (typeof window === 'undefined') return true
-    return !window.matchMedia('(max-width: 640px)').matches
-  })
+  // Ask Jasmine now appears on many routes, so it opens on an explicit action
+  // rather than defaulting open (spec §2).
+  const [agentOpen, setAgentOpen] = useState(false)
 
   const addContext = useCallback((id: string) => {
     setSelectedContexts((current) => (current.includes(id) ? current : [...current, id]))

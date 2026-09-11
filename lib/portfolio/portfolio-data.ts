@@ -56,7 +56,6 @@ export interface PortfolioItem {
   imageSrc?: string
   imageAlt?: string
   projectTrack?: ProjectTrack
-  chatbotQuestions?: string[]
 }
 
 const EXPERIENCE_META: Record<
@@ -67,7 +66,6 @@ const EXPERIENCE_META: Record<
     capabilities: string[]
     relatedIds: string[]
     featured?: boolean
-    chatbotQuestions?: string[]
   }
 > = {
   metaverse: {
@@ -100,11 +98,6 @@ const EXPERIENCE_META: Record<
     capabilities: ['Build', 'Scale'],
     relatedIds: ['intuit', 'autodesk-eng'],
     featured: true,
-    chatbotQuestions: [
-      'What did you actually build at Tesla?',
-      'Why was this an infrastructure problem?',
-      'What did you learn at Tesla?',
-    ],
   },
   'autodesk-eng': {
     abstractionLevels: ['platform'],
@@ -118,11 +111,6 @@ const EXPERIENCE_META: Record<
     capabilities: ['Decide', 'Understand', 'Experiment'],
     relatedIds: ['autodesk-eng'],
     featured: true,
-    chatbotQuestions: [
-      'Why did you move into product?',
-      'What is your approach to AI products?',
-      'How technical are you as a PM?',
-    ],
   },
   'hack-western': {
     abstractionLevels: ['zero-to-one'],
@@ -173,7 +161,6 @@ function buildExperienceItems(): PortfolioItem[] {
         featured: meta.featured,
         workId: id,
         track: card.track,
-        chatbotQuestions: meta.chatbotQuestions,
       }
     })
 }
