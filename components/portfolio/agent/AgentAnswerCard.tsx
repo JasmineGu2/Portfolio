@@ -25,7 +25,9 @@ export function AgentAnswerCard({
 }) {
   return (
     <div className="agent-answer">
-      <p className="agent-answer__summary">{answer.summary}</p>
+      <div className="agent-bubble agent-bubble--assistant">
+        <p className="agent-answer__summary">{answer.summary}</p>
+      </div>
 
       {answer.references.length > 0 && (
         <div className="agent-answer__section">

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 export function AgentIntro({
   variant = 'sidebar',
 }: {
-  variant?: 'sidebar' | 'hero' | 'floating'
+  variant?: 'sidebar' | 'hero'
 }) {
   return (
     <div className={cn('agent-intro', `agent-intro--${variant}`)}>

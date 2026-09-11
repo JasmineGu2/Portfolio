@@ -8,7 +8,6 @@ import {
   TESLA_CASE_STUDY_SECTIONS,
   TESLA_DESIGN_QUESTIONS,
   TESLA_HERO_META,
-  TESLA_INTUIT_QUESTIONS,
   TESLA_OUTCOMES,
   TESLA_OVERVIEW_STATS,
   TESLA_QUALITY_POINTS,
@@ -242,6 +241,11 @@ export function TeslaCaseStudyClient() {
               modals, loading states, and a reusable video experience for reviewing sensitive factory
               footage.
             </Body>
+            <Body>
+              I worked across frontend, APIs, and data systems to integrate ML outputs and factory
+              operations into workflows, dashboards, charts, alerts, forms, and tables, balancing
+              performance, reliability, and scalability.
+            </Body>
 
             <ul className="tesla-cs__impact-list">
               {TESLA_OVERVIEW_STATS.map((stat) => (
@@ -254,7 +258,14 @@ export function TeslaCaseStudyClient() {
             <SectionLabel>Context</SectionLabel>
             <SectionHeadline>Usability changes with the environment.</SectionHeadline>
             <Body>
-              Factory software operates under very different conditions from consumer onboarding.
+              I joined Tesla in May 2025 to work on internal factory software used across
+              Gigafactories in Shanghai, Fremont, Austin, and Berlin.
+            </Body>
+            <Body>
+              The software supported labeling, anomaly detection, observability, video and threat
+              visualization, and live factory monitoring.
+            </Body>
+            <Body>
               Operators and engineers needed to inspect{' '}
               <span className="tesla-cs__em">model runs</span>,{' '}
               <span className="tesla-cs__em">camera footage</span>,{' '}
@@ -262,19 +273,6 @@ export function TeslaCaseStudyClient() {
               <span className="tesla-cs__em">related metadata</span>, often while diagnosing
               time-sensitive issues.
             </Body>
-            <Body>
-              At{' '}
-              <Link href="/projects/intuit" className="tesla-cs__inline-link">
-                Intuit
-              </Link>
-              , I learned to use motion, consistency, and feedback to reduce uncertainty. At Tesla,
-              those same principles had to support speed, technical depth, and operational trust.
-            </Body>
-
-            <QuestionBlock
-              title="Questions we used to evaluate each interaction at Intuit"
-              questions={TESLA_INTUIT_QUESTIONS}
-            />
 
             <Body>The product served several stakeholders:</Body>
             <div className="tesla-cs__grid tesla-cs__grid--two tesla-cs__wide">
@@ -285,6 +283,24 @@ export function TeslaCaseStudyClient() {
                 </div>
               ))}
             </div>
+
+            <Subhead>A different kind of frontend challenge</Subhead>
+            <Body>
+              My previous internship was at{' '}
+              <Link href="/projects/intuit" className="tesla-cs__inline-link">
+                Intuit
+              </Link>
+              , where I built delightful, engaging UI experiences for TurboTax sign-up, focused
+              on design craft and detail.
+            </Body>
+            <Body>
+              Tesla was a very different environment. Instead of consumer onboarding, I was
+              building internal tools that were already part of people&apos;s work.
+            </Body>
+            <Body>
+              That brought new challenges: speed, technical depth, operational trust, and making
+              complex data legible without disrupting an investigation.
+            </Body>
 
             <SectionHeadline>
               Internal software is not exempt from usability. It measures it differently.

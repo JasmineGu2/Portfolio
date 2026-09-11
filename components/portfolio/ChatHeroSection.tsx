@@ -4,9 +4,6 @@ import { Suspense, useEffect, useState } from 'react'
 import { CapabilityLayerStack } from './CapabilityLayerStack'
 import { HeroIntroCopy } from './HeroIntroCopy'
 import { CAPABILITY_LAYERS } from '@/lib/portfolio/capability-layers-data'
-import { AskAgentContent } from './agent/AskAgentContent'
-import { useAskAgent } from './agent/useAskAgent'
-import { cn } from '@/lib/utils'
 
 function useIsNarrowViewport(breakpointPx: number) {
   const [isNarrow, setIsNarrow] = useState(false)
@@ -22,17 +19,21 @@ function useIsNarrowViewport(breakpointPx: number) {
   return isNarrow
 }
 
+/**
+ * Ask Jasmine is paused for now (not ready to ship) — see AgentSidePanel /
+ * AskAgentContent for the intact feature. This just renders the hero intro
+ * and capability stack, given more room now that the chat isn't below it.
+ */
 function ChatHeroSectionInner() {
-  const agent = useAskAgent({ variant: 'hero' })
   const isNarrow = useIsNarrowViewport(640)
 
   return (
-    <section className="chat-hero" aria-label="Ask Jasmine">
+    <section className="chat-hero" aria-label="Hero">
       <div className="chat-hero__card bento-tile bento-tile--editorial">
         <header className="chat-hero__header">
           <div className="chat-hero__editorial">
             <div className="chat-hero__intro">
-              <HeroIntroCopy showSub={false} />
+              <HeroIntroCopy showSub />
             </div>
 
             <div className="chat-hero__strengths">
@@ -47,15 +48,6 @@ function ChatHeroSectionInner() {
             </div>
           </div>
         </header>
-
-        <div
-          className={cn(
-            'chat-hero__ask',
-            agent.hasMessages && 'chat-hero__ask--active'
-          )}
-        >
-          <AskAgentContent agent={agent} variant="hero" />
-        </div>
       </div>
     </section>
   )

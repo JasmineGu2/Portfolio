@@ -293,6 +293,9 @@ export function FlowersBackground({
     const onSeeked = () => {
       buildGrid()
       renderFrame(0)
+      // We only need the one frame; stop decoding/streaming past it, mainly
+      // to avoid burning mobile data and battery on a video nobody sees play.
+      video.pause()
     }
     const onLoadedMetadata = () => {
       video.currentTime = Math.min(CAPTURE_TIME, Math.max(0, video.duration - 0.1 || CAPTURE_TIME))
@@ -301,6 +304,14 @@ export function FlowersBackground({
     video.addEventListener('loadedmetadata', onLoadedMetadata)
     video.addEventListener('seeked', onSeeked)
     if (video.readyState >= 1) onLoadedMetadata()
+
+    // Mobile browsers (iOS Safari in particular) largely ignore `preload`
+    // and won't fetch any video bytes until playback actually starts, so
+    // `loadedmetadata`/`seeked` above never fire without this. Muted+inline
+    // autoplay is allowed without a user gesture on every major mobile
+    // browser, which is why this is safe to call unconditionally on mount.
+    video.muted = true
+    video.play().catch(() => {})
 
     const resizeObserver = new ResizeObserver(() => {
       buildGrid()
@@ -389,6 +400,7 @@ export function FlowersBackground({
         ref={videoRef}
         className="flowers-background__video"
         muted
+        autoPlay
         playsInline
         preload="auto"
       >

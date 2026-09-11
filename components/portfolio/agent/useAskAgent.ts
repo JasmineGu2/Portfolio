@@ -70,7 +70,6 @@ export function useAskAgentState({
   } = usePortfolioState()
 
   const [messages, setMessages] = useState<AgentMessage[]>([])
-  const [categoriesOpen, setCategoriesOpen] = useState(false)
   const threadRef = useRef<HTMLDivElement>(null)
   const prevPathRef = useRef(pathname)
 
@@ -90,12 +89,10 @@ export function useAskAgentState({
 
   const close = useCallback(() => {
     setAgentOpen(false)
-    setCategoriesOpen(false)
   }, [setAgentOpen])
 
   const askIntent = useCallback(
     (intent: AgentIntent) => {
-      setCategoriesOpen(false)
       setMessages((current) => {
         const answer = resolveIntent(intent, currentContext, {
           exploredIds: readExplored(current),
@@ -130,12 +127,8 @@ export function useAskAgentState({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastAnswerId])
 
-  const openCategories = useCallback(() => setCategoriesOpen(true), [])
-  const closeCategories = useCallback(() => setCategoriesOpen(false), [])
-
   const startNewChat = useCallback(() => {
     setMessages([])
-    setCategoriesOpen(false)
     clearHighlights()
     clearTrace()
   }, [clearHighlights, clearTrace])
@@ -144,10 +137,7 @@ export function useAskAgentState({
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        if (categoriesOpen) setCategoriesOpen(false)
-        else if (agentOpen) close()
-      }
+      if (event.key === 'Escape' && agentOpen) close()
       if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
         event.preventDefault()
         toggleAgent()
@@ -155,7 +145,7 @@ export function useAskAgentState({
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [categoriesOpen, agentOpen, close, toggleAgent])
+  }, [agentOpen, close, toggleAgent])
 
   useEffect(() => {
     if (!agentOpen) clearHighlights()
@@ -212,13 +202,10 @@ export function useAskAgentState({
     exploredIds,
     suggestedIntents,
     priorityIntents,
-    categoriesOpen,
     agentOpen,
     setAgentOpen,
     toggleAgent,
     askIntent,
-    openCategories,
-    closeCategories,
     startNewChat,
     close,
   }

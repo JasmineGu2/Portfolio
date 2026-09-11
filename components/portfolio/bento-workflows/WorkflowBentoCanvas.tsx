@@ -249,7 +249,6 @@ export function WorkflowBentoCanvas({
         {isHomePage ? (
           <div className="chat-hero-wrap">
             <ChatHeroSection />
-            <div className="chat-hero-sentinel" aria-hidden />
           </div>
         ) : (
           <HeroBentoPanel

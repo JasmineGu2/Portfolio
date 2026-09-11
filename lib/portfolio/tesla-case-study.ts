@@ -36,13 +36,6 @@ export const TESLA_OVERVIEW_STATS = [
   { value: '4 global factory locations supported' },
 ] as const
 
-export const TESLA_INTUIT_QUESTIONS = [
-  'Will this interaction help someone continue?',
-  'Does this animation clarify what happened?',
-  'Can we reduce uncertainty before the user abandons the flow?',
-  'Does the experience feel trustworthy and reassuring?',
-] as const
-
 export const TESLA_STAKEHOLDERS = [
   {
     title: 'Operators',

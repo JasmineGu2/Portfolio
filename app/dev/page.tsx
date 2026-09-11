@@ -15,6 +15,7 @@ const DEV_PAGES = [
   { label: 'Gallery text options', href: '/dev/gallery-text-options' },
   { label: 'Storytelling options', href: '/dev/storytelling-options' },
   { label: 'Tesla style options', href: '/dev/tesla-style-options' },
+  { label: 'Ask Jasmine options', href: '/dev/ask-jasmine-options' },
   { label: 'Bento workflows', href: '/dev/bento-workflows' },
   { label: 'Palette duo editor', href: '/dev/palette-duo-editor' },
 ] as const

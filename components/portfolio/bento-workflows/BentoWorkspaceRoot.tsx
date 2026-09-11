@@ -19,9 +19,7 @@ import {
   useBentoWorkspace,
 } from './BentoWorkspaceContext'
 import { HeroWorkspaceNav } from './HeroWorkspaceNav'
-import { AgentSidePanel } from '@/components/portfolio/agent/AgentSidePanel'
 import { AskAgentProvider } from '@/components/portfolio/agent/AskAgentProvider'
-import { ChatFloatingWidget } from '@/components/portfolio/ChatFloatingWidget'
 
 function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -78,19 +76,17 @@ function BentoWorkspaceFrame({ children }: { children: React.ReactNode }) {
     >
       {/* Architecture page kept in light mode for now, was `dark={isArchitecturePage}` */}
       <FlowersBackgroundLayer dark={false} />
-      {/* One shared Ask Jasmine conversation across the hero panel, the side
-          panel, and the floating launcher (spec §2, §11). */}
+      {/* Ask Jasmine is paused for now (not ready to ship) — AgentSidePanel is
+          intentionally not mounted. AskAgentProvider stays so the feature can
+          come back with just that one line. */}
       <Suspense fallback={null}>
         <AskAgentProvider>
           <div className="bw-workspace-row">
-            {/* Renders itself only on routes where `isAgentPanelRoute` is true. */}
-            <AgentSidePanel />
             <div className="bw-main">
               <header className="bw-site-nav">
                 <HeroWorkspaceNav compact showWorkspaceControls={false} />
               </header>
               {children}
-              <ChatFloatingWidget />
             </div>
           </div>
         </AskAgentProvider>

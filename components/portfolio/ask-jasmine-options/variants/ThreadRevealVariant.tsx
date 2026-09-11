@@ -1,66 +1,43 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { AgentIntro } from './AgentIntro'
-import { AgentAnswerCard } from './AgentAnswerCard'
-import { UserQuestion } from './UserQuestion'
-import { TypingIndicator } from './TypingIndicator'
+import { useAskAgentState } from '@/components/portfolio/agent/useAskAgent'
+import { AgentIntro } from '@/components/portfolio/agent/AgentIntro'
+import { AgentAnswerCard } from '@/components/portfolio/agent/AgentAnswerCard'
+import { UserQuestion } from '@/components/portfolio/agent/UserQuestion'
 import { QUESTION_CATEGORIES, INTENT_QUESTIONS } from '@/lib/portfolio/agent/intents'
 import type { AgentMessage } from '@/lib/portfolio/agent/types'
-import { cn } from '@/lib/utils'
-import type { useAskAgent } from './useAskAgent'
-
-type AskAgentState = ReturnType<typeof useAskAgent>
 
 type TimelineEntry =
   | { kind: 'categoryPicker'; id: string }
   | { kind: 'categoryQuestions'; id: string; categoryId: string }
   | { kind: 'message'; id: string; message: AgentMessage }
 
-const TYPING_DELAY_MS = 550
-
 function newTurnId(): string {
   return `turn-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
 }
 
 /**
- * Ask Jasmine, chip-only (spec §4). Opens with just the 4 question categories;
- * picking one reveals its questions as a new thread turn instead of showing
- * all 14 chips at once. Answers appear after a brief typing beat.
+ * Opens with only the 4 category chips. Picking one inserts a new thread turn
+ * revealing that category's questions, chat-native instead of a wall of chips.
  */
-export function AskAgentContent({
-  agent,
-  variant = 'sidebar',
-}: {
-  agent: AskAgentState
-  variant?: 'sidebar' | 'hero'
-}) {
-  const { messages, hasMessages, threadRef, askIntent } = agent
+export function ThreadRevealVariant() {
+  const agent = useAskAgentState({ variant: 'sidebar' })
+  const { messages, askIntent } = agent
 
   const [timeline, setTimeline] = useState<TimelineEntry[]>([
     { kind: 'categoryPicker', id: 'cp-0' },
   ])
-  const [revealed, setRevealed] = useState<Set<string>>(new Set())
   const syncedCount = useRef(0)
 
   useEffect(() => {
-    if (messages.length <= syncedCount.current) return
-    const additions = messages.slice(syncedCount.current)
-    syncedCount.current = messages.length
-
-    setTimeline((current) => [
-      ...current,
-      ...additions.map((message) => ({ kind: 'message' as const, id: message.id, message })),
-    ])
-
-    const timers = additions
-      .filter((message) => message.role === 'assistant')
-      .map((message) =>
-        setTimeout(() => {
-          setRevealed((current) => new Set(current).add(message.id))
-        }, TYPING_DELAY_MS)
-      )
-    return () => timers.forEach(clearTimeout)
+    if (messages.length > syncedCount.current) {
+      const additions = messages
+        .slice(syncedCount.current)
+        .map((message) => ({ kind: 'message' as const, id: message.id, message }))
+      syncedCount.current = messages.length
+      setTimeline((current) => [...current, ...additions])
+    }
   }, [messages])
 
   function revealCategory(categoryId: string) {
@@ -75,22 +52,22 @@ export function AskAgentContent({
   }
 
   return (
-    <div className={cn('ask-agent-content', `ask-agent-content--${variant}`)}>
-      <div className="agent-thread" ref={threadRef}>
-        {!hasMessages && <AgentIntro variant={variant} />}
+    <div className="ajr-frame">
+      <div className="ajr-scroll">
+        <AgentIntro variant="sidebar" />
 
-        <ul className="agent-messages">
+        <ul className="ajr-timeline">
           {timeline.map((entry) => (
-            <li key={entry.id} className="agent-message">
+            <li key={entry.id} className="ajr-turn">
               {entry.kind === 'categoryPicker' && (
-                <div className="agent-bubble agent-bubble--assistant">
+                <div className="ajr-category-picker">
                   <p className="agent-categories__heading font-analogue">Pick a category</p>
-                  <div className="agent-category__questions">
+                  <div className="ajr-category-row">
                     {QUESTION_CATEGORIES.map((category) => (
                       <button
                         key={category.id}
                         type="button"
-                        className="agent-question-chip agent-question-chip--category"
+                        className="agent-question-chip ajr-category-chip"
                         onClick={() => revealCategory(category.id)}
                       >
                         {category.label}
@@ -105,8 +82,8 @@ export function AskAgentContent({
                   const category = QUESTION_CATEGORIES.find((c) => c.id === entry.categoryId)
                   if (!category) return null
                   return (
-                    <div className="agent-bubble agent-bubble--assistant">
-                      <p className="agent-categories__heading font-analogue">
+                    <div className="ajr-category-questions">
+                      <p className="ajr-reveal-note font-analogue">
                         Here&rsquo;s what you can ask about {category.label}
                       </p>
                       <div className="agent-category__questions">
@@ -128,14 +105,12 @@ export function AskAgentContent({
               {entry.kind === 'message' &&
                 (entry.message.role === 'user' ? (
                   <UserQuestion label={entry.message.label} />
-                ) : revealed.has(entry.message.id) ? (
+                ) : (
                   <AgentAnswerCard
                     answer={entry.message.answer}
                     onFollowUp={askIntent}
                     onExploreMore={browseMore}
                   />
-                ) : (
-                  <TypingIndicator />
                 ))}
             </li>
           ))}

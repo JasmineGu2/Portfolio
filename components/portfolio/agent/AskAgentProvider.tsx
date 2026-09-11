@@ -9,9 +9,9 @@ export type AskAgentState = ReturnType<typeof useAskAgentState>
 export const AskAgentContext = createContext<AskAgentState | null>(null)
 
 /**
- * One shared Ask Jasmine conversation for the whole workspace — the hero panel,
- * the side panel, and the floating widget all read this, so a visitor keeps
- * their thread and context moving between pages (spec §2, §11).
+ * One shared Ask Jasmine conversation for the whole workspace — the hero panel
+ * and the side panel both read this, so a visitor keeps their thread and
+ * context moving between pages (spec §2, §11).
  */
 export function AskAgentProvider({ children }: { children: ReactNode }) {
   const agent = useAskAgentState({ variant: 'hero' })

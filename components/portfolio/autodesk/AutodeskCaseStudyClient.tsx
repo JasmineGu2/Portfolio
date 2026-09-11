@@ -5,11 +5,9 @@ import { useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
-  AUTODESK_AI_FIRST_BLOCKS,
-  AUTODESK_AMBIGUITY_TYPES,
   AUTODESK_AUDIENCES,
-  AUTODESK_AVENGERS_BEATS,
   AUTODESK_CASE_STUDY_SECTIONS,
+  AUTODESK_CHALLENGES,
   AUTODESK_EXPORT_AGAINST,
   AUTODESK_EXPORT_DECISION,
   AUTODESK_EXPORT_FOR,
@@ -17,9 +15,12 @@ import {
   AUTODESK_HERO_META,
   AUTODESK_INVESTMENT_REASONS,
   AUTODESK_OUTCOMES,
-  AUTODESK_TRANSITION_ROWS,
+  AUTODESK_PLATFORM_PRINCIPLES,
   AUTODESK_PORTAL_COMPONENTS,
+  AUTODESK_PROBLEM_REASONS,
+  AUTODESK_ROADMAP_PRIORITIES,
   AUTODESK_ROLE_ROWS,
+  AUTODESK_VISION_STEPS,
 } from '@/lib/portfolio/autodesk-case-study'
 
 function SectionLabel({ children }: { children: string }) {
@@ -71,18 +72,6 @@ function CardGrid({
           <p className="adsk-cs__card-title">{card.title}</p>
           <p className="adsk-cs__card-detail">{card.detail}</p>
         </div>
-      ))}
-    </div>
-  )
-}
-
-function InlineBeats({ blocks }: { blocks: readonly { title: string; body: string }[] }) {
-  return (
-    <div className="adsk-cs__inline-beats">
-      {blocks.map((block) => (
-        <p key={block.title} className="adsk-cs__inline-beat">
-          <span className="adsk-cs__inline-beat-title">{block.title}.</span> {block.body}
-        </p>
       ))}
     </div>
   )
@@ -155,6 +144,23 @@ function NumberedBlock({
           </li>
         ))}
       </ol>
+    </div>
+  )
+}
+
+function PrincipleTable({ rows }: { rows: readonly { principle: string; need: string }[] }) {
+  return (
+    <div className="adsk-cs__principle-table adsk-cs__wide">
+      <div className="adsk-cs__principle-row adsk-cs__principle-row--head">
+        <span>Platform Principle</span>
+        <span>User Need</span>
+      </div>
+      {rows.map((row) => (
+        <div key={row.principle} className="adsk-cs__principle-row">
+          <span>{row.principle}</span>
+          <span>{row.need}</span>
+        </div>
+      ))}
     </div>
   )
 }
@@ -318,32 +324,25 @@ export function AutodeskCaseStudyClient() {
 
           <section id="overview" className="adsk-cs__section">
             <SectionLabel>Overview</SectionLabel>
-            <SectionHeadline>
-              Owning product strategy for a governed SQL and data-exploration platform on
-              Autodesk&apos;s data lake
-            </SectionHeadline>
+            <SectionHeadline>What is ADP Studio?</SectionHeadline>
             <Body>
-              ADP Studio was a modern SQL editor. It was the query and exploration interface into
-              Autodesk&apos;s Data Portal, the company&apos;s broader strategy for storing, governing,
-              and processing every category of data the business produces.
+              ADP Studio is the SQL and data-exploration layer within Autodesk&apos;s Analytics
+              Data Portal, built on Autodesk&apos;s enterprise data lake. It was being built to
+              reduce dependency on, and the costs associated with, external SQL tools like{' '}
+              <span className="adsk-cs__em">PopSQL</span>, <span className="adsk-cs__em">DBeaver</span>,{' '}
+              <span className="adsk-cs__em">Snowflake</span>, and <span className="adsk-cs__em">Hive</span>.
             </Body>
             <Body>
-              Autodesk built the lake so all of that data could be harnessed in one place instead of
-              team by team. One governed store, with access control, classification, and auditing built
-              into how you reach it. That is safer than the same data spread across a dozen tools
-              nobody can see into, and more useful, because analysis can finally cross sources that
-              never used to meet.
+              The broader Data Portal brings together data pipelines, AI/ML infrastructure,
+              metadata management, access management, and other data platform capabilities. The
+              larger strategy is a more interoperable and governed data ecosystem, connecting how
+              data is accessed, governed, and used across AI/ML pipelines and emerging AI
+              capabilities.
             </Body>
             <Body>
-              I owned product strategy and execution for it, positioned against{' '}
-              <span className="adsk-cs__em">DBeaver</span>,{' '}
-              <span className="adsk-cs__em">Hive</span>, and{' '}
-              <span className="adsk-cs__em">direct Snowflake access</span> as the enterprise
-              alternative. That covered the roadmap, the redesigned query workflows, and the rollout
-              strategy for AI-assisted data work. It also covered the UX for all of it, since the team
-              had no embedded designer.
+              I owned product strategy and execution across roadmap planning, query workflows,
+              AI-assisted data workflows, rollout strategy, metrics, and stakeholder management.
             </Body>
-
           </section>
 
           <section id="data-portal" className="adsk-cs__section">
@@ -378,10 +377,22 @@ export function AutodeskCaseStudyClient() {
             </Body>
           </section>
 
-          <section id="transition" className="adsk-cs__section">
-            <SectionLabel>The Transition</SectionLabel>
-            <SectionHeadline>ADP Studio existed because PopSQL was going away.</SectionHeadline>
-            <DefinitionTable rows={AUTODESK_TRANSITION_ROWS} />
+          <section id="the-problem" className="adsk-cs__section">
+            <SectionLabel>The Problem</SectionLabel>
+            <SectionHeadline>
+              ADP Studio had a strategic reason to exist. PopSQL created the urgency.
+            </SectionHeadline>
+            <Body>
+              In April, PopSQL was acquired and announced it would be shutting down, with a planned
+              September sunset, and ADP Studio was rushed to be ready for the migration for several
+              data teams that exclusively used PopSQL as their query engine.
+            </Body>
+            <Body>
+              The problem was that &ldquo;PopSQL is going away&rdquo; was not enough to make users
+              want to actually use ADP Studio, and adoption and user feedback were strikingly low.
+            </Body>
+
+            <NumberedBlock title="Why adoption was hard" items={AUTODESK_PROBLEM_REASONS} />
           </section>
 
           <section id="my-role" className="adsk-cs__section">
@@ -408,26 +419,74 @@ export function AutodeskCaseStudyClient() {
             </KeyInsight>
           </section>
 
-          <section id="ambiguity" className="adsk-cs__section">
-            <SectionLabel>Ambiguity</SectionLabel>
-            <SectionHeadline>Three types of ambiguity, and what I did about each</SectionHeadline>
+          <section id="roadmap" className="adsk-cs__section">
+            <SectionLabel>The Roadmap Question</SectionLabel>
+            <SectionHeadline>
+              Not &ldquo;how do we recreate PopSQL,&rdquo; but what to prioritize first
+            </SectionHeadline>
+            <Body>The roadmap competed across:</Body>
+            <BulletList items={AUTODESK_ROADMAP_PRIORITIES} />
+            <Body>
+              Users would not automatically adopt ADP Studio just because PopSQL was going away. I
+              had to identify the highest-impact gaps and prioritize them within the timeline and
+              engineering resources available.
+            </Body>
+            <Body>
+              ADP Studio served 380+ users across multiple functions, and was intended to be more
+              ambitious than PopSQL, serving not only analysts but PMs, engineers, and other
+              data-related roles. Even within analyst teams, needs varied: some worked across
+              datasets, wrote complex queries, and created intermediate tables, while others cared
+              more about dashboarding, charts, and visualizations.
+            </Body>
+            <Body>
+              I inherited 30+ feature requests, bugs, and PopSQL-parity requests, often with limited
+              context on the actual user behavior, or even the feature surface.
+            </Body>
+          </section>
 
-            <NumberedBlock title="The three types" items={AUTODESK_AMBIGUITY_TYPES} />
+          <section id="platform-pm" className="adsk-cs__section">
+            <SectionLabel>Platform Product Management</SectionLabel>
+            <SectionHeadline>How do you balance users with platform principles?</SectionHeadline>
+            <Body>
+              Many features requested by users were constrained by platform-focused principles.
+            </Body>
+            <PrincipleTable rows={AUTODESK_PLATFORM_PRINCIPLES} />
           </section>
 
           <section id="exporting" className="adsk-cs__section">
             <SectionLabel>The Exporting Decision</SectionLabel>
             <SectionHeadline>
-              Should a governed data tool let you take the data out?
+              When giving users what they want creates a platform problem
             </SectionHeadline>
             <Body>
-              Export was the single biggest blocker to adoption, and the obvious fixes both cost
-              something real. Here is how the two sides actually stacked up.
+              Export became one of the largest adoption blockers and one of the most contentious
+              platform decisions. Data analysts needed to export data to Excel and other tools
+              because ADP Studio could not yet support the volumes and workflows they needed.
+            </Body>
+            <Body>
+              But there was an important difference between PopSQL and ADP Studio. PopSQL primarily
+              worked with product data that wasn&apos;t subject to the same sensitivity concerns.
+              ADP Studio, however, was built directly on Autodesk&apos;s enterprise data lake, where
+              the query engine could reach data that extended beyond product data into sensitive
+              financial and user data.
+            </Body>
+            <Body>
+              That meant exporting was no longer just a usability question. Once data left ADP
+              Studio, what happened to it? I had to understand why exporting to Excel was necessary,
+              what analysts actually did with the exported data, and what the full process and
+              storyline of that data leaving the governed environment looked like.
+            </Body>
+            <Body>
+              This became a major area of contention. I conducted industry research and had
+              extensive conversations across Security, Legal, Metadata Management, and other teams.
+              At different points, I held a different perspective from five different teams
+              involved in the decision.
             </Body>
 
+            <Subhead>The tension</Subhead>
             <div className="adsk-cs__tradeoff adsk-cs__wide">
               <div className="adsk-cs__tradeoff-col">
-                <p className="adsk-cs__tradeoff-label font-analogue">The case for allowing it</p>
+                <p className="adsk-cs__tradeoff-label font-analogue">Allow unrestricted export</p>
                 <ul className="adsk-cs__tradeoff-list">
                   {AUTODESK_EXPORT_FOR.map((item) => (
                     <li key={item}>{item}</li>
@@ -435,7 +494,7 @@ export function AutodeskCaseStudyClient() {
                 </ul>
               </div>
               <div className="adsk-cs__tradeoff-col">
-                <p className="adsk-cs__tradeoff-label font-analogue">The case against</p>
+                <p className="adsk-cs__tradeoff-label font-analogue">Restrict export</p>
                 <ul className="adsk-cs__tradeoff-list">
                   {AUTODESK_EXPORT_AGAINST.map((item) => (
                     <li key={item}>{item}</li>
@@ -443,47 +502,80 @@ export function AutodeskCaseStudyClient() {
                 </ul>
               </div>
             </div>
+            <Body>
+              Users were already taking screenshots and finding other workarounds to bypass
+              restrictions. Simply blocking the ideal workflow did not eliminate the underlying
+              behavior &mdash; it could push users toward less visible and less governable
+              alternatives.
+            </Body>
 
             <Subsections blocks={AUTODESK_EXPORT_DECISION} />
-
-            <KeyInsight>
-              A platform question that only has two answers is usually the wrong question. Classifying
-              the data turned one policy argument into a property of each table, which is the version
-              Security, Legal, and analysts could all live with.
-            </KeyInsight>
           </section>
 
           <section id="ai-first" className="adsk-cs__section">
             <SectionLabel>Winning in an AI-First World</SectionLabel>
-            <SectionHeadline>
-              I hit this problem building in an AI-first world, so I made Spec Mode.
-            </SectionHeadline>
+            <SectionHeadline>My vision for ADP Studio</SectionHeadline>
             <Body>
-              When anyone can generate a working prototype in an afternoon, building stops being the
-              constraint and agreement becomes it. That shows up as a very specific failure: a demo
-              that looks finished and settles nothing.
+              While I was solving the immediate adoption problems, I was also asked to step back
+              from the roadmap and give a thesis for where ADP Studio should go next. The strategic
+              possibilities were broad: should ADP Studio become more powerful for data engineers,
+              including Python functionality? Should it move toward being more of a BI tool, making
+              data accessible to less technical users? And given the AI capabilities already
+              emerging across the Data Portal, what should AI fundamentally change about the
+              product?
             </Body>
-
-            <Subsections blocks={AUTODESK_AI_FIRST_BLOCKS} />
-
-            <KeyInsight>
-              Building was never really the hard part, even before AI. It just used to hide how hard it
-              was to get everyone aligned. Now that hiding place is gone.
-            </KeyInsight>
+            <Body>
+              One idea from top leadership stuck with me: the future of data products may be no
+              more writing SQL. I kept thinking about what I was seeing in practice &mdash; people
+              were increasingly using MCPs to talk to Cursor, understand their data, ask questions,
+              generate queries, and explore results.
+            </Body>
+            <Body>
+              The important shift wasn&apos;t simply that AI could write SQL. The form of
+              interaction itself was changing. Instead of opening a tool, navigating menus, finding
+              a table, writing SQL, running it, and moving somewhere else to understand the result,
+              people could increasingly describe what they wanted and work conversationally with an
+              agent.
+            </Body>
+            <Body>
+              So my thesis for ADP Studio became: don&apos;t just add AI to the SQL workflow. Build
+              for the way people will work with data in an AI-first world.
+            </Body>
+            <Body>
+              I envisioned an agentic workspace inspired by Cursor, combining conversational
+              interaction with a workspace where users could:
+            </Body>
+            <p className="adsk-cs__workflow-line">{AUTODESK_VISION_STEPS.join(' → ')}</p>
+            <Body>
+              The goal was not to hide the underlying data or SQL. It was to create a more
+              accessible interaction layer while preserving the ability for technical users to
+              understand and work directly with the underlying system.
+            </Body>
           </section>
 
           <section id="avengers" className="adsk-cs__section">
             <SectionLabel>From a Vision to the Avengers Team</SectionLabel>
-            <SectionHeadline>
-              My vision for ADP Studio turned into Autodesk&apos;s Data Portal strategy.
-            </SectionHeadline>
+            <SectionHeadline>From ADP Studio to the broader Data Portal</SectionHeadline>
+            <Body>
+              I brought the vision to my director, and she loved it. She saw an opportunity to
+              extend the idea beyond ADP Studio and reimagine the broader Analytics Data Portal
+              experience.
+            </Body>
+            <Body>
+              I was then given an opportunity to lead a hackathon-style &ldquo;Avengers&rdquo;
+              team, guided by my direct manager, bringing together 6 engineering teams to bring
+              this to life.
+            </Body>
+          </section>
 
-            <InlineBeats blocks={AUTODESK_AVENGERS_BEATS} />
-
+          <section id="challenges" className="adsk-cs__section">
+            <SectionLabel>Challenges</SectionLabel>
+            <SectionHeadline>What made this internship hard</SectionHeadline>
+            <NumberedBlock title="Four challenges" items={AUTODESK_CHALLENGES} />
           </section>
 
           <section id="future" className="adsk-cs__section">
-            <SectionLabel>The Future of Product</SectionLabel>
+            <SectionLabel>What I Learned</SectionLabel>
             <SectionHeadline>What I believe about data products going forward</SectionHeadline>
 
             <Subsections blocks={AUTODESK_FUTURE_BLOCKS} />

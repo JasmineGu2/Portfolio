@@ -1,0 +1,350 @@
+/* Ask Jasmine, interaction options — dev comparison page.
+   Uses the site's real --pf-* tokens (app/portfolio-tokens.css) since the
+   point is to preview something close to what would actually ship. */
+
+.ajo-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.ajo-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 42rem;
+}
+
+.ajo-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.ajo-title {
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.35;
+  color: var(--pf-ink);
+}
+
+.ajo-meta {
+  font-size: 0.85rem;
+  color: var(--pf-muted);
+}
+
+.ajo-hero-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.ajo-switcher-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.85rem;
+}
+
+.ajo-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: var(--pf-card-radius);
+  background: var(--pf-surface);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--pf-shadow-outline-subtle);
+  transition: var(--pf-card-transition), background 180ms ease;
+}
+
+.ajo-option:hover {
+  border-color: var(--pf-card-border-hover);
+  box-shadow: var(--pf-shadow-outline-hover);
+}
+
+.ajo-option--active {
+  border-color: color-mix(in srgb, var(--pf-accent) 55%, var(--pf-card-border));
+  background: color-mix(in srgb, var(--pf-accent) 6%, var(--pf-surface));
+}
+
+.ajo-option-name {
+  font-family: var(--pf-font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--pf-ink);
+}
+
+.ajo-option-desc {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--pf-muted);
+}
+
+.ajo-footer {
+  font-size: 0.85rem;
+  color: var(--pf-muted);
+}
+
+/* ── Shared preview frame sizing ─────────────────────────────────────────── */
+
+.ajr-frame,
+.ajc-frame,
+.ajt-frame {
+  display: flex;
+  flex-direction: column;
+  width: min(26rem, 100%);
+  height: 34rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: var(--pf-card-radius-lg);
+  background: var(--pf-surface);
+  box-shadow: var(--pf-shadow-outline);
+  overflow: hidden;
+}
+
+/* ── Variant 1: Thread reveal ─────────────────────────────────────────────── */
+
+.ajr-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding: 1rem 1.15rem 1.25rem;
+}
+
+.ajr-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ajr-turn {
+  display: block;
+}
+
+.ajr-category-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ajr-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ajr-category-chip {
+  font-weight: 600;
+  background: color-mix(in srgb, var(--pf-accent) 7%, var(--pf-surface));
+}
+
+.ajr-category-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--pf-card-border);
+}
+
+.ajr-reveal-note {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--pf-muted);
+}
+
+/* ── Variant 2: Terminal log ──────────────────────────────────────────────── */
+
+.ajt-frame {
+  background: var(--pf-ink);
+  color: var(--pf-cream);
+}
+
+.ajt-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  font-family: var(--pf-font-system);
+}
+
+.ajt-boot {
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--pf-cream) 55%, transparent);
+}
+
+.ajt-commands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ajt-command {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--pf-cream) 25%, transparent);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--pf-cream);
+  font-family: var(--pf-font-system);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.ajt-command:hover,
+.ajt-command--active {
+  border-color: var(--pf-accent);
+  color: var(--pf-accent);
+}
+
+.ajt-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+}
+
+.ajt-menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  color: var(--pf-cream);
+  text-align: left;
+  font-family: var(--pf-font-system);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.ajt-menu-item:hover {
+  background: color-mix(in srgb, var(--pf-cream) 10%, transparent);
+  color: var(--pf-accent);
+}
+
+.ajt-menu-num {
+  color: color-mix(in srgb, var(--pf-cream) 45%, transparent);
+  font-size: 0.72rem;
+}
+
+.ajt-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed color-mix(in srgb, var(--pf-cream) 20%, transparent);
+}
+
+.ajt-prompt {
+  font-size: 0.85rem;
+  color: var(--pf-accent);
+}
+
+.ajt-prompt-marker {
+  color: color-mix(in srgb, var(--pf-cream) 60%, transparent);
+  margin-right: 0.35rem;
+}
+
+.ajt-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid color-mix(in srgb, var(--pf-cream) 15%, transparent);
+}
+
+.ajt-output-summary {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--pf-cream);
+}
+
+.ajt-output-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ajt-output-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--pf-cream) 45%, transparent);
+}
+
+.ajt-output-line {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--pf-cream) 80%, transparent);
+}
+
+.ajt-output-dim {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--pf-cream) 40%, transparent);
+}
+
+/* ── Variant 3: Accordion rail ─────────────────────────────────────────────── */
+
+.ajc-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid var(--pf-card-border);
+  flex-shrink: 0;
+}
+
+.ajc-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.ajc-category--open {
+  /* Forces this item onto its own full-width row in the wrapping flex rail,
+     so the expanded questions panel beneath it can span the full width. */
+  flex: 1 1 100%;
+}
+
+.ajc-category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ajc-category--open .ajc-category-chip {
+  border-color: color-mix(in srgb, var(--pf-accent) 45%, var(--pf-card-border));
+  background: color-mix(in srgb, var(--pf-accent) 8%, var(--pf-surface));
+}
+
+.ajc-caret {
+  color: var(--pf-muted);
+  font-size: 0.85rem;
+}
+
+.ajc-questions {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding-bottom: 0.2rem;
+}
+
+.ajc-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem 1.15rem 1.25rem;
+}

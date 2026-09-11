@@ -823,3 +823,47 @@ body:has(.adsk-cs) {
 .adsk-cs__inline-beats + .adsk-cs__key-insight {
   margin-top: var(--adsk-beat);
 }
+
+/* Platform-principle vs. user-need comparison table (Platform PM section) */
+.adsk-cs__principle-table {
+  display: grid;
+  gap: 0;
+  margin: 1.5rem 0 0;
+  max-width: var(--adsk-wide);
+  border-top: 1px solid var(--adsk-border);
+}
+
+.adsk-cs__principle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--adsk-border);
+  color: var(--adsk-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.adsk-cs__principle-row--head {
+  color: var(--adsk-muted);
+  font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The AI-vision interaction chain (Prompt → Guide the agent → ...) */
+.adsk-cs__workflow-line {
+  margin-top: 1.5rem;
+  max-width: var(--adsk-prose);
+  padding: 0 0 0 1rem;
+  border-left: 2px solid var(--adsk-border);
+  color: var(--adsk-ink);
+  font-family: 'Awesome Shorten', 'Fredoka', cursive;
+  font-size: 1.0625rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+}
