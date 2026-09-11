@@ -38,6 +38,13 @@ const nextConfig = {
       }
     }
 
+    // On Windows, pnpm's nested node_modules symlinks resolve to a differently-cased
+    // real path than the project's own working directory. Webpack treats those as two
+    // separate modules, duplicating Next's router/context modules and breaking React
+    // context (e.g. "Missing ActionQueueContext"). Resolving via the symlink path
+    // instead of realpath keeps casing consistent.
+    config.resolve.symlinks = false
+
     return config
   },
 }
