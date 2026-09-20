@@ -1,9 +1,14 @@
 'use client'
 
 import { Suspense, useEffect, useState } from 'react'
+import { X } from 'lucide-react'
+import { play } from 'cuelume'
 import { CapabilityLayerStack } from './CapabilityLayerStack'
 import { HeroIntroCopy } from './HeroIntroCopy'
 import { CAPABILITY_LAYERS } from '@/lib/portfolio/capability-layers-data'
+import { AskAgentContent } from './agent/AskAgentContent'
+import { useAskAgent } from './agent/useAskAgent'
+import { cn } from '@/lib/utils'
 
 function useIsNarrowViewport(breakpointPx: number) {
   const [isNarrow, setIsNarrow] = useState(false)
@@ -20,20 +25,57 @@ function useIsNarrowViewport(breakpointPx: number) {
 }
 
 /**
- * Ask Jasmine is paused for now (not ready to ship) — see AgentSidePanel /
- * AskAgentContent for the intact feature. This just renders the hero intro
- * and capability stack, given more room now that the chat isn't below it.
+ * Ask Jasmine, embedded as the main chat interface in the homepage hero
+ * (spec §2's "main experience"). The floating side panel (AgentSidePanel)
+ * remains the secondary entry point on other pages — `isAgentPanelRoute`
+ * already excludes `/`, so the two never overlap.
+ *
+ * Starts as a compact card inline in the hero. The first interaction (a chip
+ * click, or focusing the composer) expands it into a centered modal — same
+ * `useAskAgent` instance throughout, so the conversation carries over rather
+ * than resetting. Closing the modal returns to the compact card without
+ * losing the thread; interacting again reopens it.
  */
 function ChatHeroSectionInner() {
+  const agent = useAskAgent({ variant: 'hero' })
   const isNarrow = useIsNarrowViewport(640)
+  const [expanded, setExpanded] = useState(false)
+
+  function expand() {
+    setExpanded((current) => {
+      if (!current) play('bloom')
+      return true
+    })
+  }
+
+  function collapse() {
+    setExpanded((current) => {
+      if (current) play('whisper')
+      return false
+    })
+  }
+
+  useEffect(() => {
+    if (!expanded) return
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') collapse()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [expanded])
 
   return (
-    <section className="chat-hero" aria-label="Hero">
+    <section className="chat-hero" aria-label="Ask Jasmine">
       <div className="chat-hero__card bento-tile bento-tile--editorial">
         <header className="chat-hero__header">
           <div className="chat-hero__editorial">
             <div className="chat-hero__intro">
-              <HeroIntroCopy showSub />
+              <HeroIntroCopy showSub={false} />
             </div>
 
             <div className="chat-hero__strengths">
@@ -48,6 +90,41 @@ function ChatHeroSectionInner() {
             </div>
           </div>
         </header>
+
+        {expanded && (
+          <button
+            type="button"
+            className="chat-hero__backdrop"
+            aria-label="Close chat"
+            onClick={collapse}
+          />
+        )}
+
+        <div
+          className={cn(
+            'chat-hero__ask',
+            agent.hasMessages && 'chat-hero__ask--active',
+            expanded && 'chat-hero__ask--modal'
+          )}
+          onClickCapture={expand}
+          onFocusCapture={expand}
+          role={expanded ? 'dialog' : undefined}
+          aria-modal={expanded || undefined}
+          aria-label={expanded ? 'Ask Jasmine' : undefined}
+        >
+          {expanded && (
+            <button
+              type="button"
+              className="chat-hero__ask-close"
+              aria-label="Close chat"
+              onClick={collapse}
+              data-cuelume-hover
+            >
+              <X className="h-4 w-4" aria-hidden />
+            </button>
+          )}
+          <AskAgentContent agent={agent} variant="hero" />
+        </div>
       </div>
     </section>
   )

@@ -3,8 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { AgentIntro } from './AgentIntro'
 import { AgentAnswerCard } from './AgentAnswerCard'
+import { AgentLoadingBeat } from './AgentLoadingBeat'
+import { AgentThinkingTrace } from './AgentThinkingTrace'
+import { AgentStreamingAnswer } from './AgentStreamingAnswer'
+import { AgentPromptBar } from './AgentPromptBar'
+import { FollowUpChips } from './FollowUpChips'
 import { UserQuestion } from './UserQuestion'
-import { TypingIndicator } from './TypingIndicator'
 import { QUESTION_CATEGORIES, INTENT_QUESTIONS } from '@/lib/portfolio/agent/intents'
 import type { AgentMessage } from '@/lib/portfolio/agent/types'
 import { cn } from '@/lib/utils'
@@ -17,16 +21,19 @@ type TimelineEntry =
   | { kind: 'categoryQuestions'; id: string; categoryId: string }
   | { kind: 'message'; id: string; message: AgentMessage }
 
-const TYPING_DELAY_MS = 550
+type MessagePhase = 'loading' | 'trace' | 'streaming' | 'done'
 
 function newTurnId(): string {
   return `turn-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
 }
 
 /**
- * Ask Jasmine, chip-only (spec §4). Opens with just the 4 question categories;
- * picking one reveals its questions as a new thread turn instead of showing
- * all 14 chips at once. Answers appear after a brief typing beat.
+ * Ask Jasmine, chip-only (spec §4) plus a free-text composer. Opens with the 4
+ * question categories; each answer reveals through a phase sequence (loading
+ * beat → retrieval trace → streamed summary → full answer card) that mirrors
+ * an AI-chat product's choreography over what is still a synchronous, curated
+ * lookup — see `specs/07-ask-Jasmine-Guided Portfolio.md` for why that's now
+ * a deliberate override rather than the original "no LLM theater" guidance.
  */
 export function AskAgentContent({
   agent,
@@ -35,13 +42,26 @@ export function AskAgentContent({
   agent: AskAgentState
   variant?: 'sidebar' | 'hero'
 }) {
-  const { messages, hasMessages, threadRef, askIntent } = agent
+  const { messages, hasMessages, threadRef, askIntent, askFreeText } = agent
 
   const [timeline, setTimeline] = useState<TimelineEntry[]>([
     { kind: 'categoryPicker', id: 'cp-0' },
   ])
-  const [revealed, setRevealed] = useState<Set<string>>(new Set())
+  const [phases, setPhases] = useState<Record<string, MessagePhase>>({})
   const syncedCount = useRef(0)
+
+  function advance(id: string, next: MessagePhase) {
+    setPhases((current) => ({ ...current, [id]: next }))
+  }
+
+  // A cleared conversation (agent.startNewChat) resets `messages` to `[]`; mirror
+  // that here so a stale thread from before "New conversation" doesn't linger.
+  useEffect(() => {
+    if (messages.length > 0) return
+    syncedCount.current = 0
+    setTimeline([{ kind: 'categoryPicker', id: 'cp-0' }])
+    setPhases({})
+  }, [messages])
 
   useEffect(() => {
     if (messages.length <= syncedCount.current) return
@@ -53,14 +73,19 @@ export function AskAgentContent({
       ...additions.map((message) => ({ kind: 'message' as const, id: message.id, message })),
     ])
 
-    const timers = additions
-      .filter((message) => message.role === 'assistant')
-      .map((message) =>
-        setTimeout(() => {
-          setRevealed((current) => new Set(current).add(message.id))
-        }, TYPING_DELAY_MS)
+    const newAnswerIds = additions
+      .filter(
+        (m): m is Extract<AgentMessage, { role: 'assistant'; kind: 'answer' }> =>
+          m.role === 'assistant' && m.kind === 'answer'
       )
-    return () => timers.forEach(clearTimeout)
+      .map((m) => m.id)
+    if (newAnswerIds.length > 0) {
+      setPhases((current) => {
+        const next = { ...current }
+        for (const id of newAnswerIds) next[id] = 'loading'
+        return next
+      })
+    }
   }, [messages])
 
   function revealCategory(categoryId: string) {
@@ -73,6 +98,8 @@ export function AskAgentContent({
   function browseMore() {
     setTimeline((current) => [...current, { kind: 'categoryPicker', id: newTurnId() }])
   }
+
+  const anyInFlight = Object.values(phases).some((p) => p !== 'done')
 
   return (
     <div className={cn('ask-agent-content', `ask-agent-content--${variant}`)}>
@@ -92,6 +119,8 @@ export function AskAgentContent({
                         type="button"
                         className="agent-question-chip agent-question-chip--category"
                         onClick={() => revealCategory(category.id)}
+                        data-cuelume-hover
+                        data-cuelume-press
                       >
                         {category.label}
                       </button>
@@ -116,6 +145,8 @@ export function AskAgentContent({
                             type="button"
                             className="agent-question-chip"
                             onClick={() => askIntent(intent)}
+                            data-cuelume-hover
+                            data-cuelume-press
                           >
                             {INTENT_QUESTIONS[intent]}
                           </button>
@@ -128,14 +159,54 @@ export function AskAgentContent({
               {entry.kind === 'message' &&
                 (entry.message.role === 'user' ? (
                   <UserQuestion label={entry.message.label} />
-                ) : revealed.has(entry.message.id) ? (
-                  <AgentAnswerCard
-                    answer={entry.message.answer}
-                    onFollowUp={askIntent}
-                    onExploreMore={browseMore}
-                  />
+                ) : entry.message.kind === 'fallback' ? (
+                  <div className="agent-answer">
+                    <div className="agent-bubble agent-bubble--assistant">
+                      <p className="agent-answer__summary">
+                        I don&rsquo;t have that in Jasmine&rsquo;s portfolio yet.
+                      </p>
+                    </div>
+                    <FollowUpChips
+                      intents={entry.message.followUps}
+                      onPick={askIntent}
+                      label="Try one of these"
+                    />
+                  </div>
                 ) : (
-                  <TypingIndicator />
+                  (() => {
+                    const phase = phases[entry.message.id] ?? 'loading'
+                    const { answer } = entry.message
+                    if (phase === 'loading') {
+                      return (
+                        <AgentLoadingBeat onDone={() => advance(entry.message.id, 'trace')} />
+                      )
+                    }
+                    if (phase === 'trace') {
+                      return (
+                        <AgentThinkingTrace
+                          question={answer.question}
+                          references={answer.references}
+                          onSettled={() => advance(entry.message.id, 'streaming')}
+                        />
+                      )
+                    }
+                    if (phase === 'streaming') {
+                      return (
+                        <AgentStreamingAnswer
+                          summary={answer.summary}
+                          citation={answer.references[0]}
+                          onDone={() => advance(entry.message.id, 'done')}
+                        />
+                      )
+                    }
+                    return (
+                      <AgentAnswerCard
+                        answer={answer}
+                        onFollowUp={askIntent}
+                        onExploreMore={browseMore}
+                      />
+                    )
+                  })()
                 ))}
             </li>
           ))}
@@ -143,10 +214,22 @@ export function AskAgentContent({
       </div>
 
       <div className="agent-panel__footer-bar">
-        <button type="button" className="agent-ask-more" onClick={browseMore}>
+        <button
+          type="button"
+          className="agent-ask-more"
+          onClick={browseMore}
+          data-cuelume-hover
+          data-cuelume-press
+        >
           Explore another category
           <span aria-hidden> →</span>
         </button>
+        <AgentPromptBar
+          onAskIntent={askIntent}
+          onAskFreeText={askFreeText}
+          onPickCategory={revealCategory}
+          disabled={anyInFlight}
+        />
       </div>
     </div>
   )

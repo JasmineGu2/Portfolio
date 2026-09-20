@@ -2,9 +2,10 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { play } from 'cuelume'
 import { usePortfolioState } from '@/components/portfolio/PortfolioStateContext'
 import { deriveContext, CONTEXT_INTENT_PRIORITY } from '@/lib/portfolio/agent/context'
-import { INTENT_QUESTIONS } from '@/lib/portfolio/agent/intents'
+import { INTENT_QUESTIONS, getIntentForQuestion } from '@/lib/portfolio/agent/intents'
 import { resolveIntent } from '@/lib/portfolio/agent/retrieval'
 import type { AgentIntent, AgentMessage } from '@/lib/portfolio/agent/types'
 import { AskAgentContext } from './AskAgentProvider'
@@ -33,17 +34,18 @@ function uniq(values: string[]): string[] {
 
 function readAsked(messages: AgentMessage[]): AgentIntent[] {
   return messages
-    .filter((m): m is Extract<AgentMessage, { role: 'user' }> => m.role === 'user')
+    .filter((m): m is Extract<AgentMessage, { role: 'user'; intent: AgentIntent }> =>
+      m.role === 'user' && m.intent !== null
+    )
     .map((m) => m.intent)
 }
 
 function readExplored(messages: AgentMessage[]): string[] {
   return uniq(
-    messages.flatMap((m) =>
-      m.role === 'assistant'
-        ? [m.answer.intent, ...m.answer.references.map((r) => r.id)]
-        : [m.intent]
-    )
+    messages.flatMap((m) => {
+      if (m.role === 'user') return m.intent !== null ? [m.intent] : []
+      return m.kind === 'answer' ? [m.answer.intent, ...m.answer.references.map((r) => r.id)] : []
+    })
   )
 }
 
@@ -81,7 +83,9 @@ export function useAskAgentState({
 
   const suggestedIntents = useMemo<AgentIntent[]>(() => {
     const last = [...messages].reverse().find((m) => m.role === 'assistant')
-    if (last && last.role === 'assistant') return last.answer.followUps
+    if (last?.role === 'assistant') {
+      return last.kind === 'answer' ? last.answer.followUps : last.followUps
+    }
     return CONTEXT_INTENT_PRIORITY[currentContext.page].slice(0, 3)
   }, [messages, currentContext])
 
@@ -101,11 +105,37 @@ export function useAskAgentState({
         return [
           ...current,
           { id: newId(), role: 'user', intent, label: INTENT_QUESTIONS[intent] },
-          { id: newId(), role: 'assistant', answer },
+          { id: newId(), role: 'assistant', kind: 'answer', answer },
         ]
       })
     },
     [currentContext]
+  )
+
+  /** Typed free text that doesn't exactly match a known question (spec §18: never a dead end). */
+  const askFreeText = useCallback(
+    (raw: string) => {
+      const trimmed = raw.trim()
+      if (!trimmed) return
+      const matched = getIntentForQuestion(trimmed)
+      if (matched) {
+        askIntent(matched)
+        return
+      }
+      play('error')
+      setMessages((current) => [
+        ...current,
+        { id: newId(), role: 'user', intent: null, label: trimmed },
+        {
+          id: newId(),
+          role: 'assistant',
+          kind: 'fallback',
+          query: trimmed,
+          followUps: CONTEXT_INTENT_PRIORITY[currentContext.page].slice(0, 3),
+        },
+      ])
+    },
+    [askIntent, currentContext]
   )
 
   // Light the matching tiles / trace path for the newest answer, without
@@ -114,7 +144,7 @@ export function useAskAgentState({
   const lastAnswerId = messages.at(-1)?.id
   useEffect(() => {
     const last = messages.at(-1)
-    if (!last || last.role !== 'assistant') return
+    if (!last || last.role !== 'assistant' || last.kind !== 'answer') return
     const experienceIds = last.answer.references
       .filter((r) => r.type === 'experience')
       .map((r) => r.id)
@@ -178,18 +208,40 @@ export function useAskAgentState({
     router.replace(pathname, { scroll: false })
   }, [pathname, router, searchParams, setAgentOpen])
 
+  // Sticky-bottom auto-scroll (spec-standard chat behavior): follow the thread
+  // as it grows — including the loading beat → trace → streaming-text growth
+  // within a single turn, not just when a new message is pushed — unless the
+  // visitor has scrolled up to read something earlier, in which case leave
+  // them alone until they scroll back down or ask something new.
+  const stickToBottomRef = useRef(true)
+
   useEffect(() => {
     const thread = threadRef.current
-    if (!thread) return
-    // Put the newest question at the top so its answer reads top-down, rather
-    // than scrolling to the bottom and hiding the summary.
-    const items = thread.querySelectorAll('.agent-messages > li')
-    const lastQuestion = [...items].reverse().find((li) => li.querySelector('.agent-user-question'))
-    const target = lastQuestion ?? items[items.length - 1]
-    if (target instanceof HTMLElement) {
-      thread.scrollTo({ top: target.offsetTop - 8, behavior: 'smooth' })
+    const list = thread?.querySelector('.agent-messages')
+    if (!thread || !list) return
+
+    const NEAR_BOTTOM_PX = 48
+    function onScroll() {
+      stickToBottomRef.current =
+        thread!.scrollHeight - thread!.scrollTop - thread!.clientHeight < NEAR_BOTTOM_PX
     }
-  }, [messages])
+    const resizeObserver = new ResizeObserver(() => {
+      if (stickToBottomRef.current) thread!.scrollTop = thread!.scrollHeight
+    })
+
+    thread.addEventListener('scroll', onScroll, { passive: true })
+    resizeObserver.observe(list)
+    return () => {
+      thread.removeEventListener('scroll', onScroll)
+      resizeObserver.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (messages.length === 0) return
+    stickToBottomRef.current = true
+    threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: 'smooth' })
+  }, [messages.length])
 
   return {
     variant,
@@ -206,6 +258,7 @@ export function useAskAgentState({
     setAgentOpen,
     toggleAgent,
     askIntent,
+    askFreeText,
     startNewChat,
     close,
   }

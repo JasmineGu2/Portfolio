@@ -159,7 +159,9 @@ export interface AgentContext {
 
 export type AgentMessage =
   | { id: string; role: 'user'; intent: AgentIntent; label: string }
-  | { id: string; role: 'assistant'; answer: ResolvedAnswer }
+  | { id: string; role: 'user'; intent: null; label: string }
+  | { id: string; role: 'assistant'; kind: 'answer'; answer: ResolvedAnswer }
+  | { id: string; role: 'assistant'; kind: 'fallback'; query: string; followUps: AgentIntent[] }
 
 /** Passed to `resolveIntent` so ranking can favour fresh evidence (spec §17). */
 export interface AgentConversationState {

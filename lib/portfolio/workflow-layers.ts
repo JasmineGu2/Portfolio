@@ -201,6 +201,7 @@ export const SITE_CONTACT = {
   email: 'jgu.hba2027@ivey.ca',
   phone: '647-763-3712',
   linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
+  github: 'https://github.com/JasmineGu2',
   resume: RESUME_HREF,
 }
 

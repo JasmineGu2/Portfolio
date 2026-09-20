@@ -18,12 +18,12 @@
   --arch-dark: #141210;
   --arch-dark-surface: #1c1916;
   --arch-dark-line: color-mix(in srgb, #fff 10%, transparent);
-  --arch-accent: var(--pf-accent);
-  --arch-peach: var(--pf-peach);
-  --arch-gold: var(--pf-gold);
-  --arch-blue: var(--pf-blue);
-  --arch-mint: var(--pf-mint);
-  --arch-lavender: var(--pf-blue);
+  --arch-accent: var(--pf-ink);
+  --arch-peach: var(--pf-muted);
+  --arch-gold: var(--pf-muted);
+  --arch-blue: var(--pf-muted);
+  --arch-mint: var(--pf-muted);
+  --arch-lavender: var(--pf-muted);
 
   background: var(--arch-canvas);
   color: var(--arch-ink);
@@ -372,7 +372,7 @@
   border-radius: 1rem;
   padding: 0.85rem 1.15rem;
   margin-bottom: 1rem;
-  outline: 1.5px solid color-mix(in srgb, var(--pf-accent) 45%, transparent);
+  outline: 1.5px solid color-mix(in srgb, var(--arch-accent) 45%, transparent);
   outline-offset: 3px;
 }
 
@@ -1590,7 +1590,7 @@
   background: var(--pf-surface);
   border-radius: 0.75rem;
   padding: 0.65rem 0.9rem;
-  outline: 1.5px solid color-mix(in srgb, var(--pf-accent) 40%, transparent);
+  outline: 1.5px solid color-mix(in srgb, var(--arch-accent) 40%, transparent);
   outline-offset: 3px;
 }
 
@@ -1602,7 +1602,7 @@
   background: var(--pf-surface);
   border-radius: 0.75rem;
   padding: 0.85rem 1rem;
-  outline: 1.5px solid color-mix(in srgb, var(--pf-accent) 40%, transparent);
+  outline: 1.5px solid color-mix(in srgb, var(--arch-accent) 40%, transparent);
   outline-offset: 3px;
 }
 

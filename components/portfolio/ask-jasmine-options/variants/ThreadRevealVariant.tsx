@@ -105,13 +105,13 @@ export function ThreadRevealVariant() {
               {entry.kind === 'message' &&
                 (entry.message.role === 'user' ? (
                   <UserQuestion label={entry.message.label} />
-                ) : (
+                ) : entry.message.kind === 'answer' ? (
                   <AgentAnswerCard
                     answer={entry.message.answer}
                     onFollowUp={askIntent}
                     onExploreMore={browseMore}
                   />
-                ))}
+                ) : null)}
             </li>
           ))}
         </ul>

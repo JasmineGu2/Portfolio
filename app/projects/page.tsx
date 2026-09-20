@@ -1,4 +1,4 @@
-import { ProjectsPageClient } from '@/components/portfolio/ProjectsPageClient'
+import { redirect } from 'next/navigation'
 
 export const metadata = {
   title: 'Projects · Jasmine Gu',
@@ -6,5 +6,5 @@ export const metadata = {
 }
 
 export default function ProjectsPage() {
-  return <ProjectsPageClient />
+  redirect('/')
 }

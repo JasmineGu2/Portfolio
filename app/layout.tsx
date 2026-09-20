@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
-import { BentoWorkspaceRoot } from '@/components/portfolio/bento-workflows/BentoWorkspaceRoot'
+import { Agentation } from 'agentation'
+import { Toaster } from 'sonner'
+import { SiteShell } from '@/components/portfolio/SiteShell'
 import { PortfolioStateProvider } from '@/components/portfolio/PortfolioStateContext'
-import { LaunchLoader } from '@/components/visuals/FlowersLoader/LaunchLoader'
+import { BentoWorkspaceProvider } from '@/components/portfolio/bento-workflows/BentoWorkspaceContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { VisitTracker } from '@/components/analytics/VisitTracker'
+import { SiteCursor } from '@/components/portfolio/cursor/SiteCursor'
 import { SITE_METADATA } from '@/lib/portfolio/site-copy'
 import './globals.css'
 
@@ -22,9 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased font-body">
-        <LaunchLoader />
         <PortfolioStateProvider>
-          <BentoWorkspaceRoot>{children}</BentoWorkspaceRoot>
+          <BentoWorkspaceProvider>
+            <SiteShell>{children}</SiteShell>
+          </BentoWorkspaceProvider>
         </PortfolioStateProvider>
         {/*
           Three independent layers, because any single one has a blind spot:
@@ -34,6 +38,9 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         <VisitTracker />
+        <SiteCursor />
+        <Toaster position="bottom-right" />
+        {process.env.NODE_ENV === 'development' && <Agentation />}
       </body>
     </html>
   )

@@ -20,6 +20,8 @@ export function WritingPreview({ reference }: { reference: ResolvedReference }) 
       type="button"
       className="agent-writing-preview"
       onClick={() => dispatch({ type: 'openWriting', id: entry.id })}
+      data-cuelume-hover
+      data-cuelume-press
     >
       <span className="agent-ref-card__kind font-analogue">Writing</span>
       <span className="agent-ref-card__title">{entry.title}</span>

@@ -1,32 +1,27 @@
-import Link from 'next/link'
-import { SITE_CONTACT } from '@/lib/portfolio/mindmap-data'
+import { SITE_CONTACT } from '@/lib/portfolio/workflow-layers'
 import { ResumeLink } from '@/components/portfolio/ResumeLink'
+
+const LINK = 'transition-colors hover:text-[var(--pf-ink)] hover:underline underline-offset-4'
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--pf-border)] px-6 md:px-10 py-10 max-w-5xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <p className="font-playful font-semibold text-[var(--pf-ink)]">Jasmine Gu</p>
-        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--pf-muted)]">
-          <a
-            href={`mailto:${SITE_CONTACT.email}`}
-            className="hover:text-[var(--pf-orange)] transition-colors"
-          >
-            {SITE_CONTACT.email}
-          </a>
-          <Link
-            href={SITE_CONTACT.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[var(--pf-orange)] transition-colors"
-          >
-            LinkedIn
-          </Link>
-          <ResumeLink className="hover:text-[var(--pf-orange)] transition-colors">
-            Résumé
-          </ResumeLink>
-        </div>
+    <footer className="mx-auto flex w-[80%] flex-col gap-4 border-t border-[var(--pf-card-border)] py-8 text-sm text-[var(--pf-muted)] sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-1">
+        <p className="font-medium text-[var(--pf-ink)]">Jasmine Gu</p>
+        <p className="text-xs">&copy; {new Date().getFullYear()} Jasmine Gu</p>
       </div>
+      <nav aria-label="Contact" className="flex flex-wrap gap-x-5 gap-y-2">
+        <a href={`mailto:${SITE_CONTACT.email}`} className={LINK}>
+          Email
+        </a>
+        <a href={SITE_CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className={LINK}>
+          LinkedIn
+        </a>
+        <a href={SITE_CONTACT.github} target="_blank" rel="noopener noreferrer" className={LINK}>
+          GitHub
+        </a>
+        <ResumeLink className={LINK}>Résumé</ResumeLink>
+      </nav>
     </footer>
   )
 }

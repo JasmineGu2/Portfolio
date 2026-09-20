@@ -25,6 +25,8 @@ export function FollowUpChips({
             type="button"
             className="agent-followup-chip"
             onClick={() => onPick(intent)}
+            data-cuelume-hover
+            data-cuelume-press
           >
             {INTENT_QUESTIONS[intent]}
           </button>

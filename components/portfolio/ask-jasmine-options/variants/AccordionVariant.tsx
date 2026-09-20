@@ -70,13 +70,13 @@ export function AccordionVariant() {
               <li key={message.id} className="agent-message">
                 {message.role === 'user' ? (
                   <UserQuestion label={message.label} />
-                ) : (
+                ) : message.kind === 'answer' ? (
                   <AgentAnswerCard
                     answer={message.answer}
                     onFollowUp={askIntent}
                     onExploreMore={() => setOpenCategoryId(QUESTION_CATEGORIES[0]?.id ?? null)}
                   />
-                )}
+                ) : null}
               </li>
             ))}
           </ul>

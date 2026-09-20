@@ -1,0 +1,30 @@
+/* "Theirs" variant — colors + fonts from the pasted GSAP styles.md reference,
+   mapped onto the same Material Web token layer as proto-mine.css. Mori isn't
+   licensed here; styles.md itself names Inter Tight as the correct substitute
+   (loaded via next/font/google as --font-inter-tight in app/proto/theirs/page.tsx). */
+
+.proto-theirs {
+  --md-ref-typeface-plain: var(--font-inter-tight), sans-serif;
+  --md-ref-typeface-brand: var(--font-inter-tight), sans-serif;
+
+  --md-sys-color-primary: #0ae448;
+  --md-sys-color-on-primary: #0e100f;
+  --md-sys-color-primary-container: #dfffd1;
+  --md-sys-color-on-primary-container: #0e100f;
+
+  --md-sys-color-secondary: #00bae2;
+  --md-sys-color-on-secondary: #0e100f;
+
+  --md-sys-color-surface: #191919;
+  --md-sys-color-on-surface: #fffce1;
+  --md-sys-color-surface-container: #191919;
+  --md-sys-color-surface-container-high: #232323;
+  --md-sys-color-surface-variant: #191919;
+  --md-sys-color-on-surface-variant: #7c7c6f;
+
+  --md-sys-color-background: #0e100f;
+  --md-sys-color-on-background: #fffce1;
+
+  --md-sys-color-outline: #7c7c6f;
+  --md-sys-color-outline-variant: #42433d;
+}

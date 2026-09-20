@@ -55,6 +55,8 @@ export function ContextActions({ actions }: { actions: AgentAction[] }) {
           type="button"
           className="agent-context-action"
           onClick={() => dispatch(entry.action)}
+          data-cuelume-hover
+          data-cuelume-press
         >
           {entry.label}
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />

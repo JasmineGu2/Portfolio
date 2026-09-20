@@ -1,0 +1,123 @@
+/* Shared structural layout for both /proto variants — no colors or fonts here.
+   Those live in proto-mine.css / proto-theirs.css so the two routes render
+   identical structure and differ only in --md-sys-color-* / --md-ref-typeface-*. */
+
+.proto-page {
+  min-height: 100vh;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: var(--md-ref-typeface-plain);
+}
+
+.proto-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.proto-nav__brand {
+  margin-right: auto;
+}
+
+.proto-nav__links {
+  display: flex;
+  gap: 4px;
+}
+
+.proto-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.proto-nav__back {
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.proto-nav__back:hover {
+  color: var(--md-sys-color-on-background);
+}
+
+.proto-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 96px 24px 64px;
+  text-align: left;
+}
+
+.proto-hero__headline {
+  margin: 0 0 24px;
+}
+
+.proto-hero__subhead {
+  margin: 0 0 40px;
+  max-width: 640px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.proto-hero__actions {
+  display: flex;
+  gap: 16px;
+}
+
+.proto-capabilities {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.proto-card {
+  display: block;
+  padding: 24px;
+}
+
+.proto-card__title {
+  margin: 0 0 8px;
+}
+
+.proto-card__description {
+  margin: 0 0 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.proto-card__chips {
+  flex-wrap: wrap;
+}
+
+.proto-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.proto-footer__links {
+  display: flex;
+  gap: 16px;
+}
+
+.proto-footer a {
+  color: var(--md-sys-color-primary);
+}
+
+@media (max-width: 640px) {
+  .proto-nav {
+    flex-wrap: wrap;
+  }
+
+  .proto-hero {
+    padding: 64px 20px 48px;
+  }
+}

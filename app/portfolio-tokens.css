@@ -2,16 +2,16 @@
 
 :root {
   /* Canvas & surfaces */
-  --pf-canvas: #faf6f0;
-  --pf-canvas-alt: #f3ede4;
-  --pf-canvas-dot: #d4cfc6;
-  --pf-surface: #fffdf9;
-  --pf-surface-alt: #f5f0e8;
-  --pf-cream: #faf6f0;
+  --pf-canvas: #ffffff;
+  --pf-canvas-alt: #f5f5f5;
+  --pf-canvas-dot: #d9d8d5;
+  --pf-surface: #ffffff;
+  --pf-surface-alt: #f5f5f5;
+  --pf-cream: #ffffff;
 
   /* Ink & type */
-  --pf-ink: #1a1410;
-  --pf-muted: #6b635c;
+  --pf-ink: #666666;
+  --pf-muted: #8a8a8a;
   --pf-line: color-mix(in srgb, var(--pf-ink) 10%, transparent);
 
   /* Accent palette, Claude orange */
@@ -23,7 +23,7 @@
   --pf-lavender: #c8b8e8;
   --pf-sky: #b8d4f0;
   --pf-yellow: #f5e6a8;
-  --pf-dot: rgba(200, 80, 60, 0.35);
+  --pf-dot: rgba(102, 102, 102, 0.35);
 
   /* Dark runtime sections */
   --pf-dark: #141210;

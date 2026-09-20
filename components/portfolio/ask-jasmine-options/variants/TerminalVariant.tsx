@@ -121,9 +121,9 @@ export function TerminalVariant() {
                 <p key={message.id} className="ajt-prompt">
                   <span className="ajt-prompt-marker">$</span> {message.label}
                 </p>
-              ) : (
+              ) : message.kind === 'answer' ? (
                 <TerminalAnswer key={message.id} answer={message.answer} onFollowUp={askIntent} />
-              )
+              ) : null
             )}
           </div>
         )}

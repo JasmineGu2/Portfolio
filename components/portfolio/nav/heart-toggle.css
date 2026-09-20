@@ -1,0 +1,142 @@
+/*
+ * Heart toggle, adapted from Uiverse.io "love-heart" by barisdogansutcu.
+ * Changes from the original: selectors are prefixed (its generic `.round` / `.bottom` would collide with the
+ * site CSS); the checkbox is visually hidden rather than `display: none` so it stays keyboard-reachable; the
+ * knob only animates after the first click (the original replays it on every page load); and the heart is
+ * scaled for a nav row (the original is drawn at scale(4), roughly 80px).
+ */
+
+.heart-toggle {
+  --heart-idle: hsl(231deg 28% 86%);
+  --heart-on: hsl(347deg 81% 61%);
+  --heart-on-shade: hsl(347deg 99% 72%);
+  --heart-scale: 1.4;
+
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 30px;
+  height: 26px;
+  margin-right: 4px;
+  border-radius: 6px;
+}
+
+.heart-toggle:has(.heart-toggle__input:focus-visible) {
+  outline: 2px solid var(--pf-ink);
+  outline-offset: 2px;
+}
+
+.heart-toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.heart-toggle__heart,
+.heart-toggle__heart::after {
+  box-sizing: border-box;
+  width: 10px;
+  height: 8px;
+  border: 1px solid var(--heart-idle);
+  border-bottom: 0;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+}
+
+.heart-toggle__heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  cursor: pointer;
+  /*
+   * The heart is built from three parts that are not centred on this 10x8 box. Measured from the box centre,
+   * after scale + rotate(-45deg), the drawn heart's bounding box sits (5.657s, 3.182s) away, so the leading
+   * translate pulls it back onto the wrapper's centre for any --heart-scale.
+   */
+  transform: translate(
+      calc(-5px - 5.657px * var(--heart-scale)),
+      calc(-4px - 3.182px * var(--heart-scale))
+    )
+    rotate(-45deg) scale(var(--heart-scale));
+}
+
+.heart-toggle__heart::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 7px;
+  right: -9px;
+  transform: rotate(90deg);
+}
+
+.heart-toggle__bottom {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  top: 5px;
+  left: -1px;
+  width: 11px;
+  height: 11px;
+  border-bottom: 1px solid var(--heart-idle);
+  border-left: 1px solid var(--heart-idle);
+  border-radius: 0 0 0 5px;
+}
+
+.heart-toggle__round {
+  position: absolute;
+  z-index: 1;
+  bottom: -1px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background: hsl(0deg 0% 100%);
+  box-shadow: rgb(0 0 0 / 24%) 0 0 4px 0;
+}
+
+.heart-toggle__input:checked + .heart-toggle__heart,
+.heart-toggle__input:checked + .heart-toggle__heart::after,
+.heart-toggle__input:checked + .heart-toggle__heart .heart-toggle__bottom {
+  border-color: var(--heart-on);
+  box-shadow: inset 6px -5px 0 2px var(--heart-on-shade);
+}
+
+/* The knob rides the heart's outline from one lobe to the other. `.is-touched` keeps it still until the first click. */
+.heart-toggle__heart.is-touched .heart-toggle__round {
+  animation: heart-toggle-off 0.5s forwards;
+}
+
+.heart-toggle__input:checked + .heart-toggle__heart .heart-toggle__round {
+  animation: heart-toggle-on 0.5s forwards;
+}
+
+@keyframes heart-toggle-on {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 7px);
+  }
+  100% {
+    transform: translate(7px, 7px);
+  }
+}
+
+@keyframes heart-toggle-off {
+  0% {
+    transform: translate(7px, 7px);
+  }
+  50% {
+    transform: translate(0, 7px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

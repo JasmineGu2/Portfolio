@@ -17,6 +17,8 @@ export function ReferenceCard({ reference }: { reference: ResolvedReference }) {
       type="button"
       className={cn('agent-ref-card', reference.seen && 'agent-ref-card--seen')}
       onClick={() => dispatch(referenceToAction(reference))}
+      data-cuelume-hover
+      data-cuelume-press
     >
       <span className="agent-ref-card__kind font-analogue">{reference.kindLabel}</span>
       <span className="agent-ref-card__title">{reference.title}</span>

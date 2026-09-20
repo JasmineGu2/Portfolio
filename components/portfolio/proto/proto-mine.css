@@ -1,0 +1,29 @@
+/* "Mine" variant — the portfolio's own --pf-* palette + fonts, mapped onto
+   Material Web's own token layer (--md-sys-color-*, --md-ref-typeface-*).
+   Structure/shape/elevation stay Material's defaults; only these values change. */
+
+.proto-mine {
+  --md-ref-typeface-plain: var(--pf-font-body, 'Inter', sans-serif);
+  --md-ref-typeface-brand: var(--pf-font-editorial, 'Fraunces', serif);
+
+  --md-sys-color-primary: var(--pf-accent, #d97757);
+  --md-sys-color-on-primary: #fff;
+  --md-sys-color-primary-container: var(--pf-gold-soft, #f5e6a8);
+  --md-sys-color-on-primary-container: var(--pf-ink, #1a1410);
+
+  --md-sys-color-secondary: var(--pf-gold-deep, #c9a020);
+  --md-sys-color-on-secondary: #fff;
+
+  --md-sys-color-surface: var(--pf-surface, #fffdf9);
+  --md-sys-color-on-surface: var(--pf-ink, #1a1410);
+  --md-sys-color-surface-container: var(--pf-surface-alt, #f5f0e8);
+  --md-sys-color-surface-container-high: var(--pf-canvas-alt, #f3ede4);
+  --md-sys-color-surface-variant: var(--pf-canvas-alt, #f3ede4);
+  --md-sys-color-on-surface-variant: var(--pf-muted, #6b635c);
+
+  --md-sys-color-background: var(--pf-canvas, #faf6f0);
+  --md-sys-color-on-background: var(--pf-ink, #1a1410);
+
+  --md-sys-color-outline: var(--pf-muted, #6b635c);
+  --md-sys-color-outline-variant: var(--pf-card-border, #d9d2c8);
+}

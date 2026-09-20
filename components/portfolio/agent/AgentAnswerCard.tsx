@@ -64,7 +64,13 @@ export function AgentAnswerCard({
           <p className="agent-deadend__note">
             That&rsquo;s most of what the portfolio has on this.
           </p>
-          <button type="button" className="agent-deadend__option" onClick={onExploreMore}>
+          <button
+            type="button"
+            className="agent-deadend__option"
+            onClick={onExploreMore}
+            data-cuelume-hover
+            data-cuelume-press
+          >
             Try another question
           </button>
         </div>
