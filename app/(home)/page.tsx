@@ -6,7 +6,6 @@ export default function HomePage() {
       <div id="nav"></div>
       <main id="work">
         <div id="hero"></div>
-        <div id="mapsec"></div>
         <div className="q-sheet">
           <div className="q-w" id="tabs"></div>
         </div>
@@ -27,7 +26,6 @@ export default function HomePage() {
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
             $('#nav').innerHTML = Q.header({ active: 'work', work: '#work', about: '/about', ask: true })
             Q.stage($('#hero'))
-            Q.field($('#hero'), $('#mapsec'))
             Q.workTabs($('#tabs'))
             Q.footer2($('#foot'))
             Q.init()

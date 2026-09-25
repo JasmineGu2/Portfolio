@@ -1,8 +1,6 @@
 import { SITE_CONTACT } from '@/lib/portfolio/workflow-layers'
 import { SIDE_PROJECT_SHOWCASE, WORK_SHOWCASE } from '@/lib/portfolio/showcase-data'
 import { WorkTabs } from '@/components/portfolio/hero/WorkTabs'
-import { AskButton } from '@/components/portfolio/hero/AskButton'
-import { AskPanel } from '@/components/portfolio/hero/AskPanel'
 import { SocialLinks } from '@/components/portfolio/hero/SocialLinks'
 import { ACCENT_ORANGE } from '@/lib/portfolio/brand'
 import {
@@ -52,29 +50,25 @@ export function Hero() {
   return (
     <div className="flex flex-col gap-10 py-1 sm:gap-12">
       <div className="grid grid-cols-1 gap-7 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
-        <div className="flex flex-col gap-4 sm:gap-6">
+        <div className="flex flex-col gap-4 sm:gap-6 p-8 sm:p-10 rounded-xl" style={{ backgroundColor: '#ffe98a', boxShadow: '0 10px 28px rgba(0,0,0,0.1)' }}>
           <div>
-            <p className="text-lg sm:text-xl mb-2" style={{ color: INK, opacity: 0.7 }}>
-              Hello, I'm
-            </p>
             <h1
-              className="font-mono text-[48px] font-bold lowercase leading-none sm:text-[64px]"
-              style={{ color: ACCENT }}
+              className="font-mono text-[56px] font-bold lowercase leading-tight sm:text-[72px] mb-4"
+              style={{ color: '#2b2b2b' }}
             >
               jasmine gu
             </h1>
           </div>
-          <p className="max-w-[40rem] text-2xl sm:text-3xl leading-relaxed font-light" style={{ color: INK }}>
+          <p className="max-w-[40rem] text-2xl sm:text-3xl leading-relaxed font-semibold" style={{ color: '#2b2b2b' }}>
             {HERO_HEADLINE}
           </p>
-          <p className="text-base sm:text-lg leading-7" style={{ color: INK, opacity: 0.7 }}>
-            Currently 5th year of <span className="font-semibold">CS honors and Business @ Western University</span>
+          <p className="text-sm sm:text-base leading-7 font-medium" style={{ color: '#2b2b2b', opacity: 0.8 }}>
+            Currently 5th year of <span className="font-bold">CS honors and Business @ Western University</span>
             <br />
-            Previously SWE @ <span className="font-semibold">Autodesk, Tesla, and Intuit</span>; Platform PM @ <span className="font-semibold">Autodesk</span>
+            Previously SWE @ <span className="font-bold">Autodesk, Tesla, and Intuit</span>; Platform PM @ <span className="font-bold">Autodesk</span>
           </p>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <SocialLinks links={SOCIALS} />
-            <AskButton />
           </div>
 
           <div
@@ -104,9 +98,6 @@ export function Hero() {
       <div className="pf-work-bleed">
         <WorkTabs work={WORK_SHOWCASE} side={SIDE_PROJECT_SHOWCASE} />
       </div>
-
-      {/* "Ask me anything": the button above opens this docked panel on the right */}
-      <AskPanel />
     </div>
   )
 }
