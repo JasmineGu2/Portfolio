@@ -33,7 +33,7 @@ export function DeskSection() {
   useDrag(blackjackRef, {
     onDrag: (x, y) => setBlackjackPos({ x, y }),
     constrainX: [0, 500],
-    constraintY: [100, 500],
+    constrainY: [100, 500],
   })
 
   useDrag(polaroidRef, {

@@ -65,5 +65,7 @@ Product Launches I'm invested in
 - AI X Hardware -> Gemini's
 - AI Labs x Community to promote tribal knowledge sharing
 
-My Favorite Tools
-- To allow permissions -> notification to press on it, and terminals automatically 
+My Favorite Tools I've created
+- To allow permissions -> notification to press on it, and terminals automatically color outline
+- Save my transcripts and projects all on a Notion
+- Telegram Bot that sets up 

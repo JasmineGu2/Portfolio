@@ -73,7 +73,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   const play = (cue: string) => {
     if (uiRef.current && isEnabled) {
       try {
-        uiRef.current.play(cue)
+        uiRef.current.play(cue as any)
       } catch (err) {
         console.warn(`Failed to play cue "${cue}":`, err)
       }
@@ -83,7 +83,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   const playLoop = async (cue: string) => {
     if (uiRef.current && isEnabled) {
       try {
-        return await uiRef.current.play(cue)
+        return await uiRef.current.play(cue as any)
       } catch (err) {
         console.warn(`Failed to play loop "${cue}":`, err)
         return null
