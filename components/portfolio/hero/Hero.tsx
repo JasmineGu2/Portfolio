@@ -44,48 +44,51 @@ function ArrowList({ lead, note, items }: { lead: string; note?: string; items: 
 
 /**
  * Home: who I am and what's next on top (two columns), then the work as big tiles under plain tabs.
- * The tile grid is 80% of the screen wide. "Ask me anything" is a button in the hero that opens a side panel.
+ * The tile grid is 80% of the screen wide.
  */
 export function Hero() {
   return (
     <div className="flex flex-col gap-10 py-1 sm:gap-12">
       <div className="grid grid-cols-1 gap-7 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
-        <div className="flex flex-col gap-4 sm:gap-6 p-8 sm:p-10 rounded-xl" style={{ backgroundColor: '#ffe98a', boxShadow: '0 10px 28px rgba(0,0,0,0.1)' }}>
+        <div className="flex flex-col gap-4 sm:gap-6">
           <div>
+            <p className="text-lg sm:text-xl mb-2" style={{ color: INK, opacity: 0.7 }}>
+              Hello, I'm
+            </p>
             <h1
-              className="font-mono text-[56px] font-bold lowercase leading-tight sm:text-[72px] mb-4"
-              style={{ color: '#2b2b2b' }}
+              className="font-mono text-[48px] font-bold lowercase leading-none sm:text-[64px]"
+              style={{ color: ACCENT }}
             >
               jasmine gu
             </h1>
           </div>
-          <p className="max-w-[40rem] text-2xl sm:text-3xl leading-relaxed font-semibold" style={{ color: '#2b2b2b' }}>
+          <p className="max-w-[40rem] text-2xl sm:text-3xl leading-relaxed font-light" style={{ color: INK }}>
             {HERO_HEADLINE}
           </p>
-          <p className="text-sm sm:text-base leading-7 font-medium" style={{ color: '#2b2b2b', opacity: 0.8 }}>
-            Currently 5th year of <span className="font-bold">CS honors and Business @ Western University</span>
+          <p className="text-base sm:text-lg leading-7" style={{ color: INK, opacity: 0.7 }}>
+            Currently 5th year of <span className="font-semibold">CS honors and Business @ Western University</span>
             <br />
-            Previously SWE @ <span className="font-bold">Autodesk, Tesla, and Intuit</span>; Platform PM @ <span className="font-bold">Autodesk</span>
+            Previously SWE @ <span className="font-semibold">Autodesk, Tesla, and Intuit</span>; Platform PM @ <span className="font-semibold">Autodesk</span>
           </p>
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <SocialLinks links={SOCIALS} />
           </div>
 
           <div
-            className="mt-3 max-w-md border-t border-dotted pt-3"
-            style={{ borderColor: 'rgba(40,40,40,0.5)', color: '#2b2b2b' }}
+            className="mt-1 max-w-md border-t border-dotted pt-3"
+            style={{ borderColor: 'rgba(40,40,40,0.35)', color: INK }}
           >
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ opacity: 0.85 }}>
+            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ opacity: 0.75 }}>
               {WHATS_NEXT.title}
             </p>
             <div className="flex items-baseline gap-3 text-[15px] leading-6">
               <span
                 className="shrink-0 rounded-full border px-2 py-0.5 font-mono text-xs font-bold uppercase"
-                style={{ borderColor: '#ed3801', color: '#ed3801' }}
+                style={{ borderColor: ACCENT, color: 'var(--pf-brand-orange-ink)' }}
               >
                 {WHATS_NEXT.when}
               </span>
-              <span style={{ color: '#2b2b2b' }}>{WHATS_NEXT.text}</span>
+              <span>{WHATS_NEXT.text}</span>
             </div>
           </div>
         </div>
