@@ -72,20 +72,20 @@ export function Hero() {
           </div>
 
           <div
-            className="mt-1 max-w-md border-t border-dotted pt-3"
-            style={{ borderColor: 'rgba(40,40,40,0.35)', color: INK }}
+            className="mt-3 max-w-md border-t border-dotted pt-3"
+            style={{ borderColor: 'rgba(40,40,40,0.5)', color: '#2b2b2b' }}
           >
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ opacity: 0.75 }}>
+            <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ opacity: 0.85 }}>
               {WHATS_NEXT.title}
             </p>
             <div className="flex items-baseline gap-3 text-[15px] leading-6">
               <span
                 className="shrink-0 rounded-full border px-2 py-0.5 font-mono text-xs font-bold uppercase"
-                style={{ borderColor: ACCENT, color: 'var(--pf-brand-orange-ink)' }}
+                style={{ borderColor: '#ed3801', color: '#ed3801' }}
               >
                 {WHATS_NEXT.when}
               </span>
-              <span>{WHATS_NEXT.text}</span>
+              <span style={{ color: '#2b2b2b' }}>{WHATS_NEXT.text}</span>
             </div>
           </div>
         </div>
