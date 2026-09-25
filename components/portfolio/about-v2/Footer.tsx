@@ -1,13 +1,8 @@
 'use client'
 
-import { RoadMap } from './RoadMap'
-
 export function Footer() {
   return (
     <footer className="about-v2-footer">
-      <div className="footer-roadmap">
-        <RoadMap />
-      </div>
       <div className="footer-content">
         <p>&copy; 2024 Jasmine Gu. All rights reserved.</p>
         <nav className="footer-nav">
@@ -18,12 +13,6 @@ export function Footer() {
         </nav>
       </div>
       <style jsx>{`
-        .footer-roadmap {
-          height: 120px;
-          margin-bottom: 20px;
-          overflow: hidden;
-        }
-
         /* Hide any magic 8 ball or spinner elements */
         [class*='magic'],
         [class*='spinner'],
