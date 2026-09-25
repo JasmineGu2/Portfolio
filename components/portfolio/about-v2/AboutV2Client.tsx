@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { RoadMap } from './RoadMap'
 import { AboveTheFoldStage } from './AboveTheFoldStage'
 import { DeskSection } from './DeskSection'
 import { AskPanel } from './AskPanel'
@@ -30,11 +29,6 @@ export function AboutV2Client() {
 
   return (
     <div className="about-v2">
-      {/* Background road map */}
-      <div className="about-v2-background">
-        <RoadMap />
-      </div>
-
       {/* Main content */}
       <main className="about-v2-main">
         {/* Hero section with draggable cards */}
