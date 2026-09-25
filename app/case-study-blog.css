@@ -75,6 +75,7 @@ html:has(.case-study) {
 /* Main article */
 .case-study__article {
   min-width: 0;
+  text-align: center;
 }
 
 .case-study__back {
@@ -148,7 +149,7 @@ html:has(.case-study) {
 }
 
 .case-study__body {
-  margin: 0 0 0.75rem;
+  margin: 0 auto 0.75rem;
   font-size: 16px;
   line-height: 1.7;
   color: var(--cs-ink);
@@ -160,7 +161,7 @@ html:has(.case-study) {
 }
 
 .case-study__list {
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   padding-left: 1.5rem;
   font-size: 16px;
   line-height: 1.7;
@@ -179,7 +180,7 @@ html:has(.case-study) {
 
 .case-study__emphasis {
   display: block;
-  margin: 2rem 0;
+  margin: 2rem auto;
   padding: 1.5rem;
   border-left: 3px solid var(--cs-ink);
   background: rgba(40, 40, 40, 0.03);
