@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { AskJasmineOptionsPageClient } from '@/components/portfolio/ask-jasmine-options/AskJasmineOptionsPageClient'
 import './ask-jasmine-options.css'
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default function AskJasmineOptionsPage() {
-  return <AskJasmineOptionsPageClient />
+  return (
+    <Suspense>
+      <AskJasmineOptionsPageClient />
+    </Suspense>
+  )
 }

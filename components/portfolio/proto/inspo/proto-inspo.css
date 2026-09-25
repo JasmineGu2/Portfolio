@@ -1,0 +1,438 @@
+/*
+ * /proto/inspo: the homepage as a bento of OS-style windows.
+ *
+ * Composition, spacing and radius scales are adapted from references found through the Inspo MCP:
+ * 109ichiki.com (window chrome: title bar + filename + close, 1px border, mono type, faint wireframe grid),
+ * Counter Forms (asymmetric tiles with small-caps captions), The Creative Independent (colour-block tiles,
+ * pill filters) and Milanote (the board framed as an app window). No third-party assets, fonts or code are reused.
+ */
+
+.proto-inspo {
+  --inspo-canvas: var(--pf-canvas, #fff);
+  --inspo-panel: #fff;
+  --inspo-bar: var(--pf-canvas-alt, #f5f5f5);
+  --inspo-ink: #282828;
+  --inspo-muted: rgb(40 40 40 / 0.62);
+  --inspo-line: #282828;
+  --inspo-grid-line: rgb(40 40 40 / 0.06);
+  --inspo-accent: #ed3801; /* set inline from ACCENT_ORANGE in InspoHomepage */
+
+  /* Measured on 109ichiki via Inspo: spacing 20 / 38, radius 0 / 4 / 50, base motion .15s ease-out. */
+  --inspo-gap: 20px;
+  --inspo-gap-lg: 38px;
+  --inspo-cell: 39px;
+  --inspo-radius: 4px;
+  --inspo-pill: 50px;
+  --inspo-fast: 0.15s;
+  --inspo-ease: ease-out;
+
+  color: var(--inspo-ink);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.inspo-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin: 0 0 var(--inspo-gap);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--inspo-muted);
+}
+
+.inspo-crumb a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inspo-crumb a:hover {
+  color: var(--inspo-accent);
+}
+
+/* ── Desk: the board every window sits on ── */
+
+.inspo-desk {
+  display: flex;
+  flex-direction: column;
+  gap: var(--inspo-gap-lg);
+  padding: var(--inspo-gap);
+  border: 1px solid var(--inspo-line);
+  border-radius: var(--inspo-radius);
+  background-color: var(--inspo-canvas);
+  background-image:
+    linear-gradient(to right, var(--inspo-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--inspo-grid-line) 1px, transparent 1px);
+  background-size: var(--inspo-cell) var(--inspo-cell);
+}
+
+.inspo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--inspo-gap);
+}
+
+@media (min-width: 768px) {
+  .inspo-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .inspo-win[data-placed] {
+    grid-column: var(--col);
+    grid-row: var(--row);
+  }
+}
+
+/* ── Filter pills ── */
+
+.inspo-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.inspo-filters__label {
+  margin-right: 8px;
+  font-size: 12px;
+  color: var(--inspo-muted);
+}
+
+.inspo-pill {
+  border: 1px solid var(--inspo-line);
+  border-radius: var(--inspo-pill);
+  background: var(--inspo-panel);
+  color: var(--inspo-ink);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 14px;
+  transition:
+    background var(--inspo-fast) var(--inspo-ease),
+    color var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-pill:hover {
+  background: var(--inspo-bar);
+}
+
+.inspo-pill[aria-pressed='true'] {
+  background: var(--inspo-ink);
+  color: var(--inspo-canvas);
+}
+
+.inspo-pill:focus-visible,
+.inspo-win__close:focus-visible {
+  outline: 2px solid var(--inspo-accent);
+  outline-offset: 2px;
+}
+
+/* ── Window ── */
+
+.inspo-win {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--inspo-line);
+  border-radius: var(--inspo-radius);
+  background: var(--inspo-panel);
+  transition: translate var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-win:hover {
+  translate: 0 -2px;
+}
+
+.inspo-win[data-collapsed] {
+  align-self: start;
+}
+
+/* A cream veil rather than opacity: motion owns the element's inline opacity for the entrance. */
+.inspo-win::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--inspo-canvas);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-win[data-dimmed] {
+  pointer-events: none;
+}
+
+.inspo-win[data-dimmed]::after {
+  opacity: 0.75;
+}
+
+.inspo-win__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 28px;
+  flex: none;
+  padding: 0 4px 0 10px;
+  border-bottom: 1px solid var(--inspo-line);
+  background: var(--inspo-bar);
+  font-size: 12px;
+  line-height: 1;
+  user-select: none;
+}
+
+.inspo-win[data-draggable] .inspo-win__bar {
+  touch-action: none;
+}
+
+.inspo-win__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inspo-win__close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--inspo-line);
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  transition:
+    background var(--inspo-fast) var(--inspo-ease),
+    color var(--inspo-fast) var(--inspo-ease),
+    border-color var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-win__close:hover {
+  border-color: var(--inspo-accent);
+  background: var(--inspo-accent);
+  color: #fff;
+}
+
+/* Collapse: animate the body's grid row between 1fr and 0fr. `visibility` then removes it from tab order. */
+.inspo-win__fold {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-win[data-collapsed] .inspo-win__fold {
+  flex: 0 0 auto;
+  grid-template-rows: 0fr;
+}
+
+.inspo-win__pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+
+.inspo-win[data-collapsed] .inspo-win__pane {
+  visibility: hidden;
+  transition: visibility 0s var(--inspo-fast);
+}
+
+/* ── Work window media + caption ── */
+
+.inspo-win__media {
+  position: relative;
+  display: grid;
+  flex: 1 1 auto;
+  place-items: center;
+  overflow: hidden;
+  aspect-ratio: var(--win-aspect, 4 / 3);
+}
+
+.inspo-win__fill {
+  position: absolute;
+  inset: 0;
+}
+
+.inspo-win__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inspo-win:hover .inspo-win__video {
+  transform: scale(1.04);
+}
+
+.inspo-win__logo {
+  max-width: 60%;
+  max-height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.inspo-win__caption {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--inspo-line);
+}
+
+.inspo-cat {
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--inspo-muted);
+}
+
+.inspo-win__name {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.inspo-win__sub {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--inspo-muted);
+}
+
+.inspo-win__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inspo-win__tags li {
+  padding: 1px 8px;
+  border: 1px solid var(--inspo-line);
+  border-radius: var(--inspo-pill);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ── Text windows (profile / notes / previously) ── */
+
+.inspo-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 20px;
+}
+
+.inspo-prose p,
+.inspo-prose h1,
+.inspo-prose h2 {
+  margin: 0;
+}
+
+.inspo-wordmark {
+  color: var(--inspo-accent);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.inspo-headline {
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.4;
+}
+
+.inspo-meta {
+  font-size: 12px;
+  color: var(--inspo-muted);
+}
+
+.inspo-meta b,
+.inspo-strong {
+  color: var(--inspo-ink);
+  font-weight: 500;
+}
+
+.inspo-socials {
+  display: flex;
+  gap: 14px;
+}
+
+.inspo-socials a {
+  color: var(--inspo-muted);
+  transition: color var(--inspo-fast) var(--inspo-ease);
+}
+
+.inspo-socials a:hover {
+  color: var(--inspo-accent);
+}
+
+.inspo-h {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--inspo-muted);
+}
+
+.inspo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inspo-list--cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 20px;
+}
+
+.inspo-list li {
+  display: flex;
+  gap: 8px;
+}
+
+.inspo-list a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inspo-list a:hover {
+  color: var(--inspo-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inspo-win,
+  .inspo-win::after,
+  .inspo-win__fold,
+  .inspo-win__video,
+  .inspo-win__close,
+  .inspo-pill {
+    transition: none;
+  }
+
+  .inspo-win:hover {
+    translate: none;
+  }
+
+  .inspo-win:hover .inspo-win__video {
+    transform: none;
+  }
+}

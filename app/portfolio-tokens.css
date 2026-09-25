@@ -11,8 +11,13 @@
 
   /* Ink & type */
   --pf-ink: #666666;
-  --pf-muted: #8a8a8a;
+  --pf-muted: #6b6b6b; /* 5.3:1 on white; the old #8a8a8a was 3.5:1 */
   --pf-line: color-mix(in srgb, var(--pf-ink) 10%, transparent);
+
+  /* Brand orange: the hero name, the cursor and the buttons. Mirrors ACCENT_ORANGE in lib/portfolio/brand.ts.
+     The -ink tone is for small text, where pure #ED3801 is under 4.5:1 on white. */
+  --pf-brand-orange: #ed3801;
+  --pf-brand-orange-ink: color-mix(in srgb, #ed3801 82%, #000);
 
   /* Accent palette, Claude orange */
   --pf-accent: #d97757;

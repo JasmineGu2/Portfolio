@@ -1,0 +1,155 @@
+/*
+ * The one button look for the site: Inter 12px, full pill, hairline border. It is quiet at rest
+ * and turns orange only when active, hovered or focused.
+ *
+ * Every real button or link-button (nav, tabs, footer links, back links, chips) uses `.pf-btn`.
+ * Cards, tiles and non-interactive tags do not.
+ *
+ * Small text uses --pf-brand-orange-ink: pure #ED3801 on white is about 4.1:1, under the 4.5:1 that
+ * 12px text needs. Borders, rings and fills keep the pure brand orange.
+ */
+
+.pf-btn,
+.agent-question-chip,
+.agent-followup-chip,
+.agent-ask-more,
+.agent-deadend__option,
+.agent-streaming__citation,
+.agent-context-action,
+.chat-hero__ask-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--pf-ink);
+  font-family: var(--pf-font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.pf-btn:hover,
+.agent-question-chip:hover,
+.agent-followup-chip:hover,
+.agent-ask-more:hover,
+.agent-deadend__option:hover,
+.agent-streaming__citation:hover,
+.agent-context-action:hover,
+.chat-hero__ask-close:hover {
+  border-color: var(--pf-brand-orange);
+  background: var(--pf-canvas-alt);
+  color: var(--pf-brand-orange-ink);
+}
+
+.pf-btn:focus-visible,
+.agent-question-chip:focus-visible,
+.agent-followup-chip:focus-visible,
+.agent-ask-more:focus-visible,
+.agent-deadend__option:focus-visible,
+.agent-streaming__citation:focus-visible,
+.agent-context-action:focus-visible,
+.chat-hero__ask-close:focus-visible {
+  outline: 2px solid var(--pf-brand-orange);
+  outline-offset: 2px;
+}
+
+/* Selected tab, current page, pressed toggle. */
+.pf-btn[aria-current='page'],
+.pf-btn[aria-selected='true'],
+.pf-btn[aria-pressed='true'],
+.pf-btn[data-state='active'],
+.pf-btn.is-active {
+  border-color: var(--pf-brand-orange);
+  background: color-mix(in srgb, var(--pf-brand-orange) 8%, transparent);
+  color: var(--pf-brand-orange-ink);
+}
+
+.pf-btn:disabled,
+.agent-question-chip:disabled,
+.agent-followup-chip:disabled,
+.agent-ask-more:disabled,
+.agent-deadend__option:disabled,
+.agent-streaming__citation:disabled,
+.agent-context-action:disabled,
+.chat-hero__ask-close:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Icon-only (social links, close buttons): a circle at the same 26px height as a text pill. */
+.pf-btn--icon {
+  width: 1.625rem;
+  height: 1.625rem;
+  padding: 0;
+}
+
+/* The one filled button (Ask Jasmine send). */
+.pf-btn--solid,
+.pf-btn--solid:hover {
+  border-color: var(--pf-brand-orange);
+  background: var(--pf-brand-orange);
+  color: #ffffff;
+}
+
+.pf-btn--solid:hover {
+  background: color-mix(in srgb, var(--pf-brand-orange) 88%, #000);
+}
+
+/*
+ * Ask Jasmine buttons: layout only. This file loads after portfolio-theme.css, so these rules have to live
+ * here to override the pill's `white-space: nowrap` and centering.
+ */
+
+.agent-ask-more {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.agent-question-chip {
+  white-space: normal;
+  text-align: left;
+}
+
+.agent-question-chip--category {
+  font-weight: 600;
+}
+
+.agent-followup-chip {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+}
+
+.agent-context-action {
+  gap: 0.3rem;
+}
+
+.agent-deadend__option {
+  align-self: flex-start;
+}
+
+.agent-streaming__citation {
+  margin-top: 0.5rem;
+}
+
+.chat-hero__ask-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 1;
+  width: 1.625rem;
+  height: 1.625rem;
+  padding: 0;
+}

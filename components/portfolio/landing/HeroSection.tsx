@@ -12,11 +12,11 @@ export function HeroSection() {
             <FlowerIcon className="landing-hero__flower" />
           </span>
           ne Gu is a{' '}
-          <em className="landing-hero__em">product manager and engineer</em> who translates
-          between users, engineering, and operations.
+          <em className="landing-hero__em">product engineer</em> who codes with the end users,
+          the business context, and product strategy in mind.
         </p>
         <p className="landing-hero__sub">
-          Product manager and engineer building AI-powered products, from consumer experiences at
+          Product engineer building AI-powered products, from consumer experiences at
           TurboTax to enterprise data platforms at Autodesk.
         </p>
       </div>

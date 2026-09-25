@@ -13,36 +13,14 @@
   --adsk-border: var(--pf-border, color-mix(in srgb, var(--pf-ink) 10%, transparent));
   --adsk-prose: 41rem;
   --adsk-wide: 56rem;
-  --adsk-sidebar: 14rem;
+  --adsk-sidebar: 12rem;
   --adsk-beat: 2rem;
   padding: 0.75rem 0.85rem 4rem;
   color: var(--adsk-muted);
   background: var(--adsk-cream);
 }
 
-.bw-main:has(.adsk-cs) {
-  --bw-main-pad-x: 0.65rem;
-}
-
-/*
- * The shell intends .bw-main to be the scroll container — it sets `overflow-y: auto` —
- * but the height chain from html down is only ever `min-height`, so .bw-main's
- * `height: 100%` resolves to auto, it never overflows, and the window scrolls the whole
- * page instead. A `position: sticky` element inside a scroll container that never
- * scrolls never sticks, which is why the sidebar scrolled away with the article.
- * Pinning this page's shell to the viewport hands scrolling back to .bw-main.
- */
-html:has(.adsk-cs),
-body:has(.adsk-cs) {
-  height: 100%;
-  overflow: hidden;
-}
-
-.bw-shell:has(.adsk-cs) {
-  height: 100dvh;
-}
-
-.bw-main:has(.adsk-cs) {
+html:has(.adsk-cs) {
   scroll-behavior: smooth;
 }
 
@@ -67,8 +45,6 @@ body:has(.adsk-cs) {
 
 .adsk-cs__sidebar-tile .adsk-cs__back {
   margin-bottom: 1rem;
-  color: var(--adsk-muted);
-  font-size: 0.875rem;
 }
 
 .adsk-cs__progress {
@@ -91,6 +67,7 @@ body:has(.adsk-cs) {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
+  margin-bottom: 1.5rem;
   padding-bottom: 0.25rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -98,26 +75,6 @@ body:has(.adsk-cs) {
 
 .adsk-cs__mobile-nav::-webkit-scrollbar {
   display: none;
-}
-
-.adsk-cs__mobile-link {
-  flex-shrink: 0;
-  white-space: nowrap;
-  padding: 0.45rem 0.75rem;
-  border: 1px solid var(--adsk-border);
-  border-radius: 999px;
-  background: var(--adsk-surface);
-  color: var(--adsk-muted);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.adsk-cs__mobile-link--active {
-  border-color: color-mix(in srgb, var(--adsk-accent) 35%, var(--adsk-border));
-  color: var(--adsk-ink);
-  background: color-mix(in srgb, var(--adsk-peach) 25%, var(--adsk-surface));
 }
 
 .adsk-cs__nav {
@@ -144,14 +101,14 @@ body:has(.adsk-cs) {
 }
 
 .adsk-cs__nav-link:hover {
-  color: var(--adsk-ink);
+  color: var(--pf-brand-orange-ink);
 }
 
 .adsk-cs__nav-link--active {
-  background: color-mix(in srgb, var(--adsk-peach) 20%, var(--adsk-surface));
-  border-left-color: var(--adsk-accent);
-  color: var(--adsk-ink);
-  font-weight: 700;
+  background: color-mix(in srgb, var(--pf-brand-orange) 6%, var(--adsk-surface));
+  border-left-color: var(--pf-brand-orange);
+  color: var(--pf-brand-orange-ink);
+  font-weight: 600;
 }
 
 .adsk-cs__main {
@@ -159,27 +116,25 @@ body:has(.adsk-cs) {
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* One centred reading column. Without this the content hugged the left edge of
-     its grid track and left a dead gutter on the right at desktop widths. */
   width: 100%;
   max-width: var(--adsk-wide);
   margin-inline: auto;
 }
 
-/* Prose-width blocks share the same left edge as the wider blocks (meta grid,
-   card grids, role table) instead of floating centred inside them — a single
-   left rail to scan down, with only the wide blocks extending further right. */
-.adsk-cs__kicker,
-.adsk-cs__label,
-.adsk-cs__hero-title,
-.adsk-cs__headline,
-.adsk-cs__body,
-.adsk-cs__bullets,
-.adsk-cs__impact-list,
-.adsk-cs__subsections,
-.adsk-cs__key-insight,
-.adsk-cs__outcomes-panel {
-  margin-inline: 0;
+/*
+ * Center every width-limited block in the column: prose blocks sit in the middle at the reading width and the
+ * wide blocks (meta grid, card grids, tables) fill the whole column, so they share one center line.
+ */
+.adsk-cs__main :is(.adsk-cs__hero, .adsk-cs__section) > * {
+  margin-inline: auto;
+}
+
+.adsk-cs__back {
+  align-self: flex-start;
+}
+
+.adsk-cs__main > .adsk-cs__back {
+  margin-bottom: 1rem;
 }
 
 /* Section labels have no measure of their own, so they need one to line up with
@@ -293,7 +248,6 @@ body:has(.adsk-cs) {
 
 .adsk-cs__section > .adsk-cs__subhead {
   max-width: var(--adsk-prose);
-  margin-inline: 0;
 }
 
 .adsk-cs__body {
@@ -653,20 +607,19 @@ body:has(.adsk-cs) {
 }
 
 .adsk-cs__nav-link:focus-visible,
-.adsk-cs__mobile-link:focus-visible,
-.adsk-cs__back:focus-visible,
 .adsk-cs__inline-link:focus-visible {
   outline: 2px solid var(--adsk-accent);
   outline-offset: 3px;
 }
 
 @media (min-width: 768px) {
-  .bw-main:has(.adsk-cs) {
-    --bw-main-pad-x: 0.85rem;
-  }
-
   .adsk-cs {
     padding: 1rem 1.15rem 4rem;
+  }
+
+  .adsk-cs__mobile-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
 
   .adsk-cs__meta-grid {
@@ -700,40 +653,54 @@ body:has(.adsk-cs) {
 }
 
 @media (min-width: 1024px) {
-  .bw-main:has(.adsk-cs) {
-    --bw-main-pad-x: 1rem;
-  }
-
   .adsk-cs {
     padding: 1rem 1.35rem 4.5rem;
   }
+}
 
+/*
+ * The section nav (the Astryx Outline) floats in the left margin so the article stays centered on the page. It
+ * needs a sidebar's width on both sides of the column, so it shows from 1360px up (12rem wide, 14rem from
+ * 1880px); below that the pill nav above the article does the job.
+ */
+@media (min-width: 1360px) {
   .adsk-cs__layout {
-    grid-template-columns: var(--adsk-sidebar) minmax(0, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--adsk-wide)) minmax(0, 1fr);
+    gap: 0;
     align-items: start;
-    /* Centre the sidebar and column as one unit rather than letting the grid
-       stretch edge to edge with all the slack on the right. */
-    max-width: calc(var(--adsk-sidebar) + 1.5rem + var(--adsk-wide));
-    margin-inline: auto;
   }
 
   .adsk-cs__sidebar {
     display: block;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    width: var(--adsk-sidebar);
+    margin-right: 1rem;
     position: sticky;
-    top: 7rem;
-    /* dvh, not vh — the scrollport is now the shell's own height. */
-    max-height: calc(100dvh - 8.5rem);
+    top: 2rem;
+    max-height: calc(100dvh - 4rem);
     overflow-y: auto;
   }
 
-  .adsk-cs__mobile-nav {
-    display: none;
+  .adsk-cs__main {
+    grid-column: 2;
+    grid-row: 1;
   }
 
-  .adsk-cs__section,
-  .adsk-cs__hero {
-    scroll-margin-top: 7rem;
+  .adsk-cs__mobile-nav,
+  .adsk-cs__back--main {
+    display: none;
+  }
+}
+
+@media (min-width: 1880px) {
+  .adsk-cs {
+    --adsk-sidebar: 14rem;
+  }
+
+  .adsk-cs__sidebar {
+    margin-right: 1.5rem;
   }
 }
 

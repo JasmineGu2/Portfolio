@@ -23,12 +23,12 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
     summary:
       'Three engineering internships, each a layer down from the last. At Intuit she built onboarding UI inside TurboTax’s existing component system. At Tesla she owned the video data infrastructure behind factory-camera ML (API architecture, lazy loading, secure playback) and shipped production React components. At Autodesk she went full-stack on Fusion’s library platform: features across microservices in Java and C++, DynamoDB- and Redis-backed workflows, and contract testing that other teams adopted.',
     references: [
-      { type: 'experience', id: 'tesla', reason: 'She owned the video pipeline end to end here, not just the screen on top of it.' },
+      { type: 'experience', id: 'tesla', reason: 'She owned the whole video pipeline here, down to the infrastructure under the screen.' },
       { type: 'experience', id: 'autodesk-eng', reason: 'Her deepest systems work: distributed services, caching, and cross-team API contracts.' },
       { type: 'experience', id: 'intuit', reason: 'Engineering as integration: fitting new UI into a component library and APIs other teams owned.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'The Journey page lays out how each engineering role added a wider lens.' },
+      { type: 'architecture', id: 'architecture', reason: 'Her side projects sit on The Journey, if you want to see what she builds on her own.' },
     ],
     followUps: ['ai_experience', 'technical_pm', 'engineering_teams'],
   },
@@ -45,7 +45,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       { type: 'experience', id: 'tesla', reason: 'Worked across design, backend, and ML in four factory time zones.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'How platform work taught her to think in dependencies and teams, not features.' },
+      { type: 'architecture', id: 'architecture', reason: 'The Journey has photos from the teams and communities she has been part of.' },
     ],
     followUps: ['collaborators', 'engineering_type', 'technical_pm'],
   },
@@ -55,14 +55,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   ai_experience: {
     intent: 'ai_experience',
     summary:
-      'Yes, on both sides of it. At Autodesk she owns the roadmap for AI-assisted data work (schema assistance, query discovery, SQL autocomplete, MCP integrations), which cut task time about 30%, and she built a benchmarking framework across 20+ workflows to hold those features to accuracy and trust thresholds before launch. She also wired Claude, Cursor, Obsidian, and Jira MCP into one setup that cut her own process overhead roughly 35%. Outside work, TLDW and BrewMates were fast hackathon builds with a language model at the core.',
+      'Yes, on both sides of it. At Autodesk she owned the roadmap for AI-assisted data work (schema assistance, query discovery, SQL autocomplete, MCP integrations), which cut task time about 30%, and she built a benchmarking framework across 20+ workflows to hold those features to accuracy and trust thresholds before launch. She also wired Claude, Cursor, Obsidian, and Jira MCP into one setup that cut her own process overhead roughly 35%. Outside work, TLDW and BrewMates were fast hackathon builds with a language model at the core.',
     references: [
-      { type: 'experience', id: 'autodesk', reason: 'Where she owns AI-assisted query experiences for a governed data platform.' },
+      { type: 'experience', id: 'autodesk', reason: 'Where she owned AI-assisted query experiences for a governed data platform.' },
       { type: 'project', id: 'tldw', reason: 'Summarized and classified YouTube videos, an LLM build shipped end to end.' },
       { type: 'project', id: 'brewmates', reason: 'Networking help for students, built fast around a language model.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'The runtime section shows how she actually uses these tools day to day.' },
+      { type: 'architecture', id: 'architecture', reason: 'TLDW and BrewMates sit with the rest of her side projects on The Journey.' },
     ],
     followUps: ['beliefs', 'technical_pm', 'things_built'],
   },
@@ -72,15 +72,15 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   things_built: {
     intent: 'things_built',
     summary:
-      'A lot, at different sizes. The biggest is LaurelSpace, a childcare CRM where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 400+ participants.',
+      'A lot, at different sizes. The biggest is LaurelSpace, a childcare CRM where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
     references: [
       { type: 'experience', id: 'stealth-startup', reason: 'LaurelSpace, the clearest case of her owning both halves, product and code.' },
       { type: 'experience', id: 'tesla', reason: 'Operator-facing ML tooling, backed by real video infrastructure.' },
-      { type: 'experience', id: 'hack-western', reason: 'Built the portal first, then led the six-person team behind it.' },
+      { type: 'experience', id: 'hack-western', reason: 'Built the portal first, then led the dev team of 8 behind it.' },
       { type: 'project', id: 'tldw', reason: 'A weekend build that summarized and classified YouTube videos.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'Every build runs the same loop: notice, build, put it in front of people, learn.' },
+      { type: 'architecture', id: 'architecture', reason: 'The Journey collects the smaller builds and case studies.' },
     ],
     followUps: ['product_ownership', 'ai_experience', 'engineering_type'],
   },
@@ -90,14 +90,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   products: {
     intent: 'products',
     summary:
-      'Two she owned, plus product leadership elsewhere. At Autodesk she runs product for ADP Studio, the governed SQL and data-exploration layer on the company’s data lake, used by 380+ analysts and engineers. Before that, LaurelSpace, a pre-seed childcare CRM where she set the roadmap, personas, MVP scope, and go-to-market herself. She also led product for the Hack Western portal and taught a 10-week product bootcamp at Ivey.',
+      'Two she owned, plus product leadership elsewhere. At Autodesk she ran product for ADP Studio, the governed SQL and data-exploration layer on the company’s data lake, used by 380+ analysts and engineers. Before that, LaurelSpace, a pre-seed childcare CRM where she set the roadmap, personas, MVP scope, and go-to-market herself. She also led product for the Hack Western portal, and led the Product Fellowship at Ivey for 2 years, hosting 28 product educationals.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'ADP Studio, an enterprise data platform she was effectively the solo PM for.' },
       { type: 'experience', id: 'stealth-startup', reason: 'LaurelSpace, product and engineering owned from discovery to MVP.' },
-      { type: 'experience', id: 'hack-western', reason: 'Product vision and delivery for a portal serving 400+ hackers.' },
+      { type: 'experience', id: 'hack-western', reason: 'Product vision and delivery for a portal serving 300+ students.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'Why she moved from building systems to deciding which ones should exist.' },
+      { type: 'architecture', id: 'architecture', reason: 'The product case studies she did on the side are on The Journey.' },
     ],
     followUps: ['product_ownership', 'technical_pm', 'ai_experience'],
   },
@@ -113,7 +113,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       { type: 'experience', id: 'stealth-startup', reason: 'The other end of the spectrum: 0→1, both halves, no spec to start from.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'How the engineering years made her comfortable owning the product call.' },
+      { type: 'architecture', id: 'architecture', reason: 'More of her product work, in the side projects on The Journey.' },
     ],
     followUps: ['technical_pm', 'collaborators', 'future_building'],
   },
@@ -130,7 +130,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       { type: 'experience', id: 'tesla', reason: 'ML and video infrastructure, systems under a user-facing surface.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'The through-line: she widened what she owned without leaving building behind.' },
+      { type: 'architecture', id: 'architecture', reason: 'The Journey has the things she built outside a job.' },
     ],
     followUps: ['engineering_type', 'ai_experience', 'working_style'],
   },
@@ -140,15 +140,15 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   workplaces: {
     intent: 'workplaces',
     summary:
-      'Six internships across startups and big tech, alongside a Computer Science and Business dual degree at Western and Ivey. Autodesk twice, full-stack engineering, then platform PM. Tesla and Intuit on the frontend. OMERS and Metaverse Group earlier, on enterprise automation and growth. She’s based in Toronto and graduates in 2027.',
+      'Seven internships across big tech, startups, and enterprise IT, alongside a Computer Science and Business dual degree at Western and Ivey. Autodesk twice, full-stack engineering, then platform PM. Tesla and Intuit on the frontend. LaurelSpace, the childcare CRM she built 0→1. OMERS and Metaverse Group earlier, on enterprise automation and growth. She’s based in Toronto and graduates in 2027.',
     references: [
-      { type: 'experience', id: 'autodesk', reason: 'Current role, platform product for a governed data lake.' },
+      { type: 'experience', id: 'autodesk', reason: 'Her most recent role, platform product for a governed data lake.' },
       { type: 'experience', id: 'tesla', reason: 'Factory ML systems and the infrastructure behind them.' },
       { type: 'experience', id: 'autodesk-eng', reason: 'The full-stack internship immediately before the PM one.' },
       { type: 'experience', id: 'omers', reason: 'Her first enterprise role, building ServiceNow workflows.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'The Journey page maps what each role trained, in order.' },
+      { type: 'architecture', id: 'architecture', reason: 'The Journey has her side projects and photos from outside work.' },
     ],
     followUps: ['engineering_type', 'products', 'collaborators'],
     actions: [{ type: 'navigate', href: '/' }],
@@ -160,14 +160,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   collaborators: {
     intent: 'collaborators',
     summary:
-      'At the team and community level rather than name-dropping. At Autodesk her partners were software engineers and data analysts, plus the Trust, Metadata Management, and AI teams she needed governance sign-off from, and eventually a six-team cross-functional group. At Hack Western she led six engineers. Outside work she’s been Product VP of the Ivey Product Society, a hub leader for Rewriting the Code, and president of a municipal youth council.',
+      'At the team and community level rather than name-dropping. At Autodesk her partners were software engineers and data analysts, plus the Trust, Metadata Management, and AI teams she needed governance sign-off from, and eventually a six-team cross-functional group. At Hack Western she leads a dev team of 8. Outside work she’s been Product VP of the Ivey Product Society, a hub leader for Rewriting the Code, and president of a municipal youth council.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'Cross-functional by necessity: governance teams, engineering, and other PMs.' },
-      { type: 'experience', id: 'hack-western', reason: 'Her first time responsible for other people’s work, not just her own.' },
-      { type: 'experience', id: 'ivey-product', reason: 'Leading a product community, not just a project.' },
+      { type: 'experience', id: 'hack-western', reason: 'Her first time responsible for other people’s work.' },
+      { type: 'experience', id: 'ivey-product', reason: 'Where she led a product community rather than a project.' },
     ],
     readNext: [
-      { type: 'gallery', id: 'gallery', reason: 'The communities and teams she’s been part of, with photos.' },
+      { type: 'gallery', id: 'gallery', reason: 'Photos of the communities and teams she’s been part of, on The Journey.' },
     ],
     followUps: ['working_style', 'impact', 'engineering_teams'],
   },
@@ -184,7 +184,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       { type: 'experience', id: 'hack-western', reason: 'Where leading other people’s work started.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'The runtime loop: notice, understand, build, put it in front of people, learn, zoom out.' },
+      { type: 'architecture', id: 'architecture', reason: 'The Journey is where the side projects ended up.' },
     ],
     followUps: ['values', 'collaborators', 'technical_pm'],
   },
@@ -194,14 +194,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   values: {
     intent: 'values',
     summary:
-      'Getting the real problem right before building, and not spending user trust to move faster. Her ServiceNow work taught her that solving the technical problem means little if you’ve misread the human one. At Autodesk she treats security and governance as product concerns rather than things bolted on at the end, partly because she once shipped an AI feature before it was ready and watched it cost confidence. She’s most engaged when a problem is technically deep and the direction isn’t settled.',
+      'Getting the real problem right before building, and not spending user trust to move faster. Her ServiceNow work taught her that solving the technical problem means little if you’ve misread the human one. At Autodesk she treated security and governance as product concerns rather than things bolted on at the end, partly because she once shipped an AI feature before it was ready and watched it cost confidence. She’s most engaged when a problem is technically deep and the direction isn’t settled.',
     references: [
       { type: 'experience', id: 'omers', reason: 'Where the gap between the technical problem and the human one became obvious.' },
       { type: 'experience', id: 'autodesk', reason: 'Security and trust treated as product decisions, not compliance.' },
       { type: 'experience', id: 'tesla', reason: 'The constraint is usually a layer below where the complaint shows up.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'How each role trained a different instinct: leverage, empathy, dependencies, direction.' },
+      { type: 'architecture', id: 'architecture', reason: 'The side projects and case studies she took on outside a job.' },
     ],
     followUps: ['beliefs', 'impact', 'working_style'],
   },
@@ -214,10 +214,10 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       'A few things she’ll argue for. Stickiness is rarely a missing feature. It’s the cost of leaving what already works, so anything trying to unseat an established tool competes with familiarity first. User trust is earned slowly and lost fast, more so as AI takes over the workflow; people forgive a slow feature, not a confidently wrong one. And when anyone can build fast, building stops being the bottleneck and agreement becomes it.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'These come straight out of the ADP Studio adoption problem.' },
-      { type: 'experience', id: 'autodesk-eng', reason: 'The platform view underneath: a product is a network of services and contracts, not a page.' },
+      { type: 'experience', id: 'autodesk-eng', reason: 'The platform view underneath: a product is a network of services and contracts.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'Where software goes when agents act on data instead of people clicking screens.' },
+      { type: 'architecture', id: 'architecture', reason: 'Her side projects and case studies are on The Journey.' },
     ],
     followUps: ['ai_experience', 'future_building', 'values'],
   },
@@ -228,14 +228,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   impact: {
     intent: 'impact',
     summary:
-      'She hasn’t written a mission statement, but the pattern is clear enough. Professionally she wants to work where the problem is technically deep and the direction isn’t settled: platform and data products where trust and access are real constraints. Alongside that she keeps building communities: she grew a municipal youth council’s membership 300%, led a social justice club, and taught a product bootcamp to help people into their first PM role.',
+      'She hasn’t written a mission statement, but the pattern is clear enough. Professionally she wants to work where the problem is technically deep and the direction isn’t settled: platform and data products where trust and access are real constraints. Alongside that she keeps building communities: she grew a municipal youth council’s membership 300%, led a social justice club, and led her school’s Product Fellowship for 2 years, hosting 28 product educationals to help students build PM skills.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'The kind of problem she’s drawn to: judgment over throughput.' },
       { type: 'experience', id: 'ivey-product', reason: 'Teaching product to people trying to break in.' },
       { type: 'gallery', id: 'myac', reason: 'President of a municipal youth council, membership grew 300%.' },
     ],
     readNext: [
-      { type: 'gallery', id: 'gallery', reason: 'The community and leadership work sits in the Gallery.' },
+      { type: 'gallery', id: 'gallery', reason: 'The community and leadership photos sit on The Journey.' },
     ],
     followUps: ['future_building', 'beliefs', 'values'],
   },
@@ -251,7 +251,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
       { type: 'experience', id: 'autodesk-eng', reason: 'The platform engineering that makes “the surface moves to APIs” concrete.' },
     ],
     readNext: [
-      { type: 'architecture', id: 'architecture', reason: 'How she got from automation to deciding what systems should exist.' },
+      { type: 'architecture', id: 'architecture', reason: 'The AI side projects sit on The Journey with the rest.' },
     ],
     followUps: ['beliefs', 'ai_experience', 'impact'],
   },

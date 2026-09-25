@@ -9,14 +9,22 @@ import { caseStudies, technicalProjects } from '@/lib/projects-data'
 import { getExperienceVideoMeta } from '@/lib/portfolio/experience-videos-data'
 import { WORK_ACCENTS } from '@/lib/portfolio/bento-workflows/work-accents'
 
-/** Home-page work tabs. `education` roles fall under "other" — they have no product/engineering track. */
-export type WorkGroup = 'engineering' | 'product' | 'other'
+/** Home-page work tabs. `education` roles (Hack Western, the Product Fellowship, school) sit under "people": leadership and community. */
+export type WorkGroup = 'engineering' | 'product' | 'people'
 
 export interface ShowcaseItem {
   id: string
   eyebrow: string
   name: string
   description: string
+  /** One-line role summary shown under a work tile's name (the card's `subtitle`); tiles fall back to `description`. */
+  subtitle?: string
+  /** Skill chips shown under a work tile (the card's three `tags`). */
+  tags?: string[]
+  /** Languages and tools used in an engineering role; they become the hover tag on its tile. */
+  languages?: string[]
+  /** When the role happened, shown beside the company name in the tile's caption row. */
+  period?: string
   image: string
   imageAlt: string
   video?: string
@@ -50,10 +58,15 @@ function homePlacement(id: WorkId): { col?: string; row?: string } {
   return { col: 'span 5' }
 }
 
-/** Cover art in `public/work/` doesn't key 1:1 to `WorkId` — map the exceptions. */
+/**
+ * Cover art in `public/work/` doesn't key 1:1 to `WorkId`, so map the exceptions. The `-cover` files are square
+ * crops made from the originals (the IPS poster cut out of an Instagram screenshot, the Ivey wordmark padded to a
+ * square) so the tile can show them edge to edge like the videos.
+ */
 const WORK_IMAGE_OVERRIDES: Partial<Record<WorkId, string>> = {
   'autodesk-eng': '/work/autodesk.png',
-  western: '/work/western-ivey.png',
+  'ivey-product': '/work/ivey-product-cover.jpg',
+  western: '/work/western-ivey-cover.png',
 }
 
 function workImage(id: WorkId): string {
@@ -79,6 +92,15 @@ const CURSOR_LABELS: Record<WorkId, string> = {
   western: 'CS + business degree',
 }
 
+/** Languages and tools used in each engineering role (from her resume list). Their tiles show these in the hover tag. */
+const LANGUAGES: Partial<Record<WorkId, string[]>> = {
+  'autodesk-eng': ['Java', 'C++', 'React', 'JavaScript'],
+  tesla: ['React', 'TypeScript', 'Node.js'],
+  intuit: ['React', 'TypeScript', 'Node.js'],
+  omers: ['ServiceNow'],
+  metaverse: ['Python', 'Selenium'],
+}
+
 export const WORK_SHOWCASE: ShowcaseItem[] = DISPLAY_ORDER.map((id) => {
   const card = EXPERIENCE_CARDS[id]
   const placement = homePlacement(id)
@@ -88,11 +110,15 @@ export const WORK_SHOWCASE: ShowcaseItem[] = DISPLAY_ORDER.map((id) => {
     eyebrow: `Work - ${card.company}`,
     name: card.company,
     description: shortDescription(card.description),
+    subtitle: card.subtitle,
+    tags: card.tags.map((tag) => tag.label),
+    period: card.period,
     image: workImage(id),
     imageAlt: card.company,
     video: getExperienceVideoMeta(id).video,
-    cursorLabel: CURSOR_LABELS[id],
-    group: card.track === 'education' ? 'other' : card.track,
+    languages: LANGUAGES[id],
+    cursorLabel: LANGUAGES[id]?.join(' · ') ?? CURSOR_LABELS[id],
+    group: card.track === 'education' ? 'people' : card.track,
     logoStyle: true,
     gradient: `linear-gradient(135deg, ${accent.color}, ${accent.colorEnd ?? accent.color})`,
     href: `/work/${id}`,
@@ -109,7 +135,7 @@ const SIDE_PROJECTS_FROM_BUILDS: ShowcaseItem[] = technicalProjects
   .filter((project) => project.id !== 'hackwestern-web-developer')
   .map((project) => ({
     id: project.id,
-    eyebrow: 'Side Project - Personal',
+    eyebrow: 'Side project',
     name: project.title,
     description: project.description,
     image: normalizeSrc(project.image?.src ?? '/projects/technical/website.png'),
@@ -120,7 +146,7 @@ const SIDE_PROJECTS_FROM_BUILDS: ShowcaseItem[] = technicalProjects
 
 const SIDE_PROJECTS_FROM_CASE_STUDIES: ShowcaseItem[] = caseStudies.map((study) => ({
   id: study.id,
-  eyebrow: 'Side Project - Personal',
+  eyebrow: 'Case study',
   name: study.title,
   description: study.description,
   image: normalizeSrc(study.image!.src),

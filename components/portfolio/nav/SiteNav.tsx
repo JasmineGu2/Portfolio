@@ -2,50 +2,43 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { ContactGallery } from '@/components/portfolio/nav/ContactGallery'
 import { HeartToggle } from '@/components/portfolio/nav/HeartToggle'
 
 const NAV_ITEMS = [
   { label: 'Work', href: '/' },
-  { label: 'Photos', href: '/gallery' },
-  { label: 'The Journey', href: '/architecture' },
+  { label: 'About me', href: '/about' },
 ] as const
 
 function isActive(pathname: string, href: string) {
-  if (href === '/') return pathname === '/'
+  if (href === '/') return pathname === '/' || pathname.startsWith('/work/')
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
+/** Plain text header: name and role on the left, two links in the middle, the heart on the right. */
 export function SiteNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="site-nav flex flex-wrap items-center justify-between gap-3 px-6 py-4 text-sm sm:px-10">
-      <div className="flex flex-wrap items-center gap-1">
-        <HeartToggle />
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              'rounded-sm px-2 py-1 text-xs transition-colors',
-              isActive(pathname, item.href)
-                ? 'bg-[var(--pf-ink)] text-[var(--pf-canvas)]'
-                : 'text-[var(--pf-ink)] hover:bg-[var(--pf-canvas-alt)]'
-            )}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
+    <header className="site-nav pf-header">
+      <Link href="/" className="pf-header__brand">
+        <b>Jasmine Gu</b>
+        <span>Product engineer</span>
+      </Link>
 
-      {/* The home hero already has its own contact icons; every other page keeps them here. */}
-      {pathname !== '/' && (
-        <div className="flex items-center">
-          <ContactGallery />
-        </div>
-      )}
-    </nav>
+      <nav aria-label="Primary" className="pf-header__links">
+        {NAV_ITEMS.map((item) => {
+          const active = isActive(pathname, item.href)
+          return (
+            <Link key={item.href} href={item.href} aria-current={active ? 'page' : undefined}>
+              {item.label}
+            </Link>
+          )
+        })}
+      </nav>
+
+      <div className="pf-header__end">
+        <HeartToggle />
+      </div>
+    </header>
   )
 }

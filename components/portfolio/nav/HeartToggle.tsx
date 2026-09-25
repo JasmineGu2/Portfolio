@@ -3,7 +3,7 @@
 import { useId, useState } from 'react'
 import './heart-toggle.css'
 
-/** Like button for the top-left of the nav. State is local: it resets on a full reload, and isn't stored anywhere. */
+/** Like button for the top-right of the nav. State is local: it resets on a full reload, and isn't stored anywhere. */
 export function HeartToggle() {
   const id = useId()
   const [touched, setTouched] = useState(false)

@@ -132,7 +132,7 @@ export function AgentPromptBar({
       )}
       {menuOpen && rows.length === 0 && !isCategoryMenu && (
         <div className="agent-prompt-bar__menu agent-prompt-bar__menu--empty">
-          <span>Press Enter — that&rsquo;s not one of her chip questions, but I&rsquo;ll let you know what I have</span>
+          <span>Press Enter. That&rsquo;s not one of her chip questions, but I&rsquo;ll tell you what I have</span>
         </div>
       )}
 

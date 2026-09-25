@@ -2,9 +2,9 @@
 
 export const HERO_TAGLINE = {
   primary:
-    'Jasmine Gu is a product manager and engineer who translates between users, engineering, and operations.',
+    'Jasmine Gu is a product engineer who codes with the end users, the business context, and product strategy in mind.',
   secondary:
-    'Product manager and engineer building AI-powered products, from consumer experiences at TurboTax to enterprise data platforms at Autodesk.',
+    'Product engineer. Most recently at Autodesk, working on agentic workflows for enterprise data tools. Before that, Tesla and Intuit.',
 } as const
 
 export const SITE_METADATA = {

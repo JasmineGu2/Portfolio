@@ -14,7 +14,8 @@ function pageFromCard(id: WorkId): WorkExperiencePageContent {
     id,
     summary: card.description,
     highlights: [card.subtitle, card.role, card.period],
-    skills: [...card.tags.map((tag) => tag.label), ...card.expandedTags],
+    // A card can list the same skill in both `tags` and `expandedTags` (OMERS did), and repeats break React keys.
+    skills: Array.from(new Set([...card.tags.map((tag) => tag.label), ...card.expandedTags])),
   }
 }
 

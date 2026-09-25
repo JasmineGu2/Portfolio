@@ -16,9 +16,8 @@ export function HeroIntroCopy({
         <p className="hero-editorial-headline font-serif-display">{headline}</p>
       ) : (
         <p className="hero-editorial-headline font-serif-display">
-          Jasmine Gu is an <em className="hero-em hero-em--accent">engineer</em> solving{' '}
-          <em className="hero-em hero-em--accent">product</em> problems with{' '}
-          <em className="hero-em hero-em--accent">code and empathy</em>.
+          I&rsquo;m a <em className="hero-em hero-em--accent">product engineer</em> who codes with
+          the end users, the business context, and product strategy in mind.
           <span
             className="hero-worked-with"
             aria-label="Worked at Tesla, Autodesk, and Intuit"

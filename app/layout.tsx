@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import { Agentation } from 'agentation'
 import { Toaster } from 'sonner'
 import { SiteShell } from '@/components/portfolio/SiteShell'
+import { SoundProvider } from '@/components/portfolio/SoundProvider'
 import { PortfolioStateProvider } from '@/components/portfolio/PortfolioStateContext'
 import { BentoWorkspaceProvider } from '@/components/portfolio/bento-workflows/BentoWorkspaceContext'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { VisitTracker } from '@/components/analytics/VisitTracker'
 import { SiteCursor } from '@/components/portfolio/cursor/SiteCursor'
+import { VideoAutoplay } from '@/components/portfolio/VideoAutoplay'
 import { SITE_METADATA } from '@/lib/portfolio/site-copy'
 import './globals.css'
 
@@ -25,11 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased font-body">
-        <PortfolioStateProvider>
-          <BentoWorkspaceProvider>
-            <SiteShell>{children}</SiteShell>
-          </BentoWorkspaceProvider>
-        </PortfolioStateProvider>
+        <SoundProvider>
+          <PortfolioStateProvider>
+            <BentoWorkspaceProvider>
+              <SiteShell>{children}</SiteShell>
+            </BentoWorkspaceProvider>
+          </PortfolioStateProvider>
+        </SoundProvider>
         {/*
           Three independent layers, because any single one has a blind spot:
           Vercel's script can be ad-blocked, and the server-side middleware can't
@@ -39,8 +43,9 @@ export default function RootLayout({
         <SpeedInsights />
         <VisitTracker />
         <SiteCursor />
+        <VideoAutoplay />
         <Toaster position="bottom-right" />
-        {process.env.NODE_ENV === 'development' && <Agentation />}
+        {process.env.NODE_ENV === 'development' && <Agentation endpoint="http://localhost:4747" />}
       </body>
     </html>
   )

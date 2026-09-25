@@ -5,7 +5,7 @@ import './autodesk-case-study.css'
 export const metadata: Metadata = {
   title: 'Owning Product Strategy for a Governed SQL Platform · Autodesk · Jasmine Gu',
   description:
-    'Case study on owning product strategy for ADP Studio, Autodesk’s governed SQL and data-exploration platform: adoption, ambiguity, AI-assisted data workflows, and the cross-functional agentic data strategy it became.',
+    'Case study on owning product strategy for ADP Studio, Autodesk’s governed SQL and data-exploration platform: adoption, ambiguity, AI-assisted data workflows, and the agentic data strategy it grew into.',
 }
 
 export default function AutodeskCaseStudyPage() {

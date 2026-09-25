@@ -11,7 +11,7 @@ export function ProfileStrip() {
             JG
           </span>
           <div>
-            <p className="landing-profile__label">Product Manager + Engineer</p>
+            <p className="landing-profile__label">Product Engineer</p>
             <p className="landing-profile__meta">
               Western / Ivey · Computer Science + Business · Grad 2027
             </p>

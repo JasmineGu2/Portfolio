@@ -47,7 +47,7 @@ const REFERENCE_TITLE_OVERRIDES: Record<string, string> = {
 
 const SECTION_ROUTES: Record<string, { title: string; href: string; kindLabel: string }> = {
   architecture: { title: 'The Journey', href: '/architecture', kindLabel: 'The Journey' },
-  gallery: { title: 'Gallery', href: '/gallery', kindLabel: 'Gallery' },
+  gallery: { title: 'Gallery', href: '/architecture', kindLabel: 'Gallery' },
   projects: { title: 'Explorations', href: '/projects', kindLabel: 'Explorations' },
 }
 
@@ -94,7 +94,7 @@ export function resolveReference(
     if (ref.id === 'gallery') return { ...ref, ...SECTION_ROUTES.gallery, seen }
     const role = galleryRole(ref.id)
     if (!role) return null
-    return { ...ref, title: role.title, href: '/gallery', kindLabel: 'Gallery', seen }
+    return { ...ref, title: role.title, href: '/architecture', kindLabel: 'Gallery', seen }
   }
 
   return null

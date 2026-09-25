@@ -29,7 +29,7 @@ export const BIO_LINKS: Record<string, BioLink> = {
 
 export const BIO_PARAGRAPHS: { text: string; linkKeys?: string[] }[] = [
   {
-    text: 'My work is translation. I move between users, product, engineering, and operations, and turn ambiguous problems into shipped workflows.',
+    text: 'I build for a deep variety of audiences. I move between users, product, engineering, and operations, and turn ambiguous problems into shipped workflows.',
   },
   {
     text: 'I studied Computer Science and Business at {western}. Right now I\'m shaping data products and AI capabilities at {autodesk}, after building operator-facing ML software at {tesla} and product engineering at {intuit}.',

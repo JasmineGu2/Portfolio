@@ -21,7 +21,7 @@ export interface StoryStep {
   links?: { label: string; href: string; external?: boolean }[]
 }
 
-export const STORY_HEADLINE = 'My work is translation.'
+export const STORY_HEADLINE = 'I build for a deep variety of audiences.'
 export const STORY_SUBLINE =
   'I move between users, product, engineering, and operations, turning ambiguous problems into shipped workflows.'
 

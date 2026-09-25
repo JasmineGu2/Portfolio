@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ArticleOutline } from '@/components/portfolio/ArticleOutline'
 import {
   TESLA_CASE_STUDY_SECTIONS,
   TESLA_DESIGN_QUESTIONS,
@@ -83,10 +84,8 @@ export function TeslaCaseStudyClient() {
   const [activeSection, setActiveSection] = useState(TESLA_CASE_STUDY_SECTIONS[0].id)
   const [readProgress, setReadProgress] = useState(0)
 
-  // The app shell scrolls internally on .bw-main, not the window/document, a plain
-  // <a href="#id"> fragment jump is ambiguous about which of those it scrolls, and in
-  // practice it was scrolling the wrong one, taking the sticky sidebar off-screen with it.
-  // Scrolling the target explicitly finds the real scrollable ancestor correctly.
+  // Scroll the target explicitly instead of a plain <a href="#id"> jump, so the smooth scroll and
+  // scroll-margin-top both apply.
   function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
     event.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -121,17 +120,12 @@ export function TeslaCaseStudyClient() {
   }, [])
 
   useEffect(() => {
-    // The app shell scrolls internally on .bw-main rather than the window,
-    // so this has to listen there too or the progress bar just freezes.
-    const scrollContainer = document.querySelector('.bw-main')
-
     function updateProgress() {
       const article = document.querySelector('.tesla-cs__main')
       if (!article) return
 
       const rect = article.getBoundingClientRect()
-      const viewportHeight = scrollContainer?.clientHeight ?? window.innerHeight
-      const total = article.scrollHeight - viewportHeight
+      const total = article.scrollHeight - window.innerHeight
       if (total <= 0) return
 
       const scrolled = Math.min(Math.max(-rect.top, 0), total)
@@ -141,11 +135,9 @@ export function TeslaCaseStudyClient() {
     updateProgress()
     window.addEventListener('scroll', updateProgress, { passive: true })
     window.addEventListener('resize', updateProgress)
-    scrollContainer?.addEventListener('scroll', updateProgress, { passive: true })
     return () => {
       window.removeEventListener('scroll', updateProgress)
       window.removeEventListener('resize', updateProgress)
-      scrollContainer?.removeEventListener('scroll', updateProgress)
     }
   }, [])
 
@@ -154,9 +146,9 @@ export function TeslaCaseStudyClient() {
       <div className="tesla-cs__layout">
         <aside className="tesla-cs__sidebar" aria-label="Case study sections">
           <div className="bento-tile bento-tile--editorial-soft tesla-cs__sidebar-tile">
-            <Link href="/" className="bw-content-back tesla-cs__back">
-              <ArrowLeft className="h-4 w-4" aria-hidden />
-              Back to workspace
+            <Link href="/" className="pf-btn tesla-cs__back">
+              <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+              Back to work
             </Link>
             <div
               className="tesla-cs__progress"
@@ -168,26 +160,18 @@ export function TeslaCaseStudyClient() {
             >
               <span className="tesla-cs__progress-bar" style={{ width: `${readProgress}%` }} />
             </div>
-            <nav className="tesla-cs__nav">
-              {TESLA_CASE_STUDY_SECTIONS.map(({ id, label }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={(event) => scrollToSection(event, id)}
-                  className={cn('tesla-cs__nav-link', activeSection === id && 'tesla-cs__nav-link--active')}
-                  aria-current={activeSection === id ? 'true' : undefined}
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
+            <ArticleOutline
+              sections={TESLA_CASE_STUDY_SECTIONS}
+              activeId={activeSection}
+              onActiveIdChange={setActiveSection}
+            />
           </div>
         </aside>
 
         <div className="tesla-cs__main">
-          <Link href="/" className="bw-content-back tesla-cs__back lg:hidden">
-            <ArrowLeft className="h-4 w-4" aria-hidden />
-            Back to workspace
+          <Link href="/" className="pf-btn tesla-cs__back tesla-cs__back--main">
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+            Back to work
           </Link>
 
           <nav className="tesla-cs__mobile-nav" aria-label="Case study sections">
@@ -196,7 +180,7 @@ export function TeslaCaseStudyClient() {
                 key={id}
                 href={`#${id}`}
                 onClick={(event) => scrollToSection(event, id)}
-                className={cn('tesla-cs__mobile-link', activeSection === id && 'tesla-cs__mobile-link--active')}
+                className={cn('pf-btn shrink-0', activeSection === id && 'is-active')}
                 aria-current={activeSection === id ? 'true' : undefined}
               >
                 {label}
@@ -232,9 +216,9 @@ export function TeslaCaseStudyClient() {
             <SectionLabel>Overview</SectionLabel>
             <SectionHeadline>Building internal tools for factory investigation</SectionHeadline>
             <Body>
-              I built frontend systems for Tesla&apos;s internal factory software, supporting safety,
-              quality, investigation, and live-monitoring workflows across factories in Shanghai,
-              Fremont, Austin, and Berlin.
+              I built frontend systems for Tesla&apos;s internal factory software. They supported
+              safety, quality, investigation, and live-monitoring workflows across factories in
+              Shanghai, Fremont, Austin, and Berlin.
             </Body>
             <Body>
               My work included data-heavy pages, live charts, tables, forms, filters, investigation
@@ -242,9 +226,9 @@ export function TeslaCaseStudyClient() {
               footage.
             </Body>
             <Body>
-              I worked across frontend, APIs, and data systems to integrate ML outputs and factory
-              operations into workflows, dashboards, charts, alerts, forms, and tables, balancing
-              performance, reliability, and scalability.
+              I worked across frontend, APIs, and data systems to bring ML outputs and factory
+              operations into workflows, dashboards, charts, alerts, forms, and tables. All of it
+              had to stay fast, reliable, and able to scale.
             </Body>
 
             <ul className="tesla-cs__impact-list">
@@ -274,7 +258,7 @@ export function TeslaCaseStudyClient() {
               time-sensitive issues.
             </Body>
 
-            <Body>The product served several stakeholders:</Body>
+            <Body>Several groups used it:</Body>
             <div className="tesla-cs__grid tesla-cs__grid--two tesla-cs__wide">
               {TESLA_STAKEHOLDERS.map((card) => (
                 <div key={card.title} className="tesla-cs__card">
@@ -290,8 +274,7 @@ export function TeslaCaseStudyClient() {
               <Link href="/projects/intuit" className="tesla-cs__inline-link">
                 Intuit
               </Link>
-              , where I built delightful, engaging UI experiences for TurboTax sign-up, focused
-              on design craft and detail.
+              , where I built UI for TurboTax sign-up, focused on design craft and detail.
             </Body>
             <Body>
               Tesla was a very different environment. Instead of consumer onboarding, I was
@@ -303,7 +286,7 @@ export function TeslaCaseStudyClient() {
             </Body>
 
             <SectionHeadline>
-              Internal software is not exempt from usability. It measures it differently.
+              Internal software still has to be usable. It just gets judged differently.
             </SectionHeadline>
             <Body>
               The software was already part of the work. The goal was not to persuade someone to return
@@ -329,7 +312,7 @@ export function TeslaCaseStudyClient() {
           <section id="information-design" className="tesla-cs__section">
             <SectionLabel>Information Design</SectionLabel>
             <SectionHeadline>
-              The challenge was not showing more data. It was deciding what deserved attention first.
+              The hard part was deciding what deserved attention first, not showing more data.
             </SectionHeadline>
             <Body>Factory workflows combined:</Body>
 
@@ -342,7 +325,7 @@ export function TeslaCaseStudyClient() {
               ))}
             </div>
 
-            <Body>Our team did not have a dedicated product designer embedded in the workflow.</Body>
+            <Body>Our team did not have a product designer assigned to it.</Body>
             <Body>
               I was often given business requirements and expected to turn them into complete production
               pages. That meant deciding:
@@ -358,8 +341,8 @@ export function TeslaCaseStudyClient() {
               tables, filters, modals, validation, and loading states.
             </Body>
             <Body>
-              Instead of inventing every page from scratch, I could focus on understanding the workflow
-              and assembling familiar patterns into something coherent.
+              Instead of inventing every page from scratch, I could spend my time understanding the
+              workflow and putting known patterns together.
             </Body>
             <Body>
               This was also summer 2025, before Claude Code-style interface generation became common. We
@@ -367,8 +350,8 @@ export function TeslaCaseStudyClient() {
               through an investigation.
             </Body>
             <KeyInsight>
-              A strong design system did not replace design thinking. It gave engineers enough structure
-              to make good product decisions independently.
+              A strong design system did not replace the thinking. It gave engineers enough structure
+              to make good product decisions on their own.
             </KeyInsight>
           </section>
 
@@ -420,8 +403,8 @@ export function TeslaCaseStudyClient() {
             <SectionLabel>Video, APIs &amp; Security</SectionLabel>
             <SectionHeadline>What looked like a video modal was also an infrastructure problem.</SectionHeadline>
             <Body>
-              One reusable experience I owned was a secure video modal for reviewing sensitive factory
-              footage and associated model results.
+              One reusable piece I owned was a secure video modal for reviewing sensitive factory
+              footage and the model results that went with it.
             </Body>
             <Body>
               I built the player and added it to Tesla&apos;s reusable internal system so future workflows
@@ -471,7 +454,7 @@ export function TeslaCaseStudyClient() {
               <span className="tesla-cs__em">12+ Tesla sales</span>.
             </Body>
             <Body>
-              I loved getting to know customers and the San Francisco Bay Area ecosystem, and driving a red
+              I loved getting to know customers and the San Francisco Bay Area, and driving a red
               Cybertruck was a definite highlight.
             </Body>
           </section>

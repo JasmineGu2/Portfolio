@@ -9,15 +9,11 @@
   --tesla-border: var(--pf-border, color-mix(in srgb, var(--pf-ink) 10%, transparent));
   --tesla-prose: 38rem;
   --tesla-wide: 52rem;
-  --tesla-sidebar: 14rem;
+  --tesla-sidebar: 12rem;
   --tesla-beat: 1.75rem;
   padding: 0.75rem 0.85rem 4rem;
   color: var(--tesla-muted);
   background: var(--tesla-cream);
-}
-
-.bw-main:has(.tesla-cs) {
-  --bw-main-pad-x: 0.65rem;
 }
 
 html:has(.tesla-cs) {
@@ -45,8 +41,6 @@ html:has(.tesla-cs) {
 
 .tesla-cs__sidebar-tile .tesla-cs__back {
   margin-bottom: 1rem;
-  color: var(--tesla-muted);
-  font-size: 0.875rem;
 }
 
 .tesla-cs__progress {
@@ -69,6 +63,7 @@ html:has(.tesla-cs) {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
+  margin-bottom: 1.5rem;
   padding-bottom: 0.25rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -76,26 +71,6 @@ html:has(.tesla-cs) {
 
 .tesla-cs__mobile-nav::-webkit-scrollbar {
   display: none;
-}
-
-.tesla-cs__mobile-link {
-  flex-shrink: 0;
-  white-space: nowrap;
-  padding: 0.45rem 0.75rem;
-  border: 1px solid var(--tesla-border);
-  border-radius: 999px;
-  background: var(--tesla-surface);
-  color: var(--tesla-muted);
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.tesla-cs__mobile-link--active {
-  border-color: color-mix(in srgb, var(--tesla-accent) 35%, var(--tesla-border));
-  color: var(--tesla-ink);
-  background: color-mix(in srgb, var(--tesla-peach) 25%, var(--tesla-surface));
 }
 
 .tesla-cs__nav {
@@ -122,14 +97,14 @@ html:has(.tesla-cs) {
 }
 
 .tesla-cs__nav-link:hover {
-  color: var(--tesla-ink);
+  color: var(--pf-brand-orange-ink);
 }
 
 .tesla-cs__nav-link--active {
-  background: color-mix(in srgb, var(--tesla-peach) 20%, var(--tesla-surface));
-  border-left-color: var(--tesla-accent);
-  color: var(--tesla-ink);
-  font-weight: 700;
+  background: color-mix(in srgb, var(--pf-brand-orange) 6%, var(--tesla-surface));
+  border-left-color: var(--pf-brand-orange);
+  color: var(--pf-brand-orange-ink);
+  font-weight: 600;
 }
 
 .tesla-cs__main {
@@ -137,6 +112,25 @@ html:has(.tesla-cs) {
   display: flex;
   flex-direction: column;
   gap: 0;
+  width: 100%;
+  max-width: var(--tesla-wide);
+  margin-inline: auto;
+}
+
+/*
+ * Center every width-limited block in the column: prose blocks sit in the middle at the reading width and the
+ * wide blocks (meta grid, card grids) fill the whole column, so they share one center line.
+ */
+.tesla-cs__main :is(.tesla-cs__hero, .tesla-cs__section) > * {
+  margin-inline: auto;
+}
+
+.tesla-cs__back {
+  align-self: flex-start;
+}
+
+.tesla-cs__main > .tesla-cs__back {
+  margin-bottom: 1rem;
 }
 
 .tesla-cs__prose {
@@ -154,8 +148,10 @@ html:has(.tesla-cs) {
   border-bottom: 1px solid var(--tesla-border);
 }
 
+/* Labels have no measure of their own, so cap them at the reading width to line up with the copy they introduce. */
 .tesla-cs__kicker,
 .tesla-cs__label {
+  max-width: var(--tesla-prose);
   margin-bottom: 1rem;
   color: var(--tesla-muted);
   font-family: 'Analogue OS', 'JetBrains Mono', ui-monospace, monospace;
@@ -563,20 +559,19 @@ html:has(.tesla-cs) {
 }
 
 .tesla-cs__nav-link:focus-visible,
-.tesla-cs__mobile-link:focus-visible,
-.tesla-cs__back:focus-visible,
 .tesla-cs__inline-link:focus-visible {
   outline: 2px solid var(--tesla-accent);
   outline-offset: 3px;
 }
 
 @media (min-width: 768px) {
-  .bw-main:has(.tesla-cs) {
-    --bw-main-pad-x: 0.85rem;
-  }
-
   .tesla-cs {
     padding: 1rem 1.15rem 4rem;
+  }
+
+  .tesla-cs__mobile-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
 
   .tesla-cs__meta-grid {
@@ -594,35 +589,54 @@ html:has(.tesla-cs) {
 }
 
 @media (min-width: 1024px) {
-  .bw-main:has(.tesla-cs) {
-    --bw-main-pad-x: 1rem;
-  }
-
   .tesla-cs {
     padding: 1rem 1.35rem 4.5rem;
   }
+}
 
+/*
+ * The section nav (the Astryx Outline) floats in the left margin so the article stays centered on the page. It
+ * needs a sidebar's width on both sides of the column, so it shows from 1360px up (12rem wide, 14rem from
+ * 1880px); below that the pill nav above the article does the job.
+ */
+@media (min-width: 1360px) {
   .tesla-cs__layout {
-    grid-template-columns: var(--tesla-sidebar) minmax(0, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--tesla-wide)) minmax(0, 1fr);
+    gap: 0;
     align-items: start;
   }
 
   .tesla-cs__sidebar {
     display: block;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    width: var(--tesla-sidebar);
+    margin-right: 1rem;
     position: sticky;
-    top: 7rem;
-    max-height: calc(100vh - 8.5rem);
+    top: 2rem;
+    max-height: calc(100dvh - 4rem);
     overflow-y: auto;
   }
 
-  .tesla-cs__mobile-nav {
-    display: none;
+  .tesla-cs__main {
+    grid-column: 2;
+    grid-row: 1;
   }
 
-  .tesla-cs__section,
-  .tesla-cs__hero {
-    scroll-margin-top: 7rem;
+  .tesla-cs__mobile-nav,
+  .tesla-cs__back--main {
+    display: none;
+  }
+}
+
+@media (min-width: 1880px) {
+  .tesla-cs {
+    --tesla-sidebar: 14rem;
+  }
+
+  .tesla-cs__sidebar {
+    margin-right: 1.5rem;
   }
 }
 

@@ -14,6 +14,9 @@
     "components": "@/components",
     "utils": "@/lib/utils",
     "ui": "@/components/ui"
+  },
+  "registries": {
+    "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+    "@componentry": "https://componentry.fun/r/{name}.json"
   }
 }
-

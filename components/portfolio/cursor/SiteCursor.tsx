@@ -6,19 +6,21 @@ import { AnimatePresence, motion, useMotionValue, useReducedMotion } from 'motio
 import { ACCENT_ORANGE } from '@/lib/portfolio/brand'
 
 /**
- * Site-wide cursor modelled on anikamantri.com: an orange arrow with a small tag beside it.
- * Any element can retitle the tag by carrying `data-cursor-label="…"` (the work tiles do, see `WorkBentoTile`).
+ * Site-wide cursor modelled on anikamantri.com: a small orange dot that turns into an orange arrow with a tag
+ * beside it over any element carrying `data-cursor-label="…"` (the work tiles do, see `WorkBentoTile`).
  * Labels are read off the element under the pointer on every move rather than via per-element hooks, so
  * server components can opt in with a plain attribute and a label can't go stale if its element unmounts.
  */
 
 const CREAM = '#FFFEFD'
 
-/** Tag shown when nothing labelled is under the pointer. '' shows the bare arrow, like the reference. */
-const DEFAULT_LABEL = 'jasmine'
+/** Tag shown when nothing labelled is under the pointer. '' keeps the cursor a bare dot. */
+const DEFAULT_LABEL = ''
 
 const FINE_POINTER = '(hover: hover) and (pointer: fine)'
 const ARROW_W = 22
+const ARROW_H = 26
+const DOT_SIZE = 12
 const TAG_GAP = 6
 const EDGE_MARGIN = 16
 /** The arrow's tip sits ~2px inside its SVG box; nudge the box so the tip lands on the click point. */
@@ -51,7 +53,7 @@ const getFinePointerOnServer = () => false
 
 function Arrow() {
   return (
-    <svg width={ARROW_W} height={26} viewBox="0 0 26 31" fill="none" aria-hidden className="block shrink-0">
+    <svg width={ARROW_W} height={ARROW_H} viewBox="0 0 26 31" fill="none" aria-hidden className="block shrink-0">
       <path
         d="M21.993 14.425 2.549 2.935l4.444 23.108 4.653-10.002z"
         fill={ACCENT_ORANGE}
@@ -60,6 +62,16 @@ function Arrow() {
         strokeLinecap="square"
       />
     </svg>
+  )
+}
+
+function Dot() {
+  return (
+    <span
+      aria-hidden
+      className="block rounded-full"
+      style={{ width: DOT_SIZE, height: DOT_SIZE, backgroundColor: ACCENT_ORANGE, border: `2px solid ${CREAM}` }}
+    />
   )
 }
 
@@ -138,8 +150,30 @@ export function SiteCursor() {
         animate={{ opacity: active && shown ? 1 : 0 }}
         transition={{ duration: reduceMotion ? 0 : 0.12 }}
       >
-        <div className="relative flex">
-          <Arrow />
+        {/* Sized to the arrow whichever glyph shows, so the tag's `left-full` anchor never moves. */}
+        <div className="relative" style={{ width: ARROW_W, height: ARROW_H }}>
+          {/* Both glyphs stay mounted and cross-fade, so the swap reads as a fade rather than a pop. */}
+          <motion.span
+            aria-hidden
+            className="absolute left-0 top-0 block"
+            style={{ transformOrigin: `${-TIP_OFFSET}px ${-TIP_OFFSET}px` }}
+            initial={false}
+            animate={{ opacity: label ? 1 : 0, scale: label ? 1 : 0.6 }}
+            transition={{ duration, ease: 'easeOut' }}
+          >
+            <Arrow />
+          </motion.span>
+          {/* The pointer sits 2px inside this box (see TIP_OFFSET), so centre the dot there. */}
+          <motion.span
+            aria-hidden
+            className="absolute block"
+            style={{ left: -TIP_OFFSET - DOT_SIZE / 2, top: -TIP_OFFSET - DOT_SIZE / 2 }}
+            initial={false}
+            animate={{ opacity: label ? 0 : 1, scale: label ? 0.5 : 1 }}
+            transition={{ duration, ease: 'easeOut' }}
+          >
+            <Dot />
+          </motion.span>
           <AnimatePresence initial={false}>
             {label && (
               <motion.span

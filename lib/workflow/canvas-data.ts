@@ -42,7 +42,7 @@ export const NODE_LABEL_H = 28
 
 /** Logical canvas, scaled to fit viewport */
 export const CANVAS_META = {
-  title: 'My work is translation.',
+  title: 'I build for a deep variety of audiences.',
   subtitle: 'Users → product → engineering → operations',
   width: 1040,
   height: 340,

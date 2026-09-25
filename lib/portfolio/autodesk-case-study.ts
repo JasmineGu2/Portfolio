@@ -32,7 +32,7 @@ export const AUTODESK_HERO_META = {
   kicker: 'Autodesk · ADP Studio · 2026',
   title: 'Owning Product Strategy for a Governed SQL Platform',
   role: 'Technical Platform Product Manager Intern',
-  timeline: 'May 2026 – Present',
+  timeline: 'May 2026 to Present',
   team: ['Engineering', 'PMs', 'Trust', 'Metadata Management', 'AI'],
   skills: [
     'Product Strategy',
@@ -66,10 +66,10 @@ export const AUTODESK_PORTAL_COMPONENTS = [
 ] as const
 
 export const AUTODESK_INVESTMENT_REASONS = [
-  'Interoperability was the actual goal. Real analysis crosses tools, teams, and organizations, so the value of a governed entry point comes from how well it connects to the rest of the stack, not from how much of it we could replace.',
-  'AI is only as good as the data it can reach, which makes interoperability infrastructure rather than a feature.',
-  'Data capabilities had grown fast across a lot of teams and left real architectural fragmentation behind. Leadership aligned the org structure to reduce it.',
-  'There was no internal consensus on where the space was headed, so I read outward: Snowflake on agentic development, Databricks on handling data at scale.',
+  'Interoperability was the actual goal. Real analysis crosses tools, teams, and organizations, so the value of a governed entry point is in how well it connects to the rest of the stack, not in how much of it we could replace.',
+  'AI is only as good as the data it can reach. That makes interoperability infrastructure, not a feature.',
+  'Data capabilities had grown fast across a lot of teams and left the architecture fragmented. Leadership changed the org structure to reduce that.',
+  'No one internally agreed on where the space was headed, so I read outward: Snowflake on agentic development, Databricks on handling data at scale.',
 ]
 
 export const AUTODESK_AUDIENCES = [
@@ -100,7 +100,7 @@ export const AUTODESK_ROLE_ROWS = [
   {
     label: 'Team',
     detail:
-      'Engineering team based in India. All collaboration remote-first, across a full time-zone gap.',
+      'Engineering team based in India. All collaboration remote, across a full time-zone gap.',
   },
   {
     label: 'Transition',
@@ -123,17 +123,17 @@ export const AUTODESK_PROBLEM_REASONS = [
   {
     title: 'People don’t like changing tools',
     detail:
-      'Users liked PopSQL, and SQL and data exploration were core daily workflows. Changing a tool people use every day is difficult because so much of the experience is tied to usability, habits, and muscle memory. Even if PopSQL disappeared, switching to ADP Studio still meant relearning familiar workflows and changing established habits.',
+      'Users liked PopSQL, and SQL and data exploration were daily work for them. Changing a tool people use every day is hard, because so much of the experience is tied to usability, habit, and muscle memory. Even with PopSQL gone, moving to ADP Studio meant relearning workflows they already knew.',
   },
   {
     title: 'ADP Studio was an MVP',
     detail:
-      'ADP Studio had been built quickly on Querybook, an open-source big-data tool originally developed by Pinterest. It had core functionality, but it wasn’t yet designed around the workflows of data analysts and hadn’t reached full feature parity with PopSQL. Since it was built on another tool, we had no design input, so it was severely lacking on the UX side. With my frontend background from Intuit and Tesla, I stepped up to deliver a redesign of the workspace and experience.',
+      'ADP Studio had been built quickly on Querybook, an open-source big-data tool originally developed by Pinterest. The core worked, but it wasn’t designed around how data analysts actually work, and it hadn’t reached feature parity with PopSQL. Because it sat on someone else’s tool, we had no design input, and the UX suffered badly for it. With my frontend background from Intuit and Tesla, I took on a redesign of the workspace and the experience.',
   },
   {
     title: 'Engineering capacity was not centered entirely on ADP Studio',
     detail:
-      'My engineering team was the infrastructure team, responsible for the underlying data and AI infrastructure needed to support the broader data portal. They had already done significant feature heavy-lifting for ADP Studio, and their focus turned to other tasks. Where ADP Studio was concerned, they were mostly interested in integrating Autodesk’s internal AI capabilities. That created a resource limitation and introduced slightly more pushback to my ideas.',
+      'My engineering team was the infrastructure team. They owned the data and AI infrastructure under the broader data portal. They had already done the heavy feature lifting for ADP Studio, and their focus had moved on. On ADP Studio, they were mostly interested in integrating Autodesk’s internal AI capabilities. So I had less engineering capacity to work with, and a bit more pushback on my ideas.',
   },
 ] as const
 
@@ -163,11 +163,11 @@ export const AUTODESK_EXPORT_AGAINST = [
 export const AUTODESK_EXPORT_DECISION = [
   {
     title: 'The decision',
-    body: 'We ultimately landed on a classification-based approach: low-sensitivity data, export permitted; sensitive data, additional controls. Metadata Management classified schemas and tables by sensitivity. We also launched a backfill of existing tags and created a self-serve flow for users to request export access for new, deprecated, or incorrectly classified tables.',
+    body: 'We landed on a classification-based approach: low-sensitivity data, export permitted; sensitive data, extra controls. Metadata Management classified schemas and tables by sensitivity. We also ran a backfill of existing tags and built a self-serve flow for users to request export access for new, deprecated, or wrongly classified tables.',
   },
   {
     title: 'What it changed',
-    body: 'The decision shifted the question from “Which users are allowed to export?” to “What data is safe to export?” That was one of the clearest examples of what platform PM meant in practice: balancing first principles of the platform with the individual needs and actual behavior of users.',
+    body: 'It moved the question from “Which users are allowed to export?” to “What data is safe to export?” That was one of the clearest examples of what platform PM meant day to day: weighing the platform’s first principles against what users actually needed and actually did.',
   },
 ] as const
 
@@ -184,33 +184,33 @@ export const AUTODESK_CHALLENGES = [
   {
     title: 'I had to build so much context',
     detail:
-      'There was no single source of truth. Leadership, engineering, the previous PM, and users each held different pieces of the story, so my first challenge was understanding the history, architecture, decisions, and what users actually needed. I went through old Confluence documentation, OneDrive’s plugin on ChatGPT, Jira epics and stories, and conducted 12+ structured user interviews to reconstruct the context. I also researched Snowflake and Databricks to better understand where the broader data space was heading, particularly around data at scale and agentic experiences. I built a personal context “brain” using Obsidian and Cursor, using AI to organize my accumulated context, connect information across sources, and synthesize interview transcripts and research. I kept building that knowledge base throughout the internship, so that when I left, I could turn it into 6 handoff documents that gave the next person the context I had spent months building.',
+      'There was no single source of truth. Leadership, engineering, the previous PM, and users each held a different piece of the story, so my first job was to learn the history, the architecture, the decisions, and what users actually needed. I went through old Confluence documentation, OneDrive’s plugin on ChatGPT, and Jira epics and stories, then ran 12+ structured user interviews to put the context back together. I also read up on Snowflake and Databricks to see where the broader data space was heading, mostly around data at scale and agentic experiences. Then I built a personal context “brain” in Obsidian and Cursor, with AI to organize what I had, connect it across sources, and pull interview transcripts and research together. I kept adding to it all through the internship, so that when I left, I could turn it into 6 handoff documents that gave the next person the context I had spent months collecting.',
   },
   {
     title: 'I had to navigate technical ambiguity',
     detail:
-      'As an engineer, I was already comfortable operating in technical ambiguity. For ADP Studio, I became highly resourceful in finding context. ADP Studio was built on Querybook and integrated with Snowflake, Presto/Trino, Spark, Hive, and S3. I had to understand enough of the architecture and underlying technologies to make informed product decisions and participate meaningfully in architecture discussions, and specifically to understand what AI features I could reliably test, benchmark, and request to build. Rather than waiting for someone to explain the system to me, I pieced it together through existing technical documentation, Jira epics and stories, and conversations with engineers, building enough technical depth to reason about the product alongside the engineering teams.',
+      'As an engineer, I was already comfortable working in technical ambiguity. On ADP Studio, I had to go find the context myself. ADP Studio was built on Querybook and integrated with Snowflake, Presto/Trino, Spark, Hive, and S3. I needed enough of the architecture and the technologies under it to make informed product decisions, hold my own in architecture discussions, and know which AI features I could reliably test, benchmark, and ask for. So instead of waiting for someone to explain the system to me, I pieced it together from the existing technical documentation, Jira epics and stories, and conversations with engineers, until I could reason about the product alongside the engineering teams.',
   },
   {
     title: 'My manager left two weeks in',
     detail:
-      'Two weeks into my internship, my manager left for a 7-week sabbatical. I worked extensively with my skip-level, coordinating across engineering teams in India and the Bay Area, with no in-person overlap and a significant time-zone gap. I had to independently drive product decisions, establish stakeholder cadences, lead user interviews and feedback sessions, define requirements, coordinate engineering and partner teams, and participate in architecture discussions. I was only able to navigate that level of independence because I had two prior Big Tech internships as an engineer, and this was my second term at Autodesk.',
+      'Two weeks into my internship, my manager left for a 7-week sabbatical. I worked closely with my skip-level, across engineering teams in India and the Bay Area, with no in-person overlap and a big time-zone gap. I had to drive product decisions on my own, set up stakeholder cadences, lead user interviews and feedback sessions, define requirements, coordinate engineering and partner teams, and take part in architecture discussions. I could only handle that much independence because I had two prior Big Tech internships as an engineer, and this was my second term at Autodesk.',
   },
   {
     title: 'Adjusting to the speed of an AI-first world',
     detail:
-      'Prototyping became much faster, but product definition did not, and a prototype introduces implementation ambiguity and weak alignment between product and engineering. While I was leading the agentic chat initiative, I saw the gap directly: AI could quickly produce a working prototype, but prototypes don’t answer the questions engineering needs to implement it, and often add complexity from the sheer volume of features and experiences packed in. Once I understood that, I created Spec Mode to bridge the gap: prototype, user story, product requirements, and existing feedback, combined into one working artifact instead of separated. The prototype showed what the experience should feel like by walking the user through a step-by-step spotlight demo, alongside a Jira-like story specification on the right-hand bar.',
+      'Prototyping got much faster. Product definition did not. A prototype on its own leaves implementation ambiguity and weak alignment between product and engineering. Leading the agentic chat work, I saw it directly: AI could produce a working prototype quickly, but a prototype doesn’t answer the questions engineering needs answered to implement it, and it often adds complexity from the sheer volume of features and experiences packed in. Once I understood that, I made Spec Mode: prototype, user story, product requirements, and existing feedback in one working artifact instead of separate pieces. The prototype walked the user through a step-by-step spotlight demo to show what the experience should feel like, with a Jira-like story specification in the right-hand bar.',
   },
 ] as const
 
 export const AUTODESK_FUTURE_BLOCKS = [
   {
     title: 'Product stickiness is often switching cost',
-    body: 'Users don’t stay with a product only because it has every feature. They stay because their workflows already work. Migration means relearning, changing habits, and organizational cost. Adoption strategy has to account for those switching costs, not just feature gaps.',
+    body: 'Users don’t stay with a product only because it has every feature. They stay because their workflows already work. Migration means relearning, new habits, and cost to the organization. So an adoption plan has to account for switching costs as much as for feature gaps.',
   },
   {
     title: 'Trust is a product requirement',
-    body: 'Users will tolerate a missing feature more readily than incorrect or unreliable results. That becomes even more important with AI. AI recommendations need to be grounded in relevant, trustworthy data.',
+    body: 'Users will put up with a missing feature more easily than a wrong or unreliable result. That matters even more with AI. AI recommendations have to be grounded in data that is relevant and trustworthy.',
   },
   {
     title: 'Governance is part of the product',
@@ -218,18 +218,18 @@ export const AUTODESK_FUTURE_BLOCKS = [
   },
   {
     title: 'AI changes the product surface',
-    body: 'Traditional software asks: “What does the user need to click?” Agentic systems introduce a different question: “What can the agent safely access and act on?” That makes APIs, permissions, structured data, access boundaries, and data quality core product capabilities.',
+    body: 'Traditional software asks: “What does the user need to click?” Agentic systems ask something else: “What can the agent safely access and act on?” That turns APIs, permissions, structured data, access boundaries, and data quality into core product capabilities.',
   },
 ] as const
 
 export const AUTODESK_OUTCOMES = [
   '380+ users, 60% increase in internal adoption, ~50% improvement in usability',
-  '7+ redesigned workflows with clearer information architecture, and a 3x expansion of usable workspace',
+  '7+ redesigned workflows with clearer information architecture, and 3x more usable workspace',
   '~30% faster AI-assisted data workflows across schema assistance, query discovery, autocomplete, and MCP integrations',
   '12+ user interviews, partnering with Engineering, Trust, Metadata Management, and AI teams on product vision, roadmap, and governance principles',
-  'led UX strategy, feature ideation, and prototyping, including on an AI chatbot feature: dogfooding 12+ prototypes, catching 20+ issues before engineering implementation, and cutting concept-to-validation time by ~40%',
-  'created a 12-component scalable design system to support accurate prototyping',
-  'built a benchmarking framework for MCP- and LLM-powered features across 20+ representative workflows, establishing thresholds for accuracy, latency, task completion, and trustworthiness',
+  'led UX strategy, feature ideation, and prototyping, including on an AI chatbot feature: dogfooded 12+ prototypes, caught 20+ issues before engineering built them, and cut concept-to-validation time by ~40%',
+  'created a scalable 12-component design system so prototypes stayed accurate',
+  'built a benchmarking framework for MCP- and LLM-powered features across 20+ representative workflows, with thresholds for accuracy, latency, task completion, and trustworthiness',
   'led a 6-team, multi-PM cross-functional effort that became Autodesk’s agentic data strategy',
-  'reduced my own process overhead by ~35% with an AI-enabled PM workflow built on Claude, Obsidian, and Jira MCP',
+  'cut my own process overhead by ~35% with an AI-enabled PM workflow built on Claude, Obsidian, and Jira MCP',
 ] as const

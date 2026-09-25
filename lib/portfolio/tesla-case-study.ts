@@ -17,7 +17,7 @@ export const TESLA_HERO_META = {
   kicker: 'Tesla · Shipped Summer 2025',
   title: 'Building Reusable Factory Software',
   role: 'Frontend and Infrastructure Engineering Intern',
-  timeline: 'May–August 2025',
+  timeline: 'May to August 2025',
   team: ['Software Engineers', 'ML Engineers', 'Operators', 'Technicians'],
   skills: [
     'Frontend Architecture',
@@ -47,7 +47,7 @@ export const TESLA_STAKEHOLDERS = [
   },
   {
     title: 'Software engineers',
-    detail: 'Needed predictable data contracts, reusable patterns, and code that could support future workflows.',
+    detail: 'Needed predictable data contracts and reusable patterns that could support future workflows.',
   },
   {
     title: 'Technicians',
@@ -67,7 +67,7 @@ export const TESLA_QUALITY_POINTS = [
 export const TESLA_WORKFLOW_CARDS = [
   {
     title: 'Live charts',
-    detail: 'For understanding current operational conditions and changes over time.',
+    detail: 'For seeing current conditions and how they changed over time.',
   },
   {
     title: 'Forms and filters',
@@ -112,11 +112,11 @@ export const TESLA_VIDEO_SUBSECTIONS = [
   },
   {
     title: 'Performance',
-    body: 'Large media files made loading strategy part of the user experience. I used lazy loading, parallel data fetching, skeleton states, memoization, and targeted updates to reduce unnecessary work and keep the interface responsive.',
+    body: 'Large media files meant loading was something the user felt. I used lazy loading, parallel data fetching, skeleton states, memoization, and targeted updates to reduce unnecessary work and keep the interface responsive.',
   },
   {
     title: 'API contracts',
-    body: 'The frontend depended on predictable information: protected file locations, timestamps, visual coordinates, detection types, and supporting metadata. I worked with backend engineers to define how this information would be consumed and represented in the interface.',
+    body: 'The frontend depended on predictable information: protected file locations, timestamps, visual coordinates, detection types, and supporting metadata. I worked with backend engineers to define how the frontend would read and display it.',
   },
   {
     title: 'Security',

@@ -51,7 +51,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Hackathon dev team lead',
         org: 'Hack Western',
-        focus: 'Platform for 400+ hackers',
+        focus: 'Platform for 300+ students',
         stack: ['Next.js', 'TypeScript'],
       },
     ],
@@ -77,14 +77,14 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Product lead',
         org: 'Hack Western',
-        focus: 'Vision + roadmap, 6 engineers',
+        focus: 'Vision + roadmap, 8-person dev team',
         stack: ['Roadmapping', 'Design reviews'],
       },
       {
-        role: 'Bootcamp lead',
+        role: 'Fellowship lead',
         org: 'IPS Fellowship',
-        focus: '10-week product curriculum',
-        stack: ['Curriculum design', 'Mentorship'],
+        focus: '28 product educationals in 2 years',
+        stack: ['Program leadership', 'Mentorship'],
       },
     ],
     experienceRefs: ['autodesk', 'stealth-startup', 'hack-western', 'ivey-product'],
@@ -129,13 +129,13 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Product + eng lead',
         org: 'Hack Western',
-        focus: '400+ hackers, 6-person team',
+        focus: '300+ students, 8-person team',
         stack: ['Facilitation', 'Team leadership'],
       },
       {
-        role: 'Bootcamp lead',
+        role: 'Fellowship lead',
         org: 'IPS Fellowship',
-        focus: 'Mentoring first-time PMs',
+        focus: 'Helping students develop PM skills',
         stack: ['Workshops', 'Mentorship'],
       },
       {

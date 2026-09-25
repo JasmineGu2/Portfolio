@@ -14,7 +14,7 @@ import type {
 
 // --- Hero copy (edit in HeroSection or here) ---
 export const HERO_COPY = {
-  headline: 'My work is translation.',
+  headline: 'I build for a deep variety of audiences.',
   subheadline:
     'I build at the boundary between users, products, and technical systems.',
   supporting:
@@ -31,7 +31,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     categoryLabel: 'Webhook / Trigger',
     title: 'New problem received',
     description:
-      'Ambiguous requirements. Real users. Business constraints. Technical complexity.',
+      'Ambiguous requirements, real users, business constraints, and technical complexity.',
     inputTags: [
       'user need',
       'operational friction',
@@ -57,7 +57,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     title: 'Context Agent',
     subtitle: 'Understands the environment before proposing a solution.',
     description:
-      'I begin by understanding why the system exists, who depends on it, and where the friction actually lives.',
+      'I start by learning why the system exists, who depends on it, and where the friction is.',
     input: 'Ambiguous problem',
     output: 'Shared problem definition',
     responsibilities: [
@@ -118,7 +118,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     categoryLabel: 'Agent',
     title: 'Product Agent',
     subtitle:
-      'Turns ambiguity into priorities, requirements, and a clear path forward.',
+      'Turns ambiguity into priorities, requirements, and a clear next step.',
     description:
       'I turn broad needs into a product model that teams can build, test, and improve.',
     input: 'User-centered workflow',
@@ -158,7 +158,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     subtitle:
       'Builds the system across frontend, backend, APIs, data, and infrastructure.',
     description:
-      'I build the technical system behind the workflow, not just the interface in front of it.',
+      'I build the technical system behind the workflow as well as the interface in front of it.',
     input: 'Product plan and system requirements',
     output: 'Working product and technical system',
     responsibilities: [
@@ -196,9 +196,9 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     agentType: 'operations',
     categoryLabel: 'Agent',
     title: 'Operations Agent',
-    subtitle: 'Connects the system to the environment where it must actually work.',
+    subtitle: 'Connects the system to the environment where it has to work.',
     description:
-      'I make sure the product works in context, not just in isolation.',
+      'I make sure the product works in context as well as in isolation.',
     input: 'Working product and technical system',
     output: 'Operationally useful system',
     responsibilities: [
@@ -225,7 +225,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
         'Connect to production workflows, coordinate rollout, monitor, and govern adoption.',
       output: 'Operationally useful system that works in real context.',
       translation: 'Working software → operational value.',
-      unlocked: 'System that delivers measurable outcomes in production.',
+      unlocked: 'System that produces measurable results in production.',
       tools: ['Rollout planning', 'Monitoring', 'Cross-team coordination'],
     },
   },
@@ -244,7 +244,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     categoryLabel: 'Merge',
     title: 'Merge perspectives',
     description:
-      'The strongest solutions do not come from optimizing one layer. They come from understanding how every layer affects the others.',
+      'The strongest solutions come from understanding how every layer affects the others, more than from optimizing any one layer.',
     body: 'user understanding · product judgment · technical execution · operational awareness · intelligence · reliability · cross-functional alignment',
     input: 'Multiple specialization paths',
     output: 'End-to-end systems perspective',
@@ -256,7 +256,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
       process: 'Synthesize perspectives across all specialization layers.',
       output: 'End-to-end systems perspective.',
       translation: 'Specialized outputs → unified systems view.',
-      unlocked: 'Holistic solution ready for orchestration.',
+      unlocked: 'Solution that covers every layer, ready for orchestration.',
       tools: ['Systems thinking', 'Tradeoff analysis', 'Cross-layer synthesis'],
     },
   },
@@ -265,10 +265,10 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
     type: 'orchestrator',
     categoryLabel: 'Orchestrator',
     title: 'Systems Orchestrator',
-    subtitle: 'Product-minded engineer and technical translator',
+    subtitle: 'Product engineer',
     description: 'Jasmine Gu',
-    body: 'I connect the agents. I understand the user. I structure the product. I build the technical system. I align the people around it. I make the workflow useful, scalable, and reliable.',
-    coreStatement: 'My work is translation.',
+    body: 'I connect the agents, understand the user, structure the product, build the technical system, and align the people around it. I make the workflow useful, scalable, and reliable.',
+    coreStatement: 'I build for a deep variety of audiences.',
     supportingStatement:
       'I am most useful where product, engineering, and operations collide.',
     connectedLabels: ['Users', 'Products', 'Technical Systems', 'Operations'],
@@ -521,7 +521,7 @@ export const EXPERIENCE_EXECUTIONS: ExperienceExecution[] = [
     workflowBuilt:
       'Reusable React and TypeScript components, API integrations, theming, testing, and performance improvements.',
     resultProduced:
-      'A more consistent, engaging, and reliable TurboTax experience.',
+      'A more consistent and reliable TurboTax experience.',
     capabilityUnlocked: 'Product engineering and user experience at scale.',
   },
   {
@@ -550,7 +550,7 @@ export const EXPERIENCE_EXECUTIONS: ExperienceExecution[] = [
     workflowBuilt:
       'React interfaces, video infrastructure, APIs, visualizations, ML workflows, testing, security safeguards, and cross-team delivery.',
     resultProduced:
-      'Faster time-to-insight and more usable operational intelligence.',
+      'Faster time to insight and more usable operational intelligence.',
     capabilityUnlocked:
       'Building at the intersection of users, ML systems, infrastructure, and real-world operations.',
   },
@@ -725,14 +725,14 @@ export const ABOUT_COPY = {
   title: 'About the orchestrator',
   body: 'I study Computer Science and Business, which shapes how I approach technical work. I care about why a system should exist, who must use it, how it should be built, and what must happen for it to work reliably in the real world.',
   closing:
-    'I do not see business, product, and engineering as separate boxes. I see them as connected nodes in the same workflow.',
-  statement: 'My work is translation.',
+    'I see business, product, and engineering as connected nodes in the same workflow.',
+  statement: 'I build for a deep variety of audiences.',
 }
 
 // --- Contact section ---
 export const CONTACT_COPY = {
   title: 'Start a new workflow',
-  body: 'Have a difficult product, platform, or operational problem? Let\u2019s connect the right people, decisions, and systems.',
+  body: 'Have a difficult product, platform, or operational problem? Let\u2019s talk.',
   status:
     'Available for conversations about Forward Deployed Engineering, Technical Product Management, Platform Product Management, and product-minded engineering roles.',
   buttons: [
@@ -749,7 +749,7 @@ export const CONTACT_COPY = {
 // --- Site metadata ---
 export const SITE_CONFIG = {
   name: 'Jasmine Gu',
-  tagline: 'Product-minded engineer and technical translator',
+  tagline: 'Product engineer',
   email: 'jasmine@example.com', // UPDATE: your email
   linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201',
 }

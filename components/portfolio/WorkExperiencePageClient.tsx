@@ -20,11 +20,11 @@ export function WorkExperiencePageClient({ slug }: { slug: WorkId }) {
   const accent = resolveWorkAccent(slug, colorScheme)
 
   return (
-    <BentoWorkspaceShell title="Experience" description={tile.subtitle}>
+    <BentoWorkspaceShell title="Experience" description={tile.subtitle} hidePageHeader>
       <div className="bw-content-panel">
-        <Link href="/" className="bw-content-back">
-          <ArrowLeft className="w-4 h-4" aria-hidden />
-          Back to workspace
+        <Link href="/" className="pf-btn mb-5">
+          <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+          Back to work
         </Link>
 
         <header className="bw-content-header">

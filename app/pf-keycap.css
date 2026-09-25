@@ -1,0 +1,123 @@
+/*
+ * The "Email Me" keycap in the footer: an isometric mechanical key, in the site's orange. The structure is a
+ * socket, a stack of extruded layers and a top face; pressing it flattens the stack (scaleZ). The geometry is
+ * the pasted 3D keyboard-key button; only the colors, the label size and the outer scale are ours.
+ */
+.pf-key-scale {
+  /* The key is drawn at 220 x 140; this scales the whole scene into the footer column. */
+  --pf-key-zoom: 0.88;
+  width: calc(310px * var(--pf-key-zoom));
+  height: calc(215px * var(--pf-key-zoom));
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.pf-key-scene {
+  perspective: 2000px;
+  transform: scale(var(--pf-key-zoom));
+  transform-origin: center;
+}
+
+.pf-key {
+  --btn-top: #ed3801;
+  --btn-top-pressed: #c22e01;
+  --btn-text: #ffffff;
+  --btn-border: #b32b01;
+  --btn-border-pressed: #8f2200;
+  --layer-left: #b32b01;
+  --layer-right: #ff6a3d;
+  --btn-shadow: rgba(0, 0, 0, 0.1);
+
+  position: relative;
+  display: block;
+  width: 220px;
+  height: 140px;
+  transform: rotateX(60deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The hole it sits in. */
+.pf-key__socket {
+  position: absolute;
+  inset: -20px;
+  background: #e4e2e1;
+  border-radius: 24px;
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.05),
+    inset 4px 4px 8px rgba(0, 0, 0, 0.12),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.8),
+    inset 10px 10px 20px rgba(0, 0, 0, 0.04);
+  transform: translateZ(0);
+}
+
+.pf-key__extrusion {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scaleZ(1);
+}
+
+.pf-key__layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--layer-left) 50%, var(--layer-right) 50%);
+  box-shadow: inset 0 0 0 1px var(--btn-shadow);
+}
+
+.pf-key__top {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--btn-border);
+  border-radius: 12px;
+  background: var(--btn-top);
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.03),
+    inset 2px 2px 5px rgba(255, 255, 255, 1);
+  color: var(--btn-text);
+  font-family: Inter, system-ui, sans-serif;
+  /* "Email Me" is longer than "Launch", so the label is smaller than the original 42px. */
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* The press (after hover, so a pressed key stays dark under the pointer). */
+.pf-key:hover .pf-key__top {
+  background: #f44a12;
+}
+.pf-key:active .pf-key__extrusion,
+.pf-key[data-down='true'] .pf-key__extrusion {
+  transform: scaleZ(0.3);
+}
+.pf-key:active .pf-key__top,
+.pf-key[data-down='true'] .pf-key__top {
+  background: var(--btn-top-pressed);
+  border-color: var(--btn-border-pressed);
+}
+
+.pf-key:focus-visible .pf-key__socket {
+  outline: 3px solid #0e3b8f;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1000px) {
+  .pf-key-scale {
+    --pf-key-zoom: 0.7;
+  }
+}

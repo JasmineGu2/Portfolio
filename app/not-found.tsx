@@ -11,8 +11,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="px-4 py-2 bg-[#2A2A2A] dark:bg-white text-white dark:text-[#2A2A2A] rounded-lg hover:opacity-80 transition-opacity"
-        style={{ fontFamily: "Inter" }}
+        className="pf-btn"
       >
         Go back home
       </Link>

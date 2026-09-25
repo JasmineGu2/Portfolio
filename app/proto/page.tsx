@@ -32,6 +32,21 @@ const LINKS = [
     title: 'Using interior.dev',
     body: 'A different animation approach — shadcn-style copy-in React components (Copy Button, Text Reveal, Loading Button, Sticky Header) wired to your real content, not Material.',
   },
+  {
+    href: '/proto/inspo',
+    title: 'Using the Inspo MCP: bento windows',
+    body: 'The homepage as a bento of draggable OS-style windows, composed from references found through the Inspo MCP (109ichiki, Counter Forms, The Creative Independent, Milanote). Composition only: no third-party assets, fonts or code.',
+  },
+  {
+    href: '/proto/terminal',
+    title: 'Using the Inspo MCP: terminal',
+    body: 'Your experiences as a terminal session: a live prompt in the hero and stories that scroll as transcripts. Composed from Inspo\'s Ferrite example and Tinybird, Linear, E2B, Warp and Raycast. The Autodesk and Tesla chapters are published case-study text; the rest are flagged drafts.',
+  },
+  {
+    href: '/proto/other-features-v2',
+    title: 'Other features v2 (Future work)',
+    body: 'Experimental features and exploratory work not yet integrated into the main experience. Includes: Ask Jasmine (AI chat about the portfolio), and other interactive prototypes.',
+  },
 ]
 
 export default function ProtoIndexPage() {

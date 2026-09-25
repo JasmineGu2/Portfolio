@@ -20,7 +20,7 @@ export const caseStudies: CaseStudy[] = [
     id: 'rbc-leap',
     title: 'Royal Bank of Canada Design Thinking Project',
     category: 'Design Thinking',
-    description: 'User-centric design and research for LEAP. Applied design thinking methodologies to understand user needs and create innovative solutions.',
+    description: 'User research and design thinking for LEAP.',
     challenge: 'Need for user-centric design approach',
     solution: 'Applied design thinking and UX research methodologies',
     results: ['Improved user understanding', 'Innovative solution design', 'Enhanced user experience'],
@@ -35,10 +35,10 @@ export const caseStudies: CaseStudy[] = [
     id: 'compass-food-bank',
     title: 'The Compass Food Bank VBA',
     category: 'Automation',
-    description: 'Automating task scheduling with VBA to improve operational efficiency and reduce manual work.',
+    description: 'VBA automation for task scheduling, so less of it has to be done by hand.',
     challenge: 'Manual task scheduling processes',
     solution: 'Developed VBA automation solutions',
-    results: ['Reduced manual work', 'Improved efficiency', 'Streamlined operations'],
+    results: ['Reduced manual work', 'Improved efficiency', 'Simpler scheduling process'],
     tags: ['Excel VBA', 'Automation', 'Process Improvement'],
     link: 'https://thecompass.ca/',
     image: {
@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
     id: 'fellowship',
     title: 'Fellowship Project',
     category: 'Product Management',
-    description: 'Product management fellowship project focusing on user research and product strategy.',
+    description: 'A fellowship project on user research and product strategy.',
     challenge: 'Understanding user needs and market opportunities',
     solution: 'Applied PM methodologies and user research',
     results: ['Improved product strategy', 'Better user insights', 'Enhanced product decisions'],
@@ -89,7 +89,7 @@ export const technicalProjects: TechnicalProject[] = [
   {
     id: 'brewmates',
     title: 'BrewMates - Coffee Chat App',
-    description: 'Empowering students with tools to approach networking events confidently.',
+    description: 'Helps students approach people at networking events with more confidence.',
     technologies: ['React', 'Cohere API', 'QR Code Scanner', 'HTML', 'CSS', 'Firebase', 'Figma'],
     demo: 'https://devpost.com/software/brewmates',
     image: {
@@ -112,7 +112,7 @@ export const technicalProjects: TechnicalProject[] = [
   {
     id: 'personal-website',
     title: 'Personal Website',
-    description: 'Personal portfolio website showcasing projects, experience, and skills.',
+    description: 'This site: projects, experience, and skills in one place.',
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     demo: '#',
     image: {

@@ -12,12 +12,19 @@ export default function GlobalError({
       <body>
         <div className="flex min-h-screen flex-col items-center justify-center p-8">
           <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: "Editorial Old" }}>
-            Something went wrong!
+            Something went wrong.
           </h2>
           <button
             onClick={reset}
-            className="px-4 py-2 bg-[#2A2A2A] dark:bg-white text-white dark:text-[#2A2A2A] rounded-lg hover:opacity-80 transition-opacity"
-            style={{ fontFamily: "Inter" }}
+            style={{
+              padding: '4px 12px',
+              border: '1px solid #ED3801',
+              borderRadius: 9999,
+              background: 'transparent',
+              color: '#C22E01',
+              font: '500 12px/16px Inter, system-ui, sans-serif',
+              cursor: 'pointer',
+            }}
           >
             Try again
           </button>
