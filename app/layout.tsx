@@ -26,6 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/mocks/k2.css" />
+        <link rel="stylesheet" href="/mocks/k3.css" />
+        <link rel="stylesheet" href="/mocks/k4.css" />
+        <link rel="stylesheet" href="/mocks/k6.css" />
+      </head>
       <body style={{ margin: 0, padding: 0 }} className="q q6" data-map="blue">
         {children}
         {/*

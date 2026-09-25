@@ -87,9 +87,9 @@ My Favorite Tools I've created to solve my pain points :)
 Hello, I'm Jasmine Gu.
 
 An engineer passionate about building functional technology and delightful experiences.
-Currently leading Eng @Hack Western + 5th year of CS honors and Business @Western University.
+Currently 5th year of CS honors and Business @Western University.
 
-Previously @ Autodesk, Tesla, and Intuit.
+Previously SWE @Autodesk, Tesla, and Intuit, Platform PM @Autodesk
 
 Experience
 Autodesk Product Manager (AI and Data Products)  - Summer 2026
@@ -99,3 +99,10 @@ Intuit Frontend Engineer (TurboTax.com Onboarding)- Summer 2024
 Stealth Startup - Fall 2023
 OMERS Solutions Engineer - Summer 2023
 Metaverse Group (Acq. Tokens.com) - Spring 2023
+
+Keep the A few highlights but write this....
+A few highlights (not on my resume)
+-> Did consulting project on digital transofmration exploring HRIS
+-> Currently writing a business case on Vibe Coding Product Marketing Strategy for Replit
+-> Set up Salesforce system, and Excel Scripts for local homeless shelter (120+ hours saved monthly)
+-> Keep them all  except get rid of the most recently.. at...

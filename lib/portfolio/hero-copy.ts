@@ -1,7 +1,7 @@
 /** Front-page copy for the Work hero. */
 
 export const HERO_HEADLINE =
-  "I'm a product engineer. I code while taking careful consideration of the end users, the business context, and product strategy."
+  "An engineer passionate about building functional technology and delightful experiences."
 
 export const WHATS_NEXT = {
   title: "What's next",
@@ -12,8 +12,10 @@ export const WHATS_NEXT = {
 export const HERO_HIGHLIGHTS_LEAD = 'a few highlights from university:'
 
 export const HERO_HIGHLIGHTS = [
-  'completed 7 internships across 4 big tech companies, a Series A startup, a stealth 0→1 and Enterprise IT',
-  'led my school’s Product Fellowship for 2 years, hosting 28 product educationals and helping students develop PM skills',
-  'lead a dev team of 8 for Hack Western, my school’s hackathon serving 300+ students',
-  'most recently, a Platform Product Manager Intern at Autodesk, where I worked on agentic workflows for enterprise data tools, and absolutely loved it',
+  ‘completed 7 internships across 4 big tech companies, a Series A startup, a stealth 0→1 and Enterprise IT’,
+  ‘led my school’s Product Fellowship for 2 years, hosting 28 product educationals’,
+  ‘lead a dev team of 8 for Hack Western, my school’s hackathon serving 300+ students’,
+  ‘did consulting on digital transformation, exploring HRIS systems for enterprise’,
+  ‘currently writing a business case on Vibe Coding Product Marketing Strategy for Replit’,
+  ‘set up Salesforce system and Excel Scripts for local homeless shelter, saving 120+ hours monthly’,
 ] as const

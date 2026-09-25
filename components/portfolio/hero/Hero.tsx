@@ -26,16 +26,16 @@ const SOCIALS = [
 function ArrowList({ lead, note, items }: { lead: string; note?: string; items: readonly string[] }) {
   return (
     <div style={{ color: INK }}>
-      <p className="mb-1 text-[15px] font-medium">{lead}</p>
+      <p className="mb-4 text-base sm:text-lg font-semibold">{lead}</p>
       {note && (
-        <p className="-mt-1 mb-2 font-mono text-[11px] uppercase tracking-[0.14em]" style={{ opacity: 0.55 }}>
+        <p className="-mt-1 mb-3 font-mono text-xs uppercase tracking-[0.14em]" style={{ opacity: 0.55 }}>
           {note}
         </p>
       )}
-      <ul className="flex flex-col gap-1 text-[15px] leading-[1.45]" style={{ opacity: 0.8 }}>
+      <ul className="flex flex-col gap-3 text-base sm:text-lg leading-relaxed" style={{ opacity: 0.75 }}>
         {items.map((item) => (
-          <li key={item} className="flex gap-2">
-            <span aria-hidden>↳</span>
+          <li key={item} className="flex gap-3">
+            <span aria-hidden className="shrink-0">→</span>
             <span>{item}</span>
           </li>
         ))}
@@ -52,21 +52,25 @@ export function Hero() {
   return (
     <div className="flex flex-col gap-10 py-1 sm:gap-12">
       <div className="grid grid-cols-1 gap-7 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
-        <div className="flex flex-col gap-2.5">
-          <h1
-            className="font-mono text-[36px] font-bold lowercase leading-none sm:text-[46px]"
-            style={{ color: ACCENT }}
-          >
-            jasmine gu
-          </h1>
-          <p className="max-w-[34rem] text-xl leading-snug sm:text-[26px]" style={{ color: INK }}>
+        <div className="flex flex-col gap-4 sm:gap-6">
+          <div>
+            <p className="text-lg sm:text-xl mb-2" style={{ color: INK, opacity: 0.7 }}>
+              Hello, I'm
+            </p>
+            <h1
+              className="font-mono text-[48px] font-bold lowercase leading-none sm:text-[64px]"
+              style={{ color: ACCENT }}
+            >
+              jasmine gu
+            </h1>
+          </div>
+          <p className="max-w-[40rem] text-2xl sm:text-3xl leading-relaxed font-light" style={{ color: INK }}>
             {HERO_HEADLINE}
           </p>
-          <p className="text-[15px] leading-6" style={{ color: INK, opacity: 0.65 }}>
-            currently leading engineering @ <span className="font-semibold">hack western</span>,
-            prev. @ <span className="font-semibold">autodesk</span>,{' '}
-            <span className="font-semibold">tesla</span> and{' '}
-            <span className="font-semibold">intuit</span>
+          <p className="text-base sm:text-lg leading-7" style={{ color: INK, opacity: 0.7 }}>
+            Currently 5th year of <span className="font-semibold">CS honors and Business @ Western University</span>
+            <br />
+            Previously SWE @ <span className="font-semibold">Autodesk, Tesla, and Intuit</span>; Platform PM @ <span className="font-semibold">Autodesk</span>
           </p>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <SocialLinks links={SOCIALS} />
