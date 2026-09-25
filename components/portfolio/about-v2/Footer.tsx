@@ -12,6 +12,15 @@ export function Footer() {
           <a href="https://linkedin.com">LinkedIn</a>
         </nav>
       </div>
+      <style jsx>{`
+        /* Hide any magic 8 ball or spinner elements */
+        [class*='magic'],
+        [class*='spinner'],
+        [class*='loader'],
+        [role='progressbar'] {
+          display: none !important;
+        }
+      `}</style>
     </footer>
   )
 }

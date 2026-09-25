@@ -3,7 +3,6 @@ import { ResumeLink } from '@/components/portfolio/ResumeLink'
 import { FooterSignature } from '@/components/portfolio/footer/FooterSignature'
 import { FOOTER_FACTS } from '@/lib/portfolio/play-data'
 import { ContactKeycap } from '@/components/portfolio/footer/ContactKeycap'
-import { QuoteCard } from '@/components/portfolio/footer/QuoteCard'
 import { VideoToggle } from '@/components/portfolio/footer/VideoToggle'
 import {
   BackToTop,
@@ -27,13 +26,14 @@ export function SiteFooter() {
       <div className="pf-foot__in">
         <div className="pf-foot__top">
           <div className="pf-foot__mark">
-            <FooterSignature />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+              <FooterSignature />
+              <ContactKeycap href={`mailto:${SITE_CONTACT.email}`} />
+            </div>
             <div className="pf-foot__wordmark" data-originkit="vector-wordmark">
               {FOOTER_FACTS.wordmark}
             </div>
           </div>
-          <QuoteCard />
-          <ContactKeycap href={`mailto:${SITE_CONTACT.email}`} />
         </div>
 
         <div className="pf-foot__facts">

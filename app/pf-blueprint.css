@@ -85,17 +85,9 @@ html::-webkit-scrollbar-thumb {
 }
 .pf-foot__top {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(240px, 300px) auto;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 2.5rem;
-}
-@media (max-width: 1080px) {
-  .pf-foot__top {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-  .pf-foot__mark {
-    grid-column: 1 / -1;
-  }
 }
 @media (max-width: 640px) {
   .pf-foot__top {
