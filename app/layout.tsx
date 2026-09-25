@@ -16,7 +16,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
-  icons: { icon: '/icons/jasmine-logo.png' },
+  icons: { icon: '/icons/favicon.svg' },
 }
 
 export default function RootLayout({
@@ -26,14 +26,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen antialiased font-body">
-        <SoundProvider>
-          <PortfolioStateProvider>
-            <BentoWorkspaceProvider>
-              <SiteShell>{children}</SiteShell>
-            </BentoWorkspaceProvider>
-          </PortfolioStateProvider>
-        </SoundProvider>
+      <body style={{ margin: 0, padding: 0 }} className="q q6" data-map="blue">
+        {children}
         {/*
           Three independent layers, because any single one has a blind spot:
           Vercel's script can be ad-blocked, and the server-side middleware can't

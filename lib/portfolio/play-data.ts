@@ -11,7 +11,7 @@ export const FOOTER_FACTS = {
   currently: 'Leading engineering at Hack Western',
   city: 'Toronto',
   timeZone: 'America/Toronto',
-  wordmark: 'always curious',
+  wordmark: 'innovation is easy, integration is hard',
   signature: 'Jasmine',
 } as const
 

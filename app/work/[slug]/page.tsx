@@ -3,6 +3,7 @@ import { WORK_ORDER, type WorkId } from '@/lib/portfolio/bento-workflows/experie
 import { isWorkExperienceSlug } from '@/lib/portfolio/work-experience-content'
 import { getWorkTileById } from '@/lib/portfolio/bento-workflows/layouts'
 import { WorkExperiencePageClient } from '@/components/portfolio/WorkExperiencePageClient'
+import { GlobalBackground } from '@/components/portfolio/GlobalBackground'
 
 export function generateStaticParams() {
   return WORK_ORDER.map((slug) => ({ slug }))
@@ -27,5 +28,12 @@ export default async function WorkExperiencePage({
   if (!isWorkExperienceSlug(slug)) notFound()
   if (slug === 'tesla') redirect('/tesla')
   if (slug === 'autodesk') redirect('/autodesk')
-  return <WorkExperiencePageClient slug={slug as WorkId} />
+  return (
+    <>
+      <GlobalBackground />
+      <div className="relative z-10">
+        <WorkExperiencePageClient slug={slug as WorkId} />
+      </div>
+    </>
+  )
 }

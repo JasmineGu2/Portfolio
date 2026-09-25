@@ -1,9 +1,9 @@
-import { Mail, Linkedin, Github } from 'lucide-react'
 import { SITE_CONTACT } from '@/lib/portfolio/workflow-layers'
 import { SIDE_PROJECT_SHOWCASE, WORK_SHOWCASE } from '@/lib/portfolio/showcase-data'
 import { WorkTabs } from '@/components/portfolio/hero/WorkTabs'
 import { AskButton } from '@/components/portfolio/hero/AskButton'
 import { AskPanel } from '@/components/portfolio/hero/AskPanel'
+import { SocialLinks } from '@/components/portfolio/hero/SocialLinks'
 import { ACCENT_ORANGE } from '@/lib/portfolio/brand'
 import {
   HERO_HEADLINE,
@@ -18,9 +18,9 @@ const ACCENT = ACCENT_ORANGE
 const INK = '#282828'
 
 const SOCIALS = [
-  { href: `mailto:${SITE_CONTACT.email}`, label: 'Email', icon: Mail },
-  { href: SITE_CONTACT.linkedin, label: 'LinkedIn', icon: Linkedin },
-  { href: SITE_CONTACT.github, label: 'GitHub', icon: Github },
+  { href: `mailto:${SITE_CONTACT.email}`, label: 'Email', iconType: 'mail' as const },
+  { href: SITE_CONTACT.linkedin, label: 'LinkedIn', iconType: 'linkedin' as const },
+  { href: SITE_CONTACT.github, label: 'GitHub', iconType: 'github' as const },
 ]
 
 function ArrowList({ lead, note, items }: { lead: string; note?: string; items: readonly string[] }) {
@@ -69,18 +69,7 @@ export function Hero() {
             <span className="font-semibold">intuit</span>
           </p>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            {SOCIALS.map(({ href, label, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                aria-label={label}
-                className="pf-btn pf-btn--icon"
-              >
-                <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
-              </a>
-            ))}
+            <SocialLinks links={SOCIALS} />
             <AskButton />
           </div>
 

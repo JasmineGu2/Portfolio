@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowUp, RotateCcw, X } from 'lucide-react'
+import { useSound } from '@/components/portfolio/SoundProvider'
 import { ASK_OPEN_EVENT } from '@/lib/portfolio/ask-events'
 import {
   ASK_FALLBACK,
@@ -16,11 +17,14 @@ import { SITE_CONTACT } from '@/lib/portfolio/workflow-layers'
 type Turn = { key: number; q: string; item?: AskItem }
 
 /** Question links, the way the panel shows them: `↳ question`. */
-function Ask({ id, onAsk }: { id: string; onAsk: (id: string) => void }) {
+function Ask({ id, onAsk, play }: { id: string; onAsk: (id: string) => void; play: (cue: string) => void }) {
   const item = askItem(id)
   if (!item) return null
   return (
-    <button type="button" className="ask__link" onClick={() => onAsk(id)}>
+    <button type="button" className="ask__link" onClick={() => {
+      play('select')
+      onAsk(id)
+    }}>
       <span aria-hidden>↳</span> {item.q}
     </button>
   )
@@ -32,6 +36,7 @@ function Ask({ id, onAsk }: { id: string; onAsk: (id: string) => void }) {
  * typed text is matched to the nearest written answer, and anything else falls back to the email link.
  */
 export function AskPanel() {
+  const { play } = useSound()
   const [open, setOpen] = useState(false)
   const [turns, setTurns] = useState<Turn[]>([])
   const [text, setText] = useState('')
@@ -42,7 +47,10 @@ export function AskPanel() {
 
   const push = useCallback((q: string, item?: AskItem) => {
     setTurns((t) => [...t, { key: count.current++, q, item }])
-  }, [])
+    if (item) {
+      play('success')
+    }
+  }, [play])
 
   const askId = useCallback(
     (id: string) => {
@@ -55,12 +63,13 @@ export function AskPanel() {
   useEffect(() => {
     const onOpen = (e: Event) => {
       setOpen(true)
+      play('open')
       const id = (e as CustomEvent<{ id?: string }>).detail?.id
       if (id) askId(id)
     }
     window.addEventListener(ASK_OPEN_EVENT, onOpen)
     return () => window.removeEventListener(ASK_OPEN_EVENT, onOpen)
-  }, [askId])
+  }, [askId, play])
 
   // a closed panel is out of the tab order and hidden from screen readers
   useEffect(() => {
@@ -68,14 +77,17 @@ export function AskPanel() {
     if (!open) return
     const focus = setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 260)
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+        play('close')
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
       clearTimeout(focus)
       window.removeEventListener('keydown', onKey)
     }
-  }, [open])
+  }, [open, play])
 
   useEffect(() => {
     const body = bodyRef.current
@@ -102,10 +114,16 @@ export function AskPanel() {
           <span aria-hidden>✦</span> Ask me anything
         </p>
         <div>
-          <button type="button" aria-label="Start over" onClick={() => setTurns([])}>
+          <button type="button" aria-label="Start over" onClick={() => {
+            play('select')
+            setTurns([])
+          }}>
             <RotateCcw size={16} strokeWidth={1.75} />
           </button>
-          <button type="button" aria-label="Close" onClick={() => setOpen(false)}>
+          <button type="button" aria-label="Close" onClick={() => {
+            play('close')
+            setOpen(false)
+          }}>
             <X size={18} strokeWidth={1.75} />
           </button>
         </div>
@@ -117,7 +135,7 @@ export function AskPanel() {
         {!turns.length && (
           <div className="ask__links">
             {ASK_STARTERS.map((id) => (
-              <Ask key={id} id={id} onAsk={askId} />
+              <Ask key={id} id={id} onAsk={askId} play={play} />
             ))}
           </div>
         )}
@@ -156,7 +174,7 @@ export function AskPanel() {
             {turn === last && (
               <div className="ask__links">
                 {(turn.item ? turn.item.next : ASK_STARTERS.filter((id) => !asked.has(id)).slice(0, 3)).map((id) => (
-                  <Ask key={id} id={id} onAsk={askId} />
+                  <Ask key={id} id={id} onAsk={askId} play={play} />
                 ))}
               </div>
             )}
@@ -164,7 +182,10 @@ export function AskPanel() {
         ))}
       </div>
 
-      <form className="ask__form" onSubmit={submit}>
+      <form className="ask__form" onSubmit={(e) => {
+        play('select')
+        submit(e)
+      }}>
         <input
           ref={inputRef}
           value={text}

@@ -60,12 +60,42 @@ Some of my beliefs:
 - Ai is a tribal activity, it is not best learned by experimenting but by combining crowd sourcing with iteration (AI power users are 5x more likely) 
 	- X and GitHub Public Repos are a great way to stay ahead of it 
 
-Product Launches I'm invested in
+------
+Product Trends I'm interested in...
+- Agentic Interfaces (Google's shift to Gemini first approach beta on Google Search, building interfaces for agents to best comprehend, GitHUb May no longer be suited for the AI native developer, Developers are leaving coding behind without a terminal, but long diff files may not be the best solution)
 - Attention Hacking with Ai Slop (ex. the rise of Microdramas)
-- AI X Hardware -> Gemini's
-- AI Labs x Community to promote tribal knowledge sharing
+- Agents for personal use (I'd love to see Muse come to Whatsapp in a Poke or customer service way for SMB users)
 
-My Favorite Tools I've created
-- To allow permissions -> notification to press on it, and terminals automatically color outline
-- Save my transcripts and projects all on a Notion
-- Telegram Bot that sets up 
+My Favorite Tools I've created to solve my pain points :) 
+- To support me multitasking, a notification and the terminal is outlined 
+- Save my transcripts and projects all on a Notion with modified summarize skill
+- Obsidian Context with Git syncing PC notepad to Macbook notepad
+	- Allows me to create thorough knowledge systems to build apps on
+	- Details about architecture, PRDs etc.
+	- This personal website
+- Obsidian Context Brain 
+	- For Product, to ingest transcripts, Jira Stories, detail user relationships, PRDs etc
+- Job Scraping Bot (telegram) - that scrapes well known job sites based off this repo, adapted for my use, (favorite feature) - lets me learn about startups, fed lists of startups like Lenny's top 100 startups and this X thread
+- Claude Routine to remember threads in my obsidian context about thought leadership I love from TLDR.tech with daily ingestion
+- NFC Chip setup with Foqus to allow me to stop doomscrolling and mandate daily walks outsied (NFC chip to get access to my phone, Foqos locking me out of all my computers)
+- Tailscale setup to allow me to SSH into my PC from my Macbook so my Macbook Air stops getting fried
+- Can never decide what to watch while eating, or what to wear-> Preload queue using "watch later" on Sunday Reset, NFC Chip beside fridge to automatically open and start video with timer. NFC Chip beside bed to talk to Google Home to set a timer, play getting ready music
+- 
+
+"i LOVE BUILDING THINGS THAT MATTER"
+
+Hello, I'm Jasmine Gu.
+
+An engineer passionate about building functional technology and delightful experiences.
+Currently leading Eng @Hack Western + 5th year of CS honors and Business @Western University.
+
+Previously @ Autodesk, Tesla, and Intuit.
+
+Experience
+Autodesk Product Manager (AI and Data Products)  - Summer 2026
+Autodesk Full-stack Engineer (Libraries Platform) - Spring 2026
+Tesla Frontend Engineer (ML Factory Tool) - Summer 2025
+Intuit Frontend Engineer (TurboTax.com Onboarding)- Summer 2024
+Stealth Startup - Fall 2023
+OMERS Solutions Engineer - Summer 2023
+Metaverse Group (Acq. Tokens.com) - Spring 2023
