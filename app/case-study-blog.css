@@ -4,7 +4,7 @@
   --cs-ink: #282828;
   --cs-muted: rgba(40, 40, 40, 0.6);
   --cs-border: rgba(40, 40, 40, 0.1);
-  --cs-prose: 45rem;
+  --cs-prose: 42rem;
   --cs-bg: #fff;
 }
 
@@ -127,7 +127,7 @@ html:has(.case-study) {
 
 /* Sections */
 .case-study__section {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   scroll-margin-top: 6rem;
 }
 
@@ -148,7 +148,7 @@ html:has(.case-study) {
 }
 
 .case-study__body {
-  margin: 0 0 1rem;
+  margin: 0 0 0.75rem;
   font-size: 16px;
   line-height: 1.7;
   color: var(--cs-ink);
@@ -156,7 +156,7 @@ html:has(.case-study) {
 }
 
 .case-study__body + .case-study__body {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .case-study__list {
