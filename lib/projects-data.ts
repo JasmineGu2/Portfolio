@@ -27,7 +27,7 @@ export const caseStudies: CaseStudy[] = [
     tags: ['Design Thinking', 'UX Research', 'Product Design'],
     link: 'https://www.figma.com/proto/TItO4qnPpXbOTbgmQntyPH/Untitled?node-id=0-1&t=ensfyHOuKQMtKQl7-1',
     image: {
-      src: 'projects/pm/leap.png',
+      src: '/projects/pm/leap.png',
       alt: 'RBC LEAP Project',
     },
   },
