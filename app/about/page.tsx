@@ -1,9 +1,12 @@
 import Script from 'next/script'
 import { BookShelf3D } from '@/components/portfolio/reading/BookShelf3D'
 import { getReading, READING_LABELS } from '@/lib/portfolio/reading'
+import { getTools } from '@/lib/portfolio/tools'
 
 export default function AboutPage() {
   const reading = getReading()
+  // Tools copy lives in content/tools.md; the page script renders it from this JSON.
+  const toolsJson = JSON.stringify(getTools()).replace(/</g, '\\u003c')
   return (
     <>
       <div id="nav"></div>
@@ -12,6 +15,11 @@ export default function AboutPage() {
           <div className="q6-top">
             <div className="q6-left">
               <div id="notes"></div>
+              <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
+              <div className="q6-notes2">
+                <div id="resumeNote"></div>
+                <div id="hlNote"></div>
+              </div>
             </div>
             <div id="lan"></div>
           </div>
@@ -34,7 +42,6 @@ export default function AboutPage() {
           {reading.subtitle && <p className="bs-sub">{reading.subtitle}</p>}
           <BookShelf3D items={reading.items} labels={READING_LABELS} />
         </div>
-        <div className="q-w q-block" id="tools"></div>
         <div className="q-w q-block">
           <div id="dith"></div>
         </div>
@@ -55,20 +62,21 @@ export default function AboutPage() {
           const $ = (s) => document.querySelector(s)
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
             $('#nav').innerHTML = Q.header({ active: 'about', work: '/', about: '#journey', ask: false })
-            $('#notes').innerHTML = Q.notes2()
+            Q.toolsPad($('#notes'), JSON.parse($('#tools-data').textContent))
+            Q.resumeNote($('#resumeNote'))
+            Q.highlightsNote($('#hlNote'))
             Q.lanyard($('#lan'))
             Q.meaningful($('#meaningful'))
             Q.productTrends($('#trends'))
             Q.customTools($('#customTools'))
             Q.sideQuests($('#quests'))
             Q.polaroids($('#pola'))
-            Q.tools($('#tools'))
             Q.dither($('#dith'))
             Q.footer2($('#foot'))
             Q.init()
             K.theme('pencil')
             Q.drag($('#notes'), { mouseOnly: true });
-            ['#meaningful', '#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
+            ['#resumeNote', '#hlNote', '#meaningful', '#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
           }
         `}
       </Script>
