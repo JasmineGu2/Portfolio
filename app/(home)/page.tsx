@@ -1,6 +1,9 @@
 import Script from 'next/script'
+import { getQuotes } from '@/lib/portfolio/quotes'
 
 export default function HomePage() {
+  // Footer quotes live in content/Quotes about engineering.md; the footer card reads this JSON.
+  const quotesJson = JSON.stringify(getQuotes()).replace(/</g, '\\u003c')
   return (
     <>
       <div id="nav"></div>
@@ -11,6 +14,7 @@ export default function HomePage() {
         </div>
       </main>
       <div id="foot"></div>
+      <script id="quotes-data" type="application/json" dangerouslySetInnerHTML={{ __html: quotesJson }} />
 
       <Script src="/mocks/k2-data.js" strategy="beforeInteractive" />
       <Script src="/mocks/k4-data.js" strategy="beforeInteractive" />
@@ -27,7 +31,7 @@ export default function HomePage() {
             $('#nav').innerHTML = Q.header({ active: 'work', work: '#work', about: '/about', ask: false })
             Q.stage($('#hero'))
             Q.workTabs($('#tabs'))
-            Q.footer2($('#foot'))
+            Q.footer2($('#foot'), JSON.parse($('#quotes-data').textContent))
             Q.init()
             K.theme('pencil')
             // Ask me anything panel removed; keep all other content

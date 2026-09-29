@@ -2,13 +2,19 @@ import Script from 'next/script'
 import { BookShelf3D } from '@/components/portfolio/reading/BookShelf3D'
 import { getReading, READING_LABELS } from '@/lib/portfolio/reading'
 import { getTools } from '@/lib/portfolio/tools'
-import { IDCardLanyard } from '@/components/ui/id-card-lanyard'
-import { BADGE } from '@/lib/portfolio/badge'
+import { getToolsCreated } from '@/lib/portfolio/tools-created'
+import { getAboutPhoto } from '@/lib/portfolio/about-photo'
+import { getQuotes } from '@/lib/portfolio/quotes'
 
 export default function AboutPage() {
   const reading = getReading()
+  const photo = getAboutPhoto()
   // Tools copy lives in content/tools.md; the page script renders it from this JSON.
   const toolsJson = JSON.stringify(getTools()).replace(/</g, '\\u003c')
+  // Same for the tools she built: content/tools-created.md
+  const madeJson = JSON.stringify(getToolsCreated()).replace(/</g, '\\u003c')
+  // Footer quotes: content/Quotes about engineering.md (the footer card reads #quotes-data)
+  const quotesJson = JSON.stringify(getQuotes()).replace(/</g, '\\u003c')
   return (
     <>
       <div id="nav"></div>
@@ -18,11 +24,17 @@ export default function AboutPage() {
             <div className="q6-left">
               <div id="notes"></div>
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
+              <script id="made-data" type="application/json" dangerouslySetInnerHTML={{ __html: madeJson }} />
+              <script id="quotes-data" type="application/json" dangerouslySetInnerHTML={{ __html: quotesJson }} />
               <div className="q6-made" id="customTools"></div>
             </div>
-            {/* the ID badge: a canvas rope you can swing; badge copy and the photo path live in lib/portfolio/badge.ts */}
-            <div className="q6-lan">
-              <IDCardLanyard {...BADGE} ropeColor="#0e3b8f" swingOnMount />
+            {/* hero polaroid (photo, alt and caption live in content/about-photo.md); draggable like the other about cards */}
+            <div className="q6-hero" id="heroPol">
+              <figure className="q6-hero-pol">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photo.photo} alt={photo.alt} width={768} height={1024} draggable={false} />
+                {photo.caption && <figcaption>{photo.caption}</figcaption>}
+              </figure>
             </div>
           </div>
         </div>
@@ -64,7 +76,7 @@ export default function AboutPage() {
             $('#nav').innerHTML = Q.header({ active: 'about', work: '/', about: '#journey', ask: false })
             Q.toolsPad($('#notes'), JSON.parse($('#tools-data').textContent))
             Q.productTrends($('#trends'))
-            Q.customTools($('#customTools'))
+            Q.customTools($('#customTools'), JSON.parse($('#made-data').textContent))
             Q.sideQuests($('#quests'))
             Q.polaroids($('#pola'))
             Q.dither($('#dith'))
@@ -72,7 +84,7 @@ export default function AboutPage() {
             Q.init()
             K.theme('pencil')
             Q.drag($('#notes'), { mouseOnly: true });
-            ['#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
+            ['#trends', '#customTools', '#quests', '#heroPol'].forEach((s) => Q.drag($(s)))
           }
         `}
       </Script>
