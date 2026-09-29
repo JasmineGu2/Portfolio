@@ -97,8 +97,8 @@
 }
 .title {
   font-family: var(--pf-font-editorial);
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.875rem;
+  line-height: 1.15;
   font-weight: 500;
   letter-spacing: -0.025em;
   color: var(--pf-dark);
@@ -106,18 +106,18 @@
 }
 @media (min-width: 768px) {
   .title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 2.25rem;
+    line-height: 1.15;
   }
 }
 .dek {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.625;
   color: var(--pf-ink);
   margin: 0 0 0.25rem;
 }
 .meta {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.25rem;
   color: var(--pf-muted);
   margin: 0 0 1.5rem;
@@ -146,7 +146,7 @@
 
 /* Body */
 .body {
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.7;
 }
 /* public/mocks/k2.css pads every <section> by 56px; these are plain article sections. */
@@ -158,7 +158,7 @@
 }
 .heading {
   font-family: var(--pf-font-editorial);
-  font-size: 1.125rem;
+  font-size: 1.3125rem;
   line-height: 1.75rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -175,7 +175,7 @@
 }
 @media (min-width: 768px) {
   .heading {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 .paragraph,
