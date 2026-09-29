@@ -8,9 +8,23 @@
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
 
-  // ---------- header: plain mono text. Name and role left, two links in the middle, the heart (and "Ask me anything" on About) right ----------
-  Q.header = ({ active = 'work', work = '34-home-v2.html', about = '35-about-v2.html', ask = false } = {}) =>
-    `<header class="q6-hdr"><a class="brand" href="${work}"><b>Jasmine Gu</b><span>Product engineer</span></a><nav aria-label="Primary"><a href="${work}"${active === 'work' ? ' aria-current="page"' : ''}>Work</a><a href="${about}"${active === 'about' ? ' aria-current="page"' : ''}>About me</a></nav><div class="end">${ask ? '<button type="button" class="ask-link" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button>' : ''}<span class="heart" aria-hidden="true">♡</span></div></header>`
+  // ---------- header: plain mono text. Name left, two links in the middle, LinkedIn / email / Resume (and "Ask me anything" if asked for) right ----------
+  // The header is sticky (k6.css). hdrWatch keeps --hdr-h (scroll-padding + hero height) in step with its real height and adds .is-scrolled for the border/shadow.
+  const hdrWatch = () => {
+    const h = $('.q6-hdr'); if (!h) return
+    const set = () => document.documentElement.style.setProperty('--hdr-h', h.offsetHeight + 'px')
+    const sc = () => h.classList.toggle('is-scrolled', scrollY > 2)
+    set(); sc(); if (window.ResizeObserver) new ResizeObserver(set).observe(h); addEventListener('scroll', sc, { passive: true })
+  }
+  Q.header = ({ active = 'work', work = '34-home-v2.html', about = '35-about-v2.html', ask = false } = {}) => {
+    const C = D.contact, L = D.hdrContact, ext = 'target="_blank" rel="noopener noreferrer"'
+    setTimeout(hdrWatch)
+    // right side: LinkedIn icon, the email as text (just "Email" on narrow screens), Resume
+    const hc = `<span class="hc"><a class="hc-i" href="${C.linkedin}" ${ext} aria-label="${L.linkedin}" title="${L.linkedin}">${K.icon('linkedin')}</a>`
+      + `<a class="hc-m" href="mailto:${C.email}" aria-label="${L.email}: ${C.email}"><span class="hc-t">${C.email}</span><span class="hc-s" aria-hidden="true">${L.email}</span></a>`
+      + `<a class="hc-r" href="${C.resume}" ${ext}>${L.resume}</a></span>`
+    return `<header class="q6-hdr"><a class="brand" href="${work}"><b>Jasmine Gu</b></a><nav aria-label="Primary"><a href="${work}"${active === 'work' ? ' aria-current="page"' : ''}>Work</a><a href="${about}"${active === 'about' ? ' aria-current="page"' : ''}>About me</a></nav><div class="end">${ask ? '<button type="button" class="ask-link" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button>' : ''}${hc}</div></header>`
+  }
 
   // ---------- hero: mock 18's collage without the cork-board picture; the exploded view is bigger (see k6.css) ----------
   Q.hero2 = (el) => { Q.hero(el, { mode: 'collage' }); $('.q-pinpic', el)?.remove() }
@@ -20,7 +34,7 @@
   Q.stage = (el) => {
     const N = D4.next, st = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>')
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p><div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
+      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
       <div class="q-xcard q6-c" style="--r:1.5deg" id="xc"></div>
       <div class="q6-list q6-c" style="--r:-1deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
@@ -30,6 +44,12 @@
     // trim the empty left margin so the exploded view fills its card, and narrow the hover note so it fits inside the card
     K.layers($('#xc', el), 'sticky', { bare: true, viewBox: '44 0 900 600', noteW: 320 })
     $$('.q6-c', el).forEach((c) => Q.drag(c))
+    // "selected work": smooth-scroll to the work tabs (instant under reduced motion); falls back to the plain #tabs jump if the target is missing
+    $('[data-hero-cta]', el)?.addEventListener('click', (e) => {
+      const t = $(D.cta.href); if (!t) return
+      e.preventDefault(); t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
+      history.replaceState(null, '', D.cta.href)
+    })
   }
 
   // ---------- the map, exactly one viewport tall: the whole thing (roads, labels, pins, the JASMINE GU block) fits the window at any size.

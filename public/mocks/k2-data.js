@@ -2,8 +2,11 @@
 // showcase-data.ts, capability-layers-data.ts). Fun facts are built from real content; they are tagged "placeholder note".
 window.K2 = {
   name: 'Jasmine Gu',
-  headline: "An engineer passionate about building functional technology and delightful experiences.",
-  status: "Currently 5th year of CS honors and Business @Western University. Previously SWE @Autodesk, Tesla, and Intuit, Platform PM @Autodesk",
+  headline: "I'm Jasmine, a product engineer who builds with technical depth and user empathy.",
+  status: "Currently a 5th year CS honors and Business student at Western. Previously a SWE at Autodesk, Tesla and Intuit, and a Platform PM at Autodesk.",
+  recents: "Recents include governed AI query tools for Autodesk's data platform, factory-camera ML workflows at Tesla, and leading Hack Western's dev team.",
+  // hero call to action: before + link + after; the link smooth-scrolls to the work tabs (#tabs)
+  cta: { before: 'Explore my ', link: 'selected work', after: '.', href: '#tabs' },
   intro: "An engineer passionate about building functional technology and delightful experiences.",
   hlLead: 'A few highlights (not on my resume)',
   // items are small trusted HTML strings (renderers insert them as innerHTML) so one can carry links
@@ -24,7 +27,9 @@ window.K2 = {
     'automated a B2B outreach pipeline that generated 900+ leads at Metaverse Group',
   ],
   previously: [['Data Products', 'Autodesk'], ['ML Systems', 'Tesla'], ['Platform Engineering', 'Autodesk'], ['Consumer Fintech', 'Intuit'], ['Enterprise Automation', 'OMERS'], ['0→1 Product', 'Stealth startup'], ['Growth Automation', 'Metaverse Group'], ['Product Leadership', 'Hack Western'], ['Product Education', 'IPS Fellowship'], ['Education', 'Western / Ivey']],
-  contact: { email: 'jgu.hba2027@ivey.ca', linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201', github: 'https://github.com/JasmineGu2', resume: '#' },
+  contact: { email: 'jgu.hba2027@ivey.ca', linkedin: 'https://www.linkedin.com/in/jasmine-gu-b2aa65201', github: 'https://github.com/JasmineGu2', resume: '/resume.pdf' },
+  // labels for the contact links on the right of the site header (Q.header in k6.js); `email` is the short label narrow screens show instead of the address
+  hdrContact: { linkedin: 'LinkedIn', email: 'Email', resume: 'Resume' },
 
   // all 10 experiences, in the site's tile order; `label` is the orange cursor tag (CURSOR_LABELS in showcase-data.ts)
   exp: [
