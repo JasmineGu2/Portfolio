@@ -20,7 +20,7 @@
   Q.stage = (el) => {
     const N = D4.next, st = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>')
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p><div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div>
+      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p><div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
       <div class="q-xcard q6-c" style="--r:1.5deg" id="xc"></div>
       <div class="q6-list q6-c" style="--r:-1deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
@@ -91,16 +91,25 @@
   const QUOTES = ['A strong commitment to always learning and showing up.', 'I code while taking careful consideration of the end users, the business context, and product strategy.', 'How I use technology to solve problems around me.', 'Built 0→1 products at startups, where there wasn’t an established roadmap or system to inherit.', 'More experience, better work.']
   const KEY_LAYERS = Array.from({ length: 49 }, (_, i) => `<span class="k6-layer" style="transform:translateZ(${i + 1}px) scale(${1 - ((i + 1) / 50) * 0.2})"></span>`).join('')
   Q.keycap = (href, label = 'Email Me') => `<div class="k6-keyscale"><div class="k6-keyscene"><a class="k6-key" href="${href}" aria-label="${label} (opens an email)"><span class="k6-socket" aria-hidden="true"></span><span class="k6-ext" aria-hidden="true">${KEY_LAYERS}<span class="k6-top" style="transform:translateZ(50px) scale(.8)">${label}</span></span></a></div></div>`
-  Q.quoteCard = (el) => {
-    let i = Math.floor(Math.random() * QUOTES.length)
-    const paint = (fresh) => { el.innerHTML = `<button type="button" class="k6-quote" aria-label="Show another core value"><span class="mk" aria-hidden="true">“</span><span class="tx${fresh ? ' in' : ''}">${QUOTES[i]}</span><span class="ft"><span>A core value</span><span>${i + 1} / ${QUOTES.length} · Another</span></span></button>`; $('.k6-quote', el).addEventListener('click', () => { i = (i + 1) % QUOTES.length; paint(true) }) }
+  // quotes come from content/Quotes about engineering.md via the page's #quotes-data JSON ([{ text, code? }]); QUOTES is the fallback
+  const quoteList = (list) => {
+    if (!list) { try { list = JSON.parse(document.getElementById('quotes-data')?.textContent || 'null') } catch (e) { list = null } }
+    return Array.isArray(list) && list.length ? list : QUOTES.map((text) => ({ text }))
+  }
+  Q.quoteCard = (el, list) => {
+    const qs = quoteList(list)
+    let i = Math.floor(Math.random() * qs.length)
+    const body = (q, fresh) => q.code
+      ? `<span class="mk" aria-hidden="true" style="height:auto;font:600 26px/1 'JetBrains Mono',monospace;letter-spacing:-.04em">&lt;/&gt;</span><span class="tx${fresh ? ' in' : ''}" style="display:flex;align-items:center;font-style:normal"><pre style="margin:0;padding:11px 14px;width:100%;overflow-x:auto;border-radius:10px;background:rgba(20,38,79,.07);font:500 15px/1.55 'JetBrains Mono',monospace;letter-spacing:0;white-space:pre;tab-size:4">${esc(q.text)}</pre></span>`
+      : `<span class="mk" aria-hidden="true">“</span><span class="tx${fresh ? ' in' : ''}" style="overflow-wrap:break-word">${esc(q.text)}</span>`
+    const paint = (fresh) => { el.innerHTML = `<button type="button" class="k6-quote" aria-label="Show another quote">${body(qs[i], fresh)}<span class="ft"><span>Words I live by</span><span>${i + 1} / ${qs.length} · Another</span></span></button>`; $('.k6-quote', el).addEventListener('click', () => { i = (i + 1) % qs.length; paint(true) }) }
     paint(false)
   }
-  Q.footer2 = (el) => {
+  Q.footer2 = (el, quotes) => {
     Q.stockCard = () => {} // the ADSK card is gone from the footer
     Q.footer(el)
     const box = $('#scBox', el); box.className = 'k6-fcol'; box.innerHTML = '<div id="qc"></div>' + Q.keycap('mailto:' + D.contact.email)
-    Q.quoteCard($('#qc', el))
+    Q.quoteCard($('#qc', el), quotes)
     const wx = $('[data-wx]', el); wx.style.display = 'none'; const cell = document.createElement('div'); cell.innerHTML = '<small>Site conditions</small><span>--</span>'; wx.after(cell)
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${D4.foot.lat}&longitude=${D4.foot.lon}&current=temperature_2m,weather_code&timezone=auto`).then((r) => r.json()).then((j) => { const c = j.current.weather_code, n = ['clear', 'mostly clear', 'partly cloudy', 'overcast'][c] || (c <= 48 ? 'fog' : c <= 57 ? 'drizzle' : c <= 67 ? 'rain' : c <= 77 ? 'snow' : 'showers'); $('span', cell).textContent = `${Math.round(j.current.temperature_2m)}°C, ${n}` }).catch(() => { $('span', cell).textContent = 'unavailable' })
   }
@@ -162,11 +171,39 @@
     const trends = (D4.productTrends || []).map((t) => `<div style="margin-bottom:16px"><h4 style="font-size:16px;font-weight:600;margin:0 0 6px;color:var(--ink)">${t.title}</h4><p style="font-size:15px;margin:0;color:var(--muted)">${t.desc}</p></div>`).join('')
     el.innerHTML = `<div class="q6-c q6-paper" style="--r:-1deg;padding:24px"><h3 class="q6-h" style="font-size:22px;margin-bottom:16px">Product Trends I'm interested in</h3><div style="font-size:16px">${trends}</div></div>`
   }
-  // custom tools she's built
-  Q.customTools = (el) => {
-    const hd = D4.customToolsHead || {}
-    const tools = (D4.customTools || []).map((t) => `<li><h4>${t.name}</h4><p>${t.desc}</p></li>`).join('')
-    el.innerHTML = `<div class="q6-c q6-paper q6-made-c" style="--r:0.8deg"><h3 class="q6-h">${hd.title || ''}</h3><p class="sub">${hd.sub || ''}</p><ul>${tools}</ul></div>`
+  // tools she's built (copy from content/tools-created.md, handed over as JSON by app/about/page.tsx):
+  // title, then Problem / Tool with mono-caps labels, then "Built with" chips; work-in-progress ones sit in their own dashed group
+  Q.customTools = (el, T) => {
+    const L = T.labels, at = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+    let n = 0
+    // a title with an image becomes a button; the picture pops up under it in a paper frame (hover/focus, tap pins it)
+    const head = (t) => { if (!t.image) return `<h4>${esc(t.title)}</h4>`; const id = `mpic${n++}`
+      return `<h4><button type="button" class="pic" aria-expanded="false" aria-controls="${id}">${esc(t.title)}<i aria-hidden="true"></i></button></h4><span class="q6-mpic" id="${id}" role="group" aria-label="${at(t.title)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="1200" height="642" loading="lazy" decoding="async" draggable="false"></span>` }
+    const item = (t) => `<li${t.image ? ' class="has-pic"' : ''}>${head(t)}${t.problem ? `<p class="k">${esc(L.problem)}</p><p>${esc(t.problem)}</p>` : ''}${t.tool ? `<p class="k">${esc(L.tool)}</p><p>${esc(t.tool)}</p>` : ''}${t.desc ? `<p>${esc(t.desc)}</p>` : ''}${t.builtWith.length ? `<p class="k">${esc(L.builtWith)}</p><ul class="chips">${t.builtWith.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : ''}</li>`
+    const wip = T.wip.length ? `<div class="wip">${T.wipTitle ? `<p class="wip-k">${esc(T.wipTitle)}</p>` : ''}<ul class="list">${T.wip.map(item).join('')}</ul></div>` : ''
+    el.innerHTML = `<div class="q6-c q6-paper q6-made-c" style="--r:0.8deg"><h3 class="q6-h">${esc(T.title)}</h3>${T.sub ? `<p class="sub">${esc(T.sub)}</p>` : ''}<ul class="list">${T.items.map(item).join('')}</ul>${wip}</div>`
+    const HOVER = matchMedia('(hover: hover)')
+    let open = null, pinned = false, t = 0
+    const set = (li, on) => {
+      const b = $('.pic', li), p = $('.q6-mpic', li); li.classList.toggle('open', on); b.setAttribute('aria-expanded', String(on))
+      if (!on) return
+      // keep the picture inside the viewport: shift it sideways if it would spill past either edge
+      p.style.setProperty('--dx', '0px'); const r = p.getBoundingClientRect(), pad = 12
+      const dx = r.right > innerWidth - pad ? innerWidth - pad - r.right : r.left < pad ? pad - r.left : 0
+      p.style.setProperty('--dx', Math.round(dx) + 'px')
+    }
+    const show = (li) => { clearTimeout(t); if (open && open !== li) { set(open, false); pinned = false } open = li; set(li, true); el.classList.add('has-open') }
+    const hide = () => { clearTimeout(t); if (open) set(open, false); open = null; pinned = false; el.classList.remove('has-open') }
+    $$('.has-pic', el).forEach((li) => {
+      const b = $('.pic', li)
+      li.addEventListener('mouseenter', () => { if (HOVER.matches) show(li) })
+      li.addEventListener('mouseleave', () => { if (!pinned && open === li) t = setTimeout(hide, 140) })
+      b.addEventListener('focus', () => show(li))
+      b.addEventListener('blur', () => { if (!pinned && open === li) hide() })
+      b.addEventListener('click', () => { if (open === li && pinned) hide(); else { show(li); pinned = true } })
+    })
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) hide() })
+    document.addEventListener('pointerdown', (e) => { if (open && !open.contains(e.target)) hide() })
   }
   // side quests
   Q.sideQuests = (el) => {
