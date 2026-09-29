@@ -44,10 +44,13 @@
   transform: translateY(-50%) translateX(-10px);
   opacity: 0;
   pointer-events: none;
-  font-size: 13px;
+  font-size: 18px;
+  line-height: 1.25;
   font-weight: 500;
   color: #555;
-  white-space: nowrap;
+  /* the side column is ~192px wide: long names wrap instead of being clipped */
+  width: max-content;
+  max-width: 9.5rem;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .line:hover .tip,
