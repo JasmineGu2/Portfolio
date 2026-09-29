@@ -104,6 +104,10 @@
 .q6 .q-bj .pc.down{border-width:4px;background-size:10px 10px}.q6 .q-bj .acts{gap:8px;min-height:36px;margin-top:14px}.q6 .q-bj .q-pill{font-size:13px;padding:6px 16px}
 @media (max-width:1420px){.q6 .q-desk{height:auto;display:flex;flex-wrap:wrap;gap:40px 34px;padding:20px 0 30px}.q6 .q-desk>div{position:relative;left:auto!important;top:auto!important;max-width:100%}}
 @media (max-width:1100px){.q6-top{grid-template-columns:1fr}.q6 .q-lan{justify-self:center}}
+/* the ID badge slot (components/ui/id-card-lanyard.tsx hangs inside it); the hint pill sits just under it */
+.q6-lan{position:relative;z-index:4;height:600px;margin-bottom:34px}
+@media (max-width:1100px){.q6-lan{width:100%;max-width:420px;justify-self:center}}
+@media (max-width:760px){.q6-lan{height:520px;--idcl-card-w:200px}}
 /* the invitation to the side panel */
 .q6-invite{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:start;padding:30px 34px;border:1px solid var(--faint);background:#fff}
 .q6-invite .lede{max-width:30rem;margin:8px 0 0;color:rgba(27,27,27,.7);font:400 16px/1.6 Inter,system-ui,sans-serif}

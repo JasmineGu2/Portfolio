@@ -2,6 +2,8 @@ import Script from 'next/script'
 import { BookShelf3D } from '@/components/portfolio/reading/BookShelf3D'
 import { getReading, READING_LABELS } from '@/lib/portfolio/reading'
 import { getTools } from '@/lib/portfolio/tools'
+import { IDCardLanyard } from '@/components/ui/id-card-lanyard'
+import { BADGE } from '@/lib/portfolio/badge'
 
 export default function AboutPage() {
   const reading = getReading()
@@ -18,7 +20,10 @@ export default function AboutPage() {
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
               <div className="q6-made" id="customTools"></div>
             </div>
-            <div id="lan"></div>
+            {/* the ID badge: a canvas rope you can swing; badge copy and the photo path live in lib/portfolio/badge.ts */}
+            <div className="q6-lan">
+              <IDCardLanyard {...BADGE} ropeColor="#0e3b8f" swingOnMount />
+            </div>
           </div>
         </div>
         <hr className="q-rule" />
@@ -58,7 +63,6 @@ export default function AboutPage() {
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
             $('#nav').innerHTML = Q.header({ active: 'about', work: '/', about: '#journey', ask: false })
             Q.toolsPad($('#notes'), JSON.parse($('#tools-data').textContent))
-            Q.lanyard($('#lan'))
             Q.productTrends($('#trends'))
             Q.customTools($('#customTools'))
             Q.sideQuests($('#quests'))
