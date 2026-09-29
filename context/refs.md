@@ -32,3 +32,4 @@ One line each: what it is, why it matters. Open only when the task needs it.
 - context/images/Screenshot 2026-08-24 at 6.57.59 AM.png - hover inspiration (embedded in specs/visuals/hover.md)
 - context/images/Screenshot 2026-09-24 022523.png - screenshot from 2026-09-24 (purpose unknown)
 - mocks/hero-options-v1/, mocks/hero-variations-v1/ - earlier hero explorations
+- context/images/map-ref-early-2026-09-28.png, map-ref-full-2026-09-28.png - blueprint city map inspo: streets named after tech (Engineering Bd, Product Av, Java Rue), experiences as pins, orange "Jasmine Gu / Product Engineer" label; early = sparse grid, full = dense city. For the scroll-built map mock.
