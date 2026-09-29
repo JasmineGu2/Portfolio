@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map v1 | I kept zooming out</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e3b8f;            /* blueprint royal blue */
+  --block:170,196,255;     /* block tint rgb */
+  --line:rgba(205,222,255,.85);
+  --paper:#f5f5f5;         /* --pf-canvas-alt */
+  --ink:#141210;           /* --pf-dark */
+  --orange:#ff5a1f;        /* ref orange; site token --pf-brand-orange is #ed3801 */
+  --mono:"Space Mono","Analogue OS",ui-monospace,monospace;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:#fff;font-family:var(--sans)}
+.track{position:relative;height:800vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+svg#map{position:absolute;inset:0;width:100%;height:100%;display:block}
+.title{position:absolute;left:clamp(16px,3vw,40px);top:clamp(16px,3vw,36px);max-width:22rem;pointer-events:none}
+.title small{font:400 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.title h1{font:500 clamp(26px,3.2vw,44px)/1.05 var(--serif);margin-top:10px;letter-spacing:-.01em}
+.card{position:absolute;left:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,40px);width:min(340px,calc(100% - 32px));
+  background:var(--paper);color:var(--ink);border-radius:1.35rem;padding:18px 20px 20px;box-shadow:0 10px 30px rgba(3,14,45,.35)}
+.card .meta{display:flex;justify-content:space-between;font:400 11px/1 var(--mono);letter-spacing:.14em;color:#6b6b6b;text-transform:uppercase}
+.card h2{font:600 26px/1.05 var(--serif);margin-top:12px}
+.card h2 span{font:400 12px var(--mono);letter-spacing:.14em;color:#6b6b6b;margin-left:8px;vertical-align:middle}
+.card p{font:400 15px/1.45 var(--sans);color:#3d3d3d;margin-top:8px}
+.card .swap{transition:opacity .25s}
+.card.out .swap{opacity:0}
+.dots{position:absolute;right:clamp(12px,2vw,28px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px}
+.dots i{width:7px;height:7px;border-radius:50%;border:1px solid #fff;opacity:.55;transition:all .25s}
+.dots i.on{background:#fff;opacity:1;transform:scale(1.35)}
+.dots i.done{background:rgba(255,255,255,.55)}
+.hint{position:absolute;right:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,36px);font:400 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;opacity:.7;transition:opacity .4s}
+.pinlabel{font:400 13px var(--mono);letter-spacing:.06em;fill:#fff;stroke:#0e3b8f;stroke-width:3.5px;paint-order:stroke;stroke-linejoin:round}
+.pinyear{font:400 10px var(--mono);letter-spacing:.12em;fill:rgba(255,255,255,.72)}
+.street{font:700 10.5px var(--mono);letter-spacing:.3em;fill:#fff}
+.blabel{font:700 10.5px var(--mono);letter-spacing:.16em;fill:#fff}
+@media (max-width:600px){
+  .title h1{font-size:26px}
+  .card{padding:14px 16px 16px}
+  .card h2{font-size:22px}
+  .card p{font-size:14px}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .track{height:100svh}
+  .hint,.dots{display:none}
+}
+</style>
+</head>
+<body>
+<div class="track" id="track">
+  <div class="stage" id="stage">
+    <svg id="map" xmlns="http://www.w3.org/2000/svg" aria-label="Blueprint city map of Jasmine Gu's experiences" role="img"></svg>
+    <div class="title"><small>Jasmine Gu, a map</small><h1>I kept zooming out.</h1></div>
+    <aside class="card" id="card" aria-live="polite">
+      <div class="swap">
+        <div class="meta"><span id="cStep">01 / 11</span><span id="cRole">Start</span></div>
+        <h2><b id="cName" style="font-weight:600">Western</b><span id="cYear"></span></h2>
+        <p id="cLine"></p>
+      </div>
+    </aside>
+    <nav class="dots" id="dots" aria-hidden="true"></nav>
+    <div class="hint" id="hint">Scroll to build the city</div>
+  </div>
+</div>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const smooth=t=>t*t*(3-2*t);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- seeded rng ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd=mulberry32(20260928);
+
+/* ---------- content (only the names/years given) ---------- */
+const w=r=>[r[0]*1.5+200,r[1]*1.5+200];
+const PINS=[
+ {name:'WESTERN',year:'',ref:[157,537],role:'Start',line:'Where the map starts.'},
+ {name:'METAVERSE',year:'2022',ref:[217,466],role:'Internship',line:'Metaverse Group. First internship.'},
+ {name:'OMERS',year:'2023',ref:[347,389],role:'Internship',line:'Internship. The avenue starts to matter.'},
+ {name:'INTUIT',year:'2024',ref:[494,284],role:'Internship',line:'Internship.'},
+ {name:'HACK WESTERN',year:'',ref:[425,146],role:'Leadership',line:'Led the dev team of 8.'},
+ {name:'IVEY',year:'2025',ref:[616,241],role:'School',line:'A new district opens up.'},
+ {name:'TESLA',year:'2025',ref:[728,327],role:'Internship',line:'Internship.'},
+ {name:'LAURELSPACE',year:'',ref:[755,510],role:'Team',line:'Another corner of the city.'},
+ {name:'IPS FELLOWSHIP',year:'',ref:[988,475],role:'Program',line:'Ran the Product Fellowship: 28 educationals over 2 years.'},
+ {name:'AUTODESK ENG',year:'2026',ref:[841,181],role:'Internship',line:'Software engineering internship.'},
+ {name:'AUTODESK PM',year:'2026',ref:[936,285],role:'Internship',line:'Product management internship. Product Av crosses Engineering Bd.'},
+];
+PINS.forEach(p=>{p.pos=w(p.ref)});
+const NP=PINS.length, LAST=NP-1;
+const NAMES=[
+ ['SQL AV','row',[615,58]],['JAVASCRIPT AV','col',[340,120]],['TYPESCRIPT RUE','row',[240,255]],
+ ['NODE.JS RUE','row',[770,300]],['REACT AV','col',[585,345]],['JAVA RUE','row',[430,412]],
+ ['HTML/CSS RUE','row',[735,468]],['C++ BD','col',[870,560]],['PYTHON AV','row',[1010,80]],
+ ['SERVICENOW RUE','col',[228,470]],
+];
+
+/* ---------- lattice ---------- */
+const I=17,J=12, CU=215, CV=150, ROT=-11*Math.PI/180, CX0=1120, CY0=700;
+const rowSlope=[...Array(J+1)].map(()=> (rnd()-.5)*.09);
+const colLean=[...Array(I+1)].map(()=> (rnd()-.5)*.12);
+const P=[];
+for(let i=0;i<=I;i++){P[i]=[];for(let j=0;j<=J;j++){
+  const u=(i-I/2)*CU, v=(j-J/2)*CV;
+  let x=u+v*(.2+colLean[i]), y=v+u*rowSlope[j];
+  x+=(rnd()-.5)*30; y+=(rnd()-.5)*26;
+  const c=Math.cos(ROT), s=Math.sin(ROT);
+  P[i][j]=[CX0+x*c-y*s, CY0+x*s+y*c];
+}}
+const mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+
+/* ---------- growth: which step does each spot belong to ---------- */
+const ANCH=PINS.map((p,k)=>k===0?{pos:mid(PINS[0].pos,PINS[1].pos),R:270}:{pos:p.pos,R:255});
+function stepOf(pt){
+  for(let k=0;k<NP;k++){const d=dist(pt,ANCH[k].pos);if(d<ANCH[k].R)return {step:k,delay:.42*d/ANCH[k].R};}
+  return {step:rnd()<.5?LAST-1:LAST,delay:rnd()*.42};
+}
+
+/* ---------- SVG scaffolding ---------- */
+const svg=$('map');
+const el=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);(parent||svg).appendChild(e);return e};
+const defs=el('defs',{});
+const pat=el('pattern',{id:'dots',width:13,height:13,patternUnits:'userSpaceOnUse'},defs);
+el('circle',{cx:6.5,cy:6.5,r:1.05,fill:'rgba(200,220,255,.45)'},pat);
+const cam=el('g',{id:'cam'});
+el('rect',{x:-1800,y:-1400,width:6400,height:4200,fill:'url(#dots)'},cam);
+const gBlocks=el('g',{},cam), gCase=el('g',{},cam), gCore=el('g',{},cam), gText=el('g',{},cam), gPins=el('g',{},cam), gLabel=el('g',{},cam);
+
+/* ---------- pick named lines ---------- */
+const named=new Map(); // key "row:j" -> {name, i0}
+const labels=[];
+NAMES.forEach(([name,dir,ref])=>{
+  const t=w(ref); let best=null;
+  if(dir==='row'){
+    for(let j=0;j<=J;j++)for(let i=0;i<I;i++){const m=mid(P[i][j],P[i+1][j]),d=dist(m,t);
+      if(!named.has('row:'+j)&&(!best||d<best.d))best={d,j,i};}
+    if(best){named.set('row:'+best.j,1);labels.push({name,dir,line:best.j,seg:best.i});}
+  }else{
+    for(let i=0;i<=I;i++)for(let j=0;j<J;j++){const m=mid(P[i][j],P[i][j+1]),d=dist(m,t);
+      if(!named.has('col:'+i)&&(!best||d<best.d))best={d,i,j};}
+    if(best){named.set('col:'+best.i,1);labels.push({name,dir,line:best.i,seg:best.j});}
+  }
+});
+const lineW={row:[],col:[]};
+for(let j=0;j<=J;j++)lineW.row[j]=named.has('row:'+j)?13:(rnd()<.2?10:5.5+rnd()*2.5);
+for(let i=0;i<=I;i++)lineW.col[i]=named.has('col:'+i)?13:(rnd()<.2?10:5.5+rnd()*2.5);
+
+/* ---------- blocks ---------- */
+const blocks=[];
+for(let i=0;i<I;i++)for(let j=0;j<J;j++){
+  const q=[P[i][j],P[i+1][j],P[i+1][j+1],P[i][j+1]];
+  const c=[q.reduce((a,p)=>a+p[0],0)/4,q.reduce((a,p)=>a+p[1],0)/4];
+  const {step,delay}=stepOf(c);
+  const e=el('path',{d:'M'+q.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z',fill:`rgba(var(--block),${(.26+rnd()*.13).toFixed(3)})`},gBlocks);
+  e.style.fill=`rgba(170,196,255,${(.26+rnd()*.14).toFixed(3)})`;
+  blocks.push({e,c,step,delay,last:-1});
+}
+
+/* ---------- street segments ---------- */
+const segs=[];
+function mkSeg(a,b,width,step,delay,straight){
+  const m=mid(a,b), dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1;
+  const off=straight?0:(rnd()-.5)*14;
+  const cx=m[0]-dy/L*off, cy=m[1]+dx/L*off;
+  const d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`;
+  const common={d,fill:'none',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1};
+  const ca=el('path',{...common,stroke:'rgba(205,222,255,.85)','stroke-width':(width+2.8).toFixed(1)},gCase);
+  const co=el('path',{...common,stroke:'#0e3b8f','stroke-width':width.toFixed(1)},gCore);
+  const s={ca,co,step,delay,last:-1};segs.push(s);return s;
+}
+const segIndex={};
+for(let j=0;j<=J;j++)for(let i=0;i<I;i++){
+  const nm=named.has('row:'+j);
+  if(!nm&&rnd()<.07)continue;
+  const m=mid(P[i][j],P[i+1][j]);const {step,delay}=stepOf(m);
+  segIndex['row:'+j+':'+i]=mkSeg(P[i][j],P[i+1][j],lineW.row[j],step,delay,nm);
+}
+for(let i=0;i<=I;i++)for(let j=0;j<J;j++){
+  const nm=named.has('col:'+i);
+  if(!nm&&rnd()<.07)continue;
+  const m=mid(P[i][j],P[i][j+1]);const {step,delay}=stepOf(m);
+  segIndex['col:'+i+':'+j]=mkSeg(P[i][j],P[i][j+1],lineW.col[i],step,delay,nm);
+}
+
+/* ---------- street name labels (textPath) ---------- */
+labels.forEach((L,n)=>{
+  let pts=[];
+  if(L.dir==='row'){const i0=clamp(L.seg-1,0,I-3);for(let i=i0;i<=i0+3;i++)pts.push(P[i][L.line]);}
+  else{const j0=clamp(L.seg-1,0,J-3);for(let j=j0+3;j>=j0;j--)pts.push(P[L.line][j]);}
+  const id='sp'+n;
+  el('path',{id,d:'M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L'),fill:'none'},defs);
+  const t=el('text',{class:'street',dy:3.6},gText);
+  const tp=el('textPath',{href:'#'+id,startOffset:'50%','text-anchor':'middle'},t);
+  tp.textContent=L.name;
+  const key=L.dir+':'+L.line+':'+L.seg;
+  L.text=t;L.segRef=segIndex[key];
+  if(!L.segRef){L.segRef={step:0,delay:0};}
+  t.style.opacity=0;
+});
+
+/* ---------- Engineering Bd + Product Av ---------- */
+function longStreet(pts,width){
+  const d='M'+pts[0][0]+' '+pts[0][1]+'Q'+pts[1][0]+' '+pts[1][1]+' '+pts[2][0]+' '+pts[2][1];
+  const common={d,fill:'none',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1};
+  const ca=el('path',{...common,stroke:'rgba(205,222,255,.85)','stroke-width':width+3},gCase);
+  const co=el('path',{...common,stroke:'#0e3b8f','stroke-width':width},gCore);
+  return {ca,co};
+}
+const ENG=longStreet([[-500,1180],[1150,760],[2900,205]],26);
+const PROD=longStreet([[380,1420],[1420,660],[2380,-60]],22);
+el('path',{id:'engp',d:'M-500 1180Q1150 760 2900 205',fill:'none'},defs);
+el('path',{id:'prodp',d:'M380 1420Q1420 660 2380 -60',fill:'none'},defs);
+const engT=el('text',{class:'street',dy:3.6,style:'font-size:12px;letter-spacing:.32em'},gText);
+{const tp=el('textPath',{href:'#engp',startOffset:'63%','text-anchor':'middle'},engT);tp.textContent='ENGINEERING BD';}
+const prodT=el('text',{class:'street',dy:3.6,style:'font-size:11px;letter-spacing:.32em'},gText);
+{const tp=el('textPath',{href:'#prodp',startOffset:'70%','text-anchor':'middle'},prodT);tp.textContent='PRODUCT AV';}
+prodT.style.opacity=0;
+
+/* ---------- pins ---------- */
+PINS.forEach((p,k)=>{
+  const g=el('g',{transform:`translate(${p.pos[0]} ${p.pos[1]})`},gPins);
+  const inner=el('g',{},g);
+  el('circle',{r:9,fill:'#0e3b8f',stroke:'#fff','stroke-width':1.6},inner);
+  el('circle',{r:3.6,fill:'#fff'},inner);
+  const t=el('text',{class:'pinlabel',x:16,y:1},inner);t.textContent=p.name;
+  if(p.year){const y=el('text',{class:'pinyear',x:16,y:14},inner);y.textContent=p.year;}
+  p.g=g;p.inner=inner;
+});
+
+/* ---------- orange frontier label ---------- */
+const lab=el('g',{},gLabel);
+const lrot=el('g',{transform:'rotate(-8)'},lab);
+el('rect',{x:-80,y:-25,width:160,height:50,fill:'#ff5a1f'},lrot);
+const l1=el('text',{class:'blabel',x:0,y:-3,'text-anchor':'middle'},lrot);l1.textContent='JASMINE GU';
+const l2=el('text',{class:'blabel',x:0,y:11,'text-anchor':'middle'},lrot);l2.textContent='PRODUCT ENGINEER';
+const LOFF=[230,-250];
+
+/* ---------- side UI ---------- */
+const dots=$('dots');PINS.forEach(()=>dots.appendChild(document.createElement('i')));
+const card=$('card');let shown=-1;
+function setCard(k){
+  if(k===shown)return;shown=k;
+  const p=PINS[k];
+  card.classList.add('out');
+  setTimeout(()=>{
+    $('cStep').textContent=String(k+1).padStart(2,'0')+' / '+NP;
+    $('cRole').textContent=p.role;
+    $('cName').textContent=p.name.split(' ').map(x=>/^(IPS|PM)$/.test(x)?x:x.charAt(0)+x.slice(1).toLowerCase()).join(' ').replace('Node.js','Node.js');
+    $('cYear').textContent=p.year;
+    $('cLine').textContent=p.line;
+    card.classList.remove('out');
+  },reduce?0:140);
+  [...dots.children].forEach((d,i)=>{d.className=i===k?'on':(i<k?'done':'')});
+}
+
+/* ---------- camera ---------- */
+let VW=0,VH=0,cams=[];
+function computeCams(){
+  VW=svg.clientWidth;VH=svg.clientHeight;
+  const mobile=VW<600, minS=mobile?.55:.3, maxS=mobile?1.15:1.3, pad=mobile?150:250;
+  cams=PINS.map((_,k)=>{
+    const upto=Math.max(k,1);
+    let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    for(let i=0;i<=upto;i++){const p=PINS[i].pos;x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);}
+    if(k>=LAST-1){y0-=160;x1+=200;}          // make room for the orange label
+    const bw=x1-x0+2*pad, bh=y1-y0+2*pad;
+    const fit=Math.min(VW/bw,VH/bh);
+    const s=clamp(fit,minS,maxS);
+    let cx=(x0+x1)/2, cy=(y0+y1)/2;
+    if(fit<minS){const p=PINS[k].pos;cx=p[0]*.7+cx*.3+(k>=LAST-1?70:0);cy=p[1]*.7+cy*.3-(k>=LAST-1?110:0);}
+    // shift up on desktop so the caption card doesn't hide pins
+    if(!mobile)cx-=(VW*.06)/s; else cy+=(VH*.12)/s;
+    return {cx,cy,s};
+  });
+}
+
+/* ---------- render ---------- */
+let S=0,Starget=0,engA=reduce?1:0,rafOn=false;
+const setA=(o,a)=>{o.ca.setAttribute('stroke-dashoffset',(1-a).toFixed(3));o.co.setAttribute('stroke-dashoffset',(1-a).toFixed(3));};
+const amt=(step,delay)=>step===0?1:clamp((S-(step-1)-delay)/.55);
+function render(){
+  for(const s of segs){const a=amt(s.step,s.delay);if(Math.abs(a-s.last)>.002){s.last=a;setA(s,a);}}
+  for(const b of blocks){const a=amt(b.step,b.delay);if(Math.abs(a-b.last)>.002){b.last=a;
+    const k=.82+.18*a;
+    b.e.setAttribute('transform',`translate(${b.c[0].toFixed(1)} ${b.c[1].toFixed(1)}) scale(${k.toFixed(3)}) translate(${-b.c[0].toFixed(1)} ${-b.c[1].toFixed(1)})`);
+    b.e.style.opacity=a;}}
+  setA(ENG,engA);
+  const pa=clamp((S-(LAST-1.1))/1.0);setA(PROD,pa);prodT.style.opacity=clamp((pa-.6)/.4);
+  engT.style.opacity=clamp((engA-.6)/.4);
+  labels.forEach(L=>{L.text.style.opacity=amt(L.segRef.step,L.segRef.delay)>.98?1:0;});
+  const active=clamp(Math.round(S),0,LAST);
+  PINS.forEach((p,k)=>{
+    const a=k===0?1:clamp((S-(k-.7))/.7);
+    const cur=k===active;
+    const sc=(cur?1.35:1)*(1+(1-smooth(a))*.9);
+    p.inner.setAttribute('transform',`translate(0 ${(-(1-smooth(a))*40).toFixed(1)}) scale(${sc.toFixed(3)})`);
+    p.g.style.opacity=a;
+  });
+  // orange label rides the growing edge
+  const k0=clamp(Math.floor(S),0,LAST-1), f=smooth(clamp(S-k0));
+  const a=PINS[k0].pos, b=PINS[Math.min(k0+1,LAST)].pos;
+  const lx=a[0]+(b[0]-a[0])*f+LOFF[0], ly=a[1]+(b[1]-a[1])*f+LOFF[1];
+  lab.setAttribute('transform',`translate(${lx.toFixed(1)} ${ly.toFixed(1)})`);
+  // camera: interpolate between step cameras
+  const c0=cams[k0], c1=cams[Math.min(k0+1,LAST)];
+  const cx=c0.cx+(c1.cx-c0.cx)*f, cy=c0.cy+(c1.cy-c0.cy)*f;
+  const sc=Math.exp(Math.log(c0.s)+(Math.log(c1.s)-Math.log(c0.s))*f);
+  cam.setAttribute('transform',`translate(${VW/2} ${VH/2}) scale(${sc.toFixed(4)}) translate(${-cx.toFixed(1)} ${-cy.toFixed(1)})`);
+  setCard(active);
+  $('hint').style.opacity=S<.15?.7:0;
+}
+function tick(){
+  const d=Starget-S;
+  if(Math.abs(d)>.002)S+=d*(reduce?1:.1); else S=Starget;
+  if(engA<1)engA=Math.min(1,engA+.012);
+  render();
+  if(S!==Starget||engA<1)requestAnimationFrame(tick); else rafOn=false;
+}
+function kick(){if(!rafOn){rafOn=true;requestAnimationFrame(tick);}}
+function onScroll(){
+  if(reduce){Starget=LAST;kick();return;}
+  const tr=$('track'), max=tr.offsetHeight-innerHeight;
+  const t=clamp(-tr.getBoundingClientRect().top/max);
+  Starget=clamp(t/.93)*LAST;
+  kick();
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{computeCams();onScroll();render();});
+computeCams();
+if(reduce){S=Starget=LAST;engA=1;}
+onScroll();
+S=Starget; render(); kick();
+window.__map={setS:v=>{Starget=v;S=v;render();},LAST};
+})();
+</script>
+</body>
+</html>

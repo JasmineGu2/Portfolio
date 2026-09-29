@@ -48,6 +48,8 @@ const nextConfig = {
       { source: '/gallery', destination: '/about', permanent: false },
       { source: '/architecture', destination: '/about', permanent: false },
       { source: '/play', destination: '/about', permanent: false },
+      // Old standalone case-study routes were archived; their write-ups now live at /work/<slug>.
+      ...['tesla', 'autodesk', 'intuit', 'omers', 'metaverse'].map((slug) => ({ source: `/${slug}`, destination: `/work/${slug}`, permanent: true })),
       ...devRedirects,
     ]
   },

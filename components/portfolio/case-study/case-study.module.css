@@ -1,0 +1,312 @@
+/*
+ * Long-form case-study layout. Measurements follow the reference article (nicholaschen.me/blogs/...):
+ * a 72rem frame split into [1fr | 30rem | 1fr] with a 2rem gap, so the reading column is 480px and
+ * centred; the section list sits right-aligned in the left column, 12rem wide, sticky 6rem from the top.
+ * Type: 30/36 title, 20/28 section headings, 14px body at leading-relaxed, 16px between paragraphs,
+ * 32px between sections. Below 900px the side list becomes an "On this page" disclosure above the article.
+ */
+
+.page {
+  min-height: 100vh;
+  background: var(--pf-canvas);
+  color: var(--pf-ink);
+  font-family: var(--pf-font-body);
+}
+
+.frame {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 4rem 1.5rem 6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.topRow,
+.article {
+  width: 100%;
+  max-width: 30rem;
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.topRow {
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .frame {
+    grid-template-columns: 1fr minmax(0, 30rem) 1fr;
+    column-gap: 2rem;
+    align-items: start;
+  }
+  .topRow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .aside {
+    grid-column: 1;
+    grid-row: 2;
+    position: sticky;
+    top: 6rem;
+    justify-self: end;
+    width: 100%;
+    max-width: 12rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+  }
+  .article {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* Back link */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pf-muted);
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition: color var(--pf-card-transition);
+}
+.back:hover {
+  color: var(--pf-dark);
+}
+.back:focus-visible,
+.tocLink:focus-visible,
+.summary:focus-visible {
+  outline: 2px solid var(--pf-brand-orange-ink);
+  outline-offset: 2px;
+}
+
+/* Header */
+.eyebrow {
+  font-family: var(--pf-font-system);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+  margin: 0 0 0.75rem;
+}
+.title {
+  font-family: var(--pf-font-editorial);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--pf-dark);
+  margin: 0 0 0.5rem;
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+.dek {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--pf-ink);
+  margin: 0 0 0.25rem;
+}
+.meta {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pf-muted);
+  margin: 0 0 1.5rem;
+}
+
+/* Hero media */
+.figure {
+  margin: 0 0 1.5rem;
+  overflow: hidden;
+  border-radius: var(--pf-card-radius-sm);
+  border: 1px solid var(--pf-card-border);
+  background: var(--pf-canvas-alt);
+}
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cover {
+  object-fit: cover;
+}
+.contain {
+  object-fit: contain;
+  padding: 2rem;
+}
+
+/* Body */
+.body {
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+/* public/mocks/k2.css pads every <section> by 56px; these are plain article sections. */
+.section {
+  padding: 0;
+}
+.section + .section {
+  margin-top: 2rem;
+}
+.heading {
+  font-family: var(--pf-font-editorial);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--pf-dark);
+  margin: 0 0 0.75rem;
+  scroll-margin-top: 2rem;
+}
+.heading:focus {
+  outline: none;
+}
+@media (min-width: 768px) {
+  .heading {
+    font-size: 1.25rem;
+  }
+}
+.paragraph,
+.emphasis,
+.subhead,
+.tags {
+  margin: 0;
+}
+.subhead {
+  font-size: inherit;
+  line-height: inherit;
+}
+.section > * + :not(.heading) {
+  margin-top: 1rem;
+}
+.section > .heading + * {
+  margin-top: 0;
+}
+.emphasis {
+  border-left: 2px solid var(--pf-card-border-hover);
+  padding-left: 1rem;
+  color: var(--pf-dark);
+}
+.section > .subhead {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: var(--pf-dark);
+}
+.section > .subhead + * {
+  margin-top: 0.25rem;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+.tag {
+  border: 1px solid var(--pf-card-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--pf-ink);
+}
+
+/* Section list */
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.tocLink {
+  display: block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pf-muted);
+  text-decoration: none;
+  transition: color var(--pf-card-transition), background-color var(--pf-card-transition);
+}
+.tocLink:hover {
+  color: var(--pf-dark);
+}
+.tocLink[aria-current='true'] {
+  color: var(--pf-dark);
+  background: var(--pf-canvas-alt);
+}
+
+.sideNav {
+  display: none;
+}
+@media (min-width: 900px) {
+  .sideNav {
+    display: block;
+  }
+  .disclosure {
+    display: none;
+  }
+}
+
+/* Mobile disclosure */
+.disclosure {
+  max-width: 30rem;
+  width: 100%;
+  margin: 0 auto 2rem;
+  border: 1px solid var(--pf-card-border);
+  border-radius: var(--pf-card-radius-sm);
+}
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pf-dark);
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--pf-card-radius-sm);
+}
+.summary::-webkit-details-marker {
+  display: none;
+}
+.summary::after {
+  content: '';
+  margin-left: auto;
+  align-self: center;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--pf-card-transition);
+}
+.disclosure[open] .summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+.current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--pf-muted);
+}
+.disclosure .tocList {
+  padding: 0 0.5rem 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back,
+  .tocLink,
+  .summary::after {
+    transition: none;
+  }
+}

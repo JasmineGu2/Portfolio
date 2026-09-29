@@ -1,9 +1,9 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { WORK_ORDER, type WorkId } from '@/lib/portfolio/bento-workflows/experience-layouts'
 import { isWorkExperienceSlug } from '@/lib/portfolio/work-experience-content'
 import { getWorkTileById } from '@/lib/portfolio/bento-workflows/layouts'
-import { WorkExperiencePageClient } from '@/components/portfolio/WorkExperiencePageClient'
-import { GlobalBackground } from '@/components/portfolio/GlobalBackground'
+import { getCaseStudy } from '@/lib/portfolio/case-studies'
+import { CaseStudyArticle } from '@/components/portfolio/case-study/CaseStudyArticle'
 
 export function generateStaticParams() {
   return WORK_ORDER.map((slug) => ({ slug }))
@@ -26,14 +26,5 @@ export default async function WorkExperiencePage({
 }) {
   const { slug } = await params
   if (!isWorkExperienceSlug(slug)) notFound()
-  if (slug === 'tesla') redirect('/tesla')
-  if (slug === 'autodesk') redirect('/autodesk')
-  return (
-    <>
-      <GlobalBackground />
-      <div className="relative z-10">
-        <WorkExperiencePageClient slug={slug as WorkId} />
-      </div>
-    </>
-  )
+  return <CaseStudyArticle study={getCaseStudy(slug as WorkId)} />
 }
