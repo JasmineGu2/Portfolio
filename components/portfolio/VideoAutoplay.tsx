@@ -19,8 +19,9 @@ if (typeof window !== 'undefined') (window as Window & { pfVideoAutoplay?: boole
  *   once on the first touch for browsers that hold autoplay back until then (battery-saver modes).
  * - A video with `data-src` has no `src` in the markup: its file is only fetched when it is within 300px of the screen,
  *   so a page with many videos does not start every download on load.
- * - Motion is optional: visitors who ask their system for reduced motion start with the videos paused on their first
- *   frame, and the footer's "Pause videos" control (which sets `data-videos="paused"` on <html>) works for everyone.
+ * - The videos are silent looping previews, so they autoplay for everyone, including visitors whose system asks for
+ *   reduced motion. Only the visitor's own choice pauses them: the footer's "Pause videos" control sets
+ *   `data-videos="paused"` on <html> and remembers it, and paused videos hold on their first frame.
  *
  * It also marks <html data-has-videos> while the page has an autoplay video, so the footer control only shows up then.
  * Renders nothing.
@@ -28,14 +29,13 @@ if (typeof window !== 'undefined') (window as Window & { pfVideoAutoplay?: boole
 export function VideoAutoplay() {
   useEffect(() => {
     const root = document.documentElement
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     let saved: string | null = null
     try {
       saved = localStorage.getItem(VIDEOS_KEY)
     } catch {}
-    // her choice wins; with none, someone who asked for reduced motion starts paused
-    if (saved === 'paused' || (saved === null && reduced.matches)) root.dataset.videos = 'paused'
+    // only the visitor's own saved choice pauses the videos
+    if (saved === 'paused') root.dataset.videos = 'paused'
     const paused = () => root.dataset.videos === 'paused'
 
     const inView = (video: HTMLVideoElement) => {
@@ -84,6 +84,8 @@ export function VideoAutoplay() {
       video.setAttribute('webkit-playsinline', '')
       video.playsInline = true
       video.disablePictureInPicture = true
+      // a video in the server markup can start before this runs, so the play listener below never saw it
+      if (paused()) video.pause()
       io.observe(video)
       ioLoad.observe(video)
     }
