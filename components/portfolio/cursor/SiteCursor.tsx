@@ -14,6 +14,9 @@ import { ACCENT_ORANGE } from '@/lib/portfolio/brand'
 
 const CREAM = '#FFFEFD'
 
+// Tells the home/about scripts in public/mocks (k2.js `K.cursor`) to drop their copy of this cursor, so only one draws.
+if (typeof window !== 'undefined') (window as Window & { pfSiteCursor?: boolean }).pfSiteCursor = true
+
 /** Tag shown when nothing labelled is under the pointer. '' keeps the cursor a bare dot. */
 const DEFAULT_LABEL = ''
 
@@ -23,6 +26,8 @@ const ARROW_H = 26
 const DOT_SIZE = 12
 const TAG_GAP = 6
 const EDGE_MARGIN = 16
+/** Tag's offset below the pointer box's top. Near the bottom edge it sits above the pointer instead. */
+const TAG_TOP = 8
 /** The arrow's tip sits ~2px inside its SVG box; nudge the box so the tip lands on the click point. */
 const TIP_OFFSET = -2
 
@@ -86,12 +91,16 @@ export function SiteCursor() {
   const [shown, setShown] = useState(true)
   const [label, setLabel] = useState(DEFAULT_LABEL)
   const [flipped, setFlipped] = useState(false)
+  const [flippedY, setFlippedY] = useState(false)
   const pointerX = useRef(0)
+  const pointerY = useRef(0)
   const tagWidth = useRef(0)
+  const tagHeight = useRef(0)
 
-  // The tag flips to the arrow's left when it would run off the right edge of the viewport.
+  // The tag flips to the arrow's left near the right edge, and above the pointer near the bottom edge.
   const updateFlip = useCallback(() => {
     setFlipped(pointerX.current + ARROW_W + TAG_GAP + tagWidth.current + EDGE_MARGIN > window.innerWidth)
+    setFlippedY(pointerY.current + TAG_TOP + tagHeight.current + EDGE_MARGIN > window.innerHeight)
   }, [])
 
   // Ignore null: an exiting tag unmounting after a label swap must not zero the width of the new one.
@@ -99,6 +108,7 @@ export function SiteCursor() {
     (el: HTMLSpanElement | null) => {
       if (!el) return
       tagWidth.current = el.offsetWidth
+      tagHeight.current = el.offsetHeight
       updateFlip()
     },
     [updateFlip]
@@ -112,6 +122,7 @@ export function SiteCursor() {
       x.set(e.clientX)
       y.set(e.clientY)
       pointerX.current = e.clientX
+      pointerY.current = e.clientY
 
       const target = e.target instanceof Element ? e.target : null
       setActive(true)
@@ -183,8 +194,12 @@ export function SiteCursor() {
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.85, x: flipped ? 4 : -4 }}
                 transition={{ duration, ease: 'easeOut' }}
-                style={{ backgroundColor: ACCENT_ORANGE, color: CREAM }}
-                className={`absolute top-2 whitespace-nowrap rounded-[4px] px-2 py-1 font-mono text-[11px] lowercase leading-[1.2] shadow-sm ${
+                style={{
+                  backgroundColor: ACCENT_ORANGE,
+                  color: CREAM,
+                  ...(flippedY ? { bottom: ARROW_H } : { top: TAG_TOP }),
+                }}
+                className={`absolute whitespace-nowrap rounded-[6px] px-3 py-1.5 font-mono text-[18px] lowercase leading-[1.25] shadow-sm ${
                   flipped ? 'right-full mr-1.5' : 'left-full ml-1.5'
                 }`}
               >
