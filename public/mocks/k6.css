@@ -44,7 +44,7 @@
 .q6-panel .q-tiles{gap:44px 28px}
 .q6-panel .q-tiles.bento{--row:clamp(420px,44vw,820px);grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}.q6-panel .bento .tile .m{aspect-ratio:auto;height:var(--row)}
 .q6-panel .bento .tile[data-narrow=true] .q-cap2{flex-direction:column;gap:8px}.q6-panel .bento .tile[data-narrow=true] .meta{text-align:left;max-width:none}
-.q6-panel .tile .tg2{transition:color .15s}.q6-panel .tile[data-group=engineering]:hover .tg2{color:var(--or)}
+.q6-panel .tile .tg2,.q6-panel .tile.side .meta span{transition:color .15s}.q6-panel .tile[data-id]:hover .tg2,.q6-panel .tile.side:hover .meta span{color:var(--or)}
 .q6-panel .q-cap2 .meta .soon{display:inline-block;width:auto;margin-bottom:6px;padding:2px 8px;border:1px solid #c9d0da;border-radius:999px;color:#7a8698;font-size:11px;letter-spacing:.08em}
 .q6-panel .tile.side .m{background:#eee;aspect-ratio:4/5}.q6-panel .tile.side .m img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:760px){.q6-panel .q-tiles.bento{grid-template-columns:1fr}.q6-panel .bento .tile{grid-column:auto!important;grid-row:auto!important}.q6-panel .bento .tile .m{height:auto;aspect-ratio:3/4}.q6 .q-sheet .q-w{width:auto;padding:0 18px}.q6-tab{padding:12px 12px;font-size:14px}.q6-panel .q-tiles{grid-template-columns:1fr}}
