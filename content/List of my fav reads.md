@@ -1,0 +1,10 @@
+- Hooked - how to build habit forming products
+- Drive - Daniel H Park
+- How to Love better
+- The 8 Rules of Love
+- Tldr.tech (fav newsletter)
+- https://lytagold.substack.com/p/ai-stupidity-psychosis-is-spreading
+- https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically
+- https://sublimeinternet.substack.com/p/umm-i-guess-were-talking-about-taste
+- https://www.lennysnewsletter.com/p/this-week-on-how-i-ai-how-stripe
+- https://www.lennysnewsletter.com/p/this-week-on-how-i-ai-how-stripe
