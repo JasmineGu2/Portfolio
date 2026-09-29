@@ -29,8 +29,8 @@ export default function AboutPage() {
         <hr className="q-rule" />
         <div className="q-w">
           <div className="q-desk">
-            <div className="d2" id="trends"></div>
             <div className="d4" id="quests"></div>
+            <div className="d2" id="trends"></div>
           </div>
         </div>
         <div className="q-w q-block">
