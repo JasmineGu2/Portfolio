@@ -14,6 +14,7 @@ export default function HomePage() {
 
       <Script src="/mocks/k2-data.js" strategy="beforeInteractive" />
       <Script src="/mocks/k4-data.js" strategy="beforeInteractive" />
+      <Script src="/mocks/k6-ask.js" strategy="beforeInteractive" />
       <Script src="/mocks/k2.js" strategy="beforeInteractive" />
       <Script src="/mocks/k3.js" strategy="beforeInteractive" />
       <Script src="/mocks/k4.js" strategy="beforeInteractive" />
@@ -23,12 +24,13 @@ export default function HomePage() {
         {`
           const $ = (s) => document.querySelector(s)
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
-            $('#nav').innerHTML = Q.header({ active: 'work', work: '#work', about: '/about' })
+            $('#nav').innerHTML = Q.header({ active: 'work', work: '#work', about: '/about', ask: false })
             Q.stage($('#hero'))
             Q.workTabs($('#tabs'))
             Q.footer2($('#foot'))
             Q.init()
             K.theme('pencil')
+            // Ask me anything panel removed; keep all other content
           }
         `}
       </Script>
