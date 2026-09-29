@@ -29,3 +29,8 @@
 - Why: globals.css still imports n8n-design-system, bento-scheme-global, bento-work-accents, pf-blueprint, pf-ask; `pnpm build` failed without them, and live pages use their classes (footer pf-foot/pf-quote, ask panel, work tiles).
 - Also re-added SoundProvider, PortfolioStateProvider, BentoWorkspaceProvider to the root layout (dropped with SiteShell in c5fb8d0; /work/[slug] needs them). SiteShell stays out.
 - Alternatives: delete the imports (would silently unstyle footer and ask panel); prune dead selectors (later, as its own task).
+
+## 2026-09-29 · Track public/mocks in git
+- Why: the live home and About pages are built from public/mocks (k2/k4/k6 js/css/data). It was excluded locally in .git/info/exclude, so Vercel never got it and the deployed home page would render empty. Jazz asked to stop ignoring it.
+- Note: the older throwaway mock pages (1-69-*.html, m52-m58) ship too and are reachable at /mocks/<file>.html once deployed.
+- Alternatives: move only the live files to public/site/ and keep mocks excluded (cleaner URLs, more moving parts); keep excluding (site breaks on deploy).
