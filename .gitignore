@@ -41,3 +41,6 @@ next-env.d.ts
 .vercel
 .env*.local
 .obsidian/
+
+# verification screenshots (large, regenerated each session)
+mocks/_shots/
