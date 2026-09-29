@@ -16,10 +16,6 @@ export default function AboutPage() {
             <div className="q6-left">
               <div id="notes"></div>
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
-              <div className="q6-notes2">
-                <div id="resumeNote"></div>
-                <div id="hlNote"></div>
-              </div>
             </div>
             <div id="lan"></div>
           </div>
@@ -27,7 +23,6 @@ export default function AboutPage() {
         <hr className="q-rule" />
         <div className="q-w">
           <div className="q-desk">
-            <div className="d1" id="meaningful"></div>
             <div className="d2" id="trends"></div>
             <div className="d3" id="customTools"></div>
             <div className="d4" id="quests"></div>
@@ -63,10 +58,7 @@ export default function AboutPage() {
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
             $('#nav').innerHTML = Q.header({ active: 'about', work: '/', about: '#journey', ask: false })
             Q.toolsPad($('#notes'), JSON.parse($('#tools-data').textContent))
-            Q.resumeNote($('#resumeNote'))
-            Q.highlightsNote($('#hlNote'))
             Q.lanyard($('#lan'))
-            Q.meaningful($('#meaningful'))
             Q.productTrends($('#trends'))
             Q.customTools($('#customTools'))
             Q.sideQuests($('#quests'))
@@ -76,7 +68,7 @@ export default function AboutPage() {
             Q.init()
             K.theme('pencil')
             Q.drag($('#notes'), { mouseOnly: true });
-            ['#resumeNote', '#hlNote', '#meaningful', '#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
+            ['#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
           }
         `}
       </Script>
