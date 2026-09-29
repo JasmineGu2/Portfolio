@@ -120,7 +120,7 @@
     el.classList.add('q6-pd'); if (mouseOnly) el.classList.add('mouse')
     let on = false, moved = false, id = 0, sx = 0, sy = 0, x = 0, y = 0, b = [0, 0, 0, 0]
     el.addEventListener('pointerdown', (e) => {
-      if ((e.pointerType === 'mouse' && e.button) || (mouseOnly && e.pointerType !== 'mouse') || e.target.closest('a,button,input,video,canvas')) return
+      if ((e.pointerType === 'mouse' && e.button) || (mouseOnly && e.pointerType !== 'mouse') || e.target.closest('a,button,input,video,canvas,.made-track,.q6-mpic')) return
       const r = el.getBoundingClientRect(), a = (el.closest('main') || document.body).getBoundingClientRect()
       on = true; moved = false; id = e.pointerId; sx = e.clientX; sy = e.clientY
       b = [8 - r.left + x, innerWidth - 8 - r.right + x, a.top + scrollY - (r.top + scrollY) + y, a.bottom - r.bottom + y]; el.style.zIndex = ++zTop
@@ -179,31 +179,60 @@
     // a title with an image becomes a button; the picture pops up under it in a paper frame (hover/focus, tap pins it)
     const head = (t) => { if (!t.image) return `<h4>${esc(t.title)}</h4>`; const id = `mpic${n++}`
       return `<h4><button type="button" class="pic" aria-expanded="false" aria-controls="${id}">${esc(t.title)}<i aria-hidden="true"></i></button></h4><span class="q6-mpic" id="${id}" role="group" aria-label="${at(t.title)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="1200" height="642" loading="lazy" decoding="async" draggable="false"></span>` }
-    const item = (t) => `<li${t.image ? ' class="has-pic"' : ''}>${head(t)}${t.problem ? `<p class="k">${esc(L.problem)}</p><p>${esc(t.problem)}</p>` : ''}${t.tool ? `<p class="k">${esc(L.tool)}</p><p>${esc(t.tool)}</p>` : ''}${t.desc ? `<p>${esc(t.desc)}</p>` : ''}${t.builtWith.length ? `<p class="k">${esc(L.builtWith)}</p><ul class="chips">${t.builtWith.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : ''}</li>`
-    const wip = T.wip.length ? `<div class="wip">${T.wipTitle ? `<p class="wip-k">${esc(T.wipTitle)}</p>` : ''}<ul class="list">${T.wip.map(item).join('')}</ul></div>` : ''
-    el.innerHTML = `<div class="q6-c q6-paper q6-made-c" style="--r:0.8deg"><h3 class="q6-h">${esc(T.title)}</h3>${T.sub ? `<p class="sub">${esc(T.sub)}</p>` : ''}<ul class="list">${T.items.map(item).join('')}</ul>${wip}</div>`
+    const body = (t) => `${head(t)}${t.problem ? `<p class="k">${esc(L.problem)}</p><p>${esc(t.problem)}</p>` : ''}${t.tool ? `<p class="k">${esc(L.tool)}</p><p>${esc(t.tool)}</p>` : ''}${t.desc ? `<p>${esc(t.desc)}</p>` : ''}${t.builtWith.length ? `<p class="k">${esc(L.builtWith)}</p><ul class="chips">${t.builtWith.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : ''}`
+    // one row of slides: the work-in-progress ones first (dashed), then the tools in file order
+    const slide = (t, wip) => `<li class="${[t.image && 'has-pic', wip && 'wip'].filter(Boolean).join(' ')}">${wip && T.wipTitle ? `<p class="wip-k">${esc(T.wipTitle)}</p>` : ''}${body(t)}</li>`
+    const slides = T.wip.map((t) => slide(t, true)).concat(T.items.map((t) => slide(t, false))).join('')
+    el.innerHTML = `<div class="q6-c q6-paper q6-made-c" style="--r:0.8deg"><h3 class="q6-h">${esc(T.title)}</h3>${T.sub ? `<p class="sub">${esc(T.sub)}</p>` : ''}<ul class="list made-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="${at(T.title)}">${slides}</ul><div class="made-nav"><button type="button" class="made-arw" data-d="-1" aria-label="${at(L.prev || 'Previous tools')}"><span aria-hidden="true">←</span></button><div class="made-dots"></div><button type="button" class="made-arw" data-d="1" aria-label="${at(L.next || 'Next tools')}"><span aria-hidden="true">→</span></button></div></div>`
+    const card = $('.q6-made-c', el), track = $('.made-track', el), dots = $('.made-dots', el), arws = $$('.made-arw', el)
+    // the pictures live outside the scrolling track (its overflow would clip them) and are placed under their title
+    $$('.q6-mpic', track).forEach((p) => card.appendChild(p))
+    // ---- carousel: native scroll + snap; buttons, dots and arrow keys move one page (2 slides wide, 1 on phones)
+    const RM = matchMedia('(prefers-reduced-motion: reduce)')
+    const step = () => { const s = track.children; return s.length > 1 ? s[1].offsetLeft - s[0].offsetLeft : track.clientWidth }
+    const per = () => Math.max(1, Math.round((track.clientWidth + 1) / step()))
+    const pages = () => Math.ceil(track.children.length / per())
+    const page = () => { const max = track.scrollWidth - track.clientWidth; return track.scrollLeft >= max - 2 ? pages() - 1 : Math.round(track.scrollLeft / (step() * per())) }
+    const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(pages() - 1, i)) * step() * per(), behavior: RM.matches ? 'auto' : 'smooth' })
+    let nDots = 0
+    const sync = () => {
+      const n = pages(), i = page()
+      if (n !== nDots) { nDots = n; dots.innerHTML = Array.from({ length: n }, (_, k) => `<button type="button" aria-label="${k + 1} / ${n}"><i></i></button>`).join(''); $$('button', dots).forEach((d, k) => d.addEventListener('click', () => go(k))) }
+      $$('button', dots).forEach((d, k) => d.toggleAttribute('aria-current', k === i))
+      arws[0].disabled = i <= 0; arws[1].disabled = i >= n - 1; $('.made-nav', el).hidden = n < 2
+    }
+    arws.forEach((a) => a.addEventListener('click', () => go(page() + +a.dataset.d)))
+    track.addEventListener('keydown', (e) => { if (e.target !== track || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return; e.preventDefault(); go(page() + (e.key === 'ArrowRight' ? 1 : -1)) })
+    let raf = 0
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { sync(); if (open) place(open) }) }, { passive: true })
+    addEventListener('resize', sync); sync()
     const HOVER = matchMedia('(hover: hover)')
     let open = null, pinned = false, t = 0
-    const set = (li, on) => {
-      const b = $('.pic', li), p = $('.q6-mpic', li); li.classList.toggle('open', on); b.setAttribute('aria-expanded', String(on))
-      if (!on) return
-      // keep the picture inside the viewport: shift it sideways if it would spill past either edge
+    const pic = (li) => $('#' + $('.pic', li).getAttribute('aria-controls'), card)
+    // put the picture under its title (card coordinates), then keep it inside the viewport sideways
+    const place = (li) => {
+      const p = pic(li), c = card.getBoundingClientRect(), h = $('h4', li).getBoundingClientRect()
+      p.style.left = Math.round(h.left - c.left - 10) + 'px'; p.style.top = Math.round(h.bottom - c.top) + 'px'
       p.style.setProperty('--dx', '0px'); const r = p.getBoundingClientRect(), pad = 12
       const dx = r.right > innerWidth - pad ? innerWidth - pad - r.right : r.left < pad ? pad - r.left : 0
       p.style.setProperty('--dx', Math.round(dx) + 'px')
     }
+    const set = (li, on) => { const p = pic(li); li.classList.toggle('open', on); p.classList.toggle('open', on); $('.pic', li).setAttribute('aria-expanded', String(on)); if (on) place(li) }
     const show = (li) => { clearTimeout(t); if (open && open !== li) { set(open, false); pinned = false } open = li; set(li, true); el.classList.add('has-open') }
     const hide = () => { clearTimeout(t); if (open) set(open, false); open = null; pinned = false; el.classList.remove('has-open') }
+    const inside = (n) => open && (open.contains(n) || pic(open).contains(n))
     $$('.has-pic', el).forEach((li) => {
-      const b = $('.pic', li)
+      const b = $('.pic', li), p = pic(li)
       li.addEventListener('mouseenter', () => { if (HOVER.matches) show(li) })
-      li.addEventListener('mouseleave', () => { if (!pinned && open === li) t = setTimeout(hide, 140) })
+      li.addEventListener('mouseleave', (e) => { if (!pinned && open === li && !p.contains(e.relatedTarget)) t = setTimeout(hide, 140) })
+      p.addEventListener('mouseenter', () => clearTimeout(t))
+      p.addEventListener('mouseleave', (e) => { if (!pinned && open === li && !li.contains(e.relatedTarget)) t = setTimeout(hide, 140) })
       b.addEventListener('focus', () => show(li))
       b.addEventListener('blur', () => { if (!pinned && open === li) hide() })
       b.addEventListener('click', () => { if (open === li && pinned) hide(); else { show(li); pinned = true } })
     })
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) hide() })
-    document.addEventListener('pointerdown', (e) => { if (open && !open.contains(e.target)) hide() })
+    document.addEventListener('pointerdown', (e) => { if (open && !inside(e.target)) hide() })
   }
   // side quests
   Q.sideQuests = (el) => {

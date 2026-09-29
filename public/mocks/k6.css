@@ -262,8 +262,22 @@
 .q6-made-c .q6-h{font-size:22px;margin:0 0 6px}
 .q6-made-c .sub{font-size:15px;margin:0 0 18px;color:var(--muted)}
 .q6-made-c ul{list-style:none;margin:0;padding:0}
-.q6-made-c .list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 30px}
-.q6-made-c .list>li{min-width:0}
+/* one row that swipes sideways: native scroll + snap, 2 slides a page (1 on phones); height = the tallest slide, shorter ones sit at the top */
+.q6-made-c .made-track{--g:30px;display:flex;align-items:flex-start;gap:var(--g);margin:-4px;padding:4px;scroll-padding:0 4px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;touch-action:pan-x pan-y;contain:inline-size;scrollbar-width:none;cursor:auto;user-select:text;-webkit-user-select:text}
+.q6-made-c .made-track::-webkit-scrollbar{display:none}
+.q6-made-c .made-track:focus-visible{outline:2px solid var(--or);outline-offset:-2px;border-radius:4px}
+.q6-made-c .made-track>li{flex:0 0 calc((100% - var(--g)) / 2);min-width:0;scroll-snap-align:start}
+.q6-made-c .made-nav{display:flex;align-items:center;justify-content:center;gap:4px;margin:8px 0 0}
+.q6-made-c .made-nav[hidden]{display:none}
+.q6-made-c .made-arw{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:999px;background:transparent;color:#0e3b8f;font:500 18px/1 'JetBrains Mono',monospace;cursor:pointer}
+.q6-made-c .made-arw:hover:not(:disabled){background:rgba(14,59,143,.08)}
+.q6-made-c .made-arw:disabled{opacity:.3;cursor:default}
+.q6-made-c .made-arw:focus-visible,.q6-made-c .made-dots button:focus-visible{outline:2px solid var(--or);outline-offset:-2px}
+.q6-made-c .made-dots{display:flex}
+.q6-made-c .made-dots button{display:grid;place-items:center;width:22px;height:44px;padding:0;border:0;background:none;cursor:pointer;border-radius:6px}
+.q6-made-c .made-dots i{width:7px;height:7px;border-radius:999px;background:rgba(14,59,143,.28);transition:width .2s ease,background-color .2s ease}
+.q6-made-c .made-dots button[aria-current] i{width:16px;background:#0e3b8f}
+@media (prefers-reduced-motion:reduce){.q6-made-c .made-dots i{transition:none}}
 .q6-made-c h4{font-size:17px;font-weight:600;line-height:1.3;margin:0 0 6px;color:var(--ink)}
 .q6-made-c p{font-size:15px;line-height:1.5;margin:0;color:var(--muted)}
 /* labels match the legal pad's hover card ("What it is / How I use it") */
@@ -271,8 +285,7 @@
 .q6-made-c h4+.k{margin-top:0}
 .q6-made-c .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .q6-made-c .chips li{padding:3px 9px;border:1px solid rgba(27,27,27,.28);border-radius:999px;font:500 12px/1.4 'JetBrains Mono',monospace;color:var(--ink);white-space:nowrap}
-.q6-made-c .wip{margin:26px 0 8px;padding:18px 18px 16px;border:1.5px dashed rgba(14,59,143,.45);border-radius:6px}
-.q6-made-c .wip .list{grid-template-columns:1fr}
+.q6-made-c .wip{padding:16px 16px 14px;border:1.5px dashed rgba(14,59,143,.45);border-radius:6px}
 .q6-made-c .wip-k{display:inline-block;margin:0 0 12px;padding:3px 9px;border-radius:4px;background:#0e3b8f;color:#fffefb;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
 /* a title with a picture: dotted underline + a tiny frame icon; the picture drops under it in a paper frame like the legal pad's hover cards */
 .q6-made-c li.has-pic{position:relative}
@@ -282,10 +295,10 @@
 .q6-mpic{position:absolute;z-index:6;left:-10px;width:min(560px,calc(100vw - 24px));margin-top:6px;padding:12px 12px 14px;background:#fffefb;cursor:auto;
   box-shadow:0 18px 34px -10px rgba(20,30,60,.3),0 2px 6px rgba(20,30,60,.1);translate:var(--dx,0px) 0;transform:translateY(-4px) rotate(-.4deg);opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .16s ease,transform .18s cubic-bezier(.3,.9,.3,1),visibility 0s linear .18s}
-.q6-made-c li.open .q6-mpic{opacity:1;visibility:visible;pointer-events:auto;transform:rotate(.6deg);transition-delay:0s}
+.q6-made-c .q6-mpic.open{opacity:1;visibility:visible;pointer-events:auto;transform:rotate(.6deg);transition-delay:0s}
 .q6-mpic img{display:block;width:100%;height:auto;border:1px solid rgba(27,27,27,.12)}
 .q6-made.has-open{z-index:999!important}
-@media (prefers-reduced-motion:reduce){.q6-mpic,.q6-made-c li.open .q6-mpic{transition:none;transform:rotate(.6deg)}}
-@media (max-width:760px){.q6-made{--off:0px;width:100%;margin:0}.q6-made-c{padding:22px 20px 14px}.q6-made-c .list{grid-template-columns:1fr}.q6-made-c .wip{padding:16px 14px 14px}}
+@media (prefers-reduced-motion:reduce){.q6-mpic,.q6-made-c .q6-mpic.open{transition:none;transform:rotate(.6deg)}}
+@media (max-width:760px){.q6-made{--off:0px;width:100%;margin:0}.q6-made-c{padding:22px 20px 8px}.q6-made-c .made-track{--g:16px}.q6-made-c .made-track>li{flex-basis:100%}.q6-made-c .wip{padding:16px 14px 14px}}
 /* when a legal-pad tool card is open it must sit above this note */
 .q6-left #notes{position:relative;z-index:3}
