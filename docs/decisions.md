@@ -34,3 +34,15 @@
 - Why: the live home and About pages are built from public/mocks (k2/k4/k6 js/css/data). It was excluded locally in .git/info/exclude, so Vercel never got it and the deployed home page would render empty. Jazz asked to stop ignoring it.
 - Note: the older throwaway mock pages (1-69-*.html, m52-m58) ship too and are reachable at /mocks/<file>.html once deployed.
 - Alternatives: move only the live files to public/site/ and keep mocks excluded (cleaner URLs, more moving parts); keep excluding (site breaks on deploy).
+
+## 2026-09-29 · Vercel builds with pnpm; one file for the home route
+- Why: vercel.json still forced npm, which rejects @astryxdesign/core's React 19 peer range (pnpm accepts it; lib/react19-shim.js covers it), so every deploy failed at install. Then app/page.tsx re-exporting app/(home)/page.tsx left an empty .next/server/app/(home) and Vercel failed on its client-reference manifest. Now vercel.json uses pnpm and app/page.tsx is the only "/" page; the group moved to _to_delete/ (excluded in tsconfig).
+- Alternatives: `npm install --legacy-peer-deps` (hides a real mismatch, two package managers); keep the route group and add a layout with a client component (works around, doesn't remove the duplicate).
+
+## 2026-09-29 · About badge removed; polaroids + receipt instead
+- Why: the physics lanyard was laggy and Jazz asked to remove it. The About top is now tools pad + two polaroids (content/about-photo.md) on the left and a receipt strip of tools-I've-created (content/tools-created.md "Short:" lines) on the right.
+- Alternatives: optimise the lanyard (stopped mid-way when she chose to remove it).
+
+## 2026-09-30 · Safari fixes: HTML note overlay, PNG favicon
+- Why: WebKit misplaces HTML inside SVG <foreignObject> under transforms/viewBox scaling, and ignores SVG favicons. The hero note is now an HTML overlay positioned from SVG coordinates; favicon ships as SVG + PNG + ICO + apple-touch.
+- Alternatives: SVG <text> for the note (loses wrapping and the handwritten styling).
