@@ -1,6 +1,9 @@
-﻿import Script from 'next/script'
+import Script from 'next/script'
+import { BookShelf3D } from '@/components/portfolio/reading/BookShelf3D'
+import { getReading, READING_LABELS } from '@/lib/portfolio/reading'
 
 export default function AboutPage() {
+  const reading = getReading()
   return (
     <>
       <div id="nav"></div>
@@ -25,6 +28,10 @@ export default function AboutPage() {
         <div className="q-w q-block">
           <p className="q-lab">gallery</p>
           <div id="pola"></div>
+        </div>
+        <div className="q-w q-block">
+          <p className="q-lab">{reading.title}</p>
+          <BookShelf3D items={reading.items} labels={READING_LABELS} />
         </div>
         <div className="q-w q-block" id="tools"></div>
         <div className="q-w q-block">
@@ -59,7 +66,7 @@ export default function AboutPage() {
             Q.footer2($('#foot'))
             Q.init()
             K.theme('pencil')
-            Q.drag($('#notes'), { mouseOnly: true })
+            Q.drag($('#notes'), { mouseOnly: true });
             ['#meaningful', '#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
           }
         `}
