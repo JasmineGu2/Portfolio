@@ -6,7 +6,7 @@ export const HERO_HEADLINE =
 export const WHATS_NEXT = {
   title: "What's next",
   when: 'Now',
-  text: 'Looking to join a startup or a high-ownership role in NYC or the Bay Area. Optimizing for learning.',
+  text: 'Looking to join a high-ownership, dynamic role in NYC or the Bay Area. Optimizing for learning.',
 } as const
 
 export const HERO_HIGHLIGHTS_LEAD = 'A few highlights (not on my resume)'
