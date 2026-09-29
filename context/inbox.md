@@ -2231,3 +2231,64 @@ Screenshots: `mocks/_shots/footer-quotes-2026-09-29.png`, `mocks/_shots/footer-q
 <status>completed</status>
 <summary>Background command "Restart dev server in background" completed (exit code 0)</summary>
 </task-notification>
+
+## 2026-09-29 04:52
+<task-notification>
+<task-id>bfq0jrdwg</task-id>
+<tool-use-id>toolu_01DE1QZnNRZyxUxqfKPn2k9A</tool-use-id>
+<output-file>C:\Users\JASMIN~1\AppData\Local\Temp\claude\C--Users-Jasmine-Gu-portfolio\45566874-35d8-4dfc-8098-78a4ff77cdba\tasks\bfq0jrdwg.output</output-file>
+<status>completed</status>
+<summary>Background command "Restart dev server in background" completed (exit code 0)</summary>
+</task-notification>
+
+## 2026-09-29 05:06
+<task-notification>
+<task-id>a9a71c82cb8d5295d</task-id>
+<tool-use-id>toolu_01LvFjbspoxFjKUJL8urx6N5</tool-use-id>
+<output-file>C:\Users\JASMIN~1\AppData\Local\Temp\claude\C--Users-Jasmine-Gu-portfolio\45566874-35d8-4dfc-8098-78a4ff77cdba\tasks\a9a71c82cb8d5295d.output</output-file>
+<status>completed</status>
+<summary>Agent "Fix Autodesk tile hover colors" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I fixed it: hovering now turns the whole tag line orange on every experience tile in all three tabs, and on the side-project tiles too.
+
+**Root cause:** the hover rule in `public/mocks/k6.css:47` only matched tiles marked as Engineering (`.tile[data-group=engineering]`). Autodesk TPM is filed under Product, so it never got the colour. Stealth, Hack Western and IPS Fellowship had the same problem. Side-project tiles had no hover rule at all.
+
+**Fix (k6.css:47):** the rule now matches every experience tile, plus the name line on side-project tiles. I didn't change the colour or timing.
+
+**Check:** Playwright hovered all 25 tiles (18 across All, Engineering and Product/Business, plus 7 side projects). All 25 pass: grey before, orange on hover, including the wrapped third line. Screenshot: `C:\Users\Jasmine Gu\portfolio\mocks\_shots\tile-hover-autodesk-2026-09-29.png`</result>
+<usage><subagent_tokens>63871</subagent_tokens><tool_uses>13</tool_uses><duration_ms>409959</duration_ms></usage>
+</task-notification>
+
+## 2026-09-29 05:19
+<task-notification>
+<task-id>ab944eb42c53cfe68</task-id>
+<tool-use-id>toolu_01BKg9hSs2i2WsevaueJi55T</tool-use-id>
+<output-file>C:\Users\JASMIN~1\AppData\Local\Temp\claude\C--Users-Jasmine-Gu-portfolio\45566874-35d8-4dfc-8098-78a4ff77cdba\tasks\ab944eb42c53cfe68.output</output-file>
+<status>completed</status>
+<summary>Agent "Tools-created card as swipeable row" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>The tools card is now a one-row swipeable carousel. At 1440 the card went from **1475px to 467px** tall; the row is 300px, set by the tallest slide, so nothing is clipped. The whole page got about 1000px shorter (5501 to 4493).
+
+- **Order:** the "Work in progress" eye-tracking tool comes first, with its dashed box. The 8 tools follow in file order, and prev is disabled at the start.
+- **Desktop checks:** 2 per page, 5 dots. Next, the dots and the arrow keys all advanced correctly. Wheel scrolling over the card moved the page 300px. The screenshot popover shows in full.
+- **390:** 1 per page, 9 dots. A touch swipe moved exactly one page without dragging the card. No sideways page scroll and no console errors.
+
+Files are in `C:\Users\Jasmine Gu\portfolio\public\mocks\`:
+- k6.js
+- k6.css
+
+Screenshots are in `C:\Users\Jasmine Gu\portfolio\mocks\_shots\`:
+- tools-created-carousel-1440-2026-09-29.png
+- tools-created-carousel-page2-1440-2026-09-29.png
+- tools-created-carousel-390-2026-09-29.png</result>
+<usage><subagent_tokens>93912</subagent_tokens><tool_uses>31</tool_uses><duration_ms>644604</duration_ms></usage>
+</task-notification>
+
+## 2026-09-29 05:19
+<task-notification>
+<task-id>bdbvyzuyi</task-id>
+<tool-use-id>toolu_01FiLzJYMovpNiXjF4Vv4F2z</tool-use-id>
+<output-file>C:\Users\JASMIN~1\AppData\Local\Temp\claude\C--Users-Jasmine-Gu-portfolio\45566874-35d8-4dfc-8098-78a4ff77cdba\tasks\bdbvyzuyi.output</output-file>
+<status>completed</status>
+<summary>Background command "Restart dev server in background" completed (exit code 0)</summary>
+</task-notification>
