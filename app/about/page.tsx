@@ -3,12 +3,12 @@ import { BookShelf3D } from '@/components/portfolio/reading/BookShelf3D'
 import { getReading, READING_LABELS } from '@/lib/portfolio/reading'
 import { getTools } from '@/lib/portfolio/tools'
 import { getToolsCreated } from '@/lib/portfolio/tools-created'
-import { getAboutPhoto } from '@/lib/portfolio/about-photo'
+import { getAboutPhotos } from '@/lib/portfolio/about-photo'
 import { getQuotes } from '@/lib/portfolio/quotes'
 
 export default function AboutPage() {
   const reading = getReading()
-  const photo = getAboutPhoto()
+  const photos = getAboutPhotos()
   // Tools copy lives in content/tools.md; the page script renders it from this JSON.
   const toolsJson = JSON.stringify(getTools()).replace(/</g, '\\u003c')
   // Same for the tools she built: content/tools-created.md
@@ -26,13 +26,17 @@ export default function AboutPage() {
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
               <script id="made-data" type="application/json" dangerouslySetInnerHTML={{ __html: madeJson }} />
               <script id="quotes-data" type="application/json" dangerouslySetInnerHTML={{ __html: quotesJson }} />
-              {/* hero polaroid under the legal pad (photo, alt and caption live in content/about-photo.md); draggable like the other about cards */}
-              <div className="q6-hero" id="heroPol">
-                <figure className="q6-hero-pol">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={photo.photo} alt={photo.alt} width={768} height={1024} draggable={false} />
-                  {photo.caption && <figcaption>{photo.caption}</figcaption>}
-                </figure>
+              {/* hero polaroids tossed under the legal pad's bottom edge, in front of it (photos, alt and captions live in content/about-photo.md); each one is draggable like the other about cards */}
+              <div className="q6-heros">
+                {photos.map((photo, i) => (
+                  <div className="q6-hero" id={`heroPol${i}`} key={photo.photo}>
+                    <figure className="q6-hero-pol">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={photo.photo} alt={photo.alt} width={768} height={1024} draggable={false} />
+                      {photo.caption && <figcaption>{photo.caption}</figcaption>}
+                    </figure>
+                  </div>
+                ))}
               </div>
             </div>
             {/* right column: "Tools I've Created" as a long receipt strip, as tall as the pad + polaroid */}
@@ -85,7 +89,8 @@ export default function AboutPage() {
             Q.init()
             K.theme('pencil')
             Q.drag($('#notes'), { mouseOnly: true });
-            ['#trends', '#customTools', '#quests', '#heroPol'].forEach((s) => Q.drag($(s)))
+            ['#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
+            document.querySelectorAll('.q6-hero').forEach((el) => Q.drag(el))
           }
         `}
       </Script>
