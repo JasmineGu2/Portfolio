@@ -64,9 +64,9 @@
     const panel = $('.q6-panel', el), tabs = $$('.q6-tab', el)
     // the original 12-column bento: each experience keeps the width it had (a few stretch so a row fills)
     // All: autodesk + tesla first (7/5), then the rest in balanced rows, no tile under 4 columns
-    const BENTO = [{ autodesk: ['1 / span 7', 1, 7], tesla: ['8 / span 5', 1, 5], 'autodesk-eng': ['1 / span 5', 2, 5], intuit: ['6 / span 7', 2, 7], omers: ['1 / span 7', 3, 7], metaverse: ['8 / span 5', 3, 5], 'stealth-startup': ['1 / span 6', 4, 6], 'hack-western': ['7 / span 6', 4, 6], 'ivey-product': ['1 / span 6', 5, 6], western: ['7 / span 6', 5, 6] },
+    const BENTO = [{ autodesk: ['1 / span 7', 1, 7], tesla: ['8 / span 5', 1, 5], 'autodesk-eng': ['1 / span 5', 2, 5], intuit: ['6 / span 7', 2, 7], omers: ['1 / span 7', 3, 7], metaverse: ['8 / span 5', 3, 5], 'stealth-startup': ['1 / span 4', 4, 4], 'hack-western': ['5 / span 4', 4, 4], 'ivey-product': ['9 / span 4', 4, 4] },
       { tesla: ['1 / span 4', 1, 4], intuit: ['5 / span 8', 1, 8], 'autodesk-eng': ['1 / span 5', 2, 5], omers: ['6 / span 7', 2, 7], metaverse: ['1 / span 12', 3, 12] },
-      { autodesk: ['1 / span 8', 1, 8], 'hack-western': ['9 / span 4', 1, 4], 'stealth-startup': ['1 / span 4', 2, 4], 'ivey-product': ['5 / span 4', 2, 4], western: ['9 / span 4', 2, 4] }]
+      { autodesk: ['1 / span 8', 1, 8], 'hack-western': ['9 / span 4', 1, 4], 'stealth-startup': ['1 / span 6', 2, 6], 'ivey-product': ['7 / span 6', 2, 6] }]
     const tile = (e, bi) => { const b = bento(e, bi); return `<article class="tile" data-id="${e.id}" data-group="${e.group.toLowerCase()}" ${b.attr} data-cursor-label="${soon(e) ? D.comingSoonCursor : LANG[e.id] || e.label}"${soon(e) ? ' data-soon="true"' : ''} style="cursor:pointer"><div class="m">${K.media(e)}</div><div class="q-cap2"><p class="sub">${e.sub}</p><p class="meta">${soon(e) ? `<span class="soon">${D.comingSoon}</span>` : ''}<span>${e.co} · ${e.when}</span><span class="tg2">${e.tags.map((t) => `<i>${t}</i>`).join(' · ')}</span></p></div></article>` }
     const bento = (e, bi) => { const p = (BENTO[bi] || {})[e.id]; return p ? { attr: `style="grid-column:${p[0]};grid-row:${p[1]}" data-span="${p[2]}"${p[2] <= 5 ? ' data-narrow="true"' : ''}` } : { attr: '' } }
     const side = (s) => `<article class="tile side"><div class="m"><img src="${s.img}" alt="" loading="lazy"></div><div class="q-cap2"><p class="sub">${s.line}</p><p class="meta"><span>${s.n}</span></p></div></article>`
@@ -132,8 +132,10 @@
   Q.toolsPad = (el, T) => {
     const L = T.labels, at = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
     const out = (u) => /wikipedia\.org/.test(u) ? L.wiki : L.site
-    const row = (t, i) => `<li class="q6-tool"><span class="nm">${t.url ? `<a href="${at(t.url)}" target="_blank" rel="noreferrer" aria-describedby="tcard${i}">${esc(t.name)}</a>` : `<span tabindex="0" aria-describedby="tcard${i}">${esc(t.name)}</span>`}</span>${t.label ? `<span class="r">${esc(t.label)}</span>` : ''}
-      <div class="q6-tcard" id="tcard${i}" role="group" aria-label="${at(t.name)}"><p class="h">${esc(t.name)}</p>${t.what ? `<p class="k">${L.what}</p><p>${esc(t.what)}</p>` : ''}${t.how ? `<p class="k">${L.how}</p><p>${esc(t.how)}</p>` : ''}${t.metric ? `<p class="k">${L.metric}</p><p class="m">${esc(t.metric)}</p>` : ''}${t.url ? `<a class="go" href="${at(t.url)}" target="_blank" rel="noreferrer">${out(t.url)} <span aria-hidden="true">↗</span></a>` : ''}</div></li>`
+    // the product's own app icon (decorative: the name sits right next to it); sized inline so it fits the pad's 32px ruled line
+    const ico = (t, px) => t.icon ? `<img src="${at(t.icon)}" alt="" width="${px}" height="${px}" loading="lazy" decoding="async" style="width:${px}px;height:${px}px;border-radius:${Math.round(px / 4.5)}px;vertical-align:middle;margin:-4px 8px 0 0;display:inline-block">` : ''
+    const row = (t, i) => `<li class="q6-tool"><span class="nm">${t.url ? `<a href="${at(t.url)}" target="_blank" rel="noreferrer" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</a>` : `<span tabindex="0" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</span>`}</span>${t.label ? `<span class="r">${esc(t.label)}</span>` : ''}
+      <div class="q6-tcard" id="tcard${i}" role="group" aria-label="${at(t.name)}"><p class="h">${ico(t, 28)}${esc(t.name)}</p>${t.what ? `<p class="k">${L.what}</p><p>${esc(t.what)}</p>` : ''}${t.how ? `<p class="k">${L.how}</p><p>${esc(t.how)}</p>` : ''}${t.metric ? `<p class="k">${L.metric}</p><p class="m">${esc(t.metric)}</p>` : ''}${t.url ? `<a class="go" href="${at(t.url)}" target="_blank" rel="noreferrer">${out(t.url)} <span aria-hidden="true">↗</span></a>` : ''}</div></li>`
     el.innerHTML = `<div class="q-notes q6-pad q6-tpad" style="--r:-1.6deg"><p class="k">${esc(T.title)}</p>${T.intro ? `<p class="lead">${esc(T.intro)}</p>` : ''}<ul class="q6-tools">${T.items.map(row).join('')}</ul>${T.hint ? `<p class="hint">${esc(T.hint)}</p>` : ''}</div>`
     const pad = $('.q6-tpad', el), HOVER = matchMedia('(hover: hover)')
     let open = null, pinned = false, t = 0
@@ -162,13 +164,14 @@
   }
   // custom tools she's built
   Q.customTools = (el) => {
-    const tools = (D4.customTools || []).map((t) => `<div style="margin-bottom:12px"><h4 style="font-size:16px;font-weight:600;margin:0 0 4px;color:var(--ink)">${t.name}</h4><p style="font-size:15px;margin:0;color:var(--muted)">${t.desc}</p></div>`).join('')
-    el.innerHTML = `<div class="q6-c q6-paper" style="--r:0.8deg;padding:24px"><h3 class="q6-h" style="font-size:22px;margin-bottom:16px">My Favorite Tools I've Created</h3><p style="font-size:15px;margin-bottom:16px;color:var(--muted)">…to solve my pain points :)</p><div>${tools}</div></div>`
+    const hd = D4.customToolsHead || {}
+    const tools = (D4.customTools || []).map((t) => `<li><h4>${t.name}</h4><p>${t.desc}</p></li>`).join('')
+    el.innerHTML = `<div class="q6-c q6-paper q6-made-c" style="--r:0.8deg"><h3 class="q6-h">${hd.title || ''}</h3><p class="sub">${hd.sub || ''}</p><ul>${tools}</ul></div>`
   }
   // side quests
   Q.sideQuests = (el) => {
     const quests = (D4.sideQuests || []).map((q) => `<li><span aria-hidden="true">✦</span><span>${q}</span></li>`).join('')
-    el.innerHTML = `<div class="q6-c q6-paper" style="--r:-0.6deg;padding:24px"><h3 class="q6-h" style="font-size:22px;margin-bottom:16px">Side Quests I Love</h3><ul style="list-style:none;padding:0;margin:0;font-size:16px">${quests}</ul></div>`
+    el.innerHTML = `<div class="q6-c q6-paper" style="--r:-0.6deg;padding:24px"><h3 class="q6-h" style="font-size:22px;margin-bottom:16px">${D4.sideQuestsTitle || ''}</h3><ul style="list-style:none;padding:0;margin:0;font-size:16px">${quests}</ul></div>`
   }
 
   // ---------- "Ask me anything": a docked side panel ----------

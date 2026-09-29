@@ -5,6 +5,8 @@ import path from 'node:path'
 export interface Tool {
   name: string
   url?: string
+  /** Path to the product's official app icon under /icons/tools/ */
+  icon?: string
   label?: string
   what?: string
   how?: string
@@ -28,11 +30,11 @@ export const TOOLS_LABELS = {
   site: 'Visit the site',
 } as const
 
-const FIELDS = ['url', 'label', 'what', 'how', 'metric'] as const
+const FIELDS = ['url', 'icon', 'label', 'what', 'how', 'metric'] as const
 
 /**
  * Reads content/tools.md: `# Title`, then the first plain line is the intro and the second the hint.
- * Each `## Name` starts a tool; `- key: value` lines under it fill url, label, what, how and metric.
+ * Each `## Name` starts a tool; `- key: value` lines under it fill url, icon, label, what, how and metric.
  * Empty values are dropped, so an empty `metric:` never renders.
  */
 export function getTools(): Tools {
