@@ -1,0 +1,63 @@
+/* Scrollspy line navigation, adapted from Cue Foundations cue084. Desktop only; phones keep the "On this page" menu. */
+.lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.line {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40px; /* big hit area */
+  height: 24px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.line::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #dcd8ce;
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.line:hover::before {
+  width: 14px;
+  background-color: #999;
+}
+.line[aria-current='true']::before {
+  width: 22px;
+  background-color: var(--pf-dark, #141210);
+}
+.line:focus-visible {
+  outline: 2px solid var(--pf-brand-orange-ink);
+  outline-offset: 2px;
+}
+/* Section name: the link's accessible name, shown as a tooltip on hover/focus */
+.tip {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.line:hover .tip,
+.line:focus-visible .tip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .line::before,
+  .tip {
+    transition: none;
+  }
+}
