@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>47 · Stack options</title>
+<meta name="description" content="Seven ways to keep the exploded layer stack but make software engineering the loudest layer.">
+<style>
+:root{--navy:#0e3b8f;--ink:#282828;--muted:#6b6b6b;--or:#ff5a1f;--paper:#f3efe6;--mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);background-image:linear-gradient(rgba(14,59,143,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(14,59,143,.07) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:400 14px/1.55 var(--mono)}
+.wrap{max-width:1320px;margin:0 auto;padding:28px 24px 64px}
+header h1{margin:0 0 6px;font:700 16px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+header p{margin:0;max-width:78ch;color:var(--muted)}
+header p+p{margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,600px),1fr));gap:34px 28px;margin-top:28px}
+.card{display:flex;flex-direction:column;min-width:0}
+.card h2{margin:0;font:700 14px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline}
+.card h2 b{display:inline-grid;place-items:center;width:24px;height:24px;background:var(--navy);color:#fff;font-size:12px}
+.card .blurb{margin:6px 0 10px;color:var(--muted);font-size:12.5px;min-height:3.1em}
+.fig{background-color:var(--navy);background-image:linear-gradient(rgba(232,241,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.09) 1px,transparent 1px);background-size:24px 24px}
+.fig svg{display:block;width:100%;height:auto}
+.note{min-height:150px;padding:12px 2px 0;border-top:1px dotted color-mix(in srgb,var(--ink) 40%,transparent);margin-top:10px;font-size:12.5px}
+.note h4{margin:0 0 2px;font:700 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.note h4 i{width:10px;height:10px;background:var(--c)}
+.note .caps{margin:0 0 6px;color:var(--muted)}
+.note ul{margin:0;padding:0;list-style:none;display:grid;gap:3px}
+.note .idle{color:var(--muted)}
+/* drawing */
+.under{fill:#0e3b8f;stroke:none}
+.ln{fill:none;stroke:#e8f1ff;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}
+.thin{stroke-width:.9;opacity:.6}
+.top{fill:rgba(232,241,255,.10)}.sl{fill:rgba(232,241,255,.22)}.sr{fill:rgba(232,241,255,.06)}
+.gd{stroke:#9fd3ff;stroke-width:1;stroke-dasharray:4 6;opacity:.6;fill:none}
+.slab{transition:transform .3s ease,opacity .3s;cursor:pointer;outline:0}
+.slab .top,.slab .sl,.slab .sr{transition:fill .3s}
+.slab.on{transform:translateY(-10px)}.strip.on{transform:translateY(-6px)}
+.slab.on .top{fill:color-mix(in srgb,var(--c) 62%,transparent)}.slab.on .sl{fill:color-mix(in srgb,var(--c) 62%,#000)}.slab.on .sr{fill:color-mix(in srgb,var(--c) 45%,#000)}
+.slab:focus-visible .ln{stroke:#fff;stroke-width:2}
+.dimm .slab:not(.on),.dimm .lb:not(.on){opacity:.35}
+.lb{transition:opacity .3s}
+.nm{font:700 14px var(--mono);letter-spacing:.06em;fill:#e8f1ff}.nm.s{font-size:12px}
+.sb{font:500 10.5px var(--mono);letter-spacing:.08em;fill:#9fd3ff}
+.st{font:500 10.5px var(--mono);letter-spacing:.08em;fill:#9fd3ff}
+.tg{font:700 11px var(--mono);letter-spacing:.06em;fill:#e8f1ff}
+.ld{fill:none;stroke:#9fd3ff;stroke-width:1;stroke-dasharray:2 4;opacity:.85}
+.dt{fill:#e8f1ff}.mk{fill:#ff5a1f}.mkl{stroke:#ff5a1f;stroke-width:2;fill:none}
+@media (prefers-reduced-motion:reduce){.slab,.slab .top,.slab .sl,.slab .sr,.lb{transition:none}}
+@media (max-width:640px){.wrap{padding:20px 16px 48px}.grid{gap:28px}.note{min-height:170px}.nm{font-size:17px}.nm.s{font-size:15px}.sb,.st{font-size:12.5px}.tg{font-size:14px}}
+</style></head>
+<body>
+<div class="wrap">
+<header>
+<h1>47 · Stack options</h1>
+<p>You liked the exploded layer stack. Below it is kept (same blueprint blue, same slab drawing, labels on the left), but software engineering is the loudest thing on the page and product, business and community sit closer together as the support. Hover any slab for the note; the copy comes from your own layers data.</p>
+<p>A is the current one, for comparison. B to H are the options. If I had to pick: B, because it keeps the drawing you liked and still reads at hero-card size; G if you want engineering to be almost the whole stack. Say a letter and I will build it into the hero.</p>
+</header>
+<div class="grid" id="grid"></div>
+</div>
+<script src="k2-data.js"></script>
+<script>
+(() => {
+  const LAY = Object.fromEntries(window.K2.layers.map((l) => [l.id, l]))
+  const f = (n) => Math.round(n * 10) / 10
+  const NAMES = { swe: ['SOFTWARE', 'ENGINEERING'], product: ['PRODUCT'], business: ['BUSINESS'], community: ['COMMUNITY'] }
+  const col = (id) => (LAY[id] || LAY.swe).color
+
+  // an isometric slab (or cube): top diamond, two side faces, optional strata lines on the sides and rings on the top
+  const diamond = ({ cx, cy, W, H, T, id, strata = 0, rings = 0, label }) => {
+    const top = `${f(cx - W)},${f(cy)} ${f(cx)},${f(cy - H)} ${f(cx + W)},${f(cy)} ${f(cx)},${f(cy + H)}`
+    let s = `<g class="slab" tabindex="0" data-id="${id}" aria-label="${label || LAY[id].label}" style="--c:${col(id)}">`
+    s += `<polygon class="under" points="${f(cx - W)},${f(cy)} ${f(cx)},${f(cy - H)} ${f(cx + W)},${f(cy)} ${f(cx + W)},${f(cy + T)} ${f(cx)},${f(cy + H + T)} ${f(cx - W)},${f(cy + T)}"/>`
+    s += `<polygon class="top" points="${top}"/><polygon class="sl" points="${f(cx - W)},${f(cy)} ${f(cx)},${f(cy + H)} ${f(cx)},${f(cy + H + T)} ${f(cx - W)},${f(cy + T)}"/><polygon class="sr" points="${f(cx)},${f(cy + H)} ${f(cx + W)},${f(cy)} ${f(cx + W)},${f(cy + T)} ${f(cx)},${f(cy + H + T)}"/>`
+    s += `<polygon class="ln" points="${top}"/><path class="ln" d="M${f(cx - W)} ${f(cy)}v${T}L${f(cx)} ${f(cy + H + T)}L${f(cx + W)} ${f(cy + T)}V${f(cy)}M${f(cx)} ${f(cy + H)}v${T}"/>`
+    for (let k = 1; k < strata; k++) { const o = (T * k) / strata; s += `<path class="ln thin" d="M${f(cx - W)} ${f(cy + o)}L${f(cx)} ${f(cy + H + o)}L${f(cx + W)} ${f(cy + o)}"/>` }
+    if (rings >= 1) s += `<ellipse class="ln thin" cx="${cx}" cy="${cy}" rx="${f(W * 0.34)}" ry="${f(H * 0.34)}"/>`
+    if (rings >= 2) s += `<ellipse class="ln thin" cx="${cx}" cy="${cy}" rx="${f(W * 0.12)}" ry="${f(H * 0.12)}"/>`
+    return s + '</g>'
+  }
+  // a round disc (record / platter) with grooves and a spindle hole
+  const disc = ({ cx, cy, rx, ry, T, id, rings = [], hole = 0 }) => {
+    const bottom = `A${rx} ${ry} 0 0 0 ${cx + rx} ${cy + T}`
+    const side = `M${cx - rx} ${cy}V${cy + T}${bottom}V${cy}A${rx} ${ry} 0 0 1 ${cx - rx} ${cy}Z`
+    let s = `<g class="slab" tabindex="0" data-id="${id}" aria-label="${LAY[id].label}" style="--c:${col(id)}">`
+    s += `<path class="under" d="${side}"/><ellipse class="under" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`
+    s += `<path class="sl" d="${side}"/><ellipse class="top" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`
+    s += `<ellipse class="ln" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/><path class="ln" d="M${cx - rx} ${cy}V${cy + T}${bottom}V${cy}"/>`
+    rings.forEach((r) => (s += `<ellipse class="ln thin" cx="${cx}" cy="${cy}" rx="${f(rx * r)}" ry="${f(ry * r)}"/>`))
+    if (hole) s += `<ellipse class="under" cx="${cx}" cy="${cy}" rx="${hole}" ry="${f((hole * ry) / rx)}"/><ellipse class="ln" cx="${cx}" cy="${cy}" rx="${hole}" ry="${f((hole * ry) / rx)}"/>`
+    return s + '</g>'
+  }
+  // one slab cut into n strips (product / business / community share it). Strips run back-left to front-right.
+  const P = (cx, cy, W, H, s, t) => [cx - W + s * W + t * W, cy - s * H + t * H]
+  const strips = ({ cx, cy, W, H, T, ids }) => {
+    const n = ids.length, pt = (s, t) => P(cx, cy, W, H, s, t).map(f).join(',')
+    let s = `<polygon class="under" points="${pt(0, 0)} ${pt(1, 0)} ${pt(1, 1)} ${f(cx + W)},${f(cy + T)} ${f(cx)},${f(cy + H + T)} ${f(cx - W)},${f(cy + T)}"/>`
+    ids.forEach((id, i) => {
+      const t0 = i / n, t1 = (i + 1) / n, [ax, ay] = P(cx, cy, W, H, 0, t0), [dx, dy] = P(cx, cy, W, H, 0, t1)
+      s += `<g class="slab strip" tabindex="0" data-id="${id}" aria-label="${LAY[id].label}" style="--c:${col(id)}"><polygon class="top" points="${pt(0, t0)} ${pt(1, t0)} ${pt(1, t1)} ${pt(0, t1)}"/>`
+      s += `<polygon class="sl" points="${f(ax)},${f(ay)} ${f(dx)},${f(dy)} ${f(dx)},${f(dy + T)} ${f(ax)},${f(ay + T)}"/>`
+      if (i === n - 1) s += `<polygon class="sr" points="${pt(0, 1)} ${pt(1, 1)} ${f(cx + W)},${f(cy + T)} ${f(cx)},${f(cy + H + T)}"/>`
+      s += `<polygon class="ln" points="${pt(0, t0)} ${pt(1, t0)} ${pt(1, t1)} ${pt(0, t1)}"/><path class="ln" d="M${f(ax)} ${f(ay)}v${T}L${f(dx)} ${f(dy + T)}V${f(dy)}${i === n - 1 ? `M${f(dx)} ${f(dy + T)}L${f(cx + W)} ${f(cy + T)}V${f(cy)}` : ''}"/></g>`
+    })
+    return s
+  }
+  const guides = (cx, W, y0, y1, extra = '') => `<path class="gd" d="M${cx - W} ${y0}V${y1}M${cx + W} ${y0}V${y1}M${cx} ${y0}V${y1}"/>${extra}`
+  // label in the left column with a dotted leader to the slab
+  const label = ({ x = 26, y, name, sub, ax, ay, id, hot = false, lx = 200 }) => {
+    const names = [].concat(name), first = y - 4
+    let t = `<g class="lb" data-for="${id}">`
+    if (hot) t += `<rect class="mk" x="${x - 14}" y="${y - 10}" width="6" height="6"/>`
+    t += names.map((n, i) => `<text class="nm${names.length === 1 && !sub ? ' s' : ''}" x="${x}" y="${y + i * 16}">${n}</text>`).join('')
+    if (sub) t += `<text class="sb" x="${x}" y="${y + (names.length - 1) * 16 + 15}">${sub}</text>`
+    const ex = ax - 30, end = ax - 6
+    t += ex > lx + 8 ? `<path class="ld" d="M${lx} ${f(first)}H${f(ex)}L${f(end)} ${f(ay)}"/>` : `<path class="ld" d="M${Math.min(lx, end - 10)} ${f(first)}L${f(end)} ${f(ay)}"/>`
+    return t + `<circle class="dt" cx="${f(ax)}" cy="${f(ay)}" r="3.5" fill="${col(id)}"/></g>`
+  }
+  // a small tag above a block
+  const tag = (x, y, id) => `<g class="lb" data-for="${id}"><text class="tg" x="${f(x)}" y="${f(y)}" text-anchor="middle">${NAMES[id][0]}</text><path class="ld" d="M${f(x)} ${f(y + 4)}v8"/></g>`
+
+  const V = []
+  const add = (key, title, blurb, build, vb = '0 0 700 560') => V.push({ key, title, blurb, build, vb })
+
+  add('A', 'Current', 'Four equal slabs. Nothing says which one leads.', () => {
+    const cx = 400, W = 150, H = 60, T = 14, ys = [96, 216, 336, 456], ids = ['swe', 'product', 'business', 'community']
+    let s = guides(cx, W, 60, 456 + H + T)
+    ;[3, 2, 1, 0].forEach((i) => (s += diamond({ cx, cy: ys[i], W, H, T, id: ids[i], rings: 2 })))
+    ids.forEach((id, i) => (s += label({ y: ys[i] - 2, name: NAMES[id], sub: 'LAYER 0' + (i + 1), ax: cx - W, ay: ys[i], id })))
+    return s
+  })
+
+  add('B', 'Foundation slab', 'One tall block for software engineering, cut into its own four capabilities. Product, business and community are three thin slabs packed close above it.', () => {
+    const cx = 400, sw = { cx, cy: 330, W: 190, H: 76, T: 96 }, th = { cx, W: 104, H: 42, T: 10 }
+    let s = guides(cx, sw.W, 56, sw.cy, '')
+    s += diamond({ ...sw, id: 'swe', strata: 4, rings: 2 })
+    ;[['product', 178], ['business', 138], ['community', 98]].forEach(([id, cy]) => (s += diamond({ ...th, cy, id, rings: 1 })))
+    ;['FRONTEND', 'BACKEND', 'SYSTEMS', 'INFRA'].forEach((n, k) => { const y = sw.cy + ((k + 0.5) * sw.T) / 4; s += `<path class="ld" d="M${sw.cx + sw.W + 2} ${f(y)}H${sw.cx + sw.W + 12}"/><text class="st" x="${sw.cx + sw.W + 16}" y="${f(y + 4)}">${n}</text>` })
+    s += label({ y: 324, name: NAMES.swe, sub: 'PRIMARY LAYER', ax: sw.cx - sw.W, ay: sw.cy, id: 'swe', hot: true })
+    ;[['product', 178], ['business', 138], ['community', 98]].forEach(([id, cy]) => (s += label({ y: cy - 2, name: NAMES[id], sub: 'SUPPORTING', ax: cx - th.W, ay: cy, id })))
+    return s
+  }, '0 36 700 500')
+
+  add('C', 'Ziggurat', 'Width is the emphasis. Software engineering is the wide base and each layer above steps in toward a point, so the eye lands on the base first.', () => {
+    const cx = 400, sp = [
+      { id: 'swe', W: 224, H: 90, T: 52, cy: 384 },
+      { id: 'product', W: 128, H: 51, T: 14, cy: 326 },
+      { id: 'business', W: 92, H: 37, T: 14, cy: 272 },
+      { id: 'community', W: 62, H: 25, T: 14, cy: 218 },
+    ]
+    let s = `<path class="gd" d="M${cx - 224} 384L${cx - 62} 218M${cx + 224} 384L${cx + 62} 218M${cx} 170V${384 + 90 + 52}"/>`
+    sp.forEach((p) => (s += diamond({ cx, ...p, rings: p.id === 'swe' ? 2 : 1 })))
+    const rows = { swe: 394, product: 320, business: 266, community: 212 }
+    sp.forEach((p) => (s += label({ y: rows[p.id], name: NAMES[p.id], sub: p.id === 'swe' ? 'PRIMARY LAYER' : 'SUPPORTING', ax: cx - p.W, ay: p.cy, id: p.id, hot: p.id === 'swe' })))
+    return s
+  }, '0 150 700 400')
+
+  add('D', 'Platter', 'A different disk. One big record-style platter for software engineering, with three thin discs threaded on the same spindle above it.', () => {
+    const cx = 400, big = { cx, cy: 372, rx: 218, ry: 76, T: 66 }
+    let s = `<path class="gd" d="M${cx} 136V${372}"/>`
+    s += disc({ ...big, id: 'swe', rings: [0.78, 0.6, 0.42, 0.26], hole: 9 })
+    ;[['product', 288], ['business', 254], ['community', 220]].forEach(([id, cy]) => (s += disc({ cx, cy, rx: 100, ry: 35, T: 8, id, rings: [0.5], hole: 6 })))
+    s += `<path class="ln" d="M${cx - 4} 150V${222}M${cx + 4} 150V${222}"/><ellipse class="ln" cx="${cx}" cy="150" rx="4" ry="1.6"/>`
+    const rows = { swe: 384, product: 284, business: 250, community: 216 }
+    ;[['swe', 372, 218], ['product', 288, 100], ['business', 254, 100], ['community', 220, 100]].forEach(([id, cy, rx]) => (s += label({ y: rows[id] - (id === 'swe' ? 0 : 0), name: NAMES[id], sub: id === 'swe' ? 'PRIMARY LAYER' : null, ax: cx - rx, ay: cy, id, hot: id === 'swe' })))
+    return s
+  }, '0 110 700 430')
+
+  add('E', 'Two tiers', 'Software engineering stands on its own. Product, business and community share one slab, cut in three, so they read as one supporting layer.', () => {
+    const cx = 400, sw = { cx, cy: 190, W: 210, H: 84, T: 90 }, sh = { cx, cy: 420, W: 128, H: 51, T: 22 }
+    let s = guides(cx, sw.W, 90, sh.cy + sh.H + sh.T)
+    s += strips({ ...sh, ids: ['product', 'business', 'community'] })
+    s += diamond({ ...sw, id: 'swe', rings: 2 })
+    s += label({ y: 190, name: NAMES.swe, sub: 'PRIMARY LAYER', ax: sw.cx - sw.W, ay: sw.cy, id: 'swe', hot: true })
+    s += `<text class="sb" x="26" y="410">SUPPORTING LAYER</text>`
+    ;['product', 'business', 'community'].forEach((id, i) => { const [ax, ay] = P(sh.cx, sh.cy, sh.W, sh.H, 0, (i + 0.5) / 3); s += label({ y: ay + 4, name: NAMES[id], ax, ay, id, lx: 150 }) })
+    return s
+  }, '0 84 700 470')
+
+  add('F', 'Platform and blocks', 'A wide software engineering platform with three small blocks standing on it. Product, business and community are literally on top of the engineering.', () => {
+    const cx = 400, pl = { cx, cy: 372, W: 236, H: 94, T: 34 }, bw = 36, bh = 14.4, bt = 52
+    let s = guides(cx, pl.W, 150, pl.cy, '')
+    s += diamond({ ...pl, id: 'swe' })
+    const cubes = [['community', cx + 84, pl.cy - 40], ['business', cx, pl.cy - 6], ['product', cx - 84, pl.cy + 28]]
+    cubes.forEach(([id, bx, by]) => (s += diamond({ cx: bx, cy: by - bt, W: bw, H: bh, T: bt, id })))
+    cubes.forEach(([id, bx, by]) => (s += tag(bx, by - bt - bh - 20, id)))
+    s += label({ y: 366, name: NAMES.swe, sub: 'PRIMARY LAYER', ax: pl.cx - pl.W, ay: pl.cy, id: 'swe', hot: true, lx: 150 })
+    return s
+  }, '0 170 700 380')
+
+  add('G', 'Layer cake', 'Software engineering takes four of the five layers (frontend, backend, systems, infrastructure). Everything else is one thin cap on top.', () => {
+    const cx = 400, sw = { W: 200, H: 80, T: 16 }, rows = [['FRONTEND', 196], ['BACKEND', 276], ['SYSTEMS', 356], ['INFRASTRUCTURE', 436]], top = { cx, cy: 92, W: 150, H: 60, T: 14 }
+    let s = guides(cx, sw.W, 60, 436 + sw.H + sw.T)
+    ;[...rows].reverse().forEach(([, cy]) => (s += diamond({ cx, cy, ...sw, id: 'swe', rings: 1 })))
+    s += strips({ ...top, ids: ['product', 'business', 'community'] })
+    rows.forEach(([n, cy]) => (s += label({ x: 56, y: cy - 2, name: n, ax: cx - sw.W, ay: cy, id: 'swe', lx: 236 })))
+    s += `<path class="mkl" d="M34 176V456M34 176h8M34 456h8"/><text class="nm" transform="translate(24 318) rotate(-90)" text-anchor="middle" style="fill:#ff5a1f;font-size:11px">SOFTWARE ENGINEERING · 4 OF 5 LAYERS</text>`
+    ;['product', 'business', 'community'].forEach((id, i) => { const [ax, ay] = P(top.cx, top.cy, top.W, top.H, 0, (i + 0.5) / 3); s += label({ x: 56, y: ay + 4, name: NAMES[id], ax, ay, id, lx: 180 }) })
+    s += `<text class="sb" x="56" y="66">SUPPORTING CAP</text>`
+    return s
+  }, '0 24 700 536')
+
+  add('H', 'Cascade', 'The stack tips over. Software engineering is big and in front; the other three are small and tight, stepping away behind it.', () => {
+    const sw = { cx: 340, cy: 372, W: 200, H: 80, T: 64 }, sm = { W: 92, H: 37, T: 10 }, sp = [['community', 596, 188], ['business', 552, 228], ['product', 508, 268]]
+    let s = `<path class="gd" d="M${sw.cx} ${sw.cy}L596 188"/>`
+    sp.forEach(([id, cx, cy]) => (s += diamond({ cx, cy, ...sm, id, rings: 1 })))
+    s += diamond({ ...sw, id: 'swe', rings: 2 })
+    sp.forEach(([id, cx, cy]) => (s += `<g class="lb" data-for="${id}"><text class="tg" x="${cx - sm.W - 14}" y="${cy + 4}" text-anchor="end">${NAMES[id][0]}</text><path class="ld" d="M${cx - sm.W - 10} ${cy}H${cx - sm.W - 4}"/><circle class="dt" cx="${cx - sm.W}" cy="${cy}" r="3.5" fill="${col(id)}"/></g>`))
+    s += label({ y: 366, name: NAMES.swe, sub: 'PRIMARY LAYER', ax: sw.cx - sw.W, ay: sw.cy, id: 'swe', hot: true, lx: 150 })
+    return s
+  }, '0 110 700 470')
+
+  const noteHTML = (id) => { const l = LAY[id]; return `<h4 style="--c:${l.color}"><i></i>${l.label}</h4><p class="caps">${l.caps}</p><ul>${l.items.map((x) => `<li><b>${x[0]}</b>, ${x[1]}: ${x[2]}</li>`).join('')}</ul>` }
+  const idle = '<p class="idle">Hover a layer.</p>'
+
+  const grid = document.getElementById('grid')
+  V.forEach((v) => {
+    const el = document.createElement('article'); el.className = 'card'; el.dataset.key = v.key
+    el.innerHTML = `<h2><b>${v.key}</b>${v.title}</h2><p class="blurb">${v.blurb}</p><div class="fig"><svg viewBox="${v.vb}" role="img" aria-label="${v.title}: exploded layer stack">${v.build()}</svg></div><div class="note">${idle}</div>`
+    grid.appendChild(el)
+    const note = el.querySelector('.note'), fig = el.querySelector('.fig')
+    const on = (id, g) => { fig.classList.add('dimm'); el.querySelectorAll('.slab').forEach((s) => s.classList.toggle('on', s === g)); el.querySelectorAll('.lb').forEach((l) => l.classList.toggle('on', l.dataset.for === id)); note.innerHTML = noteHTML(id) }
+    const off = () => { fig.classList.remove('dimm'); el.querySelectorAll('.on').forEach((s) => s.classList.remove('on')); note.innerHTML = idle }
+    el.querySelectorAll('.slab').forEach((g) => { const id = g.dataset.id; g.addEventListener('mouseenter', () => on(id, g)); g.addEventListener('mouseleave', off); g.addEventListener('focus', () => on(id, g)); g.addEventListener('blur', off); g.addEventListener('click', () => on(id, g)) })
+    // in the strata and cake variants every slab is software engineering: light them all together
+    el.querySelectorAll('.slab[data-id="swe"]').forEach((g) => { g.addEventListener('mouseenter', () => el.querySelectorAll('.slab[data-id="swe"]').forEach((x) => x.classList.add('on'))) })
+  })
+})()
+</script>
+</body></html>

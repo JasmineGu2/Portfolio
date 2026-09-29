@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 54 · Skill Streams</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .stream { stroke-width: 20; fill: none; opacity: 0.9; }
+    .stream-frontend { stroke: #4a9eff; }
+    .stream-backend { stroke: #ff7b4a; }
+    .stream-product { stroke: #7c4aff; }
+
+    .exp-pin { cursor: pointer; transition: all 0.25s; }
+    .exp-pin circle { fill: #fff; r: 6; opacity: 0.8; }
+    .exp-pin text { font-size: 10px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 8; opacity: 1; filter: drop-shadow(0 0 10px rgba(255, 149, 0, 0.6)); }
+    .exp-pin:hover text { fill: #fff; font-weight: 700; }
+
+    .skill-label { font-size: 12px; font-weight: 600; fill: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px; }
+    .year-label { font-size: 13px; font-weight: 500; fill: rgba(255,255,255,0.5); }
+
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 15px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .title-text { font-size: 22px; font-weight: 700; letter-spacing: 1px; fill: rgba(255,255,255,0.9); }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Title -->
+  <text class="title-text" x="600" y="50" text-anchor="middle">THREE SKILL STREAMS CONVERGE</text>
+
+  <!-- Frontend Stream (React, TypeScript, JavaScript) -->
+  <g class="stream-group">
+    <path d="M 150,200 Q 400,250 600,280 Q 800,300 1000,320" class="stream stream-frontend" filter="url(#blur)"/>
+    <text class="skill-label" x="200" y="165">FRONTEND</text>
+    <text class="year-label" x="200" y="185">(2024-2026)</text>
+
+    <!-- Intuit 2024 -->
+    <g class="exp-pin">
+      <circle cx="380" cy="245"/>
+      <text x="380" y="248">React</text>
+      <title>Intuit · React · May 2024</title>
+    </g>
+
+    <!-- Tesla 2025 -->
+    <g class="exp-pin">
+      <circle cx="520" cy="270"/>
+      <text x="520" y="273">TS</text>
+      <title>Tesla · TypeScript · May 2025</title>
+    </g>
+
+    <!-- Autodesk 2026 -->
+    <g class="exp-pin">
+      <circle cx="750" cy="295"/>
+      <text x="750" y="298">JS</text>
+      <title>Autodesk · JavaScript · Jan 2026</title>
+    </g>
+  </g>
+
+  <!-- Backend Stream (Python, C++, Java, Node.js) -->
+  <g class="stream-group">
+    <path d="M 150,550 Q 380,480 600,380 Q 800,300 1000,340" class="stream stream-backend" filter="url(#blur)"/>
+    <text class="skill-label" x="200" y="600">BACKEND</text>
+    <text class="year-label" x="200" y="620">(2022-2026)</text>
+
+    <!-- Metaverse 2022 -->
+    <g class="exp-pin">
+      <circle cx="180" cy="530"/>
+      <text x="180" y="533">Py</text>
+      <title>Metaverse · Python · Nov 2022</title>
+    </g>
+
+    <!-- OMERS 2023 -->
+    <g class="exp-pin">
+      <circle cx="320" cy="450"/>
+      <text x="320" y="453">API</text>
+      <title>OMERS · APIs · May 2023</title>
+    </g>
+
+    <!-- Ivey 2025 -->
+    <g class="exp-pin">
+      <circle cx="580" cy="340"/>
+      <text x="580" y="343">LLM</text>
+      <title>Ivey · LLM Pipelines · May 2025</title>
+    </g>
+
+    <!-- Autodesk 2026 -->
+    <g class="exp-pin">
+      <circle cx="850" cy="310"/>
+      <text x="850" y="313">C++</text>
+      <title>Autodesk · C++, Java · Jan 2026</title>
+    </g>
+  </g>
+
+  <!-- Product Stream (Stakeholder management, AI, PM) -->
+  <g class="stream-group">
+    <path d="M 150,700 Q 420,600 650,420 Q 850,320 1000,360" class="stream stream-product" filter="url(#blur)"/>
+    <text class="skill-label" x="200" y="730">PRODUCT</text>
+    <text class="year-label" x="200" y="750">(2023-2026)</text>
+
+    <!-- OMERS 2023 (50% product) -->
+    <g class="exp-pin">
+      <circle cx="340" cy="580"/>
+      <text x="340" y="583">UAT</text>
+      <title>OMERS · Stakeholder Mgmt · May 2023</title>
+    </g>
+
+    <!-- Intuit 2024 (10% product) -->
+    <g class="exp-pin">
+      <circle cx="500" cy="490"/>
+      <text x="500" y="493">UX</text>
+      <title>Intuit · UX · May 2024</title>
+    </g>
+
+    <!-- Tesla 2025 (15% product) -->
+    <g class="exp-pin">
+      <circle cx="700" cy="370"/>
+      <text x="700" y="373">ML</text>
+      <title>Tesla · ML Product · May 2025</title>
+    </g>
+
+    <!-- Autodesk PM 2026 -->
+    <g class="exp-pin">
+      <circle cx="960" cy="340"/>
+      <text x="960" y="343">PM</text>
+      <title>Autodesk · Product Manager · May 2026</title>
+    </g>
+  </g>
+
+  <!-- Convergence Point - YOU -->
+  <rect class="me-block" x="940" y="300" width="140" height="100" rx="6"/>
+  <text class="me-text" x="1010" y="335">JASMINE GU</text>
+  <text class="me-text" x="1010" y="360" style="font-size: 13px; font-weight: 500;">PRODUCT ENGINEER</text>
+  <text class="me-text" x="1010" y="380" style="font-size: 11px; opacity: 0.8;">2026 →</text>
+
+  <!-- Arrow pointing to future -->
+  <path d="M 1090 250 L 1140 250" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+  <text style="font-size: 14px; font-weight: 600; fill: rgba(255,255,255,0.5); letter-spacing: 1px;" x="1160" y="255">FUTURE</text>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    const group = pin.parentElement;
+    pin.addEventListener('mouseenter', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => {
+        if (p.parentElement === group) {
+          p.style.opacity = '1';
+        } else {
+          p.style.opacity = '0.2';
+        }
+      });
+      document.querySelectorAll('.stream').forEach(s => {
+        if (s.parentElement === group) {
+          s.style.opacity = '1';
+        } else {
+          s.style.opacity = '0.15';
+        }
+      });
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+      document.querySelectorAll('.stream').forEach(s => s.style.opacity = '0.9');
+    });
+  });
+</script>
+</body>
+</html>

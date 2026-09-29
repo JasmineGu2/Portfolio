@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Option 1 Variations</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; padding: 40px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    h1 { font-size: 32px; margin-bottom: 12px; color: #1a1a1a; }
+    .subtitle { font-size: 16px; color: #666; margin-bottom: 50px; }
+
+    .variations { display: grid; gap: 60px; }
+    .variation { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .variation-title { font-size: 18px; font-weight: 700; color: #ed3801; margin-bottom: 8px; }
+    .variation-desc { font-size: 13px; color: #999; margin-bottom: 30px; font-style: italic; }
+    .divider { height: 1px; background: #eee; margin: 40px 0; }
+
+    /* ===== VARIATION 1: Minimalist ===== */
+    .v1 .greeting { font-size: 16px; font-weight: 400; color: #333; line-height: 1.6; margin-bottom: 20px; }
+    .v1 .intro { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 24px; }
+    .v1 .hobbies-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #999; margin-bottom: 12px; margin-top: 24px; }
+    .v1 .hobbies-list { list-style: none; font-size: 14px; line-height: 1.8; color: #666; }
+    .v1 .hobbies-list li { margin-bottom: 6px; }
+    .v1 .hobbies-list strong { color: #333; font-weight: 500; }
+    .v1 .exp-section { margin-top: 32px; }
+    .v1 .exp-header { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #999; margin-bottom: 14px; }
+    .v1 .exp-item { display: flex; justify-content: space-between; font-size: 14px; line-height: 1.6; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; }
+    .v1 .exp-item:last-child { border-bottom: none; }
+    .v1 .exp-role { color: #333; font-weight: 500; }
+    .v1 .exp-date { color: #999; font-size: 13px; }
+
+    /* ===== VARIATION 2: Bold & Warm ===== */
+    .v2 { background: #fffbf8; }
+    .v2 .greeting { font-size: 18px; font-weight: 600; color: #ed3801; line-height: 1.5; margin-bottom: 16px; }
+    .v2 .intro { font-size: 16px; line-height: 1.8; color: #5a3a3a; margin-bottom: 28px; }
+    .v2 .hobbies-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #c9553d; margin-bottom: 12px; margin-top: 28px; }
+    .v2 .hobbies-list { list-style: none; font-size: 15px; line-height: 1.9; color: #5a3a3a; }
+    .v2 .hobbies-list li { margin-bottom: 8px; }
+    .v2 .hobbies-list strong { color: #ed3801; font-weight: 600; }
+    .v2 .exp-section { margin-top: 32px; border-top: 2px solid #ed3801; padding-top: 20px; }
+    .v2 .exp-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #ed3801; margin-bottom: 14px; }
+    .v2 .exp-item { display: flex; justify-content: space-between; font-size: 14px; line-height: 1.6; padding: 10px 0; }
+    .v2 .exp-role { color: #ed3801; font-weight: 600; }
+    .v2 .exp-date { color: #c9553d; }
+
+    /* ===== VARIATION 3: Monospace Tech ===== */
+    .v3 { background: #f5f5f5; font-family: 'JetBrains Mono', 'Courier New', monospace; }
+    .v3 .greeting { font-size: 13px; color: #333; line-height: 1.6; margin-bottom: 16px; font-weight: 500; letter-spacing: 0.02em; }
+    .v3 .intro { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 24px; letter-spacing: 0.01em; }
+    .v3 .hobbies-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #999; margin-bottom: 10px; margin-top: 24px; }
+    .v3 .hobbies-list { list-style: none; font-size: 12px; line-height: 1.7; color: #666; }
+    .v3 .hobbies-list li { margin-bottom: 4px; }
+    .v3 .hobbies-list strong { color: #333; }
+    .v3 .exp-section { margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 16px; }
+    .v3 .exp-header { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #999; margin-bottom: 12px; }
+    .v3 .exp-item { display: flex; justify-content: space-between; font-size: 12px; line-height: 1.6; padding-bottom: 8px; }
+    .v3 .exp-role { color: #333; font-weight: 500; }
+    .v3 .exp-date { color: #999; }
+
+    /* ===== VARIATION 4: Serif Elegant ===== */
+    .v4 { background: #fefdfb; }
+    .v4 .greeting { font-family: 'Georgia', serif; font-size: 20px; font-style: italic; color: #2c2c2c; line-height: 1.5; margin-bottom: 20px; font-weight: 400; }
+    .v4 .intro { font-family: 'Georgia', serif; font-size: 16px; line-height: 1.8; color: #4a4a4a; margin-bottom: 28px; font-weight: 400; }
+    .v4 .hobbies-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: #b0a099; margin-bottom: 14px; margin-top: 30px; }
+    .v4 .hobbies-list { list-style: none; font-size: 15px; line-height: 1.9; color: #5a5a5a; }
+    .v4 .hobbies-list li { margin-bottom: 8px; font-family: 'Georgia', serif; }
+    .v4 .hobbies-list strong { color: #2c2c2c; font-weight: 600; }
+    .v4 .exp-section { margin-top: 36px; border-top: 1px solid #d4ccc4; padding-top: 24px; }
+    .v4 .exp-header { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: #b0a099; margin-bottom: 16px; }
+    .v4 .exp-item { display: flex; justify-content: space-between; font-size: 15px; line-height: 1.7; padding-bottom: 12px; }
+    .v4 .exp-role { color: #2c2c2c; font-weight: 600; }
+    .v4 .exp-date { color: #9a9a9a; font-size: 13px; }
+
+    /* ===== VARIATION 5: Bold Modern ===== */
+    .v5 { background: #ffffff; border-left: 4px solid #ed3801; }
+    .v5 .greeting { font-size: 20px; font-weight: 700; color: #1a1a1a; line-height: 1.4; margin-bottom: 16px; }
+    .v5 .intro { font-size: 16px; line-height: 1.7; color: #4a4a4a; margin-bottom: 28px; font-weight: 500; }
+    .v5 .hobbies-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #ed3801; margin-bottom: 14px; margin-top: 28px; }
+    .v5 .hobbies-list { list-style: none; font-size: 15px; line-height: 1.8; color: #555; }
+    .v5 .hobbies-list li { margin-bottom: 6px; }
+    .v5 .hobbies-list strong { color: #1a1a1a; font-weight: 700; }
+    .v5 .exp-section { margin-top: 32px; }
+    .v5 .exp-header { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: #ed3801; margin-bottom: 16px; }
+    .v5 .exp-item { display: flex; justify-content: space-between; font-size: 15px; line-height: 1.7; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .v5 .exp-item:last-child { border-bottom: none; }
+    .v5 .exp-role { color: #1a1a1a; font-weight: 700; }
+    .v5 .exp-date { color: #999; }
+
+    .nav-top { position: fixed; top: 20px; right: 20px; background: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); z-index: 999; }
+    .nav-top a { display: block; font-size: 13px; color: #ed3801; text-decoration: none; margin-bottom: 8px; font-weight: 500; }
+    .nav-top a:last-child { margin-bottom: 0; }
+    .nav-top a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="nav-top">
+    <a href="#v1">Minimalist</a>
+    <a href="#v2">Warm Bold</a>
+    <a href="#v3">Monospace</a>
+    <a href="#v4">Serif</a>
+    <a href="#v5">Modern Bold</a>
+  </div>
+
+  <div class="container">
+    <h1>Hero Option 1 Variations</h1>
+    <p class="subtitle">Vertical Stack with Different Styling & Tone</p>
+
+    <div class="variations">
+
+      <!-- VARIATION 1: MINIMALIST -->
+      <div id="v1" class="variation v1">
+        <div class="variation-title">Variation 1: Minimalist</div>
+        <div class="variation-desc">Clean, spacious, restrained. Focus on content. Best for: understated elegance.</div>
+
+        <p class="greeting">Hello, I'm Jasmine. I build things for people.</p>
+
+        <p class="intro">Currently leading engineering at Hack Western. Previously worked at Autodesk, Tesla, and Intuit on product and infrastructure. Passionate about design systems, developer tools, and making complex things simple.</p>
+
+        <div class="hobbies-label">Outside of work</div>
+        <ul class="hobbies-list">
+          <li><strong>Design systems</strong> — scaling component libraries</li>
+          <li><strong>Open source</strong> — contributing to dev tools</li>
+          <li><strong>Writing</strong> — sharing what I learn</li>
+          <li><strong>Coffee</strong> — always hunting for the perfect pour-over</li>
+        </ul>
+
+        <div class="exp-section">
+          <div class="exp-header">Experience</div>
+          <div class="exp-item">
+            <span class="exp-role">Hack Western / Engineering Lead</span>
+            <span class="exp-date">2023 – Now</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Autodesk / Senior Engineer</span>
+            <span class="exp-date">2022 – 2023</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Tesla / Full Stack Engineer</span>
+            <span class="exp-date">2021 – 2022</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Intuit / Software Engineer</span>
+            <span class="exp-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARIATION 2: BOLD & WARM -->
+      <div id="v2" class="variation v2">
+        <div class="variation-title">Variation 2: Warm & Bold</div>
+        <div class="variation-desc">Energetic, friendly, approachable. Warm colors. Best for: personal connection.</div>
+
+        <p class="greeting">ello Hello, I'm Jasmine! •‿•</p>
+
+        <p class="intro">Engineering lead at Hack Western. I love building products that matter and tools that make developers' lives better. Previously at Autodesk, Tesla, and Intuit.</p>
+
+        <div class="hobbies-label">Things I care about</div>
+        <ul class="hobbies-list">
+          <li><strong>Design systems</strong> — making things scale beautifully</li>
+          <li><strong>Open source</strong> — giving back to the community</li>
+          <li><strong>Mentoring</strong> — helping others grow</li>
+          <li><strong>Adventure</strong> — exploring new cities and ideas</li>
+        </ul>
+
+        <div class="exp-section">
+          <div class="exp-header">Experience</div>
+          <div class="exp-item">
+            <span class="exp-role">Hack Western / Engineering Lead</span>
+            <span class="exp-date">2023 – Now</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Autodesk / Senior Engineer</span>
+            <span class="exp-date">2022 – 2023</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Tesla / Full Stack Engineer</span>
+            <span class="exp-date">2021 – 2022</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Intuit / Software Engineer</span>
+            <span class="exp-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARIATION 3: MONOSPACE TECH -->
+      <div id="v3" class="variation v3">
+        <div class="variation-title">Variation 3: Monospace Tech</div>
+        <div class="variation-desc">Technical, programmer aesthetic. Monospace typography. Best for: developer audience.</div>
+
+        <p class="greeting">Hi, I'm Jasmine. I build tools for engineers.</p>
+
+        <p class="intro">Lead engineer @ Hack Western. 5+ years shipping products at Autodesk, Tesla, Intuit. Specialist in full-stack architecture, design systems, performance optimization.</p>
+
+        <div class="hobbies-label">Stack & interests</div>
+        <ul class="hobbies-list">
+          <li><strong>Frontend</strong> — React, TypeScript, design systems</li>
+          <li><strong>Backend</strong> — Node.js, databases, scaling</li>
+          <li><strong>DevEx</strong> — tooling, CLI, developer experience</li>
+          <li><strong>Open source</strong> — active contributor</li>
+        </ul>
+
+        <div class="exp-section">
+          <div class="exp-header">Experience</div>
+          <div class="exp-item">
+            <span class="exp-role">Hack Western / Engineering Lead</span>
+            <span class="exp-date">2023 – Now</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Autodesk / Senior Engineer</span>
+            <span class="exp-date">2022 – 2023</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Tesla / Full Stack Engineer</span>
+            <span class="exp-date">2021 – 2022</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Intuit / Software Engineer</span>
+            <span class="exp-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARIATION 4: SERIF ELEGANT -->
+      <div id="v4" class="variation v4">
+        <div class="variation-title">Variation 4: Serif Elegant</div>
+        <div class="variation-desc">Refined, timeless, sophisticated. Georgia serif. Best for: premium feel.</div>
+
+        <p class="greeting">Hello, I'm Jasmine Gu.</p>
+
+        <p class="intro">A product engineer passionate about building thoughtful systems and delightful experiences. Currently leading engineering at Hack Western. Previously at Autodesk, Tesla, and Intuit.</p>
+
+        <div class="hobbies-label">What drives me</div>
+        <ul class="hobbies-list">
+          <li><strong>Design systems</strong> — creating elegant foundations for growth</li>
+          <li><strong>Mentorship</strong> — lifting others as we climb</li>
+          <li><strong>Craftsmanship</strong> — attention to detail in every line</li>
+          <li><strong>Curiosity</strong> — always learning something new</li>
+        </ul>
+
+        <div class="exp-section">
+          <div class="exp-header">Experience</div>
+          <div class="exp-item">
+            <span class="exp-role">Hack Western / Engineering Lead</span>
+            <span class="exp-date">2023 – Now</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Autodesk / Senior Engineer</span>
+            <span class="exp-date">2022 – 2023</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Tesla / Full Stack Engineer</span>
+            <span class="exp-date">2021 – 2022</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Intuit / Software Engineer</span>
+            <span class="exp-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARIATION 5: MODERN BOLD -->
+      <div id="v5" class="variation v5">
+        <div class="variation-title">Variation 5: Modern Bold</div>
+        <div class="variation-desc">Strong, confident, contemporary. Bold typography with accent color. Best for: impact.</div>
+
+        <p class="greeting">Jasmine Gu / Engineering Leader</p>
+
+        <p class="intro">Building tools and teams that scale. Lead engineer at Hack Western with 5+ years at Autodesk, Tesla, and Intuit. Focused on product, infrastructure, and developer experience.</p>
+
+        <div class="hobbies-label">My focus areas</div>
+        <ul class="hobbies-list">
+          <li><strong>Design systems</strong> — architecture that scales</li>
+          <li><strong>Full-stack development</strong> — end-to-end thinking</li>
+          <li><strong>Developer tools</strong> — making engineering faster</li>
+          <li><strong>Open source</strong> — building in public</li>
+        </ul>
+
+        <div class="exp-section">
+          <div class="exp-header">Experience</div>
+          <div class="exp-item">
+            <span class="exp-role">Hack Western / Engineering Lead</span>
+            <span class="exp-date">2023 – Now</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Autodesk / Senior Engineer</span>
+            <span class="exp-date">2022 – 2023</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Tesla / Full Stack Engineer</span>
+            <span class="exp-date">2021 – 2022</span>
+          </div>
+          <div class="exp-item">
+            <span class="exp-role">Intuit / Software Engineer</span>
+            <span class="exp-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

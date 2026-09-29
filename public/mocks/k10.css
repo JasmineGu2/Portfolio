@@ -1,0 +1,242 @@
+/* Round 9: City growth map with reference aesthetic (blueprint blue, irregular blocks, clean labels) */
+
+.k10 {
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --or: #ff5a1f;
+  --bg: #0e3b8f;
+  --ink: #fff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --block: rgba(255, 255, 255, 0.15);
+  --block-dot: rgba(255, 255, 255, 0.3);
+
+  font-family: var(--mono);
+  color: var(--ink);
+  background: var(--bg);
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.k10 h1 {
+  margin: 0 0 8px;
+  font: 700 18px / 1.3 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.k10 p {
+  margin: 4px 0 24px;
+  font: 400 12px / 1.5 var(--mono);
+  color: var(--muted);
+  max-width: 66ch;
+}
+
+.k10 svg {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: var(--bg);
+  display: block;
+  margin: 0 auto;
+}
+
+/* Blocks (city buildings) */
+.blk {
+  fill: var(--block);
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 1;
+}
+
+.blk.me {
+  fill: var(--or);
+  stroke: var(--or);
+}
+
+/* Dot pattern for block fill */
+.dot-fill {
+  fill: var(--block-dot);
+}
+
+/* Roads */
+.road {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s;
+}
+
+.road.eng {
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 20;
+}
+
+.road.prod {
+  stroke: var(--or);
+  stroke-width: 12;
+  opacity: 0.7;
+}
+
+.road.eng:hover,
+.road.prod:hover {
+  stroke: var(--or);
+  opacity: 1;
+}
+
+/* Pins (experiences) */
+.pin {
+  cursor: pointer;
+}
+
+.pin-outer {
+  fill: rgba(255, 255, 255, 0.8);
+  transition: r 0.2s;
+}
+
+.pin-inner {
+  fill: var(--bg);
+}
+
+.pin:hover .pin-outer {
+  r: 11;
+}
+
+.pin.active .pin-outer {
+  fill: var(--or);
+  stroke: var(--or);
+  stroke-width: 2;
+}
+
+/* Labels */
+.pin-label,
+.me-label,
+.road-label {
+  font: 700 9px var(--mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink);
+  text-anchor: middle;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.me-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Stack legend */
+.legend-bg {
+  fill: rgba(0, 0, 0, 0.3);
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1;
+}
+
+.legend-title {
+  font: 700 11px var(--mono);
+  letter-spacing: 0.08em;
+  fill: var(--ink);
+  text-transform: uppercase;
+}
+
+.stack-label {
+  font: 700 9px var(--mono);
+  letter-spacing: 0.06em;
+  fill: var(--ink);
+  text-transform: uppercase;
+}
+
+.stack-label.eng {
+  fill: rgba(255, 255, 255, 0.7);
+}
+
+.stack-label.prod {
+  fill: var(--or);
+}
+
+.stack-label.comm {
+  fill: rgba(255, 255, 255, 0.7);
+}
+
+.stack-item {
+  font: 400 8px var(--mono);
+  letter-spacing: 0.04em;
+  fill: var(--muted);
+  text-transform: none;
+}
+
+/* Tooltips */
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--or);
+  font: 400 11px var(--mono);
+  border-radius: 3px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.tooltip b {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Info card */
+.info-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9;
+  width: 280px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font: 400 11px var(--mono);
+  color: var(--ink);
+  display: none;
+}
+
+.info-card.active {
+  display: block;
+}
+
+.info-card h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--or);
+  text-transform: uppercase;
+}
+
+.info-card p {
+  margin: 4px 0;
+  padding: 0;
+  color: var(--muted);
+}
+
+.info-card .split {
+  display: flex;
+  height: 16px;
+  margin: 8px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  font-size: 9px;
+}
+
+.split-eng,
+.split-prod {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+}
+
+.split-eng {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.split-prod {
+  background: var(--or);
+}

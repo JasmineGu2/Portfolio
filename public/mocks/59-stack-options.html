@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack & Experience Options</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; padding: 40px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    h1 { font-size: 32px; margin-bottom: 12px; color: #1a1a1a; }
+    .subtitle { font-size: 16px; color: #666; margin-bottom: 50px; }
+
+    .options { display: grid; gap: 60px; }
+    .option { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .option-title { font-size: 18px; font-weight: 700; color: #ed3801; margin-bottom: 8px; }
+    .option-desc { font-size: 13px; color: #999; margin-bottom: 30px; font-style: italic; }
+
+    /* Common styles */
+    .intro { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 32px; }
+
+    /* ===== OPTION 1: Vertical Stack Layers ===== */
+    .o1 .layer { margin-bottom: 36px; }
+    .o1 .layer-title { font-size: 14px; font-weight: 700; color: #ed3801; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+    .o1 .layer-desc { font-size: 13px; color: #999; margin-bottom: 12px; }
+    .o1 .layer-items { list-style: none; }
+    .o1 .layer-items li { font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 6px; }
+    .o1 .layer-items strong { color: #333; font-weight: 600; }
+    .o1 .experience-blocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+    .o1 .exp-block { padding: 12px; background: #f9f9f9; border-radius: 4px; border-left: 3px solid #ed3801; }
+    .o1 .exp-block-title { font-size: 12px; font-weight: 700; color: #333; }
+    .o1 .exp-block-role { font-size: 13px; color: #666; }
+
+    /* ===== OPTION 2: Journey Timeline ===== */
+    .o2 .timeline { position: relative; padding-left: 40px; }
+    .o2 .timeline::before { content: ''; position: absolute; left: 5px; top: 0; bottom: 0; width: 3px; background: #ed3801; }
+    .o2 .timeline-item { margin-bottom: 40px; position: relative; }
+    .o2 .timeline-item::before { content: ''; position: absolute; left: -38px; top: 4px; width: 16px; height: 16px; background: #ed3801; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px #ed3801; }
+    .o2 .timeline-year { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #999; margin-bottom: 4px; }
+    .o2 .timeline-role { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px; }
+    .o2 .timeline-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+    /* ===== OPTION 3: Matrix/Grid ===== */
+    .o3 .matrix { display: grid; grid-template-columns: 150px 1fr; gap: 24px; }
+    .o3 .matrix-col { }
+    .o3 .matrix-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #999; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #ed3801; }
+    .o3 .matrix-items { display: flex; flex-direction: column; gap: 20px; }
+    .o3 .matrix-item { }
+    .o3 .matrix-item-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px; }
+    .o3 .matrix-item-meta { font-size: 12px; color: #999; margin-bottom: 8px; }
+    .o3 .matrix-item-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+    /* ===== OPTION 4: Skill-First Narrative ===== */
+    .o4 .skill-section { margin-bottom: 40px; }
+    .o4 .skill-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+    .o4 .skill-subtitle { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #ed3801; margin-bottom: 12px; }
+    .o4 .skill-content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .o4 .skill-desc { font-size: 14px; line-height: 1.7; color: #555; }
+    .o4 .skill-projects { font-size: 13px; color: #666; line-height: 1.8; }
+    .o4 .skill-projects li { list-style: none; margin-bottom: 6px; }
+
+    /* ===== OPTION 5: Pyramid/Progression ===== */
+    .o5 .progression { }
+    .o5 .level { margin-bottom: 32px; }
+    .o5 .level-num { font-size: 28px; font-weight: 700; color: #ed3801; line-height: 1; }
+    .o5 .level-title { font-size: 16px; font-weight: 700; color: #333; margin-bottom: 4px; }
+    .o5 .level-desc { font-size: 13px; color: #666; margin-bottom: 12px; line-height: 1.6; }
+    .o5 .level-items { display: flex; flex-wrap: wrap; gap: 8px; }
+    .o5 .level-tag { padding: 6px 12px; background: #f5f5f5; border-radius: 4px; font-size: 12px; color: #555; }
+
+    .nav-top { position: fixed; top: 20px; right: 20px; background: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); z-index: 999; }
+    .nav-top a { display: block; font-size: 13px; color: #ed3801; text-decoration: none; margin-bottom: 8px; font-weight: 500; }
+    .nav-top a:last-child { margin-bottom: 0; }
+    .nav-top a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="nav-top">
+    <a href="#o1">Vertical Layers</a>
+    <a href="#o2">Timeline Journey</a>
+    <a href="#o3">Category Matrix</a>
+    <a href="#o4">Skill-First</a>
+    <a href="#o5">Progression Levels</a>
+  </div>
+
+  <div class="container">
+    <h1>Stack & Experience Options</h1>
+    <p class="subtitle">Software Engineering → Product Focus</p>
+
+    <div class="options">
+
+      <!-- OPTION 1: VERTICAL LAYERS -->
+      <div id="o1" class="option o1">
+        <div class="option-title">Option 1: Vertical Layers</div>
+        <div class="option-desc">Stack-based narrative: building blocks from infrastructure up to product. Best for: technical depth.</div>
+
+        <p class="intro">I build across the full engineering stack, from infrastructure and backend systems down to the pixel-perfect UX and insights that drive product decisions.</p>
+
+        <div class="layer">
+          <div class="layer-title">Infrastructure & Backend</div>
+          <div class="layer-desc">Microservices, databases, API design, system architecture</div>
+          <ul class="layer-items">
+            <li><strong>Autodesk</strong> — Scaling microservices for 100k+ users, building core APIs</li>
+            <li><strong>Tesla</strong> — Infrastructure optimization, real-time data pipelines</li>
+            <li><strong>OMERS</strong> — Backend systems architecture and database design</li>
+          </ul>
+          <div class="experience-blocks">
+            <div class="exp-block">
+              <div class="exp-block-title">Autodesk</div>
+              <div class="exp-block-role">2022–2023</div>
+            </div>
+            <div class="exp-block">
+              <div class="exp-block-title">Tesla</div>
+              <div class="exp-block-role">2021–2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-title">User Interfaces</div>
+          <div class="layer-desc">React, TypeScript, component systems, design systems</div>
+          <ul class="layer-items">
+            <li><strong>Hack Western</strong> — Building design systems for 300+ students</li>
+            <li><strong>Autodesk</strong> — Frontend architecture, component libraries</li>
+            <li><strong>Intuit</strong> — User-facing features, accessible interfaces</li>
+          </ul>
+          <div class="experience-blocks">
+            <div class="exp-block">
+              <div class="exp-block-title">Hack Western</div>
+              <div class="exp-block-role">2023–Now</div>
+            </div>
+            <div class="exp-block">
+              <div class="exp-block-title">Intuit</div>
+              <div class="exp-block-role">2020–2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-title">Data & Insights</div>
+          <div class="layer-desc">Data visualization, analytics, ML pipelines</div>
+          <ul class="layer-items">
+            <li><strong>Metaverse Project</strong> — 3D data visualization and interaction</li>
+            <li><strong>OMERS</strong> — Analytics dashboards and reporting</li>
+            <li><strong>Tesla</strong> — Real-time metrics and telemetry</li>
+          </ul>
+        </div>
+
+        <div class="layer">
+          <div class="layer-title">Product & Strategy</div>
+          <div class="layer-desc">Product leadership, roadmapping, stakeholder management</div>
+          <ul class="layer-items">
+            <li><strong>Hack Western</strong> — Product decisions for 300+ community members</li>
+            <li><strong>Autodesk</strong> — Cross-functional product collaboration</li>
+            <li><strong>Ivey Product</strong> — Product strategy and business planning</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OPTION 2: TIMELINE JOURNEY -->
+      <div id="o2" class="option o2">
+        <div class="option-title">Option 2: Timeline Journey</div>
+        <div class="option-desc">Chronological progression through roles showing growth. Best for: narrative flow.</div>
+
+        <p class="intro">My journey across engineering and product, building skills at each step—from foundational backend work to full-stack systems to leading product decisions.</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">2020–2021</div>
+            <div class="timeline-role">Intuit / Software Engineer</div>
+            <div class="timeline-desc">Built user-facing features for financial software. Learned full-stack development and user-centered design principles.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2021–2022</div>
+            <div class="timeline-role">Tesla / Full Stack Engineer</div>
+            <div class="timeline-desc">Optimized infrastructure, built real-time dashboards, worked on APIs serving millions of requests. Started thinking bigger about data and systems.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2022–2023</div>
+            <div class="timeline-role">Autodesk / Senior Engineer</div>
+            <div class="timeline-desc">Led architecture decisions for microservices. Built design systems that scaled across 50+ engineers. Started collaborating with product teams.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2023–Now</div>
+            <div class="timeline-role">Hack Western / Engineering Lead</div>
+            <div class="timeline-desc">Leading product and engineering for 300+ students. Making strategic decisions about what to build, how to scale, and what matters most.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 3: CATEGORY MATRIX -->
+      <div id="o3" class="option o3">
+        <div class="option-title">Option 3: Category Matrix</div>
+        <div class="option-desc">Experience organized by discipline/skill area. Best for: clarity and organization.</div>
+
+        <p class="intro">My work spans multiple disciplines, each building on the others to create complete products and systems.</p>
+
+        <div class="matrix">
+          <div class="matrix-col">
+            <div class="matrix-label">Fullstack<br/>& Backend</div>
+          </div>
+          <div class="matrix-col">
+            <div class="matrix-items">
+              <div class="matrix-item">
+                <div class="matrix-item-title">Tesla (2021–2022)</div>
+                <div class="matrix-item-meta">Microservices, API design, databases</div>
+                <div class="matrix-item-desc">Optimized infrastructure serving real-time data pipelines. Built core APIs for fleet telemetry and monitoring systems.</div>
+              </div>
+              <div class="matrix-item">
+                <div class="matrix-item-title">Autodesk (2022–2023)</div>
+                <div class="matrix-item-meta">Microservices architecture, scaling systems</div>
+                <div class="matrix-item-desc">Led backend architecture for 100k+ users. Designed service-to-service communication patterns and database optimization.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <div class="matrix-col">
+            <div class="matrix-label">Frontend &<br/>UI Systems</div>
+          </div>
+          <div class="matrix-col">
+            <div class="matrix-items">
+              <div class="matrix-item">
+                <div class="matrix-item-title">Intuit (2020–2021)</div>
+                <div class="matrix-item-meta">React, JavaScript, user interfaces</div>
+                <div class="matrix-item-desc">Built customer-facing features with focus on accessibility and performance. Learned React fundamentals and component architecture.</div>
+              </div>
+              <div class="matrix-item">
+                <div class="matrix-item-title">Hack Western (2023–Now)</div>
+                <div class="matrix-item-meta">Design systems, component libraries, TypeScript</div>
+                <div class="matrix-item-desc">Building scalable design system for 300+ users. Creating reusable components that enforce consistency across the platform.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <div class="matrix-col">
+            <div class="matrix-label">Data &<br/>Visualization</div>
+          </div>
+          <div class="matrix-col">
+            <div class="matrix-items">
+              <div class="matrix-item">
+                <div class="matrix-item-title">Metaverse Project</div>
+                <div class="matrix-item-meta">3D visualization, interactive data</div>
+                <div class="matrix-item-desc">Built 3D visualization system for complex data. Explored spatial computing and immersive data representation.</div>
+              </div>
+              <div class="matrix-item">
+                <div class="matrix-item-title">Tesla & OMERS</div>
+                <div class="matrix-item-meta">Analytics dashboards, real-time metrics</div>
+                <div class="matrix-item-desc">Created dashboards for fleet telemetry and business analytics. Made data actionable for teams and executives.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <div class="matrix-col">
+            <div class="matrix-label">Product &<br/>Leadership</div>
+          </div>
+          <div class="matrix-col">
+            <div class="matrix-items">
+              <div class="matrix-item">
+                <div class="matrix-item-title">Hack Western (2023–Now)</div>
+                <div class="matrix-item-meta">Product direction, roadmapping, strategy</div>
+                <div class="matrix-item-desc">Leading product decisions for a platform serving 300+ students. Collaborating with stakeholders to define priorities and vision.</div>
+              </div>
+              <div class="matrix-item">
+                <div class="matrix-item-title">Autodesk (2022–2023)</div>
+                <div class="matrix-item-meta">Cross-functional collaboration, roadmapping</div>
+                <div class="matrix-item-desc">Working with product and design teams to shape architecture decisions. Balancing technical constraints with business goals.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 4: SKILL-FIRST NARRATIVE -->
+      <div id="o4" class="option o4">
+        <div class="option-title">Option 4: Skill-First Narrative</div>
+        <div class="option-desc">Organized by core competencies with examples. Best for: showcasing expertise.</div>
+
+        <p class="intro">I specialize in full-stack development with deep expertise in system design, frontend architecture, and bringing data insights to life.</p>
+
+        <div class="skill-section">
+          <div class="skill-title">Full-Stack & Microservices</div>
+          <div class="skill-subtitle">Backend infrastructure + APIs + databases</div>
+          <div class="skill-content">
+            <div class="skill-desc">
+              I design and build systems that scale. From database schema optimization to service-oriented architecture, I focus on reliability, performance, and maintainability.
+            </div>
+            <div class="skill-projects">
+              <strong>Where I've done this:</strong>
+              <ul>
+                <li>Tesla: Infrastructure optimization for real-time telemetry</li>
+                <li>Autodesk: Microservices architecture for 100k+ users</li>
+                <li>OMERS: Backend systems design and implementation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-section">
+          <div class="skill-title">User Interface & Design Systems</div>
+          <div class="skill-subtitle">React, TypeScript, component libraries, accessibility</div>
+          <div class="skill-content">
+            <div class="skill-desc">
+              I build interfaces that delight and systems that scale. From pixel-perfect components to design system governance, I bring engineering rigor to frontend.
+            </div>
+            <div class="skill-projects">
+              <strong>Where I've done this:</strong>
+              <ul>
+                <li>Hack Western: Design system serving 300+ students</li>
+                <li>Autodesk: Component library governance and patterns</li>
+                <li>Intuit: Customer-facing UI and accessibility</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-section">
+          <div class="skill-title">Data & Analytics</div>
+          <div class="skill-subtitle">Dashboards, visualization, real-time metrics</div>
+          <div class="skill-content">
+            <div class="skill-desc">
+              I turn data into insight. Whether building real-time dashboards or exploring 3D visualization, I focus on making complex data accessible and actionable.
+            </div>
+            <div class="skill-projects">
+              <strong>Where I've done this:</strong>
+              <ul>
+                <li>Metaverse: 3D data visualization and interaction</li>
+                <li>Tesla: Real-time telemetry dashboards</li>
+                <li>OMERS: Business analytics and reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-section">
+          <div class="skill-title">Product Thinking</div>
+          <div class="skill-subtitle">Leadership, roadmapping, strategic decisions</div>
+          <div class="skill-content">
+            <div class="skill-desc">
+              I don't just build features—I build products that matter. By understanding user needs and business constraints, I make decisions that align engineering with impact.
+            </div>
+            <div class="skill-projects">
+              <strong>Where I've done this:</strong>
+              <ul>
+                <li>Hack Western: Leading product direction and strategy</li>
+                <li>Autodesk: Cross-functional collaboration and roadmapping</li>
+                <li>Ivey: Product strategy and business planning</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 5: PROGRESSION LEVELS -->
+      <div id="o5" class="option o5">
+        <div class="option-title">Option 5: Progression Levels</div>
+        <div class="option-desc">Growth journey from junior to leader. Best for: demonstrating trajectory.</div>
+
+        <p class="intro">My career shows a natural progression: learning the fundamentals, diving deep into systems, building at scale, and now leading teams and products.</p>
+
+        <div class="progression">
+          <div class="level">
+            <div class="level-num">01</div>
+            <div class="level-title">Foundations (2020–2021)</div>
+            <div class="level-desc">Learning full-stack development. Built user-facing features at Intuit and learned how products come together.</div>
+            <div class="level-items">
+              <span class="level-tag">React</span>
+              <span class="level-tag">JavaScript</span>
+              <span class="level-tag">UX First</span>
+              <span class="level-tag">Customer Focus</span>
+            </div>
+          </div>
+
+          <div class="level">
+            <div class="level-num">02</div>
+            <div class="level-title">Infrastructure (2021–2022)</div>
+            <div class="level-desc">Shifted focus to backend systems. At Tesla, worked on microservices and real-time data pipelines serving millions of requests.</div>
+            <div class="level-items">
+              <span class="level-tag">Microservices</span>
+              <span class="level-tag">API Design</span>
+              <span class="level-tag">Databases</span>
+              <span class="level-tag">Real-time Systems</span>
+            </div>
+          </div>
+
+          <div class="level">
+            <div class="level-num">03</div>
+            <div class="level-title">Architecture & Scale (2022–2023)</div>
+            <div class="level-desc">Led technical decisions at Autodesk. Designed microservices for 100k+ users and built design systems that scaled across 50+ engineers.</div>
+            <div class="level-items">
+              <span class="level-tag">System Design</span>
+              <span class="level-tag">Design Systems</span>
+              <span class="level-tag">Leadership</span>
+              <span class="level-tag">Cross-functional Collab</span>
+            </div>
+          </div>
+
+          <div class="level">
+            <div class="level-num">04</div>
+            <div class="level-title">Product Leadership (2023–Now)</div>
+            <div class="level-desc">Leading engineering and product at Hack Western. Making strategic decisions about what to build and how to scale for 300+ users and beyond.</div>
+            <div class="level-items">
+              <span class="level-tag">Product Vision</span>
+              <span class="level-tag">Team Leadership</span>
+              <span class="level-tag">Roadmapping</span>
+              <span class="level-tag">Strategy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

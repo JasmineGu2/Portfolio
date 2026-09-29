@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 11 · Drafting sheet</title>
+<link rel="stylesheet" href="k2.css">
+<style>
+.band{background-color:#1f3fd8;background-image:linear-gradient(rgba(232,241,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.16) 1px,transparent 1px),linear-gradient(rgba(232,241,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.07) 1px,transparent 1px);background-size:80px 80px,80px 80px,16px 16px,16px 16px;color:#e8f1ff;padding:20px 0 6px;border-bottom:3px double #9fd3ff;position:relative;overflow:hidden}
+.band .wrap{position:relative}.band svg{width:80%;height:auto;display:block}.band .label{color:#9fd3ff;display:flex;justify-content:space-between}
+.band .stks{position:absolute;right:24px;top:70px;display:grid;gap:18px}
+.nm{font-family:'Bebas Neue',Impact,sans-serif;stroke:#e8f1ff;stroke-width:2.2;fill:url(#hatch);fill-opacity:0;stroke-dasharray:4200;stroke-dashoffset:4200;animation:dr2 3.2s .4s cubic-bezier(.5,0,.2,1) forwards,fi 1.2s 3s forwards}
+@keyframes dr2{to{stroke-dashoffset:0}}@keyframes fi{to{fill-opacity:1}}
+@media (prefers-reduced-motion:reduce){.nm{animation:none;stroke-dashoffset:0;fill-opacity:1}}
+.dm{stroke:#e8f1ff;stroke-width:1.2;fill:none}.dsh{stroke:#9fd3ff;stroke-width:1;stroke-dasharray:6 7;fill:none;opacity:.8}
+.dn{fill:#ff8a5c;font:500 15px 'JetBrains Mono';letter-spacing:.06em}.dl{fill:#9fd3ff;font:500 12px 'JetBrains Mono';letter-spacing:.14em}.org{stroke:#ff8a5c;stroke-width:2.4;fill:none}
+.top{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start;padding:38px 0 6px}
+.hl{font-size:clamp(21px,2.4vw,30px);line-height:1.3;margin-bottom:12px}
+ol.gn{margin:10px 0 0;padding:0;list-style:none;counter-reset:n;display:grid;gap:12px}ol.gn li{counter-increment:n;display:grid;grid-template-columns:38px 1fr;gap:6px}ol.gn li::before{content:counter(n,decimal-leading-zero);font:500 12px 'JetBrains Mono';color:var(--orink);padding-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.chips span{border:1px solid var(--faint);border-radius:99px;padding:2px 12px;font-size:13.5px}
+ul.arw{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}ul.arw li{display:grid;grid-template-columns:20px 1fr;gap:6px}ul.arw li::before{content:"↳";color:var(--orink);font-weight:700}
+.tile .bub{position:absolute;left:-16px;top:-16px;z-index:5}
+.sides{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 22px}.side{padding:14px 14px 18px}.side img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:10px;border-radius:4px}.side h3{font:600 15px Inter;margin-bottom:4px}.side p{font-size:13.5px;color:var(--muted);line-height:1.45}
+.side .hatchc{position:absolute;top:0;right:0;width:46px;height:46px;clip-path:polygon(0 0,100% 0,100% 100%);color:var(--line);opacity:.5}
+.polrow{display:flex;flex-wrap:wrap;gap:34px 26px;padding:30px 10px 10px}
+table.rev{width:100%;border-collapse:collapse;font-size:14.5px}table.rev th{font:500 10px 'JetBrains Mono';letter-spacing:.16em;text-align:left;color:var(--muted);padding:8px 12px;border-bottom:1.5px solid var(--line)}
+table.rev td{padding:12px;border-bottom:1px solid var(--faint)}table.rev td:first-child{font:700 12px 'JetBrains Mono';color:var(--orink);width:80px}table.rev tr:hover td{background:rgba(159,211,255,.25)}
+@media (max-width:900px){.top{grid-template-columns:1fr}.sides{grid-template-columns:1fr 1fr}.band .stks{display:none}}
+</style></head><body>
+<div id="hdr"></div>
+<header class="band" id="top"><div class="wrap">
+  <p class="label"><span>Sheet 01 · the name, drafted</span><span>Scale 1:1 · Drawn by J.G.</span></p>
+  <svg viewBox="0 0 1200 480" role="img" aria-label="The name Jasmine Gu drafted as a blueprint drawing with dimension lines">
+    <defs><pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#e8f1ff" stroke-width="1.6"/></pattern></defs>
+    <g class="dsh fade" style="--d:.3s"><line x1="600" y1="20" x2="600" y2="450"/><line x1="40" y1="240" x2="1160" y2="240"/></g>
+    <text class="nm" x="110" y="375" font-size="330" textLength="900" lengthAdjust="spacingAndGlyphs">JASMINE GU</text>
+    <g class="dm"><line class="draw" pathLength="1" style="--d:3.2s" x1="110" y1="420" x2="1010" y2="420"/><line class="draw" pathLength="1" style="--d:3.3s" x1="110" y1="408" x2="110" y2="432"/><line class="draw" pathLength="1" style="--d:3.4s" x1="1010" y1="408" x2="1010" y2="432"/>
+      <line class="draw" pathLength="1" style="--d:3.5s" x1="62" y1="125" x2="62" y2="375"/><line class="draw" pathLength="1" style="--d:3.6s" x1="50" y1="125" x2="74" y2="125"/><line class="draw" pathLength="1" style="--d:3.7s" x1="50" y1="375" x2="74" y2="375"/></g>
+    <g class="dsh fade" style="--d:3.4s"><line x1="110" y1="375" x2="110" y2="420"/><line x1="1010" y1="375" x2="1010" y2="420"/><line x1="62" y1="125" x2="110" y2="125"/></g>
+    <text class="dn fade" style="--d:3.9s" x="520" y="412">W 900</text><text class="dn fade" style="--d:4s" transform="translate(44 265) rotate(-90)">H 250</text>
+    <circle class="org fade" style="--d:4.1s" cx="110" cy="375" r="11"/><text class="dn fade" style="--d:4.2s" x="126" y="400">R 11</text>
+    <path class="org fade" style="--d:4.2s" d="M960 375 A50 50 0 0 0 1010 325"/><text class="dn fade" style="--d:4.3s" x="1020" y="330">43°</text>
+    <text class="dl fade" style="--d:4.4s" x="110" y="462">PRODUCT ENGINEER · TORONTO · GRAD 2027</text><text class="dl fade" style="--d:4.4s" x="1010" y="462" text-anchor="end">FIG. 01</text></svg>
+  <div class="stks" id="stks"></div></div></header>
+
+<main class="wrap">
+  <section class="top" id="about" style="padding-top:44px"><div class="sheet regs"><p class="hl" id="hl"></p><p class="muted" id="status" style="margin-bottom:16px"></p><div id="soc"></div><p id="intro" style="margin-top:22px;font-size:17px"></p><p class="label" style="margin-top:22px" id="hlead"></p><ol class="gn" id="hls"></ol></div>
+    <div class="sheet"><p class="label">Notes</p><div class="chips" id="notes"></div><p class="label" style="margin-top:24px">what i've been building:</p><ul class="arw" id="build"></ul><p class="label" style="margin-top:24px">previously:</p><div id="prev" style="margin-top:6px;font-size:14px"></div></div></section>
+
+  <div id="dim1"></div>
+  <section id="layers" style="padding-top:8px"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 02 / A-101</span><span class="label">hover a layer · the callout is part of the drawing</span></div><div id="lay"></div></section>
+
+  <div id="dim2"></div>
+  <section id="work"><div class="sec-h"><h2>Experience</h2><span class="sect">SECTION A–A</span><span class="label">each drawing has a detail bubble · hover for the orange tag</span></div><div class="frost regs"><div id="tilesBox"></div></div></section>
+
+  <div id="dim3"></div>
+  <section id="revs"><div class="sec-h"><h2>Revisions</h2><span class="sect">TIMELINE</span></div><div class="sheet"><table class="rev" id="rev"></table></div></section>
+
+  <section id="journey"><div class="sec-h"><h2>The Journey</h2><span class="sect">SHEET A-102</span></div>
+    <p class="label" style="margin-bottom:18px">Side projects</p><div class="sides" id="side"></div><p class="label" style="margin:44px 0 0">Gallery · drag them around</p><div class="polrow" id="pols"></div></section>
+</main>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script>
+<script>
+const D = K2, $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer(); $('#soc').innerHTML = K.socials()
+$('#hl').textContent = D.headline; $('#status').textContent = D.status; $('#intro').textContent = D.intro; $('#hlead').textContent = D.hlLead
+$('#hls').innerHTML = D.highlights.map((h) => `<li><span>${h}</span></li>`).join(''); $('#notes').innerHTML = D.notes.map((n) => `<span>${n}</span>`).join('')
+$('#build').innerHTML = D.building.map((b) => `<li><span>${b}</span></li>`).join('')
+$('#prev').innerHTML = D.previously.map(([c, n]) => `<div style="padding:5px 0;border-bottom:1px solid var(--faint);display:flex;justify-content:space-between;gap:12px"><b class="label">${c}</b><span>${n}</span></div>`).join('')
+$('#stks').innerHTML = K.sticky(0, '', -3) + K.sticky(2, 'l', 3)
+$('#dim1').innerHTML = K.dim('1180'); $('#dim2').innerHTML = K.dim('SECTION A–A · 1180'); $('#dim3').innerHTML = K.dim('SHEET 2 · 1180')
+const tl = D.exp.slice().sort((a, b) => a.order - b.order)
+$('#rev').innerHTML = `<thead><tr><th>REV</th><th>WHEN</th><th>WHAT</th><th>ROLE</th></tr></thead><tbody>${tl.map((e, i) => `<tr data-cursor-label="${e.label}"><td>REV ${String(i + 1).padStart(2, '0')}</td><td>${e.when}</td><td><b>${e.co}</b></td><td class="muted">${e.role}</td></tr>`).join('')}</tbody>`
+K.tiles($('#tilesBox'), { tabs: true })
+const addBubs = () => document.querySelectorAll('.tile').forEach((t, i) => { if (!t.querySelector('.bub')) t.insertAdjacentHTML('afterbegin', K.bub(String(i + 1).padStart(2, '0'))) })
+addBubs(); $('#tilesBox').addEventListener('click', () => setTimeout(addBubs, 0))
+$('#side').innerHTML = D.side.map((p) => `<article class="sheet side" data-drag><span class="hatchc hatch"></span><span class="tape2"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p></article>`).join(''); $('#pols').innerHTML = K.pols(10)
+K.init()
+const L = K.layers($('#lay'), 'call')
+K.switches([{ key: 'note', label: 'Layer note', opts: [['call', 'Callout'], ['sticky', 'Sticky'], ['both', 'Both']] }, { key: 'tiles', label: 'Tiles', opts: [['wide', 'Wide'], ['sq', 'Square'], ['feat', 'Featured']] }, { key: 'frame', label: 'Card frame', opts: [['tab', 'Tab'], ['iso', 'Iso part'], ['tape', 'Tape'], ['pin', 'Pin'], ['clip', 'Clip']] }], (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

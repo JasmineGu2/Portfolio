@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 8 · Layers first</title>
+<link rel="stylesheet" href="k2.css">
+<style>
+.intro{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;padding:34px 0 28px}
+.name{font:700 clamp(46px,6vw,80px)/1 'JetBrains Mono',monospace;color:var(--or);text-transform:lowercase;letter-spacing:-.04em}
+.hl{font-size:clamp(20px,2.3vw,28px);line-height:1.3}
+.bom{width:100%;border-collapse:collapse;font-size:14.5px}
+.bom th{font:500 10px 'JetBrains Mono';letter-spacing:.16em;text-align:left;color:var(--muted);padding:8px 14px;border-bottom:1.5px solid var(--line)}
+.bom td{padding:14px;border-bottom:1px solid var(--faint);vertical-align:middle}
+.bom td.n{font:700 13px 'JetBrains Mono';color:var(--orink);width:56px}
+.bom svg{width:64px;height:54px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linejoin:round}
+.bom b{font:600 17px Fraunces}.bom .orgs{color:var(--muted);font-size:13.5px}
+.abt{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.chips span{border:1px solid var(--faint);border-radius:99px;padding:2px 12px;font-size:13.5px}
+ul.arw{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}ul.arw li{display:grid;grid-template-columns:20px 1fr;gap:6px}ul.arw li::before{content:"↳";color:var(--orink);font-weight:700}
+.prev{columns:2;column-gap:30px;margin-top:8px;font-size:14px}.prev div{break-inside:avoid;padding:4px 0;border-bottom:1px solid var(--faint)}.prev b{font:500 10px 'JetBrains Mono';letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block}
+.sides{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 24px}
+.side{padding:14px 14px 18px}.side img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:10px;border-radius:4px}.side h3{font:600 15px Inter;margin-bottom:4px}.side p{font-size:13.5px;color:var(--muted);line-height:1.45}
+.polrow{display:flex;flex-wrap:wrap;gap:34px 26px;padding:30px 10px 10px}
+.tile .bub{position:absolute;left:-16px;top:-16px;z-index:5}
+@media (max-width:900px){.intro,.abt{grid-template-columns:1fr}.sides{grid-template-columns:1fr 1fr}.bom .orgs{display:none}}
+</style></head><body>
+<div id="hdr"></div>
+<main class="wrap">
+  <section class="intro" id="top" style="padding-bottom:20px"><div class="sheet"><h1 class="name">jasmine gu</h1></div>
+    <div class="sheet regs"><p class="hl" id="hl"></p><p class="muted" id="status" style="margin:10px 0 14px"></p><div id="soc"></div></div></section>
+
+  <section id="layers" style="padding-top:8px"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 01 / A-101</span><span class="label">hover a layer · every note is one of my real roles</span></div><div id="lay"></div>
+    <div class="stampx" style="margin-top:18px">placeholder notes · real facts</div></section>
+
+  <div id="dim1"></div>
+  <section><div class="sec-h"><h2>Parts list</h2><span class="sect">BILL OF MATERIALS</span></div>
+    <div class="sheet regs"><table class="bom" id="bom"></table></div></section>
+
+  <section id="about"><div class="sec-h"><h2>About</h2><span class="sect">GENERAL NOTES</span></div>
+    <div class="abt"><div class="sheet"><p id="intro" style="font-size:18px"></p><p class="label" style="margin-top:24px" id="hlead"></p><ul class="arw" id="hls"></ul><p class="label" style="margin-top:26px">Notes</p><div class="chips" id="notes"></div></div>
+      <div class="sheet"><p class="label">what i've been building:</p><ul class="arw" id="build"></ul><p class="label" style="margin-top:26px">previously:</p><div class="prev" id="prev"></div></div></div></section>
+
+  <div id="dim2"></div>
+  <section id="work"><div class="sec-h"><h2>Experience</h2><span class="sect">SECTION A–A</span><span class="label">Tesla leads · detail bubbles number each drawing</span></div>
+    <div class="sheet regs"><div id="tilesBox"></div></div></section>
+
+  <div id="dim3"></div>
+  <section id="journey"><div class="sec-h"><h2>The Journey</h2><span class="sect">SHEET A-102</span></div>
+    <p class="label" style="margin-bottom:18px">Side projects</p><div class="sides" id="side"></div>
+    <p class="label" style="margin:44px 0 0">Gallery</p><div class="polrow" id="pols"></div></section>
+</main>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script>
+<script>
+const D = K2, $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer(); $('#soc').innerHTML = K.socials()
+$('#hl').textContent = D.headline; $('#status').textContent = D.status; $('#intro').textContent = D.intro; $('#hlead').textContent = D.hlLead
+$('#hls').innerHTML = D.highlights.map((h) => `<li><span>${h}</span></li>`).join('')
+$('#notes').innerHTML = D.notes.map((n) => `<span>${n}</span>`).join('')
+$('#build').innerHTML = D.building.map((b) => `<li><span>${b}</span></li>`).join('')
+$('#prev').innerHTML = D.previously.map(([c, n]) => `<div><b>${c}</b>${n}</div>`).join('')
+$('#dim1').innerHTML = K.dim('1180'); $('#dim2').innerHTML = K.dim('SECTION A–A · 1180'); $('#dim3').innerHTML = K.dim('SHEET 2 · 1180')
+
+// parts list: one small line-art part per layer (floppy, chip, disc, cube)
+const parts = [
+  '<svg viewBox="0 0 64 54"><path d="M6 6h40l8 8v34H6z"/><rect x="16" y="6" width="22" height="14"/><rect x="14" y="30" width="30" height="18"/></svg>',
+  '<svg viewBox="0 0 64 54"><rect x="14" y="10" width="36" height="34"/><rect x="22" y="18" width="20" height="18"/><path d="M20 4v6M28 4v6M36 4v6M44 4v6M20 44v6M28 44v6M36 44v6M44 44v6M8 18h6M8 26h6M8 34h6M50 18h6M50 26h6M50 34h6"/></svg>',
+  '<svg viewBox="0 0 64 54"><ellipse cx="32" cy="27" rx="26" ry="20"/><ellipse cx="32" cy="27" rx="9" ry="7"/><path d="M6 27v6c0 11 12 20 26 20s26-9 26-20v-6" transform="translate(0 -6)"/></svg>',
+  '<svg viewBox="0 0 64 54"><path d="M32 4 56 16v22L32 50 8 38V16z"/><path d="M32 28 8 16M32 28l24-12M32 28v22"/></svg>',
+]
+$('#bom').innerHTML = `<thead><tr><th>NO.</th><th>PART</th><th>LAYER</th><th>WHERE IT SHOWS UP</th></tr></thead><tbody>${D.layers.map((l, i) => `<tr><td class="n">0${i + 1}</td><td>${parts[i]}</td><td><b>${l.label}</b><div class="orgs">${l.caps}</div></td><td class="orgs" style="font-size:14px;color:var(--ink)">${[...new Set(l.items.map((x) => x[1]))].join(' · ')}</td></tr>`).join('')}</tbody>`
+
+K.tiles($('#tilesBox'), { tabs: true })
+const addBubs = () => document.querySelectorAll('.tile').forEach((t, i) => { if (!t.querySelector('.bub')) t.insertAdjacentHTML('afterbegin', K.bub(String(i + 1).padStart(2, '0'))) })
+addBubs(); document.getElementById('tilesBox').addEventListener('click', () => setTimeout(addBubs, 0))
+$('#side').innerHTML = D.side.map((p, i) => `<article class="sheet side" data-drag><span class="tape2"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p></article>`).join('')
+$('#pols').innerHTML = K.pols(10)
+K.init()
+const L = K.layers($('#lay'), 'both')
+K.switches([{ key: 'note', label: 'Layer note', def: 'both', opts: [['sticky', 'Sticky'], ['call', 'Callout'], ['both', 'Both']] }, { key: 'frame', label: 'Card frame', opts: [['iso', 'Iso part'], ['tape', 'Tape'], ['pin', 'Pin'], ['clip', 'Clip'], ['tab', 'Tab']] }, { key: 'tiles', label: 'Tiles', opts: [['feat', 'Featured'], ['sq', 'Square'], ['wide', 'Wide']] }], (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

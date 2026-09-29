@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 53 · Two Roads (Parallel)</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+  body { padding: 40px 20px; }
+  .title { font: 28px Fraunces; margin: 0 0 8px; }
+  .desc { color: #666; font-size: 14px; margin: 0 0 24px; }
+  canvas { border: 1px solid #ddd; border-radius: 4px; display: block; margin: 0 auto; }
+  .interaction { margin-top: 20px; padding: 16px; background: #f9f9f9; border-radius: 4px; font-size: 13px; }
+</style>
+</head><body>
+
+<h1 class="title">Two Parallel Roads</h1>
+<p class="desc">Engineering (blue) and Product (orange) roads run parallel, converging at your current role. Hover over experiences to see details.</p>
+
+<canvas id="canvas" width="1000" height="400"></canvas>
+
+<div class="interaction">
+  <strong>On hover:</strong> See a brief blurb about what you did in each role.<br>
+  <strong>The middle point:</strong> Where all your experience converges—Autodesk PM.
+</div>
+
+<script src="k9-data.js"></script>
+<script src="k9.js"></script>
+<script>
+  const canvas = document.getElementById('canvas');
+  K9.twoParallelRoads(canvas, K9DATA);
+</script>
+
+</body></html>

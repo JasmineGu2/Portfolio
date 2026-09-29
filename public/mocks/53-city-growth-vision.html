@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 53 · City Growth (Your Vision)</title>
+<link rel="stylesheet" href="k10.css">
+</head><body>
+
+<div class="k10">
+  <h1>City Growth Map</h1>
+  <p>A real street map of your career. Engineering is the main road. Product slides through and grows. You're where they meet.</p>
+
+  <svg width="1200" height="600" viewBox="0 0 1200 600">
+    <!-- Blueprint blue background with dot pattern -->
+    <defs>
+      <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="3" r="0.8" class="dot-fill"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="600" fill="#0e3b8f"/>
+    <rect width="1200" height="600" fill="url(#dots)"/>
+
+    <!-- Irregular city blocks -->
+    <g class="blocks">
+      <!-- Top left cluster -->
+      <polygon class="blk" points="50,50 120,45 125,110 55,115"/>
+      <polygon class="blk" points="130,60 200,55 205,130 135,135"/>
+      <polygon class="blk" points="50,130 120,125 125,190 55,195"/>
+      <polygon class="blk" points="210,50 280,48 285,125 215,127"/>
+      <polygon class="blk" points="300,80 370,75 375,160 305,165"/>
+
+      <!-- Center-top blocks -->
+      <polygon class="blk" points="420,40 500,38 505,110 425,112"/>
+      <polygon class="blk" points="520,50 600,48 605,130 525,132"/>
+      <polygon class="blk" points="420,130 500,128 505,210 425,212"/>
+      <polygon class="blk" points="620,60 700,58 705,145 625,147"/>
+
+      <!-- Right side blocks -->
+      <polygon class="blk" points="750,70 820,68 825,150 755,152"/>
+      <polygon class="blk" points="850,80 920,78 925,165 855,167"/>
+      <polygon class="blk" points="750,170 820,168 825,250 755,252"/>
+      <polygon class="blk" points="950,90 1020,88 1025,170 955,172"/>
+
+      <!-- Bottom left cluster -->
+      <polygon class="blk" points="50,250 120,248 125,320 55,322"/>
+      <polygon class="blk" points="130,240 200,238 205,315 135,317"/>
+      <polygon class="blk" points="50,340 120,338 125,410 55,412"/>
+      <polygon class="blk" points="220,280 290,278 295,355 225,357"/>
+
+      <!-- Center bottom blocks -->
+      <polygon class="blk" points="420,280 500,278 505,360 425,362"/>
+      <polygon class="blk" points="520,290 600,288 605,370 525,372"/>
+      <polygon class="blk" points="300,350 370,348 375,430 305,432"/>
+      <polygon class="blk" points="700,300 770,298 775,380 705,382"/>
+
+      <!-- Right bottom blocks -->
+      <polygon class="blk" points="850,320 920,318 925,400 855,402"/>
+      <polygon class="blk" points="950,310 1020,308 1025,390 955,392"/>
+    </g>
+
+    <!-- Two main roads -->
+    <g class="roads">
+      <!-- Engineering road: thick main line -->
+      <path class="road eng" d="M 0 300 Q 300 280 600 300 T 1200 310" stroke-width="26"/>
+
+      <!-- Product road: curves through engineering -->
+      <path class="road prod" d="M 0 380 Q 280 340 450 300 T 800 310 L 1200 320" stroke-width="14"/>
+    </g>
+
+    <!-- Experience pins along roads -->
+    <g class="pins">
+      <g class="pin" data-id="metaverse" transform="translate(140 300)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">META</text>
+      </g>
+
+      <g class="pin" data-id="omers" transform="translate(240 380)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">OMERS</text>
+      </g>
+
+      <g class="pin" data-id="intuit" transform="translate(380 300)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">INTUIT</text>
+      </g>
+
+      <g class="pin" data-id="ivey" transform="translate(520 300)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">IVEY</text>
+      </g>
+
+      <g class="pin" data-id="tesla" transform="translate(660 300)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">TESLA</text>
+      </g>
+
+      <g class="pin" data-id="autodesk-fs" transform="translate(800 300)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">AUTODESK</text>
+      </g>
+
+      <g class="pin" data-id="autodesk-pm" transform="translate(920 315)">
+        <circle class="pin-outer" r="8"/>
+        <circle class="pin-inner" r="5"/>
+        <text class="pin-label" y="-14">PRODUCT</text>
+      </g>
+    </g>
+
+    <!-- Your current role: orange convergence block -->
+    <g class="me-block">
+      <polygon class="blk me" points="850,270 950,260 970,360 850,370"/>
+      <text class="me-label" x="910" y="320">YOU</text>
+    </g>
+
+    <!-- Stack legend (right side) -->
+    <g class="stack-legend" transform="translate(1050 80)">
+      <rect class="legend-bg" width="130" height="280" rx="3"/>
+      <text class="legend-title" x="8" y="18">SKILLS</text>
+
+      <text class="stack-label eng" x="8" y="45">⬤ ENGINEERING</text>
+      <text class="stack-item" x="14" y="60">TypeScript</text>
+      <text class="stack-item" x="14" y="72">React, CSS</text>
+      <text class="stack-item" x="14" y="84">Node.js, Java, C++</text>
+      <text class="stack-item" x="14" y="96">Microservices</text>
+
+      <text class="stack-label prod" x="8" y="125">⬤ PRODUCT</text>
+      <text class="stack-item" x="14" y="140">Roadmap Planning</text>
+      <text class="stack-item" x="14" y="152">Stakeholder Mgmt</text>
+      <text class="stack-item" x="14" y="164">A/B Testing</text>
+
+      <text class="stack-label comm" x="8" y="190">⬤ COMMUNITY</text>
+      <text class="stack-item" x="14" y="205">Hack Western Lead</text>
+      <text class="stack-item" x="14" y="217">IPS Fellow (mentor)</text>
+    </g>
+  </svg>
+
+  <p style="margin-top: 24px; color: var(--muted); font-size: 12px;">
+    <strong>On hover:</strong> Click an experience pin to see company, role, dates, and skills lighting up in the stack.<br>
+    <strong>The story:</strong> Engineering (thick road) runs through your whole career. Product slides through and grows over time. You're the orange block where they meet.
+  </p>
+</div>
+
+</body></html>

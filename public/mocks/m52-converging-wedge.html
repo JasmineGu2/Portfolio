@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 52 · Converging Wedge</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .road-eng { stroke: #fff; stroke-width: 28; fill: none; }
+    .road-prod { stroke: #fff; stroke-width: 16; fill: none; }
+
+    .exp-pin { cursor: pointer; transition: all 0.2s; }
+    .exp-pin circle { fill: #fff; r: 6; }
+    .exp-pin text { font-size: 11px; font-weight: 500; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 8; }
+    .exp-pin:hover text { fill: #fff; font-weight: 600; }
+
+    .year-label { font-size: 13px; font-weight: 600; fill: rgba(255,255,255,0.6); }
+    .road-label { font-size: 16px; font-weight: 700; letter-spacing: 1px; fill: rgba(255,255,255,0.8); }
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 14px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .future-text { font-size: 18px; font-weight: 700; fill: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Engineering Road (thicker, converging from left) -->
+  <path class="road-eng" d="M 100,650 Q 400,550 700,400 T 1080,200" filter="url(#shadow)"/>
+
+  <!-- Product Avenue (thinner, converging from left but lower) -->
+  <path class="road-prod" d="M 100,700 Q 450,550 750,380 T 1080,240" filter="url(#shadow)"/>
+
+  <!-- Years marked along the roads -->
+  <g class="timeline">
+    <!-- 2022 -->
+    <text class="year-label" x="120" y="620">2022</text>
+    <circle cx="100" cy="650" r="3" fill="rgba(255,255,255,0.4)"/>
+
+    <!-- 2023 -->
+    <text class="year-label" x="280" y="500">2023</text>
+    <circle cx="260" cy="560" r="3" fill="rgba(255,255,255,0.4)"/>
+
+    <!-- 2024 -->
+    <text class="year-label" x="460" y="420">2024</text>
+    <circle cx="480" cy="480" r="3" fill="rgba(255,255,255,0.4)"/>
+
+    <!-- 2025 -->
+    <text class="year-label" x="680" y="320">2025</text>
+    <circle cx="720" cy="390" r="3" fill="rgba(255,255,255,0.4)"/>
+
+    <!-- 2026 -->
+    <text class="year-label" x="1010" y="160">2026</text>
+    <circle cx="1080" cy="220" r="3" fill="rgba(255,255,255,0.4)"/>
+  </g>
+
+  <!-- Engineering Experiences -->
+  <g class="experiences">
+    <!-- Metaverse (Nov 2022) -->
+    <g class="exp-pin" data-id="metaverse">
+      <circle cx="130" cy="620"/>
+      <text x="130" y="605">MV</text>
+      <title>Metaverse Group · Growth Engineering · Nov 2022</title>
+    </g>
+
+    <!-- OMERS (May 2023) -->
+    <g class="exp-pin" data-id="omers">
+      <circle cx="300" cy="520"/>
+      <text x="300" y="505">OM</text>
+      <title>OMERS · Solutions Engineer · May 2023</title>
+    </g>
+
+    <!-- Intuit (May 2024) -->
+    <g class="exp-pin" data-id="intuit">
+      <circle cx="500" cy="440"/>
+      <text x="500" y="425">IN</text>
+      <title>Intuit · Frontend Engineer · May 2024</title>
+    </g>
+
+    <!-- Ivey (May 2025) -->
+    <g class="exp-pin" data-id="ivey">
+      <circle cx="700" cy="360"/>
+      <text x="700" y="345">IV</text>
+      <title>Ivey · AI Engineer · May 2025</title>
+    </g>
+
+    <!-- Tesla (May 2025) -->
+    <g class="exp-pin" data-id="tesla">
+      <circle cx="780" cy="360"/>
+      <text x="780" y="345">TS</text>
+      <title>Tesla · Frontend/Infra · May 2025</title>
+    </g>
+
+    <!-- Autodesk Eng (Jan 2026) -->
+    <g class="exp-pin" data-id="autodesk-fs">
+      <circle cx="950" cy="270"/>
+      <text x="950" y="255">AE</text>
+      <title>Autodesk · Full-Stack Eng · Jan 2026</title>
+    </g>
+  </g>
+
+  <!-- Product Experiences -->
+  <g class="experiences-prod">
+    <!-- Autodesk PM (May 2026) -->
+    <g class="exp-pin" data-id="autodesk-pm">
+      <circle cx="1060" cy="240"/>
+      <text x="1060" y="225">AP</text>
+      <title>Autodesk · PM (AI Infra) · May 2026</title>
+    </g>
+  </g>
+
+  <!-- Road Labels -->
+  <text class="road-label" x="350" y="550" text-anchor="middle">ENGINEERING BD</text>
+  <text class="road-label" x="450" y="720" text-anchor="middle" style="font-size: 14px; letter-spacing: 0.5px;">PRODUCT AV</text>
+
+  <!-- Center block (YOU) -->
+  <rect class="me-block" x="1020" y="180" width="120" height="80" rx="4"/>
+  <text class="me-text" x="1080" y="210">JASMINE GU</text>
+  <text class="me-text" x="1080" y="230" style="font-size: 12px; font-weight: 500;">PRODUCT ENG</text>
+
+  <!-- Future indicator -->
+  <text class="future-text" x="1140" y="80" text-anchor="end">→ FUTURE</text>
+  <path d="M 1160 70 L 1180 70" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-dasharray="4,4"/>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = p === this ? '1' : '0.4');
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 56 · Minimal Double Helix</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .road { fill: none; }
+    .road-eng { stroke: #fff; stroke-width: 28; opacity: 0.95; }
+    .road-prod { stroke: #fff; stroke-width: 16; opacity: 0.85; }
+
+    .exp-pin { cursor: pointer; transition: all 0.2s ease-out; }
+    .exp-pin circle { fill: #fff; r: 5; }
+    .exp-pin text { font-size: 9px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 7; filter: drop-shadow(0 0 10px rgba(255,149,0,0.7)); }
+    .exp-pin:hover text { font-weight: 700; }
+
+    .timeline { }
+    .timeline-dot { fill: rgba(255,255,255,0.2); }
+    .timeline-label { font-size: 11px; font-weight: 600; fill: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 14px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .desc-text { font-size: 13px; fill: rgba(255,255,255,0.7); letter-spacing: 0.3px; }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Engineering Road - top path, curves gracefully -->
+  <path class="road road-eng" d="M 80,280 Q 300,320 500,340 T 900,280 T 1100,200"/>
+
+  <!-- Product Road - lower path, spirals up to meet engineering -->
+  <path class="road road-prod" d="M 80,500 Q 300,480 500,440 T 900,320 T 1100,240"/>
+
+  <!-- Timeline dots at key year intervals -->
+  <g class="timeline">
+    <!-- 2022 -->
+    <circle class="timeline-dot" cx="80" cy="280" r="2.5"/>
+    <circle class="timeline-dot" cx="80" cy="500" r="2.5"/>
+    <text class="timeline-label" x="70" y="600">2022</text>
+
+    <!-- 2023 -->
+    <circle class="timeline-dot" cx="260" cy="310" r="2.5"/>
+    <circle class="timeline-dot" cx="260" cy="490" r="2.5"/>
+    <text class="timeline-label" x="250" y="600">2023</text>
+
+    <!-- 2024 -->
+    <circle class="timeline-dot" cx="440" cy="335" r="2.5"/>
+    <circle class="timeline-dot" cx="440" cy="460" r="2.5"/>
+    <text class="timeline-label" x="430" y="600">2024</text>
+
+    <!-- 2025 -->
+    <circle class="timeline-dot" cx="620" cy="340" r="2.5"/>
+    <circle class="timeline-dot" cx="620" cy="415" r="2.5"/>
+    <text class="timeline-label" x="610" y="600">2025</text>
+
+    <!-- 2026 -->
+    <circle class="timeline-dot" cx="800" cy="310" r="2.5"/>
+    <circle class="timeline-dot" cx="800" cy="340" r="2.5"/>
+    <text class="timeline-label" x="790" y="600">2026</text>
+  </g>
+
+  <!-- Engineering Experiences -->
+  <g class="experiences">
+    <!-- Metaverse 2022 -->
+    <g class="exp-pin">
+      <circle cx="80" cy="280"/>
+      <text x="80" y="282">MV</text>
+      <title>Metaverse · Growth Eng · Nov 2022 · Python</title>
+    </g>
+
+    <!-- OMERS 2023 -->
+    <g class="exp-pin">
+      <circle cx="260" cy="310"/>
+      <text x="260" y="312">OM</text>
+      <title>OMERS · Solutions Engineer · May 2023 · ServiceNow</title>
+    </g>
+
+    <!-- Intuit 2024 -->
+    <g class="exp-pin">
+      <circle cx="440" cy="335"/>
+      <text x="440" y="337">IN</text>
+      <title>Intuit · Frontend Eng · May 2024 · React</title>
+    </g>
+
+    <!-- Ivey 2025 -->
+    <g class="exp-pin">
+      <circle cx="620" cy="320"/>
+      <text x="620" y="322">IV</text>
+      <title>Ivey · AI Engineer · May 2025 · LLM Pipelines</title>
+    </g>
+
+    <!-- Tesla 2025 -->
+    <g class="exp-pin">
+      <circle cx="680" cy="340"/>
+      <text x="680" y="342">TS</text>
+      <title>Tesla · Frontend/Infra Eng · May 2025 · TypeScript, React</title>
+    </g>
+
+    <!-- Autodesk Eng 2026 -->
+    <g class="exp-pin">
+      <circle cx="900" cy="280"/>
+      <text x="900" y="282">AE</text>
+      <title>Autodesk · Full-Stack Eng · Jan 2026 · Java, C++, React</title>
+    </g>
+  </g>
+
+  <!-- Product Experiences -->
+  <g class="experiences-prod">
+    <!-- Autodesk PM 2026 -->
+    <g class="exp-pin">
+      <circle cx="1080" cy="240"/>
+      <text x="1080" y="242">AP</text>
+      <title>Autodesk · PM (AI Infra) · May 2026 · SQL, RAG, MCP</title>
+    </g>
+  </g>
+
+  <!-- Road Labels -->
+  <text class="desc-text" x="320" y="260">ENGINEERING BOULEVARD</text>
+  <text class="desc-text" x="360" y="540">PRODUCT AVENUE</text>
+
+  <!-- YOU - Convergence Point -->
+  <rect class="me-block" x="1050" y="190" width="120" height="85" rx="5"/>
+  <text class="me-text" x="1110" y="225">JASMINE GU</text>
+  <text class="me-text" x="1110" y="245" style="font-size: 11px; font-weight: 500;">PRODUCT ENGINEER</text>
+
+  <!-- Story text at bottom -->
+  <g transform="translate(60, 650)">
+    <text style="font-size: 12px; fill: rgba(255,255,255,0.7); font-weight: 500; letter-spacing: 0.3px;">Your engineering path (top) and product journey (bottom) spiral upward and converge.</text>
+    <text style="font-size: 11px; fill: rgba(255,255,255,0.5); letter-spacing: 0.3px;">Hover on any experience to see details. Both roads lead to 2026.</text>
+  </g>
+
+  <!-- Arrow to future -->
+  <path d="M 1170 200 L 1190 180" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="3,3"/>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => {
+        p.style.opacity = p === this ? '1' : '0.25';
+      });
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+    });
+  });
+</script>
+</body>
+</html>

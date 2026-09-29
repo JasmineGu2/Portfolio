@@ -1,0 +1,119 @@
+/* Round 3: your live localhost page (unchanged layout) + only the blueprint parts. Loads after k2.css. */
+
+/* ---- the live page look: white, Inter, #282828, two columns 0.9fr / 1.1fr ---- */
+body[data-site]{--paper:#fff;--sheet:#fff;--ink:#282828;--muted:rgba(40,40,40,.62)}
+[data-theme=blueprint] body[data-site]{--paper:#0e3b8f;--sheet:#123f96;--ink:#e8f1ff;--muted:#9fd3ff}
+.plate{background:var(--paper)}
+.home{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;padding:40px 0 56px}
+.home .l{display:flex;flex-direction:column;gap:12px;min-width:0}
+.home .nm0{font:700 clamp(44px,4.4vw,56px)/1 'JetBrains Mono',monospace;color:var(--or);text-transform:lowercase;letter-spacing:-.02em}
+body[data-nm=hide] .home .nm0{display:none}
+.home .hl{font-size:clamp(24px,2.2vw,30px);line-height:1.25;color:var(--ink)}
+.home .st{font-size:16px;color:var(--muted)}.home .st b{color:var(--ink);font-weight:600}
+.home .in{max-width:28rem;font-size:16px;line-height:28px}
+.home .lead{font-weight:500;font-size:16px;margin-bottom:4px}
+.home ul.ar{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;opacity:.85;font-size:16px}
+.home ul.ar li{display:flex;gap:8px}.home ul.ar li>span:first-child{color:var(--orink)}
+.home .prev small{font-size:12px;text-transform:uppercase;letter-spacing:.06em}.home .prev b{font-weight:600}
+.home .notes h2{font:500 20px/1.2 ui-serif,Georgia,serif;margin-bottom:6px;color:var(--ink)}
+.home .notes ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 32px;color:var(--muted);font-size:16px}
+.home .r{min-width:0}
+.home .tiles{gap:30px 20px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.home .tile{gap:8px}.home .tile .co{font:600 14px Inter}.home .tile .sub{font-size:12px;line-height:1.4}.home .tile .tg span{font-size:11px;padding:0 8px}
+/* tile accents: switcher Clean / Bubble / Dim lines (no card frames, the round-2 frames are gone) */
+.tile .bub{display:none}.dimx{display:none}
+body[data-tacc=bubble] .tile .bub{display:inline-grid;position:absolute;left:8px;top:8px;z-index:5;width:42px;height:42px;font-size:10px}
+body[data-tacc=dim] .dimx{display:block;position:relative;height:14px;color:var(--muted);margin-top:-2px}
+.dimx::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid currentColor}
+.dimx::after{content:"";position:absolute;inset:0;background:linear-gradient(currentColor,currentColor) 0 50%/1px 12px no-repeat,linear-gradient(currentColor,currentColor) 100% 50%/1px 12px no-repeat}
+.dimx span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 8px;font:500 9px 'JetBrains Mono';letter-spacing:.14em;text-transform:uppercase;z-index:1;white-space:nowrap}
+/* text: switcher Clean / Dotted (the Tsutaya address-table look: dotted rules) */
+body[data-txt=dotted] .home .ar li,body[data-txt=dotted] .home .notes li{padding:6px 0;border-bottom:1px dotted color-mix(in srgb,currentColor 50%,transparent)}
+body[data-txt=dotted] .home .lead,body[data-txt=dotted] .home .notes h2{padding:6px 0;border-top:1px dotted color-mix(in srgb,currentColor 50%,transparent);border-bottom:1px dotted color-mix(in srgb,currentColor 50%,transparent);margin-bottom:2px}
+/* graph paper: switcher None / Faint / Full */
+body[data-grid=none]{background-image:none}
+body[data-grid=full]{background-image:linear-gradient(rgba(60,110,200,.32) 1px,transparent 1px),linear-gradient(90deg,rgba(60,110,200,.32) 1px,transparent 1px),linear-gradient(rgba(60,110,200,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(60,110,200,.13) 1px,transparent 1px);background-size:160px 160px,160px 160px,32px 32px,32px 32px}
+[data-theme=blueprint] body[data-grid=full]{background-image:linear-gradient(rgba(159,211,255,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(159,211,255,.34) 1px,transparent 1px),linear-gradient(rgba(159,211,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(159,211,255,.14) 1px,transparent 1px)}
+
+/* ---- blueprint bands ---- */
+.bpb{background-color:#1f3fd8;background-image:linear-gradient(rgba(232,241,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.16) 1px,transparent 1px),linear-gradient(rgba(232,241,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.07) 1px,transparent 1px);background-size:80px 80px,80px 80px,16px 16px,16px 16px;color:#e8f1ff;border-block:3px double #9fd3ff;padding:22px 0;position:relative;overflow:hidden}
+.bpb .label,.bpb .sect{color:#9fd3ff}.bpb h2{color:#e8f1ff}
+.bpb .sec-h{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;margin-left:0}
+.bpb .bpp{background:none;box-shadow:none;padding:0}
+.bpb section,.bpb>section{padding:0}
+.nb .label{display:flex;justify-content:space-between;color:#9fd3ff}
+.nbw{position:relative}.nbw svg{width:80%;height:auto;display:block}
+.nbw .stks{position:absolute;right:8px;top:44px;display:grid;gap:18px}
+.nm{font-family:'Bebas Neue',Impact,sans-serif;stroke:#e8f1ff;stroke-width:2.2;fill:url(#hatch);fill-opacity:0;stroke-dasharray:4200;stroke-dashoffset:4200;animation:dr2 3.2s .4s cubic-bezier(.5,0,.2,1) forwards,fi 1.2s 3s forwards}
+@keyframes dr2{to{stroke-dashoffset:0}}@keyframes fi{to{fill-opacity:1}}
+@media (prefers-reduced-motion:reduce){.nm{animation:none;stroke-dashoffset:0;fill-opacity:1}}
+.dm{stroke:#e8f1ff;stroke-width:1.2;fill:none}.dsh{stroke:#9fd3ff;stroke-width:1;stroke-dasharray:6 7;fill:none;opacity:.8}
+.dn{fill:#ff8a5c;font:500 15px 'JetBrains Mono';letter-spacing:.06em}.dl{fill:#9fd3ff;font:500 12px 'JetBrains Mono';letter-spacing:.14em}.org{stroke:#ff8a5c;stroke-width:2.4;fill:none}
+
+/* ---- skills city (the mock-3 road map). Skin comes from body[data-map]: blue blueprint or light map + orange block ---- */
+.cmap{position:relative;width:100%;overflow:hidden;--mbg:#1f3cff;--mdot:rgba(232,241,255,.6);--edge:#e8f1ff;--inner:#1f3cff;--mtxt:#fff;--mpin:#1f3cff;--mring:#fff;--mctr:#e8f1ff}
+body[data-map=light] .cmap{--mbg:#e6e7e9;--mdot:transparent;--edge:#cbced2;--inner:#fbfbfb;--mtxt:#222;--mpin:#fff;--mring:#2b2b2b;--mctr:#c9ccd0}
+.cmap svg{display:block;width:100%;height:auto}
+.mbg{fill:var(--mbg)}.mdot{fill:var(--mdot)}.mrE{stroke:var(--edge);fill:none}.mrI{stroke:var(--inner);fill:none}.mrc{stroke:var(--mctr);stroke-width:1.4;fill:none;opacity:.85}
+.rdl{fill:var(--mtxt);font:500 11px 'JetBrains Mono';letter-spacing:.3em;opacity:.8}
+.mpin{cursor:pointer}.mpin .ring{fill:var(--mpin);stroke:var(--mring);stroke-width:4;transition:.2s}.mpin:hover .ring{fill:#fff;stroke:var(--or)}
+.mpin text{fill:var(--mtxt);font:700 13px 'JetBrains Mono';letter-spacing:.05em;paint-order:stroke;stroke:var(--mbg);stroke-width:5px}.mpin .w{font:500 10px 'JetBrains Mono';opacity:.9}
+.oblk polygon{fill:#ed3801}.oblk line{stroke:#fff;stroke-width:2.4;stroke-dasharray:9 7}.oblk text{fill:#fff;font:700 17px 'JetBrains Mono';letter-spacing:.14em}.oblk .s2{font:500 10px 'JetBrains Mono';letter-spacing:.2em}
+.cmap .cap{position:absolute;left:14px;bottom:12px;font:500 10px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase;color:var(--mtxt);background:color-mix(in srgb,var(--mbg) 85%,transparent);padding:4px 10px;border-radius:99px}
+
+/* ---- sheet on a graph-paper table (mock 13) ---- */
+.sheetT{background:#fff;color:#282828;position:relative;box-shadow:0 22px 50px rgba(20,30,60,.22);margin:40px auto;max-width:1240px;padding:0 0 30px}
+[data-theme=blueprint] .sheetT{background:#123f96;color:#e8f1ff}
+.sheetT.regs::before{left:-13px;top:-13px}.sheetT.regs::after{right:-13px;bottom:-13px}
+.sheetT .tb2{display:grid;grid-template-columns:auto 1fr auto;border-bottom:1.5px solid var(--line)}
+.sheetT .tb2 .cell{border-color:var(--line);color:var(--ink)}.sheetT .tb2 .cell .l{color:var(--muted)}
+.sheetT .pad{padding:0 44px}
+
+/* ---- city as the footer background (mock 14) ---- */
+.ftrmap{position:relative}.ftrmap .ftr{position:absolute;left:0;right:0;bottom:0;margin:0;background:rgba(8,45,110,.94)}
+
+@media (max-width:900px){.home{grid-template-columns:1fr;gap:34px}.nbw svg{width:100%}.nbw .stks{display:none}}
+
+/* ---- mock 17: hero text inside the blue hero, big clean tiles (caption row: title + subtitle left, tags right) ---- */
+.wide{padding:0 28px}
+.hp{background:rgba(8,45,110,.93);border:3px double #9fd3ff;padding:26px 30px;color:#e8f1ff;position:relative}
+.hp .htxt{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+.hp .hl{font-size:clamp(30px,3.5vw,48px);line-height:1.14;letter-spacing:-.02em;color:#fff}
+.hp .st{font-size:16px;color:#9fd3ff;margin-top:16px}.hp .st b{color:#fff;font-weight:600}
+.hp .in{font-size:16px;line-height:28px;max-width:34rem;margin-top:14px}
+.hp .lead{font-weight:500;margin-bottom:4px;color:#9fd3ff}
+.hp ul.ar{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;font-size:16px}
+.hp ul.ar li{display:flex;gap:8px;padding:9px 0;border-bottom:1px dotted rgba(232,241,255,.42)}.hp ul.ar li>span:first-child{color:#ff8a5c}
+.hp .soc{margin-top:14px}
+.tiles.big{gap:46px 14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.tiles.big .tile{gap:10px}.tiles.big .m{aspect-ratio:16/10;border-radius:6px}
+.tile .cap{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.tile .cap h3{font:600 20px/1.2 Inter;letter-spacing:-.01em}.tile .cap .sub{font-size:14.5px;line-height:1.45;margin-top:3px;max-width:34rem}
+.tile .tgl{font:500 11px/1.7 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:right;max-width:15rem;flex:none}
+.tile .tgl span+span::before{content:" · "}
+body[data-tiles=feat] .tiles.big .tile:first-child{grid-column:1/-1}body[data-tiles=feat] .tiles.big .tile:first-child .m{aspect-ratio:21/9}
+body[data-tiles=one] .tiles.big{grid-template-columns:1fr}
+.info3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:56px}
+.info3 .lead{font-weight:500;margin-bottom:6px}.info3 ul{list-style:none;margin:0;padding:0}
+.info3 li{padding:8px 0;border-bottom:1px dotted color-mix(in srgb,currentColor 45%,transparent);display:flex;gap:8px}.info3 li>span:first-child{color:var(--orink)}
+.info3 .nt2 li{display:block}.info3 h2{font:500 20px/1.2 ui-serif,Georgia,serif;margin-bottom:6px}
+.info3 small{font-size:12px;text-transform:uppercase;letter-spacing:.06em}.info3 b{font-weight:600}
+@media (max-width:1000px){.hp .htxt,.info3{grid-template-columns:1fr}.tile .cap{flex-direction:column;gap:6px}.tile .tgl{text-align:left}.tiles.big{grid-template-columns:1fr}}
+
+/* type + focus (round 3 polish) */
+.hp .hl{font-family:Inter,system-ui,sans-serif;font-weight:400}
+body[data-hf=serif] .hp .hl{font-family:Fraunces,Georgia,serif}
+.hero17 .nbw svg{width:56%}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--or);outline-offset:3px;border-radius:4px}
+@media (max-width:900px){.hero17 .nbw svg{width:100%}}
+
+/* box over the media: white, thin dark outline, square corners (title, description, tags) */
+.tiles.big.ov{gap:14px}
+.tiles.big.ov .m{aspect-ratio:16/10;border-radius:0;outline:0}
+.tile .bx{position:absolute;left:16px;bottom:16px;z-index:3;max-width:min(320px,54%);background:#fff;color:#0e1a3a;border:1px solid #0e1a3a;padding:14px 16px 14px}
+.tile .bx h3{font:400 21px/1.15 Fraunces,Georgia,serif;letter-spacing:-.01em;color:#0e1a3a}
+.tile .bx .sub{font:400 12px/1.5 'JetBrains Mono',monospace;color:#33509c;margin:7px 0 11px;max-width:none}
+.tile .bx .tgl{display:flex;flex-wrap:wrap;gap:5px;text-align:left;max-width:none;margin:0}
+.tile .bx .tgl span{border:1px solid #9db3e6;color:#33509c;font:500 9px/1.5 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px}
+.tile .bx .tgl span+span::before{content:none}
+@media (max-width:700px){.tile .bx{max-width:calc(100% - 32px)}}

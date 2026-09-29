@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 7 · Pinboard, organized</title>
+<link rel="stylesheet" href="k2.css">
+<style>
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start;padding:48px 0 10px}
+.name{font:700 clamp(46px,6.4vw,84px)/1 'JetBrains Mono',monospace;color:var(--or);text-transform:lowercase;letter-spacing:-.04em}
+.hl{font-size:clamp(22px,2.5vw,31px);line-height:1.28;margin:16px 0 14px}
+.cluster{position:relative;min-height:470px}
+.cluster>*{position:absolute}
+.abt{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.chips span{border:1px solid var(--faint);border-radius:99px;padding:2px 12px;font-size:13.5px}
+ul.arw{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}ul.arw li{display:grid;grid-template-columns:20px 1fr;gap:6px}ul.arw li::before{content:"↳";color:var(--orink);font-weight:700}
+.prev{columns:2;column-gap:30px;margin-top:8px;font-size:14px}.prev div{break-inside:avoid;padding:4px 0;border-bottom:1px solid var(--faint)}.prev b{font:500 10px 'JetBrains Mono';letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block}
+.idcs{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.idc img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:10px}.idc h3{font-size:16px;background:#fff;display:inline;line-height:1.5}.idc p{font-size:13.5px;margin-top:8px;color:#555;line-height:24px}
+.polrow{display:flex;flex-wrap:wrap;gap:34px 26px;padding:30px 10px 10px}
+@media (max-width:900px){.hero,.abt{grid-template-columns:1fr}.idcs{grid-template-columns:1fr 1fr}.cluster{min-height:560px}}
+</style></head><body>
+<div id="hdr"></div>
+<main class="wrap">
+  <section class="hero" id="top">
+    <div class="sheet regs"><span class="tape2"></span>
+      <p class="label">sheet A-101 · placeholder mock</p><h1 class="name">jasmine gu</h1><p class="hl" id="hl"></p><p class="muted" id="status" style="margin-bottom:18px"></p><div id="soc"></div></div>
+    <div class="cluster" id="cluster"></div>
+  </section>
+
+  <section id="about"><div class="sec-h"><h2>About</h2><span class="sect">SECTION B–B</span></div>
+    <div class="abt"><div class="sheet regs"><p id="intro" style="font-size:18px"></p><p class="label" style="margin-top:24px" id="hlead"></p><ul class="arw" id="hls"></ul><p class="label" style="margin-top:26px">Notes</p><div class="chips" id="notes"></div></div>
+      <div class="npad"><p class="label" style="margin-bottom:6px">what i've been building:</p><ul class="arw" id="build" style="gap:0"></ul></div></div></section>
+
+  <div id="dim1"></div>
+  <section id="layers"><div class="sec-h"><h2>Layers</h2><span class="sect">DETAIL 02 / A-101</span></div><div id="lay"></div></section>
+
+  <div id="dim2"></div>
+  <section id="work"><div class="sec-h"><h2>Experience</h2><span class="sect">SECTION A–A</span><span class="label">hover a tile · big videos, organized</span></div>
+    <div class="sheet regs"><span class="tape2"></span><div id="tilesBox"></div><p class="label" style="margin-top:34px">previously:</p><div class="prev" id="prev"></div></div></section>
+
+  <div id="dim3"></div>
+  <section id="journey"><div class="sec-h"><h2>The Journey</h2><span class="sect">SHEET A-102</span></div>
+    <p class="label" style="margin-bottom:16px">Side projects</p><div class="idcs" id="side"></div>
+    <p class="label" style="margin:44px 0 0">Gallery · drag them around</p><div class="polrow" id="pols"></div></section>
+</main>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script>
+<script>
+const D = K2, $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer(); $('#soc').innerHTML = K.socials()
+$('#hl').textContent = D.headline; $('#status').textContent = D.status; $('#intro').textContent = D.intro; $('#hlead').textContent = D.hlLead
+$('#hls').innerHTML = D.highlights.map((h) => `<li><span>${h}</span></li>`).join('')
+$('#notes').innerHTML = D.notes.map((n) => `<span>${n}</span>`).join('')
+$('#build').innerHTML = D.building.map((b) => `<li><span>${b}</span></li>`).join('')
+$('#prev').innerHTML = D.previously.map(([c, n]) => `<div><b>${c}</b>${n}</div>`).join('')
+$('#cluster').innerHTML = `<div style="left:6%;top:0">${K.sticky(0, '', -3)}</div><div style="left:52%;top:26px">${K.sticky(2, 'l', 3)}</div><div style="left:4%;top:150px">${K.pols(1, 1)}</div><div style="left:40%;top:190px">${K.pols(1, 0)}</div><div style="left:66%;top:230px">${K.fol(1, 'open me')}</div><div style="left:24%;top:360px">${K.sticky(6, 'm', 2)}</div>`
+$('#dim1').innerHTML = K.dim('1180'); $('#dim2').innerHTML = K.dim('SECTION A–A · 1180'); $('#dim3').innerHTML = K.dim('SHEET 2 · 1180')
+K.tiles($('#tilesBox'), { tabs: true })
+$('#side').innerHTML = D.side.map((p) => `<article class="idc" data-drag><span class="clip2"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p></article>`).join('')
+$('#pols').innerHTML = K.pols(10)
+K.init()
+const L = K.layers($('#lay'), 'sticky')
+K.switches([{ key: 'frame', label: 'Card frame', opts: [['tape', 'Tape'], ['pin', 'Pin'], ['clip', 'Clip'], ['iso', 'Iso part'], ['tab', 'Tab']] }, { key: 'tiles', label: 'Tiles', opts: [['feat', 'Featured'], ['sq', 'Square'], ['wide', 'Wide']] }, { key: 'note', label: 'Layer note', opts: [['sticky', 'Sticky'], ['call', 'Callout'], ['both', 'Both']] }], (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

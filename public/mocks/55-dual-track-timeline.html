@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 55 · Dual Track Timeline</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+  body { padding: 40px 20px; }
+  .title { font: 28px Fraunces; margin: 0 0 8px; }
+  .desc { color: #666; font-size: 14px; margin: 0 0 24px; }
+  canvas { border: 1px solid #ddd; border-radius: 4px; display: block; margin: 0 auto; }
+  .explanation { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; font-size: 13px; }
+  .exp-block { padding: 12px; background: #f9f9f9; border-radius: 4px; }
+  .exp-block h3 { margin: 0 0 8px; font: bold 14px monospace; }
+  .exp-block p { margin: 0; color: #666; }
+</style>
+</head><body>
+
+<h1 class="title">Dual Track Timeline</h1>
+<p class="desc">Your timeline split into two parallel tracks: Engineering (blue) and Product (orange). Some roles span both.</p>
+
+<canvas id="canvas" width="1200" height="450"></canvas>
+
+<div class="explanation">
+  <div class="exp-block">
+    <h3>🔵 Engineering Track</h3>
+    <p>Frontend, fullstack, infrastructure, and AI work. Python, React, TypeScript, C++, Java, systems design.</p>
+  </div>
+  <div class="exp-block">
+    <h3>🟠 Product Track</h3>
+    <p>PM work, stakeholder alignment, roadmap planning. Currently at Autodesk on AI-assisted SQL workflows.</p>
+  </div>
+</div>
+
+<script src="k9-data.js"></script>
+<script src="k9.js"></script>
+<script>
+  const canvas = document.getElementById('canvas');
+  K9.dualTrackTimeline(canvas, K9DATA);
+</script>
+
+</body></html>

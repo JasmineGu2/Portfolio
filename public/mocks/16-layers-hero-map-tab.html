@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 16 · Layers hero + map tab</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+<style>.nb16 .nbw svg{width:54%}.nb16 .stks{right:6%;top:24px}@media (max-width:900px){.nb16 .nbw svg{width:100%}}</style>
+</head><body data-site data-nm="hide">
+<div id="hdr"></div>
+<header class="bpb" id="top"><div class="wrap"><div class="nb16" id="nb"></div><div class="sec-h" style="margin-top:22px"><h2>Exploded view</h2><span class="sect">DETAIL 01 / A-101</span><span class="label">hover a layer · the note is one of my real roles</span></div><div id="lay"></div></div></header>
+<div class="plate"><main class="wrap"><div id="home"></div></main></div>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer()
+$('#nb').innerHTML = K.nameBand()
+K.home($('#home'), { mapTab: true })
+K.init()
+const L = K.layers($('#lay'), 'both')
+K.sw3(['grid', 'tacc', 'txt', 'map', 'note'], { grid: 'faint', tacc: 'clean', txt: 'clean', map: 'light', note: 'both' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 34 · Home v2</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css"><link rel="stylesheet" href="k4.css"><link rel="stylesheet" href="k6.css">
+</head><body class="q q6" data-map="blue">
+<div id="nav"></div>
+<main id="work"><div id="hero"></div>
+<div id="mapsec"></div>
+<div class="q-sheet"><div class="q-w" id="tabs"></div></div></main>
+<div id="foot"></div>
+<script src="k2-data.js"></script><script src="k4-data.js"></script><script src="k6-ask.js"></script><script src="k2.js"></script><script src="k3.js"></script><script src="k4.js"></script><script src="k6.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#nav').innerHTML = Q.header({ active: 'work', work: '#work' })
+Q.stage($('#hero')); Q.field($('#hero'), $('#mapsec')); Q.workTabs($('#tabs')); Q.footer2($('#foot'))
+Q.init(); K.theme('pencil'); Q.ask()
+</script></body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 55 · Spiral Ascent</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .spiral { stroke-width: 0; fill: none; }
+    .spiral-eng { stroke: #fff; stroke-width: 26; opacity: 0.9; }
+    .spiral-prod { stroke: #fff; stroke-width: 14; opacity: 0.85; }
+
+    .exp-pin { cursor: pointer; transition: all 0.25s; }
+    .exp-pin circle { fill: #fff; r: 6; }
+    .exp-pin text { font-size: 10px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 8; filter: drop-shadow(0 0 8px rgba(255,149,0,0.7)); }
+    .exp-pin:hover text { fill: #fff; }
+
+    .year-marker { }
+    .year-dot { fill: rgba(255,255,255,0.3); }
+    .year-text { font-size: 13px; font-weight: 600; fill: rgba(255,255,255,0.6); }
+
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 14px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .title-text { font-size: 22px; font-weight: 700; letter-spacing: 1px; fill: rgba(255,255,255,0.9); }
+    .subtitle { font-size: 12px; fill: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <filter id="spiral-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Title -->
+  <text class="title-text" x="600" y="50" text-anchor="middle">UPWARD SPIRAL</text>
+  <text class="subtitle" x="600" y="70" text-anchor="middle">Engineering & Product roads wind upward together, convergence at 2026</text>
+
+  <!-- Engineering Spiral (larger radius, bottom start) -->
+  <path class="spiral-eng" d="M 200,600 Q 300,550 400,500 T 600,350 T 800,200 T 950,100" filter="url(#spiral-shadow)"/>
+
+  <!-- Product Spiral (smaller radius, starts after) -->
+  <path class="spiral-prod" d="M 250,630 Q 350,580 450,530 T 650,380 T 850,230 T 980,120" filter="url(#spiral-shadow)"/>
+
+  <!-- 2022 - Starting Point -->
+  <g class="year-marker">
+    <circle class="year-dot" cx="200" cy="600" r="4"/>
+    <text class="year-text" x="160" y="625">2022</text>
+
+    <g class="exp-pin">
+      <circle cx="200" cy="600"/>
+      <text x="200" y="603">MV</text>
+      <title>Metaverse · Nov 2022</title>
+    </g>
+  </g>
+
+  <!-- 2023 - First product join -->
+  <g class="year-marker">
+    <circle class="year-dot" cx="360" cy="515" r="4"/>
+    <text class="year-text" x="320" y="540">2023</text>
+
+    <g class="exp-pin">
+      <circle cx="360" cy="515"/>
+      <text x="360" y="518">OM</text>
+      <title>OMERS · May 2023</title>
+    </g>
+  </g>
+
+  <!-- 2024 - Growing both -->
+  <g class="year-marker">
+    <circle class="year-dot" cx="520" cy="420" r="4"/>
+    <text class="year-text" x="480" y="450">2024</text>
+
+    <g class="exp-pin">
+      <circle cx="520" cy="420"/>
+      <text x="520" y="423">IN</text>
+      <title>Intuit · May 2024</title>
+    </g>
+  </g>
+
+  <!-- 2025 - Approaching convergence -->
+  <g class="year-marker">
+    <circle class="year-dot" cx="700" cy="280" r="4"/>
+    <text class="year-text" x="660" y="310">2025</text>
+
+    <g class="exp-pin">
+      <circle cx="680" cy="290"/>
+      <text x="680" y="293">IV</text>
+      <title>Ivey · AI Eng · May 2025</title>
+    </g>
+
+    <g class="exp-pin">
+      <circle cx="740" cy="270"/>
+      <text x="740" y="273">TS</text>
+      <title>Tesla · Infra · May 2025</title>
+    </g>
+  </g>
+
+  <!-- 2026 - Convergence at peak -->
+  <g class="year-marker">
+    <circle class="year-dot" cx="900" cy="150" r="4"/>
+    <text class="year-text" x="860" y="180">2026</text>
+
+    <g class="exp-pin">
+      <circle cx="870" cy="165"/>
+      <text x="870" y="168">AE</text>
+      <title>Autodesk · Eng · Jan 2026</title>
+    </g>
+
+    <g class="exp-pin">
+      <circle cx="930" cy="135"/>
+      <text x="930" y="138">AP</text>
+      <title>Autodesk · PM · May 2026</title>
+    </g>
+  </g>
+
+  <!-- YOU - At the Peak -->
+  <rect class="me-block" x="940" y="60" width="130" height="90" rx="6"/>
+  <text class="me-text" x="1005" y="93">JASMINE GU</text>
+  <text class="me-text" x="1005" y="113" style="font-size: 12px; font-weight: 500;">PRODUCT ENG</text>
+
+  <!-- Future arrow -->
+  <path d="M 1080 100 L 1150 50" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="4,4"/>
+  <text style="font-size: 13px; font-weight: 600; fill: rgba(255,255,255,0.5); letter-spacing: 0.5px;" x="1170" y="55">→</text>
+
+  <!-- Legend / Instructions -->
+  <g transform="translate(80, 680)">
+    <rect x="0" y="0" width="1000" height="60" fill="rgba(0,0,0,0.15)" rx="4"/>
+    <text style="font-size: 12px; fill: rgba(255,255,255,0.6);" x="20" y="20">Read the spiral from bottom-left (2022) to top-right (2026): your engineering and product skills evolve and spiral upward, culminating as a complete Product Engineer</text>
+    <text style="font-size: 11px; fill: rgba(255,255,255,0.4);" x="20" y="42">Hover over any experience pin for details. The roads show your dual expertise building toward the future.</text>
+  </g>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', function() {
+      document.querySelectorAll('.exp-pin').forEach(p =>
+        p.style.opacity = p === this ? '1' : '0.3'
+      );
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+    });
+  });
+</script>
+</body>
+</html>

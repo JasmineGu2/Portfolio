@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 1 · Margin notes</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.strip{position:sticky;top:0;z-index:20}
+.strip .wrap{display:flex;align-items:center;justify-content:space-between;height:46px;gap:16px}
+.strip .tabs{display:flex}
+.strip a{color:var(--onbp);text-decoration:none;font:500 11px 'Analogue OS','JetBrains Mono',monospace;letter-spacing:.14em;padding:15px 12px 13px;border-bottom:2px solid transparent}
+.strip a.on{border-color:var(--or)}
+.strip .who{font:700 12px 'JetBrains Mono';letter-spacing:.18em}
+.zonebar{padding:7px 0;border-bottom:1px solid var(--faint)}
+.rail{position:fixed;left:10px;top:120px;bottom:70px;display:flex;flex-direction:column;justify-content:space-between;font:500 10px 'JetBrains Mono';color:var(--muted);z-index:2}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding:76px 0 56px}
+.hero h1{font-size:clamp(34px,4.6vw,58px)}
+.hero .status{margin:22px 0 20px;color:var(--muted)}
+.fig{position:relative}
+.fig .sticky{position:absolute;right:-30px;bottom:-34px}
+.fig figcaption{margin-top:10px}
+.notes{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.notes ol{margin:0;padding:0;list-style:none;counter-reset:n;display:grid;gap:16px;max-width:660px}
+.notes li{counter-increment:n;display:grid;grid-template-columns:34px 1fr;gap:8px}
+.notes li::before{content:counter(n,decimal-leading-zero);font:500 12px 'JetBrains Mono';color:var(--orink);padding-top:4px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.proj{display:grid;gap:10px}
+.proj h3{font-size:21px}
+.legend{display:grid;gap:14px}
+.legend div{display:grid;grid-template-columns:130px 210px 1fr;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--faint)}
+.sec-h{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+.sec-h h2{font-size:30px}
+.foot{border-top:1.5px solid var(--line);padding:22px 0 90px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+@media (max-width:860px){.hero,.notes{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.legend div{grid-template-columns:1fr}.rail{display:none}.fig .sticky{right:0}}
+</style></head><body>
+<div class="loader"><svg width="360" height="150" viewBox="0 0 360 150" fill="none" stroke="#e8f1ff" stroke-width="1.5">
+  <rect class="draw" pathLength="1" x="6" y="6" width="348" height="138" style="--d:.1s"/><line class="draw" pathLength="1" x1="6" y1="104" x2="354" y2="104" style="--d:.5s"/>
+  <line class="draw" pathLength="1" x1="200" y1="104" x2="200" y2="144" style="--d:.7s"/><text class="fade" x="22" y="70" fill="#e8f1ff" stroke="none" font-family="JetBrains Mono" font-size="13" letter-spacing="3" style="--d:1.1s">SHEET A-101</text>
+  <text class="fade" x="22" y="130" fill="#9fd3ff" stroke="none" font-family="JetBrains Mono" font-size="11" letter-spacing="2" style="--d:1.4s">LOADING…</text></svg></div>
+
+<header class="strip"><div class="wrap"><span class="who">JASMINE GU</span>
+  <nav class="tabs"><a class="on" href="#home">A-101 HOME</a><a href="#work">A-102 WORK</a><a href="#about">A-103 NOTES</a><a href="#contact">A-104 CONTACT</a></nav>
+  <span class="label" style="color:var(--cy)">SCALE 1:1</span></div></header>
+<div class="wrap zonebar"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
+<div class="rail"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+
+<main class="wrap">
+  <section id="home" class="hero">
+    <div><p class="label">Sheet A-101 · Home</p><h1 id="tag" style="margin-top:14px"></h1><p class="status" id="status"></p><div id="socials"></div></div>
+    <figure class="fig crop" style="margin:0"><div id="heroMedia"></div><figcaption class="label">Fig. 1 · ADP Studio, Autodesk</figcaption><div id="s0"></div></figure>
+  </section>
+
+  <section id="about"><div class="sec-h"><h2>General notes</h2><span class="label">A-103</span></div>
+    <div class="notes"><p class="label" style="padding-top:6px">Read before the drawings</p><div><p id="about-t" style="max-width:660px;margin-bottom:26px;font-size:18px"></p><ol id="hl"></ol></div></div></section>
+
+  <section id="work"><div class="sec-h"><h2>Drawings</h2><span class="label">A-102 · nine sheets · video plays on the sheet</span></div><div class="grid3" id="projects"></div></section>
+
+  <section><div class="sec-h"><h2>Legend</h2><span class="label">Line types = layers</span></div><div class="legend" id="legend"></div></section>
+
+  <section><div class="sec-h"><h2>Revisions</h2><span class="label">Timeline</span></div>
+    <table class="rev"><thead><tr><th>REV</th><th>DATE</th><th>WHAT</th><th>NOTE</th></tr></thead><tbody id="rev"></tbody></table></section>
+
+  <section id="contact"><div class="sec-h"><h2>Title block</h2><span class="label">A-104</span></div>
+    <div class="tb"><div><span class="label">Drawn by</span><div class="v">Jasmine Gu</div></div><div><span class="label">Location</span><div class="v">Toronto</div></div>
+    <div><span class="label">Contact</span><div class="v" id="socials2" style="display:flex;gap:6px;flex-wrap:wrap"></div></div><div><span class="label">Sheet</span><div class="v">A-101 · 1 of 1</div></div></div></section>
+
+  <footer class="foot"><div style="display:flex;gap:22px;align-items:center"><div><div class="scale"><i></i><i></i><i></i><i></i><i></i></div><span class="label">0 · 1 · 2 · 3 · 4 m</span></div>
+    <svg width="34" height="44" viewBox="0 0 34 44" fill="none" stroke="var(--line)" stroke-width="1.6"><path d="M17 2 26 38 17 30 8 38Z"/><text x="12" y="52" font-size="0"/></svg><span class="label">N</span></div>
+    <span class="label">Placeholder mock · real videos and images</span></footer>
+</main>
+
+<script src="mock-data.js"></script>
+<script>
+const S = SITE, $ = (s) => document.querySelector(s)
+$('#tag').textContent = S.tagline; $('#status').textContent = S.status; $('#socials').innerHTML = S.socials; $('#socials2').innerHTML = S.socials
+$('#about-t').textContent = S.about
+$('#heroMedia').innerHTML = S.media(S.work[1]); $('#s0').innerHTML = S.sticky(0)
+$('#hl').innerHTML = S.highlights.map((h) => `<li><span>${h}</span></li>`).join('')
+$('#projects').innerHTML = S.work.map((p, i) => `<article class="proj"><div class="crop hov" data-tip="${p.n} · ${p.when}">${S.media(p)}</div>
+  <div class="label" style="margin-top:6px">${String(i + 1).padStart(2, '0')} · ${p.group} · ${p.when}</div><h3>${p.n}</h3><p class="muted" style="font-size:15px">${p.line}</p>${S.tags(p)}</article>`).join('')
+const dash = ['', '6 5', '1.5 5', 'hatch']
+$('#legend').innerHTML = S.layers.map((l, i) => `<div><span class="label">${l.label}</span>
+  <svg width="200" height="14"><defs><pattern id="h${i}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="currentColor" stroke-width="1.5"/></pattern></defs>
+  ${i === 3 ? `<rect x="0" y="1" width="200" height="12" fill="url(#h${i})" stroke="currentColor"/>` : `<line x1="0" y1="7" x2="200" y2="7" stroke="currentColor" stroke-width="2.5" stroke-dasharray="${dash[i]}"/>`}</svg><span class="muted">${l.caps}</span></div>`).join('')
+$('#rev').innerHTML = S.timeline.map((t, i) => `<tr><td>REV ${String(i + 1).padStart(2, '0')}</td><td>${t.when}</td><td>${t.what}</td><td class="muted">${t.line}</td></tr>`).join('')
+</script>
+<script src="mock.js"></script>
+</body></html>

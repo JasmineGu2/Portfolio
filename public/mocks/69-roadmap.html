@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Road Map Pattern</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f0f0f0;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .description {
+      margin: 0 0 20px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Road Map Pattern</h1>
+    <p class="description">SVG grid and road network pattern originally from the About page footer. A repeating road/grid design with street labels.</p>
+
+    <svg viewBox="0 0 1400 2000" preserveAspectRatio="none" style="width: 100%; height: 400px;">
+      <defs>
+        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#e0e0e0" strokeWidth="1" />
+        </pattern>
+        <pattern id="roads" width="200" height="200" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="100" x2="200" y2="100" stroke="#d0d0d0" strokeWidth="2" />
+          <line x1="100" y1="0" x2="100" y2="200" stroke="#d0d0d0" strokeWidth="2" />
+        </pattern>
+      </defs>
+
+      {/* Background */}
+      <rect width="1400" height="2000" fill="#f8f8f8" />
+
+      {/* Grid pattern */}
+      <rect width="1400" height="2000" fill="url(#grid)" />
+
+      {/* Road network */}
+      <rect width="1400" height="2000" fill="url(#roads)" opacity="0.6" />
+
+      {/* Street labels (sample) */}
+      <text x="50" y="120" fontSize="12" fill="#999">
+        Product Ave
+      </text>
+      <text x="120" y="150" fontSize="12" fill="#999">
+        Engineering St
+      </text>
+    </svg>
+  </div>
+
+  <div class="container">
+    <h2 style="margin-top: 0;">Full Screen Variant</h2>
+    <svg viewBox="0 0 1400 500" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 500px; border: 1px solid #e0e0e0; border-radius: 4px;">
+      <defs>
+        <pattern id="grid2" width="100" height="100" patternUnits="userSpaceOnUse">
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#e0e0e0" strokeWidth="1" />
+        </pattern>
+        <pattern id="roads2" width="200" height="200" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="100" x2="200" y2="100" stroke="#d0d0d0" strokeWidth="2" />
+          <line x1="100" y1="0" x2="100" y2="200" stroke="#d0d0d0" strokeWidth="2" />
+        </pattern>
+      </defs>
+
+      <rect width="1400" height="500" fill="#f8f8f8" />
+      <rect width="1400" height="500" fill="url(#grid2)" />
+      <rect width="1400" height="500" fill="url(#roads2)" opacity="0.6" />
+
+      <text x="50" y="120" fontSize="12" fill="#999">Product Ave</text>
+      <text x="120" y="150" fontSize="12" fill="#999">Engineering St</text>
+      <text x="400" y="250" fontSize="12" fill="#999">Design Blvd</text>
+      <text x="800" y="180" fontSize="12" fill="#999">Innovation Way</text>
+    </svg>
+  </div>
+
+  <div class="footer">
+    <p>Component: RoadMap.tsx | Removed from: About v2 footer | Status: Archived as mockup</p>
+  </div>
+</body>
+</html>

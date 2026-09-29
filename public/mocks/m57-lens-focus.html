@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 57 · Lens Focus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .road { fill: none; stroke: #fff; opacity: 0.95; }
+    .road-eng { stroke-width: 24; }
+    .road-prod { stroke-width: 14; opacity: 0.85; }
+
+    .phase-line { stroke: rgba(255,255,255,0.15); stroke-width: 1; stroke-dasharray: 3,4; }
+    .phase-label { font-size: 11px; font-weight: 600; fill: rgba(255,255,255,0.4); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .exp-pin { cursor: pointer; transition: all 0.2s; }
+    .exp-pin circle { fill: #fff; r: 5.5; }
+    .exp-pin text { font-size: 10px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 7.5; filter: drop-shadow(0 0 12px rgba(255,149,0,0.8)); }
+    .exp-pin:hover text { fill: #fff; }
+
+    .year-text { font-size: 13px; font-weight: 600; fill: rgba(255,255,255,0.6); letter-spacing: 0.3px; }
+    .phase-title { font-size: 14px; font-weight: 700; fill: rgba(255,255,255,0.8); letter-spacing: 0.5px; }
+
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 14px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .title { font-size: 24px; font-weight: 700; letter-spacing: 1px; fill: rgba(255,255,255,0.95); }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Title -->
+  <text class="title" x="600" y="45" text-anchor="middle">THE LENS · FOCUS ON YOUR GROWTH</text>
+
+  <!-- Phase 1: Divergence (2022-2023) -->
+  <g class="phase-1">
+    <line class="phase-line" x1="350" y1="60" x2="350" y2="700"/>
+    <text class="phase-label" x="350" y="30" text-anchor="middle">FOUNDATION</text>
+    <text class="year-text" x="300" y="720">2022-2023</text>
+  </g>
+
+  <!-- Phase 2: Building (2024-2025) -->
+  <g class="phase-2">
+    <line class="phase-line" x1="750" y1="60" x2="750" y2="700"/>
+    <text class="phase-label" x="750" y="30" text-anchor="middle">EXPANSION</text>
+    <text class="year-text" x="700" y="720">2024-2025</text>
+  </g>
+
+  <!-- Phase 3: Convergence (2026) -->
+  <g class="phase-3">
+    <text class="phase-label" x="1050" y="30" text-anchor="middle">CONVERGENCE</text>
+    <text class="year-text" x="1050" y="720">2026</text>
+  </g>
+
+  <!-- Engineering Road - starts wide, narrows, then converges -->
+  <path class="road road-eng" d="M 100,220 L 350,280 Q 550,340 750,360 Q 900,350 1050,300"/>
+
+  <!-- Product Road - starts low, narrows, then converges above eng -->
+  <path class="road road-prod" d="M 100,540 L 350,460 Q 550,380 750,360 Q 900,350 1050,320"/>
+
+  <!-- FOUNDATION PHASE: 2022-2023 -->
+
+  <!-- Metaverse 2022 - Left side, Engineering -->
+  <g class="exp-pin">
+    <circle cx="100" cy="220"/>
+    <text x="100" y="223">MV</text>
+    <title>Metaverse · Growth Eng · Nov 2022 · Python, Selenium</title>
+  </g>
+
+  <!-- OMERS 2023 - Between eng and prod, both roads -->
+  <g class="exp-pin">
+    <circle cx="320" cy="290"/>
+    <text x="320" y="293">OM</text>
+    <title>OMERS · Solutions Eng · May 2023 · ServiceNow, UAT</title>
+  </g>
+
+  <!-- EXPANSION PHASE: 2024-2025 (widening expertise) -->
+
+  <!-- Intuit 2024 - Frontend -->
+  <g class="exp-pin">
+    <circle cx="520" cy="310"/>
+    <text x="520" y="313">IN</text>
+    <title>Intuit · Frontend Eng · May 2024 · React, REST</title>
+  </g>
+
+  <!-- Ivey 2025 - AI/ML depth -->
+  <g class="exp-pin">
+    <circle cx="700" cy="320"/>
+    <text x="700" y="323">IV</text>
+    <title>Ivey · AI Engineer · May 2025 · LLM Pipelines, Python</title>
+  </g>
+
+  <!-- Tesla 2025 - Infrastructure -->
+  <g class="exp-pin">
+    <circle cx="770" cy="350"/>
+    <text x="770" y="353">TS</text>
+    <title>Tesla · Frontend/Infra · May 2025 · TypeScript, Video Infra, ML</title>
+  </g>
+
+  <!-- CONVERGENCE PHASE: 2026 (expertise merges) -->
+
+  <!-- Autodesk Eng 2026 - Full Stack -->
+  <g class="exp-pin">
+    <circle cx="960" cy="325"/>
+    <text x="960" y="328">AE</text>
+    <title>Autodesk · Full-Stack Eng · Jan 2026 · Java, C++, React, Microservices</title>
+  </g>
+
+  <!-- Autodesk PM 2026 - Product focus -->
+  <g class="exp-pin">
+    <circle cx="1020" cy="315"/>
+    <text x="1020" y="318">AP</text>
+    <title>Autodesk · PM (AI Infra) · May 2026 · SQL, RAG, MCP, AI</title>
+  </g>
+
+  <!-- YOU - The focal point -->
+  <rect class="me-block" x="1030" y="240" width="130" height="100" rx="6"/>
+  <text class="me-text" x="1095" y="280">JASMINE GU</text>
+  <text class="me-text" x="1095" y="305" style="font-size: 12px; font-weight: 500;">PRODUCT ENGINEER</text>
+
+  <!-- Legend -->
+  <g transform="translate(60, 100)">
+    <g style="opacity: 0.6;">
+      <text style="font-size: 11px; fill: rgba(255,255,255,0.7); letter-spacing: 0.3px; font-weight: 500;">Roads that start separate slowly converge, like light through a lens,</text>
+      <text style="font-size: 11px; fill: rgba(255,255,255,0.7); letter-spacing: 0.3px; font-weight: 500;">focusing your engineering and product expertise into a unified vision.</text>
+    </g>
+  </g>
+
+  <!-- Arrow to future -->
+  <path d="M 1165 270 L 1185 250" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-dasharray="4,4"/>
+  <text style="font-size: 12px; font-weight: 600; fill: rgba(255,255,255,0.4); letter-spacing: 0.5px;" x="1150" y="225">→</text>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', function() {
+      const others = Array.from(document.querySelectorAll('.exp-pin')).filter(p => p !== this);
+      others.forEach(p => p.style.opacity = '0.2');
+      document.querySelectorAll('.road').forEach(r => r.style.opacity = '0.3');
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+      document.querySelectorAll('.road').forEach(r => r.style.opacity = '0.95');
+    });
+  });
+</script>
+</body>
+</html>

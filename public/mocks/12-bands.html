@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 12 · Bands</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+</head><body data-site data-nm="hide">
+<div id="hdr"></div>
+<header class="bpb" id="top"><div class="wrap" id="nb"></div></header>
+<div class="plate"><main class="wrap"><div id="home"></div></main></div>
+<section class="bpb" id="layers"><div class="wrap"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 02 / A-101</span><span class="label">hover a layer · every note is one of my real roles</span></div><div id="lay"></div></div></section>
+<section class="bpb" id="city" style="border-top:0;padding:18px 0 0"><div class="wrap"><div class="sec-h"><h2>Skills city</h2><span class="sect">SITE PLAN · A-103</span></div></div><div id="cityBox"></div></section>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer()
+$('#nb').innerHTML = K.nameBand()
+K.home($('#home'))
+K.city($('#cityBox'), { W: 1440, H: 520 })
+K.init()
+const L = K.layers($('#lay'), 'sticky')
+K.sw3(['grid', 'tacc', 'txt', 'map', 'note'], { grid: 'faint', tacc: 'bubble', txt: 'clean', map: 'blue', note: 'sticky' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

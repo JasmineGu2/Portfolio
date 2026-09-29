@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="blueprint"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 17 · Blueprint hero + big tiles</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+<style>
+/* Minimal on purpose: no rulers, no tabs, no headings, no tags, one bold moment (the drafted name). Add ?tools to the URL for review controls. */
+body{padding:0}
+.mh{background:var(--bp);color:#e8f1ff;display:flex;justify-content:space-between;align-items:center;padding:0 28px;height:46px;font:500 13px 'JetBrains Mono',monospace;border-bottom:1px solid rgba(159,211,255,.4)}
+.mh nav{display:flex;gap:28px}.mh a{color:#e8f1ff;text-decoration:none;padding:15px 0 13px;border-bottom:2px solid transparent}.mh a.on{border-bottom-color:var(--or)}
+.hero17{border-top:0;padding:30px 0 30px}
+.hero17 .hp{border:0;margin-top:16px}
+section.s{padding:64px 0 0}
+.mf{background:var(--bp);color:#e8f1ff;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;font:500 13px 'JetBrains Mono',monospace;border-top:3px double #9fd3ff}
+.mf .ib{color:#e8f1ff;border-color:rgba(159,211,255,.55)}.mf .ib:hover{color:#ff8a5c;border-color:#ff8a5c}
+.city{margin-top:64px}
+</style></head><body data-site data-nm="hide" data-tiles="two" data-hf="site" data-grid="none" data-map="blue">
+<header class="mh"><span>Jasmine Gu</span><nav><a class="on" href="#work">Work</a><a href="#journey">The Journey</a></nav></header>
+
+<div class="bpb hero17" id="top"><div class="wide">
+  <div id="nb"></div>
+  <div class="hp"><div class="htxt"><div><h1 class="hl" id="hl"></h1><p class="st" id="st"></p><p class="in" id="in"></p></div><div><p class="lead" id="lead"></p><ul class="ar" id="hls"></ul></div></div></div>
+</div></div>
+
+<main class="wide" id="work"><section class="s"><div id="tilesBox"></div></section>
+  <section class="s"><div id="lay" style="max-width:1040px;margin:0 auto"></div></section>
+  <section class="s" style="padding-bottom:0"><div class="info3" id="info"></div></section></main>
+
+<div class="city" id="cityBox"></div>
+<footer class="mf"><span>Jasmine Gu, Toronto</span><span id="soc"></span></footer>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const D = K2, $ = (s) => document.querySelector(s), tools = /[?&#]tools/.test(location.search + location.hash)
+$('#nb').innerHTML = K.nameBand({ bare: true })
+$('#hl').textContent = D.headline; $('#st').innerHTML = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>'); $('#in').textContent = D.intro
+$('#lead').textContent = D.hlLead; $('#hls').innerHTML = D.highlights.map((h) => `<li><span>↳</span><span>${h}</span></li>`).join('')
+K.bigTiles($('#tilesBox'), { min: true, overlay: true })
+$('#info').innerHTML = `<div class="nt2"><h2>Notes</h2><ul>${D.notes.map((n) => `<li>${n}</li>`).join('')}</ul></div>
+  <div><p class="lead">what i've been building:</p><ul>${D.building.map((b) => `<li><span>↳</span><span>${b}</span></li>`).join('')}</ul></div>
+  <div><p class="lead">previously:</p><ul>${D.previously.map(([c, n]) => `<li><span>↳</span><span><small>${c}</small> <b>${n}</b></span></li>`).join('')}</ul></div>`
+K.city($('#cityBox'), { W: 1440, H: 620, nocap: true })
+$('#soc').innerHTML = K.socials(['mail', 'linkedin', 'github'])
+K.init({ rulers: false, bar: tools }); K.theme('blueprint')
+const L = K.layers($('#lay'), 'sticky', { bare: true })
+if (tools) K.sw3(['big', 'hf', 'grid', 'map', 'note'], { big: 'two', hf: 'site', grid: 'none', map: 'blue', note: 'sticky' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

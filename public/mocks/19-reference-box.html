@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 19 · Reference, box over the video</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css"><link rel="stylesheet" href="k4.css">
+</head><body class="q" data-map="blue">
+<div id="nav"></div>
+<main id="work"><div id="hero"></div>
+<div id="lists"></div>
+<div id="band"></div>
+<div class="q-sheet"><div class="q-w" id="tiles"></div></div></main>
+<div id="foot"></div>
+<script src="k2-data.js"></script><script src="k4-data.js"></script><script src="k2.js"></script><script src="k3.js"></script><script src="k4.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#nav').innerHTML = Q.nav(0); Q.lists($('#lists')); Q.hero($('#hero'), { mode: 'collage' })
+Q.band($('#band')); Q.tiles($('#tiles'), { box: 'all' }); Q.footer($('#foot'))
+Q.init(); K.theme('pencil')
+</script></body></html>

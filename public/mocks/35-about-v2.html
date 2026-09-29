@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 35 · About me v2</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css"><link rel="stylesheet" href="k4.css"><link rel="stylesheet" href="k6.css">
+</head><body class="q q6" data-map="blue">
+<div id="nav"></div>
+<main id="journey"><div class="q-w"><div class="q6-top"><div class="q6-left"><div id="notes"></div><div id="wel"></div></div><div id="lan"></div></div></div>
+<hr class="q-rule">
+<div class="q-w"><div class="q-desk"><div class="d1" id="qt"></div><div class="d2" id="sl"></div><div class="d3" id="bj"></div><div class="d4" id="pd"></div></div></div>
+<div class="q-w q-block" id="inv"></div>
+<div class="q-w q-block"><p class="q-lab">gallery</p><div id="pola"></div></div>
+<div class="q-w q-block" id="tools"></div>
+<div class="q-w q-block"><div id="dith"></div></div>
+<div class="q-w q-block"><p class="q-lab">more context</p><div id="ctx"></div></div></main>
+<div style="height:80px"></div><div id="foot"></div>
+<script src="k2-data.js"></script><script src="k4-data.js"></script><script src="k6-ask.js"></script><script src="k2.js"></script><script src="k3.js"></script><script src="k4.js"></script><script src="k6.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+// the pins: three lines that are not already on the home page (placeholder pins until her saved ones arrive)
+K4.quotes = ['Built an agent to automate my own job applications.', '28 educationals. yes, I counted', 'Built systems for people I care about.']
+$('#nav').innerHTML = Q.header({ active: 'about', work: '34-home-v2.html', about: '#journey', ask: true })
+$('#notes').innerHTML = Q.notes2(); Q.welcome($('#wel')); Q.lanyard($('#lan'))
+Q.quotes($('#qt')); Q.stockList($('#sl')); Q.blackjack($('#bj')); Q.polaroid2($('#pd')); $('.q-polad').removeAttribute('data-drag')
+Q.askInvite($('#inv')); Q.polaroids($('#pola')); Q.tools($('#tools')); Q.dither($('#dith')); Q.moreContext($('#ctx')); Q.footer2($('#foot'))
+Q.init(); K.theme('pencil'); Q.ask()
+// every piece moves: the notes sheet (mouse only, so a finger still scrolls), then the four desk pieces
+Q.drag($('#notes'), { mouseOnly: true }); ;['#qt', '#sl', '#bj', '#pd'].forEach((s) => Q.drag($(s)))
+</script></body></html>

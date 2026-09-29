@@ -1,0 +1,249 @@
+/* Round 6: mock 18 played with, plus the About page rebuilt. Loads after k4.css. Body needs classes "q q6". */
+
+/* ---- header: plain mono text ---- */
+.q6-hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 40px;border-bottom:1px solid var(--faint);font:500 13px/1.2 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.72)}
+.q6-hdr .brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;text-decoration:none;color:var(--muted)}.q6-hdr .brand b{color:var(--ink);font-weight:700}
+.q6-hdr nav{display:flex;gap:36px}.q6-hdr nav a{padding:6px 0;color:var(--muted);text-decoration:none;transition:color .15s}
+.q6-hdr nav a:hover,.q6-hdr nav a:focus-visible{color:var(--orink)}.q6-hdr nav a[aria-current=page]{color:var(--or)}
+.q6-hdr .end{display:flex;align-items:center;justify-content:flex-end;gap:26px}
+.q6-hdr .ask-link{padding:6px 0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);cursor:pointer}.q6-hdr .ask-link span{color:var(--or);margin-right:4px}.q6-hdr .ask-link:hover{color:var(--orink)}
+.q6-hdr .heart{font-size:22px;color:rgba(27,27,27,.4)}
+@media (max-width:720px){.q6-hdr{grid-template-columns:1fr auto;padding:14px 18px;row-gap:6px}.q6-hdr .brand span{display:none}.q6-hdr nav{grid-column:1/-1;grid-row:2;gap:24px}}
+
+/* ---- hero: no cork-board picture, a bigger exploded view ---- */
+.q6 .q-pinpic{display:none}
+.q6 .q-lan{margin-top:0}
+.q6-hdr{position:relative;z-index:5}
+.q6 .q-lists .note6{margin:-2px 0 8px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---- hero stage: all blueprint (grid + roads, no text), cards on top that can be moved ---- */
+.q6-stage{position:relative;height:calc(100vh - 62px);min-height:640px;display:flex;align-items:center;justify-content:center;gap:22px;padding:0 24px;overflow:hidden;background:var(--navy)}
+.q6-stage .bg{position:absolute;inset:0}.q6-stage .bg .cmap{height:100%;--mbg:var(--navy);--inner:var(--navy);--mpin:var(--navy)}.q6-stage .bg svg{width:100%;height:100%;display:block}
+.q6-stage .q6-c{position:relative;left:auto;top:auto;z-index:3;flex:none}
+.q6-stage .q-note{width:340px;padding:24px 26px 20px}
+.q6-stage .q-note .q-name{font-size:42px}.q6-stage .q-note .q-hl{font-size:19px;margin-top:10px}.q6-stage .q-note .q-st{font-size:12.5px;margin-top:10px}
+.q6-stage .q-note .q-soc{margin-top:12px}.q6-stage .q-note .q-next{margin-top:14px;padding-top:12px}.q6-stage .q-note .q-next span{font-size:14px}
+.q6-stage .q-xcard{width:clamp(560px,50vw,860px);transform:rotate(var(--r,1deg))}
+.q6-stage .q-xcard,.q6-stage .q-xcard .bpp,.q6-stage .q-xcard svg{overflow:visible}
+.q6-list{width:300px;background:#fff;border:1px solid var(--faint);padding:18px 20px 8px;box-shadow:0 16px 30px rgba(8,20,70,.3);transform:rotate(var(--r,-1deg))}
+.q6-list .lead{font:500 15px/1.4 Inter,sans-serif;margin:0 0 4px}
+.q6-list ul{list-style:none;margin:0;padding:0}.q6-list li{display:flex;gap:10px;padding:9px 0;border-top:1px dotted rgba(27,27,27,.38);font:400 13.5px/1.45 Inter,sans-serif;color:rgba(27,27,27,.86)}.q6-list li>span:first-child{color:var(--orink);flex:none}
+.q6-askbtn{margin-left:14px;padding:5px 14px;border:1px solid rgba(27,27,27,.3);border-radius:99px;background:rgba(255,255,255,.7);font:500 12px/16px Inter,system-ui,sans-serif;cursor:pointer;color:var(--ink)}.q6-askbtn span{color:var(--or);margin-right:5px}.q6-askbtn:hover{border-color:var(--or);color:var(--orink)}
+@media (max-width:1200px){.q6-stage{flex-wrap:wrap;height:auto;padding:24px}.q6-stage .q-xcard{width:min(100%,860px)}}
+@media (max-width:1000px){.q6-stage{display:grid;gap:22px;padding:18px}.q6-stage .q6-c{width:auto!important}}
+/* the map: exactly one viewport tall */
+.q6-mapsec{position:relative;overflow:hidden;background:var(--navy)}.q6-mapsec .cmap{height:100%;--mbg:var(--navy);--inner:var(--navy);--mpin:var(--navy)}.q6-mapsec svg{display:block;width:100%;height:100%}
+
+/* ---- plain tabs over full-size tiles: a row of text tabs over a thin rule, the active one underlined in orange; the grid is 80% of the screen ---- */
+.q6 .q-sheet .q-w{max-width:none;width:80vw;padding:0}
+.q6-tabs{display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px;margin-bottom:28px;padding-left:12px;border-bottom:1px solid #dedede}
+.q6-tab{margin-bottom:-1px;padding:13px 26px 12px;border:1px solid #e4e4e4;border-bottom-color:#dedede;border-radius:10px 10px 0 0;background:#f1f1f1;color:#a4a4a4;font:500 16px/1 Inter,system-ui,sans-serif;cursor:pointer;transition:color .15s,background-color .15s}
+.q6-tab:hover{color:#6d6d6d}.q6-tab[aria-selected=true]{border-color:#dedede;border-bottom-color:#fff;background:#fff;color:var(--or);font-weight:700;box-shadow:0 -3px 8px rgba(0,0,0,.04)}
+.q6-tab:focus-visible{outline:2px solid var(--or);outline-offset:-2px}
+.q6-panel .q-tiles{gap:44px 28px}
+.q6-panel .q-tiles.bento{--row:clamp(420px,44vw,820px);grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}.q6-panel .bento .tile .m{aspect-ratio:auto;height:var(--row)}
+.q6-panel .bento .tile[data-narrow=true] .q-cap2{flex-direction:column;gap:8px}.q6-panel .bento .tile[data-narrow=true] .meta{text-align:left;max-width:none}
+.q6-panel .tile .tg2{transition:color .15s}.q6-panel .tile[data-group=engineering]:hover .tg2{color:var(--or)}
+.q6-panel .q-cap2 .meta .soon{display:inline-block;width:auto;margin-bottom:6px;padding:2px 8px;border:1px solid #c9d0da;border-radius:999px;color:#7a8698;font-size:11px;letter-spacing:.08em}
+.q6-panel .tile.side .m{background:#eee;aspect-ratio:4/5}.q6-panel .tile.side .m img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:760px){.q6-panel .q-tiles.bento{grid-template-columns:1fr}.q6-panel .bento .tile{grid-column:auto!important;grid-row:auto!important}.q6-panel .bento .tile .m{height:auto;aspect-ratio:3/4}.q6 .q-sheet .q-w{width:auto;padding:0 18px}.q6-tab{padding:12px 12px;font-size:14px}.q6-panel .q-tiles{grid-template-columns:1fr}}
+
+/* ---- footer: quote card + keycap ---- */
+.q6 .q-foot .ftop{display:grid;grid-template-columns:minmax(0,1.25fr) auto;align-items:center;gap:40px}
+.q6 .q-foot .mark{flex-direction:column;align-items:flex-start;gap:0}
+.q6 .q-foot .q-wm{margin-left:min(14rem,38vw);padding-bottom:0;font-size:37px;color:#e3edff}
+.q6 .q-foot .q-sigsvg{max-width:100%}
+.k6-fcol{display:flex;align-items:center;gap:34px}
+.k6-fcol #qc{width:300px}
+.k6-quote{display:flex;flex-direction:column;gap:10px;width:100%;min-height:220px;padding:18px 21px 16px;border:0;border-radius:20px;background:#f7f2e8;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 18px 34px -14px rgba(3,14,45,.7);color:#14264f;text-align:left;cursor:pointer;transform:rotate(-1.4deg);transition:transform .25s,box-shadow .25s}
+.k6-quote:hover,.k6-quote:focus-visible{transform:rotate(0) translateY(-3px);outline:0;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 24px 40px -14px rgba(3,14,45,.8)}
+.k6-quote:focus-visible{outline:3px solid #ff8a5c;outline-offset:4px}
+.k6-quote .mk{height:30px;color:var(--or);font:600 68px/.9 Fraunces,Georgia,serif}
+.k6-quote .tx{flex:1;font:italic 400 22px/1.28 Fraunces,Georgia,serif;letter-spacing:-.01em}.k6-quote .tx.in{animation:k6in .35s ease both}
+.k6-quote .ft{display:flex;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid rgba(20,38,79,.22);color:rgba(20,38,79,.75);font:500 10.5px/1.2 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+@keyframes k6in{from{opacity:0;transform:translateY(6px)}}
+.q6 .q-foot .facts{font-size:14px;letter-spacing:.02em;color:#fff;margin-top:42px}.q6 .q-foot .facts small{font-size:11px;color:#b4dbff;margin-bottom:6px}
+.q6 .q-foot .bar{font-size:13px;letter-spacing:.04em;color:#e3edff}
+@media (max-width:1080px){.q6 .q-foot .ftop{grid-template-columns:1fr}.k6-fcol{flex-wrap:wrap}}
+/* the keycap: a pasted isometric mechanical key in the site's orange (see app/pf-keycap.css on the real site) */
+.k6-keyscale{--z:.88;width:calc(310px*var(--z));height:calc(215px*var(--z));flex:none;display:grid;place-items:center}
+.k6-keyscene{perspective:2000px;transform:scale(var(--z))}
+.k6-key{--btn-top:#ed3801;--btn-top-pressed:#c22e01;--btn-text:#fff;--btn-border:#b32b01;--btn-border-pressed:#8f2200;--layer-left:#b32b01;--layer-right:#ff6a3d;--btn-shadow:rgba(0,0,0,.1);position:relative;display:block;width:220px;height:140px;transform:rotateX(60deg) rotateZ(-45deg);transform-style:preserve-3d;cursor:pointer;outline:0;text-decoration:none;user-select:none}
+.k6-socket{position:absolute;inset:-20px;background:#e4e2e1;border-radius:24px;border:2px solid #fff;box-shadow:0 5px 15px rgba(0,0,0,.05),inset 4px 4px 8px rgba(0,0,0,.12),inset -4px -4px 8px rgba(255,255,255,.8),inset 10px 10px 20px rgba(0,0,0,.04);transform:translateZ(0)}
+.k6-ext{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .1s cubic-bezier(.4,0,.2,1);transform:scaleZ(1)}
+.k6-layer{position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,var(--layer-left) 50%,var(--layer-right) 50%);box-shadow:inset 0 0 0 1px var(--btn-shadow)}
+.k6-top{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:2px solid var(--btn-border);border-radius:12px;background:var(--btn-top);box-shadow:inset 0 0 20px rgba(0,0,0,.03),inset 2px 2px 5px #fff;color:var(--btn-text);font:600 30px/1 Inter,system-ui,sans-serif;letter-spacing:.5px;white-space:nowrap;transition:background .3s,border-color .3s}
+.k6-key:hover .k6-top{background:#f44a12}
+.k6-key:active .k6-ext{transform:scaleZ(.3)}.k6-key:active .k6-top{background:var(--btn-top-pressed);border-color:var(--btn-border-pressed)}
+.k6-key:focus-visible .k6-socket{outline:3px solid #0e3b8f;outline-offset:3px}
+
+/* ---- About v2 ---- */
+.q6 .q-lab{margin:0 0 22px;font:400 clamp(28px,2.4vw,36px)/1.15 Fraunces,Georgia,serif;letter-spacing:-.015em;text-transform:none;color:var(--ink)}
+.q6 .q-lab::first-letter{text-transform:uppercase}
+.q6-h{margin:0;font:400 clamp(28px,2.4vw,36px)/1.15 Fraunces,Georgia,serif;letter-spacing:-.015em;color:var(--ink)}
+.q6-top{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:40px;align-items:start;padding:34px 0 26px}
+.q6-left{display:grid;gap:48px;align-content:start}
+.q6-welcome{max-width:700px}
+.q6-welcome .frame{aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:var(--navy)}
+.q6-welcome .empty{display:grid;height:100%;place-content:center;justify-items:center;gap:16px;color:#cfe0ff;background-image:linear-gradient(rgba(232,241,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.14) 1px,transparent 1px);background-size:28px 28px}
+.q6-welcome .empty i{width:0;height:0;margin-left:8px;border-style:solid;border-width:22px 0 22px 36px;border-color:transparent transparent transparent #fff}
+.q6-welcome .empty span{font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.q6-welcome .cap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 20px;margin-top:14px}
+.q6-welcome .cap p{margin:0;color:var(--muted);font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em}
+.q6-pd{position:relative}
+.q6-pd,.q6 .q-desk>div{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}.q6-pd.mouse{touch-action:auto}.q6-pd.is-dragging{cursor:grabbing}.q6-pd.is-dragging>*{filter:drop-shadow(0 18px 20px rgba(20,30,60,.28))}
+.q6-pd a,.q6-pd button{cursor:pointer}
+/* desk: the blackjack table is bigger, and nothing sits on the stock buttons */
+.q6 .q-desk{height:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px;align-items:start;padding:20px 0 40px}.q6 .q-desk>div{position:relative;left:auto;top:auto}
+.q6 .q-desk .d1{margin-top:80px}.q6 .q-desk .d2{margin-top:50px}.q6 .q-desk .d3{margin-top:0}.q6 .q-desk .d4{margin-top:70px}
+.q6 .q-sl{width:250px}
+.q6 .q-bj{width:360px;padding:18px;border-radius:22px;font-size:14px;transform:rotate(-5deg);box-shadow:0 22px 40px rgba(10,50,30,.4),inset 0 0 0 5px rgba(255,255,255,.08)}
+.q6 .q-bj .hd{min-height:50px}.q6 .q-bj .chip{width:52px;height:52px;border-width:4px;font-size:14px}.q6 .q-bj .msg{max-width:200px;min-height:40px;font-size:13px}
+.q6 .q-bj .who{font-size:12px;margin-top:10px}.q6 .q-bj .hand{gap:8px;min-height:122px;margin:6px 0 10px}
+.q6 .q-bj .pc{width:82px;height:118px;border-radius:9px;font-size:19px}.q6 .q-bj .pc .rk{left:8px;top:8px}.q6 .q-bj .pc.face .rk{left:4px;top:4px;padding:3px 4px}.q6 .q-bj .pc .st{right:8px;bottom:6px;font-size:34px}
+.q6 .q-bj .pc.down{border-width:4px;background-size:10px 10px}.q6 .q-bj .acts{gap:8px;min-height:36px;margin-top:14px}.q6 .q-bj .q-pill{font-size:13px;padding:6px 16px}
+@media (max-width:1420px){.q6 .q-desk{height:auto;display:flex;flex-wrap:wrap;gap:40px 34px;padding:20px 0 30px}.q6 .q-desk>div{position:relative;left:auto!important;top:auto!important;max-width:100%}}
+@media (max-width:1100px){.q6-top{grid-template-columns:1fr}.q6 .q-lan{justify-self:center}}
+/* the invitation to the side panel */
+.q6-invite{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:start;padding:30px 34px;border:1px solid var(--faint);background:#fff}
+.q6-invite .lede{max-width:30rem;margin:8px 0 0;color:rgba(27,27,27,.7);font:400 16px/1.6 Inter,system-ui,sans-serif}
+.q6-invite .qs{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.q6-invite .qs button{width:100%;padding:9px 0;border:0;border-bottom:1px dotted rgba(27,27,27,.4);background:none;color:var(--ink);font:400 17px/1.4 Inter,system-ui,sans-serif;text-align:left;cursor:pointer}
+.q6-invite .qs button:last-child{border-bottom:0}.q6-invite .qs button span{margin-right:8px;color:var(--or)}.q6-invite .qs button:hover{color:var(--orink)}
+.q6-invite .more{margin-top:18px;padding:0;border:0;background:none;color:var(--orink);font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+@media (max-width:900px){.q6-invite{grid-template-columns:1fr;gap:22px;padding:24px 22px}}
+.q6-topics{margin:26px 0 0;padding-top:14px;border-top:1px dotted rgba(27,27,27,.4);font:400 16px/1.6 Inter,sans-serif;color:var(--muted)}
+.q6-topics b{margin-right:14px;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+
+/* ---- Ask me anything: a docked side panel ---- */
+.q6-ask{position:fixed;z-index:60;top:0;right:0;bottom:0;display:flex;width:min(430px,100vw);flex-direction:column;background:#fff;border-left:1px solid rgba(27,27,27,.18);box-shadow:-18px 0 40px -22px rgba(20,30,60,.35);color:#1b1b1b;transform:translateX(104%);visibility:hidden;transition:transform .3s cubic-bezier(.3,.9,.3,1),visibility 0s linear .3s}
+.q6-ask.open{transform:none;visibility:visible;transition-delay:0s}
+.q6-ask header{display:flex;flex:none;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(27,27,27,.14)}
+.q6-ask header p{margin:0;font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}.q6-ask header p span{margin-right:6px;color:var(--or)}
+.q6-ask header div{display:flex;gap:4px}.q6-ask header button{display:grid;width:32px;height:32px;place-items:center;border:0;border-radius:8px;background:none;color:rgba(27,27,27,.65);cursor:pointer}.q6-ask header button:hover{background:rgba(27,27,27,.07);color:#1b1b1b}
+.q6-ask .body{display:flex;flex:1;flex-direction:column;gap:22px;padding:22px 20px 12px;overflow-y:auto;overscroll-behavior:contain}
+.q6-ask .a{font:400 15px/1.6 Inter,system-ui,sans-serif}.q6-ask .a p{margin:0 0 10px}.q6-ask .a p:last-child{margin-bottom:0}
+.q6-ask .turn{display:flex;flex-direction:column;gap:14px;animation:k6in .3s ease both}
+.q6-ask .q{align-self:flex-end;max-width:86%;margin:0;padding:10px 14px;border-radius:16px 16px 4px 16px;background:#efeeea;font:500 14px/1.45 Inter,system-ui,sans-serif}
+.q6-ask .out{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px!important}.q6-ask .out a{color:var(--orink);font:500 13px/1.4 'JetBrains Mono',monospace;text-decoration:underline;text-underline-offset:3px}
+.q6-ask .lks{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.q6-ask .lk{padding:0;border:0;background:none;color:rgba(27,27,27,.72);font:400 14px/1.45 Inter,system-ui,sans-serif;text-align:left;cursor:pointer}.q6-ask .lk span{color:var(--or)}.q6-ask .lk:hover{color:var(--orink);text-decoration:underline;text-underline-offset:3px}
+.q6-ask form{display:flex;flex:none;gap:8px;margin:0 16px;padding:6px 6px 6px 16px;border:1px solid rgba(27,27,27,.25);border-radius:999px;background:#fff}.q6-ask form:focus-within{border-color:var(--or)}
+.q6-ask input{flex:1;min-width:0;border:0;outline:0;background:none;font:400 14px/1 Inter,system-ui,sans-serif}
+.q6-ask form button{display:grid;width:34px;height:34px;place-items:center;border:0;border-radius:50%;background:#1b1b1b;color:#fff;cursor:pointer}.q6-ask form button:hover:not(:disabled){background:var(--or)}.q6-ask form button:disabled{background:rgba(27,27,27,.18);cursor:default}
+.q6-ask .note{margin:10px 16px 16px;color:rgba(27,27,27,.5);font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---- About intro as a legal pad: pale yellow sheets, blue rules every --l, red double margin, navy gum binding on top ----
+   every row (label, lead, items) is exactly one --l tall so the text sits on the rules */
+.q-notes.q6-pad{--l:32px;--top:76px;--m:72px;--rule:rgba(40,90,170,.3);--red:rgba(214,58,46,.55);
+  max-width:700px;padding:var(--top) 40px calc(var(--l)*1.5) calc(var(--m) + 26px);color:#1f2a44;border-radius:2px 2px 4px 4px;
+  background:
+    linear-gradient(to right,transparent var(--m),var(--red) var(--m) calc(var(--m) + 1px),transparent calc(var(--m) + 1px) calc(var(--m) + 4px),var(--red) calc(var(--m) + 4px) calc(var(--m) + 5px),transparent calc(var(--m) + 5px)),
+    repeating-linear-gradient(to bottom,transparent 0 calc(var(--l) - 1px),var(--rule) calc(var(--l) - 1px) var(--l)) 0 calc(var(--top) - 6px)/100% var(--l),
+    linear-gradient(170deg,#fdf8d8,#fbf1c4 70%,#f8ecbb) #fcf5cf;
+  box-shadow:0 1px 0 #efe3ad,3px 4px 0 -1px #f7eec6,3px 4px 0 0 #e6d9a2,6px 8px 0 -1px #f3e8bb,6px 8px 0 0 #ddd09a,0 26px 38px -18px rgba(60,45,10,.45),0 6px 14px -6px rgba(60,45,10,.2)}
+/* gum binding strip */
+.q-notes.q6-pad::before{content:"";position:absolute;left:-2px;right:-2px;top:0;height:40px;border-radius:3px 3px 1px 1px;background:linear-gradient(to bottom,#1a4aa3,#0e3b8f 55%,#0a2f75);box-shadow:0 3px 4px -1px rgba(10,30,80,.35),inset 0 1px 0 rgba(255,255,255,.18)}
+/* a scrap of the torn-off sheet caught under the binding */
+.q-notes.q6-pad::after{content:"";position:absolute;left:0;right:0;top:40px;height:5px;background:linear-gradient(to bottom,rgba(60,45,10,.12),transparent);pointer-events:none}
+.q-notes.q6-pad .k{margin:0;font:500 11px/var(--l) 'JetBrains Mono',monospace;letter-spacing:.16em;color:#0e3b8f}
+.q-notes.q6-pad .lead{margin:0;font:400 22px/var(--l) Fraunces,Georgia,serif;letter-spacing:-.01em;color:#16213b}
+.q-notes.q6-pad .chk{margin:0;padding:0}
+.q-notes.q6-pad .chk li{display:flex;gap:14px;padding:0;border:0;font:400 16.5px/var(--l) Inter,system-ui,sans-serif;color:#1f2a44}
+.q-notes.q6-pad .chk i{flex:none;width:17px;height:17px;margin-top:8px;border:1.6px solid #0e3b8f;border-radius:3px;background:rgba(255,255,255,.35)}
+.q-notes.q6-pad .chk i::after{left:4px;top:0;width:5px;height:10px;border-color:var(--or)}
+.q-notes.q6-pad .ff{margin-top:var(--l)}
+.q-notes.q6-pad .ff .chk li{font-size:15.5px}
+@media (max-width:760px){.q-notes.q6-pad{--m:34px;--top:72px;padding:var(--top) 16px var(--l) calc(var(--m) + 14px);transform:rotate(-.5deg);margin-right:6px}.q-notes.q6-pad .lead{font-size:21px}.q-notes.q6-pad .chk li{gap:10px}}
+
+/* About desk cards: paper, like the hero note */
+.q6-paper{width:100%;background:#fffefb;box-shadow:0 14px 32px rgba(20,30,60,.16);transform:rotate(var(--r,-1deg));color:var(--ink)}
+/* Hero: blueprint paper instead of flat navy (fine 32px grid, bold every 160px), bigger card text */
+.q6-stage::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(232,241,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.2) 1px,transparent 1px),linear-gradient(rgba(232,241,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.07) 1px,transparent 1px);background-size:160px 160px,160px 160px,32px 32px,32px 32px;background-position:-1px -1px}
+.q6-stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(6,22,70,.35))}
+.q6-stage .q-note{width:420px;padding:30px 32px 26px}
+.q6-stage .q-note .q-name{font-size:56px}
+.q6-stage .q-note .q-hl{font-size:24px;margin-top:14px}
+.q6-stage .q-note .q-st{font-size:15px;margin-top:14px}
+.q6-stage .q6-list{width:370px;padding:22px 24px 10px}
+.q6-stage .q6-list .lead{font-size:18px}
+.q6-stage .q6-list li{font-size:16px}
+@media (max-width:760px){.q6-stage .q-note,.q6-stage .q6-list{width:auto}.q6-stage .q-note .q-name{font-size:44px}.q6-stage .q-note .q-hl{font-size:21px}}
+.q6-stage .q-xcard{width:clamp(460px,36vw,760px)}
+.q6-stage .q-note{width:clamp(350px,29vw,440px)}.q6-stage .q6-list{width:clamp(310px,26vw,380px)}
+
+/* ---- phones (2026-09-29 mobile pass) ---- */
+/* the hero stacks its cards below 1000px: let it grow past the JS-set window height (inline style) so no card is clipped */
+@media (max-width:1000px){.q6-stage{height:auto!important;padding-bottom:30px}}
+/* touch: a swipe that starts on a draggable card still scrolls the page; sideways drags still move / swing it */
+@media (hover:none),(pointer:coarse){.q6-pd,.q6 .q-desk>div,.q-pol,.q-lan,.q-card{touch-action:pan-y}}
+@media (max-width:760px){
+  .q6-tabs{flex-wrap:nowrap;gap:3px;padding-left:0}
+  .q6-tab{flex:1 1 auto;min-height:44px;padding:12px 7px;font-size:13px;white-space:nowrap}
+  .q6 .q-foot .q-wm{margin-left:min(14rem,16vw);font-size:32px}
+  .q-card .tagline{letter-spacing:.12em}
+  .q6-stage .q-xcard{transform:rotate(.6deg)}
+  .q6 .q-desk{row-gap:34px}.q6 .q-desk>div{margin-top:0!important}
+  .q6 #tools{margin-top:44px}
+}
+/* Larger tile captions */
+.q6-panel .q-cap2 .sub{font-size:23px;line-height:1.3}
+.q6-panel .q-cap2 .meta{font-size:13.5px}
+@media (max-width:760px){.q6-panel .q-cap2 .sub{font-size:20px}.q6-panel .q-cap2 .meta{font-size:12.5px}}
+/* Hero at 40px+: cards stack in the left column (highlights offset like pinned paper), diagram on the right */
+@media (min-width:1000px){
+.q6-stage{height:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"note xc";align-items:center;align-content:center;column-gap:56px;row-gap:0;padding:72px clamp(24px,4vw,72px) 88px}
+.q6-stage .q-note{grid-area:note;width:auto;max-width:660px;padding:40px 44px 34px;justify-self:start}
+.q6-stage .q6-list{grid-area:list;width:auto;max-width:600px;margin:-28px 0 0 clamp(60px,8vw,140px);padding:30px 34px 14px;justify-self:start;z-index:4}
+.q6-stage .q-xcard{grid-area:xc;width:100%;max-width:760px;align-self:center;justify-self:center}
+}
+.q6-stage .q-note .q-name{font-size:clamp(56px,5.6vw,84px)}
+.q6-stage .q-note .q-hl{font-size:clamp(28px,2.8vw,40px);line-height:1.2;margin-top:18px}
+.q6-stage .q-note .q-st{font-size:clamp(16px,1.35vw,20px);margin-top:18px}
+.q6-stage .q-note .q-next span{font-size:clamp(16px,1.3vw,19px)}
+.q6-stage .q6-list .lead{font-size:clamp(24px,2.5vw,36px);line-height:1.2;margin-bottom:8px}
+.q6-stage .q6-list li{font-size:clamp(18px,1.95vw,28px);line-height:1.35;padding:14px 0}
+@media (min-width:1000px){.q6-stage .q6-list{margin-top:18px}}
+/* Hero layer note: the SVG scales it to ~60%, so size it up in SVG units (~18px on screen) */
+.q6-stage .nt{font-size:30px;line-height:1.25;padding:16px 18px}
+.q6-stage .nt small{font-size:13px;margin-bottom:4px}
+.q6-stage .nt ul{gap:8px}
+
+/* ---- About top (2026-09-29): the legal pad holds her favorite tools; two paper notes sit under it ---- */
+.q-notes.q6-tpad .k{text-transform:uppercase}
+.q6-tools{list-style:none;margin:0;padding:0}
+.q6-tool{position:relative;display:flex;flex-wrap:wrap;align-items:flex-start;column-gap:14px;cursor:pointer}
+.q6-tool .nm{font:400 21px/var(--l) Fraunces,Georgia,serif;letter-spacing:-.01em;color:#16213b}
+.q6-tool .nm a{color:inherit;text-decoration:underline;text-decoration-color:rgba(14,59,143,.35);text-underline-offset:4px;text-decoration-thickness:1.5px}
+.q6-tool .nm a:hover,.q6-tool .nm a:focus-visible{color:#0e3b8f;text-decoration-color:currentColor}
+.q6-tool .r{position:relative;top:2px;flex:1 1 12rem;min-width:0;font:500 11.5px/var(--l) 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(31,42,68,.7)}
+.q6-tool .nm a:focus-visible,.q6-tcard .go:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+.q-notes.q6-tpad .hint{margin:0;font:500 11px/var(--l) 'JetBrains Mono',monospace;letter-spacing:.06em;color:rgba(31,42,68,.6)}
+/* the card: a scrap of off-white paper that drops just under the row */
+.q6-tcard{position:absolute;z-index:5;right:-14px;top:calc(100% - 2px);width:min(360px,calc(100% + 28px));padding:18px 20px 16px;background:#fffefb;color:#1b1b1b;cursor:auto;
+  box-shadow:0 18px 34px -10px rgba(20,30,60,.3),0 2px 6px rgba(20,30,60,.1);transform:translateY(-4px) rotate(-.4deg);opacity:0;visibility:hidden;
+  transition:opacity .16s ease,transform .18s cubic-bezier(.3,.9,.3,1),visibility 0s linear .18s}
+.q6-tool.open .q6-tcard{opacity:1;visibility:visible;transform:rotate(.8deg);transition-delay:0s}
+.q6-tcard p{margin:0;font:400 15.5px/1.5 Inter,system-ui,sans-serif}
+.q6-tcard .h{font:400 22px/1.2 Fraunces,Georgia,serif;letter-spacing:-.01em;margin-bottom:10px}
+.q6-tcard .k{margin-top:10px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#0e3b8f}
+.q6-tcard .h+.k{margin-top:0}
+.q6-tcard .go{display:inline-block;margin-top:14px;color:var(--orink);font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
+.q6-tpad.has-open{z-index:999!important}
+/* while only hovered, the card lets the pointer through to the rows under it; pinned or focused, it takes clicks */
+.q6-tool.open:not(.pin):not(:focus-within) .q6-tcard{pointer-events:none}
+@media (prefers-reduced-motion:reduce){.q6-tcard,.q6-tool.open .q6-tcard{transition:none;transform:rotate(.8deg)}}
+@media (max-width:760px){.q6-tool .r{order:2;flex-basis:100%;top:-2px}.q6-tool .nm{font-size:20px}.q6-tcard{right:-6px;width:calc(100% + 12px)}}
+/* Hero centred (2026-09-29): name card on the left spanning both rows, diagram top-right, highlights card tucked under it; the trio sits centred with equal side margins */
+@media (min-width:1000px){
+.q6-stage{grid-template-columns:minmax(0,580px) minmax(0,600px);grid-template-areas:"note xc" "note list";padding-top:48px;padding-bottom:64px;justify-content:center;align-content:center;column-gap:clamp(40px,4vw,72px);padding-left:clamp(40px,7vw,200px);padding-right:clamp(40px,7vw,200px)}
+.q6-stage .q-note{justify-self:end;align-self:center}
+.q6-stage .q-xcard{justify-self:start;align-self:end;max-width:540px}
+.q6-stage .q6-list{justify-self:stretch;align-self:start;width:auto;max-width:none;margin:-44px 0 0 clamp(24px,4vw,72px);padding:20px 26px 8px}
+}
+.q6-stage .q6-list .lead{font-size:clamp(20px,1.6vw,24px)}
+.q6-stage .q6-list li{font-size:clamp(15px,1.05vw,17px);line-height:1.4;padding:7px 0}
+.q6-stage .q6-list a{position:relative;z-index:1}
+@media (max-width:999px){.q6-stage .q6-list{margin:0}}
+/* About desk (2026-09-29): three cards now (Product Trends, Favorite Tools I've Created, Side Quests), so three even columns with a gentle stagger */
+@media (min-width:1000px){.q6 .q-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,48px)}.q6 .q-desk .d2{margin-top:40px}.q6 .q-desk .d3{margin-top:0}.q6 .q-desk .d4{margin-top:56px}}

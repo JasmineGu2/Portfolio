@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mock 58 · Trajectory Matrix</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: #0e3b8f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    svg { display: block; max-width: 100%; }
+
+    .grid-line { stroke: rgba(255,255,255,0.1); stroke-width: 1; }
+    .axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 2; }
+    .axis-label { font-size: 12px; font-weight: 600; fill: rgba(255,255,255,0.6); }
+    .year-label { font-size: 13px; font-weight: 600; fill: rgba(255,255,255,0.7); }
+
+    .path-eng { stroke: #fff; stroke-width: 3; fill: none; opacity: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+    .path-prod { stroke: #fff; stroke-width: 2; fill: none; opacity: 0.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5,4; }
+
+    .exp-pin { cursor: pointer; transition: all 0.2s; }
+    .exp-pin circle { fill: #fff; r: 5; }
+    .exp-pin text { font-size: 9px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; fill: #0e3b8f; }
+    .exp-pin:hover circle { fill: #ff9500; r: 7; filter: drop-shadow(0 0 10px rgba(255,149,0,0.8)); }
+    .exp-pin:hover text { fill: #fff; }
+
+    .title { font-size: 22px; font-weight: 700; letter-spacing: 1px; fill: rgba(255,255,255,0.95); }
+    .subtitle { font-size: 11px; fill: rgba(255,255,255,0.5); }
+
+    .me-block { fill: #ff9500; }
+    .me-text { font-size: 13px; font-weight: 700; fill: #0e3b8f; text-anchor: middle; }
+
+    .skill-label { font-size: 10px; fill: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+<svg width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="rgba(255,255,255,0.3)"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="760" fill="#0e3b8f"/>
+
+  <!-- Title -->
+  <text class="title" x="600" y="50" text-anchor="middle">CAREER MATRIX · TWO TRAJECTORIES</text>
+  <text class="subtitle" x="600" y="68" text-anchor="middle">X: Time (2022→2026) | Y: Depth (Entry→Expert)</text>
+
+  <!-- Grid -->
+  <g class="grid">
+    <!-- Vertical lines (years) -->
+    <line class="grid-line" x1="150" y1="120" x2="150" y2="650"/>
+    <line class="grid-line" x1="350" y1="120" x2="350" y2="650"/>
+    <line class="grid-line" x1="550" y1="120" x2="550" y2="650"/>
+    <line class="grid-line" x1="750" y1="120" x2="750" y2="650"/>
+    <line class="grid-line" x1="950" y1="120" x2="950" y2="650"/>
+
+    <!-- Horizontal lines (depth) -->
+    <line class="grid-line" x1="100" y1="180" x2="1100" y2="180"/>
+    <line class="grid-line" x1="100" y1="280" x2="1100" y2="280"/>
+    <line class="grid-line" x1="100" y1="380" x2="1100" y2="380"/>
+    <line class="grid-line" x1="100" y1="480" x2="1100" y2="480"/>
+    <line class="grid-line" x1="100" y1="580" x2="1100" y2="580"/>
+  </g>
+
+  <!-- Axes -->
+  <line class="axis-line" x1="100" y1="650" x2="1100" y2="650" marker-end="url(#arrowhead)"/>
+  <line class="axis-line" x1="100" y1="650" x2="100" y2="80" marker-end="url(#arrowhead)"/>
+
+  <!-- Axis labels -->
+  <text class="axis-label" x="1090" y="680" text-anchor="end">Time →</text>
+  <text class="axis-label" x="70" y="95">Depth ↑</text>
+
+  <!-- Y-axis labels (Depth) -->
+  <text class="axis-label" x="90" y="655" text-anchor="end">Entry</text>
+  <text class="axis-label" x="90" y="485" text-anchor="end">Intermediate</text>
+  <text class="axis-label" x="90" y="185" text-anchor="end">Expert</text>
+
+  <!-- X-axis labels (Years) -->
+  <text class="year-label" x="150" y="700" text-anchor="middle">2022</text>
+  <text class="year-label" x="350" y="700" text-anchor="middle">2023</text>
+  <text class="year-label" x="550" y="700" text-anchor="middle">2024</text>
+  <text class="year-label" x="750" y="700" text-anchor="middle">2025</text>
+  <text class="year-label" x="950" y="700" text-anchor="middle">2026</text>
+
+  <!-- Engineering Trajectory (solid line, steeper) -->
+  <polyline class="path-eng" points="150,550 350,440 550,350 750,240 950,150"/>
+
+  <!-- Product Trajectory (dashed line, starts later, gentler) -->
+  <polyline class="path-prod" points="350,600 550,500 750,380 950,200"/>
+
+  <!-- Legend box in corner -->
+  <g transform="translate(1000, 100)">
+    <rect x="0" y="0" width="180" height="90" fill="rgba(0,0,0,0.2)" rx="4"/>
+    <line x1="8" y1="18" x2="30" y2="18" class="path-eng"/>
+    <text x="40" y="23" style="font-size: 11px;">Engineering</text>
+    <line x1="8" y1="45" x2="30" y2="45" class="path-prod"/>
+    <text x="40" y="50" style="font-size: 11px;">Product</text>
+    <circle cx="19" cy="72" r="4" fill="#ff9500" opacity="0.8"/>
+    <text x="30" y="76" style="font-size: 10px;">Experience</text>
+  </g>
+
+  <!-- Engineering Experiences -->
+  <g class="experiences-eng">
+    <!-- Metaverse 2022 -->
+    <g class="exp-pin">
+      <circle cx="150" cy="550"/>
+      <text x="150" y="553">MV</text>
+      <title>Metaverse · Growth Eng · Nov 2022</title>
+    </g>
+
+    <!-- OMERS 2023 -->
+    <g class="exp-pin">
+      <circle cx="350" cy="440"/>
+      <text x="350" y="443">OM</text>
+      <title>OMERS · Solutions Eng · May 2023</title>
+    </g>
+
+    <!-- Intuit 2024 -->
+    <g class="exp-pin">
+      <circle cx="550" cy="350"/>
+      <text x="550" y="353">IN</text>
+      <title>Intuit · Frontend Eng · May 2024</title>
+    </g>
+
+    <!-- Ivey 2025 -->
+    <g class="exp-pin">
+      <circle cx="720" cy="260"/>
+      <text x="720" y="263">IV</text>
+      <title>Ivey · AI Engineer · May 2025</title>
+    </g>
+
+    <!-- Tesla 2025 -->
+    <g class="exp-pin">
+      <circle cx="780" cy="220"/>
+      <text x="780" y="223">TS</text>
+      <title>Tesla · Frontend/Infra · May 2025</title>
+    </g>
+
+    <!-- Autodesk Eng 2026 -->
+    <g class="exp-pin">
+      <circle cx="950" cy="150"/>
+      <text x="950" y="153">AE</text>
+      <title>Autodesk · Full-Stack Eng · Jan 2026</title>
+    </g>
+  </g>
+
+  <!-- Product Experiences -->
+  <g class="experiences-prod">
+    <!-- OMERS (50% product) 2023 -->
+    <g class="exp-pin">
+      <circle cx="350" cy="560"/>
+      <text x="350" y="563">+</text>
+      <title>OMERS · Product Stakeholder Mgmt</title>
+    </g>
+
+    <!-- Intuit (10% product) 2024 -->
+    <g class="exp-pin">
+      <circle cx="550" cy="500"/>
+      <text x="550" y="503">+</text>
+      <title>Intuit · Product Thinking</title>
+    </g>
+
+    <!-- Tesla (15% product) 2025 -->
+    <g class="exp-pin">
+      <circle cx="750" cy="380"/>
+      <text x="750" y="383">TS*</text>
+      <title>Tesla · ML Product · May 2025</title>
+    </g>
+
+    <!-- Autodesk PM 2026 -->
+    <g class="exp-pin">
+      <circle cx="950" cy="200"/>
+      <text x="950" y="203">AP</text>
+      <title>Autodesk · Product Manager · May 2026</title>
+    </g>
+  </g>
+
+  <!-- Convergence Point -->
+  <circle cx="950" cy="170" r="12" fill="none" stroke="#ff9500" stroke-width="2" opacity="0.5" stroke-dasharray="3,2"/>
+
+  <!-- YOU -->
+  <rect class="me-block" x="970" y="80" width="120" height="90" rx="5"/>
+  <text class="me-text" x="1030" y="115">JASMINE GU</text>
+  <text class="me-text" x="1030" y="135" style="font-size: 11px; font-weight: 500;">PRODUCT ENG</text>
+</svg>
+
+<script>
+  document.querySelectorAll('.exp-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', function() {
+      document.querySelectorAll('.exp-pin').forEach(p =>
+        p.style.opacity = p === this ? '1' : '0.25'
+      );
+    });
+    pin.addEventListener('mouseleave', function() {
+      document.querySelectorAll('.exp-pin').forEach(p => p.style.opacity = '1');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 13 · Sheet on the table</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+<style>.ov{position:absolute;right:-100px;top:-58px;z-index:9;display:grid;gap:16px}.ov .stk{width:196px}@media (max-width:1300px){.ov{display:none}}</style>
+</head><body data-site data-nm="hide">
+<div class="sheetT regs" id="sheet">
+  <div class="tb2"><div class="cell"><span class="l">Drawing</span><span class="v">JASMINE GU · PORTFOLIO</span></div><div class="cell" style="border:0"><span class="l">Sheet</span><span class="v">A-101 · WORK · THE JOURNEY</span></div><div class="cell" style="border-right:0"><span class="l">Rev · Scale</span><span class="v">A · 1:1</span></div></div>
+  <div class="ov" id="ov"></div>
+  <div class="pad" style="padding-top:30px"><div class="bpb" style="border-radius:2px"><div class="wrap" style="padding:0 22px" id="nb"></div></div></div>
+  <div class="pad"><div id="home"></div></div>
+  <div class="pad"><div class="bpb" style="border-radius:2px"><div style="padding:0 22px"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 02 / A-101</span></div><div id="lay"></div></div></div></div>
+  <div class="pad" style="margin-top:34px"><div class="bpb" style="padding:0;border-radius:2px"><div style="padding:16px 22px 0"><div class="sec-h"><h2>Site plan</h2><span class="sect">SKILLS CITY · A-103</span></div></div><div id="cityBox"></div></div></div>
+  <div style="margin-top:34px" id="ftr"></div>
+</div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#ftr').innerHTML = K.footer()
+$('#nb').innerHTML = K.nameBand({ stk: false })
+$('#ov').innerHTML = K.sticky(0, '', -3) + K.sticky(2, 'l', 3)
+K.home($('#home')); K.city($('#cityBox'), { W: 1152, H: 470 })
+K.init()
+const L = K.layers($('#lay'), 'sticky')
+K.sw3(['grid', 'tacc', 'txt', 'map', 'note'], { grid: 'full', tacc: 'dim', txt: 'dotted', map: 'blue', note: 'sticky' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 15 · City hero</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+<style>
+.hero15{position:relative;padding:0}
+.pl15{position:absolute;right:28px;top:26px;width:min(470px,40%);background:rgba(8,45,110,.95);border:3px double #9fd3ff;padding:14px 18px 6px;z-index:6;color:#e8f1ff}
+.pl15 .nbw svg{width:100%}
+.hero15 .s1,.hero15 .s2{position:absolute;bottom:18px;z-index:7}.hero15 .s1{left:34%}.hero15 .s2{left:51%;bottom:30px}
+@media (max-width:1000px){.pl15{position:static;width:100%}.hero15 .s1,.hero15 .s2{display:none}}
+</style></head><body data-site data-nm="hide">
+<div id="hdr"></div>
+<section class="hero15"><div id="cityBox"></div><div class="pl15" id="pl"></div><div class="s1" id="s1"></div><div class="s2" id="s2"></div></section>
+<div class="plate"><main class="wrap"><div id="home"></div></main></div>
+<section class="bpb" id="layers"><div class="wrap"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 02 / A-101</span><span class="label">hover a layer · every note is one of my real roles</span></div><div id="lay"></div></div></section>
+<div id="ftr"></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer()
+K.city($('#cityBox'), { W: 1440, H: 620 })
+$('#pl').innerHTML = K.nameBand({ stk: false, l: 'Sheet 01 · the name' })
+$('#s1').innerHTML = K.sticky(0, '', -3); $('#s2').innerHTML = K.sticky(2, 'l', 3)
+K.home($('#home'))
+K.init()
+const L = K.layers($('#lay'), 'sticky')
+K.sw3(['map', 'grid', 'tacc', 'txt', 'note'], { map: 'light', grid: 'faint', tacc: 'bubble', txt: 'dotted', note: 'sticky' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

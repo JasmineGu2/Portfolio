@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 36 · Type options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--or:#ed3801;--orink:#c22e01;--ink:#282828;--muted:color-mix(in srgb,var(--ink) 60%,#fff);--faint:color-mix(in srgb,var(--ink) 14%,#fff);
+  --f-name:'JetBrains Mono',monospace;--f-head:Inter,system-ui,sans-serif;--f-body:Inter,system-ui,sans-serif;--f-serif:Fraunces,Georgia,serif;--f-mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--f-body)}
+.bar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--faint);padding:14px 28px;display:grid;gap:12px}
+.bar h1{margin:0;font:600 15px/1.2 system-ui;letter-spacing:.02em}
+.bar p{margin:0;font:400 13px/1.4 system-ui;color:#666}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.row b{font:600 11px/1 system-ui;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-right:6px;min-width:64px}
+.pill{padding:7px 12px;border:1px solid #d9d9d9;border-radius:99px;background:#fff;font:500 13px/1 system-ui;cursor:pointer;color:#333}.pill[aria-pressed=true]{border-color:var(--or);color:var(--orink);background:#fff6f2}
+.sw{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border:1px solid #d9d9d9;border-radius:99px;background:#fff;font:500 12px/1 system-ui;cursor:pointer;color:#333}.sw i{width:22px;height:22px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}.sw[aria-pressed=true]{border-color:var(--or)}.sw small{color:#888;font-weight:400}
+main{max-width:1440px;margin:0 auto;padding:28px}
+h2{font:600 12px/1 system-ui;letter-spacing:.14em;text-transform:uppercase;color:#888;margin:34px 0 14px}
+/* the big specimen: her real copy in the selected combo */
+.spec{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;padding:40px;border:1px solid var(--faint);border-radius:14px}
+.name{font:700 clamp(44px,5vw,64px)/1 var(--f-name);color:var(--or);text-transform:lowercase;letter-spacing:-.02em;margin:0}
+.head{font:400 clamp(24px,2.3vw,32px)/1.28 var(--f-head);margin:14px 0 0;letter-spacing:-.01em;max-width:32ch}
+.st{font:400 16px/1.5 var(--f-body);color:var(--muted);margin:14px 0 0}.st b{color:var(--ink);font-weight:600}
+.body{font:400 16px/1.75 var(--f-body);margin:18px 0 0;max-width:34rem}
+.next{margin-top:20px;padding-top:14px;border-top:1px dotted color-mix(in srgb,var(--ink) 35%,#fff);max-width:34rem}
+.next .k{font:500 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.next .r{display:flex;gap:12px;align-items:baseline;font:400 16px/1.6 var(--f-body)}.next b{font:700 12px/1 var(--f-mono);color:var(--or);border:1px solid var(--or);border-radius:99px;padding:3px 8px}
+.lead{font:500 16px/1.4 var(--f-body);margin:0 0 8px}
+ul{list-style:none;margin:0;padding:0}li{display:flex;gap:10px;padding:5px 0;font:400 16px/1.6 var(--f-body);color:color-mix(in srgb,var(--ink) 88%,#fff)}li i{font-style:normal;color:var(--orink)}
+.tabs{display:flex;gap:4px;margin:26px 0 0;padding-left:12px;border-bottom:1px solid #dedede}.tab{margin-bottom:-1px;padding:12px 22px 11px;border:1px solid #e4e4e4;border-bottom-color:#dedede;border-radius:10px 10px 0 0;background:#f1f1f1;color:#a4a4a4;font:500 15px/1 var(--f-body)}.tab.on{background:#fff;border-bottom-color:#fff;color:var(--or);font-weight:700}
+.cap{display:flex;justify-content:space-between;gap:20px;align-items:baseline;margin-top:16px}
+.cap .sub{font:400 20px/1.3 var(--f-serif);margin:0;letter-spacing:-.01em}.cap .meta{font:400 11px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;margin:0;max-width:44%}.cap .meta b{display:block;color:var(--ink);font-weight:400}
+.quote{margin-top:22px;padding:18px 22px;background:#f7f2e8;border-radius:18px;max-width:340px;transform:rotate(-1.4deg)}.quote .q{font:italic 400 22px/1.28 var(--f-serif);color:#14264f;margin:0}.quote .f{font:500 10.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(20,38,79,.7);margin:12px 0 0;padding-top:10px;border-top:1px solid rgba(20,38,79,.2)}
+/* compare all */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:18px}
+.cell{padding:24px 26px;border:1px solid var(--faint);border-radius:12px;cursor:pointer;background:#fff}.cell:hover{border-color:#bbb}.cell.on{border-color:var(--or);box-shadow:0 0 0 1px var(--or)}
+.cell h3{margin:0 0 3px;font:600 13px/1.3 system-ui;color:#333}.cell .fam{margin:0 0 16px;font:400 12px/1.4 system-ui;color:#888}
+.cell .name{font-size:34px}.cell .head{font-size:19px;margin-top:8px}.cell .sub{font:400 17px/1.3 var(--f-serif);margin:12px 0 4px}.cell .meta{font:400 10.5px/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}.cell .bd{font:400 14px/1.6 var(--f-body);margin:10px 0 0;color:color-mix(in srgb,var(--ink) 88%,#fff)}
+/* live preview of the real home page */
+.live{border:1px solid var(--faint);border-radius:12px;overflow:hidden}.live .note{margin:0;padding:10px 16px;background:#faf6ee;font:400 13px/1.5 system-ui;color:#7a6a45}
+iframe{display:block;width:100%;height:920px;border:0}
+@media (max-width:1000px){.spec{grid-template-columns:1fr;padding:22px}.cap{flex-direction:column}.cap .meta{text-align:left;max-width:none}}
+</style></head><body>
+<div class="bar">
+  <div><h1>Type options</h1><p>Pick a font combo and a text color. Everything below and the live preview of your real home page update together. Nothing is applied to the site yet.</p></div>
+  <div class="row" id="combos"><b>Fonts</b></div>
+  <div class="row" id="inks"><b>Text color</b></div>
+</div>
+<main>
+  <h2>Your words in the selected combo</h2>
+  <section class="spec" id="spec"></section>
+  <h2>Compare every combo (click one to select it)</h2>
+  <section class="grid" id="grid"></section>
+  <h2>Your real home page with the selected fonts and color</h2>
+  <section class="live"><p class="note" id="livenote">Loading the live page…</p><iframe id="frame" title="Live preview of the home page"></iframe></section>
+</main>
+<script>
+// role: name = the orange "jasmine gu", head = the headline, body = paragraphs / lists / tabs, serif = subheadings + quote card, mono = small caps details
+const COMBOS = [
+  { id: 'current', n: 'Current', fam: 'Inter · Fraunces · JetBrains Mono', name: "'JetBrains Mono'", head: 'Inter', body: 'Inter', serif: 'Fraunces', mono: "'JetBrains Mono'", why: 'What the site uses now.' },
+  { id: 'playfair', n: 'Editorial classic', fam: 'Playfair Display · Source Sans 3 · IBM Plex Mono', name: "'IBM Plex Mono'", head: "'Source Sans 3'", body: "'Source Sans 3'", serif: "'Playfair Display'", mono: "'IBM Plex Mono'", why: 'Magazine feel. High-contrast serif, quiet sans.' },
+  { id: 'dm', n: 'Modern editorial', fam: 'DM Serif Display · DM Sans · DM Mono', name: "'DM Mono'", head: "'DM Sans'", body: "'DM Sans'", serif: "'DM Serif Display'", mono: "'DM Mono'", why: 'One family, three voices. Soft and current.' },
+  { id: 'instrument', n: 'Minimal trend', fam: 'Instrument Serif · Inter · Geist Mono', name: "'Geist Mono'", head: 'Inter', body: 'Inter', serif: "'Instrument Serif'", mono: "'Geist Mono'", why: 'Very popular right now: a light condensed serif over plain Inter.' },
+  { id: 'grotesk', n: 'Techy', fam: 'Space Grotesk · Inter · Space Mono', name: "'Space Mono'", head: "'Space Grotesk'", body: 'Inter', serif: "'Space Grotesk'", mono: "'Space Mono'", why: 'Engineer energy. Geometric grotesk headlines.' },
+  { id: 'plex', n: 'Engineer', fam: 'IBM Plex Serif · IBM Plex Sans · IBM Plex Mono', name: "'IBM Plex Mono'", head: "'IBM Plex Sans'", body: "'IBM Plex Sans'", serif: "'IBM Plex Serif'", mono: "'IBM Plex Mono'", why: 'A whole system designed together. Reads as technical but warm.' },
+  { id: 'geist', n: 'Vercel-style', fam: 'Geist · Newsreader · Geist Mono', name: "'Geist Mono'", head: 'Geist', body: 'Geist', serif: 'Newsreader', mono: "'Geist Mono'", why: 'Clean product-engineering look with a bookish serif for captions.' },
+  { id: 'jakarta', n: 'Warm humanist', fam: 'Plus Jakarta Sans · Newsreader · JetBrains Mono', name: "'JetBrains Mono'", head: "'Plus Jakarta Sans'", body: "'Plus Jakarta Sans'", serif: 'Newsreader', mono: "'JetBrains Mono'", why: 'Friendly and rounded without feeling childish.' },
+  { id: 'poppins', n: 'Friendly classic', fam: 'Poppins · Lora · IBM Plex Mono', name: "'IBM Plex Mono'", head: 'Poppins', body: 'Poppins', serif: 'Lora', mono: "'IBM Plex Mono'", why: 'Rounded geometric sans with a warm text serif.' },
+  { id: 'monty', n: 'Safe standard', fam: 'Montserrat · Merriweather · Space Mono', name: "'Space Mono'", head: 'Montserrat', body: 'Montserrat', serif: 'Merriweather', mono: "'Space Mono'", why: 'The most common pairing on the web. Reliable, a little generic.' },
+]
+const INKS = [
+  { id: 'a', n: 'Current', hex: '#282828' }, { id: 'b', n: 'Soft black', hex: '#2b2b2d' }, { id: 'c', n: 'Charcoal', hex: '#3a3a3c' },
+  { id: 'd', n: 'Warm graphite', hex: '#403b36' }, { id: 'e', n: 'Cool slate', hex: '#3d434b' }, { id: 'f', n: 'Muted grey', hex: '#4d4d4d' },
+]
+const lum = (h) => { const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] }
+const ratio = (h) => (1.05 / (lum(h) + 0.05)).toFixed(1)
+const COPY = { head: "I'm a product engineer. I code while taking careful consideration of the end users, the business context, and product strategy.", st: 'currently leading engineering @ <b>hack western</b>, prev. @ <b>autodesk</b>, <b>tesla</b> and <b>intuit</b>', body: "I've worked on tech with a deep variety of audiences, from enterprise data teams and factory operators to elderly nonprofit leaders.", lead: 'a few highlights from university:', li: ['completed 7 internships across 4 big tech companies, a Series A startup, a stealth 0→1 and Enterprise IT', 'led my school’s Product Fellowship for 2 years, hosting 28 product educationals and helping students develop PM skills'], sub: 'Turning factory-camera inference into workflows operators can act on', meta: ['Tesla · Summer 2025', 'ML visualization · React · Video infrastructure'], q: 'A strong commitment to always learning and showing up.' }
+const $ = (s, r = document) => r.querySelector(s)
+let cur = COMBOS[0], ink = INKS[0]
+const setVars = (el, c) => { el.style.setProperty('--f-name', c.name + ',monospace'); el.style.setProperty('--f-head', c.head + ',system-ui,sans-serif'); el.style.setProperty('--f-body', c.body + ',system-ui,sans-serif'); el.style.setProperty('--f-serif', c.serif + ',Georgia,serif'); el.style.setProperty('--f-mono', c.mono + ',monospace') }
+function specimen(c, small) {
+  return small
+    ? `<h3>${c.n}</h3><p class="fam">${c.fam}</p><p class="name">jasmine gu</p><p class="head">${COPY.head}</p><p class="bd">${COPY.body}</p><p class="sub">${COPY.sub}</p><p class="meta">${COPY.meta.join(' · ')}</p>`
+    : `<div><p class="name">jasmine gu</p><p class="head">${COPY.head}</p><p class="st">${COPY.st}</p><p class="body">${COPY.body}</p><div class="next"><p class="k">What's next</p><div class="r"><b>NOW</b><span>Looking to join a startup or an agency and work with a team. More experience, better work.</span></div></div></div>
+       <div><p class="lead">${COPY.lead}</p><ul>${COPY.li.map((x) => `<li><i>↳</i><span>${x}</span></li>`).join('')}</ul>
+       <div class="tabs"><span class="tab on">Engineering</span><span class="tab">Product</span><span class="tab">People</span><span class="tab">Side projects</span></div>
+       <div class="cap"><p class="sub">${COPY.sub}</p><p class="meta"><b>${COPY.meta[0]}</b>${COPY.meta[1]}</p></div>
+       <div class="quote"><p class="q">${COPY.q}</p><p class="f">A core value · 1 / 5 · Another</p></div>
+       <p style="margin:18px 0 0;font:400 12px/1.6 var(--f-mono);color:var(--muted)">${c.fam} · ${c.why}</p></div>`
+}
+function paint() {
+  document.documentElement.style.setProperty('--ink', ink.hex); setVars(document.documentElement, cur)
+  $('#spec').innerHTML = specimen(cur)
+  $('#grid').innerHTML = COMBOS.map((c) => `<div class="cell${c === cur ? ' on' : ''}" data-id="${c.id}" style="--f-name:${c.name},monospace;--f-head:${c.head},system-ui,sans-serif;--f-body:${c.body},system-ui,sans-serif;--f-serif:${c.serif},Georgia,serif;--f-mono:${c.mono},monospace">${specimen(c, true)}</div>`).join('')
+  document.querySelectorAll('#combos .pill').forEach((b) => b.setAttribute('aria-pressed', b.dataset.id === cur.id))
+  document.querySelectorAll('#inks .sw').forEach((b) => b.setAttribute('aria-pressed', b.dataset.id === ink.id))
+  live()
+}
+$('#combos').insertAdjacentHTML('beforeend', COMBOS.map((c) => `<button class="pill" data-id="${c.id}" aria-pressed="false">${c.n}</button>`).join(''))
+$('#inks').insertAdjacentHTML('beforeend', INKS.map((c) => `<button class="sw" data-id="${c.id}" aria-pressed="false"><i style="background:${c.hex}"></i>${c.n} <small>${c.hex} · ${ratio(c.hex)}:1</small></button>`).join(''))
+document.addEventListener('click', (e) => { const p = e.target.closest('.pill'), s = e.target.closest('.sw'), g = e.target.closest('.cell'); if (p) cur = COMBOS.find((c) => c.id === p.dataset.id); else if (s) ink = INKS.find((c) => c.id === s.dataset.id); else if (g) cur = COMBOS.find((c) => c.id === g.dataset.id); else return; paint() })
+
+// ---- live preview: the real home page in a same-origin iframe. Every element is tagged once by the font it uses now (serif / mono / sans) and by how dark its text is; the chosen combo and color are then applied with an injected stylesheet ----
+const frame = $('#frame')
+let styleEl = null
+function tag(doc) {
+  const w = doc.defaultView
+  doc.querySelectorAll('body *').forEach((el) => {
+    if (el.dataset.tr) return
+    const cs = w.getComputedStyle(el), f = cs.fontFamily
+    el.dataset.tr = /fraunces|georgia/i.test(f) ? 'serif' : /jetbrains|mono/i.test(f) ? 'mono' : 'sans'
+    const m = cs.color.match(/[\d.]+/g); if (!m) return
+    const [r, g, b, a = 1] = m.map(Number), mx = Math.max(r, g, b), mn = Math.min(r, g, b)
+    if (mx - mn < 24 && a > 0.5) { if (mx < 100) el.dataset.ti = '1'; else if (mx < 175) el.dataset.ti = '2' }
+  })
+}
+function inject(doc) {
+  if (!doc.getElementById('tr-fonts')) { const l = doc.createElement('link'); l.id = 'tr-fonts'; l.rel = 'stylesheet'; l.href = document.querySelector('link[href*="fonts.googleapis.com/css2"]').href; doc.head.appendChild(l) }
+  if (!styleEl || !styleEl.isConnected) { styleEl = doc.createElement('style'); styleEl.id = 'tr-style'; doc.head.appendChild(styleEl) }
+  styleEl.textContent = `[data-tr=sans]{font-family:${cur.body},system-ui,sans-serif!important}[data-tr=serif]{font-family:${cur.serif},Georgia,serif!important}[data-tr=mono]{font-family:${cur.mono},monospace!important}
+    [data-ti="1"]{color:${ink.hex}!important}[data-ti="2"]{color:color-mix(in srgb,${ink.hex} 62%,#fff)!important}`
+}
+function live() {
+  try {
+    const doc = frame.contentDocument; if (!doc || !doc.body || !doc.body.children.length) return
+    tag(doc); inject(doc); $('#livenote').textContent = 'Live: this is localhost:3000 with the selected fonts and text color applied on top. Switch tabs or scroll inside it.'
+    if (!frame._mo) { frame._mo = new MutationObserver(() => { tag(doc); inject(doc) }); frame._mo.observe(doc.body, { childList: true, subtree: true }) }
+  } catch (e) { $('#livenote').textContent = 'The live preview needs the site running (next dev on localhost:3000, open this page from /mocks/36-type-options.html there).' }
+}
+frame.addEventListener('load', () => setTimeout(live, 500)); frame.src = '/'
+paint()
+</script></body></html>

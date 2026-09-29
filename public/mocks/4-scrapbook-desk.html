@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 4 · Scrapbook desk</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.itabs{display:flex;gap:4px}.itab{padding:6px 14px;background:var(--sy);color:#2b2b2b;text-decoration:none;border-radius:6px 6px 0 0;font:500 11px 'Analogue OS','JetBrains Mono';letter-spacing:.14em;text-transform:uppercase}
+.itab:nth-child(2){background:var(--sl)}.itab:nth-child(3){background:var(--sm)}.itab:nth-child(4){background:#f4b896}
+.desk{background:#c8a878 radial-gradient(rgba(0,0,0,.07) 1px,transparent 1.3px) 0 0/6px 6px;padding:54px 0 70px;position:relative;overflow:hidden}
+.dgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.paper{background:#fbfaf4;padding:34px 30px 30px;position:relative;box-shadow:0 12px 26px rgba(0,0,0,.25);transform:rotate(-1deg);color:#2b2b2b;background-image:repeating-linear-gradient(transparent 0 31px,rgba(80,130,200,.18) 31px 32px)}
+.paper h1{font-size:clamp(28px,3.4vw,42px);margin:12px 0 14px;background:#fbfaf4;display:inline}
+.paper .muted{color:#6b6b6b}
+.polys{display:flex;gap:18px;margin-top:38px;padding-left:10px}
+.polys .polaroid{width:132px}.polys .polaroid:nth-child(2){transform:rotate(3deg) translateY(10px)}.polys .polaroid:nth-child(3){transform:rotate(-1deg)}
+.polys .cap{position:absolute;bottom:5px;left:0;right:0;text-align:center;font:700 15px Caveat;color:#444}
+.stk{position:absolute;right:-70px;top:-52px}
+.docs{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 22px;padding-top:12px}
+.doc{background:#fff;padding:12px 12px 14px;position:relative;box-shadow:0 5px 12px rgba(0,0,0,.18);transform:rotate(var(--r,0deg));transition:transform .2s}
+.doc:hover{transform:rotate(0) translateY(-4px)}
+.doc h3{font-size:18px;margin:8px 0 3px}.doc p{font-size:13.5px;color:#6b6b6b;line-height:1.45}
+.doc .label{color:#8a8a8a}
+.badge{position:absolute;right:-34px;top:250px;z-index:6;transform:rotate(3deg)}
+.badge .body{padding:8px 12px 14px}.badge h4{margin:8px 0 2px;font:700 16px Inter}.badge .role{font:500 10px 'JetBrains Mono';letter-spacing:.14em;color:#555}
+.barcode{height:26px;margin-top:10px;background:repeating-linear-gradient(90deg,#222 0 2px,transparent 2px 4px,#222 4px 5px,transparent 5px 8px)}
+.sec-h{display:flex;align-items:baseline;gap:16px;margin-bottom:26px}.sec-h h2{font-size:30px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:12px}.checks li{display:grid;grid-template-columns:24px 1fr;gap:8px}.checks li::before{content:"☑";color:#9fd3ff}
+.abouts{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+.idxs{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.idx{background:#fff;color:#2b2b2b;box-shadow:0 5px 12px rgba(0,0,0,.14);border-top:3px solid #e0574f;background-image:repeating-linear-gradient(transparent 0 23px,#a8c7e8 23px 24px);background-position:0 60px;transform:rotate(var(--r,0deg));position:relative;padding:12px}
+.idx img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:10px}.idx h3{font-size:18px;background:#fff;display:inline}.idx p{font-size:13.5px;margin-top:8px;color:#555}
+.lay-f .folder{border-top-left-radius:0}.lay-f ul{margin:0;padding:6px 0 0;list-style:none;display:grid;gap:6px;font-size:15px}
+.lay-f li b{font-weight:600}
+.tickets{display:flex;gap:16px;overflow-x:auto;padding:8px 4px 24px}
+.ticket{flex:0 0 200px;background:#fff;color:#2b2b2b;padding:14px 14px 14px 22px;box-shadow:0 5px 12px rgba(0,0,0,.16);position:relative;border-left:2px dashed #bbb;background-image:radial-gradient(circle at 0 50%,var(--paper) 9px,transparent 10px)}
+.ticket .w{font:500 10px 'JetBrains Mono';letter-spacing:.14em;color:#c22e01}.ticket b{display:block;font:600 16px Fraunces;margin:6px 0 2px}.ticket span.d{font-size:13px;color:#666}
+.env{background:#f3ead6;border:1.5px solid #cdbf9c;padding:26px;position:relative;max-width:560px;box-shadow:0 8px 18px rgba(0,0,0,.14);color:#2b2b2b}
+.env .stamp{position:absolute;right:16px;top:14px;width:54px;height:64px;border:2px dashed #b04a2f;display:grid;place-items:center;font:700 10px 'JetBrains Mono';color:#b04a2f;transform:rotate(4deg)}
+@media (max-width:980px){.dgrid,.abouts{grid-template-columns:1fr}.idxs{grid-template-columns:1fr 1fr}.badge{position:static;margin-top:20px}.stk{right:0}}
+</style></head><body>
+<div class="wrap"><nav class="top"><b class="mono" style="letter-spacing:.16em;font-size:13px">JASMINE GU</b><div class="itabs"><a class="itab" href="#top">Desk</a><a class="itab" href="#about">About</a><a class="itab" href="#layers">Layers</a><a class="itab" href="#contact">Mail</a></div></nav></div>
+
+<div class="desk" id="top"><div class="wrap dgrid">
+  <div>
+    <div class="paper"><span class="clip"></span><p class="label">from the desk of · placeholder mock</p><h1 id="tag"></h1><p class="muted" id="status" style="margin:14px 0 16px"></p><div id="socials"></div><div class="stk" id="s0"></div></div>
+    <div class="polys" id="polys"></div>
+    <div style="display:flex;gap:16px;margin-top:34px;padding-left:12px"><div id="s1"></div><div id="s2"></div></div>
+  </div>
+  <div style="position:relative" data-tabs>
+    <div class="ftabs" id="ftabs"></div><div class="folder" id="folder"></div>
+    <div class="badge" data-drag><div class="body" id="badge"></div></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+<section id="about"><div class="sec-h"><h2>About</h2><span class="label">punched sheet · drag the notes around</span></div>
+  <div class="abouts"><div class="punched"><p class="label" style="color:#9fd3ff;margin-bottom:12px">Notes to self</p><p id="about-t" style="font-size:18px;margin-bottom:20px;color:#fff"></p><ul class="checks" id="hl"></ul></div><div id="s3" style="justify-self:center;margin-top:20px"></div></div></section>
+
+<section><div class="sec-h"><h2>Side projects</h2><span class="label">index cards</span></div><div class="idxs" id="idx"></div></section>
+
+<section id="layers" class="lay-f"><div class="sec-h"><h2>The four layers</h2><span class="label">pick a folder</span></div><div data-tabs><div class="ftabs" id="ltabs"></div><div class="folder" id="lfolder"></div></div></section>
+
+<section><div class="sec-h"><h2>Tickets</h2><span class="label">timeline · scroll sideways</span></div><div class="tickets" id="tix"></div></section>
+
+<section id="contact"><div class="sec-h"><h2>Mail</h2><span class="label">contact</span></div>
+  <div class="env"><div class="stamp">TORONTO<br>ON</div><p class="hand" style="font-size:26px;margin-bottom:12px">Say hi.</p><div id="socials2" style="display:flex;gap:6px;flex-wrap:wrap"></div></div>
+  <p class="label" style="padding:34px 0 90px">Placeholder mock · real videos, images and photos</p></section>
+</div>
+
+<script src="mock-data.js"></script>
+<script>
+const S = SITE, $ = (s) => document.querySelector(s)
+$('#tag').textContent = S.tagline; $('#status').textContent = S.status; $('#socials').innerHTML = S.socials; $('#socials2').innerHTML = S.socials; $('#about-t').textContent = S.about
+$('#hl').innerHTML = S.highlights.map((h) => `<li><span>${h}</span></li>`).join('')
+;['s0', 's1', 's2', 's3'].forEach((id, i) => ($('#' + id).innerHTML = S.sticky(i, ['', 'l', 'm', ''][i])))
+document.querySelectorAll('.sticky').forEach((s, i) => { let k = i; s.addEventListener('dblclick', () => { k = (k + 1) % S.notes.length; s.innerHTML = `<span class="tape"></span><small>placeholder note · flipped</small>${S.notes[k]}` }) })
+$('#polys').innerHTML = S.photos.slice(0, 3).map(([src, c]) => `<div class="polaroid" data-drag><span class="tape"></span><img src="${src}" alt="${c}" loading="lazy"><span class="cap">${c}</span></div>`).join('')
+
+// folder with the site's real Engineering / Product / Other tabs, documents clipped in
+const groups = ['Engineering', 'Product', 'Other']
+$('#ftabs').innerHTML = groups.map((g) => `<button class="ftab" data-tab="${g}">${g}</button>`).join('')
+$('#folder').innerHTML = groups.map((g) => `<div data-panel="${g}" class="docs">${S.work.filter((w) => w.group === g).map((p, i) => `<article class="doc hov" style="--r:${[-1.6, 1.2, -.8, 1.8][i % 4]}deg" data-tip="${p.n}"><span class="clip"></span>${S.media(p)}<div class="label" style="margin-top:8px">${p.when}</div><h3>${p.n}</h3><p>${p.line}</p></article>`).join('')}</div>`).join('')
+$('#badge').innerHTML = `${S.media(S.work[1], 'media')}<div class="role" style="margin-top:8px">PRODUCT ENGINEER</div><h4>JASMINE GU</h4><div class="role">TORONTO · GRAD 2027</div><div class="barcode"></div>`
+$('#idx').innerHTML = S.side.map((p, i) => `<article class="idx hov" style="--r:${[-1.5, 1, -.6, 1.6][i]}deg" data-tip="${p.n}"><span class="clip"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p></article>`).join('')
+
+// the four layers as file folders
+$('#ltabs').innerHTML = S.layers.map((l) => `<button class="ftab" data-tab="${l.id}" style="background:color-mix(in srgb,${l.color} 60%,#dcc08f)">${l.label}</button>`).join('')
+$('#lfolder').innerHTML = S.layers.map((l) => `<div data-panel="${l.id}"><p class="label" style="color:#555;margin-bottom:8px">${l.caps}</p><ul>${l.items.map((x) => `<li><b>${x[0]}</b> · ${x[1]} <span style="color:#555">— ${x[2]}</span></li>`).join('')}</ul></div>`).join('')
+$('#tix').innerHTML = S.timeline.map((t) => `<div class="ticket"><span class="w">${t.when.toUpperCase()}</span><b>${t.what}</b><span class="d">${t.line}</span></div>`).join('')
+</script>
+<script src="mock.js"></script>
+</body></html>

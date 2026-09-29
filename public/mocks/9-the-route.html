@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 9 · The route</title>
+<link rel="stylesheet" href="k2.css">
+<style>
+.intro{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;padding:34px 0 10px}
+.name{font:700 clamp(46px,6vw,80px)/1 'JetBrains Mono',monospace;color:var(--or);text-transform:lowercase;letter-spacing:-.04em}
+.hl{font-size:clamp(20px,2.3vw,28px);line-height:1.3}
+/* ---- the route: the timeline as a big symbolic path ---- */
+.route{position:relative;padding:24px 0;--cc:84px;--sw:12px}
+.route::before,.route::after{content:"";position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);z-index:0}
+.route::before{width:var(--sw)}
+[data-path=highway] .route{--sw:54px}
+[data-path=highway] .route::before{background:repeating-linear-gradient(to bottom,#ffd23f 0 22px,transparent 22px 44px) 50% 0/4px 100% no-repeat,linear-gradient(90deg,#fff 0 3px,transparent 3px calc(100% - 3px),#fff calc(100% - 3px)) 0 0/100% 100% no-repeat,#2b2b2b;border-radius:3px}
+[data-path=subway] .route::before{display:none}
+[data-path=trail] .route{--sw:6px}
+[data-path=trail] .route::before{background:repeating-linear-gradient(to bottom,#7a5d28 0 12px,transparent 12px 20px)}
+[data-path=city] .route{--sw:170px;--cc:170px}
+[data-path=city] .route::before{background:radial-gradient(circle,rgba(232,241,255,.6) 1.1px,transparent 1.6px) 0 0/9px 9px,#1f3cff;border-radius:6px}
+[data-path=city] .route::after{width:40px;background:#1f3cff;border-left:2px solid #e8f1ff;border-right:2px solid #e8f1ff}
+.stop{position:relative;display:grid;grid-template-columns:minmax(0,1fr) var(--cc) minmax(0,1fr);gap:0 22px;align-items:center;margin-bottom:72px}
+[data-path=subway] .stop::before{content:"";position:absolute;left:50%;top:0;bottom:-72px;width:12px;transform:translateX(-50%);background:var(--lc)}
+.stop .rc{grid-column:1;grid-row:1;cursor:pointer}.stop .info{grid-column:3;grid-row:1}.stop .mk{grid-column:2;grid-row:1}
+.stop:nth-child(even) .rc{grid-column:3}.stop:nth-child(even) .info{grid-column:1;text-align:right}
+.mk{position:relative;z-index:2;justify-self:center;width:68px;height:68px;border-radius:50%;background:#fff;border:5px solid var(--lc);display:grid;place-items:center;box-shadow:0 6px 14px rgba(0,0,0,.28);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.mk img{width:72%;height:72%;object-fit:contain}
+.stop:hover .mk{transform:scale(1.18) rotate(-7deg)}
+[data-path=highway] .mk{border-color:#fff;outline:5px solid #0a6b3a;border-radius:10px}
+[data-path=trail] .mk{border-color:#7a5d28;border-radius:10px 10px 50% 50%}
+[data-path=city] .mk{border-color:#fff;background:#fff;box-shadow:0 0 0 6px #1f3cff,0 6px 14px rgba(0,0,0,.35)}
+.rc{position:relative;background:var(--sheet);border:1px solid var(--faint);border-radius:8px;padding:14px;box-shadow:0 10px 26px rgba(20,30,60,.12);transition:transform .25s}
+.rc:hover{transform:translateY(-4px)}
+.rc .m{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:6px;background:#111}
+.rc .m video,.rc .m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rc .co{font:600 19px Inter;margin:12px 0 2px}.rc .sub{font-size:14.5px;color:var(--muted);line-height:1.45}
+.rc .tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.rc .tg span{font:500 11px/1.4 Inter;border:1px solid var(--faint);border-radius:99px;padding:1px 9px}
+.plate,.stub,.cap,.stp{display:none}
+.info .sheet{display:inline-block;padding:14px 18px;max-width:340px;text-align:left}
+.info .w{font:500 11px 'JetBrains Mono';letter-spacing:.14em;color:var(--orink);text-transform:uppercase}.info b{display:block;font:600 18px Fraunces;margin:2px 0 4px}
+.scn{margin-top:12px;height:54px;display:flex;gap:10px;align-items:flex-end;color:var(--muted)}.stop:nth-child(even) .scn{justify-content:flex-end}
+.scn svg{height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;display:none}
+[data-path=highway] .scn .a,[data-path=subway] .scn .b,[data-path=trail] .scn .c,[data-path=city] .scn .d{display:block}
+/* card skins */
+[data-card=sign] .plate{display:block;font:700 12px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;margin:-14px -14px 12px;border-radius:7px 7px 0 0;background:var(--lc);color:#fff}
+[data-card=sign][data-path=highway] .plate{background:#0a6b3a}[data-card=sign][data-path=trail] .plate{background:#7a5d28}[data-card=sign][data-path=city] .plate{background:#1f3cff}
+[data-card=ticket] .rc{border:1.5px dashed var(--line);border-radius:6px}
+[data-card=ticket] .stub{display:flex;justify-content:space-between;gap:10px;border-top:2px dashed var(--line);margin:12px -14px -14px;padding:10px 14px;font:500 10px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+[data-card=ticket] .rc::before,[data-card=ticket] .rc::after{content:"";position:absolute;bottom:38px;width:18px;height:18px;border-radius:50%;background:var(--paper);border:1.5px dashed var(--line);z-index:2}
+[data-card=ticket] .rc::before{left:-10px}[data-card=ticket] .rc::after{right:-10px}
+[data-card=polaroid] .rc{padding:12px 12px 48px;border-radius:2px;background:#fff;color:#2b2b2b;transform:rotate(var(--rot,-1.2deg))}[data-card=polaroid] .rc .sub,[data-card=polaroid] .rc .co{color:#2b2b2b}
+[data-card=polaroid] .cap{display:block;position:absolute;bottom:12px;left:0;right:0;text-align:center;font:400 22px 'Patrick Hand'}
+[data-card=stamp] .stp{display:grid;place-items:center;position:absolute;right:-16px;top:-18px;width:92px;height:92px;border:3px double var(--orink);border-radius:50%;color:var(--orink);font:700 9px/1.25 'JetBrains Mono';letter-spacing:.06em;text-align:center;text-transform:uppercase;transform:rotate(14deg);background:rgba(255,253,248,.9);z-index:3;padding:8px}
+/* right-side road bar: the vehicle follows your scroll; hover a stop and it drives there */
+.rbar{position:fixed;right:10px;top:34px;bottom:18px;width:36px;z-index:70}
+.rbar .rd{position:absolute;left:50%;top:0;bottom:0;width:12px;transform:translateX(-50%);background:#1f3cff;border-left:2px solid #e8f1ff;border-right:2px solid #e8f1ff;border-radius:4px}
+.rbar .rd::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed #e8f1ff;transform:translateX(-1px)}
+[data-path=subway] .rbar .rd{background:#1f3fd8;border:0}[data-path=subway] .rbar .rd::before{display:none}
+[data-path=trail] .rbar .rd{background:transparent;border:0;width:4px;border-left:4px dotted #7a5d28}[data-path=trail] .rbar .rd::before{display:none}
+[data-path=highway] .rbar .rd{background:#2b2b2b}
+.rbar .tk{position:absolute;left:50%;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--lc);transform:translate(-50%,-50%);display:grid;place-items:center;overflow:hidden;transition:transform .2s}
+.rbar .tk img{width:80%;height:80%;object-fit:contain}.rbar .tk.on{transform:translate(-50%,-50%) scale(1.5);z-index:3}
+.veh{position:absolute;left:50%;top:0;width:34px;height:34px;transform:translate(-50%,-50%);transition:top .25s ease;z-index:5;background:var(--or);border-radius:50%;border:3px solid #fff;display:grid;place-items:center;color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.veh svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:none}
+[data-path=highway] .veh .a,[data-path=subway] .veh .b,[data-path=trail] .veh .c,[data-path=city] .veh .d{display:block}
+.abt{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.chips span{border:1px solid var(--faint);border-radius:99px;padding:2px 12px;font-size:13.5px}
+ul.arw{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}ul.arw li{display:grid;grid-template-columns:20px 1fr;gap:6px}ul.arw li::before{content:"↳";color:var(--orink);font-weight:700}
+.prev{columns:2;column-gap:30px;margin-top:8px;font-size:14px}.prev div{break-inside:avoid;padding:4px 0;border-bottom:1px solid var(--faint)}.prev b{font:500 10px 'JetBrains Mono';letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block}
+.sides{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 24px}.side{padding:14px 14px 18px}.side img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:10px;border-radius:4px}.side h3{font:600 15px Inter;margin-bottom:4px}.side p{font-size:13.5px;color:var(--muted);line-height:1.45}
+.polrow{display:flex;flex-wrap:wrap;gap:34px 26px;padding:30px 10px 10px}
+@media (max-width:900px){.intro,.abt{grid-template-columns:1fr}.sides{grid-template-columns:1fr 1fr}.stop{grid-template-columns:70px 1fr;gap:0 14px}.stop .mk{grid-column:1;grid-row:1}.stop .rc,.stop:nth-child(even) .rc{grid-column:2;grid-row:1}.stop .info,.stop:nth-child(even) .info{grid-column:2;grid-row:2;text-align:left}.route::before,.route::after{left:35px}.rbar{display:none}}
+</style></head><body>
+<div id="hdr"></div>
+<main class="wrap">
+  <section class="intro" id="top"><div class="sheet"><h1 class="name">jasmine gu</h1></div><div class="sheet regs"><p class="hl" id="hl"></p><p class="muted" id="status" style="margin:10px 0 14px"></p><div id="soc"></div></div></section>
+  <section id="about" style="padding-top:20px"><div class="abt"><div class="sheet"><p id="intro" style="font-size:18px"></p><p class="label" style="margin-top:22px" id="hlead"></p><ul class="arw" id="hls"></ul><p class="label" style="margin-top:24px">Notes</p><div class="chips" id="notes"></div></div>
+    <div class="sheet"><p class="label">what i've been building:</p><ul class="arw" id="build"></ul><p class="label" style="margin-top:24px">previously:</p><div class="prev" id="prev"></div></div></div></section>
+
+  <section id="work"><div class="sec-h"><h2>The route</h2><span class="sect">TIMELINE · A-101</span><span class="label">scroll the road · hover a stop · click a card for the big video</span></div>
+    <div class="route" id="route"></div></section>
+
+  <div id="dim1"></div>
+  <section id="all"><div class="sec-h"><h2>All experiences</h2><span class="sect">SECTION A–A</span></div><div class="sheet regs"><div id="tilesBox"></div></div></section>
+
+  <div id="dim2"></div>
+  <section id="journey"><div class="sec-h"><h2>The Journey</h2><span class="sect">SHEET A-102</span></div>
+    <p class="label" style="margin-bottom:18px">Side projects</p><div class="sides" id="side"></div><p class="label" style="margin:44px 0 0">Gallery</p><div class="polrow" id="pols"></div></section>
+</main>
+<div id="ftr"></div>
+<div class="rbar" id="rbar"><div class="rd"></div><div id="tks"></div><div class="veh" id="veh">
+  <svg class="a" viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="7" rx="3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M6 10l2-4h8l2 4"/></svg>
+  <svg class="b" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="4"/><path d="M4 11h16M9 21l-2 2M15 21l2 2M8 15h.01M16 15h.01"/></svg>
+  <svg class="c" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v7M12 10l-4 3M12 10l4 3M12 15l-3 6M12 15l3 6"/></svg>
+  <svg class="d" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script>
+<script>
+const D = K2, $ = (s) => document.querySelector(s)
+document.body.dataset.rbar = ''
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer(); $('#soc').innerHTML = K.socials()
+$('#hl').textContent = D.headline; $('#status').textContent = D.status; $('#intro').textContent = D.intro; $('#hlead').textContent = D.hlLead
+$('#hls').innerHTML = D.highlights.map((h) => `<li><span>${h}</span></li>`).join(''); $('#notes').innerHTML = D.notes.map((n) => `<span>${n}</span>`).join('')
+$('#build').innerHTML = D.building.map((b) => `<li><span>${b}</span></li>`).join(''); $('#prev').innerHTML = D.previously.map(([c, n]) => `<div><b>${c}</b>${n}</div>`).join('')
+$('#dim1').innerHTML = K.dim('SECTION A–A · 1180'); $('#dim2').innerHTML = K.dim('SHEET 2 · 1180')
+K.tiles($('#tilesBox'), { tabs: true })
+$('#side').innerHTML = D.side.map((p) => `<article class="sheet side" data-drag><span class="tape2"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p></article>`).join(''); $('#pols').innerHTML = K.pols(10)
+
+// ---- the route: chronological stops, four path skins, four card skins ----
+const stops = D.exp.slice().sort((a, b) => a.order - b.order), LC = { job: '#1f3fd8', community: '#ed3801', school: '#2b2b2b' }
+const word = { highway: 'EXIT', subway: 'STOP', trail: 'MILE', city: 'LOT' }
+const scn = '<div class="scn"><svg class="a" viewBox="0 0 60 50"><path d="M4 46h52M14 46V20h32v26M20 20V8h20v12M24 28h12"/></svg><svg class="a" viewBox="0 0 40 50"><path d="M20 4l14 22H6zM20 22l16 22H4zM20 44v4"/></svg><svg class="b" viewBox="0 0 70 50"><path d="M4 46h62M8 46V26h12v20M24 46V12h14v34M42 46V22h10v24M56 46V30h10v16M28 20h6M28 28h6M28 36h6"/></svg><svg class="c" viewBox="0 0 40 50"><path d="M20 4l14 22H6zM20 22l16 22H4zM20 44v4"/></svg><svg class="c" viewBox="0 0 70 50"><path d="M2 46 22 12l12 20 8-12 24 26z"/></svg><svg class="d" viewBox="0 0 60 50"><path d="M4 46h52M10 46V22h16v24M32 46V10h18v36M15 30h6M38 18h6M38 28h6"/></svg></div>'
+const drawRoute = () => { const p = document.body.dataset.path || 'highway'
+  $('#route').innerHTML = stops.map((e, i) => { const n = String(i + 1).padStart(2, '0')
+    return `<div class="stop" data-i="${i}" style="--lc:${LC[e.kind]};--rot:${i % 2 ? 1.4 : -1.4}deg">
+      <div class="rc" data-cursor-label="${e.label}" data-id="${e.id}"><div class="plate">${word[p]} ${n} · ${e.co}</div><div class="m">${K.media(e)}</div><div class="co">${e.co}</div><p class="sub">${e.sub}</p><div class="tg">${e.tags.map((t) => `<span>${t}</span>`).join('')}</div>
+        <div class="stub"><span>admit one</span><span>${e.when}</span><span>${e.role}</span></div><i class="cap">${e.when}</i><div class="stp">${e.co}<br>${e.when}</div></div>
+      <div class="mk"><img src="${e.logo}" alt="${e.co} logo"></div>
+      <div class="info"><div class="sheet"><span class="w">${e.when}</span><b>${e.role}</b><span class="muted" style="font-size:13.5px">${e.kind === 'community' ? 'community line' : e.kind === 'school' ? 'school line' : 'work line'}</span></div>${scn}</div></div>` }).join('')
+  K.videos($('#route')); $$route()
+}
+const $$ = (s) => [...document.querySelectorAll(s)]
+$('#route').addEventListener('click', (ev) => { const c = ev.target.closest('.rc'); if (c) K.lightbox(D.exp.find((e) => e.id === c.dataset.id)) })
+
+// ---- right-side road bar ----
+const veh = $('#veh'), tks = $('#tks'); let hover = -1
+function $$route() { setTimeout(placeTicks, 60) }
+function placeTicks() { const H = document.documentElement.scrollHeight, rb = $('#rbar').getBoundingClientRect().height, off = $('#rbar').getBoundingClientRect().top
+  tks.innerHTML = $$('.stop').map((s, i) => { const e = stops[i], y = ((s.getBoundingClientRect().top + scrollY + s.offsetHeight / 2) / H) * rb; return `<div class="tk" data-i="${i}" style="top:${y}px;--lc:${LC[e.kind]}"><img src="${e.logo}" alt=""></div>` }).join(''); move() }
+function move() { const H = document.documentElement.scrollHeight - innerHeight, rb = $('#rbar').getBoundingClientRect().height
+  let y = (scrollY / Math.max(H, 1)) * rb; if (hover >= 0) { const t = tks.children[hover]; if (t) y = parseFloat(t.style.top) }
+  veh.style.top = y + 'px'; const mid = scrollY + innerHeight / 2; let act = -1; $$('.stop').forEach((s, i) => { const r = s.getBoundingClientRect(); if (r.top + scrollY <= mid && mid <= r.bottom + scrollY + 40) act = i })
+  ;[...tks.children].forEach((t, i) => t.classList.toggle('on', i === (hover >= 0 ? hover : act))) }
+addEventListener('scroll', move, { passive: true }); addEventListener('resize', placeTicks); addEventListener('load', () => setTimeout(placeTicks, 400))
+$('#route').addEventListener('mouseover', (e) => { const s = e.target.closest('.stop'); hover = s ? +s.dataset.i : -1; move() })
+$('#route').addEventListener('mouseleave', () => { hover = -1; move() })
+
+K.init()
+K.switches([{ key: 'path', label: 'Path', opts: [['highway', 'Highway'], ['subway', 'Subway'], ['trail', 'Trail'], ['city', 'City']] }, { key: 'card', label: 'Stop card', opts: [['sign', 'Sign'], ['ticket', 'Ticket'], ['polaroid', 'Polaroid'], ['stamp', 'Stamp']] }, { key: 'tiles', label: 'Grid', opts: [['feat', 'Featured'], ['sq', 'Square'], ['wide', 'Wide']] }], (k) => { if (k === 'path') drawRoute() })
+</script></body></html>

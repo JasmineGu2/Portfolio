@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 3 · Skills city</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.road{position:fixed;left:14px;top:0;bottom:0;width:12px;background:#1f3cff;z-index:30;border-left:1.5px solid #e8f1ff;border-right:1.5px solid #e8f1ff}
+.road::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed #e8f1ff;transform:translateX(-1px)}
+.car{position:absolute;left:50%;top:0;width:16px;height:16px;border-radius:50%;background:var(--or);border:3px solid #fff;transform:translate(-50%,-50%);transition:top .12s linear}
+.road .tick{position:absolute;left:20px;font:500 9px 'JetBrains Mono';letter-spacing:.14em;color:var(--muted);white-space:nowrap;text-transform:uppercase}
+.sign{display:inline-block;background:#1f3cff;color:#fff;border:2px solid #fff;outline:2px solid #1f3cff;border-radius:4px;padding:2px 12px;font:700 11px 'JetBrains Mono';letter-spacing:.14em;text-decoration:none;margin-right:10px}
+.sign:hover,.sign.on{background:var(--or);outline-color:var(--or)}
+nav.top{padding:18px 0 6px}
+.intro{padding:34px 0 30px;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
+.intro h1{font-size:clamp(32px,4.4vw,56px)}
+.band{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:min(62vh,600px);min-height:420px;background:#1f3cff;overflow:hidden}
+.band svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{cursor:pointer}.pin circle.ring{fill:#1f3cff;stroke:#fff;stroke-width:4;transition:.2s}.pin:hover circle.ring{stroke:var(--or);fill:#fff}
+.pin text{fill:#fff;font:700 13px 'JetBrains Mono';letter-spacing:.06em;paint-order:stroke;stroke:#1f3cff;stroke-width:5px}
+.pin .w{font:500 10px 'JetBrains Mono';opacity:.9}
+.rd{fill:#fff;font:500 11px 'JetBrains Mono';letter-spacing:.3em;opacity:.85}
+.here rect{fill:var(--or)}.here text{fill:#111;font:700 11px 'JetBrains Mono';letter-spacing:.12em}
+.pop{position:absolute;width:310px;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:4px;padding:14px;box-shadow:0 14px 34px rgba(0,0,0,.35);z-index:5}
+.pop .x{position:absolute;right:8px;top:6px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--ink)}
+.pop h3{font-size:22px;margin:4px 0 10px}.pop .media{margin-bottom:10px}
+.sec-h{display:flex;align-items:baseline;gap:16px;margin-bottom:26px}.sec-h h2{font-size:30px}
+.two{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:14px;max-width:680px}.checks li{display:grid;grid-template-columns:22px 1fr;gap:8px}.checks li::before{content:"↳";color:var(--orink);font-weight:700}
+.lots{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.lot{padding:0;background:var(--card);border:1.5px solid var(--line);position:relative;overflow:hidden}
+.lot .b{padding:14px}.lot h3{font-size:20px;margin:6px 0}
+.corner{position:absolute;top:0;right:0;width:54px;height:54px;clip-path:polygon(0 0,100% 0,100% 100%);color:var(--line);opacity:.55;z-index:3}
+.h-Engineering{background:repeating-linear-gradient(45deg,currentColor 0 1px,transparent 1px 5px)}
+.h-Product{background:repeating-linear-gradient(45deg,currentColor 0 1px,transparent 1px 5px),repeating-linear-gradient(-45deg,currentColor 0 1px,transparent 1px 5px)}
+.h-Other{background:radial-gradient(currentColor 1.2px,transparent 1.6px) 0 0/7px 7px}
+.roads{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.roads div{padding:12px 0;border-bottom:1px solid var(--faint)}.roads b{font:700 12px 'JetBrains Mono';letter-spacing:.1em}
+.miles{list-style:none;margin:0;padding:0 0 0 34px;border-left:3px solid #1f3cff;display:grid;gap:22px;position:relative}
+.miles li{position:relative;display:grid;grid-template-columns:130px 1fr;gap:18px}
+.miles li::before{content:"";position:absolute;left:-44px;top:6px;width:14px;height:14px;background:var(--paper);border:3px solid #1f3cff;border-radius:50%}
+.miles .m{font:500 10px 'JetBrains Mono';letter-spacing:.14em;color:var(--orink)}
+.town{width:100%;height:110px;display:block}
+@media (max-width:900px){.intro,.two,.lots,.roads{grid-template-columns:1fr}.miles li{grid-template-columns:1fr}.road{display:none}}
+</style></head><body>
+<div class="road" id="road"><i class="car" id="car"></i></div>
+<div class="wrap">
+<nav class="top"><a class="sign on" href="#home">HOME ST</a><a class="sign" href="#lots">WORK AVE</a><a class="sign" href="#roads">SKILLS RD</a><a class="sign" href="#miles">TIMELINE WAY</a><a class="sign" href="#office">CONTACT LN</a></nav>
+<section class="intro" id="home" style="padding-top:26px"><div><p class="label">City plan · placeholder mock</p><h1 id="tag" style="margin-top:12px"></h1></div><div><p class="muted" id="status" style="margin-bottom:16px"></p><div id="socials"></div></div></section>
+</div>
+
+<div class="band" id="band"><svg id="map" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Map of skills as roads, projects as intersections"></svg><div class="pop" id="pop" hidden></div></div>
+<div class="wrap"><p class="label" style="padding:10px 0 0">Roads are what I care about. Intersections are where I've worked. Click one.</p>
+
+<section id="about"><div class="sec-h"><h2>Site survey</h2><span class="label">About</span></div>
+  <div class="two"><p class="label" style="padding-top:6px">Area plan</p><div><p id="about-t" style="font-size:18px;max-width:660px;margin-bottom:24px"></p><ul class="checks" id="hl"></ul></div></div></section>
+
+<section id="lots"><div class="sec-h"><h2>Lots</h2><span class="label">Hatch = type · corner shows engineering / product / other</span></div><div class="lots" id="lotsGrid"></div></section>
+
+<section id="roads"><div class="sec-h"><h2>Road register</h2><span class="label">Skills, and what sits on each road</span></div><div class="roads" id="roadList"></div></section>
+
+<section id="miles"><div class="sec-h"><h2>Mile markers</h2><span class="label">Timeline</span></div><ol class="miles" id="mileList"></ol></section>
+
+<section id="office"><div class="sec-h"><h2>Site office</h2><span class="label">Contact</span></div><div id="socials2" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:26px"></div>
+  <svg class="town" id="town" viewBox="0 0 1000 110" preserveAspectRatio="xMinYMax meet"></svg>
+  <button class="pill" id="addHouse" type="button" style="margin:10px 0 90px">+ add a house</button></section>
+</div>
+
+<script src="mock-data.js"></script>
+<script>
+const S = SITE, $ = (s) => document.querySelector(s)
+$('#tag').textContent = S.tagline; $('#status').textContent = S.status; $('#socials').innerHTML = S.socials; $('#socials2').innerHTML = S.socials; $('#about-t').textContent = S.about
+$('#hl').innerHTML = S.highlights.map((h) => `<li><span>${h}</span></li>`).join('')
+
+// roads = skills; projects sit where two roads cross (intersections are computed, not hand-placed)
+const R = [
+  { n: 'PRODUCT STRATEGY AVE', a: [-20, 150], b: [1220, 250] }, { n: 'BUSINESS BLVD', a: [-20, 440], b: [1220, 360] },
+  { n: 'FULL-STACK ST', a: [260, -20], b: [380, 580] }, { n: 'AI / ML ROAD', a: [640, -20], b: [560, 580] },
+  { n: 'DATA WAY', a: [-20, -40], b: [1220, 560] }, { n: 'COMMUNITY LANE', a: [930, -20], b: [1030, 580] },
+  { n: 'USER RESEARCH ST', a: [-20, 320], b: [1220, 280] },
+]
+const PIN = { tesla: [3, 4], autodesk: [0, 3], 'autodesk-eng': [2, 4], intuit: [2, 6], omers: [1, 2], metaverse: [1, 4], laurelspace: [0, 2], hackwestern: [0, 5], ips: [5, 6] }
+const X = (p, q) => { const [x1, y1] = p.a, [x2, y2] = p.b, [x3, y3] = q.a, [x4, y4] = q.b
+  const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)); return [x1 + t * (x2 - x1), y1 + t * (y2 - y1)] }
+const line = (r, e = '') => `<line ${e} x1="${r.a[0]}" y1="${r.a[1]}" x2="${r.b[0]}" y2="${r.b[1]}"/>`
+const pos = {}, pinSvg = S.work.map((p, i) => { const [a, b] = PIN[p.id], [x, y] = X(R[a], R[b]); pos[p.id] = [x, y]
+  const right = x < 900
+  return `<g class="pin fade" style="--d:${1.6 + i * .12}s" data-id="${p.id}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><circle class="ring" r="11"/>
+    <text x="${right ? 20 : -20}" y="-1" text-anchor="${right ? 'start' : 'end'}">${p.n.toUpperCase()}</text><text class="w" x="${right ? 20 : -20}" y="13" text-anchor="${right ? 'start' : 'end'}">${p.when.toUpperCase()}</text></g>` }).join('')
+const [hx, hy] = X(R[4], R[6])
+$('#map').innerHTML = `<defs><pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#e8f1ff" fill-opacity=".55"/></pattern>
+  ${R.map((r, i) => `<path id="r${i}" d="M${r.a} L${r.b}"/>`).join('')}</defs>
+  <rect width="1200" height="560" fill="#1f3cff"/><rect width="1200" height="560" fill="url(#dots)"/>
+  <g stroke="#e8f1ff" stroke-width="38" stroke-linecap="butt">${R.map((r) => line(r)).join('')}</g>
+  <g stroke="#1f3cff" stroke-width="36">${R.map((r) => line(r)).join('')}</g>
+  <g stroke="#e8f1ff" stroke-width="1.4" fill="none" opacity=".8">${R.map((r, i) => line(r, `class="draw" pathLength="1" style="--d:${.2 + i * .2}s"`)).join('')}</g>
+  ${R.map((r, i) => `<text class="rd fade" style="--d:${1 + i * .1}s" dy="-6"><textPath href="#r${i}" startOffset="${[8, 6, 22, 10, 30, 14, 33][i]}%">${r.n}</textPath></text>`).join('')}
+  ${pinSvg}
+  <g class="here fade" style="--d:2.4s" transform="translate(${hx} ${hy})"><circle r="15" fill="none" stroke="#ed3801" stroke-width="6"/><rect x="24" y="-13" width="128" height="26" rx="2"/><text x="34" y="5">YOU ARE HERE</text></g>`
+
+const pop = $('#pop'), band = $('#band')
+const open = (id) => { const p = S.work.find((w) => w.id === id), el = document.querySelector(`.pin[data-id="${id}"]`)
+  pop.innerHTML = `<button class="x" aria-label="close">×</button><span class="label">${p.group} · ${p.when}</span><h3>${p.n}</h3>${S.media(p)}<p class="muted" style="font-size:14px;margin-bottom:8px">${p.line}</p>${S.tags(p)}`
+  pop.hidden = false; const c = band.getBoundingClientRect(), r = el.getBoundingClientRect()
+  pop.style.left = Math.max(12, Math.min(c.width - 322, r.left - c.left + (r.left - c.left > c.width * .55 ? -330 : 30))) + 'px'
+  pop.style.top = Math.max(10, Math.min(c.height - pop.offsetHeight - 10, r.top - c.top - 60)) + 'px'
+  const v = pop.querySelector('video'); if (v) { v.autoplay = true; v.play().catch(() => {}) }
+  pop.querySelector('.x').onclick = () => (pop.hidden = true) }
+document.querySelectorAll('.pin').forEach((g) => (g.onclick = () => open(g.dataset.id)))
+
+$('#lotsGrid').innerHTML = S.work.map((p, i) => `<article class="lot hov crop" style="padding:0" data-tip="Lot ${i + 1} · ${p.n}"><span class="corner h-${p.group}"></span>${S.media(p)}<div class="b"><span class="label">Lot ${String(i + 1).padStart(2, '0')} · ${p.group} · ${p.when}</span><h3>${p.n}</h3><p class="muted" style="font-size:14.5px;margin-bottom:10px">${p.line}</p>${S.tags(p)}</div></article>`).join('')
+$('#roadList').innerHTML = R.map((r, i) => `<div><b>${r.n}</b><div class="muted" style="font-size:14.5px">${Object.entries(PIN).filter(([, ab]) => ab.includes(i)).map(([id]) => S.work.find((w) => w.id === id).n).join(' · ')}</div></div>`).join('')
+$('#mileList').innerHTML = S.timeline.map((t, i) => `<li><span class="m">MILE ${String(i + 1).padStart(2, '0')}<br><span style="color:var(--muted)">${t.when}</span></span><span><b>${t.what}</b><br><span class="muted">${t.line}</span></span></li>`).join('')
+
+// little town along a road at the bottom; visitors can add houses
+const town = $('#town'); let n = 0; const cols = ['#ffe98a', '#d9cdf5', '#bfe8d2', '#f4b896', '#9fd3ff']
+const house = (i) => { const x = 20 + i * 62, h = 34 + ((i * 37) % 30), c = cols[i % 5]
+  return `<g class="fade" style="--d:${i * .08}s" stroke="var(--line)" stroke-width="1.5" stroke-linejoin="round"><polygon points="${x},${100 - h} ${x + 22},${88 - h} ${x + 22},${100 - 12} ${x},100" fill="${c}"/><polygon points="${x + 22},${88 - h} ${x + 46},${100 - h} ${x + 46},100 ${x + 22},${100 - 12}" fill="${c}" opacity=".7"/><polygon points="${x},${100 - h} ${x + 22},${88 - h} ${x + 46},${100 - h} ${x + 24},${108 - h}" fill="var(--paper)"/></g>` }
+const draw = () => { town.innerHTML = '<line x1="0" y1="104" x2="1000" y2="104" stroke="#1f3cff" stroke-width="4"/>' + Array.from({ length: n }, (_, i) => house(i)).join('') }
+n = 7; draw(); $('#addHouse').onclick = () => { n = Math.min(n + 1, 15); draw() }
+
+// the road down the left margin: the car follows your scroll, ticks mark sections
+const car = $('#car'), road = $('#road')
+document.querySelectorAll('section').forEach((s) => { const t = document.createElement('span'); t.className = 'tick'; t.textContent = (s.querySelector('h2') || { textContent: 'Home' }).textContent
+  t.dataset.for = s.id || ''; road.append(t) })
+const place = () => { const H = document.documentElement.scrollHeight - innerHeight, sy = scrollY; car.style.top = 8 + (sy / H) * (innerHeight - 16) + 'px'
+  road.querySelectorAll('.tick').forEach((t, i) => { const s = document.querySelectorAll('section')[i]; t.style.top = ((s.getBoundingClientRect().top + sy) / (H + innerHeight)) * innerHeight + 'px' }) }
+addEventListener('scroll', place, { passive: true }); addEventListener('resize', place); place()
+</script>
+<script src="mock.js"></script>
+</body></html>

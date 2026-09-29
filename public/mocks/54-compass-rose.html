@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 54 · Compass Rose</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+  body { padding: 40px 20px; }
+  .title { font: 28px Fraunces; margin: 0 0 8px; }
+  .desc { color: #666; font-size: 14px; margin: 0 0 24px; }
+  canvas { border: 1px solid #ddd; border-radius: 4px; display: block; margin: 0 auto; }
+  .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; font-size: 13px; }
+  .legend-item { display: flex; gap: 8px; align-items: center; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+</style>
+</head><body>
+
+<h1 class="title">Compass Rose</h1>
+<p class="desc">Your journey as a compass. Blue = Engineering focus, Orange = Product focus, Purple = Balanced. Center = You, now.</p>
+
+<canvas id="canvas" width="900" height="600"></canvas>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot" style="background: #3b82f6;"></div>
+    <span>Engineering-focused roles</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background: #f97316;"></div>
+    <span>Product-focused roles</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background: #8b5cf6;"></div>
+    <span>Balanced roles (50/50)</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background: #ec4899;"></div>
+    <span>You, now (Autodesk PM)</span>
+  </div>
+</div>
+
+<script src="k9-data.js"></script>
+<script src="k9.js"></script>
+<script>
+  const canvas = document.getElementById('canvas');
+  K9.compassRose(canvas, K9DATA);
+</script>
+
+</body></html>

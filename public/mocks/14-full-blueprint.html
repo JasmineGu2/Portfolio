@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-theme="blueprint"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 14 · Full blueprint</title>
+<link rel="stylesheet" href="k2.css"><link rel="stylesheet" href="k3.css">
+</head><body data-site data-nm="hide">
+<div id="hdr"></div>
+<header class="bpb" style="margin-top:0"><div class="wrap" id="nb"></div></header>
+<div class="wrap"><section style="padding:34px 0 10px"><div class="sec-h"><h2>Exploded view</h2><span class="sect">DETAIL 02 / A-101</span><span class="label">hover a layer</span></div><div id="lay"></div></section></div>
+<div class="wrap"><div id="home"></div></div>
+<div class="ftrmap"><div class="wrap" style="padding-bottom:14px"><div class="sec-h"><h2>Skills city</h2><span class="sect">SITE PLAN · A-103</span></div></div><div id="cityBox"></div><div id="ftr"></div></div>
+
+<script src="k2-data.js"></script><script src="k2.js"></script><script src="k3.js"></script>
+<script>
+const $ = (s) => document.querySelector(s)
+$('#hdr').innerHTML = K.header(0); $('#ftr').innerHTML = K.footer()
+$('#nb').innerHTML = K.nameBand()
+K.home($('#home')); K.city($('#cityBox'), { W: 1440, H: 620 })
+K.init(); K.theme('blueprint')
+const L = K.layers($('#lay'), 'both')
+K.sw3(['grid', 'tacc', 'txt', 'map', 'note'], { grid: 'none', tacc: 'dim', txt: 'dotted', map: 'blue', note: 'both' }, (k, v) => { if (k === 'note' && L) L.set(v) })
+</script></body></html>

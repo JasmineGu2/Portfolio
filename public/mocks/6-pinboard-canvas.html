@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="pencil"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 6 · Pinboard canvas</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+body{min-width:2450px;overflow:auto}
+.board{position:relative;width:2450px;height:1600px}
+.board>.obj{position:absolute;z-index:2}
+.zl{position:absolute;font:500 11px 'JetBrains Mono';letter-spacing:.3em;color:var(--muted)}
+.jump{position:fixed;left:12px;top:12px;z-index:60;display:flex;gap:6px;flex-wrap:wrap;background:var(--card);border:1px solid var(--faint);border-radius:99px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.jump b{font:700 11px 'JetBrains Mono';letter-spacing:.16em;padding:4px 10px}
+.pap{background:#fbfaf4;color:#2b2b2b;padding:30px 30px 26px;box-shadow:0 12px 26px rgba(0,0,0,.22);background-image:repeating-linear-gradient(transparent 0 31px,rgba(80,130,200,.18) 31px 32px);position:relative}
+.pap h1{font-size:40px;margin:10px 0 12px;background:#fbfaf4;display:inline}
+.pap .muted{color:#6b6b6b}
+.bpc{background:#1f3fd8;background-image:linear-gradient(rgba(232,241,255,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.16) 1px,transparent 1px);background-size:40px 40px;color:#e8f1ff;padding:16px;border-radius:3px;box-shadow:0 12px 26px rgba(0,0,0,.25)}
+.bpc .label{color:#9fd3ff}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px}.checks li{display:grid;grid-template-columns:22px 1fr;gap:6px}.checks li::before{content:"☑";color:#9fd3ff}
+.doc{background:#fff;color:#2b2b2b;padding:10px 10px 12px;box-shadow:0 6px 14px rgba(0,0,0,.2);position:relative}
+.doc h3{font-size:17px;margin:7px 0 2px}.doc p{font-size:12.5px;color:#666;line-height:1.4}
+.idx{background:#fff;color:#2b2b2b;box-shadow:0 5px 12px rgba(0,0,0,.14);border-top:3px solid #e0574f;padding:10px;position:relative;background-image:repeating-linear-gradient(transparent 0 23px,#a8c7e8 23px 24px);background-position:0 40px}
+.idx img{aspect-ratio:16/10;object-fit:cover;width:100%;margin-bottom:8px}.idx h3{font-size:16px;background:#fff;display:inline}.idx p{font-size:12.5px;margin-top:6px;color:#555}
+.tapeline{display:flex;gap:0;background:#fffdf5;color:#2b2b2b;border:1px solid #d8cfb8;box-shadow:0 8px 18px rgba(0,0,0,.16);padding:18px 20px;width:2250px;background-image:repeating-linear-gradient(90deg,transparent 0 16px,rgba(0,0,0,.05) 16px 17px)}
+.tapeline div{flex:1;padding:0 16px;border-right:2px dashed #cfc7ad}.tapeline div:last-child{border:0}
+.tapeline .w{font:500 10px 'JetBrains Mono';letter-spacing:.14em;color:#c22e01}.tapeline b{display:block;font:600 17px Fraunces;margin:4px 0 2px}.tapeline span.d{font-size:13px;color:#666}
+.env{background:#f3ead6;border:1.5px solid #cdbf9c;padding:22px;box-shadow:0 8px 18px rgba(0,0,0,.14);color:#2b2b2b;position:relative}
+.env .stamp{position:absolute;right:14px;top:12px;width:50px;height:60px;border:2px dashed #b04a2f;display:grid;place-items:center;font:700 10px 'JetBrains Mono';color:#b04a2f;transform:rotate(4deg)}
+.hint{position:absolute;left:120px;top:44px;z-index:1}
+</style></head><body>
+<div class="jump"><b>PINBOARD</b><button class="pill" data-go="0,40">Home</button><button class="pill" data-go="700,40">About</button><button class="pill" data-go="1300,40">Layers</button><button class="pill" data-go="0,570">Work</button><button class="pill" data-go="1300,970">Side projects</button><button class="pill" data-go="0,1350">Timeline</button><button class="pill" data-go="1850,40">Contact</button></div>
+<div class="board" id="board"><p class="label hint">Wildcard: breaks "same sections, same order". Drag anything. Everything is on one board.</p></div>
+
+<script src="mock-data.js"></script>
+<script>
+const S = SITE, B = document.getElementById('board')
+const add = (h, x, y, o = {}) => { const d = document.createElement('div'); d.className = 'obj ' + (o.c || ''); d.dataset.drag = ''; d.style.cssText = `left:${x}px;top:${y}px;width:${o.w || 280}px;transform:rotate(${o.r || 0}deg)`; d.innerHTML = h; B.append(d); return d }
+'ABCDEF'.split('').forEach((c, i) => { const z = document.createElement('span'); z.className = 'zl'; z.style.cssText = `left:${200 + i * 400}px;top:8px`; z.textContent = c; B.append(z) })
+;[1, 2, 3, 4].forEach((n, i) => { const z = document.createElement('span'); z.className = 'zl'; z.style.cssText = `left:8px;top:${120 + i * 340}px`; z.textContent = n; B.append(z) })
+
+add(`<span class="clip"></span><p class="label">from the desk of</p><h1>${S.tagline}</h1><p class="muted" style="margin:12px 0 14px">${S.status}</p><div>${S.socials}</div>`, 120, 100, { w: 520, r: -1, c: 'pap' })
+add(`<p class="label" style="color:#9fd3ff;margin-bottom:10px">About · notes to self</p><p style="font-size:16px;margin-bottom:14px;color:#fff">${S.about}</p><ul class="checks">${S.highlights.map((h) => `<li><span>${h}</span></li>`).join('')}</ul>`, 760, 100, { w: 520, r: .6, c: 'punched' })
+
+// layers: a small exploded stack on a blueprint card
+const L = S.layers, cx = 150, ys = [70, 150, 230, 310]
+const slab = (l, i) => { const y = ys[i]; return `<g><polygon points="${cx},${y - 46} ${cx + 120},${y} ${cx},${y + 46} ${cx - 120},${y}" fill="${l.color}" fill-opacity=".55" stroke="#e8f1ff" stroke-width="1.5"/><path d="M${cx - 120} ${y}v12L${cx} ${y + 58}l120 -46V${y}" fill="none" stroke="#e8f1ff" stroke-width="1.5"/>
+  <line x1="${cx + 120}" y1="${y}" x2="290" y2="${y}" stroke="#e8f1ff"/><text x="298" y="${y - 2}" fill="#e8f1ff" font-family="JetBrains Mono" font-size="13" font-weight="700" letter-spacing="1">${l.label.toUpperCase()}</text><text x="298" y="${y + 13}" fill="#9fd3ff" font-family="JetBrains Mono" font-size="10.5">${l.caps.split(' · ').slice(0, 2).join(' · ').toUpperCase()}</text></g>` }
+add(`<p class="label">Fig. 02 · layers</p><svg viewBox="0 0 520 400" width="100%">${L.map(slab).join('')}</svg>`, 1360, 90, { w: 520, r: -.8, c: 'bpc' })
+
+add(`<div class="stamp">TORONTO<br>ON</div><p class="hand" style="font-size:26px;margin-bottom:10px">Say hi.</p><div style="display:flex;gap:6px;flex-wrap:wrap">${S.socials}</div>`, 1940, 110, { w: 300, r: 2, c: 'env' })
+
+// work: six video screens, then image documents
+S.work.filter((p) => p.video).forEach((p, i) => add(`<span class="clip"></span>${S.media(p)}<div class="label" style="margin-top:8px">${p.when}</div><h3>${p.n}</h3><p>${p.line}</p>`, 100 + i * 385, 610 + (i % 2) * 40, { w: 300, r: [-1.5, 1.2, -.7, 1.6, -1, .8][i], c: 'doc hov' }))
+S.work.filter((p) => !p.video).forEach((p, i) => add(`<span class="clip"></span>${S.media(p)}<div class="label" style="margin-top:8px">${p.when}</div><h3>${p.n}</h3><p>${p.line}</p>`, 100 + i * 330, 1010, { w: 270, r: [1, -1.2, .8][i], c: 'doc hov' }))
+S.photos.slice(0, 4).forEach(([src, cap], i) => add(`<span class="tape"></span><img src="${src}" alt="${cap}" loading="lazy"><span style="position:absolute;bottom:4px;left:0;right:0;text-align:center;font:700 15px Caveat;color:#444">${cap}</span>`, 1080 + i * 78, 1020 + (i % 2) * 34, { w: 150, r: [-4, 3, -2, 5][i], c: 'polaroid' }))
+S.side.forEach((p, i) => add(`<span class="clip"></span><img src="${p.img}" alt="${p.n}" loading="lazy"><h3>${p.n}</h3><p>${p.line}</p>`, 1450 + i * 250, 1010 + (i % 2) * 30, { w: 225, r: [-1.5, 1, -.6, 1.6][i], c: 'idx' }))
+;[[S.sticky(0), 1290, 480, 'sticky'], [S.sticky(1, 'l'), 60, 480], [S.sticky(2, 'm'), 1780, 540], [S.sticky(3), 2140, 800]].forEach(([h, x, y]) => { const t = document.createElement('div'); t.innerHTML = h; const el = t.firstElementChild; el.removeAttribute('data-drag'); add(el.outerHTML, x, y, { w: 190 }) })
+
+add(S.timeline.map((t) => `<div><span class="w">${t.when.toUpperCase()}</span><b>${t.what}</b><span class="d">${t.line}</span></div>`).join(''), 100, 1410, { w: 2250, c: 'tapeline' })
+
+document.querySelectorAll('[data-go]').forEach((b) => (b.onclick = () => { const [x, y] = b.dataset.go.split(',').map(Number); scrollTo({ left: Math.max(0, x - 60), top: Math.max(0, y - 70), behavior: 'smooth' }) }))
+</script>
+<script src="mock.js"></script>
+</body></html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock 53 · Two Roads (Parallel)</title><link rel="stylesheet" href="k7.css">
+<style>html,body{margin:0;background:#0e3b8f}body{min-height:100vh}</style></head><body>
+<div id="app"></div>
+<script src="k7-data.js"></script><script src="k7.js"></script><script src="k7-scenes.js"></script><script>
+  // Two-road scene: ENGINEERING (top) and PRODUCT (bottom) run parallel, all converge at current role
+  const twoRoadsScene = (K7, D, pal) => {
+    const { RoadSet, pin, lm, bg } = K7;
+    const roads = new RoadSet(), pins = [];
+
+    // Main roads: Engineering (top) and Product (bottom)
+    roads.add([[100, 280], [1100, 280]], 20, { label: 'ENGINEERING ROAD', t: 0.5, cls: 'role' });
+    roads.add([[100, 520], [1100, 520]], 20, { label: 'PRODUCT ROAD', t: 0.5, cls: 'role' });
+
+    // Plot experiences on their respective roads based on eng/prod split
+    D.exp.forEach((e, i) => {
+      const progress = (i + 1) / (D.exp.length + 1); // spread along the roads
+      const x = 100 + progress * 1000;
+
+      if (e.eng >= 50) {
+        // Engineering-heavy: on top road
+        pins.push(pin(e.id, x, 250, 'ENGINEERING', { side: 1 }));
+      }
+      if (e.prod >= 40) {
+        // Product-heavy: on bottom road
+        pins.push(pin(e.id, x, 550, 'PRODUCT', { side: 1 }));
+      }
+    });
+
+    // Current role: where roads converge
+    const meLabel = () => `<polygon class="blk me" points="900,350 950,330 960,410 910,430"/><text class="blabel me" transform="translate(925 380) rotate(0)"><tspan x="0" dy="0">YOU</tspan><tspan x="0" dy="11">NOW</tspan></text>`;
+
+    return {
+      name: 'Two Roads (Parallel)',
+      line: 'Engineering (blue) and Product (orange) roads run parallel through your career, converging at your current role.',
+      svg: bg() + roads.casings() + roads.fills() + roads.labels() + meLabel() + roads.hits(),
+      pins: [...pins, lm('western', 80, 200, { side: 1 }), lm('hack-western', 150, 620, { side: -1 })],
+      W: 1200,
+      H: 760,
+    };
+  };
+
+  K7.mount(document.getElementById('app'), twoRoadsScene, { palette: 'blue' });
+</script>
+</body></html>
