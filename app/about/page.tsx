@@ -31,6 +31,7 @@ export default function AboutPage() {
         </div>
         <div className="q-w q-block">
           <p className="q-lab">{reading.title}</p>
+          {reading.subtitle && <p className="bs-sub">{reading.subtitle}</p>}
           <BookShelf3D items={reading.items} labels={READING_LABELS} />
         </div>
         <div className="q-w q-block" id="tools"></div>

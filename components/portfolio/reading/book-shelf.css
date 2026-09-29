@@ -1,4 +1,5 @@
 /* 3D book shelf (adapted from Cue Foundations cue074). Scoped under .bs so it can sit inside any page. */
+.bs-sub { margin: -6px 0 18px; font: 400 20px/1.4 Inter, sans-serif; color: rgba(27, 27, 27, .66); }
 .bs { position: relative; height: 560px; outline: none; user-select: none; -webkit-user-select: none; cursor: grab; }
 .bs:focus-visible { outline: 2px solid #ed3801; outline-offset: 6px; border-radius: 8px; }
 .bs:active { cursor: grabbing; }

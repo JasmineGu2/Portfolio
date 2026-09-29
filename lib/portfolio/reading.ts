@@ -11,6 +11,7 @@ export interface ReadingItem {
 
 export interface Reading {
   title: string
+  subtitle?: string
   items: ReadingItem[]
 }
 
@@ -33,11 +34,13 @@ export function getReading(): Reading {
   const raw = fs.readFileSync(path.join(process.cwd(), 'content', 'reading.md'), 'utf8')
   const body = raw.replace(/^---[\s\S]*?---\s*/, '')
   let title = 'Thought pieces'
+  let subtitle: string | undefined
   let kind = ''
   const items: ReadingItem[] = []
   for (const line of body.split(/\r?\n/)) {
     const t = line.trim()
     if (t.startsWith('# ')) title = t.slice(2).trim()
+    else if (t && !kind && !t.startsWith('#') && !t.startsWith('- ') && !subtitle) subtitle = t
     else if (t.startsWith('## ')) kind = t.slice(3).trim()
     else if (t.startsWith('- ')) {
       const text = t.slice(2).trim()
@@ -49,5 +52,5 @@ export function getReading(): Reading {
       }
     }
   }
-  return { title, items }
+  return { title, subtitle, items }
 }

@@ -5,6 +5,8 @@ updated: 2026-09-29
 
 # Thought pieces
 
+Some reads I love
+
 ## Books
 - Hooked: how to build habit forming products
 - Drive, Daniel H Park
