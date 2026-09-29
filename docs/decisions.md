@@ -17,3 +17,10 @@
 - Moved: app/proto/, app/dev/, app/bento*, app/stack-colors, app/city-growth, app/mocks-gallery, specs/01-11.
 - Kept: live routes only (home, about, architecture, autodesk, tesla, work/[slug], ask, projects).
 - Alternatives: delete prototypes entirely (but archive preserves them for reference).
+
+## 2026-09-28 · Ultra-lean main repo: keep only home, about, work, ask
+- Why: focus on core site; everything unused was bloating context and distraction; archive preserves history.
+- Moved to archive: routes (autodesk, tesla, architecture, projects, intuit, metaverse, omers, experience-videos, ai, about-v2), CSS (case-study-*, landing-theme, pf-*, bento-*), public folders (case-studies, contact-tiles, gallery, play, projects, puzzle, videos).
+- Kept: app/(home), about, work, ask, api; public/fonts, icons, mocks, work; all content markdown.
+- Result: ~92% codebase reduction; main repo now ~50 routes → 5 routes, focused on live site only.
+- Alternatives: keep everything in main (but bloats context and CI); delete instead of archive (but loses reference).
