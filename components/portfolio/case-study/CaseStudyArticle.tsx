@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import type { CaseStudy, CaseStudyBlock, CaseStudyMedia } from '@/lib/portfolio/case-studies'
 import { CASE_STUDY_LABELS } from '@/lib/portfolio/case-studies'
@@ -54,20 +53,24 @@ function HeroMedia({ media }: { media: CaseStudyMedia }) {
 export function CaseStudyArticle({ study }: { study: CaseStudy }) {
   const tocItems = study.sections.map((section) => ({ id: section.id, label: section.tocLabel ?? section.heading }))
   const meta = study.meta.join(' · ')
+  const hasWriteUp = study.sections.length > 0
 
   return (
     <div className={styles.page}>
       <div className={styles.frame}>
         <div className={styles.topRow}>
-          <Link href={CASE_STUDY_LABELS.backHref} className={styles.back}>
+          {/* a plain link on purpose: home's hero and tiles are built by scripts that only run on a full page load */}
+          <a href={CASE_STUDY_LABELS.backHref} className={styles.back}>
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
             {CASE_STUDY_LABELS.back}
-          </Link>
+          </a>
         </div>
 
-        <aside className={styles.aside}>
-          <TableOfContents items={tocItems} label={CASE_STUDY_LABELS.onThisPage} ariaLabel={CASE_STUDY_LABELS.tocAria} />
-        </aside>
+        {hasWriteUp && (
+          <aside className={styles.aside}>
+            <TableOfContents items={tocItems} label={CASE_STUDY_LABELS.onThisPage} ariaLabel={CASE_STUDY_LABELS.tocAria} />
+          </aside>
+        )}
 
         <article className={styles.article}>
           <header>
@@ -78,6 +81,14 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
           </header>
 
           {study.heroMedia && <HeroMedia media={study.heroMedia} />}
+
+          {study.tags && study.tags.length > 0 && (
+            <div className={styles.tagRow} aria-label={CASE_STUDY_LABELS.tagsAria} role="group">
+              <Block block={{ type: 'tags', items: study.tags }} />
+            </div>
+          )}
+
+          {!hasWriteUp && <p className={styles.comingSoon}>{CASE_STUDY_LABELS.comingSoon}</p>}
 
           <div className={styles.body}>
             {study.sections.map((section) => (

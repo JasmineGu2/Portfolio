@@ -38,5 +38,8 @@ export interface CaseStudy {
   /** Short facts shown as one line, joined with a dot. */
   meta: string[]
   heroMedia?: CaseStudyMedia
+  /** Skills and themes shown under the hero media. */
+  tags?: string[]
+  /** The written sections. Empty means the full write-up isn't ready yet, so the page shows a "coming soon" note. */
   sections: CaseStudySection[]
 }

@@ -1,0 +1,1 @@
+Orbits: four thin isometric discs stacked bottom to top (Software Engineering, Full-stack, Frontend specialized, Product / Business), each with a wider orbit ring as the view zooms out; four language chips orbit the smallest ring; hover lights a ring.

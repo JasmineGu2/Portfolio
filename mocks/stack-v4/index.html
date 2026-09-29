@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stack v4 - Blueprint cross-section</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0e3b8f;--orange:#ed3801;--paper:#fffefb;--line:rgba(255,254,251,.78);--faint:rgba(255,254,251,.18)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--paper);font-family:Inter,sans-serif;padding:16px}
+.card{width:100%;max-width:560px;background:var(--blue);border-radius:1.35rem;overflow:hidden;position:relative;
+ background-image:linear-gradient(rgba(255,254,251,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,254,251,.05) 1px,transparent 1px);background-size:28px 28px}
+svg{display:block;width:100%;height:auto}
+text{font-family:'JetBrains Mono',monospace;fill:var(--paper)}
+.lab{font-size:13.5px;letter-spacing:.08em;font-weight:500}
+.num{font-size:11px;letter-spacing:.1em;fill:rgba(255,254,251,.6)}
+.chip text{font-size:14px;letter-spacing:.02em}
+.ttl{font-size:11px;letter-spacing:.14em}
+.disp{font-family:Fraunces,serif;font-size:19px;font-weight:500}
+.band{cursor:default;outline:none}
+.band .hl{fill:var(--paper);opacity:0;transition:opacity .18s}
+.band .lead{stroke:var(--line);stroke-width:1;fill:none;transition:stroke .18s}
+.band .dot{fill:var(--blue);stroke:var(--paper);stroke-width:1.2;transition:fill .18s}
+.band .lab{transition:fill .18s}
+.band:hover .hl,.band:focus-visible .hl{opacity:.16}
+.band:hover .lead,.band:focus-visible .lead{stroke:var(--orange);stroke-width:1.8}
+.band:hover .dot,.band:focus-visible .dot{fill:var(--orange)}
+.band:hover .lab,.band:focus-visible .lab{fill:#fff}
+.band:hover .tick,.band:focus-visible .tick{stroke:var(--orange);stroke-width:2}
+.tick{stroke:var(--line);stroke-width:1}
+@media (prefers-reduced-motion:no-preference){
+ .band{animation:rise .7s both}.b1{animation-delay:.05s}.b2{animation-delay:.15s}.b3{animation-delay:.25s}.b4{animation-delay:.35s}
+ @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+ .compass{animation:spin 240s linear infinite;transform-origin:280px 300px}
+ @keyframes spin{to{transform:rotate(360deg)}}
+}
+@media (prefers-reduced-motion:reduce){.band .hl,.band .lead,.band .dot,.band .lab{transition:none}}
+@media (max-width:480px){.lab{font-size:16px;letter-spacing:.04em}.num{font-size:13px}.chip text{font-size:14.5px;letter-spacing:0}.ttl{font-size:13px}.disp{font-size:22px}}
+</style></head><body>
+<div class="card">
+<svg viewBox="0 0 560 560" role="img" aria-labelledby="t d">
+<title id="t">Stack: four layers, bottom to top</title>
+<desc id="d">Section drawing. Software Engineering (C++, Java, Python, TypeScript/React) at the base, then Full-stack, Frontend specialized, and Product / Business on top.</desc>
+<defs>
+ <pattern id="cross" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0L12 12M12 0L0 12" stroke="rgba(255,254,251,.4)" stroke-width="1"/></pattern>
+ <pattern id="diag" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V10" stroke="rgba(255,254,251,.45)" stroke-width="1.2"/></pattern>
+ <pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.1" fill="rgba(255,254,251,.55)"/></pattern>
+</defs>
+
+<g class="compass" fill="none" stroke="rgba(255,254,251,.18)" stroke-width="1">
+ <circle cx="280" cy="300" r="240"/><circle cx="280" cy="300" r="180" stroke-dasharray="3 6"/>
+ <path d="M280 40V560M20 300H540"/><path d="M280 300L450 130"/>
+ <circle cx="280" cy="300" r="4"/>
+</g>
+
+<g>
+ <rect x="24" y="22" width="150" height="34" fill="none" stroke="rgba(255,254,251,.78)"/>
+ <path d="M24 39H174" stroke="rgba(255,254,251,.78)"/>
+ <text class="ttl" x="32" y="35">FIG. 02 · STACK</text>
+ <text class="num" x="32" y="51">SECTION A–A</text>
+</g>
+
+<path d="M30 96V500" stroke="rgba(255,254,251,.78)" fill="none"/>
+
+<g class="band b4" tabindex="0" aria-label="Product / Business, top layer">
+ <rect x="52" y="96" width="330" height="82" fill="none" stroke="#fffefb" stroke-width="1.6" stroke-dasharray="7 4"/>
+ <rect class="hl" x="52" y="96" width="330" height="82"/>
+ <text class="disp" x="217" y="143" text-anchor="middle">Product / Business</text>
+ <path class="tick" d="M24 96H44M24 178H44"/>
+ <path class="lead" d="M382 137H404"/><circle class="dot" cx="382" cy="137" r="3.5"/>
+ <text class="num" x="412" y="120">04</text>
+ <text class="lab" x="412" y="139">PRODUCT /</text><text class="lab" x="412" y="156">BUSINESS</text>
+</g>
+
+<g class="band b3" tabindex="0" aria-label="Frontend specialized">
+ <rect x="52" y="178" width="330" height="82" fill="url(#dots)" stroke="#fffefb" stroke-width="1.6"/>
+ <rect class="hl" x="52" y="178" width="330" height="82"/>
+ <path class="tick" d="M24 260H44"/>
+ <path class="lead" d="M382 219H404"/><circle class="dot" cx="382" cy="219" r="3.5"/>
+ <text class="num" x="412" y="202">03</text>
+ <text class="lab" x="412" y="221">FRONTEND</text><text class="lab" x="412" y="238">SPECIALIZED</text>
+</g>
+
+<g class="band b2" tabindex="0" aria-label="Full-stack">
+ <rect x="52" y="260" width="330" height="82" fill="url(#diag)" stroke="#fffefb" stroke-width="1.6"/>
+ <rect class="hl" x="52" y="260" width="330" height="82"/>
+ <path class="tick" d="M24 342H44"/>
+ <path class="lead" d="M382 301H404"/><circle class="dot" cx="382" cy="301" r="3.5"/>
+ <text class="num" x="412" y="292">02</text>
+ <text class="lab" x="412" y="311">FULL-STACK</text>
+</g>
+
+<g class="band b1" tabindex="0" aria-label="Software Engineering, foundation: C++, Java, Python, TypeScript/React">
+ <rect x="52" y="342" width="330" height="158" fill="url(#cross)" stroke="#fffefb" stroke-width="2"/>
+ <rect class="hl" x="52" y="342" width="330" height="158"/>
+ <path d="M52 384H382M52 458H382" stroke="#fffefb" stroke-width="1.4"/>
+ <g class="chip">
+  <rect x="62" y="366" width="150" height="36" fill="#0e3b8f" stroke="#fffefb" stroke-width="1.4"/><text x="137" y="389" text-anchor="middle">C++</text>
+  <rect x="220" y="366" width="150" height="36" fill="#0e3b8f" stroke="#fffefb" stroke-width="1.4"/><text x="295" y="389" text-anchor="middle">Java</text>
+  <rect x="62" y="440" width="150" height="36" fill="#0e3b8f" stroke="#fffefb" stroke-width="1.4"/><text x="137" y="463" text-anchor="middle">Python</text>
+  <rect x="220" y="440" width="150" height="36" fill="#0e3b8f" stroke="#fffefb" stroke-width="1.4"/><text x="295" y="463" text-anchor="middle">TypeScript/React</text>
+ </g>
+ <path class="tick" d="M24 500H44"/>
+ <path class="lead" d="M382 421H404"/><circle class="dot" cx="382" cy="421" r="3.5"/>
+ <text class="num" x="412" y="404">01</text>
+ <text class="lab" x="412" y="423">SOFTWARE</text><text class="lab" x="412" y="440">ENGINEERING</text>
+</g>
+
+<path d="M20 500H540" stroke="rgba(255,254,251,.78)" fill="none"/>
+<path d="M52 500l-10 12M82 500l-10 12M112 500l-10 12M142 500l-10 12M172 500l-10 12M202 500l-10 12M232 500l-10 12M262 500l-10 12M292 500l-10 12M322 500l-10 12M352 500l-10 12M382 500l-10 12" stroke="rgba(255,254,251,.3)"/>
+</svg>
+</div>
+</body></html>

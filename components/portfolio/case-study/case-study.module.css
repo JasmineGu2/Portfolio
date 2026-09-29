@@ -1,7 +1,7 @@
 /*
  * Long-form case-study layout. Measurements follow the reference article (nicholaschen.me/blogs/...):
- * a 72rem frame split into [1fr | 30rem | 1fr] with a 2rem gap, so the reading column is 480px and
- * centred; the section list sits right-aligned in the left column, 12rem wide, sticky 6rem from the top.
+ * a 90rem frame split into [1fr | 54rem | 1fr] with a 2rem gap, so the reading column is up to 864px and
+ * centred; the section list sits right-aligned in the left column, 14rem wide, sticky 6rem from the top.
  * Type: 30/36 title, 20/28 section headings, 14px body at leading-relaxed, 16px between paragraphs,
  * 32px between sections. Below 900px the side list becomes an "On this page" disclosure above the article.
  */
@@ -14,7 +14,7 @@
 }
 
 .frame {
-  max-width: 72rem;
+  max-width: 90rem;
   margin-inline: auto;
   padding: 4rem 1.5rem 6rem;
   display: grid;
@@ -24,7 +24,7 @@
 .topRow,
 .article {
   width: 100%;
-  max-width: 30rem;
+  max-width: 54rem;
   margin-inline: auto;
   min-width: 0;
 }
@@ -35,7 +35,8 @@
 
 @media (min-width: 900px) {
   .frame {
-    grid-template-columns: 1fr minmax(0, 30rem) 1fr;
+    /* side columns never drop below 12rem, so on small laptops the article narrows instead of squeezing the section names */
+    grid-template-columns: minmax(12rem, 1fr) minmax(0, 54rem) minmax(12rem, 1fr);
     column-gap: 2rem;
     align-items: start;
   }
@@ -50,7 +51,7 @@
     top: 6rem;
     justify-self: end;
     width: 100%;
-    max-width: 12rem;
+    max-width: 14rem;
     max-height: calc(100vh - 8rem);
     overflow-y: auto;
   }
@@ -223,6 +224,21 @@
   color: var(--pf-ink);
 }
 
+/* Roles without a full write-up yet: tags under the hero, then a short note in place of the body */
+.tagRow {
+  margin: 0 0 1.5rem;
+}
+.comingSoon {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 1px dashed var(--pf-card-border-hover);
+  border-radius: var(--pf-card-radius-sm);
+  background: var(--pf-canvas-alt);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--pf-muted);
+}
+
 /* Section list */
 .tocList {
   list-style: none;
@@ -266,7 +282,7 @@
 
 /* Mobile disclosure */
 .disclosure {
-  max-width: 30rem;
+  max-width: 54rem;
   width: 100%;
   margin: 0 auto 2rem;
   border: 1px solid var(--pf-card-border);

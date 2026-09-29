@@ -1,6 +1,7 @@
 /* Scrollspy line navigation, adapted from Cue Foundations cue084. Desktop only; phones keep the "On this page" menu. */
 .lines {
   list-style: none;
+  gap: 6px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -8,16 +9,17 @@
 }
 .line {
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 40px; /* big hit area */
-  height: 24px;
+  display: block;
+  /* the bar sits in a 36px slot on the left; the section name follows it and may wrap to two lines */
+  padding: 3px 0 3px 36px;
   text-decoration: none;
   border-radius: 2px;
 }
 .line::before {
   content: '';
-  display: block;
+  position: absolute;
+  left: 0;
+  top: calc(3px + 0.625em - 1px); /* centred on the label's first line (18px x 1.25 leading) */
   width: 8px;
   height: 2px;
   border-radius: 2px;
@@ -36,27 +38,22 @@
   outline: 2px solid var(--pf-brand-orange-ink);
   outline-offset: 2px;
 }
-/* Section name: the link's accessible name, shown as a tooltip on hover/focus */
+/* Section name: always visible; muted until its section is the one being read */
 .tip {
-  position: absolute;
-  left: 36px;
-  top: 50%;
-  transform: translateY(-50%) translateX(-10px);
-  opacity: 0;
-  pointer-events: none;
+  display: block;
   font-size: 18px;
   line-height: 1.25;
   font-weight: 500;
-  color: #555;
-  /* the side column is ~192px wide: long names wrap instead of being clipped */
-  width: max-content;
-  max-width: 9.5rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: var(--pf-muted, #8a857c);
+  overflow-wrap: break-word;
+  transition: color 0.3s ease;
 }
-.line:hover .tip,
-.line:focus-visible .tip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
+.line:hover .tip {
+  color: #555;
+}
+.line[aria-current='true'] .tip {
+  color: var(--pf-dark, #141210);
+  font-weight: 600;
 }
 @media (prefers-reduced-motion: reduce) {
   .line::before,

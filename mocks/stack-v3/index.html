@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack v3 - Orbits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{ --blue:#0e3b8f; --orange:#ed3801; --paper:#fffefb; --line:rgba(255,254,251,.9); }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Inter,system-ui,sans-serif}
+  .card{
+    width:560px;max-width:100%;flex:0 1 560px;min-width:0;border-radius:1.35rem;overflow:hidden;position:relative;
+    background:
+      linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px) 0 0/28px 28px,
+      radial-gradient(120% 90% at 50% 40%,#134aab 0%,var(--blue) 70%);
+  }
+  svg{display:block;width:100%;height:auto}
+  text{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .lbl{font-size:13px;fill:var(--paper);paint-order:stroke;stroke:var(--blue);stroke-width:6px;stroke-linejoin:round;transition:fill .18s}
+  .chip text{font-size:12.5px;letter-spacing:.02em;text-transform:none;fill:var(--paper)}
+  .chip rect{fill:var(--blue);stroke:var(--line);stroke-width:1}
+  .ring{fill:none;stroke:rgba(255,254,251,.42);stroke-width:1.25;stroke-dasharray:3 6;stroke-linecap:round;transition:stroke .18s,stroke-width .18s}
+  .top{fill:rgba(255,254,251,.10);stroke:var(--line);stroke-width:1.25;transition:fill .18s,stroke .18s}
+  .side{fill:rgba(255,254,251,.06);stroke:none}
+  .edge{fill:none;stroke:rgba(255,254,251,.6);stroke-width:1}
+  .layer{cursor:pointer}
+  .layer:hover .ring,.layer:focus-visible .ring{stroke:var(--orange);stroke-width:2;stroke-dasharray:none}
+  .layer:hover .top,.layer:focus-visible .top{fill:rgba(255,254,251,.26);stroke:#fff}
+  .layer:hover .lbl,.layer:focus-visible .lbl{fill:#ffb59c}
+  .layer:focus{outline:none}
+  @media (max-width:480px){
+    .lbl{font-size:18px;stroke-width:8px}
+    .chip text{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+<svg id="s" viewBox="0 0 560 570" role="img" aria-label="Four stacked layers, bottom to top: Software Engineering, Full-stack, Frontend specialized, Product / Business. Each higher layer has a wider orbit ring.">
+  <g id="layers"></g>
+  <g id="back"></g>
+  <g id="l1"></g>
+  <g id="front"></g>
+  <g id="labels" pointer-events="none"></g>
+</svg>
+</div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg', cx=280, R=24, T=9, K=.27;
+  var L=[ // bottom -> top
+    {name:'Software Engineering',y:450,r:130},
+    {name:'Full-stack',y:330,r:175},
+    {name:'Frontend specialized',y:210,r:215},
+    {name:'Product / Business',y:90,r:250}
+  ];
+  var chips=['C++','Java','Python','TypeScript/React'];
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+  function layer(d,i,parent){
+    var g=el('g',{class:'layer',tabindex:0,'aria-label':d.name},parent);
+    el('ellipse',{class:'ring',cx:cx,cy:d.y,rx:d.r,ry:d.r*K},g);
+    var rx=R+38, ry=rx*K;
+    var eg=' M'+(cx-rx)+','+d.y+' L'+(cx-rx)+','+(d.y+T)+' A'+rx+','+ry+' 0 0 0 '+(cx+rx)+','+(d.y+T)+' L'+(cx+rx)+','+d.y;
+    el('path',{class:'side',d:'M'+(cx-rx)+','+d.y+' L'+(cx-rx)+','+(d.y+T)+' A'+rx+','+ry+' 0 0 0 '+(cx+rx)+','+(d.y+T)+' L'+(cx+rx)+','+d.y+' Z'},g);
+    el('path',{class:'edge',d:eg},g);
+    el('ellipse',{class:'top',cx:cx,cy:d.y,rx:rx,ry:ry},g);
+    // hit area covering the ring's band
+    return g;
+  }
+  var layersG=document.getElementById('layers');
+  [3,2,1].forEach(function(i){layer(L[i],i,layersG)});
+  layer(L[0],0,document.getElementById('l1'));
+  // labels: sit on each ring's front point, like contour labels
+  var lg=document.getElementById('labels');
+  L.forEach(function(d,i){
+    var t=el('text',{class:'lbl',x:cx,y:(i===0? d.y+d.r*K+40 : d.y-d.r*K+(i===3?11:4.5)),'text-anchor':'middle'},lg);
+    t.textContent=d.name;
+  });
+  // link hover of label zone: use the layer groups themselves
+  // chips
+  var back=document.getElementById('back'), front=document.getElementById('front');
+  var items=chips.map(function(c){
+    var g=el('g',{class:'chip'});
+    var r=el('rect',{x:-40,y:-12,width:80,height:24,rx:12},g);
+    var t=el('text',{x:0,y:4.5,'text-anchor':'middle'},g);t.textContent=c;
+    g._fit=function(){var w=t.getComputedTextLength()+22;r.setAttribute('x',-w/2);r.setAttribute('width',w)};
+    return g;
+  });
+  var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+  var a0=-Math.PI/2+.5, start=performance.now();
+  function place(t){
+    items.forEach(function(g,i){
+      var a=a0+i*Math.PI/2+t;
+      var x=cx+L[0].r*Math.cos(a), y=L[0].y+L[0].r*K*Math.sin(a);
+      g.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')');
+      var tgt=Math.sin(a)<0?back:front;
+      if(g.parentNode!==tgt)tgt.appendChild(g);
+    });
+  }
+  function frame(now){
+    if(mq.matches){place(0);return}
+    place((now-start)/1000*(2*Math.PI/48));
+    requestAnimationFrame(frame);
+  }
+  place(0);
+  function fit(){items.forEach(function(g){g._fit()})}
+  fit();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  window.addEventListener('resize',fit);
+  requestAnimationFrame(frame);
+  mq.addEventListener&&mq.addEventListener('change',function(){requestAnimationFrame(frame)});
+})();
+</script>
+</body>
+</html>

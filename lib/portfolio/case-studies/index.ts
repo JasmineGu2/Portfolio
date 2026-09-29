@@ -15,11 +15,11 @@ export type { CaseStudy, CaseStudyBlock, CaseStudyMedia, CaseStudySection } from
 export const CASE_STUDY_LABELS = {
   onThisPage: 'On this page',
   tocAria: 'Sections of this case study',
-  back: 'Back to work',
+  back: 'Back to home',
   backHref: '/',
-  /** Section names for the roles that only have a summary and tags so far. */
-  overview: 'Overview',
-  skills: 'Skills & themes',
+  /** Shown in place of the body on roles without a full write-up yet. */
+  comingSoon: 'Full write-up coming soon.',
+  tagsAria: 'Skills and themes',
 } as const
 
 /** The home tile's media for a role: its looping video when there is one, else its cover image. */
@@ -52,16 +52,13 @@ function longForm(
   }
 }
 
-/** Every other role only has its card: name, role, dates, one-line subtitle, a summary and tags. */
+/**
+ * Every other role only has its card so far: name, role, dates, one-line subtitle and tags. No sections, so the
+ * page shows the "coming soon" note instead of a body and no section list.
+ */
 function fromCard(slug: WorkId): CaseStudy {
   const tile = getWorkTileById(slug)
   const page = WORK_EXPERIENCE_PAGES[slug]
-  const sections: CaseStudySection[] = [
-    { id: 'overview', heading: CASE_STUDY_LABELS.overview, blocks: [{ type: 'paragraph', text: page.summary }] },
-  ]
-  if (page.skills.length) {
-    sections.push({ id: 'skills', heading: CASE_STUDY_LABELS.skills, blocks: [{ type: 'tags', items: page.skills }] })
-  }
   return {
     slug,
     eyebrow: tile.category,
@@ -69,7 +66,8 @@ function fromCard(slug: WorkId): CaseStudy {
     dek: tile.subtitle,
     meta: [tile.role, tile.roleNote, tile.period].filter((part): part is string => Boolean(part)),
     heroMedia: heroMediaFor(slug),
-    sections,
+    tags: page.skills,
+    sections: [],
   }
 }
 

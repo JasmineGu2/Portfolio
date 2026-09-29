@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack v2 - pyramid, narrowing then widening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0e3b8f;--paper:#fffefb;--orange:#ed3801;--line:rgba(255,254,251,.78)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Inter,system-ui,sans-serif}
+.card{width:min(560px,100%);background:var(--blue);border-radius:1.35rem;padding:24px 20px 20px;position:relative;overflow:hidden;
+  background-image:linear-gradient(rgba(255,254,251,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,254,251,.06) 1px,transparent 1px);
+  background-size:32px 32px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.contour path{fill:none;stroke:var(--paper);stroke-width:1;opacity:.2;vector-effect:non-scaling-stroke}
+.contour path:nth-child(4n){opacity:.32}
+.lbl{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;font-size:15px;letter-spacing:.09em;text-transform:uppercase;text-anchor:middle;fill:var(--paper);pointer-events:none;transition:fill .2s}
+.plate .top{fill:rgba(255,254,251,.09);stroke:var(--line);stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.plate .edge{fill:rgba(255,254,251,.22);transition:fill .2s}
+.plate.hi .top{fill:var(--paper);stroke:var(--paper)}
+.plate.hi .edge{fill:#c9d3ea}
+.plate.hi .lbl{fill:var(--blue)}
+.plate.hi .chip{fill:var(--blue)}
+.plate.end .top{fill:var(--paper);stroke:var(--orange);stroke-width:2}
+.plate.end .edge{fill:#e3b3a1}
+.plate.end .lbl{fill:var(--blue)}
+.plate.end.hi .top{fill:#fff}
+.chip{fill:rgba(14,59,143,.55);stroke:var(--line);stroke-width:1;transition:fill .2s}
+.chiptxt{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;fill:var(--paper);text-anchor:middle;pointer-events:none}
+.lift{transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+.plate{outline:none;cursor:default;transition:opacity .2s;animation:rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.4s + .1s)}
+svg:has(.plate.hi) .plate:not(.hi){opacity:.45}
+.plate:hover .lift,.plate:focus-visible .lift{transform:translateY(-6px)}
+.plate:focus-visible .top{stroke:var(--orange);stroke-width:2.5}
+.contour g{animation:fade 1.1s ease both;animation-delay:calc(var(--i)*.4s)}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.plate,.contour g{animation:none}.lift{transition:none}}
+@media (max-width:480px){body{padding:0;display:block}.card{width:100%;padding:20px 10px 16px}.lbl{font-size:15px;letter-spacing:.05em}.chiptxt{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="card">
+<svg viewBox="0 0 560 430" role="img" aria-label="Four plates stacked bottom to top: Software Engineering, Full-stack, Frontend specialized, Product / Business. The stack narrows, then widens at the top.">
+  <g class="contour" id="contour" aria-hidden="true"></g>
+
+  <g class="plate" style="--i:0" tabindex="0">
+    <g class="lift">
+      <rect class="edge" x="30" y="282" width="500" height="108" rx="6"/>
+      <rect class="top" x="30" y="282" width="500" height="100" rx="6"/>
+      <text class="lbl" x="280" y="314">Software Engineering</text>
+      <rect class="chip" x="95"  y="334" width="49"  height="30" rx="15"/><text class="chiptxt" x="119.5" y="354">C++</text>
+      <rect class="chip" x="154" y="334" width="58"  height="30" rx="15"/><text class="chiptxt" x="183"   y="354">Java</text>
+      <rect class="chip" x="222" y="334" width="75"  height="30" rx="15"/><text class="chiptxt" x="259.5" y="354">Python</text>
+      <rect class="chip" x="307" y="334" width="158" height="30" rx="15"/><text class="chiptxt" x="386"   y="354">TypeScript/React</text>
+    </g>
+  </g>
+
+  <g class="plate" style="--i:1" tabindex="0">
+    <g class="lift">
+      <rect class="edge" x="110" y="202" width="340" height="58" rx="6"/>
+      <rect class="top" x="110" y="202" width="340" height="50" rx="6"/>
+      <text class="lbl" x="280" y="233">Full-stack</text>
+    </g>
+  </g>
+
+  <g class="plate" style="--i:2" tabindex="0">
+    <g class="lift">
+      <rect class="edge" x="164" y="122" width="232" height="58" rx="6"/>
+      <rect class="top" x="164" y="122" width="232" height="50" rx="6"/>
+      <text class="lbl" x="280" y="153">Frontend specialized</text>
+    </g>
+  </g>
+
+  <g class="plate end" style="--i:3" tabindex="0">
+    <g class="lift">
+      <path class="edge" d="M98 92 L462 92 L462 100 L98 100 Z"/>
+      <path class="top" d="M52 34 L508 34 L462 92 L98 92 Z"/>
+      <text class="lbl" x="280" y="69">Product / Business</text>
+    </g>
+  </g>
+</svg>
+</div>
+<script>
+// faint topographic contours: wobbly rings around a peak behind the stack; outer rings appear with the base
+(function(){
+  var g=document.getElementById('contour'),NS='http://www.w3.org/2000/svg',cx=280,cy=225,rings=10;
+  function ring(k){
+    var rx=70+k*32, ry=40+k*21, pts=[], n=48, i;
+    for(i=0;i<n;i++){
+      var a=i/n*Math.PI*2;
+      var w=1+.07*Math.sin(3*a+k*.9)+.045*Math.sin(5*a-k*1.7)+.03*Math.sin(2*a+k*2.3);
+      pts.push([cx+Math.cos(a)*rx*w, cy+Math.sin(a)*ry*w]);
+    }
+    var d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    for(i=0;i<n;i++){
+      var p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];
+      d+='C'+(p1[0]+(p2[0]-p0[0])/6).toFixed(1)+' '+(p1[1]+(p2[1]-p0[1])/6).toFixed(1)+' '+
+        (p2[0]-(p3[0]-p1[0])/6).toFixed(1)+' '+(p2[1]-(p3[1]-p1[1])/6).toFixed(1)+' '+p2[0].toFixed(1)+' '+p2[1].toFixed(1);
+    }
+    return d+'Z';
+  }
+  var groups=[0,1,2,3].map(function(i){var e=document.createElementNS(NS,'g');e.style.setProperty('--i',i);g.appendChild(e);return e;});
+  for(var k=rings-1;k>=0;k--){
+    var p=document.createElementNS(NS,'path');p.setAttribute('d',ring(k));
+    groups[Math.min(3,Math.floor((rings-1-k)/2.5))].appendChild(p);
+  }
+  document.querySelectorAll('.plate').forEach(function(p){
+    ['mouseenter','focus'].forEach(function(e){p.addEventListener(e,function(){p.classList.add('hi')})});
+    ['mouseleave','blur'].forEach(function(e){p.addEventListener(e,function(){p.classList.remove('hi')})});
+  });
+})();
+</script>
+</body>
+</html>

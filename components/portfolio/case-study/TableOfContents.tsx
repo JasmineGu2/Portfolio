@@ -18,7 +18,7 @@ const easeInOutQuart = (t: number) => (t < 0.5 ? 8 * t ** 4 : 1 - (-2 * t + 2) *
 
 /**
  * The case study's section list. On wide screens it is a column of scrollspy lines beside the article (Cue
- * Foundations cue084: the active line grows, the section name shows on hover/focus); below 900px it is an
+ * Foundations cue084: the active line grows and its always-visible section name darkens); below 900px it is an
  * "On this page" disclosure above it. Both share one IntersectionObserver: whenever a heading crosses the read line,
  * the active item becomes the last heading above that line (or the last section once the page is scrolled to the end).
  * Clicking an item runs a 1s easeInOutQuart scroll to its heading (instant under prefers-reduced-motion; any wheel,

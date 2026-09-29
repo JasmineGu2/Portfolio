@@ -1,0 +1,1 @@
+Primitives: four clean isometric slabs, each with a large faint shape behind it (cube grid, linked circles, triangle, orbit) that brightens on hover while the other layers dim; chips only on Software Engineering.

@@ -1,0 +1,1 @@
+Pyramid stack: flat front-facing plates whose width tells the story (wide Software Engineering base with 4 chips, narrowing to Frontend specialized, flaring wide again for Product / Business) over faint topographic contours, built bottom-up on load; hover lifts and paper-fills a plate.

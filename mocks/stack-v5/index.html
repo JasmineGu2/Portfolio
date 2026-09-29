@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stack v5 - Forms stacked</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0e3b8f;--line:#b8d2ff;--ink:#eef4ff;--num:#ff9268;--orange:#ed3801;--paper:#fffefb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{container-type:inline-size;width:560px;max-width:100%;min-width:0;background:var(--blue);border-radius:24px;padding:20px 20px 12px;
+  background-image:linear-gradient(rgba(184,210,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(184,210,255,.07) 1px,transparent 1px);background-size:24px 24px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.ln{fill:none;stroke:var(--line);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.bk{stroke-dasharray:4 5;opacity:.6}
+.thin{stroke-width:1;opacity:.6}
+.form{cursor:pointer}
+.tint{fill:transparent;stroke:var(--line);stroke-width:1.5;stroke-linejoin:round;transition:fill .25s}
+.form:hover .tint,.form:focus-visible .tint{fill:rgba(237,56,1,.3)}
+.form:focus-visible{outline:none}
+.form:hover .ttl,.form:focus-visible .ttl{fill:#fff}
+.form:hover .lead,.form:focus-visible .lead{stroke:var(--num)}
+.lead{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4;fill:none;transition:stroke .25s}
+.dot{fill:var(--num)}
+.cube{fill:rgba(184,210,255,.14);stroke:var(--line);stroke-width:1.2;stroke-linejoin:round}
+.num{font:500 12px 'JetBrains Mono',ui-monospace,monospace;fill:var(--num);letter-spacing:.08em}
+.ttl{font:500 22px 'Fraunces',Georgia,serif;fill:var(--ink);transition:fill .25s}
+.sub{font:400 13px 'JetBrains Mono',ui-monospace,monospace;fill:var(--line)}
+@container (max-width:480px){
+  .num{font-size:15px}.ttl{font-size:26px}.sub{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.tint,.ttl,.lead{transition:none}}
+</style>
+</head>
+<body>
+<div class="card">
+<svg viewBox="0 160 560 490" role="img" aria-label="Four stacked forms, bottom to top: Software Engineering, Full-stack, Frontend specialized, Product / Business">
+  <!-- 1 base: block -->
+  <g class="form" tabindex="0">
+    <path class="tint" d="M40 520h260v90H40z"/>
+    <path class="tint" d="M40 520l40-22h260l-40 22z"/>
+    <path class="tint" d="M300 520l40-22v90l-40 22z"/>
+    <g>
+      <g id="c1"><path class="cube" d="M62 552h34v34H62z"/><path class="cube" d="M62 552l8-5h34l-8 5z"/><path class="cube" d="M96 552l8-5v34l-8 5z"/></g>
+      <use href="#c1" x="54"/><use href="#c1" x="108"/><use href="#c1" x="162"/>
+    </g>
+    <path class="lead" d="M340 553H348"/>
+    <circle class="dot" cx="340" cy="553" r="3"/>
+    <text class="num" x="356" y="510">01</text>
+    <text class="ttl" x="356" y="536">Software</text>
+    <text class="ttl" x="356" y="562">Engineering</text>
+    <text class="sub" x="356" y="586">C++ · Java</text>
+    <text class="sub" x="356" y="606">Python</text>
+    <text class="sub" x="356" y="626">TypeScript/React</text>
+  </g>
+  <!-- 2 cylinder -->
+  <g class="form" tabindex="0">
+    <path class="tint" d="M126 385v113a64 16 0 0 0 128 0V385z"/>
+    <path class="ln bk" d="M126 498a64 16 0 0 1 128 0"/>
+    <path class="tint" d="M126 385a64 16 0 1 0 128 0a64 16 0 1 0-128 0z"/>
+    <path class="ln thin" d="M190 396v92M185 404l5-8 5 8M185 480l5 8 5-8" stroke-dasharray="0"/>
+    <path class="lead" d="M254 441H348"/>
+    <circle class="dot" cx="254" cy="441" r="3"/>
+    <text class="num" x="356" y="418">02</text>
+    <text class="ttl" x="356" y="446">Full-stack</text>
+  </g>
+  <!-- 3 cone -->
+  <g class="form" tabindex="0">
+    <path class="tint" d="M138 385L190 262l52 123a52 13 0 0 1-104 0z"/>
+    <path class="ln bk" d="M138 385a52 13 0 0 1 104 0"/>
+    <path class="lead" d="M219 330H348"/>
+    <circle class="dot" cx="219" cy="330" r="3"/>
+    <text class="num" x="356" y="296">03</text>
+    <text class="ttl" x="356" y="324">Frontend</text>
+    <text class="ttl" x="356" y="350">specialized</text>
+  </g>
+  <!-- 4 sphere -->
+  <g class="form" tabindex="0">
+    <circle class="tint" cx="190" cy="222" r="40"/>
+    <path class="ln thin" d="M150 222a40 11 0 0 0 80 0"/>
+    <path class="ln thin bk" d="M150 222a40 11 0 0 1 80 0"/>
+    <path class="ln thin" d="M190 182a14 40 0 0 1 0 80"/>
+    <path class="lead" d="M230 222H348"/>
+    <circle class="dot" cx="230" cy="222" r="3"/>
+    <text class="num" x="356" y="196">04</text>
+    <text class="ttl" x="356" y="224">Product /</text>
+    <text class="ttl" x="356" y="250">Business</text>
+  </g>
+</svg>
+</div>
+</body>
+</html>
