@@ -15,7 +15,14 @@ import './globals.css'
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
-  icons: { icon: '/icons/favicon.svg' },
+  // SVG for Chrome/Firefox; Safari ignores SVG favicons, so it gets the PNG (and /favicon.ico) of the same blue square.
+  icons: {
+    icon: [
+      { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/icons/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({

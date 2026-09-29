@@ -26,16 +26,17 @@ export default function AboutPage() {
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
               <script id="made-data" type="application/json" dangerouslySetInnerHTML={{ __html: madeJson }} />
               <script id="quotes-data" type="application/json" dangerouslySetInnerHTML={{ __html: quotesJson }} />
-              <div className="q6-made" id="customTools"></div>
+              {/* hero polaroid under the legal pad (photo, alt and caption live in content/about-photo.md); draggable like the other about cards */}
+              <div className="q6-hero" id="heroPol">
+                <figure className="q6-hero-pol">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={photo.photo} alt={photo.alt} width={768} height={1024} draggable={false} />
+                  {photo.caption && <figcaption>{photo.caption}</figcaption>}
+                </figure>
+              </div>
             </div>
-            {/* hero polaroid (photo, alt and caption live in content/about-photo.md); draggable like the other about cards */}
-            <div className="q6-hero" id="heroPol">
-              <figure className="q6-hero-pol">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo.photo} alt={photo.alt} width={768} height={1024} draggable={false} />
-                {photo.caption && <figcaption>{photo.caption}</figcaption>}
-              </figure>
-            </div>
+            {/* right column: "Tools I've Created" as a long receipt strip, as tall as the pad + polaroid */}
+            <div className="q6-rc" id="customTools"></div>
           </div>
         </div>
         <hr className="q-rule" />

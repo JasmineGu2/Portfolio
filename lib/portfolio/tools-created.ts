@@ -4,13 +4,15 @@ import path from 'node:path'
 /** One tool she built, parsed from content/tools-created.md. */
 export interface CreatedTool {
   title: string
+  /** One line, "to do this": the only copy the receipt shows after the title. */
+  short?: string
   problem?: string
   tool?: string
   /** An unlabeled line, used by work-in-progress entries. */
   desc?: string
   builtWith: string[]
-  /** Optional picture that pops up over the title on hover, focus or tap. */
-  image?: { src: string; alt: string }
+  /** Optional picture that pops up under the title when its link label is hovered, focused or tapped. */
+  image?: { src: string; alt: string; label: string }
 }
 
 export interface ToolsCreated {
@@ -19,6 +21,8 @@ export interface ToolsCreated {
   items: CreatedTool[]
   /** Heading of the work-in-progress group, as written in the markdown. */
   wipTitle?: string
+  /** Small tag on each work-in-progress entry (the `Label:` line under that heading). */
+  wipLabel?: string
   wip: CreatedTool[]
   /** Field labels, taken from the markdown keys so they read exactly as she wrote them. */
   labels: { problem: string; tool: string; builtWith: string }
@@ -26,8 +30,8 @@ export interface ToolsCreated {
 
 /**
  * Reads content/tools-created.md: the first `# Title` is the card title and the first plain line the subtitle.
- * Each `## Title` starts a tool; `Problem:`, `Tool:` and `Built with:` lines fill it (Built with is comma-separated),
- * and a plain line becomes its description. A later `# Heading` (e.g. "Work in progress") starts the WIP group.
+ * Each `## Title` starts a tool; `Short:`, `Problem:`, `Tool:` and `Built with:` lines fill it (Built with is comma-separated),
+ * and a plain line becomes its description. A later `# Heading` (e.g. "Work in progress") starts the WIP group; a `Label:` line under it is the WIP tag.
  */
 export function getToolsCreated(): ToolsCreated {
   const raw = fs.readFileSync(path.join(process.cwd(), 'content', 'tools-created.md'), 'utf8')
@@ -54,13 +58,20 @@ export function getToolsCreated(): ToolsCreated {
         cur = undefined
       }
     } else if (!cur) {
-      if (!out.sub) out.sub = t
+      const lab = inWip && t.match(/^Label:\s*(.*)$/i)
+      if (lab) out.wipLabel = lab[1].trim()
+      else if (!out.sub) out.sub = t
     } else {
-      const m = t.match(/^(Problem|Tool|Built with|Image alt|Image):\s*(.*)$/i)
+      const m = t.match(/^(Short|Problem|Tool|Built with|Image alt|Image label|Image):\s*(.*)$/i)
       const key = m?.[1].toLowerCase()
       const val = m?.[2].trim() ?? ''
-      if (key === 'image') cur.image = { src: val, alt: cur.image?.alt ?? '' }
-      else if (key === 'image alt') cur.image = { src: cur.image?.src ?? '', alt: val }
+      if (key === 'image' || key === 'image alt' || key === 'image label') {
+        const img = (cur.image ??= { src: '', alt: '', label: '' })
+        if (key === 'image') img.src = val
+        else if (key === 'image alt') img.alt = val
+        else img.label = val
+      }
+      else if (key === 'short') cur.short = val
       else if (key === 'problem') (cur.problem = val), (out.labels.problem = m![1])
       else if (key === 'tool') (cur.tool = val), (out.labels.tool = m![1])
       else if (key === 'built with') {
@@ -70,6 +81,9 @@ export function getToolsCreated(): ToolsCreated {
     }
   }
   // an image line with no path (or an alt with no image) is dropped
-  for (const it of [...out.items, ...out.wip]) if (it.image && !it.image.src) delete it.image
+  for (const it of [...out.items, ...out.wip]) {
+    if (it.image && !it.image.src) delete it.image
+    else if (it.image && !it.image.label) it.image.label = '(See a screenshot)'
+  }
   return out
 }
