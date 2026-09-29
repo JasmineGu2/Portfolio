@@ -26,12 +26,13 @@ export const CASE_STUDY_LABELS = {
 function heroMediaFor(slug: WorkId): CaseStudyMedia | undefined {
   const item = WORK_SHOWCASE.find((entry) => entry.id === slug)
   if (!item) return undefined
-  const aspect = getExperienceMediaAspect(slug)
   if (item.video) {
+    const aspect = getExperienceMediaAspect(slug)
     // poster: the clip's first frame (public/work/<name>-poster.jpg), so nothing shows blank before it plays
     return { kind: 'video', src: item.video, poster: item.video.replace(/\.mp4$/, '-poster.jpg'), alt: item.imageAlt, aspect, fit: 'cover' }
   }
-  return { kind: 'image', src: item.image, alt: item.imageAlt, aspect, fit: 'contain' }
+  // Stills skip the tile's aspect (the Ivey tile is 1024/594 but its cover is square): the frame fits the image.
+  return { kind: 'image', src: item.image, alt: item.imageAlt, fit: 'contain' }
 }
 
 /** Tesla and Autodesk have full write-ups: title and eyebrow from the hero meta, prose from the article files. */

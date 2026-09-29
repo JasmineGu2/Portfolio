@@ -140,9 +140,19 @@
 .cover {
   object-fit: cover;
 }
-.contain {
-  object-fit: contain;
+/* Stills (posters, logos): the whole image, centred on the paper panel at no more than its own size and no
+   taller than 560px with the padding, so small logos aren't blown up to fill a wide frame. */
+.figureContain {
+  display: grid;
+  place-items: center;
   padding: 2rem;
+}
+.contain {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(560px - 4rem);
+  object-fit: contain;
 }
 
 /* Body */

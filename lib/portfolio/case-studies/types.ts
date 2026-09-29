@@ -22,9 +22,9 @@ export interface CaseStudyMedia {
   /** Still image shown before a video loads. */
   poster?: string
   alt: string
-  /** CSS aspect-ratio, e.g. "16 / 9". */
-  aspect: string
-  /** Logos and wordmarks are fitted inside the frame instead of cropped. */
+  /** CSS aspect-ratio of the frame, e.g. "16 / 9". Stills leave it out and the frame takes the image's own shape. */
+  aspect?: string
+  /** Logos, posters and wordmarks are shown whole (never cropped or scaled past their own size). */
   fit: 'cover' | 'contain'
 }
 

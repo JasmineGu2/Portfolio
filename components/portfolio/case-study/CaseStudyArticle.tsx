@@ -26,9 +26,10 @@ function Block({ block }: { block: CaseStudyBlock }) {
 }
 
 function HeroMedia({ media }: { media: CaseStudyMedia }) {
-  const fit = media.fit === 'cover' ? styles.cover : styles.contain
+  const contain = media.fit === 'contain'
+  const fit = contain ? styles.contain : styles.cover
   return (
-    <figure className={styles.figure} style={{ aspectRatio: media.aspect }}>
+    <figure className={contain ? `${styles.figure} ${styles.figureContain}` : styles.figure} style={{ aspectRatio: media.aspect }}>
       {media.kind === 'video' ? (
         <video
           className={`${styles.media} ${fit}`}
