@@ -6,6 +6,9 @@ import { useEffect } from 'react'
 export const VIDEOS_KEY = 'pf-videos'
 export const VIDEOS_EVENT = 'pf-videos-change'
 
+// Tells the home/about scripts in public/mocks (k2.js `K.videos`) to leave their tile videos to this component, so only one system plays them.
+if (typeof window !== 'undefined') (window as Window & { pfVideoAutoplay?: boolean }).pfVideoAutoplay = true
+
 /**
  * Makes every muted, looping `<video autoplay>` on the site behave: it plays on phones, loads only when it is about to
  * scroll into view, pauses when it leaves, and can be paused by the visitor.

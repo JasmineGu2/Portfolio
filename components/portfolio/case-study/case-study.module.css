@@ -71,6 +71,9 @@
   text-decoration: none;
   border-radius: 0.25rem;
   transition: color var(--pf-card-transition);
+  /* a 44px tall tap target on phones without moving the text */
+  min-height: 2.75rem;
+  margin-block: -0.75rem;
 }
 .back:hover {
   color: var(--pf-dark);
