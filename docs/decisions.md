@@ -24,3 +24,8 @@
 - Kept: app/(home), about, work, ask, api; public/fonts, icons, mocks, work; all content markdown.
 - Result: ~92% codebase reduction; main repo now ~50 routes → 5 routes, focused on live site only.
 - Alternatives: keep everything in main (but bloats context and CI); delete instead of archive (but loses reference).
+
+## 2026-09-28 · Restore 5 global CSS files the ultra-lean cleanup removed
+- Why: globals.css still imports n8n-design-system, bento-scheme-global, bento-work-accents, pf-blueprint, pf-ask; `pnpm build` failed without them, and live pages use their classes (footer pf-foot/pf-quote, ask panel, work tiles).
+- Also re-added SoundProvider, PortfolioStateProvider, BentoWorkspaceProvider to the root layout (dropped with SiteShell in c5fb8d0; /work/[slug] needs them). SiteShell stays out.
+- Alternatives: delete the imports (would silently unstyle footer and ask panel); prune dead selectors (later, as its own task).

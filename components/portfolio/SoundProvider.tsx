@@ -1,15 +1,15 @@
 'use client'
 
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { createUISFX } from 'uisfx'
+import { createUISFX, type PlayingSFX, type UISFXPlayer } from 'uisfx'
 
 interface SoundContextType {
-  ui: ReturnType<typeof createUISFX> | null
+  ui: UISFXPlayer | null
   isEnabled: boolean
   setEnabled: (enabled: boolean) => void
   play: (cue: string) => void
-  playLoop: (cue: string) => Promise<ReturnType<typeof createUISFX> | null>
-  stopLoop: (handle: ReturnType<typeof createUISFX> | null) => void
+  playLoop: (cue: string) => Promise<PlayingSFX | null>
+  stopLoop: (handle: PlayingSFX | null) => void
 }
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined)
@@ -17,7 +17,7 @@ const SoundContext = createContext<SoundContextType | undefined>(undefined)
 export function SoundProvider({ children }: { children: React.ReactNode }) {
   const [isEnabled, setEnabled] = useState(true)
   const [isClient, setIsClient] = useState(false)
-  const uiRef = useRef<ReturnType<typeof createUISFX> | null>(null)
+  const uiRef = useRef<UISFXPlayer | null>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
 
   // Initialize on first client render
@@ -92,10 +92,10 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     return null
   }
 
-  const stopLoop = (handle: ReturnType<typeof createUISFX> | null) => {
-    if (handle && uiRef.current && isEnabled) {
+  const stopLoop = (handle: PlayingSFX | null) => {
+    if (handle) {
       try {
-        uiRef.current.stop(handle)
+        handle.stop()
       } catch (err) {
         console.warn('Failed to stop loop:', err)
       }

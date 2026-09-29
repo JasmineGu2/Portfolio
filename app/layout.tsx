@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Agentation } from 'agentation'
 import { Toaster } from 'sonner'
-import { SiteShell } from '@/components/portfolio/SiteShell'
 import { SoundProvider } from '@/components/portfolio/SoundProvider'
 import { PortfolioStateProvider } from '@/components/portfolio/PortfolioStateContext'
 import { BentoWorkspaceProvider } from '@/components/portfolio/bento-workflows/BentoWorkspaceContext'
@@ -33,7 +32,11 @@ export default function RootLayout({
         <link rel="stylesheet" href="/mocks/k6.css" />
       </head>
       <body style={{ margin: 0, padding: 0 }} className="q q6" data-map="blue">
-        {children}
+        <SoundProvider>
+          <PortfolioStateProvider>
+            <BentoWorkspaceProvider>{children}</BentoWorkspaceProvider>
+          </PortfolioStateProvider>
+        </SoundProvider>
         {/*
           Three independent layers, because any single one has a blind spot:
           Vercel's script can be ad-blocked, and the server-side middleware can't
