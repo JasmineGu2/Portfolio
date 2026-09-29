@@ -86,3 +86,9 @@ body {
   height: 100%;
   opacity: 0.3;
 }
+
+/* Highlighted text uses the brand orange everywhere (home, about, case studies). */
+::selection {
+  background: var(--pf-brand-orange, #ed3801);
+  color: #fff;
+}
