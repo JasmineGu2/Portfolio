@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion, useMotionValue, useReducedMotion } from 'motion/react'
 import { ACCENT_ORANGE } from '@/lib/portfolio/brand'
@@ -103,16 +103,25 @@ export function SiteCursor() {
     setFlippedY(pointerY.current + TAG_TOP + tagHeight.current + EDGE_MARGIN > window.innerHeight)
   }, [])
 
-  // Ignore null: an exiting tag unmounting after a label swap must not zero the width of the new one.
-  const measureTag = useCallback(
+  const tagEl = useRef<HTMLSpanElement | null>(null)
+  const measureTag = useCallback(() => {
+    const el = tagEl.current
+    if (!el?.isConnected) return
+    tagWidth.current = el.offsetWidth
+    tagHeight.current = el.offsetHeight
+    updateFlip()
+  }, [updateFlip])
+  // Ignore null: the exiting tag unmounting must not clear the ref of one that has already re-entered.
+  const setTagEl = useCallback(
     (el: HTMLSpanElement | null) => {
       if (!el) return
-      tagWidth.current = el.offsetWidth
-      tagHeight.current = el.offsetHeight
-      updateFlip()
+      tagEl.current = el
+      measureTag()
     },
-    [updateFlip]
+    [measureTag]
   )
+  // One tag element swaps its text between labels, so re-measure when the text changes.
+  useLayoutEffect(measureTag, [label, measureTag])
 
   useEffect(() => {
     if (!finePointer) return
@@ -186,10 +195,12 @@ export function SiteCursor() {
             <Dot />
           </motion.span>
           <AnimatePresence initial={false}>
+            {/* One constant key: moving between tiles swaps the text in place. Keying by label left the old tag
+                fading out beside the new one, so two tags showed at once. */}
             {label && (
               <motion.span
-                key={label}
-                ref={measureTag}
+                key="tag"
+                ref={setTagEl}
                 initial={{ opacity: 0, scale: 0.85, x: flipped ? 4 : -4 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.85, x: flipped ? 4 : -4 }}
