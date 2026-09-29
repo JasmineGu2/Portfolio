@@ -42,18 +42,6 @@ window.K4 = {
     { title: 'Attention Hacking with AI Slop', desc: 'The rise of Microdramas and compelling AI-generated content' },
     { title: 'Agents for Personal Use', desc: 'I\'d love to see Muse come to WhatsApp in a Poke or customer service way for SMB users' },
   ],
-  // custom tools she's built (sits in the /about top section, under the legal pad)
-  customToolsHead: { title: 'My Favorite Tools I\'ve Created', sub: '…to solve my pain points :)' },
-  customTools: [
-    { name: 'Notification & Terminal Setup for Claude', desc: 'To support multitasking with outlined notifications' },
-    { name: 'Notion Transcript Sync', desc: 'Save transcripts and projects on Notion with modified summarize skill' },
-    { name: 'Obsidian Context with Git Syncing', desc: 'PC notepad to Macbook sync, thorough knowledge systems for architecture, PRDs, etc.' },
-    { name: 'Job Scraping Bot (Telegram)', desc: 'Scrapes job sites based on repo, learn about startups from curated lists' },
-    { name: 'Claude Routine for Thought Leadership', desc: 'Remember threads from TLDR.tech with daily ingestion into Obsidian' },
-    { name: 'NFC Chip Setup with Foqos', desc: 'Stop doomscrolling and mandate daily walks outside' },
-    { name: 'Tailscale SSH Setup', desc: 'SSH into PC from Macbook Air to prevent overheating' },
-    { name: 'Watch & Wear Preload Queue', desc: 'NFC chip by fridge auto-opens watch later queue, NFC chip by bed sets timer & play music' },
-  ],
   // what she does in her free time (was "Side Quests I Love")
   sideQuestsTitle: 'What I\'m doing in my free time',
   sideQuests: [

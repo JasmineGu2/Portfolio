@@ -104,11 +104,13 @@
 .q6 .q-bj .pc.down{border-width:4px;background-size:10px 10px}.q6 .q-bj .acts{gap:8px;min-height:36px;margin-top:14px}.q6 .q-bj .q-pill{font-size:13px;padding:6px 16px}
 @media (max-width:1420px){.q6 .q-desk{height:auto;display:flex;flex-wrap:wrap;gap:40px 34px;padding:20px 0 30px}.q6 .q-desk>div{position:relative;left:auto!important;top:auto!important;max-width:100%}}
 @media (max-width:1100px){.q6-top{grid-template-columns:1fr}.q6 .q-lan{justify-self:center}}
-/* the ID badge slot (components/ui/id-card-lanyard.tsx hangs inside it); the hint pill sits just under it */
-.q6-lan{position:relative;z-index:4;height:600px;margin-bottom:34px}
-@media (max-width:1100px){.q6-lan{width:100%;max-width:420px;justify-self:center}}
-@media (max-width:760px){.q6-lan{height:520px;--idcl-card-w:200px}}
-/* the invitation to the side panel */
+/* hero polaroid (right of the tools pad): the gallery's .q-pol look, bigger; the wrapper is what Q.drag moves */
+.q6-hero{position:relative;z-index:4;justify-self:center;width:340px;max-width:100%;margin-top:26px}
+.q6-hero-pol{margin:0;background:#fff;padding:16px 16px 58px;box-shadow:0 10px 24px rgba(0,0,0,.2);transform:rotate(3.2deg)}
+.q6-hero-pol img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:#ddd;pointer-events:none;user-select:none}
+.q6-hero-pol figcaption{margin-top:14px;text-align:center;font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#6b6b73}
+@media (max-width:1100px){.q6-hero{margin:8px 0 34px}}
+@media (max-width:760px){.q6-hero{width:min(300px,82vw)}.q6-hero-pol{padding:12px 12px 44px;transform:rotate(2.2deg)}}/* the invitation to the side panel */
 .q6-invite{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:start;padding:30px 34px;border:1px solid var(--faint);background:#fff}
 .q6-invite .lede{max-width:30rem;margin:8px 0 0;color:rgba(27,27,27,.7);font:400 16px/1.6 Inter,system-ui,sans-serif}
 .q6-invite .qs{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
@@ -242,8 +244,9 @@
 @media (min-width:1000px){
 .q6-stage{grid-template-columns:minmax(0,580px) minmax(0,600px);grid-template-areas:"note xc" "note list";padding-top:48px;padding-bottom:64px;justify-content:center;align-content:center;column-gap:clamp(40px,4vw,72px);padding-left:clamp(40px,7vw,200px);padding-right:clamp(40px,7vw,200px)}
 .q6-stage .q-note{justify-self:end;align-self:center}
-.q6-stage .q-xcard{justify-self:start;align-self:end;max-width:540px}
-.q6-stage .q6-list{justify-self:stretch;align-self:start;width:auto;max-width:none;margin:-44px 0 0 clamp(24px,4vw,72px);padding:20px 26px 8px}
+.q6-stage .q-xcard{justify-self:start;align-self:end;max-width:540px;z-index:5}
+/* highlights sit fully below the diagram (small even gap after tilts); the diagram stacks above so its hover note floats over the list, never under it */
+.q6-stage .q6-list{justify-self:stretch;align-self:start;width:auto;max-width:none;margin:28px 0 0 clamp(24px,4vw,72px);padding:20px 26px 8px}
 }
 .q6-stage .q6-list .lead{font-size:clamp(20px,1.6vw,24px)}
 .q6-stage .q6-list li{font-size:clamp(15px,1.05vw,17px);line-height:1.4;padding:7px 0}
@@ -257,10 +260,31 @@
 .q6-made-c{padding:26px 28px 14px}
 .q6-made-c .q6-h{font-size:22px;margin:0 0 6px}
 .q6-made-c .sub{font-size:15px;margin:0 0 18px;color:var(--muted)}
-.q6-made-c ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
-.q6-made-c li{padding:0 0 14px}
-.q6-made-c h4{font-size:16px;font-weight:600;margin:0 0 3px;color:var(--ink)}
-.q6-made-c p{font-size:14.5px;line-height:1.45;margin:0;color:var(--muted)}
-@media (max-width:760px){.q6-made{--off:0px;width:100%;margin:0}.q6-made-c{padding:22px 20px 10px}.q6-made-c ul{grid-template-columns:1fr}}
+.q6-made-c ul{list-style:none;margin:0;padding:0}
+.q6-made-c .list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 30px}
+.q6-made-c .list>li{min-width:0}
+.q6-made-c h4{font-size:17px;font-weight:600;line-height:1.3;margin:0 0 6px;color:var(--ink)}
+.q6-made-c p{font-size:15px;line-height:1.5;margin:0;color:var(--muted)}
+/* labels match the legal pad's hover card ("What it is / How I use it") */
+.q6-made-c .k{margin:8px 0 2px;font:500 10.5px/1.4 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#0e3b8f}
+.q6-made-c h4+.k{margin-top:0}
+.q6-made-c .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.q6-made-c .chips li{padding:3px 9px;border:1px solid rgba(27,27,27,.28);border-radius:999px;font:500 12px/1.4 'JetBrains Mono',monospace;color:var(--ink);white-space:nowrap}
+.q6-made-c .wip{margin:26px 0 8px;padding:18px 18px 16px;border:1.5px dashed rgba(14,59,143,.45);border-radius:6px}
+.q6-made-c .wip .list{grid-template-columns:1fr}
+.q6-made-c .wip-k{display:inline-block;margin:0 0 12px;padding:3px 9px;border-radius:4px;background:#0e3b8f;color:#fffefb;font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+/* a title with a picture: dotted underline + a tiny frame icon; the picture drops under it in a paper frame like the legal pad's hover cards */
+.q6-made-c li.has-pic{position:relative}
+.q6-made-c .pic{all:unset;cursor:pointer;text-decoration:underline dotted rgba(14,59,143,.55);text-decoration-thickness:1.5px;text-underline-offset:4px}
+.q6-made-c .pic:focus-visible{outline:2px solid var(--or);outline-offset:3px;border-radius:2px}
+.q6-made-c .pic i{display:inline-block;width:13px;height:10px;margin:0 0 1px 8px;border:1.5px solid #0e3b8f;border-radius:2px;vertical-align:middle;background:linear-gradient(135deg,transparent 55%,rgba(14,59,143,.45) 56%)}
+.q6-mpic{position:absolute;z-index:6;left:-10px;width:min(560px,calc(100vw - 24px));margin-top:6px;padding:12px 12px 14px;background:#fffefb;cursor:auto;
+  box-shadow:0 18px 34px -10px rgba(20,30,60,.3),0 2px 6px rgba(20,30,60,.1);translate:var(--dx,0px) 0;transform:translateY(-4px) rotate(-.4deg);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .16s ease,transform .18s cubic-bezier(.3,.9,.3,1),visibility 0s linear .18s}
+.q6-made-c li.open .q6-mpic{opacity:1;visibility:visible;pointer-events:auto;transform:rotate(.6deg);transition-delay:0s}
+.q6-mpic img{display:block;width:100%;height:auto;border:1px solid rgba(27,27,27,.12)}
+.q6-made.has-open{z-index:999!important}
+@media (prefers-reduced-motion:reduce){.q6-mpic,.q6-made-c li.open .q6-mpic{transition:none;transform:rotate(.6deg)}}
+@media (max-width:760px){.q6-made{--off:0px;width:100%;margin:0}.q6-made-c{padding:22px 20px 14px}.q6-made-c .list{grid-template-columns:1fr}.q6-made-c .wip{padding:16px 14px 14px}}
 /* when a legal-pad tool card is open it must sit above this note */
 .q6-left #notes{position:relative;z-index:3}

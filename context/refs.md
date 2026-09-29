@@ -33,3 +33,4 @@ One line each: what it is, why it matters. Open only when the task needs it.
 - context/images/Screenshot 2026-09-24 022523.png - screenshot from 2026-09-24 (purpose unknown)
 - mocks/hero-options-v1/, mocks/hero-variations-v1/ - earlier hero explorations
 - context/images/map-ref-early-2026-09-28.png, map-ref-full-2026-09-28.png - blueprint city map inspo: streets named after tech (Engineering Bd, Product Av, Java Rue), experiences as pins, orange "Jasmine Gu / Product Engineer" label; early = sparse grid, full = dense city. For the scroll-built map mock.
+- context/images/claude-notification-raw.png - raw screenshot of the Claude terminal outline + "Claude is waiting for your input" toast (unblurred desktop icons; not served). Public copy with icons blurred: public/about/tools-created/claude-notification.webp, shown on hover in the Tools I've Created card.
