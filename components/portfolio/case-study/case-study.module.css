@@ -143,8 +143,8 @@
 
 /* Body */
 .body {
-  font-size: 0.875rem;
-  line-height: 1.625;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 /* public/mocks/k2.css pads every <section> by 56px; these are plain article sections. */
 .section {
@@ -165,6 +165,10 @@
 }
 .heading:focus {
   outline: none;
+}
+.heading:focus-visible {
+  outline: 2px solid var(--pf-brand-orange-ink);
+  outline-offset: 4px;
 }
 @media (min-width: 768px) {
   .heading {
@@ -240,7 +244,9 @@
 }
 .tocLink[aria-current='true'] {
   color: var(--pf-dark);
+  font-weight: 600;
   background: var(--pf-canvas-alt);
+  box-shadow: inset 2px 0 0 var(--pf-brand-orange-ink);
 }
 
 .sideNav {
