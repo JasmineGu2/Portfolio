@@ -85,7 +85,7 @@ export const FAVORITE_TOOLS: { name: string; role: string; note?: string }[] = [
     role: 'sets up my daily to-do list',
     note: 'Opens any relevant tabs for that task for the day, starts my music, opens my Outlook, shuts me out of all distractions and starts a pomodoro timer.',
   },
-  { name: 'Freedom', role: 'Foqus for PC, set up as an automation' },
+  { name: 'Freedom', role: 'Foqos for PC, set up as an automation' },
   { name: 'NFC Chips', role: 'daily walks to fix my doomscrolling problem' },
 ]
 

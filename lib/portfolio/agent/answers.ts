@@ -72,11 +72,11 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   things_built: {
     intent: 'things_built',
     summary:
-      'A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
+      'A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western live site for 2,000 students.',
     references: [
       { type: 'experience', id: 'stealth-startup', reason: 'The stealth startup, the clearest case of her owning both halves, product and code.' },
       { type: 'experience', id: 'tesla', reason: 'Operator-facing ML tooling, backed by real video infrastructure.' },
-      { type: 'experience', id: 'hack-western', reason: 'Built the portal first, then led the dev team of 8 behind it.' },
+      { type: 'experience', id: 'hack-western', reason: 'Lead dev for 2 years: CI/CD, PR standards, and the full-stack app.' },
       { type: 'project', id: 'tldw', reason: 'A weekend build that summarized and classified YouTube videos.' },
     ],
     readNext: [
@@ -94,7 +94,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
     references: [
       { type: 'experience', id: 'autodesk', reason: 'ADP Studio, an enterprise data platform she was effectively the solo PM for.' },
       { type: 'experience', id: 'stealth-startup', reason: 'The stealth startup, product and engineering owned from discovery to MVP.' },
-      { type: 'experience', id: 'hack-western', reason: 'Product vision and delivery for a portal serving 300+ students.' },
+      { type: 'experience', id: 'hack-western', reason: 'Product vision and delivery for a live site serving 2,000 students.' },
     ],
     readNext: [
       { type: 'architecture', id: 'architecture', reason: 'The product case studies she did on the side are on The Journey.' },
@@ -160,7 +160,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   collaborators: {
     intent: 'collaborators',
     summary:
-      'At the team and community level rather than name-dropping. At Autodesk her partners were software engineers and data analysts, plus the Trust, Metadata Management, and AI teams she needed governance sign-off from, and eventually a six-team cross-functional group. At Hack Western she leads a dev team of 8. Outside work she’s been Product VP of the Ivey Product Society, a hub leader for Rewriting the Code, and president of a municipal youth council.',
+      'At the team and community level rather than name-dropping. At Autodesk her partners were software engineers and data analysts, plus the Trust, Metadata Management, and AI teams she needed governance sign-off from, and eventually a six-team cross-functional group. At Hack Western she has been lead dev on the dev team for 2 years. Outside work she’s been Product VP of the Ivey Product Society, a hub leader for Rewriting the Code, and president of a municipal youth council.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'Cross-functional by necessity: governance teams, engineering, and other PMs.' },
       { type: 'experience', id: 'hack-western', reason: 'Her first time responsible for other people’s work.' },

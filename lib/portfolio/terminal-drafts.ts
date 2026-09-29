@@ -156,7 +156,7 @@ export const TERMINAL_DRAFTS: Partial<Record<string, TerminalDraft>> = {
       },
       {
         "label": "what I built",
-        "text": "I designed and developed the full-stack hacker portal supporting more than 400 participants, then progressed into leading a team of six engineers. I own product vision, technical direction, and delivery, and work across design, operations, sponsorship, and event leadership."
+        "text": "I've been lead dev on Hack Western's dev team for 2 years: CI/CD, PR standards, and the full-stack app, shipping the live site for 2,000 students. I own product vision, technical direction, and delivery, and work across design, operations, sponsorship, and event leadership."
       },
       {
         "label": "what came next",

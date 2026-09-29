@@ -51,7 +51,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Hackathon dev team lead',
         org: 'Hack Western',
-        focus: 'Platform for 300+ students',
+        focus: 'Live site for 2,000 students',
         stack: ['Next.js', 'TypeScript'],
       },
     ],
@@ -77,7 +77,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Product lead',
         org: 'Hack Western',
-        focus: 'Vision + roadmap, 8-person dev team',
+        focus: 'Vision + roadmap, lead dev for 2 years',
         stack: ['Roadmapping', 'Design reviews'],
       },
       {
@@ -129,7 +129,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       {
         role: 'Product + eng lead',
         org: 'Hack Western',
-        focus: '300+ students, 8-person team',
+        focus: '2,000 students, lead dev for 2 years',
         stack: ['Facilitation', 'Team leadership'],
       },
       {

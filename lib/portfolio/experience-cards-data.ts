@@ -163,7 +163,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
   'hack-western': {
     company: 'Hack Western',
     role: 'Product and Engineering Lead',
-    subtitle: 'Leading an 8-person dev team behind Hack Western, serving 300+ students',
+    subtitle: "Lead dev on Hack Western's dev team, shipping the live site for 2,000 students",
     period: '2023 to present',
     category: 'Product Leadership',
     track: 'education',
@@ -180,7 +180,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
       'Event Technology',
     ],
     description:
-      'Designed and developed the full-stack hacker portal for 300+ students, then moved into leading a dev team of 8. Own product vision, technical direction, and delivery, working with design, operations, sponsorship, and event leadership.',
+      'Lead dev on the dev team for 2 years: CI/CD, PR standards, and the full-stack app, shipping the live site for 2,000 students. Own product vision, technical direction, and delivery, working with design, operations, sponsorship, and event leadership.',
   },
   'ivey-product': {
     company: 'IPS Fellowship',

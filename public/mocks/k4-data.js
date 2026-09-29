@@ -5,7 +5,7 @@ window.K4 = {
     { t: 'ADSK', n: 'Autodesk', v: '380+', u: 'ADP Studio users', logo: '/work/autodesk-icon.png', id: 'autodesk' },
     { t: 'TSLA', n: 'Tesla', v: '10+', u: 'production UI components', logo: '/work/tesla.png', id: 'tesla' },
     { t: 'MVG', n: 'Metaverse Group', v: '900+', u: 'leads from one pipeline', logo: '/work/metaverse.png', id: 'metaverse' },
-    { t: 'HKW', n: 'Hack Western', v: '300+', u: 'students on one platform', logo: '/work/hack-western.png', id: 'hack-western' },
+    { t: 'HKW', n: 'Hack Western', v: '2,000', u: 'students on one live site', logo: '/work/hack-western.png', id: 'hack-western' },
     { t: 'IPS', n: 'IPS Fellowship', v: '28', u: 'product educationals', logo: '/work/ivey-product-cover.jpg', id: 'ivey-product' },
   ],
   // Rotating pins. She has not sent her Pinterest quotes yet, so these are lines from her own site copy, marked "placeholder pin".
@@ -31,7 +31,7 @@ window.K4 = {
     { n: 'Obsidian', r: 'context brain' },
     { n: 'Agentation', r: 'annotate', note: 'Favorite for prototyping and being specific about changes.' },
     { n: 'Telegram', r: 'job scraping bot' },
-    { n: 'Foqus', r: 'NFC chip set up to lock me out' },
+    { n: 'Foqos', r: 'NFC chip set up to lock me out' },
     { n: 'TLDR.tech', r: 'keeping up with everything product' },
   ],
   // she has not sent the launches list yet
@@ -45,12 +45,12 @@ window.K4 = {
   // custom tools she's built (sits in the /about top section, under the legal pad)
   customToolsHead: { title: 'My Favorite Tools I\'ve Created', sub: '…to solve my pain points :)' },
   customTools: [
-    { name: 'Notification & Terminal Setup', desc: 'To support multitasking with outlined notifications' },
+    { name: 'Notification & Terminal Setup for Claude', desc: 'To support multitasking with outlined notifications' },
     { name: 'Notion Transcript Sync', desc: 'Save transcripts and projects on Notion with modified summarize skill' },
     { name: 'Obsidian Context with Git Syncing', desc: 'PC notepad to Macbook sync, thorough knowledge systems for architecture, PRDs, etc.' },
     { name: 'Job Scraping Bot (Telegram)', desc: 'Scrapes job sites based on repo, learn about startups from curated lists' },
     { name: 'Claude Routine for Thought Leadership', desc: 'Remember threads from TLDR.tech with daily ingestion into Obsidian' },
-    { name: 'NFC Chip Setup with Foqus', desc: 'Stop doomscrolling and mandate daily walks outside' },
+    { name: 'NFC Chip Setup with Foqos', desc: 'Stop doomscrolling and mandate daily walks outside' },
     { name: 'Tailscale SSH Setup', desc: 'SSH into PC from Macbook Air to prevent overheating' },
     { name: 'Watch & Wear Preload Queue', desc: 'NFC chip by fridge auto-opens watch later queue, NFC chip by bed sets timer & play music' },
   ],

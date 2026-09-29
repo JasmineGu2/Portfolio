@@ -45,7 +45,7 @@ export const ASK_ITEMS: AskItem[] = [
     q: 'What are you looking for next?',
     keys: ['looking for', 'next', 'want', 'role', 'join', 'startup', 'agency', 'open to', 'hiring', 'seeking', 'job', 'available', 'availability'],
     a: [
-      "I'm looking to join a startup or an agency and work with a team. More experience, better work.",
+      "Looking to join a high-ownership, dynamic role in NYC or the Bay Area. Optimizing for learning.",
       "I'm most useful where the problem is technically deep and the direction isn't settled yet. Platform and data products, where security, access, and trust are real constraints, are the ones I keep coming back to.",
     ],
     next: ['graduate', 'where', 'contact'],
@@ -115,7 +115,7 @@ export const ASK_ITEMS: AskItem[] = [
     keys: ['built', 'build', 'shipped', 'projects', 'project', 'portfolio', 'side project', 'made', 'create'],
     a: [
       'A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan.',
-      'At Tesla I built factory-camera ML tooling and the video infrastructure under it. At Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
+      'At Tesla I built factory-camera ML tooling and the video infrastructure under it. At Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western live site for 2,000 students.',
     ],
     next: ['stealth', 'notonresume', 'ai'],
   },
@@ -134,7 +134,7 @@ export const ASK_ITEMS: AskItem[] = [
     q: 'What do you do at Hack Western?',
     keys: ['hack western', 'hackwestern', 'hackathon', 'dev lead', 'pm lead', 'sponsorship', 'slack'],
     a: [
-      "I lead a dev team of 8 for Hack Western, my school's hackathon serving 300+ students. I started by designing and building the full-stack hacker portal.",
+      "I've been lead dev on Hack Western's dev team for 2 years, owning CI/CD, PR standards, and the full-stack app. Hack Western is my school's hackathon, and we shipped the live site for 2,000 students.",
       'I joined as Dev Lead, then pitched becoming PM Lead as AI changed how we could build. I introduced new product processes and empowered our dev team to build internal tools, including a sponsorship dashboard connected to Slack through MCP.',
     ],
     next: ['leadership', 'ai', 'users'],
@@ -144,7 +144,7 @@ export const ASK_ITEMS: AskItem[] = [
     q: 'Have you led a team?',
     keys: ['lead', 'led', 'leadership', 'manage', 'team', 'mentor', 'fellowship', 'ips', 'community', 'president'],
     a: [
-      "Yes. I lead a dev team of 8 for Hack Western, and I led my school's Product Fellowship for 2 years, hosting 28 product educationals to help students develop PM skills.",
+      "Yes. I've been lead dev on Hack Western's dev team for 2 years, and I led my school's Product Fellowship for 2 years, hosting 28 product educationals to help students develop PM skills.",
       "Outside of work I've been Product VP of the Ivey Product Society, a hub leader for Rewriting the Code, and president of a municipal youth council, where membership grew 300%.",
     ],
     next: ['hackwestern', 'users', 'notonresume'],
@@ -205,16 +205,16 @@ export const ASK_ITEMS: AskItem[] = [
     keys: ['on your resume', 'on my resume', 'not on', "isn't on", 'customer-facing', 'customer facing', 'other jobs', 'part-time', 'sales', 'server', 'restaurant', 'fun fact', 'interesting', 'personal', 'outside', 'nfc', 'hobby', 'hobbies'],
     a: [
       "I've worked 5+ customer-facing jobs: selling cars at Tesla (plus cold emails, messages, and calls), serving at a sports bar and 2 noodle restaurants, cold-calling sales for a lawn-mowing service, Salesforce integrations for a team of elderly nonprofit leaders, and IT customer service as a ServiceNow intern.",
-      "What's been most meaningful, though, is how I've used engineering outside of a job description: a growth system that helped a B2B startup land leads at KPMG, Hugo Boss, and Puma, automating processes at a homeless shelter with Salesforce, and an NFC system that automates my morning walks.",
+      "What's been most meaningful, though, is how I've used engineering outside of a job description: automating processes at a homeless shelter with Salesforce, and an NFC system that automates my morning walks.",
     ],
     next: ['built', 'tools', 'leadership'],
   },
   {
     id: 'tools',
     q: 'What are your favorite tools?',
-    keys: ['favorite tool', 'favourite tool', 'tools', 'obsidian', 'agentation', 'telegram', 'foqus', 'tldr', 'apps', 'tailscale', 'freedom', 'automation', 'automations', 'job hunting', 'zero2sudo', 'interview app', 'nfc'],
+    keys: ['favorite tool', 'favourite tool', 'tools', 'obsidian', 'agentation', 'telegram', 'foqos', 'foqus', 'tldr', 'apps', 'tailscale', 'freedom', 'automation', 'automations', 'job hunting', 'zero2sudo', 'interview app', 'nfc'],
     a: [
-      'Obsidian is my context brain. Agentation is my favorite for prototyping and being specific about changes. My job hunting system is a Telegram bot that scrapes Simplify and other job boards, keeps five resumes ready for when each role drops, finds contacts and emails them, then reminds me to send a follow-up, because the sale is in the follow-up. Tailscale lets me SSH and code on my MacBook without it collapsing, Apple Automations sets up my day, Foqus, Freedom and NFC chips keep me off my phone, and I read TLDR.tech to keep up with everything product.',
+      'Obsidian is my context brain. Agentation is my favorite for prototyping and being specific about changes. My job hunting system is a Telegram bot that scrapes Simplify and other job boards, keeps five resumes ready for when each role drops, finds contacts and emails them, then reminds me to send a follow-up, because the sale is in the follow-up. Tailscale lets me SSH and code on my MacBook without it collapsing, Apple Automations sets up my day, Foqos, Freedom and NFC chips keep me off my phone, and I read TLDR.tech to keep up with everything product.',
     ],
     next: ['ai', 'tech', 'notonresume'],
   },
