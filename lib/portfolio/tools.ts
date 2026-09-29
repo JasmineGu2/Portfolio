@@ -26,7 +26,6 @@ export const TOOLS_LABELS = {
   metric: 'Result',
   wiki: 'Read on Wikipedia',
   site: 'Visit the site',
-  more: 'More about',
 } as const
 
 const FIELDS = ['url', 'label', 'what', 'how', 'metric'] as const

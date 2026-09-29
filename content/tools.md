@@ -32,6 +32,13 @@ One `## Name` per tool, then these lines:
 - how: My go-to for vibe coding. Favorite for prototyping and being specific about changes.
 - metric:
 
+## Superwhisper
+- url: https://superwhisper.com/
+- label: talking to Claude
+- what: An AI voice-to-text app for Mac, Windows, iOS and Android that lets you dictate into any app.
+- how: For yapping to my Claude.
+- metric:
+
 ## Telegram
 - url: https://en.wikipedia.org/wiki/Telegram_(software)
 - label: job scraping bot
