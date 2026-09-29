@@ -245,5 +245,18 @@
 .q6-stage .q6-list li{font-size:clamp(15px,1.05vw,17px);line-height:1.4;padding:7px 0}
 .q6-stage .q6-list a{position:relative;z-index:1}
 @media (max-width:999px){.q6-stage .q6-list{margin:0}}
-/* About desk (2026-09-29): three cards now (Product Trends, Favorite Tools I've Created, Side Quests), so three even columns with a gentle stagger */
-@media (min-width:1000px){.q6 .q-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,48px)}.q6 .q-desk .d2{margin-top:40px}.q6 .q-desk .d3{margin-top:0}.q6 .q-desk .d4{margin-top:56px}}
+/* About desk (2026-09-29, v4): two cards (Product Trends, free time); "Tools I've Created" moved up under the legal pad. Two centred columns, gently staggered */
+@media (min-width:1000px){.q6 .q-desk{display:grid;grid-template-columns:repeat(2,minmax(0,560px));justify-content:center;gap:clamp(40px,5vw,96px)}.q6 .q-desk .d2{margin-top:0}.q6 .q-desk .d4{margin-top:56px}}
+/* About top (v4): "Tools I've Created" is a paper card pinned under the legal pad, nudged right like a note tucked beneath it; two-column list on wide screens */
+.q6-made{--off:clamp(0px,5vw,72px);position:relative;z-index:2;justify-self:start;width:min(calc(100% - var(--off) - 24px),760px);margin:-14px 0 0 var(--off)}
+#quests li{display:flex;gap:8px}
+.q6-made-c{padding:26px 28px 14px}
+.q6-made-c .q6-h{font-size:22px;margin:0 0 6px}
+.q6-made-c .sub{font-size:15px;margin:0 0 18px;color:var(--muted)}
+.q6-made-c ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.q6-made-c li{padding:0 0 14px}
+.q6-made-c h4{font-size:16px;font-weight:600;margin:0 0 3px;color:var(--ink)}
+.q6-made-c p{font-size:14.5px;line-height:1.45;margin:0;color:var(--muted)}
+@media (max-width:760px){.q6-made{--off:0px;width:100%;margin:0}.q6-made-c{padding:22px 20px 10px}.q6-made-c ul{grid-template-columns:1fr}}
+/* when a legal-pad tool card is open it must sit above this note */
+.q6-left #notes{position:relative;z-index:3}

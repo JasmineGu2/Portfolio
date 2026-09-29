@@ -42,7 +42,8 @@ window.K4 = {
     { title: 'Attention Hacking with AI Slop', desc: 'The rise of Microdramas and compelling AI-generated content' },
     { title: 'Agents for Personal Use', desc: 'I\'d love to see Muse come to WhatsApp in a Poke or customer service way for SMB users' },
   ],
-  // custom tools she's built
+  // custom tools she's built (sits in the /about top section, under the legal pad)
+  customToolsHead: { title: 'My Favorite Tools I\'ve Created', sub: '…to solve my pain points :)' },
   customTools: [
     { name: 'Notification & Terminal Setup', desc: 'To support multitasking with outlined notifications' },
     { name: 'Notion Transcript Sync', desc: 'Save transcripts and projects on Notion with modified summarize skill' },
@@ -53,12 +54,16 @@ window.K4 = {
     { name: 'Tailscale SSH Setup', desc: 'SSH into PC from Macbook Air to prevent overheating' },
     { name: 'Watch & Wear Preload Queue', desc: 'NFC chip by fridge auto-opens watch later queue, NFC chip by bed sets timer & play music' },
   ],
-  // side quests she loves
+  // what she does in her free time (was "Side Quests I Love")
+  sideQuestsTitle: 'What I\'m doing in my free time',
   sideQuests: [
     'Orientation Leader @Uni',
     'Love traveling (Not vacationing! there\'s a difference)',
     'Very competitive board game player (Catan, Secret Hitler, Ticket To Ride, Code names spymaster)',
     'Fashion (shot a magazine for my school\'s fashion club, was the creative director)',
+    'Poker Club',
+    'Hip Hop Western',
+    'Loved being a server and doing sales (back in the day)',
   ],
   // what isn't on her resume, verbatim
   resume: {

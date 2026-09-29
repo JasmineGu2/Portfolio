@@ -16,6 +16,7 @@ export default function AboutPage() {
             <div className="q6-left">
               <div id="notes"></div>
               <script id="tools-data" type="application/json" dangerouslySetInnerHTML={{ __html: toolsJson }} />
+              <div className="q6-made" id="customTools"></div>
             </div>
             <div id="lan"></div>
           </div>
@@ -24,7 +25,6 @@ export default function AboutPage() {
         <div className="q-w">
           <div className="q-desk">
             <div className="d2" id="trends"></div>
-            <div className="d3" id="customTools"></div>
             <div className="d4" id="quests"></div>
           </div>
         </div>
