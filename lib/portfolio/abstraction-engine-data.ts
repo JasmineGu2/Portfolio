@@ -733,7 +733,7 @@ const ARCHITECTURE_CORE_NODES: ArchitectureNode[] = [
   {
     id: 'exp-laurel',
     type: 'experience',
-    label: 'LaurelSpace',
+    label: 'Stealth startup',
     stage: 'zero-to-one',
     x: 38,
     y: 16,

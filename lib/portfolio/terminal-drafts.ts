@@ -130,7 +130,7 @@ export const TERMINAL_DRAFTS: Partial<Record<string, TerminalDraft>> = {
     "beats": [
       {
         "label": "context",
-        "text": "I was a Product Manager and Engineer Intern at LaurelSpace, pre-seed. The work was taking a childcare operations platform from customer discovery to MVP, so product strategy and full-stack development were the same job."
+        "text": "I was a Product Manager and Engineer Intern at a pre-seed stealth startup. The work was taking a childcare operations platform from customer discovery to MVP, so product strategy and full-stack development were the same job."
       },
       {
         "label": "what I built",
@@ -160,7 +160,7 @@ export const TERMINAL_DRAFTS: Partial<Record<string, TerminalDraft>> = {
       },
       {
         "label": "what came next",
-        "text": "It relates to the product bootcamp I led: product leadership inside the Ivey community. LaurelSpace connects too, since both are zero-to-one builds. And this is where leading engineers toward a product vision happened."
+        "text": "It relates to the product bootcamp I led: product leadership inside the Ivey community. The stealth startup connects too, since both are zero-to-one builds. And this is where leading engineers toward a product vision happened."
       }
     ],
     "sources": [

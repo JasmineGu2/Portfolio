@@ -32,7 +32,7 @@
   document.addEventListener('click', (e) => { const f = e.target.closest('[data-fol]'); if (f) f.classList.toggle('open') })
 
   // ---------- tiles: the site's tile (media, name, subtitle, 3 tags), orange cursor label per role ----------
-  K.order = ['tesla', 'autodesk', 'autodesk-eng', 'intuit', 'omers', 'metaverse', 'stealth-startup', 'hack-western', 'ivey-product', 'western']
+  K.order = ['tesla', 'autodesk', 'autodesk-eng', 'intuit', 'omers', 'metaverse', 'stealth-startup', 'hack-western', 'ivey-product']
   K.list = () => K.order.map((id) => D.exp.find((e) => e.id === id))
   // autoplay + muted + playsinline in the markup (iOS reads the attributes, not the properties); the poster is the clip's first frame (public/work/*-poster.jpg)
   K.media = (e) => (e.video ? `<video muted loop playsinline autoplay preload="none" poster="${e.video.replace(/\.mp4$/, '-poster.jpg')}" data-src="${e.video}"></video>` : `<img src="${e.img}" alt="${e.co}" loading="lazy">`)

@@ -139,7 +139,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
       'Built a Python and Selenium outreach pipeline that generated more than 900 leads, expanded B2B outreach, reduced email bounce rates, and improved campaign performance.',
   },
   'stealth-startup': {
-    company: 'LaurelSpace',
+    company: 'Stealth startup',
     role: 'Product Manager and Engineer Intern',
     subtitle: 'Taking a childcare operations platform from customer discovery to MVP',
     period: 'Pre-seed',

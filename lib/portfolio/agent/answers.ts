@@ -72,9 +72,9 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   things_built: {
     intent: 'things_built',
     summary:
-      'A lot, at different sizes. The biggest is LaurelSpace, a childcare CRM where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
+      'A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where she owned product and engineering end to end: payments, email automation, the database, the go-to-market plan. At Tesla she built factory-camera ML tooling and the video infrastructure under it; at Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
     references: [
-      { type: 'experience', id: 'stealth-startup', reason: 'LaurelSpace, the clearest case of her owning both halves, product and code.' },
+      { type: 'experience', id: 'stealth-startup', reason: 'The stealth startup, the clearest case of her owning both halves, product and code.' },
       { type: 'experience', id: 'tesla', reason: 'Operator-facing ML tooling, backed by real video infrastructure.' },
       { type: 'experience', id: 'hack-western', reason: 'Built the portal first, then led the dev team of 8 behind it.' },
       { type: 'project', id: 'tldw', reason: 'A weekend build that summarized and classified YouTube videos.' },
@@ -86,14 +86,14 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   },
 
   // grounding: autodesk-facts ("What ADP Studio is", roleReality), recruiter-qa
-  // ("What did you own at Autodesk", "What is LaurelSpace"), experience-cards-data
+  // ("What did you own at Autodesk", "What was the stealth startup"), experience-cards-data
   products: {
     intent: 'products',
     summary:
-      'Two she owned, plus product leadership elsewhere. At Autodesk she ran product for ADP Studio, the governed SQL and data-exploration layer on the company’s data lake, used by 380+ analysts and engineers. Before that, LaurelSpace, a pre-seed childcare CRM where she set the roadmap, personas, MVP scope, and go-to-market herself. She also led product for the Hack Western portal, and led the Product Fellowship at Ivey for 2 years, hosting 28 product educationals.',
+      'Two she owned, plus product leadership elsewhere. At Autodesk she ran product for ADP Studio, the governed SQL and data-exploration layer on the company’s data lake, used by 380+ analysts and engineers. Before that, a pre-seed childcare CRM at a stealth startup, where she set the roadmap, personas, MVP scope, and go-to-market herself. She also led product for the Hack Western portal, and led the Product Fellowship at Ivey for 2 years, hosting 28 product educationals.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'ADP Studio, an enterprise data platform she was effectively the solo PM for.' },
-      { type: 'experience', id: 'stealth-startup', reason: 'LaurelSpace, product and engineering owned from discovery to MVP.' },
+      { type: 'experience', id: 'stealth-startup', reason: 'The stealth startup, product and engineering owned from discovery to MVP.' },
       { type: 'experience', id: 'hack-western', reason: 'Product vision and delivery for a portal serving 300+ students.' },
     ],
     readNext: [
@@ -107,7 +107,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   product_ownership: {
     intent: 'product_ownership',
     summary:
-      'Yes, and under unusually thin cover. At Autodesk she was the de facto solo PM for ADP Studio, with no embedded designer and no manager above her on the product for most of the internship. She increased adoption 60%, improved usability about 50%, and launched 7+ redesigned workflows. At LaurelSpace she owned product and engineering together, from customer discovery through MVP.',
+      'Yes, and under unusually thin cover. At Autodesk she was the de facto solo PM for ADP Studio, with no embedded designer and no manager above her on the product for most of the internship. She increased adoption 60%, improved usability about 50%, and launched 7+ redesigned workflows. At a stealth startup she owned product and engineering together, from customer discovery through MVP.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'Sole product representative for an enterprise data platform mid-transition.' },
       { type: 'experience', id: 'stealth-startup', reason: 'The other end of the spectrum: 0→1, both halves, no spec to start from.' },
@@ -140,7 +140,7 @@ export const AGENT_ANSWERS: Record<AgentIntent, AgentAnswer> = {
   workplaces: {
     intent: 'workplaces',
     summary:
-      'Seven internships across big tech, startups, and enterprise IT, alongside a Computer Science and Business dual degree at Western and Ivey. Autodesk twice, full-stack engineering, then platform PM. Tesla and Intuit on the frontend. LaurelSpace, the childcare CRM she built 0→1. OMERS and Metaverse Group earlier, on enterprise automation and growth. She’s based in Toronto and graduates in 2027.',
+      'Seven internships across big tech, startups, and enterprise IT, alongside a Computer Science and Business dual degree at Western and Ivey. Autodesk twice, full-stack engineering, then platform PM. Tesla and Intuit on the frontend. A stealth startup, where she built a childcare CRM 0→1. OMERS and Metaverse Group earlier, on enterprise automation and growth. She’s based in Toronto and graduates in 2027.',
     references: [
       { type: 'experience', id: 'autodesk', reason: 'Her most recent role, platform product for a governed data lake.' },
       { type: 'experience', id: 'tesla', reason: 'Factory ML systems and the infrastructure behind them.' },

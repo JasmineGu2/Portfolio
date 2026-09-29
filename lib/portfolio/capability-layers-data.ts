@@ -70,7 +70,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       },
       {
         role: 'PM + engineer',
-        org: 'LaurelSpace',
+        org: 'Stealth startup',
         focus: '0→1 ops platform to MVP',
         stack: ['PostgreSQL', 'Stripe API'],
       },
@@ -108,7 +108,7 @@ export const CAPABILITY_LAYERS: CapabilityLayer[] = [
       },
       {
         role: 'GTM + pricing',
-        org: 'LaurelSpace',
+        org: 'Stealth startup',
         focus: 'Pre-seed positioning',
         stack: ['Market sizing', 'Pricing'],
       },

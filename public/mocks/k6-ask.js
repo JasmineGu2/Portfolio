@@ -108,7 +108,7 @@ window.K6ASK = {
    ],
    "a": [
     "I’ve done 7 internships across 4 big tech companies, a Series A startup, a stealth 0→1 and Enterprise IT.",
-    "Autodesk twice (full-stack engineering, then platform product), Tesla and Intuit on the frontend, LaurelSpace, OMERS on ServiceNow workflows, and Metaverse Group on growth automation."
+    "Autodesk twice (full-stack engineering, then platform product), Tesla and Intuit on the frontend, a stealth startup, OMERS on ServiceNow workflows, and Metaverse Group on growth automation."
    ],
    "links": [
     {
@@ -224,21 +224,19 @@ window.K6ASK = {
     "create"
    ],
    "a": [
-    "A lot, at different sizes. The biggest is LaurelSpace, a childcare CRM where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan.",
+    "A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan.",
     "At Tesla I built factory-camera ML tooling and the video infrastructure under it. At Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students."
    ],
    "next": [
-    "laurelspace",
+    "stealth",
     "notonresume",
     "ai"
    ]
   },
   {
-   "id": "laurelspace",
-   "q": "What is LaurelSpace?",
+   "id": "stealth",
+   "q": "What was the stealth startup?",
    "keys": [
-    "laurelspace",
-    "laurel",
     "childcare",
     "crm",
     "0→1",
@@ -346,7 +344,7 @@ window.K6ASK = {
     "databases"
    ],
    "a": [
-    "Java and C++ across microservices at Autodesk, with Spring Boot, DynamoDB, and Redis. TypeScript and React on the frontend at Intuit and Tesla. Python and Selenium for automation at Metaverse Group. PostgreSQL and the Stripe API at LaurelSpace, and ServiceNow at OMERS.",
+    "Java and C++ across microservices at Autodesk, with Spring Boot, DynamoDB, and Redis. TypeScript and React on the frontend at Intuit and Tesla. Python and Selenium for automation at Metaverse Group. PostgreSQL and the Stripe API at a stealth startup, and ServiceNow at OMERS.",
     "Day to day I work with Claude, Cursor, Obsidian, and Jira MCP."
    ],
    "next": [

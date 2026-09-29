@@ -65,7 +65,7 @@ export const ASK_ITEMS: AskItem[] = [
     keys: ['worked', 'work history', 'experience', 'internship', 'internships', 'companies', 'company', 'employers', 'previous', 'past roles'],
     a: [
       'I’ve done 7 internships across 4 big tech companies, a Series A startup, a stealth 0→1 and Enterprise IT.',
-      'Autodesk twice (full-stack engineering, then platform product), Tesla and Intuit on the frontend, LaurelSpace, OMERS on ServiceNow workflows, and Metaverse Group on growth automation.',
+      'Autodesk twice (full-stack engineering, then platform product), Tesla and Intuit on the frontend, a stealth startup, OMERS on ServiceNow workflows, and Metaverse Group on growth automation.',
     ],
     links: [{ label: 'See the work', href: '/' }],
     next: ['engineer_or_pm', 'built', 'autodesk'],
@@ -114,15 +114,15 @@ export const ASK_ITEMS: AskItem[] = [
     q: 'What have you built?',
     keys: ['built', 'build', 'shipped', 'projects', 'project', 'portfolio', 'side project', 'made', 'create'],
     a: [
-      'A lot, at different sizes. The biggest is LaurelSpace, a childcare CRM where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan.',
+      'A lot, at different sizes. The biggest is a childcare CRM at a stealth startup, where I owned product and engineering end to end: payments, email automation, the database, and the go-to-market plan.',
       'At Tesla I built factory-camera ML tooling and the video infrastructure under it. At Autodesk, distributed library services and later 7+ redesigned workflows for a governed SQL platform. Smaller and faster: TLDW, BrewMates, and the Hack Western hacker portal for 300+ students.',
     ],
-    next: ['laurelspace', 'notonresume', 'ai'],
+    next: ['stealth', 'notonresume', 'ai'],
   },
   {
-    id: 'laurelspace',
-    q: 'What is LaurelSpace?',
-    keys: ['laurelspace', 'laurel', 'childcare', 'crm', '0→1', 'zero to one', 'stealth', 'pre-seed', 'from scratch'],
+    id: 'stealth',
+    q: 'What was the stealth startup?',
+    keys: ['childcare', 'crm', '0→1', 'zero to one', 'stealth', 'pre-seed', 'from scratch'],
     a: [
       'A pre-seed childcare operations platform. I led product and engineering for the CRM MVP, from customer discovery through shipping payments, email automation, database infrastructure, and administrative workflows.',
       'I defined the roadmap, customer personas, MVP capabilities, success metrics, and go-to-market strategy through user research and competitive analysis.',
@@ -164,7 +164,7 @@ export const ASK_ITEMS: AskItem[] = [
     q: 'What technologies do you use?',
     keys: ['technolog', 'tech stack', 'stack', 'languages', 'language', 'java', 'python', 'react', 'typescript', 'frameworks', 'databases'],
     a: [
-      'Java and C++ across microservices at Autodesk, with Spring Boot, DynamoDB, and Redis. TypeScript and React on the frontend at Intuit and Tesla. Python and Selenium for automation at Metaverse Group. PostgreSQL and the Stripe API at LaurelSpace, and ServiceNow at OMERS.',
+      'Java and C++ across microservices at Autodesk, with Spring Boot, DynamoDB, and Redis. TypeScript and React on the frontend at Intuit and Tesla. Python and Selenium for automation at Metaverse Group. PostgreSQL and the Stripe API at a stealth startup, and ServiceNow at OMERS.',
       'Day to day I work with Claude, Cursor, Obsidian, and Jira MCP.',
     ],
     next: ['tools', 'technical_pm', 'built'],

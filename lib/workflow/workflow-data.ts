@@ -98,7 +98,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
       'reduce cognitive load',
       'make technical outputs usable',
     ],
-    experienceRefs: ['OMERS', 'Intuit', 'Tesla', 'LaurelSpace'],
+    experienceRefs: ['OMERS', 'Intuit', 'Tesla', 'Stealth startup'],
     color: 'peach',
     icon: 'users',
     details: {
@@ -173,7 +173,7 @@ export const MAIN_WORKFLOW_NODES: WorkflowNodeData[] = [
       'reliability',
     ],
     experienceRefs: [
-      'LaurelSpace',
+      'Stealth startup',
       'Intuit',
       'Tesla',
       'Autodesk Full-Stack Engineering',
@@ -503,7 +503,7 @@ export const EXPERIENCE_EXECUTIONS: ExperienceExecution[] = [
   },
   {
     id: 'laurelspace',
-    company: 'LaurelSpace',
+    company: 'Stealth startup',
     problemReceived: 'Administrative complexity for childcare providers.',
     agentsActivated: ['user', 'product', 'engineering', 'operations'],
     workflowBuilt:
