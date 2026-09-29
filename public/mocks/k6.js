@@ -145,21 +145,55 @@
     const row = (t, i) => `<li class="q6-tool"><span class="nm">${t.url ? `<a href="${at(t.url)}" target="_blank" rel="noreferrer" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</a>` : `<span tabindex="0" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</span>`}</span>${t.label ? `<span class="r">${esc(t.label)}</span>` : ''}
       <div class="q6-tcard" id="tcard${i}" role="group" aria-label="${at(t.name)}"><p class="h">${ico(t, 28)}${esc(t.name)}</p>${t.what ? `<p class="k">${L.what}</p><p>${esc(t.what)}</p>` : ''}${t.how ? `<p class="k">${L.how}</p><p>${esc(t.how)}</p>` : ''}${t.metric ? `<p class="k">${L.metric}</p><p class="m">${esc(t.metric)}</p>` : ''}${t.url ? `<a class="go" href="${at(t.url)}" target="_blank" rel="noreferrer">${out(t.url)} <span aria-hidden="true">↗</span></a>` : ''}</div></li>`
     el.innerHTML = `<div class="q-notes q6-pad q6-tpad" style="--r:-1.6deg"><p class="k">${esc(T.title)}</p>${T.intro ? `<p class="lead">${esc(T.intro)}</p>` : ''}<ul class="q6-tools">${T.items.map(row).join('')}</ul>${T.hint ? `<p class="hint">${esc(T.hint)}</p>` : ''}</div>`
-    const pad = $('.q6-tpad', el), HOVER = matchMedia('(hover: hover)')
-    let open = null, pinned = false, t = 0
-    const set = (li, on) => { li.classList.toggle('open', on); if (!on) li.classList.remove('pin') }
-    const show = (li) => { clearTimeout(t); if (open && open !== li) { set(open, false); pinned = false } open = li; set(li, true); pad.classList.add('has-open') }
-    const hide = () => { clearTimeout(t); if (open) set(open, false); open = null; pinned = false; pad.classList.remove('has-open') }
+    // the pad is tilted and draggable (its own stacking context), so the cards move to a layer on <body> and are placed from the
+    // row's on-screen box (position:fixed, top z-index in k6.css); a rAF loop keeps the open one on its row through scroll, resize and drags
+    if (el._tcards) el._tcards.remove()
+    const layer = el._tcards = document.createElement('div'); layer.className = 'q6-tcards'; document.body.appendChild(layer)
+    const HOVER = matchMedia('(hover: hover)'), card = (li) => li._card, trig = (li) => $('.nm > [aria-describedby]', li)
+    $$('.q6-tool', el).forEach((li) => { li._card = $('.q6-tcard', li); li._card._li = li; layer.appendChild(li._card) })
+    let open = null, pinned = false, t = 0, raf = 0
+    const place = (li) => {
+      const c = card(li), r = li.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = innerHeight, m = 8
+      // gone (page left) or scrolled out of view: close
+      if (!li.isConnected) { hide(); layer.remove(); return false }
+      if (r.bottom < 0 || r.top > vh) { hide(); return false }
+      const narrow = vw <= 760, w = Math.min(narrow ? r.width + 12 : 360, narrow ? r.width + 12 : r.width + 28, vw - 2 * m)
+      c.style.width = Math.round(w) + 'px'
+      let x = narrow ? r.left - 6 : r.right + 14 - w; x = Math.max(m, Math.min(vw - m - w, x))
+      const h = c.offsetHeight
+      // under the row; flipped above it when it would run off the bottom; never off either edge
+      let y = r.bottom - 2; if (y + h > vh - m && r.top + 2 - h >= m) y = r.top + 2 - h; y = Math.max(m, Math.min(vh - m - h, y))
+      c.style.left = Math.round(x) + 'px'; c.style.top = Math.round(y) + 'px'; return true
+    }
+    const loop = () => { raf = 0; if (open && place(open)) raf = requestAnimationFrame(loop) }
+    const set = (li, on) => { li.classList.toggle('open', on); card(li).classList.toggle('open', on); if (!on) li.classList.remove('pin') }
+    const show = (li) => { clearTimeout(t); if (open && open !== li) { set(open, false); pinned = false } open = li; if (!place(li)) return; set(li, true); if (!raf) raf = requestAnimationFrame(loop) }
+    function hide() { clearTimeout(t); if (open) set(open, false); open = null; pinned = false; cancelAnimationFrame(raf); raf = 0 }
+    const inside = (n) => open && n && (open.contains(n) || card(open).contains(n))
+    // hover: a short grace period so the pointer can cross from the row into its card (to click the link) and back
+    const later = (li) => { if (!pinned && open === li) { clearTimeout(t); t = setTimeout(hide, 160) } }
+    // keyboard: the card sits at the end of <body>, so Tab from the row goes into the card's link, and out of it back to the page order
+    const tabbables = () => $$('a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])').filter((n) => !n.closest('.q6-tcards') && !n.closest('[inert]') && n.getClientRects().length)
     $$('.q6-tool', el).forEach((li) => {
+      const c = card(li), b = trig(li), go = $('.go', c)
       li.addEventListener('mouseenter', () => { if (HOVER.matches) show(li) })
-      li.addEventListener('mouseleave', () => { if (!pinned && open === li) t = setTimeout(hide, 140) })
+      li.addEventListener('mouseleave', (e) => { if (!c.contains(e.relatedTarget)) later(li) })
+      c.addEventListener('mouseenter', () => { if (open === li) clearTimeout(t) })
+      c.addEventListener('mouseleave', (e) => { if (!li.contains(e.relatedTarget)) later(li) })
       li.addEventListener('focusin', () => show(li))
-      li.addEventListener('focusout', (e) => { if (!li.contains(e.relatedTarget) && open === li) hide() })
+      li.addEventListener('focusout', (e) => { if (!inside(e.relatedTarget) && open === li) hide() })
+      c.addEventListener('focusout', (e) => { if (!inside(e.relatedTarget) && open === li) hide() })
+      if (b && go) b.addEventListener('keydown', (e) => { if (e.key === 'Tab' && !e.shiftKey && open === li) { e.preventDefault(); go.focus({ preventScroll: true }) } })
+      if (b && go) go.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return; e.preventDefault()
+        if (e.shiftKey) { b.focus({ preventScroll: true }); return }
+        const all = tabbables(), nx = all[all.indexOf(b) + 1]; hide(); if (nx) nx.focus(); else go.blur()
+      })
       // a tap or click on the row (not on a link) pins the card open, a second one closes it
-      li.addEventListener('click', (e) => { if (e.target.closest('a') || e.target.closest('.q6-tcard')) return; if (open === li && pinned) hide(); else { show(li); pinned = true; li.classList.add('pin') } })
+      li.addEventListener('click', (e) => { if (e.target.closest('a')) return; if (open === li && pinned) hide(); else { show(li); if (open === li) { pinned = true; li.classList.add('pin') } } })
     })
-    document.addEventListener('keydown', (e) => { if (e.key !== 'Escape' || !open) return; const b = $('.nm > [aria-describedby]', open); if (b && $('.q6-tcard', open).contains(document.activeElement)) b.focus({ preventScroll: true }); hide() })
-    document.addEventListener('pointerdown', (e) => { if (open && !open.contains(e.target)) hide() })
+    document.addEventListener('keydown', (e) => { if (e.key !== 'Escape' || !open) return; const b = trig(open); if (b && card(open).contains(document.activeElement)) b.focus({ preventScroll: true }); hide() })
+    document.addEventListener('pointerdown', (e) => { if (open && !inside(e.target)) hide() })
   }
   // welcome video: a marked placeholder until she records it
   Q.welcome = (el) => { el.innerHTML = '<div class="q6-welcome"><div class="frame"><div class="empty"><i aria-hidden="true"></i><span>placeholder · short video goes here</span></div></div><div class="cap"><h2 class="q6-h">Welcome to my page</h2><p>(I appreciate you being here) :)</p></div></div>' }
