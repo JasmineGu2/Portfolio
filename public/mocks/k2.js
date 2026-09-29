@@ -62,12 +62,17 @@
       <circle class="fade" style="--d:${d + 1.2}s" cx="${cx - W}" cy="${y}" r="4.5" fill="${l.color}" stroke="#e8f1ff"/>
       ${l.short.map((s, k) => `<text class="lab fade" style="--d:${d + 1.3}s" text-anchor="end" x="${cx - W - 14}" y="${y - 2 + k * 15 - (l.short.length - 1) * 7}">${s}</text>`).join('')}<text class="sub2 fade" style="--d:${d + 1.4}s" text-anchor="end" x="${cx - W - 14}" y="${y + 24}">LAYER 0${i + 1}</text></g>` }
     const fh = () => (mode === 'both' ? 320 : 190)
-    el.innerHTML = `<div class="bpp">${opts.bare ? '' : '<div class="label"><span>Fig. 02 · exploded view · four layers</span><span>hover a layer</span></div>'}<svg viewBox="0 0 960 600">${guides}${L.map(slab).join('')}<path class="leader" d=""/><foreignObject x="${nx}" y="10" width="370" height="${fh()}" style="overflow:visible"><div class="nt"></div></foreignObject></svg></div>`
-    const nt = $('.nt', el), fo = $('foreignObject', el), ld = $('.leader', el), gs = $$('.lay-g', el)
-    const prompt = () => { nt.className = 'nt' + (mode === 'call' ? ' call' : ''); nt.style.setProperty('--c', '#ffe98a'); nt.innerHTML = `<small>${mode === 'call' ? 'DETAIL / A-101' : 'placeholder note'}</small>Four layers. Hover one and I'll tell you what's in it.`; fo.setAttribute('y', 10); fo.setAttribute('height', fh()); ld.classList.remove('on') }
+    el.innerHTML = `<div class="bpp">${opts.bare ? '' : '<div class="label"><span>Fig. 02 · exploded view · four layers</span><span>hover a layer</span></div>'}<div class="lay-box"><svg viewBox="${opts.viewBox || '0 0 960 600'}">${guides}${L.map(slab).join('')}<path class="leader" d=""/></svg><div class="nt"></div></div></div>`
+    const nt = $('.nt', el), box = $('.lay-box', el), svg = $('svg', el), ld = $('.leader', el), gs = $$('.lay-g', el), nw = opts.noteW || 370
+    // the note is plain HTML laid over the SVG, not a <foreignObject>: Safari/WebKit ignores the viewBox scale and the card's CSS rotation
+    // for foreignObject content (it drew the note full-size, off to the right). Here its SVG anchor (nx, ny) is converted to box pixels.
+    let ny = 10
+    const place = () => { const vb = svg.viewBox.baseVal, k = box.clientWidth / vb.width; nt.style.left = (nx - vb.x) * k + 'px'; nt.style.top = (ny - vb.y) * k + 'px'; nt.style.width = nw * k + 'px' }
+    if (window.ResizeObserver) new ResizeObserver(place).observe(box); else addEventListener('resize', place)
+    const prompt = () => { nt.className = 'nt' + (mode === 'call' ? ' call' : ''); nt.style.setProperty('--c', '#ffe98a'); nt.innerHTML = `<small>${mode === 'call' ? 'DETAIL / A-101' : 'placeholder note'}</small>Four layers. Hover one and I'll tell you what's in it.`; ny = 10; place(); ld.classList.remove('on') }
     const show = (i) => { const l = L[i], y = ys[i]; nt.className = 'nt' + (mode === 'call' ? ' call' : ''); nt.style.setProperty('--c', l.color)
       nt.innerHTML = `<small>${mode === 'call' ? 'DETAIL 0' + (i + 1) + ' / A-101 · ' : 'placeholder note · '}${l.label}</small><ul>${l.items.map((x) => `<li><b>${x[0]}</b>, ${x[1]}: ${x[2]}</li>`).join('')}</ul>` + (mode === 'both' ? `<div class="nt call" style="margin-top:8px"><small>Capabilities</small>${l.caps}</div>` : '')
-      const ny = Math.max(6, Math.min(y - 50, 600 - fh())); fo.setAttribute('y', ny); fo.setAttribute('height', fh()); ld.setAttribute('d', `M${cx + W} ${y} H${cx + W + 44} L${nx - 6} ${ny + 26}`); ld.classList.add('on') }
+      ny = Math.max(6, Math.min(y - 50, 600 - fh())); place(); ld.setAttribute('d', `M${cx + W} ${y} H${cx + W + 44} L${nx - 6} ${ny + 26}`); ld.classList.add('on') }
     gs.forEach((g) => { g.addEventListener('mouseenter', () => { gs.forEach((x) => x.classList.toggle('on', x === g)); $('.bpp', el).classList.add('dimm'); show(+g.dataset.i) })
       g.addEventListener('mouseleave', () => { g.classList.remove('on'); $('.bpp', el).classList.remove('dimm') }); g.addEventListener('click', () => show(+g.dataset.i)) })
     prompt()

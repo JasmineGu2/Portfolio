@@ -132,6 +132,7 @@ section:where(:not([aria-live])){padding:56px 0;position:relative}
 .lay-g.on{transform:translateY(-14px)}.lay-g.on .fillA{fill:var(--c)}.lay-g.on .sideA{fill:color-mix(in srgb,var(--c) 70%,#000)}
 .dimm .lay-g:not(.on){opacity:.3}
 .lab{font:700 13px 'JetBrains Mono';letter-spacing:.08em;fill:#e8f1ff}.sub2{font:500 10.5px 'JetBrains Mono';letter-spacing:.06em;fill:#9fd3ff}
+.lay-box{position:relative}.lay-box>.nt{position:absolute;box-sizing:border-box;margin:0}
 .leader{stroke:#ff8a5c;stroke-width:1.6;fill:none;opacity:0;transition:opacity .25s}.leader.on{opacity:1}
 .nt{font:400 18.5px/1.3 'Patrick Hand',cursive;background:color-mix(in srgb,var(--c,#ffe98a) 42%,#fff);color:#222;padding:12px 14px;box-shadow:0 10px 18px rgba(0,0,0,.28);transform:rotate(-1.5deg);transition:background .3s}
 .nt ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:5px}.nt small{display:block;font:500 9px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;opacity:.6}
