@@ -7,6 +7,7 @@ import { TESLA_HERO_META } from '@/lib/portfolio/tesla-case-study'
 import { AUTODESK_HERO_META } from '@/lib/portfolio/autodesk-case-study'
 import { TESLA_ARTICLE_BYLINE, TESLA_ARTICLE_SECTIONS } from './tesla-article'
 import { AUTODESK_ARTICLE_BYLINE, AUTODESK_ARTICLE_SECTIONS } from './autodesk-article'
+import { RESUME_ARTICLES } from './resume-articles'
 import type { CaseStudy, CaseStudyMedia, CaseStudySection } from './types'
 
 export type { CaseStudy, CaseStudyBlock, CaseStudyMedia, CaseStudySection } from './types'
@@ -54,21 +55,24 @@ function longForm(
 }
 
 /**
- * Every other role only has its card so far: name, role, dates, one-line subtitle and tags. No sections, so the
- * page shows the "coming soon" note instead of a body and no section list.
+ * Every other role has its card: name, role, dates, one-line subtitle and tags. Roles on the résumé also get a short
+ * write-up from it (resume-articles.ts); the rest have no sections, so the page shows the "coming soon" note.
  */
 function fromCard(slug: WorkId): CaseStudy {
   const tile = getWorkTileById(slug)
   const page = WORK_EXPERIENCE_PAGES[slug]
+  // Roles on the résumé get a short write-up from it; its title and dates win over the card's for the meta line.
+  const resume = RESUME_ARTICLES[slug]
+  const meta = resume ? [resume.role, resume.period] : [tile.role, tile.roleNote, tile.period]
   return {
     slug,
     eyebrow: tile.category,
     title: tile.title,
     dek: tile.subtitle,
-    meta: [tile.role, tile.roleNote, tile.period].filter((part): part is string => Boolean(part)),
+    meta: meta.filter((part): part is string => Boolean(part)),
     heroMedia: heroMediaFor(slug),
     tags: page.skills,
-    sections: [],
+    sections: resume?.sections ?? [],
   }
 }
 
