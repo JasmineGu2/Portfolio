@@ -58,7 +58,7 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6-askbtn{margin-left:14px;padding:5px 14px;border:1px solid rgba(27,27,27,.3);border-radius:99px;background:rgba(255,255,255,.7);font:500 12px/16px Inter,system-ui,sans-serif;cursor:pointer;color:var(--ink)}.q6-askbtn span{color:var(--or);margin-right:5px}.q6-askbtn:hover{border-color:var(--or);color:var(--orink)}
 .q6-stage .q-note .q6-mail{display:inline-block;max-width:100%;margin-top:10px;font:500 15px/1.4 'JetBrains Mono',monospace;color:var(--ink);text-decoration:underline;text-decoration-color:rgba(27,27,27,.35);text-underline-offset:3px;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}.q6-stage .q-note .q6-mail:hover{color:var(--orink);text-decoration-color:currentColor}
 @media (max-width:1200px){.q6-stage{flex-wrap:wrap;height:auto;padding:24px}.q6-stage .q-xcard{width:min(100%,860px)}}
-@media (max-width:1000px){.q6-stage{display:grid;gap:22px;padding:18px}.q6-stage .q6-c{width:auto!important}}
+@media (max-width:999px){.q6-stage{display:grid;gap:22px;padding:18px}.q6-stage .q6-c{width:auto!important}}
 /* the map: exactly one viewport tall */
 .q6-mapsec{position:relative;overflow:hidden;background:var(--navy)}.q6-mapsec .cmap{height:100%;--mbg:var(--navy);--inner:var(--navy);--mpin:var(--navy)}.q6-mapsec svg{display:block;width:100%;height:100%}
 
@@ -112,9 +112,21 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6 .q-lab{margin:0 0 22px;font:400 clamp(28px,2.4vw,36px)/1.15 Fraunces,Georgia,serif;letter-spacing:-.015em;text-transform:none;color:var(--ink)}
 .q6 .q-lab::first-letter{text-transform:uppercase}
 .q6-h{margin:0;font:400 clamp(28px,2.4vw,36px)/1.15 Fraunces,Georgia,serif;letter-spacing:-.015em;color:var(--ink)}
-/* About top (2026-09-30): left = legal pad with the hero polaroid tucked under it; right = the "Tools I've Created" receipt, stretched to the left column's height */
-.q6-top{display:grid;grid-template-columns:minmax(0,660px) clamp(440px,35vw,500px);justify-content:center;gap:clamp(40px,4vw,64px);align-items:stretch;padding:34px 0 26px}
-.q6-left{display:grid;gap:0;align-content:start}
+/* About top (2026-09-30, v2): left = the intro note with the polaroids tossed under it; right = the "tech setups" legal pad (tools + built tools in one list).
+   Phones stack intro, setups, polaroids */
+.q6-top{display:grid;grid-template-columns:minmax(0,620px) clamp(460px,37vw,540px);grid-template-areas:"intro list" "pols list";grid-template-rows:auto 1fr;justify-content:center;column-gap:clamp(40px,4vw,64px);align-items:start;padding:34px 0 26px}
+#intro{grid-area:intro;z-index:1}
+#notes{grid-area:list;position:relative;z-index:3}
+#notes.has-open{z-index:999}
+.q6-top .q6-heros{grid-area:pols}
+@media (min-width:1000px){.q6-top .q6-heros{--pw:260px;--dx:196px;margin-top:-48px}}
+/* the intro: a clean paper card, a Fraunces greeting over readable body paragraphs */
+.q6-intro-card{--r:-.8deg;padding:34px 40px 30px}
+@media (min-width:1000px){.q6-intro-card{padding-bottom:66px}}
+.q6-intro-card h1{margin:0 0 16px;font:400 clamp(28px,2.4vw,36px)/1.15 Fraunces,Georgia,serif;letter-spacing:-.015em;color:var(--ink)}
+.q6-intro-card p{margin:0 0 12px;font:400 17px/1.6 Inter,system-ui,sans-serif;color:rgba(27,27,27,.86)}
+.q6-intro-card p:last-child{margin-bottom:0}
+@media (max-width:760px){.q6-intro-card{--r:-.4deg;padding:26px 22px 22px}.q6-intro-card h1{font-size:28px}}
 .q6-welcome{max-width:700px}
 .q6-welcome .frame{aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:var(--navy)}
 .q6-welcome .empty{display:grid;height:100%;place-content:center;justify-items:center;gap:16px;color:#cfe0ff;background-image:linear-gradient(rgba(232,241,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(232,241,255,.14) 1px,transparent 1px);background-size:28px 28px}
@@ -135,10 +147,10 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6 .q-bj .pc{width:82px;height:118px;border-radius:9px;font-size:19px}.q6 .q-bj .pc .rk{left:8px;top:8px}.q6 .q-bj .pc.face .rk{left:4px;top:4px;padding:3px 4px}.q6 .q-bj .pc .st{right:8px;bottom:6px;font-size:34px}
 .q6 .q-bj .pc.down{border-width:4px;background-size:10px 10px}.q6 .q-bj .acts{gap:8px;min-height:36px;margin-top:14px}.q6 .q-bj .q-pill{font-size:13px;padding:6px 16px}
 @media (max-width:1420px){.q6 .q-desk{height:auto;display:flex;flex-wrap:wrap;gap:40px 34px;padding:20px 0 30px}.q6 .q-desk>div{position:relative;left:auto!important;top:auto!important;max-width:100%}}
-@media (max-width:999px){.q6-top{grid-template-columns:minmax(0,1fr);gap:8px}.q6 .q-lan{justify-self:center}}
-/* hero polaroids (2026-09-30): a pair tossed on the desk, overlapping each other and the pad's blank bottom strip (never its tool rows),
-   painted IN FRONT of the pad (z 3) and the receipt (z 2). .q6-heros is not a stacking context, so each .q6-hero (what Q.drag moves)
-   competes directly with the pad and receipt, and a drag's rising z-index lifts it above the other photo. The first photo sits on top.
+@media (max-width:999px){.q6-top{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "list" "pols";grid-template-rows:none;gap:40px}.q6 .q-lan{justify-self:center}}
+/* hero polaroids (2026-09-30): a pair tossed on the desk, overlapping each other and the intro note's bottom edge,
+   painted IN FRONT of the note (z 1). .q6-heros is not a stacking context, so each .q6-hero (what Q.drag moves)
+   competes directly with the note and the pad, and a drag's rising z-index lifts it above the other photo. The first photo sits on top.
    Header (z 50) and the tools-pad cards (top layer on <body>) stay above. --pw photo width, --dx/--dy the second photo's offset */
 .q6-heros{--pw:280px;--dx:210px;--dy:34px;position:relative;display:grid;justify-self:start;width:calc(var(--pw) + var(--dx));max-width:100%;margin:-20px 0 0 clamp(24px,5vw,80px)}
 .q6-hero{position:relative;grid-area:1/1;align-self:start;width:var(--pw);z-index:5}
@@ -148,7 +160,7 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6-hero:nth-child(2) .q6-hero-pol{--r:5deg}
 .q6-hero-pol img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:#ddd;pointer-events:none;user-select:none}
 .q6-hero-pol figcaption{margin-top:14px;text-align:center;font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.1em;color:#6b6b73}
-@media (max-width:999px){.q6-heros{justify-self:center;margin:22px 0 30px}}
+@media (max-width:999px){.q6-heros{justify-self:center;margin:0 0 30px}}
 @media (max-width:760px){.q6-heros{--pw:min(210px,52vw);--dx:calc(var(--pw) * .64);--dy:22px}.q6-hero-pol{padding:10px 10px 36px}}/* the invitation to the side panel */
 .q6-invite{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:start;padding:30px 34px;border:1px solid var(--faint);background:#fff}
 .q6-invite .lede{max-width:30rem;margin:8px 0 0;color:rgba(27,27,27,.7);font:400 16px/1.6 Inter,system-ui,sans-serif}
@@ -219,7 +231,7 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 
 /* ---- phones (2026-09-29 mobile pass) ---- */
 /* the hero stacks its cards below 1000px: let it grow past the JS-set window height (inline style) so no card is clipped */
-@media (max-width:1000px){.q6-stage{height:auto!important;padding-bottom:30px}
+@media (max-width:999px){.q6-stage{height:auto!important;padding-bottom:30px}
   /* the stack diagram's hover note can spill past its card: keep the card above the highlights that follow it */
   .q6-stage .q-xcard{z-index:5}}
 /* touch: a swipe that starts on a draggable card still scrolls the page; sideways drags still move / swing it */
@@ -284,8 +296,17 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6-stage .nt ul{gap:5px}
 @media (max-width:760px){.q6-stage .nt{font-size:11px;padding:6px 7px}.q6-stage .nt small{font-size:6px;margin-bottom:1px}.q6-stage .nt ul{gap:3px}}
 
-/* ---- About top (2026-09-29): the legal pad holds her favorite tools; two paper notes sit under it ---- */
+/* ---- About top: the legal pad holds "Some fun tech setups I have" (favorite tools + tools she built, one row each) ---- */
 .q-notes.q6-tpad .k{text-transform:uppercase}
+.q6-tool.plain{cursor:auto}
+/* a built tool's short line: a plain sentence on its own ruled line under the name (the favorite tools keep their small caps tag beside the name) */
+.q6-tool .r.s{flex-basis:100%;top:0;font:400 14.5px/var(--l) Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:rgba(31,42,68,.78)}
+.q6-tool .r.s .pic{margin-left:2px}
+.q6-tool .tag{display:inline-block;margin:0 8px 0 0;padding:0 5px;border:1.5px solid #0e3b8f;border-radius:3px;color:#0e3b8f;font:700 11px/1.5 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;vertical-align:4px}
+/* the screenshot link: a small dotted-underline text button after the row's short line; the picture drops under it in a paper frame */
+.q6-tool .pic{all:unset;display:inline;cursor:pointer;font:500 11.5px/var(--l) 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.04em;text-transform:none;color:#0e3b8f;text-decoration:underline dotted rgba(14,59,143,.55);text-decoration-thickness:1.5px;text-underline-offset:4px;transition:color .15s ease,text-decoration-color .15s ease}
+.q6-tool .pic:hover,.q6-tool .pic[aria-expanded="true"]{color:var(--orink);text-decoration-color:var(--or)}
+.q6-tool .pic:focus-visible{outline:2px solid var(--or);outline-offset:3px;border-radius:2px}
 .q6-tools{list-style:none;margin:0;padding:0}
 .q6-tool{position:relative;display:flex;flex-wrap:wrap;align-items:flex-start;column-gap:14px;cursor:pointer}
 .q6-tool .nm{font:400 21px/var(--l) Fraunces,Georgia,serif;letter-spacing:-.01em;color:#16213b}
@@ -307,16 +328,38 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6-tcard .go{display:inline-block;margin-top:14px;color:var(--orink);font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
 @media (prefers-reduced-motion:reduce){.q6-tcard,.q6-tcard.open{transition:none;transform:rotate(.8deg)}}
 @media (max-width:760px){.q6-tool .r{order:2;flex-basis:100%;top:-2px}.q6-tool .nm{font-size:20px}}
-/* Hero centred (2026-09-29): name card on the left spanning both rows, diagram top-right, highlights card tucked under it; the trio sits centred with equal side margins */
+/* Hero collage (2026-09-30, context/images/hero-layout-ref-2026-09-30.png): one centred grid cell (max 1440px) holds all four cards, each placed by
+   margins (in px / % of the cell's width), so the collage scales as one piece and the cell grows to fit the lowest card. Name card left and
+   vertically centred, exactly as wide as its name (--nw follows the name's font clamp); Experience on the right (--xw, wide enough for one-line
+   roles); highlights between them, just over the name card's right edge; diagram (--dw, never under the 460px that switches its drawing to
+   the narrow geometry) top-right behind everything, Experience just over its bottom margin. Stacking: diagram < name < highlights, Experience.
+   A dragged card still comes to front */
 @media (min-width:1000px){
-.q6-stage{grid-template-columns:minmax(0,580px) minmax(0,600px);grid-template-areas:"note xc" "note xp" "note list";padding-top:48px;padding-bottom:64px;justify-content:center;align-content:center;column-gap:clamp(40px,4vw,72px);padding-left:clamp(40px,7vw,200px);padding-right:clamp(40px,7vw,200px)}
-.q6-stage .q-note{justify-self:end;align-self:center}
-.q6-stage .q-xcard{justify-self:start;align-self:end;max-width:540px;z-index:5}
-/* highlights sit fully below the diagram (small even gap after tilts); the diagram stacks above so its hover note floats over the list, never under it */
-.q6-stage .q6-list{justify-self:stretch;align-self:start;width:auto;max-width:none;margin:28px 0 0 clamp(24px,4vw,72px);padding:20px 26px 8px}
-/* the Experience card sits between them, offset the other way so the three read as pinned paper */
-.q6-stage .q6-xp{grid-area:xp;justify-self:stretch;align-self:start;margin:28px clamp(24px,4vw,72px) 0 0}
+.q6-stage{display:grid;grid-template-columns:min(1560px,100%);grid-template-rows:auto;grid-template-areas:none;justify-content:center;align-content:center;gap:0;padding:32px clamp(20px,5vw - 44px,72px) 40px}
+.q6-stage .q6-c{grid-area:1/1;justify-self:start;align-self:start;max-width:none;margin:0;--nw:calc(clamp(56px,5.6vw,84px)*5.8 + 60px);--xw:clamp(440px,62.5vw - 330px,620px);--dw:max(470px,34%)}
+/* everything under the name stops 36px short of the card's right edge: a blank strip the highlights card can overlap */
+.q6-stage .q-note{width:var(--nw);align-self:center;padding:28px 30px 22px;z-index:4}.q6-stage .q-note>:not(.q-name){max-width:calc(100% - 36px)}
+.q6-stage .q-note .q-hl{margin-top:12px}.q6-stage .q-note .q-st{margin-top:12px}.q6-stage .q-note .q-soc{margin-top:14px}.q6-stage .q-note .q6-mail{margin-top:8px}.q6-stage .q-note .q-next{margin-top:12px;padding-top:10px}
+.q6-stage .q6-list{width:calc(100% - var(--nw) - var(--xw) + 58px);margin:calc(var(--dw)*.63) 0 0 calc(var(--nw) - 44px);padding:18px 22px 6px;z-index:5}
+.q6-stage .q-xcard{width:var(--dw);margin-left:calc(100% - var(--xw) - var(--dw)*.45);z-index:2}
+.q6-stage .q6-list.q6-c .lead{font-size:clamp(16px,1.15vw,24px)}
+.q6-stage .q6-list.q6-c li{padding:5px 0;line-height:1.38}
+.q6-stage .q6-xp{width:var(--xw);margin:calc(var(--dw)*.61) 0 0 calc(100% - var(--xw));padding:18px 22px 16px;z-index:5}
+.q6-stage .q6-xl{column-gap:14px;row-gap:6px}.q6-stage .q6-xl .c{font-size:clamp(15px,1.1vw,18px)}.q6-stage .q6-xl .r{font-size:clamp(14px,1vw,16px)}
 }
+/* 1000-1279: too narrow for three columns. Name card top-left, diagram top-right, Experience under the diagram (just over the name card's
+   blank right strip), highlights in a second row under the name card, tucked slightly under its bottom edge */
+@media (min-width:1000px) and (max-width:1279px){
+.q6-stage{grid-template-rows:auto auto}
+.q6-stage .q-note{align-self:start;margin-top:24px}
+.q6-stage .q-xcard{margin-left:calc(100% - var(--dw))}
+.q6-stage .q6-xp{width:calc(100% - var(--nw) + 26px);margin:calc(var(--dw)*.62) 0 0 calc(var(--nw) - 26px)}
+.q6-stage .q6-list{grid-area:2/1;width:min(640px,64%);margin:-14px 0 0 6%}
+}
+/* the diagram's hover note floats over every card: the lit diagram rises above them (and above a dragged card's inline z-index) */
+.q6-stage{isolation:isolate}.q6-stage .q-xcard:has(.sx-band.on){z-index:100000!important}
+/* phones / narrow: name, highlights, experience, then the diagram */
+@media (max-width:999px){.q6-stage .q-note{order:1}.q6-stage .q6-list{order:2}.q6-stage .q6-xp{order:3}.q6-stage .q-xcard{order:4}}
 .q6-stage .q6-list .lead{font-size:clamp(20px,1.6vw,24px)}
 .q6-stage .q6-list li{font-size:clamp(15px,1.05vw,17px);line-height:1.4;padding:7px 0}
 .q6-stage .q6-list a{position:relative;z-index:1}
@@ -329,38 +372,10 @@ body.q6>main,body.q6>#foot{isolation:isolate}
 .q6-gal-note{position:relative;z-index:12;max-width:560px}
 #quests li+li{margin-top:8px}
 @media (min-width:1000px){.q6-gal{grid-template-columns:minmax(260px,300px) minmax(0,1fr);align-items:start}.q6-gal-note{position:sticky;top:96px}.q6-gal .q-pola{width:100%;height:1500px}}
-/* "Tools I've Created" (2026-09-30): a long thermal-paper receipt beside the pad; zigzag torn edges are a mask on the paper, the shadow a filter on its wrapper.
-   Rows stretch to share the strip's height evenly, split by dashed rules; the screenshot pop-up sits on the wrapper so the mask can't clip it */
-.q6-rc{position:relative;z-index:2;display:flex;flex-direction:column;min-width:0}
-.q6-rc.has-open{z-index:999!important}
-.q6-rcpt-w{position:relative;flex:1;display:flex;flex-direction:column;transform:rotate(.9deg);filter:drop-shadow(0 14px 16px rgba(20,30,60,.16)) drop-shadow(0 2px 2px rgba(20,30,60,.1))}
-.q6-rcpt{--z:9px;flex:1;display:flex;flex-direction:column;padding:calc(var(--z) + 26px) 30px calc(var(--z) + 22px);color:#262626;font:400 15px/1.5 'JetBrains Mono',ui-monospace,monospace;
-  background:linear-gradient(90deg,rgba(0,0,0,.025),transparent 12% 88%,rgba(0,0,0,.025)),#fbfaf4;
-  -webkit-mask:linear-gradient(#000 0 0) 0 var(--z)/100% calc(100% - 2*var(--z)) no-repeat,conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) 0 0/calc(2*var(--z)) var(--z) repeat-x,conic-gradient(from -45deg at 50% 100%,#000 90deg,#0000 0) 0 100%/calc(2*var(--z)) var(--z) repeat-x;
-  mask:linear-gradient(#000 0 0) 0 var(--z)/100% calc(100% - 2*var(--z)) no-repeat,conic-gradient(from 135deg at 50% 0,#000 90deg,#0000 0) 0 0/calc(2*var(--z)) var(--z) repeat-x,conic-gradient(from -45deg at 50% 100%,#000 90deg,#0000 0) 0 100%/calc(2*var(--z)) var(--z) repeat-x}
-.q6-rcpt header{padding-bottom:14px;border-bottom:2px dashed rgba(38,38,38,.45);text-align:center}
-.q6-rcpt h3{margin:0;font:700 15px/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#1b1b1b}
-.q6-rcpt .sub{margin:6px 0 0;font-size:14px;color:rgba(38,38,38,.7)}
-.q6-rcpt ul{flex:1;display:flex;flex-direction:column;list-style:none;margin:0;padding:0}
-.q6-rcpt li{flex:1 0 auto;display:flex;align-items:center;padding:11px 0}
-.q6-rcpt li+li{border-top:1.5px dashed rgba(38,38,38,.32)}
-.q6-rcpt li p{margin:0}
-.q6-rcpt b{font-weight:700;color:#1b1b1b}
-.q6-rcpt .s{color:rgba(38,38,38,.78)}
-.q6-rcpt .tag{display:inline-block;margin-right:2px;padding:0 6px;border:1.5px solid #0e3b8f;border-radius:3px;color:#0e3b8f;font:700 14px/1.35 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;vertical-align:1px}
-/* decorative barcode at the foot of the strip */
-.q6-rcpt .bc{flex:none;height:30px;margin-top:14px;border-top:2px dashed rgba(38,38,38,.45);background:repeating-linear-gradient(90deg,#262626 0 2px,transparent 2px 4px,#262626 4px 5px,transparent 5px 9px,#262626 9px 12px,transparent 12px 14px,#262626 14px 15px,transparent 15px 19px) 50% 100%/62% 20px no-repeat}
-/* the screenshot link: a small dotted-underline text button inline after the line; the picture drops under it in a paper frame like the legal pad's hover cards */
-.q6-rcpt .pic{all:unset;display:inline;cursor:pointer;font:400 14px/1.5 'JetBrains Mono',ui-monospace,monospace;color:#0e3b8f;text-decoration:underline dotted rgba(14,59,143,.55);text-decoration-thickness:1.5px;text-underline-offset:4px;transition:color .15s ease,text-decoration-color .15s ease}
-.q6-rcpt .pic:hover,.q6-rcpt .pic[aria-expanded="true"]{color:var(--orink);text-decoration-color:var(--or)}
-.q6-rcpt .pic:focus-visible{outline:2px solid var(--or);outline-offset:3px;border-radius:2px}
+/* screenshot pop-up frame (Q.picPops): absolutely placed in its card, under its button */
 .q6-mpic{position:absolute;z-index:6;left:-10px;width:min(560px,calc(100vw - 24px),calc(70vh * var(--ar,1.87) + 26px));margin-top:6px;padding:12px 12px 14px;background:#fffefb;cursor:auto;
   box-shadow:0 18px 34px -10px rgba(20,30,60,.3),0 2px 6px rgba(20,30,60,.1);translate:var(--dx,0px) 0;transform:translateY(-4px) rotate(-.4deg);opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .16s ease,transform .18s cubic-bezier(.3,.9,.3,1),visibility 0s linear .18s}
-.q6-rcpt-w .q6-mpic.open{opacity:1;visibility:visible;pointer-events:auto;transform:rotate(-.6deg);transition-delay:0s}
+.q6-mpic.open{opacity:1;visibility:visible;pointer-events:auto;transform:rotate(-.6deg);transition-delay:0s}
 .q6-mpic img{display:block;width:100%;height:auto;border:1px solid rgba(27,27,27,.12)}
-@media (prefers-reduced-motion:reduce){.q6-mpic,.q6-rcpt-w .q6-mpic.open{transition:none;transform:rotate(-.6deg)}}
-@media (max-width:999px){.q6-rc{justify-self:center;width:min(520px,100%)}}
-@media (max-width:760px){.q6-rc{width:100%}.q6-rcpt-w{transform:rotate(.5deg)}.q6-rcpt{padding:calc(var(--z) + 22px) 20px calc(var(--z) + 18px)}}
-/* when a legal-pad tool card is open it must sit above this note */
-.q6-left #notes{position:relative;z-index:3}
+@media (prefers-reduced-motion:reduce){.q6-mpic,.q6-mpic.open{transition:none;transform:rotate(-.6deg)}}

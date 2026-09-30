@@ -34,15 +34,15 @@
   Q.stage = (el) => {
     const N = D4.next, st = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>')
     // the Experience card (its own paper card on the right since 2026-09-30): company | role ······ year, like a menu, one row per internship
-    // (D.expList picks the entries of D.exp); the ul is a 2-column grid so companies and roles line up; a row without a year gets no leader
+    // (D.expList picks the entries of D.exp; an optional third value overrides the role label shown here only); the ul is a 2-column grid so companies and roles line up; a row without a year gets no leader
     const xl = () => { const L = D.expList; if (!L) return ''; const by = (id) => D.exp.find((x) => x.id === id)
-      return `<div class="q6-xp q6-c" style="--r:2.5deg"><h2 class="k">${L.label}</h2><ul class="q6-xl">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><a class="c" href="/work/${id}">${x.co}</a><span class="rw${yr ? ' has-y' : ''}"><span class="r"><span>${x.role}</span></span>${yr ? `<span class="y">${yr}</span>` : ''}</span></li>` : '' }).join('')}</ul></div>` }
+      return `<div class="q6-xp q6-c" style="--r:2deg"><h2 class="k">${L.label}</h2><ul class="q6-xl">${L.rows.map(([id, yr, role]) => { const x = by(id); return x ? `<li><a class="c" href="/work/${id}">${x.co}</a><span class="rw${yr ? ' has-y' : ''}"><span class="r"><span>${role || x.role}</span></span>${yr ? `<span class="y">${yr}</span>` : ''}</span></li>` : '' }).join('')}</ul></div>` }
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-3.5deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
+      <div class="q-note q6-c" style="--r:-3deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
       ${xl()}
-      <div class="q-xcard q6-c" style="--r:3deg" id="xc"></div>
-      <div class="q6-list q6-c" style="--r:-2.5deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
+      <div class="q-xcard q6-c" style="--r:2.5deg" id="xc"></div>
+      <div class="q6-list q6-c" style="--r:-2deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
     const fit = () => { const h = $('.q6-hdr'); stage.style.minHeight = Math.max(640, innerHeight - (h ? h.offsetHeight : 0)) + 'px' }
     const stage = $('.q6-stage', el); fit(); addEventListener('resize', fit)
     // the roads only: the very same street network as the map below (see Q.field), with every label, pin and the JASMINE GU block taken out
@@ -160,22 +160,30 @@
   }
 
   // ---------- About v2 pieces ----------
-  // legal pad: her favorite tools (copy from content/tools.md, handed over as JSON by app/about/page.tsx). Each name links out;
-  // hovering or focusing a row shows a paper card (what it is, how she uses it, a metric if set); tapping the row pins it open.
+  // legal pad: "Some fun tech setups I have", her favorite tools and the tools she built merged into one list (content/tools.md +
+  // content/tools-created.md, merged by getSetups() and handed over as JSON by app/about/page.tsx). A row with a link or notes gets a
+  // hover/focus paper card (what it is, how she uses it, a metric if set; tapping the row pins it); a row with a screenshot gets a
+  // "(See a screenshot)" text button whose picture pops up under it (Q.picPops). Work-in-progress rows carry a small tag.
   Q.toolsPad = (el, T) => {
     const L = T.labels, at = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
     const out = (u) => /wikipedia\.org/.test(u) ? L.wiki : L.site
     // the product's own app icon (decorative: the name sits right next to it); sized inline so it fits the pad's 32px ruled line
     const ico = (t, px) => t.icon ? `<img src="${at(t.icon)}" alt="" width="${px}" height="${px}" loading="lazy" decoding="async" style="width:${px}px;height:${px}px;border-radius:${Math.round(px / 4.5)}px;vertical-align:middle;margin:-4px 8px 0 0;display:inline-block">` : ''
-    const row = (t, i) => `<li class="q6-tool"><span class="nm">${t.url ? `<a href="${at(t.url)}" target="_blank" rel="noreferrer" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</a>` : `<span tabindex="0" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</span>`}</span>${t.label ? `<span class="r">${esc(t.label)}</span>` : ''}
-      <div class="q6-tcard" id="tcard${i}" role="group" aria-label="${at(t.name)}"><p class="h">${ico(t, 28)}${esc(t.name)}</p>${t.what ? `<p class="k">${L.what}</p><p>${esc(t.what)}</p>` : ''}${t.how ? `<p class="k">${L.how}</p><p>${esc(t.how)}</p>` : ''}${t.metric ? `<p class="k">${L.metric}</p><p class="m">${esc(t.metric)}</p>` : ''}${t.url ? `<a class="go" href="${at(t.url)}" target="_blank" rel="noreferrer">${out(t.url)} <span aria-hidden="true">↗</span></a>` : ''}</div></li>`
-    el.innerHTML = `<div class="q-notes q6-pad q6-tpad" style="--r:-1.6deg"><p class="k">${esc(T.title)}</p>${T.intro ? `<p class="lead">${esc(T.intro)}</p>` : ''}<ul class="q6-tools">${T.items.map(row).join('')}</ul>${T.hint ? `<p class="hint">${esc(T.hint)}</p>` : ''}</div>`
+    // the frame's width follows the picture's shape (--ar = width/height) so a tall screenshot stays within 70vh
+    const shot = (t, i) => { if (!t.image) return ''; const w = t.image.width || 1200, h = t.image.height || 642
+      return ` <button type="button" class="pic" aria-expanded="false" aria-controls="mpic${i}">${esc(t.image.label)}</button><span class="q6-mpic" id="mpic${i}" role="group" aria-label="${at(t.name)}" style="--ar:${(w / h).toFixed(4)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" draggable="false"></span>` }
+    const row = (t, i) => { const info = t.url || t.what || t.how, line = t.short || t.label
+      const nm = t.url ? `<a href="${at(t.url)}" target="_blank" rel="noreferrer" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</a>` : info ? `<span tabindex="0" aria-describedby="tcard${i}">${ico(t, 24)}${esc(t.name)}</span>` : `<span>${ico(t, 24)}${esc(t.name)}</span>`
+      return `<li class="q6-tool${info ? '' : ' plain'}${t.image ? ' has-pic' : ''}"><span class="nm">${t.wip && T.wipLabel ? `<span class="tag">${esc(T.wipLabel)}</span>` : ''}${nm}</span>${line || t.image ? `<span class="r${t.short ? ' s' : ''}">${line ? esc(line) : ''}${shot(t, i)}</span>` : ''}
+      ${info ? `<div class="q6-tcard" id="tcard${i}" role="group" aria-label="${at(t.name)}"><p class="h">${ico(t, 28)}${esc(t.name)}</p>${t.what ? `<p class="k">${L.what}</p><p>${esc(t.what)}</p>` : ''}${t.how ? `<p class="k">${L.how}</p><p>${esc(t.how)}</p>` : ''}${t.metric ? `<p class="k">${L.metric}</p><p class="m">${esc(t.metric)}</p>` : ''}${t.url ? `<a class="go" href="${at(t.url)}" target="_blank" rel="noreferrer">${out(t.url)} <span aria-hidden="true">↗</span></a>` : ''}</div>` : ''}</li>` }
+    el.innerHTML = `<div class="q-notes q6-pad q6-tpad" style="--r:-1.6deg"><h2 class="lead">${esc(T.title)}</h2>${T.sub ? `<p class="hint">${esc(T.sub)}</p>` : ''}<ul class="q6-tools">${T.items.map(row).join('')}</ul>${T.hint ? `<p class="hint">${esc(T.hint)}</p>` : ''}</div>`
     // the pad is tilted and draggable (its own stacking context), so the cards move to a layer on <body> and are placed from the
     // row's on-screen box (position:fixed, top z-index in k6.css); a rAF loop keeps the open one on its row through scroll, resize and drags
     if (el._tcards) el._tcards.remove()
     const layer = el._tcards = document.createElement('div'); layer.className = 'q6-tcards'; document.body.appendChild(layer)
     const HOVER = matchMedia('(hover: hover)'), card = (li) => li._card, trig = (li) => $('.nm > [aria-describedby]', li)
-    $$('.q6-tool', el).forEach((li) => { li._card = $('.q6-tcard', li); li._card._li = li; layer.appendChild(li._card) })
+    const rows = $$('.q6-tool', el).filter((li) => $('.q6-tcard', li))
+    rows.forEach((li) => { li._card = $('.q6-tcard', li); li._card._li = li; layer.appendChild(li._card) })
     let open = null, pinned = false, t = 0, raf = 0
     const place = (li) => {
       const c = card(li), r = li.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = innerHeight, m = 8
@@ -199,13 +207,13 @@
     const later = (li) => { if (!pinned && open === li) { clearTimeout(t); t = setTimeout(hide, 160) } }
     // keyboard: the card sits at the end of <body>, so Tab from the row goes into the card's link, and out of it back to the page order
     const tabbables = () => $$('a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])').filter((n) => !n.closest('.q6-tcards') && !n.closest('[inert]') && n.getClientRects().length)
-    $$('.q6-tool', el).forEach((li) => {
+    rows.forEach((li) => {
       const c = card(li), b = trig(li), go = $('.go', c)
       li.addEventListener('mouseenter', () => { if (HOVER.matches) show(li) })
       li.addEventListener('mouseleave', (e) => { if (!c.contains(e.relatedTarget)) later(li) })
       c.addEventListener('mouseenter', () => { if (open === li) clearTimeout(t) })
       c.addEventListener('mouseleave', (e) => { if (!li.contains(e.relatedTarget)) later(li) })
-      li.addEventListener('focusin', () => show(li))
+      li.addEventListener('focusin', (e) => { if (!e.target.closest('.pic')) show(li) })
       li.addEventListener('focusout', (e) => { if (!inside(e.relatedTarget) && open === li) hide() })
       c.addEventListener('focusout', (e) => { if (!inside(e.relatedTarget) && open === li) hide() })
       if (b && go) b.addEventListener('keydown', (e) => { if (e.key === 'Tab' && !e.shiftKey && open === li) { e.preventDefault(); go.focus({ preventScroll: true }) } })
@@ -214,11 +222,14 @@
         if (e.shiftKey) { b.focus({ preventScroll: true }); return }
         const all = tabbables(), nx = all[all.indexOf(b) + 1]; hide(); if (nx) nx.focus(); else go.blur()
       })
-      // a tap or click on the row (not on a link) pins the card open, a second one closes it
-      li.addEventListener('click', (e) => { if (e.target.closest('a')) return; if (open === li && pinned) hide(); else { show(li); if (open === li) { pinned = true; li.classList.add('pin') } } })
+      // a tap or click on the row (not on a link or the screenshot button) pins the card open, a second one closes it
+      li.addEventListener('click', (e) => { if (e.target.closest('a,.pic')) return; if (open === li && pinned) hide(); else { show(li); if (open === li) { pinned = true; li.classList.add('pin') } } })
     })
     document.addEventListener('keydown', (e) => { if (e.key !== 'Escape' || !open) return; const b = trig(open); if (b && card(open).contains(document.activeElement)) b.focus({ preventScroll: true }); hide() })
     document.addEventListener('pointerdown', (e) => { if (open && !inside(e.target)) hide() })
+    // screenshots: the pictures move out of the tilted pad onto #notes itself (placed under their button); opening one closes the hover card
+    $$('.q6-mpic', el).forEach((p) => el.appendChild(p))
+    Q.picPops(el, el, hide)
   }
   // welcome video: a marked placeholder until she records it
   Q.welcome = (el) => { el.innerHTML = '<div class="q6-welcome"><div class="frame"><div class="empty"><i aria-hidden="true"></i><span>placeholder · short video goes here</span></div></div><div class="cap"><h2 class="q6-h">Welcome to my page</h2><p>(I appreciate you being here) :)</p></div></div>' }
@@ -229,21 +240,10 @@
     const trends = (D4.productTrends || []).map((t) => `<div style="margin-bottom:16px"><h4 style="font-size:16px;font-weight:600;margin:0 0 6px;color:var(--ink)">${t.title}</h4><p style="font-size:15px;margin:0;color:var(--muted)">${t.desc}</p></div>`).join('')
     el.innerHTML = `<div class="q6-c q6-paper" style="--r:-1deg;padding:24px"><h3 class="q6-h" style="font-size:22px;margin-bottom:16px">Product Trends I'm interested in</h3><div style="font-size:16px">${trends}</div></div>`
   }
-  // tools she's built (copy from content/tools-created.md, handed over as JSON by app/about/page.tsx): a long thermal-paper receipt,
-  // one line per tool ("title — short"), work-in-progress ones first with a small tag. A tool with an image gets an inline text link
-  // ("(See a screenshot)", from the content); its picture pops up under that link in a paper frame (hover/focus, tap pins it)
-  Q.customTools = (el, T) => {
-    const at = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
-    let n = 0
-    // the frame's width follows the picture's shape (--ar = width/height) so a tall screenshot stays within 70vh
-    const shot = (t) => { if (!t.image) return ''; const id = `mpic${n++}`, w = t.image.width || 1200, h = t.image.height || 642
-      return ` <button type="button" class="pic" aria-expanded="false" aria-controls="${id}">${esc(t.image.label)}</button><span class="q6-mpic" id="${id}" role="group" aria-label="${at(t.title)}" style="--ar:${(w / h).toFixed(4)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" draggable="false"></span>` }
-    const row = (t, wip) => `<li${t.image ? ' class="has-pic"' : ''}><p>${wip && T.wipLabel ? `<span class="tag">${esc(T.wipLabel)}</span> ` : ''}<b>${esc(t.title)}</b>${t.short ? ` <span class="s">— ${esc(t.short)}</span>` : ''}${shot(t)}</p></li>`
-    const rows = T.wip.map((t) => row(t, true)).concat(T.items.map((t) => row(t, false))).join('')
-    el.innerHTML = `<div class="q6-rcpt-w"><div class="q6-rcpt"><header><h3>${esc(T.title)}</h3>${T.sub ? `<p class="sub">${esc(T.sub)}</p>` : ''}</header><ul>${rows}</ul><div class="bc" aria-hidden="true"></div></div></div>`
-    const card = $('.q6-rcpt-w', el)
-    // the pictures live outside the paper (its torn-edge mask would clip them) and are placed under their link
-    $$('.q6-mpic', el).forEach((p) => card.appendChild(p))
+  // screenshot pop-ups: each `.has-pic` row in `el` has a "(See a screenshot)" text button (.pic, aria-controls = its picture); the
+  // pictures sit in `card` (position:relative, not tilted) and pop up under their button in a paper frame (hover/focus, tap pins it).
+  // `onShow` runs when one opens (the tools pad closes its hover card); `el` gets .has-open meanwhile so it can rise above its neighbours
+  Q.picPops = (el, card, onShow) => {
     const HOVER = matchMedia('(hover: hover)')
     let open = null, pinned = false, t = 0
     const pic = (li) => $('#' + $('.pic', li).getAttribute('aria-controls'), card)
@@ -261,7 +261,7 @@
       p.style.setProperty('--dx', Math.round(dx) + 'px')
     }
     const set = (li, on) => { const p = pic(li); li.classList.toggle('open', on); p.classList.toggle('open', on); $('.pic', li).setAttribute('aria-expanded', String(on)); if (on) place(li) }
-    const show = (li) => { clearTimeout(t); if (open && open !== li) { set(open, false); pinned = false } open = li; set(li, true); el.classList.add('has-open') }
+    const show = (li) => { clearTimeout(t); if (onShow) onShow(); if (open && open !== li) { set(open, false); pinned = false } open = li; set(li, true); el.classList.add('has-open') }
     const hide = () => { clearTimeout(t); if (open) set(open, false); open = null; pinned = false; el.classList.remove('has-open') }
     const inside = (n) => open && (open.contains(n) || pic(open).contains(n))
     $$('.has-pic', el).forEach((li) => {

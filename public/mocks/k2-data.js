@@ -6,7 +6,7 @@ window.K2 = {
   status: "Currently studying CS × Business, dual honors",
   // hero name card: year | company | role rows, newest first. Company and role come from `exp` below (by id); each company links to /work/<id>.
   // `year` is the start year from that entry's `when` (Stealth's `when` is "Pre-seed", so its year, 2023, comes from the résumé)
-  expList: { label: 'Experience', rows: [['autodesk', '2026'], ['autodesk-eng', '2026'], ['tesla', '2025'], ['intuit', '2024'], ['omers', '2023'], ['stealth-startup', '2023'], ['metaverse', '2022']] },
+  expList: { label: 'Experience', rows: [['autodesk', '2026'], ['autodesk-eng', '2026', 'Full-Stack SWE Intern'], ['tesla', '2025', 'Frontend SWE Intern'], ['intuit', '2024', 'Frontend SWE Intern'], ['omers', '2023'], ['stealth-startup', '2023', 'Full-Stack SWE Intern'], ['metaverse', '2022']] },
   intro: "An engineer passionate about building functional technology and delightful experiences.",
   hlLead: 'A few highlights (not on my resume)',
   // items are small trusted HTML strings (renderers insert them as innerHTML) so one can carry links
