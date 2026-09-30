@@ -43,16 +43,13 @@ export default function AboutPage() {
             <div className="q6-rc" id="customTools"></div>
           </div>
         </div>
-        <hr className="q-rule" />
-        <div className="q-w">
-          <div className="q-desk">
-            <div className="d4" id="quests"></div>
-            <div className="d2" id="trends"></div>
-          </div>
-        </div>
         <div className="q-w q-block">
           <p className="q-lab">gallery</p>
-          <div id="pola"></div>
+          {/* "What I'm doing in my free time" is a paper note pinned beside the polaroids (items from k4-data.js sideQuests) */}
+          <div className="q6-gal">
+            <div className="q6-gal-note" id="quests"></div>
+            <div id="pola"></div>
+          </div>
         </div>
         <div className="q-w q-block">
           <p className="q-lab">{reading.title}</p>
@@ -80,7 +77,6 @@ export default function AboutPage() {
           if (typeof Q !== 'undefined' && typeof K !== 'undefined') {
             $('#nav').innerHTML = Q.header({ active: 'about', work: '/', about: '#journey', ask: false })
             Q.toolsPad($('#notes'), JSON.parse($('#tools-data').textContent))
-            Q.productTrends($('#trends'))
             Q.customTools($('#customTools'), JSON.parse($('#made-data').textContent))
             Q.sideQuests($('#quests'))
             Q.polaroids($('#pola'))
@@ -89,7 +85,7 @@ export default function AboutPage() {
             Q.init()
             K.theme('pencil')
             Q.drag($('#notes'), { mouseOnly: true });
-            ['#trends', '#customTools', '#quests'].forEach((s) => Q.drag($(s)))
+            ['#customTools', '#quests'].forEach((s) => Q.drag($(s)))
             document.querySelectorAll('.q6-hero').forEach((el) => Q.drag(el))
           }
         `}

@@ -12,7 +12,24 @@ export interface CreatedTool {
   desc?: string
   builtWith: string[]
   /** Optional picture that pops up under the title when its link label is hovered, focused or tapped. */
-  image?: { src: string; alt: string; label: string }
+  image?: { src: string; alt: string; label: string; width?: number; height?: number }
+}
+
+/** Pixel size of a WebP or PNG in public/ (read from its header), so the pop-up reserves the right shape before it loads. */
+function imageSize(src: string): { width: number; height: number } | undefined {
+  try {
+    const b = fs.readFileSync(path.join(process.cwd(), 'public', src.replace(/^\//, '')))
+    if (b.toString('ascii', 1, 4) === 'PNG') return { width: b.readUInt32BE(16), height: b.readUInt32BE(20) }
+    if (b.toString('ascii', 0, 4) !== 'RIFF' || b.toString('ascii', 8, 12) !== 'WEBP') return undefined
+    const kind = b.toString('ascii', 12, 16)
+    if (kind === 'VP8X') return { width: 1 + b.readUIntLE(24, 3), height: 1 + b.readUIntLE(27, 3) }
+    if (kind === 'VP8 ') return { width: b.readUInt16LE(26) & 0x3fff, height: b.readUInt16LE(28) & 0x3fff }
+    if (kind === 'VP8L') {
+      const v = b.readUInt32LE(21)
+      return { width: 1 + (v & 0x3fff), height: 1 + ((v >> 14) & 0x3fff) }
+    }
+  } catch {}
+  return undefined
 }
 
 export interface ToolsCreated {
@@ -83,7 +100,10 @@ export function getToolsCreated(): ToolsCreated {
   // an image line with no path (or an alt with no image) is dropped
   for (const it of [...out.items, ...out.wip]) {
     if (it.image && !it.image.src) delete it.image
-    else if (it.image && !it.image.label) it.image.label = '(See a screenshot)'
+    else if (it.image) {
+      if (!it.image.label) it.image.label = '(See a screenshot)'
+      Object.assign(it.image, imageSize(it.image.src))
+    }
   }
   return out
 }

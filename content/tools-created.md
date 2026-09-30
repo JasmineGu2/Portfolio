@@ -23,7 +23,7 @@ Only the title and Short line show on the page right now; Problem, Tool and Buil
 
 ## Notification and terminal setup for Claude
 
-Short: to see which Claude session is waiting on me
+Short: To always get pinged and see which Claude session is waiting
 
 Problem: I run several Claude sessions at once and lose track of which one is waiting on me.
 Tool: A terminal setup that sends clear, outlined notifications when a session needs input.
@@ -31,22 +31,6 @@ Built with: Claude, terminal
 Image: /about/tools-created/claude-notification.webp
 Image alt: Terminal with an orange outline and a Windows notification: Claude is waiting for your input
 Image label: (See a screenshot)
-
-## Obsidian context with Git syncing
-
-Short: to keep my notes synced between my PC and MacBook
-
-Problem: My notes lived on my PC and never made it to my MacBook.
-Tool: An Obsidian vault that syncs between both machines through Git. It holds my architecture notes, PRDs and the rest of my knowledge system.
-Built with: Obsidian, Git
-
-## Claude routine for thought leadership
-
-Short: to save TLDR.tech threads into Obsidian every day
-
-Problem: I'd read good threads on TLDR.tech and forget them a week later.
-Tool: A daily Claude routine that pulls TLDR.tech into Obsidian so I can find those threads again.
-Built with: Claude routine, TLDR.tech, Obsidian
 
 ## Tailscale SSH setup
 
@@ -63,6 +47,9 @@ Short: to get new jobs and startups sent to my Telegram
 Problem: Checking job sites by hand took too long, and I wanted to learn about startups I hadn't heard of.
 Tool: A Claude routine scrapes Simplify and five other job boards, then sends the results to me through a Telegram bot. It also pulls startups from curated lists.
 Built with: Claude routine, Telegram bot, Simplify
+Image: /about/tools-created/job-bot.webp
+Image alt: Telegram message from my career bot listing new job postings with cohort, resume type and company notes
+Image label: (See a screenshot)
 
 ## NFC chip setup with Foqos
 
@@ -87,6 +74,9 @@ Short: to open my whole work setup with one shortcut
 Problem: Getting ready to work meant opening the same apps one by one every morning.
 Tool: One shortcut opens my Notion to-do list, my calendar and today's LinkedIn job searches, starts my playlist, and turns on Foqos to lock me out of distractions.
 Built with: Apple Shortcuts, Notion, LinkedIn, Foqos
+Image: /about/tools-created/workspace-shortcut.webp
+Image alt: macOS Shortcuts window for my Deep Work shortcut running an AppleScript that opens my work tabs
+Image label: (See a screenshot)
 
 # Work in progress
 
