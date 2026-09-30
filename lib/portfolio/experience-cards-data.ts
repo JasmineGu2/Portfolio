@@ -140,7 +140,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
   },
   'stealth-startup': {
     company: 'Stealth startup',
-    role: 'Product Manager and Engineer Intern',
+    role: 'Full-Stack Engineer Intern',
     subtitle: 'Taking a childcare operations platform from customer discovery to MVP',
     period: 'Pre-seed',
     category: '0→1 Product',

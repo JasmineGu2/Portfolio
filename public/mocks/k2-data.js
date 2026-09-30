@@ -5,8 +5,8 @@ window.K2 = {
   headline: "An engineer passionate about building functional technology and delightful experiences.",
   status: "Currently studying CS × Business, dual honors",
   // hero name card: year | company | role rows, newest first. Company and role come from `exp` below (by id); each company links to /work/<id>.
-  // `year` is the start year from that entry's `when`. Stealth's `when` is only "Pre-seed", so its year is blank until Jazz confirms it
-  expList: { label: 'Experience', rows: [['autodesk', '2026'], ['autodesk-eng', '2026'], ['tesla', '2025'], ['intuit', '2024'], ['omers', '2023'], ['stealth-startup', ''], ['metaverse', '2022']] },
+  // `year` is the start year from that entry's `when` (Stealth's `when` is "Pre-seed", so its year, 2023, comes from the résumé)
+  expList: { label: 'Experience', rows: [['autodesk', '2026'], ['autodesk-eng', '2026'], ['tesla', '2025'], ['intuit', '2024'], ['omers', '2023'], ['stealth-startup', '2023'], ['metaverse', '2022']] },
   intro: "An engineer passionate about building functional technology and delightful experiences.",
   hlLead: 'A few highlights (not on my resume)',
   // items are small trusted HTML strings (renderers insert them as innerHTML) so one can carry links
@@ -39,13 +39,13 @@ window.K2 = {
     { id: 'intuit', co: 'Intuit', role: 'Frontend Engineer Intern', when: 'Summer 2024', group: 'Engineering', label: 'B2C frontend experiences', sub: 'Building onboarding experiences for TurboTax.com', tags: ['Onboarding UX', 'Design Systems', 'React'], video: '/work/Intuit.mp4', logo: '/work/intuit.png', kind: 'job', order: 6 },
     { id: 'omers', co: 'OMERS', role: 'Solutions Engineer, ServiceNow', when: 'Summer 2023', group: 'Engineering', label: 'Enterprise workflow automation', sub: 'Digitizing enterprise workflows and internal services with ServiceNow', tags: ['ServiceNow', 'Workflow Automation', 'Enterprise Systems'], video: '/work/ServiceNowGif.mp4', logo: '/work/omers.png', kind: 'job', order: 3 },
     { id: 'metaverse', co: 'Metaverse Group', role: 'Developer and Data Analyst Intern', when: '2022 to 2023', group: 'Engineering', label: 'B2B growth automation', sub: 'Automating B2B prospecting and improving outreach performance', tags: ['Python', 'Growth Automation', 'Data Analysis'], video: '/work/metaversegroup.mp4', logo: '/work/metaverse.png', kind: 'job', order: 2 },
-    { id: 'stealth-startup', co: 'Stealth', role: 'Product Manager and Engineer Intern', when: 'Pre-seed', group: 'Product', label: '0→1 product', sub: 'Taking a childcare operations platform from customer discovery to MVP', tags: ['Product Strategy', 'Full-Stack Development', 'GTM Strategy'], img: '/work/stealth-startup.png', logo: '/work/stealth-startup.png', kind: 'job', order: 10 },
+    { id: 'stealth-startup', co: 'Stealth', role: 'Full-Stack Engineer Intern', when: 'Sep to Dec 2023', group: 'Product', label: '0→1 product', sub: 'Taking a childcare operations platform from customer discovery to MVP', tags: ['Product Strategy', 'Full-Stack Development', 'GTM Strategy'], img: '/work/stealth-startup.png', logo: '/work/stealth-startup.png', kind: 'job', order: 10 },
     { id: 'hack-western', co: 'Hack Western', role: 'Product and Engineering Lead', when: '2023 to present', group: 'Other', label: 'Product leadership', sub: 'Lead dev on Hack Western\'s dev team, shipping the live site for 2,000 students', tags: ['Product Vision', 'Engineering Leadership', 'Platform Development'], img: '/work/hack-western.png', logo: '/work/hack-western.png', kind: 'community', order: 4 },
     { id: 'ivey-product', co: 'IPS Fellowship', role: 'Product Fellowship Lead', when: '2 years', group: 'Other', label: 'Product education', sub: 'Led the Product Fellowship for 2 years and hosted 28 product educationals', tags: ['Program Leadership', 'Product Management', 'Mentorship'], img: '/work/ivey-product-cover.jpg', logo: '/work/ivey-product-cover.jpg', kind: 'community', order: 5 },
     { id: 'western', co: 'Western / Ivey', role: 'CS + Business Dual Degree', when: '2022 to 2027', group: 'Other', label: 'CS + business degree', sub: 'Studying computer science and business side by side', tags: ['Computer Science', 'Business', 'Product Strategy'], img: '/work/western-ivey-cover.png', logo: '/work/western-ivey-cover.png', kind: 'school', order: 1 },
   ],
   // only these experiences have a full written case study; every other experience tile shows the `comingSoon` tag
-  caseStudies: ['autodesk', 'tesla'],
+  caseStudies: ['autodesk', 'tesla', 'autodesk-eng', 'intuit', 'stealth-startup', 'omers', 'metaverse'],
   comingSoon: 'Coming soon',
   comingSoonCursor: 'Case study coming soon',
   side: [

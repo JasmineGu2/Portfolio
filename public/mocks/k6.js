@@ -33,12 +33,14 @@
   // and the highlights card (back from About on 2026-09-29). Every card can be picked up and moved. The full map lives in its own viewport-tall section below. ----------
   Q.stage = (el) => {
     const N = D4.next, st = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>')
-    // year | company | role, one row per internship (D.expList picks the entries of D.exp); the ul is one 3-column grid so the columns line up
+    // the Experience card (its own paper card on the right since 2026-09-30): company | role ······ year, like a menu, one row per internship
+    // (D.expList picks the entries of D.exp); the ul is a 2-column grid so companies and roles line up; a row without a year gets no leader
     const xl = () => { const L = D.expList; if (!L) return ''; const by = (id) => D.exp.find((x) => x.id === id)
-      return `<ul class="q6-xl" aria-label="${L.label}">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><span class="y">${yr}</span><a class="c" href="/work/${id}">${x.co}</a><span class="r">${x.role}</span></li>` : '' }).join('')}</ul>` }
+      return `<div class="q6-xp q6-c" style="--r:1deg"><h2 class="k">${L.label}</h2><ul class="q6-xl">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><a class="c" href="/work/${id}">${x.co}</a><span class="rw${yr ? ' has-y' : ''}"><span class="r"><span>${x.role}</span></span>${yr ? `<span class="y">${yr}</span>` : ''}</span></li>` : '' }).join('')}</ul></div>` }
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${xl()}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
+      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
+      ${xl()}
       <div class="q-xcard q6-c" style="--r:1.5deg" id="xc"></div>
       <div class="q6-list q6-c" style="--r:-1deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
     const fit = () => { const h = $('.q6-hdr'); stage.style.minHeight = Math.max(640, innerHeight - (h ? h.offsetHeight : 0)) + 'px' }
