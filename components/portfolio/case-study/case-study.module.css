@@ -1,7 +1,8 @@
 /*
  * Long-form case-study layout. Measurements follow the reference article (nicholaschen.me/blogs/...):
  * a 90rem frame split into [1fr | 54rem | 1fr] with a 2rem gap, so the reading column is up to 864px and
- * centred; the section list sits right-aligned in the left column, 14rem wide, sticky 6rem from the top.
+ * centred. When a section list exists, list (14rem, sticky 6rem from the top) + 3rem gap + article form
+ * one group centred on the page instead.
  * Type: 30/36 title, 20/28 section headings, 14px body at leading-relaxed, 16px between paragraphs,
  * 32px between sections. Below 900px the side list becomes an "On this page" disclosure above the article.
  */
@@ -58,6 +59,14 @@
   .article {
     grid-column: 2;
     grid-row: 2;
+  }
+  /* With a section list, the list and the article are one group centred on the page: equal space left of
+     the list and right of the article. The article narrows first on small laptops (about 580px at 900). */
+  .frame:has(.aside) {
+    max-width: calc(14rem + 3rem + 54rem + 3rem);
+    grid-template-columns: 14rem minmax(0, 54rem);
+    column-gap: 3rem;
+    justify-content: center;
   }
 }
 
