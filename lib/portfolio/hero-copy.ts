@@ -1,15 +1,10 @@
 /** Front-page copy for the Work hero. */
 
 export const HERO_HEADLINE =
-  "I'm Jasmine, a product engineer who builds with technical depth and user empathy."
+  "An engineer passionate about building functional technology and delightful experiences."
 
 export const HERO_STATUS =
-  'Currently a 5th year CS honors and Business student at Western. Previously a SWE at Autodesk, Tesla and Intuit, and a Platform PM at Autodesk.'
-
-export const HERO_RECENTS =
-  "Recents include governed AI query tools for Autodesk's data platform, factory-camera ML workflows at Tesla, and leading Hack Western's dev team."
-
-export const HERO_CTA = { before: 'Explore my ', link: 'selected work', after: '.', href: '#tabs' } as const
+  'Currently studying CS × Business, dual honors'
 
 export const WHATS_NEXT = {
   title: "What's next",

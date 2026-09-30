@@ -139,6 +139,33 @@ section:where(:not([aria-live])){padding:56px 0;position:relative}
 .nt.call{font:400 13px/1.45 Inter;background:#082d6e;color:#e8f1ff;border:1.5px solid #9fd3ff;border-radius:2px;transform:none;box-shadow:none}
 .nt.call small{color:#9fd3ff;opacity:1;font-size:10px;margin-bottom:4px}.nt.call li b{color:#ff8a5c;font-weight:600}
 
+/* blueprint cross-section (K.section, from mocks/stack-v4): font sizes come from the geometry in k2.js as SVG attributes */
+.sx text{font-family:'JetBrains Mono',monospace;fill:#fffefb}
+.sx .sx-lab{letter-spacing:.06em;font-weight:500;transition:fill .18s}
+.sx .sx-num{letter-spacing:.1em;fill:rgba(255,254,251,.6)}
+.sx .sx-sub{letter-spacing:.02em;fill:rgba(255,254,251,.72);transition:fill .18s}
+.sx .sx-ttl{letter-spacing:.14em}
+.sx .sx-disp{font-family:Fraunces,Georgia,serif;font-weight:500}
+.sx .sx-chip rect{fill:#0e3b8f;stroke:#fffefb;stroke-width:1.4}.sx .sx-chip text{letter-spacing:0}
+.sx-band{cursor:default;outline:none}
+.sx-band .sx-hl{fill:#fffefb;opacity:0;transition:opacity .18s}
+.sx-band .sx-lead{stroke:rgba(255,254,251,.78);stroke-width:1;fill:none;transition:stroke .18s}
+.sx-band .sx-dot{fill:#0e3b8f;stroke:#fffefb;stroke-width:1.2;transition:fill .18s}
+.sx-tick{stroke:rgba(255,254,251,.78);stroke-width:1;fill:none}
+.sx-band.on .sx-hl{opacity:.16}
+.sx-band.on .sx-lead{stroke:#ed3801;stroke-width:1.8}
+.sx-band.on .sx-dot{fill:#ed3801}
+.sx-band.on .sx-lab,.sx-band.on .sx-sub{fill:#ff8a5c}
+.sx-band.on .sx-tick{stroke:#ed3801;stroke-width:2}
+.sx-band:focus-visible .sx-hl{opacity:.16;stroke:#ed3801;stroke-width:2}
+.sx .sx-nt{pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  .sx-band{animation:sx-rise .7s both}.sx-b1{animation-delay:.05s}.sx-b2{animation-delay:.18s}
+  @keyframes sx-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .sx-compass{animation:sx-spin 240s linear infinite}@keyframes sx-spin{to{transform:rotate(360deg)}}
+}
+@media (prefers-reduced-motion:reduce){.sx-band .sx-hl,.sx-band .sx-lead,.sx-band .sx-dot,.sx .sx-lab,.sx .sx-sub{transition:none}}
+
 /* cursor: dark-blue dot, orange arrow + orange tag over anything with data-cursor-label (the experiences) */
 html.k2on,html.k2on *{cursor:none!important}html.k2on textarea,html.k2on input{cursor:text!important}
 .k2c{position:fixed;left:0;top:0;z-index:2147483647;pointer-events:none;opacity:0;transition:opacity .12s;margin:-2px 0 0 -2px;will-change:transform}

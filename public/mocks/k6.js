@@ -8,7 +8,7 @@
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
 
-  // ---------- header: plain mono text. Name left, two links in the middle, LinkedIn / email / Resume (and "Ask me anything" if asked for) right ----------
+  // ---------- header: plain mono text. Name left, two links in the middle, email / Resume (and "Ask me anything" if asked for) right ----------
   // The header is sticky (k6.css). hdrWatch keeps --hdr-h (scroll-padding + hero height) in step with its real height and adds .is-scrolled for the border/shadow.
   const hdrWatch = () => {
     const h = $('.q6-hdr'); if (!h) return
@@ -19,8 +19,8 @@
   Q.header = ({ active = 'work', work = '34-home-v2.html', about = '35-about-v2.html', ask = false } = {}) => {
     const C = D.contact, L = D.hdrContact, ext = 'target="_blank" rel="noopener noreferrer"'
     setTimeout(hdrWatch)
-    // right side: LinkedIn icon, the email as text (just "Email" on narrow screens), Resume
-    const hc = `<span class="hc"><a class="hc-i" href="${C.linkedin}" ${ext} aria-label="${L.linkedin}" title="${L.linkedin}">${K.icon('linkedin')}</a>`
+    // right side: the email as text (just "Email" on narrow screens), Resume
+    const hc = `<span class="hc">`
       + `<a class="hc-m" href="mailto:${C.email}" aria-label="${L.email}: ${C.email}"><span class="hc-t">${C.email}</span><span class="hc-s" aria-hidden="true">${L.email}</span></a>`
       + `<a class="hc-r" href="${C.resume}" ${ext}>${L.resume}</a></span>`
     return `<header class="q6-hdr"><a class="brand" href="${work}"><b>Jasmine Gu</b></a><nav aria-label="Primary"><a href="${work}"${active === 'work' ? ' aria-current="page"' : ''}>Work</a><a href="${about}"${active === 'about' ? ' aria-current="page"' : ''}>About me</a></nav><div class="end">${ask ? '<button type="button" class="ask-link" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button>' : ''}${hc}</div></header>`
@@ -33,16 +33,19 @@
   // and the highlights card (back from About on 2026-09-29). Every card can be picked up and moved. The full map lives in its own viewport-tall section below. ----------
   Q.stage = (el) => {
     const N = D4.next, st = D.status.replace(/(hack western|autodesk|tesla|intuit)/g, '<b>$1</b>')
+    // year | company | role, one row per internship (D.expList picks the entries of D.exp); the ul is one 3-column grid so the columns line up
+    const xl = () => { const L = D.expList; if (!L) return ''; const by = (id) => D.exp.find((x) => x.id === id)
+      return `<ul class="q6-xl" aria-label="${L.label}">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><span class="y">${yr}</span><a class="c" href="/work/${id}">${x.co}</a><span class="r">${x.role}</span></li>` : '' }).join('')}</ul>` }
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
+      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${xl()}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
       <div class="q-xcard q6-c" style="--r:1.5deg" id="xc"></div>
       <div class="q6-list q6-c" style="--r:-1deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
     const fit = () => { const h = $('.q6-hdr'); stage.style.minHeight = Math.max(640, innerHeight - (h ? h.offsetHeight : 0)) + 'px' }
     const stage = $('.q6-stage', el); fit(); addEventListener('resize', fit)
     // the roads only: the very same street network as the map below (see Q.field), with every label, pin and the JASMINE GU block taken out
-    // trim the empty left margin so the exploded view fills its card, and narrow the hover note so it fits inside the card
-    K.layers($('#xc', el), 'sticky', { bare: true, viewBox: '44 0 900 600', noteW: 320 })
+    // the stack as a blueprint cross-section (two bands, stack-v4 look), with the sticky hover note
+    K.section($('#xc', el))
     $$('.q6-c', el).forEach((c) => Q.drag(c))
     // "selected work": smooth-scroll to the work tabs (instant under reduced motion); falls back to the plain #tabs jump if the target is missing
     $('[data-hero-cta]', el)?.addEventListener('click', (e) => {
@@ -230,8 +233,9 @@
   Q.customTools = (el, T) => {
     const at = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
     let n = 0
-    const shot = (t) => { if (!t.image) return ''; const id = `mpic${n++}`
-      return ` <button type="button" class="pic" aria-expanded="false" aria-controls="${id}">${esc(t.image.label)}</button><span class="q6-mpic" id="${id}" role="group" aria-label="${at(t.title)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="1200" height="642" loading="lazy" decoding="async" draggable="false"></span>` }
+    // the frame's width follows the picture's shape (--ar = width/height) so a tall screenshot stays within 70vh
+    const shot = (t) => { if (!t.image) return ''; const id = `mpic${n++}`, w = t.image.width || 1200, h = t.image.height || 642
+      return ` <button type="button" class="pic" aria-expanded="false" aria-controls="${id}">${esc(t.image.label)}</button><span class="q6-mpic" id="${id}" role="group" aria-label="${at(t.title)}" style="--ar:${(w / h).toFixed(4)}"><img src="${at(t.image.src)}" alt="${at(t.image.alt)}" width="${w}" height="${h}" loading="lazy" decoding="async" draggable="false"></span>` }
     const row = (t, wip) => `<li${t.image ? ' class="has-pic"' : ''}><p>${wip && T.wipLabel ? `<span class="tag">${esc(T.wipLabel)}</span> ` : ''}<b>${esc(t.title)}</b>${t.short ? ` <span class="s">— ${esc(t.short)}</span>` : ''}${shot(t)}</p></li>`
     const rows = T.wip.map((t) => row(t, true)).concat(T.items.map((t) => row(t, false))).join('')
     el.innerHTML = `<div class="q6-rcpt-w"><div class="q6-rcpt"><header><h3>${esc(T.title)}</h3>${T.sub ? `<p class="sub">${esc(T.sub)}</p>` : ''}</header><ul>${rows}</ul><div class="bc" aria-hidden="true"></div></div></div>`
@@ -241,11 +245,16 @@
     const HOVER = matchMedia('(hover: hover)')
     let open = null, pinned = false, t = 0
     const pic = (li) => $('#' + $('.pic', li).getAttribute('aria-controls'), card)
-    // put the picture under its link (card coordinates), then keep it inside the viewport sideways
+    // put the picture under its link (card coordinates), or above it when there's more room there; if it fits neither side, shrink the
+    // frame to that side's room (keeping the picture's shape), then keep it inside the viewport sideways
     const place = (li) => {
-      const p = pic(li), c = card.getBoundingClientRect(), h = $('.pic', li).getBoundingClientRect()
-      p.style.left = Math.round(h.left - c.left - 10) + 'px'; p.style.top = Math.round(h.bottom - c.top) + 'px'
-      p.style.setProperty('--dx', '0px'); const r = p.getBoundingClientRect(), pad = 12
+      const p = pic(li), pad = 12; p.style.width = ''
+      const c = card.getBoundingClientRect(), h = $('.pic', li).getBoundingClientRect(), below = innerHeight - pad - h.bottom, above = h.top - pad - Math.max(0, $('.q6-hdr')?.getBoundingClientRect().bottom || 0)
+      let ph = p.offsetHeight + 12
+      const up = ph > below && above > below, room = up ? above : below
+      if (ph > room) { const ar = parseFloat(p.style.getPropertyValue('--ar')) || 1.87; p.style.width = Math.max(160, Math.floor((room - 40) * ar + 26)) + 'px'; ph = p.offsetHeight + 12 }
+      p.style.left = Math.round(h.left - c.left - 10) + 'px'; p.style.top = Math.round(up ? h.top - c.top - ph : h.bottom - c.top) + 'px'
+      p.style.setProperty('--dx', '0px'); const r = p.getBoundingClientRect()
       const dx = r.right > innerWidth - pad ? innerWidth - pad - r.right : r.left < pad ? pad - r.left : 0
       p.style.setProperty('--dx', Math.round(dx) + 'px')
     }

@@ -2,11 +2,11 @@
 // showcase-data.ts, capability-layers-data.ts). Fun facts are built from real content; they are tagged "placeholder note".
 window.K2 = {
   name: 'Jasmine Gu',
-  headline: "I'm Jasmine, a product engineer who builds with technical depth and user empathy.",
-  status: "Currently a 5th year CS honors and Business student at Western. Previously a SWE at Autodesk, Tesla and Intuit, and a Platform PM at Autodesk.",
-  recents: "Recents include governed AI query tools for Autodesk's data platform, factory-camera ML workflows at Tesla, and leading Hack Western's dev team.",
-  // hero call to action: before + link + after; the link smooth-scrolls to the work tabs (#tabs)
-  cta: { before: 'Explore my ', link: 'selected work', after: '.', href: '#tabs' },
+  headline: "An engineer passionate about building functional technology and delightful experiences.",
+  status: "Currently studying CS × Business, dual honors",
+  // hero name card: year | company | role rows, newest first. Company and role come from `exp` below (by id); each company links to /work/<id>.
+  // `year` is the start year from that entry's `when`. Stealth's `when` is only "Pre-seed", so its year is blank until Jazz confirms it
+  expList: { label: 'Experience', rows: [['autodesk', '2026'], ['autodesk-eng', '2026'], ['tesla', '2025'], ['intuit', '2024'], ['omers', '2023'], ['stealth-startup', ''], ['metaverse', '2022']] },
   intro: "An engineer passionate about building functional technology and delightful experiences.",
   hlLead: 'A few highlights (not on my resume)',
   // items are small trusted HTML strings (renderers insert them as innerHTML) so one can carry links
@@ -64,6 +64,16 @@ window.K2 = {
     { id: 'business', label: 'Business', short: ['BUSINESS'], caps: 'Strategy · Markets · Operations · Incentives', color: '#d9846a', items: [['Solutions engineer', 'OMERS', 'Enterprise service workflows'], ['Developer + analyst', 'Metaverse Group', 'B2B pipeline, 900+ leads'], ['GTM + pricing', 'Stealth startup', 'Pre-seed positioning'], ['HBA', 'Ivey', 'Strategy, ops, finance']] },
     { id: 'community', label: 'Community', short: ['COMMUNITY'], caps: 'Users · Facilitation · Storytelling · Feedback', color: '#9a86d6', items: [['Product + eng lead', 'Hack Western', '2,000 students, lead dev for 2 years'], ['Fellowship lead', 'IPS Fellowship', 'Helping students develop PM skills'], ['User research', 'Autodesk', 'Interviews with data users']] },
   ],
+  // home hero "blueprint cross-section" (K.section in k2.js, the stack-v4 look): two bands, foundation first. `from` names the
+  // D.layers entries whose items fill that band's hover note (Community is left out on purpose)
+  section: {
+    title: 'Stack: two layers, bottom to top',
+    fig: 'FIG. 02 · STACK', sub: 'SECTION A–A', noteTag: 'placeholder note',
+    bands: [
+      { id: 'swe', num: '01', label: 'SWE experience (full-stack)', call: ['SWE EXPERIENCE', '(FULL-STACK)'], sub: 'FRONTEND ↔ BACKEND', chips: ['C++', 'Java', 'Python', 'TypeScript/React'], from: ['swe'], aria: 'SWE experience (full-stack), frontend to backend, the foundation: C++, Java, Python, TypeScript/React' },
+      { id: 'pb', num: '02', label: 'Product / Business', title: 'Product / Business', call: ['PRODUCT /', 'BUSINESS'], from: ['product', 'business'], aria: 'Product / Business, top layer' },
+    ],
+  },
   // placeholder notes, each one a real fact
   facts: ['7 internships. 4 of them big tech.', '900+ leads from one Python pipeline', '28 educationals. yes, I counted', '2,000 students on one hackathon site', 'ADP Studio served 380+ users', '10+ production UI components shipped at Tesla', 'Toronto. Grad 2027.'],
 }

@@ -79,6 +79,72 @@
     return { set(m) { mode = m; prompt() } }
   }
 
+  // ---------- blueprint cross-section (mocks/stack-v4, cut to two bands): Product / Business on top, the SWE foundation below with the
+  // four languages as its rebar. Hovering (or focusing / tapping) a band turns its callout orange and fills the sticky note with that
+  // band's items. Copy comes from D.section + D.layers. Under ~460px the drawing switches to a narrower geometry (one chip column,
+  // a viewBox about as wide as the card) so every label stays >= 11px on a phone. The note is HTML over the SVG (no foreignObject: Safari). ----------
+  K.section = (el) => {
+    const S = D.section, lay = (id) => D.layers.find((l) => l.id === id)
+    const B = S.bands.map((b) => ({ ...b, items: b.from.flatMap((id) => lay(id).items) }))
+    const G = {
+      wide: { w: 600, h: 380, t: [20, 14], bx: 46, bw: 310, top: [66, 86], swe: [152, 204], cols: 2, cw: 140, ch: 40, pad: 10, gap: 10, rows: [214, 296], lx: 384, cy: [109, 234],
+        fs: { lab: 15, num: 13, sub: 13, chip: 13.5, ttl: 13, disp: 21 }, nx: 40, nw: 520 },
+      narrow: { w: 340, h: 308, t: [10, 10], bx: 26, bw: 168, top: [54, 64], swe: [118, 170], cols: 1, cw: 148, ch: 26, pad: 10, gap: 0, rows: [150, 184, 218, 252], lx: 206, cy: [80, 163],
+        fs: { lab: 12, num: 12, sub: 11.8, chip: 12, ttl: 12, disp: 16 }, nx: 12, nw: 316 },
+    }
+    let g = null, cur = -1, box, svg, nt, gs = []
+    const svgOf = (g) => {
+      const f = g.fs, [ty, th] = g.top, [sy, sh] = g.swe, bx = g.bx, bx2 = bx + g.bw, mid = bx + g.bw / 2, base = sy + sh, [tx, tY] = g.t
+      const r1 = f.ttl + 8, r2 = f.num + 8, tw = Math.max(S.fig.length * f.ttl * 0.74, S.sub.length * f.num * 0.7) + 16
+      const ccx = mid, ccy = (ty + base) / 2, R = (base - ty) * 0.6
+      const call = (b, y) => { const st = f.lab * 1.25; let s = `<path class="sx-lead" d="M${bx2} ${y}H${g.lx - 8}"/><circle class="sx-dot" cx="${bx2}" cy="${y}" r="3.5"/><text class="sx-num" font-size="${f.num}" x="${g.lx}" y="${y - st}">${b.num}</text>`
+        b.call.forEach((t, k) => { s += `<text class="sx-lab" font-size="${f.lab}" x="${g.lx}" y="${y + f.lab * 0.35 + k * st}">${t}</text>` })
+        if (b.sub) s += `<text class="sx-sub" font-size="${f.sub}" x="${g.lx}" y="${y + f.lab * 0.35 + b.call.length * st + 3}">${b.sub}</text>`
+        return s }
+      const tick = (ys) => `<path class="sx-tick" d="${ys.map((y) => `M${bx - 22} ${y}H${bx - 2}`).join('')}"/>`
+      const swe = B[0], pb = B[1]
+      const chips = swe.chips.map((t, k) => { const x = bx + g.pad + (k % g.cols) * (g.cw + g.gap), y = g.rows[Math.floor(k / g.cols)]
+        return `<rect x="${x}" y="${y}" width="${g.cw}" height="${g.ch}"/><text font-size="${f.chip}" x="${x + g.cw / 2}" y="${y + g.ch / 2 + f.chip * 0.35}" text-anchor="middle">${t}</text>` }).join('')
+      const rebar = [...new Set(g.rows.map((y) => y + g.ch / 2))].map((y) => `M${bx} ${y}H${bx2}`).join('')
+      let hatch = ''; for (let x = bx; x <= bx2; x += 30) hatch += `M${x} ${base}l-10 12`
+      return `<svg viewBox="0 0 ${g.w} ${g.h}" role="group" aria-label="${S.title}">
+        <defs><pattern id="sx-cross" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0L12 12M12 0L0 12" stroke="rgba(255,254,251,.4)" stroke-width="1"/></pattern></defs>
+        <g class="sx-compass" style="transform-origin:${ccx}px ${ccy}px" fill="none" stroke="rgba(255,254,251,.18)" stroke-width="1" aria-hidden="true">
+          <circle cx="${ccx}" cy="${ccy}" r="${R}"/><circle cx="${ccx}" cy="${ccy}" r="${R * 0.75}" stroke-dasharray="3 6"/>
+          <path d="M${ccx} ${ccy - R - 8}V${ccy + R + 8}M${ccx - R - 8} ${ccy}H${ccx + R + 8}M${ccx} ${ccy}L${ccx + R * 0.7} ${ccy - R * 0.7}"/><circle cx="${ccx}" cy="${ccy}" r="4"/></g>
+        <g aria-hidden="true"><rect x="${tx}" y="${tY}" width="${tw}" height="${r1 + r2}" fill="none" stroke="rgba(255,254,251,.78)"/><path d="M${tx} ${tY + r1}H${tx + tw}" stroke="rgba(255,254,251,.78)"/>
+          <text class="sx-ttl" font-size="${f.ttl}" x="${tx + 8}" y="${tY + r1 - 4.5}">${S.fig}</text><text class="sx-num" font-size="${f.num}" x="${tx + 8}" y="${tY + r1 + r2 - 4.5}">${S.sub}</text></g>
+        <path d="M${bx - 16} ${ty}V${base}" stroke="rgba(255,254,251,.78)" fill="none"/>
+        <g class="sx-band sx-b2" data-i="1" tabindex="0" aria-label="${pb.aria}">
+          <rect x="${bx}" y="${ty}" width="${g.bw}" height="${th}" fill="none" stroke="#fffefb" stroke-width="1.6" stroke-dasharray="7 4"/><rect class="sx-hl" x="${bx}" y="${ty}" width="${g.bw}" height="${th}"/>
+          <text class="sx-disp" font-size="${f.disp}" x="${mid}" y="${ty + th / 2 + f.disp * 0.33}" text-anchor="middle">${pb.title}</text>${tick([ty, ty + th])}${call(pb, g.cy[0])}</g>
+        <g class="sx-band sx-b1" data-i="0" tabindex="0" aria-label="${swe.aria}">
+          <rect x="${bx}" y="${sy}" width="${g.bw}" height="${sh}" fill="url(#sx-cross)" stroke="#fffefb" stroke-width="2"/><rect class="sx-hl" x="${bx}" y="${sy}" width="${g.bw}" height="${sh}"/>
+          <path d="${rebar}" stroke="#fffefb" stroke-width="1.4"/><g class="sx-chip">${chips}</g>${tick([base])}${call(swe, g.cy[1])}</g>
+        <path d="M${bx - 26} ${base}H${Math.min(g.w, bx2 + 30)}" stroke="rgba(255,254,251,.78)" fill="none"/><path d="${hatch}" stroke="rgba(255,254,251,.3)" aria-hidden="true"/></svg>`
+    }
+    // the note only exists while a band is hovered / focused. Product / Business: under the top band. SWE: its bottom sits just above
+    // the SWE callout (and the chips, which start below it), so the lit callout is never covered
+    const place = () => { if (!g || cur < 0) return; const k = box.clientWidth / g.w, f = g.fs
+      nt.style.left = g.nx * k + 'px'; nt.style.width = g.nw * k + 'px'
+      nt.style.top = (cur === 1 ? (g.top[0] + g.top[1] + 8) * k : Math.max(-16 * k, (g.cy[1] - f.lab * 1.25 - f.num - 4) * k - nt.offsetHeight)) + 'px' }
+    const set = (i) => { cur = i; gs.forEach((b) => b.classList.toggle('on', +b.dataset.i === i)); nt.hidden = i < 0
+      nt.innerHTML = i < 0 ? '' : `<small>${S.noteTag} · ${B[i].label}</small><ul>${B[i].items.map((x) => `<li><b>${x[0]}</b>, ${x[1]}: ${x[2]}</li>`).join('')}</ul>`
+      place() }
+    const build = () => {
+      el.innerHTML = `<div class="bpp sx"><div class="lay-box">${svgOf(g)}<div class="nt sx-nt" aria-live="polite"></div></div></div>`
+      box = $('.lay-box', el); svg = $('svg', el); nt = $('.nt', el); gs = $$('.sx-band', el)
+      gs.forEach((b) => { const i = +b.dataset.i
+        b.addEventListener('mouseenter', () => set(i)); b.addEventListener('mouseleave', () => set(-1))
+        b.addEventListener('focus', () => set(i)); b.addEventListener('blur', () => set(-1)); b.addEventListener('click', () => set(i)) })
+      set(-1) }
+    const fit = () => { const n = el.clientWidth < 460 ? G.narrow : G.wide; if (n !== g) { g = n; build() } else place() }
+    fit()
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(el); else addEventListener('resize', fit)
+    // the note's hand font is only fetched the first time it is drawn: preload it, and re-place whenever a font finishes loading
+    if (document.fonts) { document.fonts.load("400 17px 'Patrick Hand'").then(place, () => {}); document.fonts.addEventListener('loadingdone', place) }
+  }
+
   // ---------- switcher panel: segmented buttons that set body[data-key] ----------
   K.switches = (defs, onChange) => {
     const el = document.createElement('div'); el.className = 'k2sw'
