@@ -36,13 +36,13 @@
     // the Experience card (its own paper card on the right since 2026-09-30): company | role ······ year, like a menu, one row per internship
     // (D.expList picks the entries of D.exp); the ul is a 2-column grid so companies and roles line up; a row without a year gets no leader
     const xl = () => { const L = D.expList; if (!L) return ''; const by = (id) => D.exp.find((x) => x.id === id)
-      return `<div class="q6-xp q6-c" style="--r:1deg"><h2 class="k">${L.label}</h2><ul class="q6-xl">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><a class="c" href="/work/${id}">${x.co}</a><span class="rw${yr ? ' has-y' : ''}"><span class="r"><span>${x.role}</span></span>${yr ? `<span class="y">${yr}</span>` : ''}</span></li>` : '' }).join('')}</ul></div>` }
+      return `<div class="q6-xp q6-c" style="--r:2.5deg"><h2 class="k">${L.label}</h2><ul class="q6-xl">${L.rows.map(([id, yr]) => { const x = by(id); return x ? `<li><a class="c" href="/work/${id}">${x.co}</a><span class="rw${yr ? ' has-y' : ''}"><span class="r"><span>${x.role}</span></span>${yr ? `<span class="y">${yr}</span>` : ''}</span></li>` : '' }).join('')}</ul></div>` }
     el.innerHTML = `<section class="q6-stage"><div class="bg" id="stageMap" aria-hidden="true"></div>
-      <div class="q-note q6-c" style="--r:-2deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
+      <div class="q-note q6-c" style="--r:-3.5deg"><h1 class="q-name">jasmine gu</h1><p class="q-hl">${D.headline}</p><p class="q-st">${st}</p>${D.recents ? `<p class="q-st">${D.recents}</p>` : ''}${D.cta ? `<p class="q-cta">${D.cta.before}<a href="${D.cta.href}" data-hero-cta>${D.cta.link}</a>${D.cta.after}</p>` : ''}<div class="q-soc">${K.socials(['mail', 'linkedin', 'github'])}<button type="button" class="q6-askbtn" data-ask-open><span aria-hidden="true">✦</span> Ask me anything</button></div><a class="q6-mail" href="mailto:${D.contact.email}">${D.contact.email}</a>
         <div class="q-next"><p class="k">${N.title}</p><div class="r"><b>${N.when}</b><span>${N.text}</span></div></div></div>
       ${xl()}
-      <div class="q-xcard q6-c" style="--r:1.5deg" id="xc"></div>
-      <div class="q6-list q6-c" style="--r:-1deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
+      <div class="q-xcard q6-c" style="--r:3deg" id="xc"></div>
+      <div class="q6-list q6-c" style="--r:-2.5deg"><p class="lead">${D.hlLead}</p><ul>${D.highlights.map((h) => `<li><span aria-hidden="true">↳</span><span>${h}</span></li>`).join('')}</ul></div></section>`
     const fit = () => { const h = $('.q6-hdr'); stage.style.minHeight = Math.max(640, innerHeight - (h ? h.offsetHeight : 0)) + 'px' }
     const stage = $('.q6-stage', el); fit(); addEventListener('resize', fit)
     // the roads only: the very same street network as the map below (see Q.field), with every label, pin and the JASMINE GU block taken out
