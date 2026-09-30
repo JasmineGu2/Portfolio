@@ -1,9 +1,9 @@
 ---
 title: Tools I've created
-updated: 2026-09-29
+updated: 2026-09-30
 ---
 
-# My Favorite Tools I've Created
+# Some fun tech setups I have
 
 …to solve my pain points :)
 
@@ -19,18 +19,8 @@ Image alt: what the picture shows, for screen readers
 Image label: the link text under the title that opens the picture (defaults to "(See a screenshot)")
 Tools under `# Work in progress` show first, with a small tag (the `Label:` line under that heading).
 Only the title and Short line show on the page right now; Problem, Tool and Built with are kept for later.
+The /about list merges this file with tools.md (same `#` title in both). A tool with the same `##` name in tools.md gets that tool's icon, link and hover card.
 -->
-
-## Notification and terminal setup for Claude
-
-Short: To always get pinged and see which Claude session is waiting
-
-Problem: I run several Claude sessions at once and lose track of which one is waiting on me.
-Tool: A terminal setup that sends clear, outlined notifications when a session needs input.
-Built with: Claude, terminal
-Image: /about/tools-created/claude-notification.webp
-Image alt: Terminal with an orange outline and a Windows notification: Claude is waiting for your input
-Image label: (See a screenshot)
 
 ## Tailscale SSH setup
 
@@ -58,14 +48,6 @@ Short: to stop doomscrolling and go for a walk every day
 Problem: Doomscrolling.
 Tool: Foqos blocks my apps until I tap an NFC chip I keep outside, so I have to go for a walk every day.
 Built with: NFC tag, Foqos
-
-## Automate my life with NFC chips
-
-Short: to run home routines with one tap
-
-Problem: Small routines at home that I kept setting up by hand.
-Tool: A chip by the fridge opens my watch-later queue. A chip by the bed sets a timer and plays music.
-Built with: NFC tags
 
 ## Workspace setup with Apple Shortcuts
 

@@ -1,11 +1,9 @@
 ---
 title: Favorite tools
-updated: 2026-09-29
+updated: 2026-09-30
 ---
 
-# My favorite tools
-
-A PM and engineer who loves her tools.
+# Some fun tech setups I have
 
 Hover or tap a tool to see how I use it.
 
@@ -17,6 +15,8 @@ One `## Name` per tool, then these lines:
 - what: a one-sentence, neutral description of the product
 - how: how I use it, first person
 - metric: optional; leave empty to hide it
+The /about list merges this file with tools-created.md: one list, titled by the `#` line (keep it the same in both files).
+A tool here with the same `##` name as one in tools-created.md becomes one entry: its icon, link and hover card come from here, its short line and screenshot from there.
 -->
 
 ## Obsidian
@@ -43,19 +43,19 @@ One `## Name` per tool, then these lines:
 - how: For yapping to my Claude.
 - metric:
 
-## Telegram
+## Job scraping bot
 - url: https://en.wikipedia.org/wiki/Telegram_(software)
 - icon: /icons/tools/telegram.svg
-- label: job scraping bot
-- what: A cloud-based messaging app with support for bots.
+- label:
+- what: Telegram: a cloud-based messaging app with support for bots.
 - how: I set up a bot that scrapes GitHub repos for jobs and sends me notifications with details about the companies.
 - metric:
 
-## Foqos
+## NFC chip setup with Foqos
 - url: https://www.foqos.app/
 - icon: /icons/tools/foqos.png
-- label: NFC chip set up to lock me out
-- what: A free, open-source iPhone app blocker you can lock and unlock by tapping an NFC tag or scanning a QR code.
+- label:
+- what: Foqos: a free, open-source iPhone app blocker you can lock and unlock by tapping an NFC tag or scanning a QR code.
 - how: Stopped my doomscrolling. An NFC chip locks me out of my apps.
 - metric:
 
