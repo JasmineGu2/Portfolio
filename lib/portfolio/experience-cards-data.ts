@@ -63,7 +63,7 @@ export const EXPERIENCE_CARDS: Record<WorkId, ExperienceCardContent> = {
   },
   tesla: {
     company: 'Tesla',
-    role: 'Frontend and Infrastructure Engineering Intern',
+    role: 'Frontend Engineering Intern',
     subtitle: 'Turning factory-camera inference into workflows operators can act on',
     period: 'Summer 2025',
     category: 'ML Systems',

@@ -16,7 +16,7 @@ export const TESLA_CASE_STUDY_SECTIONS: TeslaCaseStudySection[] = [
 export const TESLA_HERO_META = {
   kicker: 'Tesla · Shipped Summer 2025',
   title: 'Building Reusable Factory Software',
-  role: 'Frontend and Infrastructure Engineering Intern',
+  role: 'Frontend Engineering Intern',
   timeline: 'May to August 2025',
   team: ['Software Engineers', 'ML Engineers', 'Operators', 'Technicians'],
   skills: [

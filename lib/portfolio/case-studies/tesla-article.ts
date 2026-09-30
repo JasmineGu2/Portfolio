@@ -15,7 +15,7 @@ export const TESLA_ARTICLE_SECTIONS: CaseStudySection[] = [
     "blocks": [
       {
         "type": "paragraph",
-        "text": "My internship at Tesla was one of the most technically interesting experiences I've had so far. I worked as a Frontend and Infrastructure Engineering Intern on software used across Tesla's factories in Shanghai, Fremont, Austin, and Berlin."
+        "text": "My internship at Tesla was one of the most technically interesting experiences I've had so far. I worked as a Frontend Engineering Intern on software used across Tesla's factories in Shanghai, Fremont, Austin, and Berlin."
       },
       {
         "type": "paragraph",

@@ -40,7 +40,7 @@ window.SITE = {
     { when: 'Summer 2023', what: 'OMERS', line: 'Solutions Engineer, ServiceNow', kind: 'job' },
     { when: '2023', what: 'Hack Western', line: 'Product and Engineering Lead', kind: 'community' },
     { when: 'Summer 2024', what: 'Intuit', line: 'Frontend Engineer Intern', kind: 'job' },
-    { when: 'May to Aug 2025', what: 'Tesla', line: 'Frontend and Infrastructure Engineering Intern', kind: 'job' },
+    { when: 'May to Aug 2025', what: 'Tesla', line: 'Frontend Engineering Intern', kind: 'job' },
     { when: 'Jan to May 2026', what: 'Autodesk', line: 'Full-Stack Engineering Intern', kind: 'job' },
     { when: '2026', what: 'Autodesk', line: 'Technical Platform Product Manager Intern', kind: 'job' },
   ],
