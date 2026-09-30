@@ -1,4 +1,4 @@
-**Now:** Decide the two open hero questions below, then pick a stack mock (mocks/stack-v1..v5) to replace the hero layer diagram.
+**Now:** Jazz wants the hero to look like a reference screenshot she took on her Mac ("something like this, in a very clean manner"). It didn't come through (Mac temp path). Get the image (paste into chat or save to context/images/), then build clean hero mocks in mocks/hero-vN combining it with her pick of the stack mocks (mocks/stack-v1..v5, mocks/stack-compare/compare.png).
 
 ## Where things stand
 - Live at www.jasminegu.com (Vercel deploys from main with pnpm; both projects "portfolio-sz4g" and "website" build on every push). Everything is committed and pushed.
